@@ -163,6 +163,140 @@
             margin: 2px;
         }
 
+        /* Skills */
+        .skill-group {
+            margin-bottom: 28px;
+        }
+
+        .skill-group-title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #7b5ea7;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e8e2f5;
+        }
+
+        .skill-pill {
+            display: inline-block;
+            background: #f0eef8;
+            border: 1px solid #d4cde8;
+            color: #3d2d5a;
+            padding: 5px 13px;
+            border-radius: 20px;
+            font-size: 0.81rem;
+            margin: 3px 3px 3px 0;
+            line-height: 1.4;
+        }
+
+        .skill-pill.emerging {
+            background: #edf7f0;
+            border-color: #b8dfc4;
+            color: #1c5230;
+        }
+
+        /* Work experience timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 6px;
+            bottom: 0;
+            width: 2px;
+            background: #e8e2f5;
+        }
+
+        .timeline-entry {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .timeline-entry::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #7b5ea7;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #d4cde8;
+        }
+
+        .timeline-role {
+            font-weight: 700;
+            font-size: 0.97rem;
+            color: #2d2d3a;
+            margin-bottom: 1px;
+        }
+
+        .timeline-meta {
+            font-size: 0.78rem;
+            color: #888;
+            margin-bottom: 7px;
+        }
+
+        .timeline-meta .org {
+            color: #7b5ea7;
+            font-weight: 600;
+        }
+
+        .timeline-body {
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* About Me highlights */
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .about-card {
+            background: #f7f5fc;
+            border: 1px solid #e0d9f0;
+            border-top: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+
+        .about-card .card-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7b5ea7;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .about-card .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #2d2d3a;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .about-card p {
+            font-size: 0.8rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.55;
+        }
+
         /* Project highlights */
         .highlights {
             display: grid;
@@ -240,7 +374,32 @@
             <div class="tab-pane fade show active" id="about" role="tabpanel">
                 <div class="section">
                     <h2>About Me</h2>
-                    <p>I am an operations leader transitioning into cybersecurity, combining over a decade of experience in process optimization, incident triage, and secure data handling with newly developed technical skills in network analysis, vulnerability scanning, and SIEM log review. I value precision, integrity, and proactive problem-solving, and I am driven to protect organizations by identifying risks, mitigating vulnerabilities, and strengthening overall security posture. My blend of people-focused communication and technical acumen ensures I can bridge the gap between security teams and stakeholders to achieve business and security goals.</p>
+                    <p>I am an operations leader transitioning into cybersecurity, combining over a decade of experience in process optimisation, incident triage, and secure data handling with newly developed technical skills in network analysis, vulnerability scanning, and SIEM log review. I value precision, integrity, and proactive problem-solving, and I am driven to protect organisations by identifying risks, mitigating vulnerabilities, and strengthening overall security posture. My blend of people-focused communication and technical acumen means I can bridge the gap between security teams and stakeholders — translating technical findings into decisions that make sense to the business.</p>
+
+                    <p style="margin-top: 12px;">Outside of professional work I run <strong>LorebySpec</strong>, a YouTube channel analysing the narrative and lore of the Kingdom Hearts series — which is how the KH Lore Checker in this portfolio came to exist. I also write tech and games coverage for Phandroid, Android Central, and Mobile Nations.</p>
+
+                    <div class="about-highlights">
+                        <div class="about-card">
+                            <span class="card-label">Transition</span>
+                            <span class="card-title">Operations → Cybersecurity</span>
+                            <p>A decade of process optimisation, compliance, and incident triage translates directly. I already think in risks, controls, and stakeholder communication — now backed by technical training in networks, SIEM, and vulnerability analysis.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Approach</span>
+                            <span class="card-title">Build to understand</span>
+                            <p>The tools in this portfolio exist because I build things to learn them properly. Every decision, dead end, and pivot is logged — not polished after the fact, but documented as it happened.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Strength</span>
+                            <span class="card-title">Bridging technical and human</span>
+                            <p>I have spent years making technical information legible to non-technical audiences — in support roles, in writing, and in leadership coaching. That skill matters as much in security as anywhere else.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Principle</span>
+                            <span class="card-title">Costs and constraints first</span>
+                            <p>Every project here has a "Constraints" section as prominent as the wins. I document what doesn't work, what the trade-offs are, and when a design decision is a compromise — because that's what honest engineering looks like.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -248,15 +407,51 @@
             <div class="tab-pane fade" id="work" role="tabpanel">
                 <div class="section">
                     <h2>Work Experience</h2>
-                    <ul>
-                        <li><strong>Freelance Consultant (2023–Present)</strong>: Consultancy in HR, operations, and business development, including Employer of Record (EOR) solutions, market share analysis, and business planning. Supported career progression discussions and training development for entrepreneurs and business owners.</li>
-                        <li><strong>Freelance Writer (2022–Present)</strong>: Writing tech articles for Phandroid, Android Central, and Mobile Nations. Specialised in tech reviews, guides, and feature articles on consumer electronics, games, and accessories.</li>
-                        <li><strong>Customer Support Hero (Technical) at Stamped (2020)</strong>: Triaged and diagnosed tickets for account-related issues. Worked closely with customers to integrate Stamped's APIs and helped developers build customised integrations and third-party services.</li>
-                        <li><strong>Editor &amp; Operations Assistant at Can I Play That? (2018–2020)</strong>: Supported the CEO with administrative tasks and strategic content planning. Managed communications with developers and PR professionals to secure partnerships.</li>
-                        <li><strong>Community Manager at Irish Tech Community (2016–2018)</strong>: Managed engagement and event organisation, developed onboarding documentation, and fostered community growth.</li>
-                        <li><strong>Project Manager &amp; Researcher at Learnovate (2016–2017)</strong>: Managed the €3M EU-funded "DEVELOP" project, coordinating across international partners using Agile methodologies.</li>
-                        <li><strong>Chief of People at Leaguepedia (2014–2016)</strong>: Led communications and operational aspects, developing frameworks supporting staff in achieving project goals efficiently.</li>
-                    </ul>
+                    <div class="timeline">
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Freelance Consultant</div>
+                            <div class="timeline-meta"><span class="org">Self-employed</span> · 2023–Present</div>
+                            <p class="timeline-body">HR, operations, and business development consultancy for entrepreneurs and SMEs. Projects have included Employer of Record (EOR) partner selection for international expansion, market share analysis, business planning, leadership coaching for scaling teams, and support operations restructuring — including a ticket prioritisation system that reduced response times by 30%.</p>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Freelance Tech Writer</div>
+                            <div class="timeline-meta"><span class="org">Phandroid · Android Central · Mobile Nations</span> · 2022–Present</div>
+                            <p class="timeline-body">Tech articles covering consumer electronics, games, and accessories. Specialised in reviews, buying guides, and long-form feature pieces for audiences ranging from enthusiasts to general readers. Writing is audience-first: making technical information legible without dumbing it down.</p>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Customer Support Hero (Technical)</div>
+                            <div class="timeline-meta"><span class="org">Stamped</span> · 2020</div>
+                            <p class="timeline-body">Triaged and diagnosed account and integration issues for e-commerce customers. Worked directly with developers building custom integrations against Stamped's APIs — translating between what the product did and what the code needed to do. Operated in a high-volume queue with escalation responsibility.</p>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Editor &amp; Operations Assistant</div>
+                            <div class="timeline-meta"><span class="org">Can I Play That?</span> · 2018–2020</div>
+                            <p class="timeline-body">Supported the CEO on strategic content planning and editorial operations. Managed relationships with games developers and PR professionals to negotiate coverage partnerships and review access. The publication focuses on accessibility in games — content decisions required understanding both editorial goals and audience need.</p>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Community Manager</div>
+                            <div class="timeline-meta"><span class="org">Irish Tech Community</span> · 2016–2018</div>
+                            <p class="timeline-body">Managed community engagement and event organisation for one of Ireland's largest tech networks. Developed onboarding documentation for new members, ran communications across platforms, and built relationships with contributors and speakers to sustain a volunteer-driven community.</p>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Project Manager &amp; Researcher</div>
+                            <div class="timeline-meta"><span class="org">Learnovate Centre, Trinity College Dublin</span> · 2016–2017</div>
+                            <p class="timeline-body">Managed the €3M EU-funded "DEVELOP" project, coordinating deliverables across international academic and industry partners. Used Agile methodologies to maintain progress across distributed teams with different working cultures and reporting requirements. Responsible for milestone reporting to the EU funding body.</p>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Chief of People</div>
+                            <div class="timeline-meta"><span class="org">Leaguepedia</span> · 2014–2016</div>
+                            <p class="timeline-body">Led the people and communications function for a wiki and esports data platform. Built frameworks for contributor onboarding, performance, and team structure. Managed internal communications and operational coordination across a distributed, volunteer-and-contractor team working on a high-traffic, time-sensitive product.</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
@@ -979,17 +1174,61 @@
             <div class="tab-pane fade" id="skills" role="tabpanel">
                 <div class="section">
                     <h2>Skills</h2>
-                    <ul>
-                        <li>Global Project &amp; Vendor Management</li>
-                        <li>Employee Health &amp; Safety Support</li>
-                        <li>HR Compliance &amp; Employee Well-Being</li>
-                        <li>Agile &amp; Scrum Methodologies</li>
-                        <li>Research &amp; Policy Implementation</li>
-                        <li>Team Leadership &amp; Communication</li>
-                        <li>Fundraising &amp; Stakeholder Engagement</li>
-                        <li>Copywriting &amp; Content Creation</li>
-                        <li>AI Tooling &amp; Workflow Integration</li>
-                    </ul>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">Project &amp; Operations Management</div>
+                        <span class="skill-pill">Global Project Management</span>
+                        <span class="skill-pill">Vendor &amp; Partner Management</span>
+                        <span class="skill-pill">Agile &amp; Scrum Methodologies</span>
+                        <span class="skill-pill">EU-funded Project Reporting</span>
+                        <span class="skill-pill">Process Optimisation</span>
+                        <span class="skill-pill">Workflow Design</span>
+                        <span class="skill-pill">Research &amp; Policy Implementation</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">HR, People &amp; Compliance</div>
+                        <span class="skill-pill">HR Compliance</span>
+                        <span class="skill-pill">Employee Well-Being</span>
+                        <span class="skill-pill">Leadership Coaching</span>
+                        <span class="skill-pill">Conflict Resolution</span>
+                        <span class="skill-pill">Team Building &amp; Retention</span>
+                        <span class="skill-pill">Employer of Record (EOR)</span>
+                        <span class="skill-pill">Onboarding &amp; Documentation</span>
+                        <span class="skill-pill">Stakeholder Engagement</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">Technical &amp; AI</div>
+                        <span class="skill-pill">HTML / CSS / JavaScript</span>
+                        <span class="skill-pill">Claude API (Anthropic)</span>
+                        <span class="skill-pill">Prompt Engineering</span>
+                        <span class="skill-pill">Client-side API Integration</span>
+                        <span class="skill-pill">CORS &amp; Browser Fetch Patterns</span>
+                        <span class="skill-pill">GitHub &amp; GitHub Pages</span>
+                        <span class="skill-pill">AI Workflow Integration</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">Communication &amp; Content</div>
+                        <span class="skill-pill">Tech Journalism</span>
+                        <span class="skill-pill">Copywriting</span>
+                        <span class="skill-pill">Content Strategy</span>
+                        <span class="skill-pill">Community Management</span>
+                        <span class="skill-pill">Sponsorship &amp; Partnerships</span>
+                        <span class="skill-pill">API &amp; Technical Documentation</span>
+                    </div>
+
+                    <div class="skill-group">
+                        <div class="skill-group-title">Cybersecurity — In Training</div>
+                        <span class="skill-pill emerging">Network Analysis</span>
+                        <span class="skill-pill emerging">Vulnerability Scanning</span>
+                        <span class="skill-pill emerging">SIEM Log Review</span>
+                        <span class="skill-pill emerging">Incident Response Fundamentals</span>
+                        <span class="skill-pill emerging">Security Posture Assessment</span>
+                        <span class="skill-pill emerging">Google Cybersecurity Certificate</span>
+                    </div>
+
                 </div>
             </div>
 
