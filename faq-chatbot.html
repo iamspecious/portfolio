@@ -429,7 +429,7 @@ Example: Do you take American Express? I want to upgrade my plan."></textarea>
         answer.classList.remove('visible');
 
         try {
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
+            const response = await fetch('https://anthropic-proxy.work-specious.workers.dev', {
                 method: 'POST',
                 headers: {
                     'x-api-key': apiKey,

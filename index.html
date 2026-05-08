@@ -1441,7 +1441,15 @@
                                 <span class="timestamp">2026-05-08</span>
                                 <p>
                                     <span class="tag tag-note">Note</span>
-                                    This affects all three tools — lore checker, support triage, FAQ chatbot — since all use the same fetch pattern and the same header. The <code>anthropic-dangerous-direct-browser-calls</code> approach does not work from <code>iamspecious.github.io</code>. The no-backend architecture has hit its hard limit for this use case. Options under consideration: (1) a thin CORS proxy via Cloudflare Workers or Netlify Functions — handles the preflight server-side, free tier, minimal infrastructure, works everywhere; (2) accept it as a documented constraint and present the tools as demonstrations of the prompt and logic layer rather than live-runnable artifacts.
+                                    This affects all three tools — lore checker, support triage, FAQ chatbot — since all use the same fetch pattern and the same header. The <code>anthropic-dangerous-direct-browser-calls</code> approach does not work from <code>iamspecious.github.io</code>. The no-backend architecture has hit its hard limit for this use case. Decision: deploy a Cloudflare Worker as a thin CORS proxy — handles the preflight server-side, free tier (100,000 requests/day), no infrastructure to maintain, works everywhere. A non-working portfolio tool demonstrates nothing; a tool that works and has a documented fix for a real architectural problem demonstrates more than one that never broke.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — proxy deployed</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Cloudflare Worker deployed at <code>anthropic-proxy.work-specious.workers.dev</code>. 25 lines. Handles CORS preflight (OPTIONS → 204 with <code>Access-Control-Allow-Origin: *</code>), forwards POST to Anthropic server-to-server, returns response with CORS headers attached. All three tools updated to call the proxy instead of <code>api.anthropic.com</code> directly. Worker code saved to <code>proxy/worker.js</code> in the repo. Free tier covers 100,000 requests/day — more than enough for a portfolio demo.
                                 </p>
                             </div>
 
