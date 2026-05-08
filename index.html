@@ -238,6 +238,80 @@
 
                     <hr>
 
+                    <!-- ====================================================
+                         SUPPORT TICKET TRIAGE — AI TOOL
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Support Ticket Triage Tool <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>May 2026 – Present</strong></p>
+                        <p>Paste a customer message — real, anonymised, or fabricated — and Claude returns a category, an urgency level, and a suggested first response ready to send. One input, one button. Built to directly demonstrate the kind of tool you'd build or configure in a support or implementation role.</p>
+                        <p>
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Client-side</span>
+                            <span class="tech-tag">No backend</span>
+                        </p>
+                        <a class="tool-link-badge" href="support-triage.html" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — dated as we go</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — initial build</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Same architecture as the KH Lore Checker: single file, no backend, GitHub Pages. If the pattern works for one tool, it works for two. The whole portfolio stays static and the tools are shareable as direct links.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    One input box, one button. The brief was explicit about minimal surface area. Resisted adding dropdowns, severity sliders, ticket history. The AI does the categorisation — that's the whole point. Adding a form would undermine the argument.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Three outputs: Category, Urgency, Suggested Response. Category and Urgency are the triage layer. The Suggested Response is what turns classification into action — and the output that makes this demonstrable in an interview. "Here's the tool. Here's what it produces."
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-tried">Tried</span>
+                                    First prompt draft had Claude return urgency as a 1–5 score. Dropped it. Labels (Low / Medium / High / Critical) are what support teams actually use in tooling, and they read faster at a glance. Mapped each to a colour indicator so urgency is visible before you read a word.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Added a copy button to the Suggested Response section. Not in the original brief, but practically obvious: in any real support workflow, the next thing you do after reading a suggested response is paste it somewhere. One click.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    The prompt is the meaningful part of this tool. Knowing what signals push a ticket from Medium to High, what tone to set, what categories fit a given product — that's the support judgment this tool demonstrates. The code is a vehicle for the prompt.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
                     <!-- PregVoice -->
                     <div class="project">
                         <h3>PregVoice</h3>
