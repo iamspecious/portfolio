@@ -1246,6 +1246,30 @@
                                 </p>
                             </div>
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — first live test bug</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    First real test threw: <em>"Failed to execute 'fetch' on 'Window': Failed to read the 'headers' property from 'RequestInit': String contains non ISO-8859-1 code point."</em> The other two tools passed. Headers are identical across all three tools — the only dynamic header is the API key.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Root cause: pasting an API key from certain sources (email, PDF, browser autofill) can silently introduce Unicode characters — zero-width spaces, smart quotes, non-breaking spaces — that are invisible in the input field but have code points above 255. HTTP headers only accept ISO-8859-1 (0–255), so the browser rejects the whole request.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-done">Fix</span>
+                                    Strip all non-printable-ASCII characters from the API key before it touches any header: <code>rawKey.replace(/[^\x20-\x7E]/g, '').trim()</code>. Added a format check that catches malformed keys early and tells the user to clear and re-paste rather than throwing a cryptic browser error.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 
