@@ -556,6 +556,38 @@
                                 </p>
                             </div>
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — live test</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    First real test with a live API key failed. Button returned "Load failed" — two words, no context, no HTTP status, no indication of where in the chain it broke. From a debugging standpoint, completely useless.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    "Load failed" is what Safari throws when <code>fetch()</code> fails at the network layer before any response is received. Chrome calls it "Failed to fetch", Firefox calls it "NetworkError when attempting to fetch resource". All three are the same thing: the request never reached the API. Possible causes: a browser extension blocking api.anthropic.com, a CORS restriction, a firewall or VPN, or Safari's stricter cross-origin enforcement. The character cap was not the issue — the test message was under 200 characters.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Rewrote error handling across three stages. Stage 1 — before the request: validate that the API key starts with <code>sk-ant-</code> and show a specific message if not. Stage 2 — API error response: break down <code>!response.ok</code> by HTTP status. 401 = bad key, 403 = no permission, 429 = rate limited, 400 = bad request, 500+ = server error. Each gets its own message and its own next step. Stage 3 — network failure: catch <code>TypeError</code> separately from other errors and show a specific "network error" message with instructions to open the browser console (F12 → Console) for the actual error. Also added <code>console.error()</code> logging so there is always a full trace available.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Applied the same error handling improvements to the FAQ chatbot — it had identical single-line catch block with the same gap. Any tool making direct browser API calls needs this treatment. The lesson: a generic catch block is not error handling, it's error hiding. Stage-specific messages let users actually diagnose what went wrong instead of guessing.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 

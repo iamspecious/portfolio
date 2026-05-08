@@ -397,6 +397,7 @@ Example: Do you take American Express? I want to upgrade my plan."></textarea>
         errorBanner.style.display = 'none';
 
         if (!apiKey) return showError('Enter your Anthropic API key above.');
+        if (!apiKey.startsWith('sk-ant-')) return showError('API key format looks wrong — Anthropic keys start with sk-ant-. Check you\'ve pasted the full key.');
         if (!kbContent) return showError('Paste your knowledge base or FAQ content above.');
         if (!question) return showError('Enter a customer question.');
 
@@ -438,8 +439,21 @@ ${processedKb}
             });
 
             if (!response.ok) {
-                const err = await response.json().catch(() => ({}));
-                throw new Error(err.error?.message || `API error ${response.status}`);
+                const errData = await response.json().catch(() => ({}));
+                const msg = errData.error?.message || '';
+                if (response.status === 401) {
+                    throw new Error('Authentication failed (401) — your API key is invalid or expired. Check it in your Anthropic console.');
+                } else if (response.status === 403) {
+                    throw new Error('Access forbidden (403) — your API key may not have permission for this model.');
+                } else if (response.status === 429) {
+                    throw new Error('Rate limited (429) — you\'ve hit your usage limit. Wait a moment and try again.');
+                } else if (response.status === 400) {
+                    throw new Error(`Bad request (400) — ${msg || 'check your input and API key'}`);
+                } else if (response.status >= 500) {
+                    throw new Error(`Anthropic server error (${response.status}) — the service may be temporarily unavailable. Try again in a moment.`);
+                } else {
+                    throw new Error(msg || `API error ${response.status}`);
+                }
             }
 
             const data = await response.json();
@@ -450,7 +464,16 @@ ${processedKb}
             statusText.textContent = 'done';
 
         } catch (err) {
-            showError(err.message);
+            console.error('FAQ chatbot error:', err);
+            if (err instanceof TypeError) {
+                showError(
+                    'Network error — the request failed before reaching the API. ' +
+                    'Possible causes: a browser extension blocking api.anthropic.com, a firewall or VPN, or a CORS restriction. ' +
+                    'Open your browser console (F12 → Console tab) to see the specific error.'
+                );
+            } else {
+                showError(err.message);
+            }
             statusText.textContent = '';
         } finally {
             askBtn.disabled = false;
