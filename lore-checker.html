@@ -81,6 +81,36 @@
         .api-bar input:focus { outline: none; border-color: var(--accent); }
         .api-bar .api-hint { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
 
+        /* Model selector */
+        .model-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .model-bar label { font-size: 0.75rem; color: var(--muted); font-family: monospace; white-space: nowrap; }
+        .model-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .model-option:has(input:checked) { border-color: var(--accent); background: #1a1030; }
+        .model-option input { accent-color: var(--accent); cursor: pointer; }
+        .model-option .model-name { font-size: 0.8rem; font-family: monospace; color: var(--text); }
+        .model-option .model-price { font-size: 0.68rem; color: var(--muted); margin-left: 4px; }
+        .model-option:has(input:checked) .model-price { color: var(--accent-light); }
+        .model-rec { font-size: 0.65rem; background: #1a3a1a; color: #5dbb8a; padding: 1px 6px; border-radius: 3px; font-family: monospace; }
+
         /* Panels */
         .panel-grid {
             display: grid;
@@ -342,6 +372,21 @@
         <span class="api-hint">stored in session only</span>
     </div>
 
+    <div class="model-bar">
+        <label>MODEL</label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-haiku-4-5-20251001" checked>
+            <span class="model-name">Haiku 4.5</span>
+            <span class="model-price">~$0.001/check</span>
+            <span class="model-rec">recommended</span>
+        </label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-sonnet-4-6">
+            <span class="model-name">Sonnet 4.6</span>
+            <span class="model-price">~$0.03/check</span>
+        </label>
+    </div>
+
     <div class="panel-grid">
 
         <!-- Lore Context panel -->
@@ -422,6 +467,23 @@
 </footer>
 
 <script>
+    const MODEL_PRICING = {
+        'claude-haiku-4-5-20251001': { input: 0.80, output: 4.00, label: 'Haiku 4.5' },
+        'claude-sonnet-4-6':         { input: 3.00, output: 15.00, label: 'Sonnet 4.6' }
+    };
+
+    function selectedModel() {
+        return document.querySelector('input[name="model"]:checked').value;
+    }
+
+    function estimateCost(inputChars, outputTokens) {
+        const model = MODEL_PRICING[selectedModel()];
+        const inputTokens = Math.round(inputChars / 4);
+        const inputCost = (inputTokens / 1_000_000) * model.input;
+        const outputCost = (outputTokens / 1_000_000) * model.output;
+        return { inputTokens, total: inputCost + outputCost };
+    }
+
     function addUrl(listId, cssClass) {
         const list = document.getElementById(listId);
         const row = document.createElement('div');
@@ -450,8 +512,8 @@
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const text = await res.text();
             if (statusEl) { statusEl.textContent = '✓ ok'; statusEl.className = 'url-status ok'; }
-            // Trim to ~8000 chars per URL to keep costs predictable
-            return text.slice(0, 8000);
+            // 3,500 chars (~875 words) per URL — enough for relevant lore, keeps costs low
+            return text.slice(0, 3500);
         } catch (err) {
             if (statusEl) { statusEl.textContent = '✗ failed'; statusEl.className = 'url-status err'; }
             return null;
@@ -509,11 +571,11 @@
         if (fullAnchors) userMessage += `## Hard Anchors (must not be contradicted)\n${fullAnchors}\n\n`;
         userMessage += `## Theory to Stress-Test\n${theory}`;
 
-        // Rough token estimate: ~4 chars per token
-        const estTokens = Math.round(userMessage.length / 4);
-        const estCost = ((estTokens / 1_000_000) * 3).toFixed(4);
+        const { inputTokens: estTokens, total: estCostNum } = estimateCost(userMessage.length, 900);
+        const estCost = estCostNum.toFixed(4);
+        const modelLabel = MODEL_PRICING[selectedModel()].label;
 
-        statusText.innerHTML = `<span class="spinner"></span> analysing… (~${estTokens.toLocaleString()} tokens, ~$${estCost})`;
+        statusText.innerHTML = `<span class="spinner"></span> analysing… (~${estTokens.toLocaleString()} tokens · ~$${estCost} · ${modelLabel})`;
 
         try {
             const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -525,8 +587,8 @@
                     'anthropic-dangerous-direct-browser-calls': 'true'
                 },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-6',
-                    max_tokens: 1500,
+                    model: selectedModel(),
+                    max_tokens: 900,
                     system: `You are a Kingdom Hearts lore expert and theory stress-tester for a YouTube channel called LorebySpec. Your job is to rigorously but constructively analyse fan theories.
 
 When given a theory (and optionally, lore context and hard anchors), respond with exactly four sections using these markdown headers:
@@ -557,7 +619,7 @@ Be direct. Don't pad. Write as a collaborator, not a judge.`,
             const text = data.content[0].text;
             resultsBody.innerHTML = renderMarkdown(text);
             results.classList.add('visible');
-            statusText.textContent = `done · ~${estTokens.toLocaleString()} tokens used`;
+            statusText.textContent = `done · ~${estTokens.toLocaleString()} tokens · ~$${estCost} · ${modelLabel}`;
 
         } catch (err) {
             showError(err.message);
