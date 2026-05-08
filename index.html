@@ -256,6 +256,67 @@
             margin: 0;
         }
 
+        /* How I Work — onboarding layer cards */
+        .layer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            margin: 18px 0 6px;
+        }
+
+        .layer-card {
+            background: #fff;
+            border: 1px solid #e0d9f0;
+            border-left: 4px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .layer-card .layer-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7b5ea7;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .layer-card .layer-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #2d2d3a;
+            margin-bottom: 7px;
+            display: block;
+        }
+
+        .layer-card p {
+            font-size: 0.82rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .principle-callout {
+            background: #f7f5fc;
+            border-left: 4px solid #7b5ea7;
+            border-radius: 0 6px 6px 0;
+            padding: 14px 20px;
+            margin: 22px 0;
+            font-size: 0.93rem;
+            color: #2d2d3a;
+            line-height: 1.65;
+        }
+
+        .how-i-work-subhead {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2d2d3a;
+            margin: 32px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e8e2f5;
+        }
+
         /* About Me highlights */
         .about-highlights {
             display: grid;
@@ -1244,7 +1305,68 @@
             <div class="tab-pane fade" id="how-i-work" role="tabpanel">
                 <div class="section">
                     <h2>How I Work</h2>
-                    <p>I approach each project with a blend of agility and precision. My focus is on delivering clear results through effective communication, collaborative work, and a flexible attitude. I am driven by data and open to experimenting with new strategies to continuously improve processes and achieve sustainable growth. I foster a positive work environment by maintaining transparency and ensuring all voices are heard.</p>
+
+                    <p>Most situations that look like people problems are actually clarity problems, skills problems, or systems problems. My starting point is that people are doing the best they can with what they have. That's not a naïve assumption — it's the most practically useful one. People have complex lives and real pressures that exist long before they arrive at work. When something goes wrong, asking "what did this person need that they didn't have?" gets you to a fix. Asking "what kind of person does this?" just gets you stuck.</p>
+
+                    <div class="principle-callout">
+                        Things are rarely a character or moral issue. They are nearly always a skills issue, a clarity issue, or a systems issue. Find the gap. Close it.
+                    </div>
+
+                    <div class="about-highlights">
+                        <div class="about-card">
+                            <span class="card-label">Foundation</span>
+                            <span class="card-title">Assume good intent</span>
+                            <p>Start from the most charitable explanation and work backwards. It leads to better diagnoses, better conversations, and outcomes that actually stick.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Diagnosis</span>
+                            <span class="card-title">Skills over character</span>
+                            <p>Missed expectations are almost never moral failures. They're usually a gap in clarity, training, or tooling. That's a solvable problem — and it's the problem worth solving.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Style</span>
+                            <span class="card-title">Pragmatic and intentional</span>
+                            <p>You can be clear-eyed about how things actually are while still being deliberate about where you want them to go. Realism and ambition aren't in conflict.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Environment</span>
+                            <span class="card-title">Async and remote-first</span>
+                            <p>I write clearly, document decisions rather than relying on memory, and build visibility without requiring people to be always-on. The tools change; the principle doesn't.</p>
+                        </div>
+                    </div>
+
+                    <div class="how-i-work-subhead">Onboarding is the work</div>
+
+                    <p>Onboarding is where I focus a lot of my energy — not as a 90-day checklist, but as the primary mechanism by which a company teaches people how to be there. How we communicate. How feedback works. What the values look like at 4pm on a Thursday when something's gone wrong. None of that lives in an orientation deck. It lives in the habits, the structures, and the conversations that surround the act of joining.</p>
+
+                    <p style="margin-top: 10px;">When those processes are clear, well-led, and maintained past day one — when onboarding is treated as an ongoing discipline rather than a one-time event — it sets everyone up for long-term success. That clarity has to be built before someone walks in the door, and maintained long after they settle in.</p>
+
+                    <p style="margin-top: 10px;">The work happens at every level of a company — and each layer needs something different.</p>
+
+                    <div class="layer-grid">
+                        <div class="layer-card">
+                            <span class="layer-label">Layer 1</span>
+                            <span class="layer-title">Line Managers</span>
+                            <p>What does working here actually look like day-to-day? Which tools, which rhythms, what's expected of their reports — and of them. Managers who have real clarity give it to their teams. Managers who are guessing pass that uncertainty downstream.</p>
+                        </div>
+                        <div class="layer-card">
+                            <span class="layer-label">Layer 2</span>
+                            <span class="layer-title">HR &amp; Culture Leaders</span>
+                            <p>Culture isn't what's written on the wall — it's what gets reinforced when no one's watching. Working with HR and culture teams to close the gap between the culture that's stated and the one that's actually practised.</p>
+                        </div>
+                        <div class="layer-card">
+                            <span class="layer-label">Layer 3</span>
+                            <span class="layer-title">Executive Suite</span>
+                            <p>Values start at the top and distribute downstream. If the exec layer is living them, they become real throughout the organisation. If they're not, no programme will make them stick. That alignment needs to be in place before it becomes a credibility problem.</p>
+                        </div>
+                    </div>
+
+                    <div class="how-i-work-subhead">Communication</div>
+
+                    <p>I'm direct — I say what I see and I try to be specific about it. Vague feedback helps no one; it leaves people uncertain about what to change and why. Directness, done from the right place, is a form of respect. It means you're taking the person and the situation seriously enough to be honest about both.</p>
+
+                    <p style="margin-top: 10px;">That directness is always from a good heart. The goal is never to make someone feel small — it's to give them something they can actually act on.</p>
+
                 </div>
             </div>
 
