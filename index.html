@@ -689,6 +689,46 @@
                                 </p>
                             </div>
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — risk assessment: false result is primary concern</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    A false positive or false negative in this context carries real psychological and medical consequences. The model ships with a confidence threshold — below it, the result is "inconclusive, re-check recommended", never a confident wrong answer. Language is always "the test shows" not "you are." Reliability is a release gate, not a metric to improve post-launch.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — audio privacy: tap-to-hear model</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Auto-speaking a result on the phone speaker is never acceptable. A shared bathroom, a public toilet, a partner in the next room — any of these makes unsolicited audio a privacy breach. Default: haptic pulse signals result is ready, audio only on tap. Two optional modes: earphone-only (auto-speaks when headphones detected, silent on speaker) and delay timer (10–60s pause before the haptic fires, letting the user move somewhere private). The auto-speak-on-speaker mode does not exist in the architecture.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — ethics: open source as the trust mechanism</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Privacy policies are words. Code is evidence. The codebase is public from day one so any developer can verify that the app does exactly what it claims — no image retention, no analytics, no data leaving the device. Equity testing (model performance across all test brands, lighting, device quality tiers) is a release requirement. The tool is free, permanently. No premium tier, no advertising, no data brokering.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — multilingual: clinical phrasing + professional translation</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    "The test shows a positive result" rather than "You are pregnant" — clinical framing is less culturally variable, easier to keep grammatically neutral across gendered languages, and more defensible from a regulatory standpoint. Priority languages: English, Spanish, Arabic, French, Portuguese, Hindi. All result strings professionally translated with medical language awareness — no string ships to production on machine translation alone. RTL layout (Arabic, Urdu, Hebrew) is a layout requirement, not a post-launch fix.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — framework: PWA for zero barrier, zero cost</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Progressive Web App for Phase 1: no app store, no install required, shareable as a URL, GitHub Pages hosting (free), TensorFlow.js for on-device inference (no API cost), Web Speech API for audio (no API cost), service worker for offline use. Running cost is near-zero — there is no server, no database, nothing to pay for monthly. This is not a compromise: an accessibility tool that eventually needs revenue is one that has failed its primary goal.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 
