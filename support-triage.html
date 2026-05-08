@@ -287,6 +287,21 @@
         .char-counter.warn { color: var(--warning); }
         .char-counter.over { color: var(--danger); }
 
+        .browser-note {
+            background: #1a1e2e;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--muted);
+            border-radius: 0 6px 6px 0;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            font-size: 0.72rem;
+            font-family: monospace;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .browser-note strong { color: #a0b4cc; }
+
         .spinner {
             display: inline-block;
             width: 14px;
@@ -339,6 +354,10 @@
 </header>
 
 <main>
+    <div class="browser-note">
+        <strong>Best on desktop.</strong> This tool makes direct API calls from your browser. Chrome and Firefox on desktop work most reliably. Mobile Safari and some iOS configurations block cross-origin requests — if you see a network error, try a desktop browser or disable iOS content blockers.
+    </div>
+
     <div class="api-bar">
         <label>ANTHROPIC API KEY</label>
         <input type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
