@@ -2,7 +2,7 @@
 
 **Live site:** [iamspecious.github.io/portfolio](https://iamspecious.github.io/portfolio)
 
-Operations leader, project manager, and consultant with over a decade of experience in process optimisation, incident triage, HR compliance, and people-focused leadership — now building in AI tooling and transitioning into cybersecurity. Also a tech writer and YouTube creator ([LorebySpec](https://www.youtube.com/@lorebyspec)).
+Operations professional with over a decade across people operations, strategic HR, community management, and technical support — drawn to the places where things aren't quite working and the structural reason why. Also genuinely technically curious: working knowledge of network analysis, log review, and vulnerability scanning sits alongside the operations background. Tech writer and YouTube creator ([LoreBySpec](https://www.youtube.com/@lorebyspec)).
 
 ---
 
