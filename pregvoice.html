@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PregVoice — Research &amp; Devlog</title>
+    <style>
+        :root {
+            --bg: #0a0d0f;
+            --surface: #111518;
+            --surface2: #161b1e;
+            --border: #2a3238;
+            --accent: #4a9aba;
+            --accent2: #7ec8a4;
+            --warm: #e8b86d;
+            --danger: #d4615a;
+            --muted: #6b7c85;
+            --text: #d0dde4;
+            --text-dim: #8a9ba5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            padding: 40px 20px 80px;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 36px;
+            letter-spacing: 0.03em;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        .page-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: #1e2e38;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 3px;
+            padding: 2px 8px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #eaf4f8;
+            margin-bottom: 12px;
+        }
+
+        .tagline {
+            color: var(--text-dim);
+            font-size: 16px;
+            max-width: 620px;
+            line-height: 1.6;
+        }
+
+        /* ── Section headings ── */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #eaf4f8;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: var(--text-dim);
+            margin-bottom: 14px;
+        }
+
+        p:last-child { margin-bottom: 0; }
+
+        /* ── Problem statement ── */
+        .problem-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--danger);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .problem-block p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        /* ── Layer cards ── */
+        .layer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .layer-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 18px 20px;
+        }
+
+        .layer-number {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .layer-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #eaf4f8;
+            margin-bottom: 8px;
+        }
+
+        .layer-card p {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        .layer-status {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            padding: 2px 6px;
+            margin-top: 12px;
+        }
+
+        .status-active { background: #1a2e1e; color: var(--accent2); border: 1px solid var(--accent2); }
+        .status-research { background: #1e2730; color: var(--accent); border: 1px solid var(--accent); }
+        .status-concept { background: #2a2218; color: var(--warm); border: 1px solid var(--warm); }
+
+        /* ── Constraint grid ── */
+        .constraint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
+        }
+
+        .constraint-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .constraint-card .label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .label-hard { color: var(--danger); }
+        .label-design { color: var(--warm); }
+        .label-regulatory { color: var(--accent); }
+
+        .constraint-card h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #eaf4f8;
+            margin-bottom: 6px;
+        }
+
+        .constraint-card p {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ── Haptic table ── */
+        .haptic-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .haptic-table th {
+            text-align: left;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .haptic-table td {
+            padding: 10px 12px;
+            color: var(--text-dim);
+            border-bottom: 1px solid #1a2228;
+        }
+
+        .haptic-table tr:last-child td { border-bottom: none; }
+
+        .haptic-table td:first-child {
+            font-family: monospace;
+            color: var(--accent);
+            font-size: 14px;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Devlog ── */
+        .devlog {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .devlog-header {
+            background: var(--surface2);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .devlog-header span {
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--accent2);
+        }
+
+        .devlog-header small {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .devlog-entry {
+            padding: 16px 20px;
+            border-bottom: 1px solid #1a2228;
+        }
+
+        .devlog-entry:last-child { border-bottom: none; }
+
+        .timestamp {
+            display: block;
+            font-size: 11px;
+            font-family: monospace;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            padding: 2px 7px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .tag-decision { background: #1a2e1e; color: #5dbb8a; border: 1px solid #2a4e38; }
+        .tag-tried    { background: #1a2234; color: #5b9bd5; border: 1px solid #2a3a54; }
+        .tag-pivot    { background: #2e2418; color: #d59b5b; border: 1px solid #4e3a28; }
+        .tag-done     { background: #1a2e1a; color: #5dbb5d; border: 1px solid #2a4e2a; }
+        .tag-note     { background: #22183a; color: #a07fd4; border: 1px solid #3a2858; }
+        .tag-issue    { background: #2e1a1a; color: #d55b5b; border: 1px solid #4e2a2a; }
+
+        .devlog-entry p {
+            color: var(--text-dim);
+            font-size: 13.5px;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 12px;
+            background: #1a2228;
+            color: var(--accent);
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        /* ── Next steps ── */
+        .next-steps {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent2);
+            border-radius: 6px;
+            padding: 20px 24px;
+        }
+
+        .next-steps h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent2);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 11px;
+        }
+
+        .next-steps ol {
+            padding-left: 18px;
+            color: var(--text-dim);
+            font-size: 14px;
+        }
+
+        .next-steps li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .next-steps li:last-child { margin-bottom: 0; }
+
+        /* ── Footer ── */
+        .page-footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .page-footer a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+        .page-footer a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <a class="back-link" href="index.html#projects">← back to portfolio</a>
+
+    <div class="page-header">
+        <div class="status-badge">Research &amp; Planning</div>
+        <h1>PregVoice</h1>
+        <p class="tagline">A layered accessibility project giving blind and visually impaired pregnant people an independent, private way to read a pregnancy test result. No sighted assistance required.</p>
+    </div>
+
+
+    <!-- ── THE PROBLEM ── -->
+    <div class="section">
+        <div class="section-label">The Problem</div>
+
+        <div class="problem-block">
+            <p>A blind or visually impaired person taking a home pregnancy test cannot independently read the result.</p>
+            <p>Every current path — line tests, digital tests, dip tests — produces a visual output only. Reading it means handing the test to someone else, describing a live camera feed to a volunteer service, or hoping for help. There is no standard, private, independent route.</p>
+            <p>This matters because pregnancy is one of the most private moments in a person's life. The gap is structural, not accidental — and it's solvable.</p>
+        </div>
+
+        <h2>Why existing solutions fall short</h2>
+        <p><strong>Be My Eyes / Aira</strong> — These services connect blind users with sighted volunteers or AI via live camera. Technically they work, but they require streaming video of a pregnancy test to a third-party server or volunteer. The privacy cost is too high. These are great tools; this isn't their right use case.</p>
+        <p><strong>Clearblue Digital</strong> — The closest existing product. High-contrast LCD text ("Pregnant" / "Not Pregnant") helps low-vision users with magnification tools, but produces no audio, no haptic, no screen-reader-accessible output. The hardware for an audio solution is practically already there; the output modality isn't.</p>
+        <p><strong>Voice assistants (Siri, Google Assistant)</strong> — Camera-based descriptions from general assistants are imprecise for this use case. They describe what they see generally, not with the specificity needed to confidently report a result.</p>
+    </div>
+
+
+    <!-- ── APPROACH ── -->
+    <div class="section">
+        <div class="section-label">Our Approach — Three Layers</div>
+
+        <p style="margin-bottom: 20px;">Rather than designing one solution, we're working in layers — starting with the most accessible (no new hardware) and moving toward more purpose-built options if needed.</p>
+
+        <div class="layer-grid">
+            <div class="layer-card">
+                <div class="layer-number">Layer 1</div>
+                <h3>Smartphone Camera</h3>
+                <p>Point your phone at the test — the app reads the result aloud. On-device ML only. No image leaves the phone. Works with tests you already buy.</p>
+                <div class="layer-status status-active">Active build</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-number">Layer 2</div>
+                <h3>Digital Test Partnership</h3>
+                <p>Clearblue Digital tests already have a microcontroller and battery. Research track: can audio output be added — via hardware mod, firmware, or manufacturer partnership?</p>
+                <div class="layer-status status-research">In research</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-number">Layer 3</div>
+                <h3>Standalone Reader Device</h3>
+                <p>A small clip-on accessory that holds the test in position, reads line intensity with a colour sensor, and outputs audio + haptic. Estimated BOM under £5 at volume.</p>
+                <div class="layer-status status-concept">Concept</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ── CONSTRAINTS ── -->
+    <div class="section">
+        <div class="section-label">Constraints We're Designing Around</div>
+
+        <div class="constraint-grid">
+            <div class="constraint-card">
+                <div class="label label-hard">Hard constraint</div>
+                <h4>Result reliability</h4>
+                <p>A false positive or missed positive is not acceptable. Any recognition system must meet a reliability bar before it replaces confidence a sighted person would have. The MVP ships with a confidence score and an explicit "re-check recommended" path.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-hard">Hard constraint</div>
+                <h4>Privacy by default</h4>
+                <p>No health data — images, results, metadata — leaves the device without explicit user action. On-device processing is a design requirement, not an optimisation. Cloud fallback requires opt-in with clear disclosure.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-regulatory">Regulatory</div>
+                <h4>Not a diagnostic device</h4>
+                <p>The tool reads the visual output of a completed test. The test itself is the regulated product. This distinction must be maintained in both product design and all public language to stay out of FDA/MDR medical device classification.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-design">Design constraint</div>
+                <h4>Test timing window</h4>
+                <p>Line tests are valid to read within 3–10 minutes. Faint lines fade. The reader must work first attempt — no boot sequences, no repositioning loops. Digital tests extend this window to ~6 minutes.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-design">Design constraint</div>
+                <h4>Lighting variation</h4>
+                <p>A bathroom at 3am looks nothing like a bathroom at noon. The recognition model must handle low light, overhead fluorescents, and warm incandescent — all common in real use.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-design">Design constraint</div>
+                <h4>Cost accessibility</h4>
+                <p>The people who need this most may not have the latest phones or disposable income for accessories. Layer 1 must work on mid-range Android phones from 2020 onwards. Layer 3 hardware must be priced as an essential, not a luxury.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ── HAPTIC LANGUAGE ── -->
+    <div class="section">
+        <div class="section-label">Haptic Result Language</div>
+
+        <p>Audio output isn't always possible — public spaces, shared housing, no headphones to hand, or hearing impairments within our target group. We're designing a haptic fallback built on simple, distinctive pulse patterns learned once and never forgotten.</p>
+
+        <div class="devlog" style="margin-top: 16px;">
+            <table class="haptic-table">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Result</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>— · ·</td>
+                        <td>Not pregnant</td>
+                        <td>One long, two short — mirrors Morse "D", easy to remember as "Done, not pregnant"</td>
+                    </tr>
+                    <tr>
+                        <td>· · —</td>
+                        <td>Pregnant</td>
+                        <td>Two short, one long — rising pattern feels affirmative; mirrors Morse "W"</td>
+                    </tr>
+                    <tr>
+                        <td>· · · · · ·</td>
+                        <td>Inconclusive / re-check</td>
+                        <td>Six rapid pulses, repeating — clearly different cadence, signals to try again</td>
+                    </tr>
+                    <tr>
+                        <td>— — —</td>
+                        <td>Error / unreadable</td>
+                        <td>Three long pulses — slow, deliberate, distinct from any result pattern</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top: 14px; font-size: 13px;">Pattern design will be validated with blind and low-vision users before finalising. The above is a starting hypothesis, not a spec.</p>
+    </div>
+
+
+    <!-- ── DIGITAL TEST RESEARCH ── -->
+    <div class="section">
+        <div class="section-label">Digital Pregnancy Test Internals — Research Thread</div>
+
+        <p>Clearblue Digital tests are effectively a small embedded system in a plastic casing. Our working hypothesis: the electronics to support audio output are simpler to add than a full redesign.</p>
+
+        <h2>What we know</h2>
+        <p><strong>Inside the reading stick:</strong> a standard lateral flow strip reads hCG concentration. An optical sensor reads the strip result internally. A microcontroller processes this and drives an LCD panel. A small battery powers the whole system for the ~6-minute display window.</p>
+
+        <p><strong>What we don't yet know:</strong> which MCU is used, whether it has unused GPIO pins, what the firmware architecture looks like, and whether the manufacturer has any accessibility roadmap.</p>
+
+        <h2>Research questions</h2>
+        <p><strong>Hardware path:</strong> Can a piezo buzzer or small speaker be added to the existing PCB with a firmware change? If the MCU has spare output capacity and program memory, this could be a hardware revision rather than a redesign — a significantly shorter path to market.</p>
+        <p><strong>Firmware path:</strong> If the MCU is locked or the firmware is read-protected, a parallel microcontroller (reading the LCD output via optical sensor) could drive audio separately without touching the original system.</p>
+        <p><strong>Partnership path:</strong> Clearblue (Procter &amp; Gamble) and other manufacturers have accessibility and corporate responsibility teams. A compelling prototype and a clear user need is a viable starting point for a conversation about a licensed audio edition.</p>
+    </div>
+
+
+    <!-- ── DEVLOG ── -->
+    <div class="section">
+        <div class="section-label">Devlog</div>
+
+        <div class="devlog">
+            <div class="devlog-header">
+                <span>// research log</span>
+                <small>updated as we go</small>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — problem framing</span>
+                <p>
+                    <span class="tag tag-decision">Decision</span>
+                    Starting narrow and specific: one gap, one user group, one moment. "Making pregnancy tests accessible" is too broad to build from. "A blind pregnant person cannot independently read a home pregnancy test result" is buildable. Everything else follows from that.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — who we're designing for</span>
+                <p>
+                    <span class="tag tag-note">Note</span>
+                    Primary user: blind or severely visually impaired person taking a home pregnancy test alone. Secondary: low-vision users who can see something but not enough to read a faint second line confidently. Both groups share the same core need — a reliable, private, independent result.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — existing tools audit</span>
+                <p>
+                    <span class="tag tag-tried">Tried</span>
+                    Mapped existing solutions: Be My Eyes (live volunteer video), Aira (paid AI-assisted camera), general phone accessibility (VoiceOver/TalkBack can't describe a test result), Clearblue Digital (visual text only). None provide independent, private result reading. Be My Eyes and Aira work but require a third party to see the result — not acceptable as a default.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — layer 1: smartphone camera approach</span>
+                <p>
+                    <span class="tag tag-decision">Decision</span>
+                    Phase 1 targets the hardware everyone already owns. Approach: hold phone over test, app recognises result, speaks it aloud. The recognition problem is actually constrained — we're not doing general image captioning, we're classifying a small number of specific visual states (one line, two lines, "Pregnant" text, "Not Pregnant" text). That's a well-defined classification task, not open-ended CV.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — privacy: cloud vision is a no</span>
+                <p>
+                    <span class="tag tag-issue">Issue</span>
+                    Cloud vision APIs (Google Vision, Claude vision, AWS Rekognition) would require uploading an image of the pregnancy test to a remote server. This image carries health information tied to a specific moment — arguably among the most sensitive data a person generates. Sending it to any third party, even with strong privacy policies, is the wrong default for this use case. Non-negotiable.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — on-device ML as the answer</span>
+                <p>
+                    <span class="tag tag-pivot">Pivot</span>
+                    Apple Vision framework (iOS) and Google ML Kit (Android) both support on-device image classification with no data leaving the phone. For our classification task — detect one line vs. two, or read an LCD text string — the model complexity is low. We don't need a large general-purpose model. A fine-tuned lightweight classifier trained on test images runs comfortably on any mid-range phone from ~2020 onwards.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — constraint: test timing</span>
+                <p>
+                    <span class="tag tag-issue">Issue</span>
+                    Line tests are only valid within a 3–10 minute window depending on brand. Faint positive lines fade. The app must work first attempt, in real bathroom conditions, without requiring the user to reposition multiple times. This raises the reliability bar significantly — we can't ship a prototype that "mostly works". Investigating digital tests as a more forgiving reading surface (6-minute hold, high-contrast text vs. faint dye lines).
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — digital test internals research</span>
+                <p>
+                    <span class="tag tag-note">Note</span>
+                    Clearblue Digital reading sticks contain: lateral flow strip, optical reader, MCU, LCD driver, small battery. The hardware for audio is essentially: MCU + piezo buzzer + firmware change. If the existing MCU has spare GPIO and program space — which is common in cost-optimised embedded designs — audio output may be achievable as a hardware revision, not a full redesign. Ordered a unit to examine the PCB.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — regulatory distinction</span>
+                <p>
+                    <span class="tag tag-decision">Decision</span>
+                    Established the regulatory framing early: PregVoice reads the visual output of a test that has already completed — it does not perform or interpret the diagnostic process. The test is the regulated product. The reader is an accessibility tool. This distinction must be enforced in product design (we never modify the test itself) and in all public language. Filed as a standing constraint, not a one-time check.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — haptic language design</span>
+                <p>
+                    <span class="tag tag-decision">Decision</span>
+                    Audio isn't always possible. Designed a haptic pattern language: long-short-short for negative, short-short-long for positive, six rapid for inconclusive, three long for error. Simple enough to learn in 30 seconds, distinctive enough not to misread. Patterns will go to user testing before finalising — this is a starting hypothesis.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — layer 3: standalone reader concept</span>
+                <p>
+                    <span class="tag tag-note">Note</span>
+                    Hardware fallback if smartphone reliability is insufficient: small clip-on device, holds test in fixed position, <code>TCS34725</code> colour sensor reads line intensity, ATtiny or similar drives audio + haptic. Coin cell powered. Estimated BOM £3–5 at volume. No phone required. Disposable form factor to match the test itself is worth exploring — removes the "I have to find and charge the reader" friction.
+                </p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — what's next</span>
+                <p>
+                    <span class="tag tag-decision">Decision</span>
+                    Three parallel workstreams: (1) Smartphone prototype — build a web-based proof of concept using the camera API and Web Speech, validate recognition accuracy across brands and lighting before committing to native development. (2) Hardware teardown — examine a Clearblue Digital unit, document PCB layout, identify chipset and output options. (3) Community input — reach out to blind and low-vision communities before any UX is locked. No design decision about this group should be made without them in the room.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ── NEXT STEPS ── -->
+    <div class="section">
+        <div class="section-label">What's Next</div>
+
+        <div class="next-steps">
+            <h3>Active workstreams</h3>
+            <ol>
+                <li><strong>Web prototype (Layer 1):</strong> Build a browser-based MVP using the <code>getUserMedia</code> camera API and <code>Web Speech API</code>. Test recognition accuracy across the most common UK pregnancy test brands (Clearblue, First Response, ASDA own-brand) under varied lighting. This validates the core CV assumption before committing to native app development.</li>
+                <li><strong>Hardware teardown (Layer 2):</strong> Examine a Clearblue Digital reading stick — photograph the PCB, identify the MCU, check for exposed GPIO and program memory headroom. Document findings here. If audio addition is feasible, draft a proof-of-concept circuit.</li>
+                <li><strong>Community research:</strong> Post in blind and visually impaired communities (r/Blind, RNIB forums, NAB networks) to understand lived experience, existing workarounds, and what a good solution actually looks like from the user's side. No UX decisions get made without this input.</li>
+                <li><strong>Training data strategy:</strong> Identify or construct a dataset of pregnancy test images across brands, lighting conditions, and result types for classifier fine-tuning. Consider synthetic augmentation to cover edge cases without needing thousands of real test photos.</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="page-footer">
+        <span>PregVoice — Research &amp; Planning Phase — 2025–Present</span>
+        <a href="index.html#projects">← Portfolio</a>
+    </div>
+
+</div>
+</body>
+</html>
