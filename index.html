@@ -3,227 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Specious Coda Bishop Portfolio</title>
+    <title>Specious Coda Bishop — Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
+        body { background-color: #f8f9fa; }
+
         .header {
             background-color: #343a40;
             color: white;
             padding: 20px 0;
         }
-        .section {
-            margin: 40px 0;
+
+        .section { margin: 40px 0; }
+
+        .project { margin-bottom: 28px; }
+
+        /* Devlog styles */
+        .devlog {
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 16px;
+            border: 1px solid #2a2a4a;
         }
-        .project {
-            margin-bottom: 20px;
+
+        .devlog-header {
+            background: #16213e;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .devlog-header span {
+            color: #a07fd4;
+            font-family: monospace;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 0.04em;
+        }
+
+        .devlog-header small {
+            color: #555577;
+            font-family: monospace;
+            font-size: 0.72rem;
+        }
+
+        .devlog-entry {
+            padding: 14px 18px;
+            border-bottom: 1px solid #2a2a4a;
+            font-family: monospace;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: #b0b0cc;
+        }
+
+        .devlog-entry:last-child { border-bottom: none; }
+
+        .devlog-entry .timestamp {
+            color: #c9a84c;
+            font-size: 0.7rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .devlog-entry .tag {
+            display: inline-block;
+            padding: 1px 7px;
+            border-radius: 3px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            margin-right: 6px;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        .tag-decision { background: #1a3a2a; color: #5dbb8a; }
+        .tag-tried { background: #1a2a3a; color: #5b9bd5; }
+        .tag-pivot { background: #3a2a1a; color: #d59b5b; }
+        .tag-done { background: #1a3a1a; color: #5dbb5d; }
+        .tag-note { background: #2a1a3a; color: #a07fd4; }
+        .tag-issue { background: #3a1a1a; color: #d55b5b; }
+
+        .devlog-entry p { margin: 0; }
+
+        .tool-link-badge {
+            display: inline-block;
+            background: #7b5ea7;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .tool-link-badge:hover { background: #a07fd4; color: white; }
+
+        .tech-tag {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            margin: 2px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header class="header text-center">
         <h1>Specious Coda Bishop</h1>
-        <p>Consultant | Project Manager | HR & Compliance Expert | Cybersecurity </p>
+        <p>Consultant · Project Manager · HR &amp; Compliance · Cybersecurity</p>
     </header>
 
-    <!-- Nav Tabs -->
     <div class="container mt-4">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About Me</a>
+                <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab">About Me</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="work-tab" data-bs-toggle="tab" href="#work" role="tab" aria-controls="work" aria-selected="false">Work Experience</a>
+                <a class="nav-link" id="work-tab" data-bs-toggle="tab" href="#work" role="tab">Work Experience</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="projects-tab" data-bs-toggle="tab" href="#projects" role="tab" aria-controls="projects" aria-selected="false">Projects</a>
+                <a class="nav-link" id="projects-tab" data-bs-toggle="tab" href="#projects" role="tab">Projects</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="skills-tab" data-bs-toggle="tab" href="#skills" role="tab" aria-controls="skills" aria-selected="false">Skills</a>
+                <a class="nav-link" id="skills-tab" data-bs-toggle="tab" href="#skills" role="tab">Skills</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab">Contact</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="how-i-work-tab" data-bs-toggle="tab" href="#how-i-work" role="tab" aria-controls="how-i-work" aria-selected="false">How I Work</a>
+                <a class="nav-link" id="how-i-work-tab" data-bs-toggle="tab" href="#how-i-work" role="tab">How I Work</a>
             </li>
         </ul>
+
         <div class="tab-content mt-3" id="myTabContent">
-            <!-- About Me Section -->
-            <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-                <div class="container section">
+
+            <!-- About Me -->
+            <div class="tab-pane fade show active" id="about" role="tabpanel">
+                <div class="section">
                     <h2>About Me</h2>
                     <p>I am an operations leader transitioning into cybersecurity, combining over a decade of experience in process optimization, incident triage, and secure data handling with newly developed technical skills in network analysis, vulnerability scanning, and SIEM log review. I value precision, integrity, and proactive problem-solving, and I am driven to protect organizations by identifying risks, mitigating vulnerabilities, and strengthening overall security posture. My blend of people-focused communication and technical acumen ensures I can bridge the gap between security teams and stakeholders to achieve business and security goals.</p>
                 </div>
             </div>
 
-            <!-- Work Experience Section -->
-            <div class="tab-pane fade" id="work" role="tabpanel" aria-labelledby="work-tab">
-                <div class="container section">
+            <!-- Work Experience -->
+            <div class="tab-pane fade" id="work" role="tabpanel">
+                <div class="section">
                     <h2>Work Experience</h2>
                     <ul>
-                        <li><strong>Freelance Consultant (2023-Present)</strong>: Consultancy in HR, operations, and business development, including Employer of Record (EOR) solutions, market share analysis, and business planning. I also supported career progression discussions and training development for entrepreneurs and business owners.</li>
-                        <li><strong>Freelance Writer (2022-Present)</strong>: Writing tech articles for Phandroid, Android Central, and Mobile Nations. I specialize in writing tech reviews, guides, and feature articles on consumer electronics, games, and tech accessories. I collaborated with editors to meet deadlines for timely content release.</li>
-                        <li><strong>Freelance Writer (2018-Present)</strong>: Created engaging articles and guides for the Android and tech-savvy audience at Phandroid. Conducted in-depth research for feature pieces and reviews to provide valuable insights to readers, ensuring all content met deadlines for timely publication.</li>
-                        <li><strong>Customer Support Hero (Technical) at Stamped (2020)</strong>: Triaged and diagnosed tickets for account-related issues. I worked closely with customers to integrate with Stamped’s APIs and helped developers build customized integrations and third-party services.</li>
-                        <li><strong>Editor & Operations Assistant at Can I Play That? (2018-2020)</strong>: Supported the CEO with administrative tasks and strategic content planning. I managed communications with developers and PR professionals to secure partnerships, as well as handling Patreon and fundraising efforts to ensure website sustainability.</li>
-                        <li><strong>Community Manager at Irish Tech Community (2016-2018)</strong>: Managed engagement and event organization for the Irish Tech Community, developed onboarding documentation for new members, and was responsible for fostering growth within the community.</li>
-                        <li><strong>Project Manager & Researcher at Learnovate (2016-2017)</strong>: Managed the €3M EU-funded project “DEVELOP,” working with international partners to deliver project goals on time. I coordinated travel arrangements, research contributions, and communication across European stakeholders, utilizing Agile methodologies to ensure alignment with project objectives.</li>
-                        <li><strong>Chief of People (Operations and Communications) at Leaguepedia (2014-2016)</strong>: Led a team overseeing communications and operational aspects of Leaguepedia, developing frameworks that supported the staff in achieving project goals efficiently.</li>
+                        <li><strong>Freelance Consultant (2023–Present)</strong>: Consultancy in HR, operations, and business development, including Employer of Record (EOR) solutions, market share analysis, and business planning. Supported career progression discussions and training development for entrepreneurs and business owners.</li>
+                        <li><strong>Freelance Writer (2022–Present)</strong>: Writing tech articles for Phandroid, Android Central, and Mobile Nations. Specialised in tech reviews, guides, and feature articles on consumer electronics, games, and accessories.</li>
+                        <li><strong>Customer Support Hero (Technical) at Stamped (2020)</strong>: Triaged and diagnosed tickets for account-related issues. Worked closely with customers to integrate Stamped's APIs and helped developers build customised integrations and third-party services.</li>
+                        <li><strong>Editor &amp; Operations Assistant at Can I Play That? (2018–2020)</strong>: Supported the CEO with administrative tasks and strategic content planning. Managed communications with developers and PR professionals to secure partnerships.</li>
+                        <li><strong>Community Manager at Irish Tech Community (2016–2018)</strong>: Managed engagement and event organisation, developed onboarding documentation, and fostered community growth.</li>
+                        <li><strong>Project Manager &amp; Researcher at Learnovate (2016–2017)</strong>: Managed the €3M EU-funded "DEVELOP" project, coordinating across international partners using Agile methodologies.</li>
+                        <li><strong>Chief of People at Leaguepedia (2014–2016)</strong>: Led communications and operational aspects, developing frameworks supporting staff in achieving project goals efficiently.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Projects Section -->
-            <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="projects-tab">
-                <div class="container section">
-             <h2>Projects</h2>
+            <!-- Projects -->
+            <div class="tab-pane fade" id="projects" role="tabpanel">
+                <div class="section">
+                    <h2>Projects</h2>
 
-      <!-- PregVoice Project -->
-      <div class="project">
-        <h3>PregVoice</h3>
-        <p><strong>Feb 2025 - Present</strong></p>
-        <p><strong>Description:</strong> PregVoice is an open-source project aimed at making pregnancy tests accessible to visually impaired individuals. The app uses smartphone cameras to announce results aloud, prioritizing privacy and ease of use. I’m currently seeking collaborators in various fields (development, AI, UX/UI design, etc.) to help bring this project to life.</p>
-        <p><strong>Technologies Used:</strong> HTML, CSS, JavaScript, Google Vision API (AI), Voice Feedback Integration.</p>
-      </div>
-
-      <!-- TikTok Sponsorship Projects -->
-      <div class="project">
-        <h3>Building the Sponsorship Document for a TikTok Personality</h3>
-        <p><strong>Jan 2025</strong></p>
-        <p><strong>Description:</strong> Once potential sponsors and the outreach strategy were in place, the next step was to build a comprehensive sponsorship document. This document was designed to present the TikTok personality’s stats, content, and audience data in a clear, professional way. It also outlined various sponsorship opportunities, such as product placements, sponsored content, and branded collaborations.
-
-The document included key metrics such as the TikTok personality’s follower count, engagement rates, and audience demographics. It was designed to make a strong case for why partnering with this personality would be beneficial for the sponsor, highlighting how their message aligned with the TikTok personality’s community and brand values.</p>
-        <p><strong>Technologies Used:</strong> Microsoft Word, Google Analytics, Content Strategy.</p>
-      </div>
-
-      <div class="project">
-        <h3>Crafting Outreach Messages for Sponsors for TikTok Personality</h3>
-        <p><strong>Jan 2025</strong></p>
-        <p><strong>Description:</strong>After identifying potential sponsors, we developed a clear outreach strategy. This strategy was centered around understanding the needs of each sponsor, how the TikTok personality’s audience aligned with their brand, and what unique value could be offered to the sponsor.
-
-The outreach strategy focused on customizing messages to each brand, ensuring that it was specific to their goals. This included identifying the right contacts within the company (e.g., marketing managers, brand partnerships team) and determining the best way to approach them. The outreach message highlighted the TikTok personality’s authenticity, engaged following, and the value they could bring by partnering with the brand.
-
-Alongside the sponsorship document, we also crafted outreach messages tailored to the specific brands. These messages were designed to be personalized, concise, and focused on the value the TikTok personality could provide to the brand. Each message introduced the TikTok personality, outlined their audience and engagement metrics, and briefly explained the potential for collaboration.
-
-The outreach messages were tailored to match the unique interests of each potential sponsor, whether focusing on mental health, wellness, or rehabilitation. The message was structured to be compelling, opening the door for further conversation and outlining the potential benefits for the brand.</p>
-        <p><strong>Technologies Used:</strong> Email Marketing, Personalization Tools, Communication Strategy.</p>
-      </div>
-
-      <div class="project">
-        <h3>Crafting the Outreach Strategy for TikTok Personality</h3>
-        <p><strong>Jan 2025</strong></p>
-        <p><strong>Description:</strong> After identifying potential sponsors, we developed a clear outreach strategy. This strategy was centered around understanding the needs of each sponsor, how the TikTok personality’s audience aligned with their brand, and what unique value could be offered to the sponsor.
-
-The outreach strategy focused on customizing messages to each brand, ensuring that it was specific to their goals. This included identifying the right contacts within the company (e.g., marketing managers, brand partnerships team) and determining the best way to approach them. The outreach message highlighted the TikTok personality’s authenticity, engaged following, and the value they could bring by partnering with the brand.</p>
-        <p><strong>Technologies Used:</strong> Research Tools, Audience Insights, CRM Tools.</p>
-      </div>
-
-      <div class="project">
-        <h3>Researching Sponsors for TikTok Personality</h3>
-        <p><strong>Jan 2025</strong></p>
-        <p><strong>Description:</strong> This project was aimed at supporting a TikTok personality focused on mental health and rehabilitation in securing brand sponsorships. The goal was to research and identify potential sponsors that align with the personality’s niche, audience, and values. The project also involved developing an outreach strategy and creating an effective sponsorship document for approaching brands.
-
-The first step was identifying brands that resonate with the TikTok personality’s content and core message of mental health and recovery. We focused on brands in industries such as wellness, fitness, mental health support, and recovery, ensuring that each company aligned with the TikTok personality’s mission and values.
-
-We used tools like TikTok analytics, social media platforms, and brand databases to gather information on brands that had a history of influencer marketing and were already active in the mental health and wellness spaces. We also ensured that the brands we researched had a significant presence in the UK, as it aligned with the TikTok personality’s target audience.</p>
-        <p><strong>Technologies Used:</strong> TikTok Analytics, Brand Research Tools, Excel.</p>
-      </div>
-
-      <!-- Freelance Consultant Projects -->
-      <div class="project">
-        <h3>Business Relocation and Expansion Strategy</h3>
-        <p><strong>Dec 2024 - Dec 2024</strong></p>
-        <p><strong>Description:</strong> I worked with a creative business looking to expand operations from the US to Europe. The client needed help navigating the complexities of HR compliance, selecting the right EOR partner, and ensuring the business adhered to local labor laws. I researched and identified trusted EOR solutions that could facilitate a smooth expansion while maintaining compliance.
-Additionally, I scouted suitable creative spaces in a major European city that would meet the client’s business and operational needs, ensuring a seamless transition with no disruptions to their creative output.
-
-The business successfully expanded internationally without legal or operational setbacks, allowing them to continue their operations smoothly in Europe.</p>
-        <p><strong>Technologies Used:</strong>Golbal expansion · Human Resources (HR) · Market Research · Business Relocation.</p>
-      </div>
-<div class="project">
-        <h3>Creative Space Setup for Business Continuity</h3>
-        <p><strong>Dec 2024 - Dec 2024</strong></p>
-        <p><strong>Description:</strong> The client required assistance in finding a creative workspace in a new European city to continue both content creation and their core business operations. I conducted a thorough search for facilities that would suit the unique needs of their business, from tailoring to content production. After scouting various options, I assisted in selecting a location that met both their creative and operational requirements.
-
-The client successfully transitioned to their new location and was able to maintain business continuity without delays. This allowed them to continue creating while growing their European presence.</p>
-        <p><strong>Technologies Used:</strong> Venue Search · Project Management · Executive Administrative Assistance · Executive Support.</p>
-      </div>
-     <div class="project">
-        <h3>Leadership Coaching for a Growing Team</h3>
-        <p><strong>Nov 2024 - Dec 2024</strong></p>
-        <p><strong>Description:</strong> As a start-up scaled, the leadership team faced difficulties managing internal communication and aligning the growing workforce with company values. I provided coaching to the leadership team on conflict resolution, effective communication, and team alignment. The coaching sessions helped them navigate team dynamics and improve interpersonal relationships, fostering a healthier and more collaborative work environment.
-I also implemented team-building activities and guided the leadership on how to align department goals with company-wide strategies, ensuring a unified vision across the growing team.
-
-The leadership team’s ability to manage scaling challenges improved significantly, resulting in a stronger, more cohesive team. This increased employee satisfaction, retention, and led to better cross-functional collaboration.</p>
-        <p><strong>Technologies Used:</strong> Leadership Development · Executive Coaching · Conflict Resolution · Team Alignment · Strategic Communications.</p>
-      </div>
-                        <div class="project">
-        <h3>Optimizing Customer Support Operations</h3>
-        <p><strong>June 2024 - Sep 2024</strong></p>
-        <p><strong>Description:</strong> I partnered with a startup experiencing growing pains in its customer support team. The company was struggling to manage an increasing volume of support tickets, which led to longer response times and customer dissatisfaction. My solution involved implementing a ticket allocation system that prioritized tickets based on urgency and type, ensuring that each team member was addressing the right tickets at the right time.
-
-I also built a comprehensive knowledge base to empower customers to find answers themselves and reduce support load. This was coupled with staff training to ensure high-quality responses and a focus on problem resolution.
-
-The new systems reduced response times by 30% and increased customer satisfaction. This allowed the startup to maintain high-quality customer service even as the business expanded. The support team was also able to scale without being overwhelmed by ticket volume.</p>
-        <p><strong>Technologies Used:</strong>Customer Service Management · Ticketing Systems · Staff Development · Leadership · Workflow Management
-Skills: Customer Service Management · Ticketing Systems · Staff Development · Leadership · Workflow Management</p>
-      </div>
+                    <!-- ====================================================
+                         LORE CHECKER — AI TOOL FOR LOREBYSPEC
+                    ===================================================== -->
                     <div class="project">
-        <h3>Structuring Operations for a Creative Entrepreneur</h3>
-        <p><strong>Mar 2023 - Apr 2023</strong></p>
-        <p><strong>Description:</strong>I worked with a freelance artist struggling to manage the operational side of her growing business. Despite her artistic talent, she was facing challenges with pricing, client communication, and project management. After conducting a comprehensive review of her processes, I proposed a new structure that focused on clarity in pricing through a transparent pricing model, while developing a streamlined client intake process and payment structure.
+                        <h3>KH Lore Consistency Checker <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>May 2025 – Present</strong></p>
+                        <p>A theory stress-tester built for my YouTube channel <strong>LorebySpec</strong>. Paste in a Kingdom Hearts theory, provide optional lore context and hard anchors, and Claude analyses it for contradictions, logical gaps, clarifying questions, and an overall verdict. Built to support real content prep — and to demonstrate AI tooling in a creative workflow.</p>
+                        <p>
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Client-side</span>
+                            <span class="tech-tag">No backend</span>
+                        </p>
+                        <a class="tool-link-badge" href="lore-checker.html" target="_blank">Open Tool →</a>
 
-I also helped set up a clear framework for client feedback, deposit collection, and scheduling, allowing her to better manage her time and increase client satisfaction. With these systems in place, we created an efficient workflow that reduced administrative time and helped her focus more on creating art.
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — dated as we go</small>
+                            </div>
 
-The client’s business became more professional and efficient, enabling her to raise her prices and manage more clients without sacrificing quality. Her business saw a significant increase in revenue, and she was able to dedicate more time to her craft while still running a successful operation.</p>
-        <p><strong>Technologies Used:</strong>Business Consulting · Pricing Strategy · Global Client Management · Workflow Management · Product Development</p>
-      </div>
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — initial build</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Approached this as a single-file, no-backend tool that can live on GitHub Pages. No server = no hosting cost, no auth complexity, and the portfolio stays purely static.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-tried">Tried</span>
+                                    Considered a mock/demo mode with hardcoded example outputs so visitors can see it work without an API key. Rejected — felt dishonest for a portfolio piece. A tool that actually calls the API is more compelling than a simulation.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    API key lives in the session only (not localStorage) — user pastes it each visit. Trade-off: slight friction, but no credentials ever persisted to disk or sent anywhere. For a personal creative tool this is the right call.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Three inputs: Lore Context (free-form canon dump), Hard Anchors (specific facts the theory must not break), and the Theory itself. Splitting context from anchors lets the AI treat them differently — context informs, anchors constrain.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v0.1 live. Four output sections: Contradictions Found, Potential Weaknesses, Clarifying Questions, Overall Assessment. System prompt instructs Claude to write as a collaborator, not a judge — keeps the output useful for scripting rather than just academic.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- PregVoice -->
                     <div class="project">
-        <h3>Niche Market Strategy for Web Development</h3>
-        <p><strong>Jan 2023 - Feb 2023</strong></p>
-        <p><strong>Description:</strong>Working with a developer eager to stand out in the competitive world of web development, I helped identify an underserved niche in the streaming community. With my background in market research, I recognized the potential for creating custom webhooks and integrations for Twitch streamers, a community that was increasingly looking for technical solutions to improve their streaming setup.
-I worked closely with the client to define the scope of services, set realistic pricing, and create a tailored marketing strategy aimed at attracting streamers. We also crafted unique value propositions to differentiate the services from competitors. Through strategic outreach and brand positioning, the client became a recognized name in this space.
+                        <h3>PregVoice</h3>
+                        <p><strong>Feb 2025 – Present</strong></p>
+                        <p>An open-source project aimed at making pregnancy tests accessible to visually impaired individuals. The app uses smartphone cameras to announce results aloud, prioritising privacy and ease of use. Currently seeking collaborators in development, AI, and UX/UI design.</p>
+                        <p>
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Google Vision API</span>
+                            <span class="tech-tag">Voice Feedback</span>
+                        </p>
+                    </div>
 
-The business flourished, establishing a steady client base in a high-demand niche. The client was able to scale their business and gain recognition within the streaming industry—achieving a sustainable revenue stream with long-term growth potential.</p>
-        <p><strong>Technologies Used:</strong> Consulting · Customer Acquisition · Niches · Market Research · Small Business Development</p>
-      </div>
+                    <hr>
 
-            <!-- Skills Section -->
-            <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="skills-tab">
-                <div class="container section">
+                    <!-- TikTok Sponsorship -->
+                    <div class="project">
+                        <h3>Sponsorship Strategy for a TikTok Personality</h3>
+                        <p><strong>Jan 2025</strong></p>
+                        <p>End-to-end sponsorship project for a TikTok creator in the mental health and rehabilitation space. Covered sponsor research, outreach strategy, personalised outreach messages, and a full sponsorship document with audience metrics and collaboration packages.</p>
+                        <p>
+                            <span class="tech-tag">Content Strategy</span>
+                            <span class="tech-tag">TikTok Analytics</span>
+                            <span class="tech-tag">Email Marketing</span>
+                            <span class="tech-tag">CRM</span>
+                        </p>
+                    </div>
+
+                    <hr>
+
+                    <!-- Freelance Consultant Projects -->
+                    <div class="project">
+                        <h3>Business Relocation &amp; Expansion Strategy</h3>
+                        <p><strong>Dec 2024</strong></p>
+                        <p>Supported a creative business expanding from the US to Europe — navigating HR compliance, EOR partner selection, local labour law, and scouting creative workspaces in a major European city. The business expanded without legal or operational setbacks.</p>
+                        <p>
+                            <span class="tech-tag">Global Expansion</span>
+                            <span class="tech-tag">HR Compliance</span>
+                            <span class="tech-tag">Market Research</span>
+                        </p>
+                    </div>
+
+                    <div class="project">
+                        <h3>Leadership Coaching for a Growing Team</h3>
+                        <p><strong>Nov–Dec 2024</strong></p>
+                        <p>Provided coaching to a scaling start-up's leadership team on conflict resolution, communication, and team alignment. Implemented team-building activities and cross-functional goal alignment. Outcome: stronger cohesion, improved retention, better collaboration.</p>
+                        <p>
+                            <span class="tech-tag">Executive Coaching</span>
+                            <span class="tech-tag">Conflict Resolution</span>
+                            <span class="tech-tag">Strategic Communications</span>
+                        </p>
+                    </div>
+
+                    <div class="project">
+                        <h3>Optimising Customer Support Operations</h3>
+                        <p><strong>Jun–Sep 2024</strong></p>
+                        <p>Partnered with a startup struggling with ticket volume. Implemented a priority-based ticket allocation system and knowledge base, paired with staff training. Reduced response times by 30% and increased customer satisfaction as the business scaled.</p>
+                        <p>
+                            <span class="tech-tag">Ticketing Systems</span>
+                            <span class="tech-tag">Workflow Management</span>
+                            <span class="tech-tag">Staff Development</span>
+                        </p>
+                    </div>
+
+                    <div class="project">
+                        <h3>Niche Market Strategy for Web Development</h3>
+                        <p><strong>Jan–Feb 2023</strong></p>
+                        <p>Identified an underserved niche — custom webhooks and integrations for Twitch streamers — and helped a developer position, price, and market into it. The client established a sustainable revenue stream and became a recognised name in the space.</p>
+                        <p>
+                            <span class="tech-tag">Market Research</span>
+                            <span class="tech-tag">Customer Acquisition</span>
+                            <span class="tech-tag">Small Business Development</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="tab-pane fade" id="skills" role="tabpanel">
+                <div class="section">
                     <h2>Skills</h2>
                     <ul>
-                        <li>Global Project & Vendor Management</li>
-                        <li>Employee Health & Safety Support</li>
-                        <li>HR Compliance & Employee Well-Being</li>
-                        <li>Agile & Scrum Methodologies</li>
-                        <li>Research & Policy Implementation</li>
-                        <li>Team Leadership & Communication</li>
-                        <li>Fundraising & Stakeholder Engagement</li>
-                        <li>Copywriting & Content Creation</li>
+                        <li>Global Project &amp; Vendor Management</li>
+                        <li>Employee Health &amp; Safety Support</li>
+                        <li>HR Compliance &amp; Employee Well-Being</li>
+                        <li>Agile &amp; Scrum Methodologies</li>
+                        <li>Research &amp; Policy Implementation</li>
+                        <li>Team Leadership &amp; Communication</li>
+                        <li>Fundraising &amp; Stakeholder Engagement</li>
+                        <li>Copywriting &amp; Content Creation</li>
+                        <li>AI Tooling &amp; Workflow Integration</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Contact Section -->
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <div class="container section">
+            <!-- Contact -->
+            <div class="tab-pane fade" id="contact" role="tabpanel">
+                <div class="section">
                     <h2>Contact</h2>
                     <p>Email: <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
                 </div>
             </div>
 
-            <!-- How I Work Section -->
-            <div class="tab-pane fade" id="how-i-work" role="tabpanel" aria-labelledby="how-i-work-tab">
-                <div class="container section">
+            <!-- How I Work -->
+            <div class="tab-pane fade" id="how-i-work" role="tabpanel">
+                <div class="section">
                     <h2>How I Work</h2>
                     <p>I approach each project with a blend of agility and precision. My focus is on delivering clear results through effective communication, collaborative work, and a flexible attitude. I am driven by data and open to experimenting with new strategies to continuously improve processes and achieve sustainable growth. I foster a positive work environment by maintaining transparency and ensuring all voices are heard.</p>
                 </div>
             </div>
+
         </div>
     </div>
 
