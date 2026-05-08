@@ -233,6 +233,94 @@
                                 </p>
                             </div>
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — constraint: KH lore volume</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Kingdom Hearts spans 25+ years and 15+ titles. Pasting raw lore into a text box isn't realistic — the series wiki alone would blow past any reasonable input. Raised: is there a cap? What's the actual limit?
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Real constraint isn't the text box (no cap) — it's Claude's context window (~200,000 tokens ≈ ~150,000 words) and cost. Sending entire wikis is technically possible but expensive and unfocused. A theory about BbS doesn't need all of KH3's lore.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-tried">Tried</span>
+                                    Considered direct <code>fetch()</code> to KHWiki / Fandom URLs from the browser. Blocked — external sites don't send CORS headers that allow browser requests. Would need a proxy or backend.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    Solved CORS without a backend: Jina Reader (<code>r.jina.ai</code>) is a free service that converts any URL to clean plain text and allows browser fetches. Paste a wiki link, it returns readable content. Zero setup, no extra API key.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Each fetched URL is capped at 8,000 characters on the client before it's sent to Claude. Keeps individual page contributions predictable. Users can add multiple URLs — the right workflow is: link the specific wiki pages relevant to your theory, not the entire series.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v0.2 live. Both lore context and anchors panels now accept URL inputs alongside free-text. Token estimate and approximate cost shown in the UI before the API call completes, so there are no surprise charges.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — cost optimisation pass</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Goal is cents per check, not euros. v0.2 defaulted to Claude Sonnet (~$0.03/check). Fine occasionally, expensive if you're running it across 10 theories before a video. Needed a cheaper default.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Switched default model to Claude Haiku 4.5 — same Anthropic family, ~$0.001 per typical check (input: $0.80/MTok, output: $4/MTok vs Sonnet's $3/$15). Quality is more than sufficient for lore analysis; Sonnet remains available via toggle for dense multi-game theories.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Dropped URL fetch cap from 8,000 to 3,500 characters (~875 words) per page. KH wiki pages after Jina parsing still carry nav remnants and category lists. 875 words of actual article content is enough for the relevant section of any given page, and halves that input cost.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Reduced max output tokens from 1,500 to 900. Output tokens cost 5× more than input on Anthropic's pricing. The four-section analysis rarely needs more than 600 tokens in practice — 900 gives headroom without waste.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v0.3 live. Model selector in UI shows live cost estimate per model. Estimate updates to show tokens, cost, and model name both during and after the call so there's a full paper trail per check.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 
