@@ -110,6 +110,47 @@
             font-size: 0.75rem;
             margin: 2px;
         }
+
+        /* Project highlights */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 12px;
+            margin: 18px 0 6px;
+        }
+
+        .highlight-card {
+            background: #f0eef8;
+            border: 1px solid #d4cde8;
+            border-left: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 12px 14px;
+        }
+
+        .highlight-card .win-label {
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #7b5ea7;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .highlight-card .win-title {
+            font-size: 0.88rem;
+            font-weight: bold;
+            color: #2d2d3a;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .highlight-card .win-detail {
+            font-size: 0.78rem;
+            color: #555;
+            line-height: 1.5;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -178,12 +219,47 @@
                     <div class="project">
                         <h3>KH Lore Consistency Checker <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>May 2025 – Present</strong></p>
-                        <p>A theory stress-tester built for my YouTube channel <strong>LorebySpec</strong>. Paste in a Kingdom Hearts theory, provide optional lore context and hard anchors, and Claude analyses it for contradictions, logical gaps, clarifying questions, and an overall verdict. Built to support real content prep — and to demonstrate AI tooling in a creative workflow.</p>
-                        <p>
+                        <p>A theory stress-tester built for my YouTube channel <strong>LorebySpec</strong>. Kingdom Hearts has 25+ years of lore across 15+ titles — this tool lets you paste in a theory, supply relevant wiki links or context, and get a structured AI analysis: contradictions against canon, logical weaknesses, clarifying questions a skeptical viewer would ask, and an overall verdict. Built for real content prep, not as a demo.</p>
+
+                        <div class="highlights">
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Open by design</span>
+                                <p class="win-detail">No account, no login, no subscription. Bring your own Anthropic API key and the tool works — nothing stored, nothing tracked.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Costs cents, not euros</span>
+                                <p class="win-detail">Default model (Haiku 4.5) runs a typical theory check for ~$0.001. You'd need 1,000 checks to spend a dollar. Cost shown live in the UI per check.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Zero infrastructure</span>
+                                <p class="win-detail">Pure static HTML — no server, no database, no hosting cost. Lives on GitHub Pages. Nothing to maintain or secure.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Solved CORS without a backend</span>
+                                <p class="win-detail">Browsers can't fetch external wiki pages directly. Used Jina Reader as a lightweight proxy to pull live KH wiki content client-side — no server code needed.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Prompt-engineered output</span>
+                                <p class="win-detail">The AI doesn't just chat — it returns four consistent sections every time: Contradictions, Weaknesses, Questions, Assessment. Structured for scriptwriting, not reading.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Actually used in production</span>
+                                <p class="win-detail">This isn't a demo. It's part of the real LorebySpec video prep workflow — which is why every decision was made with cost, speed, and practical use in mind.</p>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 10px;">
                             <span class="tech-tag">HTML/CSS/JS</span>
                             <span class="tech-tag">Claude API (Anthropic)</span>
-                            <span class="tech-tag">Client-side</span>
-                            <span class="tech-tag">No backend</span>
+                            <span class="tech-tag">Jina Reader</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">GitHub Pages</span>
                         </p>
                         <a class="tool-link-badge" href="lore-checker.html" target="_blank">Open Tool →</a>
 
