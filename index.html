@@ -662,15 +662,160 @@
                     <hr>
 
                     <!-- PregVoice -->
+                    <!-- ====================================================
+                         PREGVOICE — ACCESSIBILITY TOOL
+                    ===================================================== -->
                     <div class="project">
-                        <h3>PregVoice</h3>
+                        <h3>PregVoice <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">Research &amp; Planning</span></h3>
                         <p><strong>Feb 2025 – Present</strong></p>
-                        <p>An open-source project aimed at making pregnancy tests accessible to visually impaired individuals. The app uses smartphone cameras to announce results aloud, prioritising privacy and ease of use. Currently seeking collaborators in development, AI, and UX/UI design.</p>
-                        <p>
-                            <span class="tech-tag">HTML/CSS/JS</span>
-                            <span class="tech-tag">Google Vision API</span>
-                            <span class="tech-tag">Voice Feedback</span>
+                        <p>A layered accessibility project tackling one specific, overlooked gap: blind and visually impaired people cannot independently read a pregnancy test. The result is a deeply private moment that requires asking someone else — stripping dignity from an already vulnerable experience. PregVoice works through the problem in phases, from smartphone-first solutions requiring no new hardware, to researching the internals of existing digital tests, to evaluating custom hardware if no off-the-shelf path is viable.</p>
+
+                        <div class="highlights">
+                            <div class="highlight-card">
+                                <span class="win-label">focus</span>
+                                <span class="win-title">Privacy by default</span>
+                                <p class="win-detail">A person shouldn't need to hand their phone to someone else, or broadcast a health result, to know if they're pregnant. Every design decision is filtered through: does this preserve independence?</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">focus</span>
+                                <span class="win-title">Smartphone first</span>
+                                <p class="win-detail">The most accessible solution uses hardware people already own. Phase 1 explores camera-based result recognition with on-device processing — no cloud upload, no new purchases.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">constraint</span>
+                                <span class="win-title">Medical-adjacent</span>
+                                <p class="win-detail">Anything that "reads" a medical test result sits close to regulated territory. The tool reads the visual output — it doesn't perform the test. That distinction shapes every technical decision.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">research</span>
+                                <span class="win-title">Digital test internals</span>
+                                <p class="win-detail">Clearblue Digital tests already have LCD displays and microcontrollers inside. Researching whether adding audio output is a hardware addition, a firmware change, or a partnership conversation.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">concept</span>
+                                <span class="win-title">Haptic fallback</span>
+                                <p class="win-detail">Audio isn't always possible — public spaces, shared housing, no headphones available. Designing a haptic result language (e.g. pulse patterns) as a non-audio, non-visual fallback.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">focus</span>
+                                <span class="win-title">Open &amp; collaborative</span>
+                                <p class="win-detail">This can't be built well without input from blind and low-vision users, hardware engineers, and medical device specialists. The devlog is the starting point for that conversation.</p>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">On-device ML</span>
+                            <span class="tech-tag">Web Speech API</span>
+                            <span class="tech-tag">Haptics</span>
+                            <span class="tech-tag">Hardware Research</span>
+                            <span class="tech-tag">Accessibility</span>
                         </p>
+                        <a class="tool-link-badge" href="pregvoice.html" target="_blank">Read the Research →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>research log — updated as we go</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — problem framing</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The problem is narrow and specific: a blind pregnant person taking a home pregnancy test has no independent way to read the result. Every current path requires involving another person. That's not an edge case — it's a structural gap. Starting from that constraint rather than "make pregnancy tests accessible" keeps the scope tractable.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — existing tools audit</span>
+                                <p>
+                                    <span class="tag tag-tried">Tried</span>
+                                    Checked what already exists. Be My Eyes and Aira connect blind users to sighted volunteers or AI descriptions via camera. Technically usable — but both require broadcasting a live video feed of a pregnancy test to a third party (volunteer or company server). Privacy cost is too high for a result this personal. Not a viable general solution.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Clearblue Digital tests (and similar) already show "Pregnant" / "Not Pregnant" as text on an LCD screen. This is the closest existing accessibility accommodation — high-contrast text is easier to read for low-vision users with magnification tools. But it produces zero audio, zero haptic output. The hardware exists; the output modalities don't.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — layer 1: smartphone camera</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Phase 1 targets the most accessible hardware: the smartphone everyone already owns. Approach: point camera at test → recognise the result → speak it aloud. No new hardware, no app purchase required. Works with standard pregnancy test formats (line tests and digital). This is the fastest path to impact.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — privacy constraint: cloud vision</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Cloud vision APIs (Google Vision, Claude vision) would send an image of the test to a remote server. That's a photo tied to a health event — possibly the most sensitive moment in a person's reproductive life. Sending it to any third-party server, even one with strong privacy policies, is an unacceptable default for this use case.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    On-device ML is the answer. Apple's Vision framework and Google's ML Kit both run image classification on-device with no data leaving the phone. For line detection (one line vs. two, or a digital LCD reading "Pregnant") the model complexity is low — well within what a phone can handle offline. Privacy preserved by default.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — layer 2: digital test internals</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Clearblue Digital tests contain a microcontroller, LCD panel, and battery — all to display two words. The electronic reading stick re-uses the same lateral flow strip underneath but processes the optical result internally. Key question: does the MCU expose any output pins? If it does, adding a piezo buzzer or BLE chip is a hardware addition, not a redesign. Filed as a research thread.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — constraint: medical device regulation</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Anything classified as part of a diagnostic process falls under FDA (US) or MDR (EU) medical device regulation. Critical distinction: a tool that reads the visual output of an already-completed test is an accessibility aid, not a diagnostic device. The test itself is the regulated product; the reader is not. This distinction must be maintained in product design and language throughout.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — creative constraint: test timing</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Most line-based tests are valid to read within a 3–10 minute window. Faint lines fade. A reader that takes 30 seconds to boot or requires multiple repositioning attempts isn't usable in practice. Speed and first-attempt reliability are non-negotiable. Digital tests hold their result for ~6 minutes, which gives more working time.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — haptic language concept</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Audio output has real constraints: public spaces, shared housing, headphone availability, hearing impairments among the target group. Designing a haptic fallback: single long pulse = negative, two short pulses = positive, repeating triple pulse = inconclusive / error. Simple enough to learn once, distinctive enough not to misread. Mirrors how screen readers handle notification priority.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — layer 3: custom hardware path</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    If the smartphone path has reliability limits and manufacturer partnerships aren't viable, a standalone reader accessory becomes the fallback. Concept: a small clip-on device that holds the test in a fixed position, uses a colour sensor (TCS34725 or similar) to read line intensity, and outputs audio + haptic. Powered by coin cell. Single-use pairing with standard test formats. Estimated BOM: under £5 at volume.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — what's next</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Three parallel workstreams: (1) Build a smartphone prototype using ML Kit for on-device line detection — validate whether recognition is reliable enough across different test brands and lighting conditions. (2) Tear down a Clearblue Digital test and document the PCB — identify chipset, output pins, and whether audio addition is feasible without redesign. (3) Reach out to blind and low-vision communities for lived experience input before locking any UX decisions.
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
 
                     <hr>
