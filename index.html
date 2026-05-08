@@ -163,6 +163,283 @@
             margin: 2px;
         }
 
+        /* Skills */
+        .skill-group {
+            margin-bottom: 28px;
+        }
+
+        .skill-group-title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #7b5ea7;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e8e2f5;
+        }
+
+        .skill-pill {
+            display: inline-block;
+            background: #f0eef8;
+            border: 1px solid #d4cde8;
+            color: #3d2d5a;
+            padding: 5px 13px;
+            border-radius: 20px;
+            font-size: 0.81rem;
+            margin: 3px 3px 3px 0;
+            line-height: 1.4;
+        }
+
+        .skill-pill.emerging {
+            background: #edf7f0;
+            border-color: #b8dfc4;
+            color: #1c5230;
+        }
+
+        /* Work experience timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 6px;
+            bottom: 0;
+            width: 2px;
+            background: #e8e2f5;
+        }
+
+        .timeline-entry {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .timeline-entry::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #7b5ea7;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #d4cde8;
+        }
+
+        .timeline-role {
+            font-weight: 700;
+            font-size: 0.97rem;
+            color: #2d2d3a;
+            margin-bottom: 1px;
+        }
+
+        .timeline-meta {
+            font-size: 0.78rem;
+            color: #888;
+            margin-bottom: 7px;
+        }
+
+        .timeline-meta .org {
+            color: #7b5ea7;
+            font-weight: 600;
+        }
+
+        .timeline-body {
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .timeline-bullets {
+            font-size: 0.86rem;
+            color: #444;
+            line-height: 1.65;
+            margin: 5px 0 0;
+            padding-left: 18px;
+        }
+
+        .timeline-bullets li {
+            margin-bottom: 3px;
+        }
+
+        .timeline-subhead {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #7b5ea7;
+            margin: 14px 0 5px;
+        }
+
+        .education-block {
+            margin-top: 40px;
+            padding-top: 28px;
+            border-top: 2px solid #e8e2f5;
+        }
+
+        .education-entry {
+            margin-bottom: 14px;
+        }
+
+        .edu-qual {
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: #2d2d3a;
+        }
+
+        .edu-org {
+            font-size: 0.83rem;
+            color: #7b5ea7;
+            font-weight: 600;
+        }
+
+        .cert-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+        }
+
+        .cert-list li {
+            font-size: 0.86rem;
+            color: #444;
+            padding: 5px 0;
+            border-bottom: 1px solid #f0eef8;
+        }
+
+        .cert-list li:last-child { border-bottom: none; }
+
+        /* How I Work — onboarding layer cards */
+        .layer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+            margin: 18px 0 6px;
+        }
+
+        .layer-card {
+            background: #fff;
+            border: 1px solid #e0d9f0;
+            border-left: 4px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .layer-card .layer-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7b5ea7;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .layer-card .layer-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #2d2d3a;
+            margin-bottom: 7px;
+            display: block;
+        }
+
+        .layer-card p {
+            font-size: 0.82rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .principle-callout {
+            background: #f7f5fc;
+            border-left: 4px solid #7b5ea7;
+            border-radius: 0 6px 6px 0;
+            padding: 14px 20px;
+            margin: 22px 0;
+            font-size: 0.93rem;
+            color: #2d2d3a;
+            line-height: 1.65;
+        }
+
+        .how-i-work-subhead {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2d2d3a;
+            margin: 32px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e8e2f5;
+        }
+
+        /* Working with Spec */
+        .spec-item {
+            background: #fff;
+            border: 1px solid #e0d9f0;
+            border-left: 4px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .spec-item .spec-title {
+            font-size: 0.97rem;
+            font-weight: 700;
+            color: #2d2d3a;
+            margin-bottom: 10px;
+        }
+
+        .spec-item p {
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* About Me highlights */
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .about-card {
+            background: #f7f5fc;
+            border: 1px solid #e0d9f0;
+            border-top: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+
+        .about-card .card-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7b5ea7;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .about-card .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #2d2d3a;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .about-card p {
+            font-size: 0.8rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.55;
+        }
+
         /* Project highlights */
         .highlights {
             display: grid;
@@ -203,6 +480,209 @@
             line-height: 1.5;
             margin: 0;
         }
+
+        /* ===== Midnight Theme ===== */
+
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        h2, h3, h4, h5 { color: #e6edf3; }
+
+        p { color: #c9d1d9; }
+
+        strong { color: #e6edf3; }
+
+        a { color: #b392f0; }
+        a:hover { color: #d2b3ff; }
+
+        hr {
+            border-color: #30363d;
+            opacity: 1;
+        }
+
+        .header {
+            background-color: #010409;
+            border-bottom: 1px solid #30363d;
+        }
+
+        /* Bootstrap nav tabs */
+        .nav-tabs { border-bottom-color: #30363d; }
+
+        .nav-tabs .nav-link {
+            color: #8b949e;
+            border-color: transparent;
+        }
+
+        .nav-tabs .nav-link:hover,
+        .nav-tabs .nav-link:focus {
+            color: #c9d1d9;
+            border-color: #30363d #30363d transparent;
+            background-color: #161b22;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #e6edf3;
+            background-color: #0d1117;
+            border-color: #30363d #30363d #0d1117;
+        }
+
+        .badge.bg-secondary {
+            background-color: #30363d !important;
+            color: #8b949e !important;
+        }
+
+        /* About */
+        .about-card {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .about-card .card-label { color: #b392f0; }
+        .about-card .card-title { color: #e6edf3; }
+        .about-card p { color: #8b949e; }
+
+        /* Principle callout */
+        .principle-callout {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+
+        /* How I Work */
+        .how-i-work-subhead {
+            color: #e6edf3;
+            border-bottom-color: #30363d;
+        }
+
+        .layer-card {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .layer-card .layer-label { color: #b392f0; }
+        .layer-card .layer-title { color: #e6edf3; }
+        .layer-card p { color: #8b949e; }
+
+        /* Timeline */
+        .timeline::before { background: #30363d; }
+
+        .timeline-entry::before {
+            background: #7b5ea7;
+            border-color: #0d1117;
+            box-shadow: 0 0 0 2px #6e40c9;
+        }
+
+        .timeline-role { color: #e6edf3; }
+        .timeline-meta { color: #8b949e; }
+        .timeline-meta .org { color: #b392f0; }
+        .timeline-body { color: #c9d1d9; }
+        .timeline-bullets { color: #c9d1d9; }
+        .timeline-subhead { color: #b392f0; }
+
+        /* Skills */
+        .skill-group-title {
+            color: #b392f0;
+            border-bottom-color: #30363d;
+        }
+
+        .skill-pill {
+            background: #21262d;
+            border-color: #6e40c9;
+            color: #c9d1d9;
+        }
+
+        .skill-pill.emerging {
+            background: #12261e;
+            border-color: #238636;
+            color: #3fb950;
+        }
+
+        /* Tech tags */
+        .tech-tag {
+            background: #21262d;
+            color: #8b949e;
+        }
+
+        /* Tool link badge */
+        .tool-link-badge {
+            background: #6e40c9;
+        }
+
+        .tool-link-badge:hover { background: #9b7fd4; }
+
+        /* Project wins */
+        .project-wins {
+            background: #0d2818;
+            border-left-color: #3fb950;
+        }
+
+        .project-wins strong { color: #3fb950; }
+        .project-wins ul { color: #7ee787; }
+
+        /* Project constraints */
+        .project-constraints {
+            background: #1f1500;
+            border-left-color: #d29922;
+        }
+
+        .project-constraints strong { color: #d29922; }
+        .project-constraints ul { color: #e3b341; }
+
+        /* Highlight cards (PregVoice) */
+        .highlight-card {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .highlight-card .win-label { color: #b392f0; }
+        .highlight-card .win-title { color: #e6edf3; }
+        .highlight-card .win-detail { color: #8b949e; }
+
+        /* Devlog */
+        .devlog {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .devlog-header { background: #010409; }
+
+        /* Education */
+        .education-block { border-top-color: #30363d; }
+        .edu-qual { color: #e6edf3; }
+        .edu-org { color: #b392f0; }
+        .cert-list li { color: #c9d1d9; border-bottom-color: #21262d; }
+
+        /* Project filter buttons */
+        .project-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .filter-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #8b949e;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            border-color: #6e40c9;
+            color: #c9d1d9;
+        }
+
+        .filter-btn.active {
+            background: #6e40c9;
+            border-color: #6e40c9;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -224,13 +704,7 @@
                 <a class="nav-link" id="projects-tab" data-bs-toggle="tab" href="#projects" role="tab">Projects</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="skills-tab" data-bs-toggle="tab" href="#skills" role="tab">Skills</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab">Contact</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="how-i-work-tab" data-bs-toggle="tab" href="#how-i-work" role="tab">How I Work</a>
+                <a class="nav-link" id="working-with-spec-tab" data-bs-toggle="tab" href="#working-with-spec" role="tab">Working with Spec</a>
             </li>
         </ul>
 
@@ -240,7 +714,36 @@
             <div class="tab-pane fade show active" id="about" role="tabpanel">
                 <div class="section">
                     <h2>About Me</h2>
-                    <p>I am an operations leader transitioning into cybersecurity, combining over a decade of experience in process optimization, incident triage, and secure data handling with newly developed technical skills in network analysis, vulnerability scanning, and SIEM log review. I value precision, integrity, and proactive problem-solving, and I am driven to protect organizations by identifying risks, mitigating vulnerabilities, and strengthening overall security posture. My blend of people-focused communication and technical acumen ensures I can bridge the gap between security teams and stakeholders to achieve business and security goals.</p>
+                    <p>I'm an operations professional with over a decade of experience across people operations, strategic HR, community management, and technical support. The through-line across all of it is the same: I'm drawn to the places where things aren't quite working, and I find the structural reason why.</p>
+
+                    <p style="margin-top: 10px;">Most of my career has lived at the intersection of people and systems — which means I'm comfortable working at the human layer and the process layer simultaneously, and I tend to notice when a problem that looks like one is actually the other.</p>
+
+                    <p style="margin-top: 10px;">I'm also genuinely technically curious. When something interests me I go properly into it — which is how I've ended up with working knowledge of network analysis, log review, and vulnerability scanning alongside the operations background. I write tech and games coverage for Phandroid, Android Central, and Mobile Nations for the same reason: I like understanding how things work well enough to explain them clearly.</p>
+
+                    <p style="margin-top: 10px;">Outside of work I run <strong>LoreBySpec</strong>, a YouTube channel doing narrative and lore analysis of the Kingdom Hearts series — which is where the KH Lore Checker in this portfolio came from.</p>
+
+                    <div class="about-highlights">
+                        <div class="about-card">
+                            <span class="card-label">Orientation</span>
+                            <span class="card-title">Generalist by design</span>
+                            <p>A decade across HR, operations, support, and community work isn't a winding path — it's a consistent pattern of being useful wherever the system needs thinking through. I move between layers because that's where the interesting problems tend to live.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Approach</span>
+                            <span class="card-title">Build to understand</span>
+                            <p>The tools in this portfolio exist because I build things to learn them properly. Every decision, dead end, and pivot is logged — not polished after the fact, but documented as it happened.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Strength</span>
+                            <span class="card-title">Technically curious, people fluent</span>
+                            <p>I've spent years making technical information legible to non-technical audiences — in support roles, in writing, and in leadership work. The interesting problems are almost always at that boundary.</p>
+                        </div>
+                        <div class="about-card">
+                            <span class="card-label">Principle</span>
+                            <span class="card-title">Costs and constraints first</span>
+                            <p>Every project here has a "Constraints" section as prominent as the wins. I document what doesn't work, what the trade-offs are, and when a design decision is a compromise — because that's what honest work looks like.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -248,15 +751,312 @@
             <div class="tab-pane fade" id="work" role="tabpanel">
                 <div class="section">
                     <h2>Work Experience</h2>
-                    <ul>
-                        <li><strong>Freelance Consultant (2023–Present)</strong>: Consultancy in HR, operations, and business development, including Employer of Record (EOR) solutions, market share analysis, and business planning. Supported career progression discussions and training development for entrepreneurs and business owners.</li>
-                        <li><strong>Freelance Writer (2022–Present)</strong>: Writing tech articles for Phandroid, Android Central, and Mobile Nations. Specialised in tech reviews, guides, and feature articles on consumer electronics, games, and accessories.</li>
-                        <li><strong>Customer Support Hero (Technical) at Stamped (2020)</strong>: Triaged and diagnosed tickets for account-related issues. Worked closely with customers to integrate Stamped's APIs and helped developers build customised integrations and third-party services.</li>
-                        <li><strong>Editor &amp; Operations Assistant at Can I Play That? (2018–2020)</strong>: Supported the CEO with administrative tasks and strategic content planning. Managed communications with developers and PR professionals to secure partnerships.</li>
-                        <li><strong>Community Manager at Irish Tech Community (2016–2018)</strong>: Managed engagement and event organisation, developed onboarding documentation, and fostered community growth.</li>
-                        <li><strong>Project Manager &amp; Researcher at Learnovate (2016–2017)</strong>: Managed the €3M EU-funded "DEVELOP" project, coordinating across international partners using Agile methodologies.</li>
-                        <li><strong>Chief of People at Leaguepedia (2014–2016)</strong>: Led communications and operational aspects, developing frameworks supporting staff in achieving project goals efficiently.</li>
-                    </ul>
+
+                    <div class="project-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="experience">Professional Experience</button>
+                        <button class="filter-btn" data-filter="education">Education</button>
+                        <button class="filter-btn" data-filter="certifications">Certifications</button>
+                        <button class="filter-btn" data-filter="skills">Skills</button>
+                    </div>
+
+                    <div class="project-block" data-category="experience">
+                    <div class="timeline">
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Fractional Chief of Staff</div>
+                            <div class="timeline-meta"><span class="org">Spec Solutions</span> · Jan 2023 – Present</div>
+                            <div class="timeline-subhead">Customer Support Operations &amp; Service Optimisation</div>
+                            <ul class="timeline-bullets">
+                                <li>Built and optimised customer support operations for a startup, implementing a ticket allocation system that reduced response times by 30% and increased customer satisfaction.</li>
+                                <li>Developed a comprehensive knowledge base and implemented structured training for support teams, improving self-service resolution rates.</li>
+                                <li>Provided technical support for users and investigated app bugs, undocumented issues, and usability concerns, collaborating with developers to implement fixes.</li>
+                                <li>Created internal documentation and process guides to improve knowledge sharing across the team as a Tech Support &amp; QA Consultant for Joocie (via Consultancy) — Remote since Jan 2024.</li>
+                            </ul>
+                            <div class="timeline-subhead">International Business Expansion &amp; Compliance</div>
+                            <ul class="timeline-bullets">
+                                <li>Led expansion projects for businesses moving overseas, navigating HR compliance, Employer of Record (EOR) solutions, and market entry strategies.</li>
+                                <li>Secured trusted global hiring solutions and scouted operational locations to support international growth.</li>
+                            </ul>
+                            <div class="timeline-subhead">Internal Communications &amp; Leadership Coaching</div>
+                            <ul class="timeline-bullets">
+                                <li>Provided leadership coaching and team development strategies to improve internal communications and alignment.</li>
+                                <li>Implemented team-building initiatives that improved retention and cross-functional collaboration.</li>
+                            </ul>
+                            <div class="timeline-subhead">Community &amp; Engagement Operations</div>
+                            <ul class="timeline-bullets">
+                                <li>Designed and implemented engagement programmes that increased onboarding efficiency and strengthened networking within startup communities.</li>
+                                <li>Planned and executed virtual and in-person events to improve team culture and industry collaboration.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Contributing Tech Writer &amp; Content Strategist</div>
+                            <div class="timeline-meta"><span class="org">Phandroid</span> · Jan 2018 – Present</div>
+                            <ul class="timeline-bullets">
+                                <li>Spearheaded content strategy and execution for a leading tech publication, driving audience growth and establishing Phandroid as a trusted resource for Android and consumer tech insights.</li>
+                                <li>Led the development of high-impact content — from feature articles to in-depth product reviews — resulting in increased site traffic and user engagement.</li>
+                                <li>Collaborated with cross-functional teams, aligning content production with business goals and ensuring editorial excellence.</li>
+                                <li>Drove SEO optimisation strategies that increased content visibility and sustained long-term audience growth.</li>
+                                <li>Delivered data-driven insights to inform content strategies, leveraging analytics to optimise performance and readership retention.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Executive Assistant / Chief of Staff</div>
+                            <div class="timeline-meta"><span class="org">Connection Engine</span> · May 2025 – Jul 2025 · Remote</div>
+                            <div class="timeline-subhead">Team Coordination &amp; Support (30%)</div>
+                            <ul class="timeline-bullets">
+                                <li>Served as organisational glue for the Mission Circle — scheduling, maintaining rhythms and reminders, and documenting key decisions.</li>
+                                <li>Managed communication flows and followed up on action items.</li>
+                            </ul>
+                            <div class="timeline-subhead">Project Management (30%)</div>
+                            <ul class="timeline-bullets">
+                                <li>Maintained the Coda-based project management system, tracked milestones, and identified potential bottlenecks.</li>
+                                <li>Helped define and document emergent processes supporting the co-creative system.</li>
+                            </ul>
+                            <div class="timeline-subhead">Community Management (30%)</div>
+                            <ul class="timeline-bullets">
+                                <li>Helped cultivate the early beta launch community and support implementation of the storytelling cycle.</li>
+                                <li>Assisted with community events and story capture.</li>
+                            </ul>
+                            <div class="timeline-subhead">Systems &amp; Tools Administration (10%)</div>
+                            <ul class="timeline-bullets">
+                                <li>Maintained the CRM system, optimised workflows, and supported implementation of new tools as needed.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Community Manager</div>
+                            <div class="timeline-meta"><span class="org">The Nook</span> · Oct 2020 – Dec 2024 · Remote</div>
+                            <p class="timeline-body">Owner and operator of The Nook, a Discord community supporting Twitch streamers through their affiliate journey. Helped over 10 streamers reach affiliate status across a 100+ member community.</p>
+                            <ul class="timeline-bullets">
+                                <li>Managed community growth, moderation, and engagement, driving active content creation and participation.</li>
+                                <li>Provided mentorship and strategy to streamers, maintaining a high success rate for affiliate achievement.</li>
+                                <li>Developed and enforced community rules, ensuring a safe, welcoming, and productive space for creators.</li>
+                                <li>Facilitated regular check-ins, feedback sessions, and networking opportunities to help creators refine their strategies.</li>
+                                <li>Curated resources on Twitch growth — technical tips, branding strategies, and content advice.</li>
+                                <li>Coordinated events, giveaways, and collaborations to boost visibility and community engagement.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Customer Support Hero (Technical)</div>
+                            <div class="timeline-meta"><span class="org">Stamped</span> · May 2020 – Jul 2020</div>
+                            <ul class="timeline-bullets">
+                                <li>Led technical support for enterprise clients, resolving complex account-related issues and improving client satisfaction by 30%.</li>
+                                <li>Partnered with development teams to support clients building custom integrations and optimising API usage.</li>
+                                <li>Drove cross-functional collaboration to enhance troubleshooting processes and accelerate issue resolution.</li>
+                                <li>Managed sensitive customer data with a high level of confidentiality, maintaining compliance while resolving complex technical requests.</li>
+                                <li>Delivered technical training and resources to customers, empowering them to maximise the value of Stamped's product suite.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Editor &amp; Operations Assistant</div>
+                            <div class="timeline-meta"><span class="org">Can I Play That?</span> · Aug 2018 – Feb 2020</div>
+                            <ul class="timeline-bullets">
+                                <li>Provided executive support to the CEO, driving daily operations and content strategy for a platform focused on accessibility in gaming.</li>
+                                <li>Managed strategic partnerships with developers, PR teams, and industry professionals to secure collaborations and maintain a continuous content pipeline.</li>
+                                <li>Led the planning and execution of the Can I Play That? Awards in 2019/2020 — from concept to delivery, including designing trophies, managing communications with recipients, and overseeing all logistics.</li>
+                                <li>Coordinated the nomination process, collaborating with industry professionals to evaluate and select the most inclusive and innovative games of the year.</li>
+                                <li>Managed financial operations including Patreon fundraising, ensuring the platform's stability and sustainability.</li>
+                                <li>Grew the site's audience by 30% over two years through content editing and cross-functional collaboration.</li>
+                                <li>Acted as liaison between the CEO, content creators, and external partners to align strategic goals and maintain operational standards.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Community Manager</div>
+                            <div class="timeline-meta"><span class="org">Irish Tech Community</span> · Aug 2016 – Sep 2018 · Dublin, Ireland</div>
+                            <ul class="timeline-bullets">
+                                <li>Redesigned and scaled ITC's Slack community structure — formalised roles (Owner, Admins, Mods) and responsibilities, empowering members to self-govern their areas of expertise.</li>
+                                <li>Created comprehensive operational documentation for community management, role assignments, and onboarding, ensuring consistency as the community grew.</li>
+                                <li>Founded the ITC Jobs Board — job postings grew by 300% over two years and the board attracted acquisition interest.</li>
+                                <li>Increased Slack membership by 250% in two years through targeted outreach and a culture of inclusivity and knowledge-sharing.</li>
+                                <li>Ensured a safe, welcoming environment for all members — from CEOs to interns — facilitating transparent communication and conflict resolution.</li>
+                                <li>Developed cross-level engagement strategies ensuring everyone could participate, share ideas, and access resources.</li>
+                                <li>Created events and initiatives that expanded members' networks and visibility, positioning ITC as the go-to hub for Irish tech talent.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Developer Advocate</div>
+                            <div class="timeline-meta"><span class="org">Samebug</span> · Jul 2017 – Sep 2017 · Remote</div>
+                            <p class="timeline-body">Bridged the gap between the product team and the developer community — providing expert guidance on debugging and issue resolution, facilitating technical discussions, and gathering feedback to inform product development.</p>
+                            <ul class="timeline-bullets">
+                                <li>Conducted workshops, webinars, and created content to educate developers on best practices, debugging tools, and platform features.</li>
+                                <li>Built relationships with the developer community, ensuring feedback was heard and used to drive product improvements.</li>
+                                <li>Provided direct platform support, helping developers troubleshoot and optimise their workflows.</li>
+                                <li>Advocated for developer needs internally, ensuring Samebug's solutions continued to evolve in line with real challenges.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Project Manager &amp; Research Assistant</div>
+                            <div class="timeline-meta"><span class="org">Learnovate Centre, Trinity College Dublin</span> · Apr 2016 – Apr 2017 · Dublin, Ireland</div>
+                            <ul class="timeline-bullets">
+                                <li>Led the €3M EU-funded DEVELOP project, collaborating with international partners to deliver research outcomes on time and in alignment with long-term objectives.</li>
+                                <li>Drove Agile methodologies to enhance team productivity and adapt to evolving project needs.</li>
+                                <li>Managed communication across European stakeholders, providing clear updates and resolving challenges to maintain momentum.</li>
+                                <li>Mentored new employees through onboarding and led informal team-building to strengthen workplace culture.</li>
+                                <li>Spearheaded cross-functional collaboration, eliminating departmental silos and improving information flow.</li>
+                                <li>Revamped internal communications, establishing a culture of feedback, transparency, and problem-solving.</li>
+                                <li>Identified and eliminated bottlenecks, improving team alignment and resource allocation.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Customer Support Specialist</div>
+                            <div class="timeline-meta"><span class="org">CoderDojo</span> · Sep 2015 – Jan 2016 · Dublin, Ireland</div>
+                            <ul class="timeline-bullets">
+                                <li>Provided front-line support to CoderDojo community members — mentors, volunteers, and dojo organisers — via Zendesk.</li>
+                                <li>Managed incoming tickets, ensuring issues were categorised, prioritised, and escalated appropriately.</li>
+                                <li>Collaborated with the team to identify recurring issues and improve the knowledge base, creating clear support documentation for organisers and participants.</li>
+                                <li>Delivered troubleshooting guidance on technical issues, helping volunteers with setup, software installation, and platform concerns.</li>
+                                <li>Tracked and analysed support trends, suggesting process improvements that increased operational efficiency.</li>
+                                <li>Assisted in onboarding new dojo organisers and volunteers, ensuring smooth introductions to tools and resources.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Product Analyst</div>
+                            <div class="timeline-meta"><span class="org">Donnerwood Media</span> · Jan 2015 – Apr 2015 · Dublin, Ireland</div>
+                            <ul class="timeline-bullets">
+                                <li>Conducted in-depth research on consumer demographics and purchasing behaviour to support data-driven decisions for Meez's freemium model.</li>
+                                <li>Analysed customer behaviour data using SQL, identifying key metrics related to churn, lifetime value (LTV), and user retention.</li>
+                                <li>Supported user segmentation strategies to tailor content and offers, increasing engagement and conversion rates.</li>
+                                <li>Created detailed reports and presentations for senior stakeholders, summarising findings and recommending changes to reduce churn.</li>
+                                <li>Tracked the effectiveness of promotional campaigns, leveraging data to optimise customer experience and improve the freemium offering.</li>
+                                <li>Applied freemium economics principles to evaluate conversion from free to paying users while balancing retention and growth.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Chief of People (Operations &amp; Communications)</div>
+                            <div class="timeline-meta"><span class="org">Leaguepedia</span> · 2012 – 2014 · Remote</div>
+                            <ul class="timeline-bullets">
+                                <li>Supported CEO Matt Gunnin in scaling Leaguepedia from a small group to a 100+ member organisation across editorial, video content, and operations.</li>
+                                <li>Led cross-functional collaboration between editorial, video production, and operations teams as the organisation expanded rapidly.</li>
+                                <li>Managed end-to-end hiring, developing frameworks to attract talent while cultivating a culture of transparency, collaboration, and agility.</li>
+                                <li>Built operational frameworks to streamline workflows, establish SOPs, and ensure consistency in content delivery.</li>
+                                <li>Championed continuous improvement through feedback loops, performance metrics, and internal reporting systems.</li>
+                                <li>Spearheaded onboarding and training programmes, ensuring smooth integration and accelerating new hires' path to productivity.</li>
+                                <li>Developed a high-performance, people-centric culture that fostered accountability, recognition, and engagement during rapid scaling.</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-entry">
+                            <div class="timeline-role">Customer Support Specialist</div>
+                            <div class="timeline-meta"><span class="org">Vodafone</span> · Jun 2011 – Sep 2011 · Dublin, Ireland</div>
+                            <ul class="timeline-bullets">
+                                <li>Delivered exceptional customer service across multiple Vodafone stores in South Dublin, earning recognition for consistently exceeding customer expectations.</li>
+                                <li>Fostered trust and loyalty with customers, contributing to improved store satisfaction ratings.</li>
+                                <li>Supported customers with sales and technical queries — mobile plans, devices, and troubleshooting — consistently achieving high conversion rates.</li>
+                                <li>Resolved complex customer issues with empathy and a solutions-focused approach, improving satisfaction scores and repeat business.</li>
+                                <li>Trained and mentored new team members on best practices, elevating service quality across locations.</li>
+                                <li>Stepped into various stores to boost morale, support teams, and ensure each location met its customer service targets.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    </div><!-- /project-block: experience -->
+
+                    <div class="project-block" data-category="education">
+                    <div class="education-block">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Education</h3>
+
+                        <div class="education-entry">
+                            <div class="edu-qual">Level 3 Certificate — Human Resources Management and Services</div>
+                            <div class="edu-org">CIPD Qualifications</div>
+                        </div>
+
+                        <div class="education-entry">
+                            <div class="edu-qual">Bachelor of Arts — Psychology, Psychoanalysis and Film</div>
+                            <div class="edu-org">Dublin Business School</div>
+                        </div>
+
+                        <div class="education-entry">
+                            <div class="edu-qual">Higher National Diploma — Critical Research</div>
+                            <div class="edu-org">Dún Laoghaire Institute of Art, Design and Technology</div>
+                        </div>
+                    </div>
+                    </div><!-- /project-block: education -->
+
+                    <div class="project-block" data-category="certifications">
+                    <div class="education-block">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Certifications</h3>
+                        <ul class="cert-list">
+                            <li>Foundations of Cybersecurity</li>
+                            <li>Play It Safe: Manage Security Risks</li>
+                            <li>Tools of the Trade: Linux and SQL</li>
+                            <li>Assets, Threats, and Vulnerabilities</li>
+                            <li>ChatGPT for Everyone</li>
+                        </ul>
+                    </div>
+                    </div><!-- /project-block: certifications -->
+
+                    <div class="project-block" data-category="skills">
+                    <div class="education-block">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Skills</h3>
+
+                        <div class="skill-group">
+                            <div class="skill-group-title">Project &amp; Operations Management</div>
+                            <span class="skill-pill">Global Project Management</span>
+                            <span class="skill-pill">Vendor &amp; Partner Management</span>
+                            <span class="skill-pill">Agile &amp; Scrum Methodologies</span>
+                            <span class="skill-pill">EU-funded Project Reporting</span>
+                            <span class="skill-pill">Process Optimisation</span>
+                            <span class="skill-pill">Workflow Design</span>
+                            <span class="skill-pill">Research &amp; Policy Implementation</span>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-group-title">HR, People &amp; Compliance</div>
+                            <span class="skill-pill">HR Compliance</span>
+                            <span class="skill-pill">Employee Well-Being</span>
+                            <span class="skill-pill">Leadership Coaching</span>
+                            <span class="skill-pill">Conflict Resolution</span>
+                            <span class="skill-pill">Team Building &amp; Retention</span>
+                            <span class="skill-pill">Employer of Record (EOR)</span>
+                            <span class="skill-pill">Onboarding &amp; Documentation</span>
+                            <span class="skill-pill">Stakeholder Engagement</span>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-group-title">Technical &amp; AI</div>
+                            <span class="skill-pill">HTML / CSS / JavaScript</span>
+                            <span class="skill-pill">Claude API (Anthropic)</span>
+                            <span class="skill-pill">Prompt Engineering</span>
+                            <span class="skill-pill">Client-side API Integration</span>
+                            <span class="skill-pill">CORS &amp; Browser Fetch Patterns</span>
+                            <span class="skill-pill">GitHub &amp; GitHub Pages</span>
+                            <span class="skill-pill">AI Workflow Integration</span>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-group-title">Communication &amp; Content</div>
+                            <span class="skill-pill">Tech Journalism</span>
+                            <span class="skill-pill">Copywriting</span>
+                            <span class="skill-pill">Content Strategy</span>
+                            <span class="skill-pill">Community Management</span>
+                            <span class="skill-pill">Sponsorship &amp; Partnerships</span>
+                            <span class="skill-pill">API &amp; Technical Documentation</span>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-group-title">Cybersecurity — In Training</div>
+                            <span class="skill-pill emerging">Network Analysis</span>
+                            <span class="skill-pill emerging">Vulnerability Scanning</span>
+                            <span class="skill-pill emerging">SIEM Log Review</span>
+                            <span class="skill-pill emerging">Incident Response Fundamentals</span>
+                            <span class="skill-pill emerging">Security Posture Assessment</span>
+                            <span class="skill-pill emerging">Google Cybersecurity Certificate</span>
+                        </div>
+                    </div>
+                    </div><!-- /project-block: skills -->
+
                 </div>
             </div>
 
@@ -264,6 +1064,15 @@
             <div class="tab-pane fade" id="projects" role="tabpanel">
                 <div class="section">
                     <h2>Projects</h2>
+
+                    <div class="project-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="technical">Technical</button>
+                        <button class="filter-btn" data-filter="consulting">Consulting</button>
+                        <button class="filter-btn" data-filter="writing">Writing &amp; Docs</button>
+                    </div>
+
+                    <div class="project-block" data-category="technical">
 
                     <!-- ====================================================
                          LORE CHECKER — AI TOOL FOR LOREBYSPEC
@@ -273,37 +1082,25 @@
                         <p><strong>May 2025 – Present</strong></p>
                         <p>A theory stress-tester built for my YouTube channel <strong>LorebySpec</strong>. Kingdom Hearts has 25+ years of lore across 15+ titles — this tool lets you paste in a theory, supply relevant wiki links or context, and get a structured AI analysis: contradictions against canon, logical weaknesses, clarifying questions a skeptical viewer would ask, and an overall verdict. Built for real content prep, not as a demo.</p>
 
-                        <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Open by design</span>
-                                <p class="win-detail">No account, no login, no subscription. Bring your own Anthropic API key and the tool works — nothing stored, nothing tracked.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Costs cents, not euros</span>
-                                <p class="win-detail">Default model (Haiku 4.5) runs a typical theory check for ~$0.001. You'd need 1,000 checks to spend a dollar. Cost shown live in the UI per check.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Zero infrastructure</span>
-                                <p class="win-detail">Pure static HTML — no server, no database, no hosting cost. Lives on GitHub Pages. Nothing to maintain or secure.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Solved CORS without a backend</span>
-                                <p class="win-detail">Browsers can't fetch external wiki pages directly. Used Jina Reader as a lightweight proxy to pull live KH wiki content client-side — no server code needed.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Prompt-engineered output</span>
-                                <p class="win-detail">The AI doesn't just chat — it returns four consistent sections every time: Contradictions, Weaknesses, Questions, Assessment. Structured for scriptwriting, not reading.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Actually used in production</span>
-                                <p class="win-detail">This isn't a demo. It's part of the real LorebySpec video prep workflow — which is why every decision was made with cost, speed, and practical use in mind.</p>
-                            </div>
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Open by design</strong> — no account, no login, no subscription. Bring your own Anthropic API key and the tool works. Nothing stored, nothing tracked.</li>
+                                <li><strong>Costs cents, not euros</strong> — default model (Haiku 4.5) runs a typical theory check for ~$0.001. You'd need 1,000 checks to spend a dollar. Cost shown live in the UI per check.</li>
+                                <li><strong>Zero infrastructure</strong> — pure static HTML, no server, no database, no hosting cost. Lives on GitHub Pages. Nothing to maintain or secure.</li>
+                                <li><strong>Solved CORS without a backend</strong> — browsers can't fetch external wiki pages directly. Used Jina Reader as a lightweight proxy to pull live KH wiki content client-side. No server code needed.</li>
+                                <li><strong>Prompt-engineered output</strong> — returns four consistent sections every time: Contradictions, Weaknesses, Clarifying Questions, Overall Assessment. Structured for scriptwriting, not just reading.</li>
+                                <li><strong>Actually used in production</strong> — built for real LorebySpec video prep, not as a demo. Every decision was made with cost, speed, and practical use in mind.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Requires your own API key</strong> — the tool has no shared backend, so users need an Anthropic account. One-time setup, but it's friction that a hosted version would remove.</li>
+                                <li><strong>Context window caps lore volume</strong> — KH has 25+ years of lore across 15+ titles. Feeding the entire wiki is impractical. The right workflow is to link the specific pages relevant to the theory, not the whole series. Each URL is capped at 3,500 characters.</li>
+                                <li><strong>Jina Reader is best-effort</strong> — some wiki pages (behind login, heavy JS rendering, rate-limited) may fail to fetch. The tool flags this per URL but falls back to manual paste.</li>
+                                <li><strong>No session history</strong> — refresh the page and the inputs clear. There's no way to compare two theory runs side by side or review past checks. A persistence layer would fix this but needs a backend.</li>
+                            </ul>
                         </div>
 
                         <p style="margin-top: 10px;">
@@ -453,6 +1250,10 @@
                     </div>
 
                     <hr>
+
+                    </div><!-- /project-block: KH Lore Checker -->
+
+                    <div class="project-block" data-category="technical">
 
                     <!-- ====================================================
                          SUPPORT TICKET TRIAGE — AI TOOL
@@ -649,6 +1450,10 @@
 
                     <hr>
 
+                    </div><!-- /project-block: Support Triage -->
+
+                    <div class="project-block" data-category="technical">
+
                     <!-- ====================================================
                          FAQ / KNOWLEDGE BASE CHATBOT — AI TOOL
                     ===================================================== -->
@@ -748,6 +1553,10 @@
                     </div>
 
                     <hr>
+
+                    </div><!-- /project-block: FAQ Chatbot -->
+
+                    <div class="project-block" data-category="technical">
 
                     <!-- PregVoice -->
                     <!-- ====================================================
@@ -948,6 +1757,10 @@
 
                     <hr>
 
+                    </div><!-- /project-block: PregVoice -->
+
+                    <div class="project-block" data-category="consulting">
+
                     <!-- TikTok Sponsorship -->
                     <div class="project">
                         <h3>Sponsorship Strategy for a TikTok Personality</h3>
@@ -961,9 +1774,10 @@
                         </p>
                     </div>
 
-                    <hr>
+                    </div><!-- /project-block: TikTok Sponsorship -->
 
                     <!-- Freelance Consultant Projects -->
+                    <div class="project-block" data-category="consulting">
                     <div class="project">
                         <h3>Business Relocation &amp; Expansion Strategy</h3>
                         <p><strong>Dec 2024</strong></p>
@@ -974,7 +1788,9 @@
                             <span class="tech-tag">Market Research</span>
                         </p>
                     </div>
+                    </div><!-- /project-block -->
 
+                    <div class="project-block" data-category="consulting">
                     <div class="project">
                         <h3>Leadership Coaching for a Growing Team</h3>
                         <p><strong>Nov–Dec 2024</strong></p>
@@ -985,7 +1801,9 @@
                             <span class="tech-tag">Strategic Communications</span>
                         </p>
                     </div>
+                    </div><!-- /project-block -->
 
+                    <div class="project-block" data-category="consulting">
                     <div class="project">
                         <h3>Optimising Customer Support Operations</h3>
                         <p><strong>Jun–Sep 2024</strong></p>
@@ -996,7 +1814,9 @@
                             <span class="tech-tag">Staff Development</span>
                         </p>
                     </div>
+                    </div><!-- /project-block -->
 
+                    <div class="project-block" data-category="consulting">
                     <div class="project">
                         <h3>Niche Market Strategy for Web Development</h3>
                         <p><strong>Jan–Feb 2023</strong></p>
@@ -1007,47 +1827,206 @@
                             <span class="tech-tag">Small Business Development</span>
                         </p>
                     </div>
+                    </div><!-- /project-block -->
+
+                    <div class="project-block" data-category="writing">
+                    <div class="project">
+                        <h3>SaaS Integration Failure Diagnostic Guide <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
+                        <p>Internal support enablement document written to demonstrate technical writing capability in a SaaS/HRIS integration context. Designed to equip Tier 1 and Tier 2 support agents with structured diagnostic workflows for webhook delivery failures, API authentication breakdowns, and downstream HRIS sync errors — the failure modes that are most commonly misdiagnosed or escalated unnecessarily.</p>
+                        <p><strong>What it demonstrates:</strong></p>
+                        <ul style="margin-top:0.25rem;">
+                            <li>Translating complex integration failure patterns into structured, agent-usable triage flows</li>
+                            <li>Writing for audience: agents with no API background, not developers</li>
+                            <li>Knowing what to surface (silent webhook failures, sync token expiry, field mapping edge cases) and how to sequence it</li>
+                            <li>Building tools that reduce escalation rate, not just document for documentation's sake</li>
+                        </ul>
+                        <p>
+                            <span class="tech-tag">Technical Writing</span>
+                            <span class="tech-tag">SaaS Integration</span>
+                            <span class="tech-tag">Webhooks</span>
+                            <span class="tech-tag">API Authentication</span>
+                            <span class="tech-tag">Support Enablement</span>
+                            <span class="tech-tag">Zendesk</span>
+                            <span class="tech-tag">Jira</span>
+                        </p>
+                        <p><a href="support-guide.html" style="color:#b392f0;font-weight:600;">Read the document →</a></p>
+                    </div>
+                    </div><!-- /project-block -->
+
+                    <div class="project-block" data-category="writing">
+                    <div class="project">
+                        <h3>Technical Writing Portfolio <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
+                        <p>Four reference-quality playbook documents across ops and HR systems, written for different audiences to show range as well as depth. Covers API troubleshooting, SQL data audits, EOR payroll processing, and tiered escalation logic.</p>
+                        <p><strong>What it demonstrates:</strong></p>
+                        <ul style="margin-top:0.25rem;">
+                            <li>Technical depth for practitioner audiences — written to be used under real ticket pressure, not filed in a wiki</li>
+                            <li>Cross-audience translation — same domain knowledge, completely different register (e.g. technical SQL guide vs. non-technical EOR explainer)</li>
+                            <li>Process design embedded in documentation — the escalation playbook doesn't describe a process, it is the process</li>
+                            <li>Scope discipline — each document is bounded precisely; knowing what not to include is a writing skill</li>
+                        </ul>
+                        <p>
+                            <span class="tech-tag">Technical Writing</span>
+                            <span class="tech-tag">API Troubleshooting</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">EOR / Payroll</span>
+                            <span class="tech-tag">Support Operations</span>
+                            <span class="tech-tag">Process Documentation</span>
+                            <span class="tech-tag">Zendesk</span>
+                            <span class="tech-tag">Slack</span>
+                        </p>
+                        <p><a href="technical-writing-portfolio.html" style="color:#b392f0;font-weight:600;">Read the documents →</a></p>
+                    </div>
+                    </div><!-- /project-block -->
 
                 </div>
             </div>
 
-            <!-- Skills -->
-            <div class="tab-pane fade" id="skills" role="tabpanel">
-                <div class="section">
-                    <h2>Skills</h2>
-                    <ul>
-                        <li>Global Project &amp; Vendor Management</li>
-                        <li>Employee Health &amp; Safety Support</li>
-                        <li>HR Compliance &amp; Employee Well-Being</li>
-                        <li>Agile &amp; Scrum Methodologies</li>
-                        <li>Research &amp; Policy Implementation</li>
-                        <li>Team Leadership &amp; Communication</li>
-                        <li>Fundraising &amp; Stakeholder Engagement</li>
-                        <li>Copywriting &amp; Content Creation</li>
-                        <li>AI Tooling &amp; Workflow Integration</li>
-                    </ul>
-                </div>
-            </div>
 
-            <!-- Contact -->
-            <div class="tab-pane fade" id="contact" role="tabpanel">
+            <!-- Working with Spec -->
+            <div class="tab-pane fade" id="working-with-spec" role="tabpanel">
                 <div class="section">
-                    <h2>Contact</h2>
-                    <p>Email: <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
-                </div>
-            </div>
+                    <h2>Working with Spec</h2>
 
-            <!-- How I Work -->
-            <div class="tab-pane fade" id="how-i-work" role="tabpanel">
-                <div class="section">
-                    <h2>How I Work</h2>
-                    <p>I approach each project with a blend of agility and precision. My focus is on delivering clear results through effective communication, collaborative work, and a flexible attitude. I am driven by data and open to experimenting with new strategies to continuously improve processes and achieve sustainable growth. I foster a positive work environment by maintaining transparency and ensuring all voices are heard.</p>
+                    <div class="project-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="how-i-work">How I Work</button>
+                        <button class="filter-btn" data-filter="with-spec">Working with Spec</button>
+                        <button class="filter-btn" data-filter="contact">Get in Touch</button>
+                    </div>
+
+                    <!-- How I Work -->
+                    <div class="project-block" data-category="how-i-work">
+                        <div class="how-i-work-subhead" style="margin-top: 0;">How I Work</div>
+
+                        <p>Most situations that look like people problems are actually clarity problems, skills problems, or systems problems. My starting point is that people are doing the best they can with what they have. That's not a naïve assumption — it's the most practically useful one. People have complex lives and real pressures that exist long before they arrive at work. When something goes wrong, asking "what did this person need that they didn't have?" gets you to a fix. Asking "what kind of person does this?" just gets you stuck.</p>
+
+                        <div class="principle-callout">
+                            Things are rarely a character or moral issue. They are nearly always a skills issue, a clarity issue, or a systems issue. Find the gap. Close it.
+                        </div>
+
+                        <div class="about-highlights">
+                            <div class="about-card">
+                                <span class="card-label">Foundation</span>
+                                <span class="card-title">Assume good intent</span>
+                                <p>Start from the most charitable explanation and work backwards. It leads to better diagnoses, better conversations, and outcomes that actually stick.</p>
+                            </div>
+                            <div class="about-card">
+                                <span class="card-label">Diagnosis</span>
+                                <span class="card-title">Skills over character</span>
+                                <p>Missed expectations are almost never moral failures. They're usually a gap in clarity, training, or tooling. That's a solvable problem — and it's the problem worth solving.</p>
+                            </div>
+                            <div class="about-card">
+                                <span class="card-label">Style</span>
+                                <span class="card-title">Pragmatic and intentional</span>
+                                <p>You can be clear-eyed about how things actually are while still being deliberate about where you want them to go. Realism and ambition aren't in conflict.</p>
+                            </div>
+                            <div class="about-card">
+                                <span class="card-label">Environment</span>
+                                <span class="card-title">Async and remote-first</span>
+                                <p>I write clearly, document decisions rather than relying on memory, and build visibility without requiring people to be always-on. The tools change; the principle doesn't.</p>
+                            </div>
+                        </div>
+
+                        <div class="how-i-work-subhead">Onboarding is the work</div>
+
+                        <p>Onboarding is where I focus a lot of my energy — not as a 90-day checklist, but as the primary mechanism by which a company teaches people how to be there. How we communicate. How feedback works. What the values look like at 4pm on a Thursday when something's gone wrong. None of that lives in an orientation deck. It lives in the habits, the structures, and the conversations that surround the act of joining.</p>
+
+                        <p style="margin-top: 10px;">When those processes are clear, well-led, and maintained past day one — when onboarding is treated as an ongoing discipline rather than a one-time event — it sets everyone up for long-term success. That clarity has to be built before someone walks in the door, and maintained long after they settle in.</p>
+
+                        <p style="margin-top: 10px;">The work happens at every level of a company — and each layer needs something different.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Layer 1</span>
+                                <span class="layer-title">Line Managers</span>
+                                <p>What does working here actually look like day-to-day? Which tools, which rhythms, what's expected of their reports — and of them. Managers who have real clarity give it to their teams. Managers who are guessing pass that uncertainty downstream.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Layer 2</span>
+                                <span class="layer-title">HR &amp; Culture Leaders</span>
+                                <p>Culture isn't what's written on the wall — it's what gets reinforced when no one's watching. Working with HR and culture teams to close the gap between the culture that's stated and the one that's actually practised.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Layer 3</span>
+                                <span class="layer-title">Executive Suite</span>
+                                <p>Values start at the top and distribute downstream. If the exec layer is living them, they become real throughout the organisation. If they're not, no programme will make them stick. That alignment needs to be in place before it becomes a credibility problem.</p>
+                            </div>
+                        </div>
+
+                        <div class="how-i-work-subhead">Communication</div>
+
+                        <p>I'm direct — I say what I see and I try to be specific about it. Vague feedback helps no one; it leaves people uncertain about what to change and why. Directness, done from the right place, is a form of respect. It means you're taking the person and the situation seriously enough to be honest about both.</p>
+
+                        <p style="margin-top: 10px;">That directness is always from a good heart. The goal is never to make someone feel small — it's to give them something they can actually act on.</p>
+                    </div>
+
+                    <!-- Working with Spec -->
+                    <div class="project-block" data-category="with-spec">
+                        <div class="how-i-work-subhead" style="margin-top: 0;">Working with Spec</div>
+                        <p style="margin-bottom: 20px;">I've spent a lot of time in organisations watching the gap between how people think work gets done and how it actually does. The notes below are less about personal preference and more about what I've observed consistently produces better outcomes — for the people I work with as much as for me.</p>
+
+                        <div class="spec-item">
+                            <div class="spec-title">Give me the shape of what good looks like.</div>
+                            <p>My brain runs quite literally, so a concrete model of the goal is worth more to me than a detailed brief about the process. I don't need every step mapped out — I'm comfortable finding my own way through ambiguity — but I work best when the destination is clear and specific. The more precisely we can define what success actually looks like upfront, the less time we spend realigning midway through. It also tends to surface misaligned assumptions early, which is almost always worth doing before anyone has invested significant time.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <div class="spec-title">An environment where people can say the uncomfortable thing is more functional, not just nicer.</div>
+                            <p>The places where I've done the best work have been ones where flagging a problem early was treated as useful rather than inconvenient. That's not just a personal preference — organisations that suppress early signals don't stop problems from existing, they just find out about them later and at greater cost. I create that environment for the people I work with, and I do my best work when it exists around me.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <div class="spec-title">I'm a generalist because that's where the most useful work tends to live.</div>
+                            <p>Most of the problems I find genuinely interesting — and where I tend to add the most — sit at the intersections. The people issue that turns out to be a clarity issue. The process breakdown that's actually a trust issue two layers up. That kind of diagnosis requires being able to move across disciplines rather than staying within one. If you want someone with deep narrow expertise in a single domain, I'm probably not the right fit. If you want someone who can hold the shape of a whole problem and work across it, that's where I'm most useful.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <div class="spec-title">If you've hired me for creative solutions, those need space to actually form.</div>
+                            <p>Novel thinking — the kind that produces something genuinely useful rather than a competent rearrangement of what already exists — doesn't come from being always-on. It comes from having time to step away, let things settle, and come back with fresh eyes. That's not a preference for working less; it's how the particular kind of thinking you've hired me for actually works. When I've produced my best work, it's almost never been the thing I ground out in a single sitting. It's been the thing I slept on.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <div class="spec-title">High priority and emergency are different things, and treating them the same degrades both.</div>
+                            <p>Unless someone is in physical danger, what we have is a high-stakes situation that needs focus and clear thinking. Treating it as a crisis tends to shorten the diagnosis, compress the thinking, and produce the next problem before the current one is resolved. I take important things seriously — I just think the most important things deserve calm, considered responses rather than reactive ones.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <div class="spec-title">The best results come from realistic expectations on both sides.</div>
+                            <p>I'll invest genuinely — I'll think laterally, care about outcomes, and bring more than what's strictly in the brief. What I've found consistently is that the best working relationships are with people who understand that contributor-level commitment and owner-level commitment are different things, and that the difference is structural rather than motivational. When the terms of engagement feel honest, people give discretionary effort freely. When they don't, you eventually get attrition — usually quietly, and usually at the worst possible moment.</p>
+                        </div>
+
+                        <div class="spec-item">
+                            <div class="spec-title">Let's not weaponise radical candour.</div>
+                            <p>"Radical candour" has become a permission slip in a lot of workplaces — a way of framing bluntness as virtue and skipping the part where you assess whether the person in front of you is actually in a position to receive what you're about to say. Directness is genuinely valuable. But directness without reading the room isn't honesty — it's just impact without accountability. I give feedback that's specific and actionable, and I deliver it person-first and problem-second. I work best with people who operate the same way: who can spot early that something's off, address it before it compounds, and do that without making it bigger than it needs to be. If that kind of attunement isn't there, we're probably going to find each other frustrating.</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="project-block" data-category="contact">
+                        <div class="how-i-work-subhead" style="margin-top: 0;">Get in Touch</div>
+                        <p>Email: <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+                    </div>
+
                 </div>
             </div>
 
         </div>
     </div>
 
+    <script>
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const group = btn.closest('.project-filters');
+                group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                const section = btn.closest('.section');
+                section.querySelectorAll('.project-block').forEach(block => {
+                    block.style.display = (filter === 'all' || block.dataset.category === filter) ? '' : 'none';
+                });
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

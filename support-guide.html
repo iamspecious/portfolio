@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Integration Failure Diagnostic Guide — Spec Coda-Bishop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .doc-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* Nav */
+        .back-link {
+            color: #b392f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 40px;
+        }
+        .back-link:hover { color: #d2b3ff; }
+
+        /* Document header */
+        .doc-header {
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+
+        .doc-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #b392f0;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .doc-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #e6edf3;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .doc-subtitle {
+            font-size: 0.92rem;
+            color: #8b949e;
+            margin-bottom: 14px;
+        }
+
+        .doc-intro {
+            font-size: 0.88rem;
+            color: #8b949e;
+            line-height: 1.65;
+            margin-top: 14px;
+        }
+
+        .doc-byline {
+            font-size: 0.82rem;
+            color: #8b949e;
+            margin-top: 12px;
+        }
+        .doc-byline a { color: #b392f0; text-decoration: none; }
+        .doc-byline a:hover { color: #d2b3ff; }
+
+        /* Framing note */
+        .framing-note {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+
+        .framing-note .note-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #b392f0;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .framing-note p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .framing-note p:last-child { margin-bottom: 0; }
+
+        /* Capabilities grid */
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 48px;
+        }
+
+        .capability-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-top: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .cap-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #b392f0;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cap-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .cap-body {
+            font-size: 0.8rem;
+            color: #8b949e;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 52px;
+        }
+
+        .toc-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        /* Sections */
+        .doc-section { margin-bottom: 60px; }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .section-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #b392f0;
+            font-family: 'Consolas', monospace;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+        }
+
+        .section-tagline {
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        /* Context block */
+        .context-block {
+            background: #0f1318;
+            border-left: 3px solid #30363d;
+            padding: 14px 18px;
+            margin-bottom: 28px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .context-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .context-block p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Subsection headers */
+        .subsection { margin-bottom: 36px; }
+
+        .subsection-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #b392f0;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection-title::before {
+            content: '▸';
+            font-size: 0.65rem;
+        }
+
+        /* Content headings */
+        .content-heading {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin: 22px 0 10px;
+        }
+
+        /* Body text */
+        .doc-body p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+
+        /* Tables */
+        .doc-table-wrap {
+            overflow-x: auto;
+            margin: 14px 0 24px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.83rem;
+        }
+
+        .doc-table th {
+            background: #161b22;
+            color: #e6edf3;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+            white-space: nowrap;
+        }
+
+        .doc-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .doc-table tr:last-child td { border-bottom: none; }
+        .doc-table tr:nth-child(even) td { background: #0f1318; }
+
+        .doc-table td code, .doc-table th code {
+            background: #21262d;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.82rem;
+            color: #79c0ff;
+            font-family: 'Consolas', monospace;
+        }
+
+        .doc-table .cell-mono {
+            font-family: 'Consolas', monospace;
+            color: #79c0ff;
+            font-size: 0.82rem;
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin: 14px 0 24px;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: #c9d1d9;
+            line-height: 1.65;
+            margin: 0;
+            white-space: pre;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 14px 0 24px;
+        }
+
+        .callout-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .callout p {
+            font-size: 0.86rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .callout.key-point {
+            background: #0d2818;
+            border-left: 4px solid #3fb950;
+        }
+        .callout.key-point .callout-label { color: #3fb950; }
+        .callout.key-point p { color: #7ee787; }
+
+        .callout.note {
+            background: #161b22;
+            border-left: 4px solid #388bfd;
+        }
+        .callout.note .callout-label { color: #388bfd; }
+        .callout.note p { color: #b0c4f0; }
+
+        .callout.heads-up {
+            background: #1f1500;
+            border-left: 4px solid #d29922;
+        }
+        .callout.heads-up .callout-label { color: #d29922; }
+        .callout.heads-up p { color: #e3b341; }
+
+        .callout.silent-failure {
+            background: #1a0e0e;
+            border-left: 4px solid #f85149;
+        }
+        .callout.silent-failure .callout-label { color: #f85149; }
+        .callout.silent-failure p { color: #ffa198; }
+
+        .callout.shortcut {
+            background: #0d1b2e;
+            border-left: 4px solid #388bfd;
+        }
+        .callout.shortcut .callout-label { color: #79c0ff; }
+        .callout.shortcut p { color: #b0c4f0; }
+
+        /* Escalation threshold */
+        .escalation-box {
+            background: #1f1500;
+            border: 1px solid #d29922;
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin: 20px 0 28px;
+        }
+
+        .escalation-box .esc-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #d29922;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .escalation-box p {
+            font-size: 0.86rem;
+            color: #e3b341;
+            line-height: 1.65;
+            margin-bottom: 10px;
+        }
+
+        .escalation-box p:last-child { margin-bottom: 0; }
+
+        .escalation-box ul {
+            margin: 8px 0 0;
+            padding-left: 18px;
+        }
+
+        .escalation-box li {
+            font-size: 0.86rem;
+            color: #e3b341;
+            line-height: 1.65;
+            margin-bottom: 5px;
+        }
+
+        /* Triage steps */
+        .triage-steps {
+            list-style: decimal;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .triage-steps li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+
+        /* Customer sample */
+        .customer-sample {
+            background: #0f1318;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px 22px;
+            margin: 16px 0 28px;
+        }
+
+        .customer-sample-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .customer-sample p {
+            font-size: 0.86rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Jira format box */
+        .jira-box {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin: 16px 0;
+        }
+
+        .jira-box .jira-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .jira-box p {
+            font-size: 0.86rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Divider between subsections */
+        .subsection-divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 32px 0;
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #30363d;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #8b949e;
+        }
+
+        .doc-footer a { color: #b392f0; text-decoration: none; }
+        .doc-footer a:hover { color: #d2b3ff; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .capabilities { grid-template-columns: 1fr; }
+            .doc-title { font-size: 1.35rem; }
+            .section-num { font-size: 1.2rem; }
+            .doc-table { font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-container">
+
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <div class="doc-header">
+        <span class="doc-label">Internal Support Enablement · Portfolio Sample</span>
+        <h1 class="doc-title">SaaS Integration Failure<br>Diagnostic Guide</h1>
+        <p class="doc-subtitle">Prepared by Spec Coda-Bishop · Support Enablement Portfolio</p>
+        <p class="doc-intro">Written as internal enablement for a support team working on a SaaS platform with third-party integration capabilities. Synthesises common integration architecture patterns, event delivery behaviour, and API authentication failure modes into a diagnostic reference a support specialist can use when handling integration failure tickets — without needing to escalate to Engineering.</p>
+        <p class="doc-byline">Spec Coda-Bishop &nbsp;·&nbsp; <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+    <!-- Framing note -->
+    <div class="framing-note">
+        <span class="note-label">A Note on This Document — Why it exists and what it is trying to show</span>
+        <p>Most people, when they encounter a broken experience in a product, log a ticket or move on. I trace it back.</p>
+        <p>When I was using a hiring platform as a job applicant, I received a broken confirmation email — no company name, no role title, no way to follow up. To most people that is an inconvenience. To me it was immediately legible as an onboarding failure: the platform user had not configured their email templates correctly, which meant every candidate they had emailed through the system had received the same blank response. That is not a template problem. That is a documentation gap, a UI failure, a product adoption problem, and — left alone — a reputational and revenue risk for the platform. The company using it will eventually wonder why their candidate pipeline is underperforming. They may blame the platform. The platform may never connect it to a misconfigured field on day one of setup.</p>
+        <p>That chain — from one small broken moment to structural product risk — is how I think. Not because of a particular methodology, but because of a way of working built across years at the intersection of operations, people systems, and product. Problems have causes. Causes have upstream sources. Upstream sources can usually be fixed, documented, or designed out — if someone is willing to name them clearly.</p>
+        <p>This document exists to show that thinking applied to a specific technical domain: SaaS integration failures. The three failure types covered here were not chosen arbitrarily. They are the places where the chain most commonly breaks in platforms with third-party integrations — and where someone who thinks systemically can catch and close problems that would otherwise compound quietly into something much harder to fix.</p>
+        <p>The diagnostic content is written to be useful under real ticket pressure. But the framing is written for hiring managers at companies that put their product and their customers first — and who want someone on their team who will name what they see, work collaboratively toward fixing it, and understand that a two-line broken email is sometimes the first visible symptom of something worth taking seriously.</p>
+        <p>If that is not the kind of environment you are building, this document will tell you that quickly too. That is intentional.</p>
+    </div>
+
+    <!-- Capabilities -->
+    <div class="capabilities">
+        <div class="capability-card">
+            <span class="cap-label">Capability 1</span>
+            <span class="cap-title">Product curiosity without hand-holding</span>
+            <p class="cap-body">Product understanding built from documentation alone, with failure modes identified by their likelihood to land in a real queue and output structured around how someone would use it mid-ticket.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Capability 2</span>
+            <span class="cap-title">Ownership over escalation</span>
+            <p class="cap-body">Each section pushes resolution as far as possible before Engineering gets involved. Escalation criteria are specific and earned — not a catch-all for anything unfamiliar.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Capability 3</span>
+            <span class="cap-title">Communication that meets the reader where they are</span>
+            <p class="cap-body">Technical content written for a support specialist, not an engineer. The framing note is written for a hiring manager. Same information need, different register.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Capability 4</span>
+            <span class="cap-title">Documentation as a team asset</span>
+            <p class="cap-body">Escalation criteria, field mapping tables, and triage checklists written to be reused — building team knowledge rather than staying locked in individual memory.</p>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <span class="toc-label">What this guide covers</span>
+        <div class="doc-table-wrap" style="border: none; margin: 0;">
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Topic</th>
+                        <th>Covers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cell-mono">01</td>
+                        <td>Event Delivery &amp; Webhook Failure Modes</td>
+                        <td>Silent failures, cascade events, signature validation</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-mono">02</td>
+                        <td>API Authentication &amp; Permission Errors</td>
+                        <td>401s, 403s, token expiry, scope failures</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-mono">03</td>
+                        <td>Downstream System Sync Failures</td>
+                        <td>Data handoff from source platform to connected systems</td>
+                    </tr>
+                    <tr>
+                        <td class="cell-mono">04</td>
+                        <td>Diagnostic Decision Reference</td>
+                        <td>Fast triage checklists and escalation criteria</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Section 01 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <div>
+                <span class="section-title">Event Delivery &amp; Webhook Failure Modes</span>
+                <span class="section-tagline">How webhooks are structured and where they break</span>
+            </div>
+        </div>
+
+        <div class="context-block">
+            <span class="context-label">Context</span>
+            <p>Webhooks are the primary mechanism most SaaS platforms use to push real-time event data to external systems. The majority of integration failures that reach the support queue involve webhooks not firing, firing incorrectly, or being silently disabled. Understanding the lifecycle is the fastest path to diagnosis.</p>
+        </div>
+
+        <div class="subsection">
+            <div class="subsection-title">How Webhooks Work</div>
+
+            <div class="content-heading">The Lifecycle</div>
+            <div class="doc-body">
+                <p>When a triggering event occurs in the platform — a record changing state, a document being signed, a new hire being confirmed — the platform sends an HTTP POST to the URL configured in the integration or webhook settings. The receiving endpoint must respond with a 2xx status code within a defined timeout window. If it does not, the platform marks the delivery as failed.</p>
+                <p>When a webhook is first created or edited, most platforms send a validation ping to the configured URL. If the endpoint does not respond with a success code, the webhook is created but placed in a disabled state. This is a frequent and non-obvious cause of webhooks that appear configured but never fire.</p>
+            </div>
+
+            <div class="callout silent-failure">
+                <span class="callout-label">Silent Failure</span>
+                <p>A webhook created while the receiving endpoint was down or misconfigured will often appear in the admin panel in a disabled state with no visible error alert. Customers report events not arriving with no obvious reason. Always check webhook enabled status first before investigating anything else.</p>
+            </div>
+
+            <div class="content-heading">The Cascade: Related Events</div>
+            <div class="doc-body">
+                <p>Many platforms fire related or derivative webhooks automatically for certain trigger events. A single customer action can generate multiple webhook deliveries, and a failure in one can look like a different event is missing.</p>
+            </div>
+
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Trigger Event</th>
+                            <th>Also Fires</th>
+                            <th>Support Implication</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Primary record update</td>
+                            <td>Downstream status event</td>
+                            <td>Customer reports missing status events — root cause is often the primary webhook being disabled</td>
+                        </tr>
+                        <tr>
+                            <td>Object published / activated</td>
+                            <td>Events for affected related records</td>
+                            <td>Unexpected secondary event volume after a publish action is expected behaviour, not a bug</td>
+                        </tr>
+                        <tr>
+                            <td>Terminal state reached (e.g. hire, close, approve)</td>
+                            <td>Notification event to connected systems</td>
+                            <td>Listening systems may trigger before data is fully propagated — check event ordering</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout key-point">
+                <span class="callout-label">Key Point</span>
+                <p>Related webhooks often share a common action or correlation ID. If a customer's system is deduplicating on that ID, it may discard what looks like a duplicate but is actually a distinct related event. Check this if they report intermittent missing events.</p>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">Diagnosing a Broken Webhook</div>
+
+            <div class="content-heading">Step-by-Step</div>
+            <ol class="triage-steps">
+                <li>Go to the platform's integration or webhook settings and confirm the webhook is enabled. If disabled, this is the root cause — re-enable and trigger a test event.</li>
+                <li>Check whether a secret token or signing key is configured. If it is, the receiving system must validate the signature header using HMAC-SHA256. A mismatch causes the endpoint to reject the delivery, logged as a failure on the platform's side.</li>
+                <li>Ask the customer to check their endpoint logs for the timeframe of missed events. Confirm whether requests arrived and were rejected (4xx/5xx) or did not arrive at all.</li>
+                <li>If requests arrived but were rejected, the issue is on the receiving end — payload format mismatch, expired credentials on their system, or signature validation failure.</li>
+                <li>If requests did not arrive, check whether the event type is configured correctly. A webhook set to one event type will not fire for a related event type. Both must be configured as separate webhooks if both are needed.</li>
+            </ol>
+
+            <div class="content-heading">Verifying Signature Validation</div>
+            <div class="doc-body">
+                <p>Most platforms sign webhook payloads using HMAC-SHA256 with the customer's secret token. The signature is sent in a header (e.g. <code style="background:#21262d;padding:1px 5px;border-radius:3px;font-size:0.82rem;color:#79c0ff;font-family:monospace;">X-Signature</code> or similar). To verify a delivery manually:</p>
+            </div>
+
+            <div class="code-block">
+                <pre># Webhook signature verification (Python - generic pattern)
+import hmac, hashlib
+
+def verify_webhook(payload_body, secret_token, signature_header):
+    expected = hmac.new(
+        secret_token.encode('utf-8'),
+        payload_body,
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(expected, signature_header)
+
+# Returns False = secret token mismatch between platform and customer's system.
+# Resolution: regenerate or re-enter the token on both sides.</pre>
+            </div>
+
+            <div class="callout note">
+                <span class="callout-label">Note</span>
+                <p>Signing keys are optional on most platforms but strongly recommended. Without one, an endpoint will accept any POST to that URL — making it harder to isolate delivery failures from spoofed or test requests. From a security standpoint, an unsigned endpoint is also a potential attack surface. Flagging absent signing keys to customers is good practice even when it is not the immediate cause of a ticket.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 02 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <div>
+                <span class="section-title">API Authentication &amp; Permission Errors</span>
+                <span class="section-tagline">Diagnosing 401s, 403s, and scope failures</span>
+            </div>
+        </div>
+
+        <div class="context-block">
+            <span class="context-label">Context</span>
+            <p>Most SaaS platforms use API key-based authentication (Basic Auth, Bearer token, or OAuth). Errors in this layer are consistent and diagnosable from response codes and error bodies. Customers often conflate authentication failures with permission failures — these have different causes and different fixes.</p>
+        </div>
+
+        <div class="subsection">
+            <div class="subsection-title">Error Code Reference</div>
+            <div class="content-heading">What Each Code Means</div>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>HTTP Code</th>
+                            <th>Common Error Body</th>
+                            <th>Cause</th>
+                            <th>Resolution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="cell-mono">401</td>
+                            <td>(none / Unauthorized)</td>
+                            <td>API key missing, malformed, or not passed correctly in the request headers</td>
+                            <td>Confirm the key is being passed in the correct auth format for this platform (Basic Auth, Bearer, header key, etc.)</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-mono">403</td>
+                            <td><code>missing_permission</code> or <code>forbidden</code></td>
+                            <td>Key exists but lacks the required scope for the endpoint being called</td>
+                            <td>Add the required permission scope in the platform's API key or OAuth settings</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-mono">403</td>
+                            <td><code>invalid_key</code> or <code>key_inactive</code></td>
+                            <td>API key is deactivated or does not exist in the system</td>
+                            <td>Generate a new key and update all integration configurations referencing the old one</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-mono">404</td>
+                            <td><code>resource_not_found</code></td>
+                            <td>Record ID in the request does not exist or has been deleted/archived</td>
+                            <td>Confirm the ID against a current listing response before assuming a bug</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-mono">422</td>
+                            <td><code>validation_error</code></td>
+                            <td>Request is structurally valid but fails business logic — e.g. submitting to an inactive record</td>
+                            <td>Confirm the state of the target record before the request is made</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-mono">400</td>
+                            <td><code>sync_token_expired</code></td>
+                            <td>Incremental sync token has passed its expiry window</td>
+                            <td>Discard the token and perform a full sync to regenerate a valid one</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">Handling Sync Token Expiry</div>
+            <div class="content-heading">Why It Happens and How to Recover</div>
+            <div class="doc-body">
+                <p>Many platforms support incremental syncs using a sync token returned in list responses. The token is passed in subsequent requests to retrieve only records changed since the last sync. If an integration stops polling within the token's expiry window — due to downtime, a paused job, or a misconfigured schedule — the next request returns a token expiry error.</p>
+            </div>
+
+            <div class="code-block">
+                <pre># Request using an expired sync token
+POST https://api.example.com/records.list
+Authorization: Bearer &lt;API_KEY&gt;
+Content-Type: application/json
+{ "syncToken": "&lt;expired_token_value&gt;" }
+
+# Response:
+{ "success": false, "errors": ["sync_token_expired"] }
+
+# Resolution: remove syncToken from the request body entirely.
+# The platform returns a full dataset and a new syncToken.
+# Store the new token for all future incremental requests.</pre>
+            </div>
+
+            <div class="callout heads-up">
+                <span class="callout-label">Heads Up</span>
+                <p>A full sync on a large instance can return significant data volume. Advise the customer to confirm their integration can handle the full dataset before dropping the sync token. For high-volume customers, recommend checking platform rate limit documentation before triggering a full re-sync.</p>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">API Key Scope Reference</div>
+            <div class="content-heading">Common Missing Permissions by Use Case</div>
+            <div class="doc-body">
+                <p>API keys typically carry scoped permissions. A key created for one purpose may lack what another integration needs. This is the most common cause of 403 errors that gets misread as an authentication problem. The examples below use GitHub OAuth scopes to illustrate the pattern — scope names differ by platform, but the failure mode is identical.</p>
+            </div>
+
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Integration Use Case</th>
+                            <th>GitHub OAuth Scope Example</th>
+                            <th>General Pattern</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Read public repository data</td>
+                            <td><code>public_repo</code></td>
+                            <td>Narrow read scope — least privilege baseline</td>
+                        </tr>
+                        <tr>
+                            <td>Read and write to repositories</td>
+                            <td><code>repo</code></td>
+                            <td>Full repo scope — includes private; flag if over-provisioned for a read-only use case</td>
+                        </tr>
+                        <tr>
+                            <td>Read user profile data</td>
+                            <td><code>read:user</code></td>
+                            <td>Object-level read scope</td>
+                        </tr>
+                        <tr>
+                            <td>Read and write user email addresses</td>
+                            <td><code>user:email</code></td>
+                            <td>Attribute-level scope — granular control within a parent scope</td>
+                        </tr>
+                        <tr>
+                            <td>Read organisation membership</td>
+                            <td><code>read:org</code></td>
+                            <td>Resource-specific read — common missing scope for org-level integrations</td>
+                        </tr>
+                        <tr>
+                            <td>Manage webhooks on a repository</td>
+                            <td><code>admin:repo_hook</code></td>
+                            <td>Admin-level scope — should not be present on keys used only for data reads</td>
+                        </tr>
+                        <tr>
+                            <td>Full account control (all scopes)</td>
+                            <td><code>user</code> (full)</td>
+                            <td>Overly broad — always flag to customer as a security risk if seen on an integration key</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout shortcut">
+                <span class="callout-label">Diagnosis Shortcut</span>
+                <p>When a customer reports a 403 with a missing permission error, ask which endpoint they are calling and cross-reference it against the platform's scope documentation. This is almost always resolvable without Engineering involvement.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 03 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <div>
+                <span class="section-title">Downstream System Sync Failures</span>
+                <span class="section-tagline">Diagnosing broken data handoff to connected platforms</span>
+            </div>
+        </div>
+
+        <div class="context-block">
+            <span class="context-label">Context</span>
+            <p>Platform integrations that push data downstream — to HRIS systems, CRMs, payroll tools, or communication platforms — typically trigger on a terminal event (a hire, a contract signature, a deal close). These are high-impact failures because they directly affect operational or onboarding timelines. Failures here are often silent on the source platform side.</p>
+        </div>
+
+        <div class="subsection">
+            <div class="subsection-title">How the Sync Works</div>
+            <div class="content-heading">The Data Flow</div>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>What Happens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Trigger event occurs in source platform</td>
+                            <td>Platform fires an event (e.g. record marked as hired, deal closed, document signed) depending on configuration</td>
+                        </tr>
+                        <tr>
+                            <td>2. Webhook fires to downstream connector</td>
+                            <td>The integrated system receives the payload containing record, context, and field data</td>
+                        </tr>
+                        <tr>
+                            <td>3. Downstream system creates or updates record</td>
+                            <td>The receiving system maps source platform fields to its own data model</td>
+                        </tr>
+                        <tr>
+                            <td>4. Confirmation returned (or not)</td>
+                            <td>Some integrations return a sync confirmation; others are fire-and-forget with no callback</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">Common Failure Patterns</div>
+            <div class="content-heading">Record Not Appearing in Downstream System</div>
+            <div class="doc-body">
+                <p>Before assuming a sync failure, establish the sequence with the customer:</p>
+            </div>
+            <ol class="triage-steps">
+                <li>Confirm the trigger event was reached correctly — not just a preceding step. The sync fires on the terminal event specifically; earlier stage movement does not trigger it.</li>
+                <li>Check whether the downstream integration is enabled and authenticated in the platform's integration settings. Token expiry is common if the integration has not been used or reviewed recently.</li>
+                <li>Confirm required fields are populated on the source record. Most downstream integrations require a minimum set of fields (start date, role, team, compensation, etc.). Missing fields often cause the sync to fail silently on the receiving side.</li>
+                <li>Ask the customer to check their downstream system for failed import logs or error notifications. The receiving system usually surfaces the specific rejection reason even when the source platform shows a successful send.</li>
+            </ol>
+
+            <div class="content-heading">Field Mapping Failures</div>
+            <div class="doc-body">
+                <p>Platforms with extensive custom field support frequently see mapping mismatches as a source of silent sync failures. When a downstream integration is configured to map custom fields, a type or name mismatch causes data to be dropped or rejected.</p>
+            </div>
+
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Symptom</th>
+                            <th>Likely Cause</th>
+                            <th>Resolution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Field arrives in downstream system as blank</td>
+                            <td>Field exists in source but is not mapped in the integration configuration</td>
+                            <td>Add the missing field mapping in the platform's integration field mapping settings</td>
+                        </tr>
+                        <tr>
+                            <td>Sync fails with validation error on receiving side</td>
+                            <td>Field type mismatch — e.g. source sends text, receiving system expects a date or enum</td>
+                            <td>Correct the field type in the source or adjust the receiving system to accept the source format</td>
+                        </tr>
+                        <tr>
+                            <td>Some records sync, others do not</td>
+                            <td>A required mapping field is not populated for all records</td>
+                            <td>Audit records that failed to sync for missing required fields before raising to Engineering</td>
+                        </tr>
+                        <tr>
+                            <td>Sensitive data (e.g. compensation) missing</td>
+                            <td>Scope or approval state not complete before the trigger event fired</td>
+                            <td>Confirm full approval state and required fields are complete before the terminal event is triggered</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="escalation-box">
+                <span class="esc-label">Escalation Threshold</span>
+                <p>If the integration is correctly configured, the trigger event was correctly reached, all required fields are populated, and the sync still fails — escalate to Engineering. Document: record ID, event timestamp, receiving system error log, and field mapping configuration before raising the ticket.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 04 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <div>
+                <span class="section-title">Diagnostic Decision Reference</span>
+                <span class="section-tagline">Fast triage checklists and escalation criteria</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <div class="subsection-title">Webhook Tickets — Triage Checklist</div>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>If Yes</th>
+                            <th>If No / Unclear</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Is the webhook enabled in settings?</td>
+                            <td>Proceed to next check</td>
+                            <td>Re-enable, trigger test event, confirm delivery</td>
+                        </tr>
+                        <tr>
+                            <td>Is a signing key / secret token configured?</td>
+                            <td>Verify customer's signature validation matches the key in the platform</td>
+                            <td>Recommend configuring one; not a delivery blocker but a security gap</td>
+                        </tr>
+                        <tr>
+                            <td>Did requests arrive at the endpoint at all?</td>
+                            <td>Issue is on the receiving end — check their endpoint logs</td>
+                            <td>Check event type config; may need separate webhooks for related events</td>
+                        </tr>
+                        <tr>
+                            <td>Is the endpoint returning 2xx?</td>
+                            <td>Delivery confirmed; investigate downstream processing</td>
+                            <td>Identify the error code — auth, schema, or timeout on customer side</td>
+                        </tr>
+                        <tr>
+                            <td>Are cascade / related events expected?</td>
+                            <td>Confirm both event types are configured as separate webhooks</td>
+                            <td>Single event config is correct; no action needed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">API Auth Tickets — Error Code Triage</div>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Error</th>
+                            <th>First Action</th>
+                            <th>If Still Unresolved</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>401 Unauthorized</td>
+                            <td>Confirm API key is in the correct auth format with correct credentials</td>
+                            <td>Regenerate key; confirm it has not been deactivated or rate-limited</td>
+                        </tr>
+                        <tr>
+                            <td><code>403 missing_permission</code></td>
+                            <td>Identify endpoint being called; add missing scope to the key in admin settings</td>
+                            <td>Confirm key itself is active, not just scoped incorrectly</td>
+                        </tr>
+                        <tr>
+                            <td><code>sync_token_expired</code></td>
+                            <td>Drop syncToken from request to trigger full sync</td>
+                            <td>Warn customer about full sync data volume before proceeding</td>
+                        </tr>
+                        <tr>
+                            <td><code>404 resource_not_found</code></td>
+                            <td>Confirm resource ID against a fresh listing response</td>
+                            <td>Resource may be archived or deleted; confirm with customer before raising bug</td>
+                        </tr>
+                        <tr>
+                            <td><code>422 validation_error</code></td>
+                            <td>Confirm target record is in the correct state before the request is made</td>
+                            <td>Customer may be targeting a staging or inactive record in a production environment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">Downstream Sync Tickets — Triage Checklist</div>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Action if No or Unclear</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Was the terminal trigger event reached, not just a preceding step?</td>
+                            <td>Check source platform record timeline for the specific trigger event</td>
+                        </tr>
+                        <tr>
+                            <td>Is the downstream integration enabled and authenticated?</td>
+                            <td>Re-authenticate in integration settings; check for token expiry warning</td>
+                        </tr>
+                        <tr>
+                            <td>Are all required fields populated on the source record?</td>
+                            <td>Core fields (e.g. start date, role, team, compensation) must all be present</td>
+                        </tr>
+                        <tr>
+                            <td>Does the receiving system show a failed import log?</td>
+                            <td>The downstream error log usually surfaces the exact field causing rejection</td>
+                        </tr>
+                        <tr>
+                            <td>Are custom field mappings correct and complete?</td>
+                            <td>Check integration field mapping settings for missing or mismatched entries</td>
+                        </tr>
+                        <tr>
+                            <td>Does the issue affect one record or many?</td>
+                            <td>One record = data completeness issue. Many records = config, auth, or integration-level failure</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">Escalation Criteria</div>
+            <div class="content-heading">When to Involve Engineering</div>
+            <div class="doc-body">
+                <p>Most integration failures are resolvable without Engineering. Escalate only when all of the following are confirmed:</p>
+            </div>
+
+            <div class="escalation-box">
+                <span class="esc-label">Escalate only when all of these are confirmed</span>
+                <ul>
+                    <li>Configuration is correct on the source platform side — webhook enabled, correct event type, valid signing key</li>
+                    <li>API key is active and carries the correct permission scopes for the endpoints in use</li>
+                    <li>Receiving endpoint or downstream system is correctly configured and recently authenticated</li>
+                    <li>All required data fields on the source record are complete and correctly formatted</li>
+                    <li>The issue is reproducible and not a one-off timing or network event</li>
+                </ul>
+            </div>
+
+            <div class="callout note">
+                <span class="callout-label">What to Include in an Escalation</span>
+                <p>Record or customer ID, integration name and type, event type or API endpoint, timestamps of failed deliveries or requests, HTTP response codes, downstream system error logs where applicable, and a summary of every diagnostic step already completed. Incomplete escalations significantly increase resolution time.</p>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">Customer Communication</div>
+            <div class="content-heading">Writing to Customers Mid-Ticket</div>
+            <div class="doc-body">
+                <p>Clear, timely customer communication is as much a product support skill as technical diagnosis. The examples below show how the same technical situation should be framed depending on the stage and the audience.</p>
+            </div>
+
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Situation</th>
+                            <th>What to Say</th>
+                            <th>What to Avoid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Investigating — no root cause yet</td>
+                            <td>We have identified the area of the integration where this is occurring and are working through the diagnostic steps. We will update you by [time] with findings or a resolution.</td>
+                            <td>Vague timelines, hedged language like "looking into it", or technical detail the customer cannot act on</td>
+                        </tr>
+                        <tr>
+                            <td>Root cause found — fix requires customer action</td>
+                            <td>The issue is caused by a field mapping mismatch in your integration configuration. The required field [field name] is not populated on the candidate record. Populating this field and re-triggering the sync should resolve it — I can walk you through the steps if helpful.</td>
+                            <td>Passive framing that implies the platform is at fault when it is a configuration issue on the customer side</td>
+                        </tr>
+                        <tr>
+                            <td>Escalating to Engineering</td>
+                            <td>This has been escalated to our Engineering team with full diagnostic context. You can expect an update within [SLA window]. In the meantime, [any workaround if applicable].</td>
+                            <td>Surfacing internal escalation detail, mentioning specific engineers by name, or implying the platform has a bug before Engineering has confirmed it</td>
+                        </tr>
+                        <tr>
+                            <td>Resolved — preventative note</td>
+                            <td>The issue is resolved. To prevent recurrence, we recommend [specific action — e.g. reviewing your sync schedule to avoid token expiry, or auditing field mappings after any HRIS schema changes].</td>
+                            <td>Closing the ticket without a forward-looking note where one is relevant</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="customer-sample">
+                <span class="customer-sample-label">Sample Customer Update — Escalation Scenario</span>
+                <p>Hi [Name], thank you for your patience while we investigated this. We have been able to confirm that the webhook delivery is reaching your endpoint correctly, but the sync is failing at the field mapping stage — specifically, the start date field is not being accepted in the format your HRIS expects. This is a configuration fix rather than a platform issue. I have put together the steps to resolve it below, and I am available to walk through them with you directly if that is easier. If anything is unclear after reviewing, please reply here and I will pick it up straight away.</p>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="subsection">
+            <div class="subsection-title">Ticket and Tooling Workflow</div>
+            <div class="content-heading">From Diagnosis to Documentation — Zendesk and Jira</div>
+            <div class="doc-body">
+                <p>Diagnostic work only creates value if it is recorded in a way the team can use. The structure below reflects how findings from this guide translate into a Zendesk ticket and, where applicable, a Jira escalation.</p>
+            </div>
+
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket Element</th>
+                            <th>Zendesk Field / Location</th>
+                            <th>What to Record</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ticket subject</td>
+                            <td>Subject line</td>
+                            <td>Specific and searchable — e.g. "Webhook disabled after endpoint misconfiguration at setup" not "Integration not working"</td>
+                        </tr>
+                        <tr>
+                            <td>Internal note — initial findings</td>
+                            <td>Internal note (not visible to customer)</td>
+                            <td>What was checked, in what order, and what was ruled out. Timestamp key actions.</td>
+                        </tr>
+                        <tr>
+                            <td>Customer-facing update</td>
+                            <td>Public reply</td>
+                            <td>Situation summary, what was found, what action is needed — no internal diagnostic detail</td>
+                        </tr>
+                        <tr>
+                            <td>Ticket tags</td>
+                            <td>Tags field</td>
+                            <td>Tag by failure type (e.g. <code>webhook-disabled</code>, <code>403-scope</code>, <code>sync-field-mapping</code>) to enable queue filtering and trend reporting</td>
+                        </tr>
+                        <tr>
+                            <td>Linked Jira issue</td>
+                            <td>Integration or custom field</td>
+                            <td>Link the Zendesk ticket to the Jira escalation for traceability — ensures Engineering can see the full customer context</td>
+                        </tr>
+                        <tr>
+                            <td>Resolution note</td>
+                            <td>Internal note on close</td>
+                            <td>What fixed it and why, including any config changes made. This is the note that becomes a knowledge base article.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="jira-box">
+                <span class="jira-label">Jira Escalation Format</span>
+                <p><strong style="color:#e6edf3;">Summary:</strong> [Platform] — [Failure type] — [Customer / ticket ID].<br><br>
+                <strong style="color:#e6edf3;">Description:</strong> Include the full Zendesk ticket link, a one-paragraph summary of the issue and all diagnostic steps completed, HTTP response codes or error logs, and a clear statement of what has been ruled out. Label with the relevant component (e.g. <code style="background:#21262d;padding:1px 5px;border-radius:3px;font-size:0.82rem;color:#79c0ff;font-family:monospace;">webhooks</code>, <code style="background:#21262d;padding:1px 5px;border-radius:3px;font-size:0.82rem;color:#79c0ff;font-family:monospace;">api-auth</code>, <code style="background:#21262d;padding:1px 5px;border-radius:3px;font-size:0.82rem;color:#79c0ff;font-family:monospace;">hris-sync</code>) and set priority based on customer impact. Incomplete Jira tickets slow Engineering response and create duplicate investigation work.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="doc-footer">
+        Spec Coda-Bishop &nbsp;·&nbsp;
+        <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp;
+        <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a>
+        <br><br>
+        <a href="index.html">← Back to Portfolio</a>
+    </div>
+
+</div>
+</body>
+</html>
