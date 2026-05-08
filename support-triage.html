@@ -276,6 +276,17 @@
 
         .copy-btn:hover { border-color: var(--success); color: var(--success); background: transparent; }
 
+        .char-counter {
+            margin-left: auto;
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .char-counter.warn { color: var(--warning); }
+        .char-counter.over { color: var(--danger); }
+
         .spinner {
             display: inline-block;
             width: 14px;
@@ -338,10 +349,13 @@
         <div class="panel-header">
             <span class="icon">📩</span>
             <h2>customer message</h2>
+            <span class="char-counter" id="charCounter">0 / 3,000</span>
         </div>
-        <textarea id="message" placeholder="Paste the customer message here. Real, anonymised, or fabricated — whatever you want to triage.
+        <textarea id="message" placeholder="Paste anything — a customer message, an error log, a stack trace, or a support thread transcript. Real, anonymised, or fabricated.
 
-Example: Hi, I've been charged twice this month and my account still shows as inactive. I've emailed three times with no response. This is really frustrating — I need this sorted today as I have a client presentation tomorrow that depends on this software."></textarea>
+Example: Hi, I've been charged twice this month and my account still shows as inactive. I've emailed three times with no response. This is really frustrating — I need this sorted today as I have a client presentation tomorrow that depends on this software.
+
+Logs work too: TypeError: Cannot read properties of undefined (reading 'user') at checkout.js:142..."></textarea>
     </div>
 
     <div class="error-banner" id="errorBanner"></div>
@@ -361,10 +375,20 @@ Example: Hi, I've been charged twice this month and my account still shows as in
 </main>
 
 <footer>
-    support triage demo · powered by Claude · no data stored
+    support triage demo · powered by Claude Haiku · ~0.2¢ per triage · no data stored
 </footer>
 
 <script>
+    const SOFT_LIMIT = 3000;
+    const HARD_LIMIT = 5000;
+
+    document.getElementById('message').addEventListener('input', function() {
+        const len = this.value.length;
+        const counter = document.getElementById('charCounter');
+        counter.textContent = `${len.toLocaleString()} / ${SOFT_LIMIT.toLocaleString()}`;
+        counter.className = 'char-counter' + (len > HARD_LIMIT ? ' over' : len > SOFT_LIMIT ? ' warn' : '');
+    });
+
     async function triage() {
         const apiKey = document.getElementById('apiKey').value.trim();
         const message = document.getElementById('message').value.trim();
@@ -378,6 +402,10 @@ Example: Hi, I've been charged twice this month and my account still shows as in
 
         if (!apiKey) return showError('Enter your Anthropic API key above.');
         if (!message) return showError('Paste a customer message to triage.');
+
+        const processedMessage = message.length > HARD_LIMIT
+            ? message.slice(0, HARD_LIMIT) + '\n\n[Input truncated at 5,000 characters]'
+            : message;
 
         triageBtn.disabled = true;
         statusText.innerHTML = '<span class="spinner"></span> triaging...';
@@ -393,21 +421,21 @@ Example: Hi, I've been charged twice this month and my account still shows as in
                     'anthropic-dangerous-direct-browser-calls': 'true'
                 },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-6',
+                    model: 'claude-haiku-4-5-20251001',
                     max_tokens: 1000,
-                    system: `You are a support triage specialist. When given a customer message, respond with exactly three sections using these markdown headers:
+                    system: `You are a support triage specialist. When given a customer message — which may be a written message, an error log, a stack trace, or a support thread excerpt — respond with exactly three sections using these markdown headers:
 
 ## Category
 State the category on the first line (choose the most fitting: Billing, Technical Issue, Account Access, Bug Report, Feature Request, General Inquiry, Complaint, Cancellation, or Other). Then add 1–2 sentences explaining why this category fits.
 
 ## Urgency
-State the urgency level on the first line — exactly one of: Low, Medium, High, or Critical. Then add 1–2 sentences of reasoning. Consider: tone and emotional state of the customer, implied business impact, time sensitivity, and how long the issue has been ongoing.
+State the urgency level on the first line — exactly one of: Low, Medium, High, or Critical. Then add 1–2 sentences of reasoning. Consider: tone and emotional state of the customer, implied business impact, time sensitivity, how long the issue has been ongoing, and for logs or error traces, the severity and type of error.
 
 ## Suggested Response
-Write a first response the support agent can send as-is or adapt. It should be warm, professional, and specific to what the customer described. Do not use placeholder text like [NAME] or [PRODUCT] — write it ready to send. Keep it under 150 words.
+Write a first response the support agent can send as-is or adapt. It should be warm, professional, and specific to what the customer described. If the input is a log or error snippet with no accompanying message, write a response acknowledging the technical issue and requesting any relevant context (steps to reproduce, environment, account details). Do not use placeholder text like [NAME] or [PRODUCT] — write it ready to send. Keep it under 150 words.
 
 Be direct. No preamble or commentary outside these three sections.`,
-                    messages: [{ role: 'user', content: message }]
+                    messages: [{ role: 'user', content: processedMessage }]
                 })
             });
 

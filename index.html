@@ -87,6 +87,32 @@
 
         .devlog-entry p { margin: 0; }
 
+        .project-wins {
+            margin: 14px 0 10px 0;
+            padding: 12px 16px;
+            background: #f0f7f0;
+            border-left: 3px solid #4caf50;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .project-wins strong {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #2e5e2e;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .project-wins ul {
+            margin: 0;
+            padding-left: 16px;
+            font-size: 0.83rem;
+            color: #2e5e2e;
+            line-height: 1.8;
+        }
+
         .tool-link-badge {
             display: inline-block;
             background: #7b5ea7;
@@ -332,7 +358,16 @@
                     <div class="project">
                         <h3>Support Ticket Triage Tool <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
-                        <p>Paste a customer message — real, anonymised, or fabricated — and Claude returns a category, an urgency level, and a suggested first response ready to send. One input, one button. Built to directly demonstrate the kind of tool you'd build or configure in a support or implementation role.</p>
+                        <p>Paste a customer message, error log, or support thread — and Claude returns a category, an urgency level (colour-coded Low to Critical), and a suggested first response ready to copy and send. One input, one button. Built to directly demonstrate the kind of tool you'd build or configure in a support or implementation role.</p>
+                        <div class="project-wins">
+                            <strong>Why this works</strong>
+                            <ul>
+                                <li><strong>No backend</strong> — shareable as a direct link, runs in any browser with just an API key. Zero setup friction for whoever you send it to.</li>
+                                <li><strong>Costs pennies</strong> — built on Claude Haiku (~0.2¢ per triage). Viable as a real tool, not just a portfolio demo.</li>
+                                <li><strong>Paste anything</strong> — customer messages, error logs, stack traces. Structured input triages cleanly, and the suggested response adapts to what it received.</li>
+                                <li><strong>Prompt is tunable</strong> — categories, urgency signals, and response tone can be adjusted for any product in minutes. That's the implementation judgment this demonstrates.</li>
+                            </ul>
+                        </div>
                         <p>
                             <span class="tech-tag">HTML/CSS/JS</span>
                             <span class="tech-tag">Claude API (Anthropic)</span>
@@ -392,6 +427,30 @@
                                 <p>
                                     <span class="tag tag-note">Note</span>
                                     The prompt is the meaningful part of this tool. Knowing what signals push a ticket from Medium to High, what tone to set, what categories fit a given product — that's the support judgment this tool demonstrates. The code is a vehicle for the prompt.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Switched model from Sonnet to Haiku. Triage is pattern recognition and professional writing — Haiku handles it comfortably. Cost drops from ~$1.80 to ~$0.42 per 1,000 triages. "Cents not euros" isn't a nice-to-have, it's a design constraint if this is going to be a viable tool rather than just a demo.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Added a character counter with a soft warning at 3,000 and hard truncation at 5,000 — applied client-side before the API call. Support tickets rarely hit this. Error logs and paste dumps can. Truncation keeps a runaway paste from spiking cost; a note in the payload tells the model what happened. The limit also keeps max_tokens at 1,000 and the system prompt compact — three short sections is all this needs.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Updated the placeholder and system prompt to explicitly support error snippets, stack traces, and log excerpts. Structured text is actually easier to triage than messy prose — the model reads it cleanly. For log-only inputs the suggested response acknowledges the error and asks for context (steps to reproduce, environment, account details) rather than pretending it's a normal message.
                                 </p>
                             </div>
 
