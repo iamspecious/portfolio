@@ -480,6 +480,178 @@
             line-height: 1.5;
             margin: 0;
         }
+
+        /* ===== Midnight Theme ===== */
+
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        h2, h3, h4, h5 { color: #e6edf3; }
+
+        p { color: #c9d1d9; }
+
+        strong { color: #e6edf3; }
+
+        a { color: #b392f0; }
+        a:hover { color: #d2b3ff; }
+
+        hr {
+            border-color: #30363d;
+            opacity: 1;
+        }
+
+        .header {
+            background-color: #010409;
+            border-bottom: 1px solid #30363d;
+        }
+
+        /* Bootstrap nav tabs */
+        .nav-tabs { border-bottom-color: #30363d; }
+
+        .nav-tabs .nav-link {
+            color: #8b949e;
+            border-color: transparent;
+        }
+
+        .nav-tabs .nav-link:hover,
+        .nav-tabs .nav-link:focus {
+            color: #c9d1d9;
+            border-color: #30363d #30363d transparent;
+            background-color: #161b22;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #e6edf3;
+            background-color: #0d1117;
+            border-color: #30363d #30363d #0d1117;
+        }
+
+        .badge.bg-secondary {
+            background-color: #30363d !important;
+            color: #8b949e !important;
+        }
+
+        /* About */
+        .about-card {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .about-card .card-label { color: #b392f0; }
+        .about-card .card-title { color: #e6edf3; }
+        .about-card p { color: #8b949e; }
+
+        /* Principle callout */
+        .principle-callout {
+            background: #161b22;
+            color: #c9d1d9;
+        }
+
+        /* How I Work */
+        .how-i-work-subhead {
+            color: #e6edf3;
+            border-bottom-color: #30363d;
+        }
+
+        .layer-card {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .layer-card .layer-label { color: #b392f0; }
+        .layer-card .layer-title { color: #e6edf3; }
+        .layer-card p { color: #8b949e; }
+
+        /* Timeline */
+        .timeline::before { background: #30363d; }
+
+        .timeline-entry::before {
+            background: #7b5ea7;
+            border-color: #0d1117;
+            box-shadow: 0 0 0 2px #6e40c9;
+        }
+
+        .timeline-role { color: #e6edf3; }
+        .timeline-meta { color: #8b949e; }
+        .timeline-meta .org { color: #b392f0; }
+        .timeline-body { color: #c9d1d9; }
+        .timeline-bullets { color: #c9d1d9; }
+        .timeline-subhead { color: #b392f0; }
+
+        /* Skills */
+        .skill-group-title {
+            color: #b392f0;
+            border-bottom-color: #30363d;
+        }
+
+        .skill-pill {
+            background: #21262d;
+            border-color: #6e40c9;
+            color: #c9d1d9;
+        }
+
+        .skill-pill.emerging {
+            background: #12261e;
+            border-color: #238636;
+            color: #3fb950;
+        }
+
+        /* Tech tags */
+        .tech-tag {
+            background: #21262d;
+            color: #8b949e;
+        }
+
+        /* Tool link badge */
+        .tool-link-badge {
+            background: #6e40c9;
+        }
+
+        .tool-link-badge:hover { background: #9b7fd4; }
+
+        /* Project wins */
+        .project-wins {
+            background: #0d2818;
+            border-left-color: #3fb950;
+        }
+
+        .project-wins strong { color: #3fb950; }
+        .project-wins ul { color: #7ee787; }
+
+        /* Project constraints */
+        .project-constraints {
+            background: #1f1500;
+            border-left-color: #d29922;
+        }
+
+        .project-constraints strong { color: #d29922; }
+        .project-constraints ul { color: #e3b341; }
+
+        /* Highlight cards (PregVoice) */
+        .highlight-card {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .highlight-card .win-label { color: #b392f0; }
+        .highlight-card .win-title { color: #e6edf3; }
+        .highlight-card .win-detail { color: #8b949e; }
+
+        /* Devlog */
+        .devlog {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        .devlog-header { background: #010409; }
+
+        /* Education */
+        .education-block { border-top-color: #30363d; }
+        .edu-qual { color: #e6edf3; }
+        .edu-org { color: #b392f0; }
+        .cert-list li { color: #c9d1d9; border-bottom-color: #21262d; }
     </style>
 </head>
 <body>
@@ -759,7 +931,7 @@
 
                     <!-- Education & Certifications -->
                     <div class="education-block">
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: #2d2d3a; margin-bottom: 20px;">Education</h3>
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 20px;">Education</h3>
 
                         <div class="education-entry">
                             <div class="edu-qual">Level 3 Certificate — Human Resources Management and Services</div>
@@ -776,7 +948,7 @@
                             <div class="edu-org">Dún Laoghaire Institute of Art, Design and Technology</div>
                         </div>
 
-                        <h3 style="font-size: 1.1rem; font-weight: 700; color: #2d2d3a; margin: 28px 0 12px;">Certifications</h3>
+                        <h3 style="font-size: 1.1rem; font-weight: 700; margin: 28px 0 12px;">Certifications</h3>
                         <ul class="cert-list">
                             <li>Foundations of Cybersecurity</li>
                             <li>Play It Safe: Manage Security Risks</li>
