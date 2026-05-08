@@ -113,6 +113,32 @@
             line-height: 1.8;
         }
 
+        .project-constraints {
+            margin: 10px 0 10px 0;
+            padding: 12px 16px;
+            background: #fdf6ed;
+            border-left: 3px solid #e67e22;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .project-constraints strong {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #7a3a0a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .project-constraints ul {
+            margin: 0;
+            padding-left: 16px;
+            font-size: 0.83rem;
+            color: #7a3a0a;
+            line-height: 1.8;
+        }
+
         .tool-link-badge {
             display: inline-block;
             background: #7b5ea7;
@@ -527,6 +553,106 @@
                                 <p>
                                     <span class="tag tag-note">Note</span>
                                     Updated the placeholder and system prompt to explicitly support error snippets, stack traces, and log excerpts. Structured text is actually easier to triage than messy prose — the model reads it cleanly. For log-only inputs the suggested response acknowledges the error and asks for context (steps to reproduce, environment, account details) rather than pretending it's a normal message.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         FAQ / KNOWLEDGE BASE CHATBOT — AI TOOL
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>FAQ / Knowledge Base Chatbot <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>May 2026 – Present</strong></p>
+                        <p>Paste a company's FAQ or internal help content, ask a customer question, and Claude answers from those docs only. If the answer isn't there, it says so — no hallucination from general knowledge, no invented policies, no guessing. Zero backend, zero infrastructure, fraction-of-a-cent per query. Built to demonstrate how LLMs can be grounded in a specific content source for support automation.</p>
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>No backend, no vector database</strong> — paste docs, get grounded answers. Nothing to host, configure, or maintain.</li>
+                                <li><strong>~0.1¢ per query</strong> — FAQ answers are short, so max_tokens is lower than the triage tool. Cheaper still.</li>
+                                <li><strong>Grounded by design</strong> — Claude is instructed to answer only from what you provide. "Not in our docs" is a first-class response, not an error state.</li>
+                                <li><strong>Instantly reconfigurable</strong> — swap the knowledge base for any product, company, or use case. The prompt doesn't change.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Context window caps KB size</strong> — very large doc sets (full product wikis, lengthy policy libraries) need a proper RAG pipeline: chunking, vector embeddings, semantic retrieval. This demo shows the concept and the grounding behaviour; it doesn't replace that architecture.</li>
+                                <li><strong>No persistence</strong> — refresh the page and the knowledge base is gone. Production use needs storage and a loading mechanism.</li>
+                                <li><strong>Text only</strong> — can't parse PDFs, images, or tables natively. The user does the copy-paste. That's a feature in a demo, a gap in production.</li>
+                                <li><strong>Quality in, quality out</strong> — vague or incomplete docs produce vague or incomplete answers. The tool surfaces what's in the KB, nothing more.</li>
+                            </ul>
+                        </div>
+                        <p>
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Client-side</span>
+                            <span class="tech-tag">No backend</span>
+                        </p>
+                        <a class="tool-link-badge" href="faq-chatbot.html" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — dated as we go</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — initial build</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Same architecture as the other two tools: single file, no backend, GitHub Pages. Three tools in the portfolio now follow this pattern — keeping the stack consistent makes the portfolio itself readable. Different tool, same delivery mechanism.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Two inputs: knowledge base content and the customer question. Separating them is intentional — in production the KB would be loaded automatically from storage or a docs hub; the question is what the customer types. Keeping them distinct in the UI makes that production model legible, even in a demo where both are pasted manually.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Haiku model, max_tokens 500. FAQ answers are short by nature — concise is actually the goal. Dropping from 1,000 (support triage) to 500 tokens cuts output cost further. Estimated cost per query including a typical FAQ doc in context: ~0.1¢.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Grounding is the core design constraint on the system prompt. Claude is told to answer only from the provided content, never from general knowledge, and to respond with a specific "not covered in our documentation" message when a question isn't there. That fallback path is a feature, not an edge case — a chatbot that invents policies is actively harmful. Getting the "I don't know" behaviour right matters more than getting the "I know" behaviour right.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    This is a lightweight RAG (Retrieval-Augmented Generation) demo. In a production system you'd have a vector database, chunking logic, and semantic retrieval so the model only receives relevant sections of a large doc set. Here, the user pastes what's relevant. The demo shows the grounding behaviour and the prompt engineering — not the scale architecture. Both are honest and documented.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Character limit on KB content: soft warning at 8,000 chars, hard truncation at 12,000. Most FAQ pages are well under 8,000. A full internal wiki would exceed 12,000 easily — that's where the RAG constraint becomes real. The limit also prevents accidental token spikes from a large paste. Truncation is client-side with a note appended to the payload so the model knows what it received.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-tried">Tried</span>
+                                    Considered pre-filling the KB field with a sample FAQ so visitors can try the tool immediately without their own content. Left it as placeholder text instead. A pre-filled demo risks making the tool look product-specific, and it's more compelling when someone pastes their own docs and watches it work on their content.
                                 </p>
                             </div>
 
