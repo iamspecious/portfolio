@@ -535,6 +535,164 @@
 
                     <hr>
 
+                    <!-- ====================================================
+                         FAQ CHATBOT — AI TOOL
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>FAQ Chatbot <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>May 2026 – Present</strong></p>
+                        <p>Paste a company's FAQ or internal knowledge base, paste a customer message, and get an answer grounded entirely in those docs — nothing made up, nothing hallucinated. Built to show how a lightweight AI support chatbot actually works: no vector database, no embeddings pipeline, no backend. Just a system prompt, a context window, and a model that knows to say "I don't have that" when the docs don't cover it.</p>
+                        <p>The goal is a tool a client could realistically drop into their website with minimal setup — and a devlog that walks through every decision, tradeoff, and constraint so someone reading it understands not just what was built, but why it works and where it breaks.</p>
+
+                        <div class="highlights">
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Paste anything</span>
+                                <p class="win-detail">Works with any plain text: Notion exports, Confluence pages, Google Docs, Zendesk article dumps, or a hand-written FAQ. No formatting required. If you can copy it, it works.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Claude does the search</span>
+                                <p class="win-detail">No vector database, no embeddings, no semantic search infrastructure. The knowledge base goes into Claude's context window and the model finds the relevant answer natively — including paraphrased questions that wouldn't match keyword search.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Grounded by design</span>
+                                <p class="win-detail">The system prompt explicitly instructs Claude: only answer from the provided docs. If the answer isn't there, say so. This is the critical design choice — without it, the model will helpfully hallucinate a plausible-sounding answer.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Sub-cent answers</span>
+                                <p class="win-detail">A small FAQ (5K chars) costs ~$0.001 per query on Haiku. A large one (60K chars) runs ~$0.01. Still cheaper than a human response. Cost shown live after each query so there are no surprises.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Drop-in ready</span>
+                                <p class="win-detail">One HTML file. Add an API key and paste your docs. No install, no setup, no infrastructure. In a real deployment, you'd swap the client-side API key for a backend proxy — but the logic is identical.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Shows the real pattern</span>
+                                <p class="win-detail">KB-in-context is the core of most RAG-lite chatbots — even expensive ones. This demo strips away the infrastructure to show the concept clearly: the prompt engineering, the grounding rule, and where the limits actually are.</p>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">GitHub Pages</span>
+                            <span class="tech-tag">Prompt engineering</span>
+                        </p>
+                        <a class="tool-link-badge" href="faq-chatbot.html" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — initial build</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Same architecture as the other tools: single HTML file, no backend, GitHub Pages. The pattern works — a static file with a client-side API call is shareable as a direct link with zero setup. No reason to introduce a server unless we need one.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The knowledge base goes directly into Claude's context window as part of the system prompt. No vector database, no embedding model, no similarity search. Claude reads the entire KB and finds the relevant section itself — the same way a human would skim a help doc.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Why this works: Claude Haiku has a 200K token context window — roughly 150,000 words, or about 250 pages of text. Most company FAQ docs are well under 10,000 words. The entire knowledge base fits comfortably, and Claude's comprehension across that context is strong enough for straightforward Q&amp;A. This is sometimes called "long-context retrieval" — using the model's context window as the retrieval mechanism instead of a separate search system.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The system prompt contains one critical rule: if the question cannot be answered from the knowledge base, respond with a specific "I don't have that in our documentation" message. Without this, Claude will produce a confident, helpful, entirely fabricated answer. The grounding constraint is the whole point of the tool — it's what makes it trustworthy rather than just fluent.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Model: Claude Haiku 4.5. Max output: 600 tokens. FAQ answers are 2–4 sentences — even a generous response rarely hits 200 tokens. 600 gives headroom without waste. Haiku handles this pattern easily; Sonnet is overkill and 10× more expensive per query.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-tried">Tried</span>
+                                    Considered adding streaming output so the answer appears word-by-word. FAQ answers are 2–4 sentences and Haiku responds in under 2 seconds. Streaming adds code complexity and browser compatibility surface area for a response that's already fast enough to feel instant. Dropped.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — constraint: cost scales with KB size</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Every query re-sends the full knowledge base. A 5K char FAQ costs ~$0.001 per query. A 60K char KB costs ~$0.01. Still cheap in absolute terms, but if you're handling 10,000 queries a month against a large KB, you're looking at ~$100/month in input tokens alone — before output. For high-volume use, caching common answers or splitting the KB by topic would reduce this significantly.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — constraint: context window ceiling</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    The 60K char hard limit in this tool is a practical ceiling, not a model limit. Claude can technically handle much more. But past ~60K chars, you're paying meaningfully per query and the user experience of pasting 100K chars into a textarea is poor. For larger knowledge bases — multi-section product docs, extensive policy manuals — the right answer is a proper RAG pipeline: chunk the docs, embed them, and retrieve only the relevant chunks per query. This tool demonstrates the concept; that's the production version.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Production path for a real client deployment: add a thin backend (a single serverless function works) that holds the API key, rate-limits requests, and optionally caches responses for common questions. The KB can be stored server-side so clients never see it. The system prompt, grounding rule, and model call are identical to this demo — the only thing that changes is where the API key lives.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08 — wins &amp; losses</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    <strong>Wins:</strong> Zero infrastructure for the demo. Works with any plain text KB — no preprocessing required. Claude's semantic understanding handles paraphrased questions that would defeat keyword search. Grounded by design: explicit fallback when the docs don't cover something. Cheap enough to run as a real tool, not just a demo. One file, shareable as a direct link.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <strong>Constraints:</strong> Cost scales linearly with KB size — not a problem at small scale, matters at volume. No conversation history: each question is independent, so follow-up questions don't carry context from the previous answer. API key is client-side, so it's visible in the browser's network tab — fine for a demo, not for production. No logging or analytics out of the box. Can't handle non-text content (images, tables in PDFs, charts). Beyond ~60K chars, a proper RAG pipeline is the right answer.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-08</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v0.1 live. Two inputs (KB + question), one output (answer), cost shown per query. Character counters with soft warnings at 20K chars for the KB and 500 chars for the question. Hard truncation at 60K / 1K with an injected note so the model knows input was cut.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
                     <!-- PregVoice -->
                     <div class="project">
                         <h3>PregVoice</h3>
