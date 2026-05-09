@@ -39,11 +39,7 @@
             justify-content: space-between;
         }
 
-        header h1 {
-            font-size: 1.4rem;
-            color: var(--accent-light);
-            letter-spacing: 0.05em;
-        }
+        header h1 { font-size: 1.4rem; color: var(--accent-light); letter-spacing: 0.05em; }
 
         header .subtitle {
             font-size: 0.8rem;
@@ -84,12 +80,7 @@
             gap: 12px;
         }
 
-        .api-bar label {
-            font-size: 0.75rem;
-            color: var(--muted);
-            font-family: monospace;
-            white-space: nowrap;
-        }
+        .api-bar label { font-size: 0.75rem; color: var(--muted); font-family: monospace; white-space: nowrap; }
 
         .api-bar input {
             flex: 1;
@@ -103,12 +94,7 @@
         }
 
         .api-bar input:focus { outline: none; border-color: var(--accent); }
-
-        .api-bar .api-hint {
-            font-size: 0.7rem;
-            color: var(--muted);
-            white-space: nowrap;
-        }
+        .api-bar .api-hint { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
 
         .panel {
             background: var(--surface);
@@ -137,12 +123,42 @@
             font-family: monospace;
         }
 
-        .panel-header .panel-meta {
+        .kb-meta {
             margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            font-family: monospace;
             font-size: 0.7rem;
             color: var(--muted);
-            font-family: monospace;
         }
+
+        .char-counter { font-size: 0.7rem; color: var(--muted); font-family: monospace; white-space: nowrap; }
+        .char-counter.warn { color: var(--warning); }
+        .char-counter.over { color: var(--danger); }
+
+        .kb-saved-badge {
+            color: var(--success);
+            margin-left: 8px;
+        }
+
+        .kb-clear-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-family: monospace;
+            font-size: 0.7rem;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 6px;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.2s;
+        }
+
+        .kb-clear-btn:hover { color: var(--danger); background: none; }
+
+        .panel-header .panel-meta { font-size: 0.7rem; color: var(--muted); font-family: monospace; margin-left: auto; }
 
         .panel textarea {
             width: 100%;
@@ -159,12 +175,18 @@
         .panel textarea:focus { outline: none; }
         .panel textarea::placeholder { color: var(--muted); font-style: italic; }
 
-        .kb-textarea { min-height: 280px; }
-        .question-textarea { min-height: 100px; }
+        .kb-textarea { min-height: 260px; }
+        .question-textarea { min-height: 90px; }
 
-        .char-counter { font-size: 0.65rem; color: var(--muted); font-family: monospace; white-space: nowrap; }
-        .char-counter.warn { color: var(--warning); }
-        .char-counter.over { color: var(--danger); }
+        .qigo-note {
+            padding: 9px 16px;
+            font-family: monospace;
+            font-size: 0.68rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            background: #0b1220;
+            font-style: italic;
+        }
 
         .actions {
             display: flex;
@@ -229,68 +251,96 @@
             display: none;
         }
 
-        .results {
-            display: none;
+        .conversation {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 8px;
             overflow: hidden;
         }
 
-        .results.visible { display: block; }
-
-        .results-header {
+        .conversation-header {
             background: #0b1220;
-            padding: 14px 20px;
+            padding: 12px 20px;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .results-header h2 {
+        .conversation-header h2 {
             font-size: 0.85rem;
             font-family: monospace;
             color: var(--warm);
             letter-spacing: 0.04em;
         }
 
-        .results-header .cost-note {
+        .session-stats {
             font-size: 0.7rem;
             color: var(--muted);
             font-family: monospace;
         }
 
-        .results-body { padding: 28px; }
+        .exchange { border-bottom: 1px solid var(--border); }
+        .exchange:last-child { border-bottom: none; }
 
-        .answer-text {
-            font-size: 0.95rem;
+        .exchange-q {
+            background: #0a1020;
+            padding: 12px 20px;
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: #8899cc;
+            border-bottom: 1px solid var(--border);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .exchange-q-label {
+            display: block;
+            font-size: 0.62rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+
+        .exchange-a { padding: 20px 24px; }
+
+        .exchange-a-text {
+            font-size: 0.92rem;
             line-height: 1.75;
             color: var(--text);
         }
 
-        .answer-text p { margin-bottom: 12px; }
-        .answer-text p:last-child { margin-bottom: 0; }
+        .exchange-a-text p { margin-bottom: 10px; }
+        .exchange-a-text p:last-child { margin-bottom: 0; }
 
-        .answer-actions {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+        .exchange-footer {
             display: flex;
             align-items: center;
+            gap: 12px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .exchange-cost {
+            font-size: 0.68rem;
+            color: var(--muted);
+            font-family: monospace;
         }
 
         .copy-btn {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--muted);
-            padding: 5px 14px;
+            padding: 4px 12px;
             border-radius: 4px;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             font-family: monospace;
             cursor: pointer;
             letter-spacing: 0.04em;
             transition: border-color 0.2s, color 0.2s;
+            margin-left: auto;
         }
 
         .copy-btn:hover { border-color: var(--success); color: var(--success); background: transparent; }
@@ -326,9 +376,13 @@
         <div class="panel-header">
             <span class="icon">📄</span>
             <h2>knowledge base</h2>
-            <span class="char-counter panel-meta" id="kbCounter">0 chars</span>
+            <div class="kb-meta">
+                <span class="char-counter" id="kbCounter">0 chars</span>
+                <span class="kb-saved-badge" id="kbSavedBadge" style="display:none">· saved locally</span>
+                <button class="kb-clear-btn" id="kbClearBtn" onclick="clearKb()" style="display:none">· clear</button>
+            </div>
         </div>
-        <textarea class="kb-textarea" id="knowledgeBase" placeholder="Paste your company's FAQ, help docs, or knowledge base here. Plain text works best — copy from Notion, Confluence, Zendesk, Google Docs, or anywhere.
+        <textarea class="kb-textarea" id="knowledgeBase" placeholder="Paste your company's FAQ, help docs, or knowledge base here. Plain text only — copy from Notion, Confluence, Zendesk, Google Docs, or anywhere. Structured, specific docs give better answers than vague ones.
 
 Example:
 
@@ -340,6 +394,7 @@ Standard shipping takes 3–5 business days. Express (1–2 days) is available a
 
 ## Account Access
 If you've lost access to your account, use the Forgot Password link on the login page. If you no longer have access to your registered email, contact support@company.com with a photo ID."></textarea>
+        <div class="qigo-note">quality in, quality out — structured, specific docs produce accurate answers; vague or incomplete docs produce vague or incomplete answers</div>
     </div>
 
     <div class="panel">
@@ -357,26 +412,21 @@ Example: Hi, I bought something last week and it's not right for me. Can I retur
 
     <div class="actions">
         <button id="askBtn" onclick="ask()">Ask</button>
-        <button class="btn-secondary" onclick="clearAll()">Clear</button>
+        <button class="btn-secondary" id="newChatBtn" onclick="newChat()" style="display:none">New Chat</button>
         <span class="status" id="statusText"></span>
     </div>
 
-    <div class="results" id="results">
-        <div class="results-header">
-            <h2>answer</h2>
-            <span class="cost-note" id="costNote"></span>
+    <div class="conversation" id="conversation" style="display:none">
+        <div class="conversation-header">
+            <h2>conversation</h2>
+            <span class="session-stats" id="sessionStats"></span>
         </div>
-        <div class="results-body">
-            <div class="answer-text" id="answerText"></div>
-            <div class="answer-actions">
-                <button class="copy-btn" id="copyBtn" onclick="copyAnswer()">copy answer</button>
-            </div>
-        </div>
+        <div id="exchanges"></div>
     </div>
 </main>
 
 <footer>
-    faq chatbot demo · powered by Claude Haiku · ~$0.001–$0.01 per query · no data stored
+    faq chatbot demo · powered by Claude Haiku · KB saved to localStorage · no data sent or stored externally
 </footer>
 
 <script>
@@ -384,14 +434,48 @@ Example: Hi, I bought something last week and it's not right for me. Can I retur
     const KB_HARD = 60000;
     const Q_SOFT = 500;
     const Q_HARD = 1000;
+    const HISTORY_MAX = 20; // last 10 exchanges sent to API
+    const LS_KEY = 'faqbot_kb';
 
-    let lastAnswerText = '';
+    let conversationHistory = [];
+    let sessionCost = 0;
+    let sessionExchanges = 0;
 
-    document.getElementById('knowledgeBase').addEventListener('input', function() {
-        const len = this.value.length;
+    document.addEventListener('DOMContentLoaded', function() {
+        const saved = localStorage.getItem(LS_KEY);
+        if (saved) {
+            document.getElementById('knowledgeBase').value = saved;
+            updateKbCounter();
+            showKbSaved();
+        }
+    });
+
+    function updateKbCounter() {
+        const len = document.getElementById('knowledgeBase').value.length;
         const counter = document.getElementById('kbCounter');
         counter.textContent = `${len.toLocaleString()} chars`;
-        counter.className = 'char-counter panel-meta' + (len > KB_HARD ? ' over' : len > KB_SOFT ? ' warn' : '');
+        counter.className = 'char-counter' + (len > KB_HARD ? ' over' : len > KB_SOFT ? ' warn' : '');
+    }
+
+    function showKbSaved() {
+        document.getElementById('kbSavedBadge').style.display = 'inline';
+        document.getElementById('kbClearBtn').style.display = 'inline';
+    }
+
+    function hideKbSaved() {
+        document.getElementById('kbSavedBadge').style.display = 'none';
+        document.getElementById('kbClearBtn').style.display = 'none';
+    }
+
+    document.getElementById('knowledgeBase').addEventListener('input', function() {
+        updateKbCounter();
+        if (this.value.trim()) {
+            localStorage.setItem(LS_KEY, this.value);
+            showKbSaved();
+        } else {
+            localStorage.removeItem(LS_KEY);
+            hideKbSaved();
+        }
     });
 
     document.getElementById('question').addEventListener('input', function() {
@@ -401,6 +485,13 @@ Example: Hi, I bought something last week and it's not right for me. Can I retur
         counter.className = 'char-counter panel-meta' + (len > Q_HARD ? ' over' : len > Q_SOFT ? ' warn' : '');
     });
 
+    function clearKb() {
+        document.getElementById('knowledgeBase').value = '';
+        localStorage.removeItem(LS_KEY);
+        hideKbSaved();
+        updateKbCounter();
+    }
+
     async function ask() {
         const apiKey = document.getElementById('apiKey').value.trim();
         const kb = document.getElementById('knowledgeBase').value.trim();
@@ -408,7 +499,6 @@ Example: Hi, I bought something last week and it's not right for me. Can I retur
         const errorBanner = document.getElementById('errorBanner');
         const statusText = document.getElementById('statusText');
         const askBtn = document.getElementById('askBtn');
-        const results = document.getElementById('results');
 
         errorBanner.style.display = 'none';
 
@@ -424,9 +514,12 @@ Example: Hi, I bought something last week and it's not right for me. Can I retur
             ? question.slice(0, Q_HARD) + '\n\n[Message truncated]'
             : question;
 
+        conversationHistory.push({ role: 'user', content: processedQ });
+
+        const messagesToSend = conversationHistory.slice(-HISTORY_MAX);
+
         askBtn.disabled = true;
         statusText.innerHTML = '<span class="spinner"></span> looking up answer...';
-        results.classList.remove('visible');
 
         try {
             const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -452,27 +545,38 @@ Rules:
 ## Knowledge Base
 
 ${processedKb}`,
-                    messages: [{ role: 'user', content: processedQ }]
+                    messages: messagesToSend
                 })
             });
 
             if (!response.ok) {
+                conversationHistory.pop();
                 const err = await response.json().catch(() => ({}));
                 throw new Error(err.error?.message || `API error ${response.status}`);
             }
 
             const data = await response.json();
             const answerRaw = data.content[0].text.trim();
-            lastAnswerText = answerRaw;
+
+            conversationHistory.push({ role: 'assistant', content: answerRaw });
 
             const inputTokens = data.usage?.input_tokens || Math.round((processedKb.length + processedQ.length) / 4 + 150);
             const outputTokens = data.usage?.output_tokens || Math.round(answerRaw.length / 4);
             const costUsd = ((inputTokens * 0.80) + (outputTokens * 4.00)) / 1_000_000;
-            const costStr = costUsd < 0.001 ? '< $0.001' : `~$${costUsd.toFixed(4)}`;
 
-            document.getElementById('answerText').innerHTML = renderAnswer(answerRaw);
-            document.getElementById('costNote').textContent = `${inputTokens.toLocaleString()} in · ${outputTokens} out · ${costStr}`;
-            results.classList.add('visible');
+            sessionCost += costUsd;
+            sessionExchanges += 1;
+
+            appendExchange(question, answerRaw, inputTokens, outputTokens, costUsd);
+
+            document.getElementById('question').value = '';
+            document.getElementById('qCounter').textContent = '0 chars';
+            document.getElementById('qCounter').className = 'char-counter panel-meta';
+
+            updateSessionStats();
+            document.getElementById('conversation').style.display = 'block';
+            document.getElementById('newChatBtn').style.display = 'inline-block';
+
             statusText.textContent = 'done';
 
         } catch (err) {
@@ -483,6 +587,48 @@ ${processedKb}`,
         }
     }
 
+    function appendExchange(question, answer, inputTokens, outputTokens, costUsd) {
+        const costStr = costUsd < 0.001 ? '< $0.001' : `~$${costUsd.toFixed(4)}`;
+        const answerEscaped = JSON.stringify(answer);
+
+        const el = document.createElement('div');
+        el.className = 'exchange';
+        el.innerHTML = `
+            <div class="exchange-q">
+                <span class="exchange-q-label">customer</span>${escapeHtml(question)}
+            </div>
+            <div class="exchange-a">
+                <div class="exchange-a-text">${renderAnswer(answer)}</div>
+                <div class="exchange-footer">
+                    <span class="exchange-cost">${inputTokens.toLocaleString()} in · ${outputTokens} out · ${costStr}</span>
+                    <button class="copy-btn" onclick="copyText(this, ${answerEscaped})">copy</button>
+                </div>
+            </div>`;
+
+        document.getElementById('exchanges').appendChild(el);
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function updateSessionStats() {
+        const costStr = sessionCost < 0.001 ? '< $0.001' : `~$${sessionCost.toFixed(4)}`;
+        document.getElementById('sessionStats').textContent =
+            `${sessionExchanges} exchange${sessionExchanges !== 1 ? 's' : ''} · session total: ${costStr}`;
+    }
+
+    function newChat() {
+        conversationHistory = [];
+        sessionCost = 0;
+        sessionExchanges = 0;
+        document.getElementById('exchanges').innerHTML = '';
+        document.getElementById('conversation').style.display = 'none';
+        document.getElementById('newChatBtn').style.display = 'none';
+        document.getElementById('question').value = '';
+        document.getElementById('qCounter').textContent = '0 chars';
+        document.getElementById('qCounter').className = 'char-counter panel-meta';
+        document.getElementById('errorBanner').style.display = 'none';
+        document.getElementById('statusText').textContent = '';
+    }
+
     function renderAnswer(text) {
         return text
             .split('\n\n')
@@ -491,14 +637,13 @@ ${processedKb}`,
             .join('');
     }
 
-    function copyAnswer() {
-        const btn = document.getElementById('copyBtn');
-        navigator.clipboard.writeText(lastAnswerText).then(() => {
+    function copyText(btn, text) {
+        navigator.clipboard.writeText(text).then(() => {
             btn.textContent = 'copied!';
-            setTimeout(() => btn.textContent = 'copy answer', 2000);
+            setTimeout(() => btn.textContent = 'copy', 2000);
         }).catch(() => {
             btn.textContent = 'failed';
-            setTimeout(() => btn.textContent = 'copy answer', 2000);
+            setTimeout(() => btn.textContent = 'copy', 2000);
         });
     }
 
@@ -510,19 +655,6 @@ ${processedKb}`,
 
     function escapeHtml(str) {
         return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    }
-
-    function clearAll() {
-        document.getElementById('knowledgeBase').value = '';
-        document.getElementById('question').value = '';
-        document.getElementById('kbCounter').textContent = '0 chars';
-        document.getElementById('kbCounter').className = 'char-counter panel-meta';
-        document.getElementById('qCounter').textContent = '0 chars';
-        document.getElementById('qCounter').className = 'char-counter panel-meta';
-        document.getElementById('results').classList.remove('visible');
-        document.getElementById('errorBanner').style.display = 'none';
-        document.getElementById('statusText').textContent = '';
-        lastAnswerText = '';
     }
 </script>
 
