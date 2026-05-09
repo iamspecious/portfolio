@@ -768,6 +768,30 @@
                                 </p>
                             </div>
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — debouncing localStorage writes</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Switched from saving on every keystroke to a debounced save: the write only fires 800ms after the user stops typing. A <code>beforeunload</code> listener acts as a safety net — if the tab closes before the debounce timer fires, the save happens immediately on the way out. The "saved locally" badge still appears as soon as the user types (it's not delayed), so the UX is unchanged.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — does this affect API cost? No.</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    To be direct: debouncing has zero effect on Anthropic API spend. localStorage is entirely client-side — Anthropic never sees it. The only things that drive API cost are KB size (input tokens per query), conversation history length (accumulates across turns), and how often someone hits Ask. None of those change. What debouncing does affect is browser resource usage: <code>localStorage.setItem</code> is synchronous and serialises the full KB string on the main thread on every call. With a 60K char KB and 300 keystrokes in an editing session, the old approach meant ~18MB of data serialised to disk in a few minutes — wasteful and jank-inducing on older hardware or mobile. Debouncing turns those ~300 disk writes into roughly one. Right pattern, wrong reason to expect cost savings.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v0.3 live. Debounced KB save + beforeunload safety net. API cost unchanged. Browser overhead reduced significantly on large KBs.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 

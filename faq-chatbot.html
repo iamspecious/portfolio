@@ -440,6 +440,7 @@ Example: Hi, I bought something last week and it's not right for me. Can I retur
     let conversationHistory = [];
     let sessionCost = 0;
     let sessionExchanges = 0;
+    let kbSaveTimer = null;
 
     document.addEventListener('DOMContentLoaded', function() {
         const saved = localStorage.getItem(LS_KEY);
@@ -469,12 +470,22 @@ Example: Hi, I bought something last week and it's not right for me. Can I retur
 
     document.getElementById('knowledgeBase').addEventListener('input', function() {
         updateKbCounter();
+        clearTimeout(kbSaveTimer);
         if (this.value.trim()) {
-            localStorage.setItem(LS_KEY, this.value);
             showKbSaved();
+            kbSaveTimer = setTimeout(() => {
+                localStorage.setItem(LS_KEY, document.getElementById('knowledgeBase').value);
+            }, 800);
         } else {
             localStorage.removeItem(LS_KEY);
             hideKbSaved();
+        }
+    });
+
+    window.addEventListener('beforeunload', function() {
+        const kb = document.getElementById('knowledgeBase').value;
+        if (kb.trim()) {
+            localStorage.setItem(LS_KEY, kb);
         }
     });
 
