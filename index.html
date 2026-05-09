@@ -1280,6 +1280,123 @@
                     <div class="project-block" data-category="technical">
 
                     <!-- ====================================================
+                         LOREBYSPEC CREATOR TOOL
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>LoreBySpec Creator Tool <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>May 2026 – Present</strong></p>
+                        <p>A two-mode content assistant built for my YouTube channel <strong>LoreBySpec</strong>. Toggle between <strong>Video Ideas</strong> — paste a topic or theme and get five titled angles with one-sentence hooks — and <strong>Comment Reply</strong> — paste a viewer comment and get a drafted reply in a warm, knowledgeable, lore-nerd voice. Both modes call the Anthropic API directly from the browser. One tool, one key, two workflows.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Two tools, one file</strong> — Video Ideas and Comment Reply share an API key bar and shell without needing separate pages, build steps, or navigation. The toggle is the only UI decision needed.</li>
+                                <li><strong>No proxy layer</strong> — uses Anthropic's <code>anthropic-dangerous-direct-browser-access</code> header to call the API natively from the browser. No Cloudflare Worker, no relay, no CORS gymnastics.</li>
+                                <li><strong>Structured idea cards</strong> — Video Ideas responses are parsed from the model's numbered list into discrete cards (title + hook) rather than a wall of text. Scannable and visually distinct.</li>
+                                <li><strong>Prompt-engineered voice</strong> — the Comment Reply system prompt bans sycophantic openers ("great question!") by name, and anchors the persona specifically as LoreBySpec rather than a generic assistant.</li>
+                                <li><strong>Zero storage, zero friction</strong> — session-only API key, no login, no account, no database. Paste key, write prompt, get output.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Requires your own API key</strong> — no shared backend means users need an Anthropic account. One-time setup, but it's real friction for anyone who isn't already in the API ecosystem.</li>
+                                <li><strong>Output parser is format-dependent</strong> — the Video Ideas renderer relies on the model returning a numbered list in exactly the expected shape. If Claude adds preamble or changes structure, the parser falls back to raw text. Proper structured output (JSON mode) would fix this.</li>
+                                <li><strong>Comment Reply has no video context</strong> — the tool doesn't know which video the comment is on, so the reply is lore-nerd in tone but can't be video-specific. A URL input (via Jina or similar) would let it read the video description or transcript.</li>
+                                <li><strong>No idea history</strong> — refresh the page and everything clears. There's no way to compare two idea runs or revisit last session's output without a persistence layer.</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Haiku 4.5</span>
+                            <span class="tech-tag">Direct browser API access</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">GitHub Pages</span>
+                        </p>
+                        <a class="tool-link-badge" href="creator-tool.html" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — dated as we go</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — initial build</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Same single-file, no-backend pattern as the Lore Checker — static HTML, GitHub Pages, bring-your-own API key. Both tools are for the same channel so they share visual DNA; different enough in layout to feel like their own thing.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Combined both modes (Video Ideas, Comment Reply) into a single file rather than two separate tools. They're lightweight, share the same API key, and both serve the same pre-production workflow. A toggle is cheaper than a navigation layer.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Used <code>anthropic-dangerous-direct-browser-access: true</code> to call the Anthropic API directly from the browser, skipping the Cloudflare Worker proxy used in the Lore Checker. This tool doesn't need to fetch external URLs (no Jina, no wiki pages), so there's no reason to route through a relay. Simpler and one fewer moving part.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Fixed model at Haiku 4.5 — no model selector. Both tasks (brainstorming titles, drafting short replies) are well within Haiku's capability. Adding a Sonnet toggle adds UI complexity without a meaningful quality difference for 2–5 sentence outputs.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Video Ideas prompt specifies exactly 5 ideas in a strict numbered format: <code>N. [Title]\nHook: [sentence]</code>. The renderer parses this into cards. Chose structured plain text over JSON because the output is simple enough and the formatting instruction is clear — JSON mode adds a layer for no gain here.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Comment Reply system prompt explicitly bans sycophantic openers by name ("great question", "love this", "so glad you asked"). Without this, Claude defaults to them. Named the persona as LoreBySpec rather than "a YouTube creator" to anchor the voice more specifically.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Stored the last reply text in a <code>lastReplyText</code> module-level variable rather than encoding it into the <code>onclick</code> attribute via <code>JSON.stringify</code>. The attribute approach works but gets fragile with long replies or special characters; a variable is clean and safe.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v1.0 live. Video Ideas renders five idea cards (title in gold, hook in italic). Comment Reply renders a bordered panel with a copy button. Parser falls back to raw pre-formatted text if the model deviates from expected structure. API key validation strips non-ASCII before any header is set — same fix as the Lore Checker.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    </div><!-- /project-block: Creator Tool -->
+
+                    <div class="project-block" data-category="technical">
+
+                    <!-- ====================================================
                          SUPPORT TICKET TRIAGE — AI TOOL
                     ===================================================== -->
                     <div class="project">

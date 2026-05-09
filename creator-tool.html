@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Tool — LoreBySpec</title>
+    <style>
+        :root {
+            --bg: #0a0a14;
+            --surface: #111122;
+            --border: #2a2a4a;
+            --accent: #7b5ea7;
+            --accent-light: #a07fd4;
+            --gold: #c9a84c;
+            --text: #ddd8f0;
+            --muted: #7a7a9a;
+            --danger: #c0392b;
+            --success: #27ae60;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d0d22 0%, #1a1040 50%, #0d0d22 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 { font-size: 1.4rem; color: var(--gold); letter-spacing: 0.05em; }
+        header .subtitle { font-size: 0.8rem; color: var(--muted); margin-top: 4px; font-family: monospace; }
+
+        header a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-family: monospace;
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        header a:hover { color: var(--text); border-color: var(--accent); }
+
+        main { flex: 1; max-width: 760px; margin: 0 auto; padding: 40px 24px; width: 100%; }
+
+        /* API bar */
+        .api-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .api-bar label { font-size: 0.75rem; color: var(--muted); font-family: monospace; white-space: nowrap; }
+        .api-bar input {
+            flex: 1;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+        .api-bar input:focus { outline: none; border-color: var(--accent); }
+        .api-bar .api-hint { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
+
+        /* Mode toggle */
+        .mode-toggle {
+            display: flex;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 24px;
+            gap: 4px;
+        }
+        .mode-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.03em;
+            transition: background 0.2s, color 0.2s;
+        }
+        .mode-btn.active { background: var(--accent); color: white; }
+        .mode-btn:hover:not(.active) { color: var(--text); background: #1a1a30; }
+
+        /* Input panel */
+        .input-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .input-panel-header {
+            background: #16162e;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .input-panel-header .icon { font-size: 1rem; }
+        .input-panel-header h2 {
+            font-size: 0.85rem;
+            font-weight: normal;
+            color: var(--accent-light);
+            letter-spacing: 0.04em;
+            font-family: monospace;
+        }
+        .input-panel textarea {
+            width: 100%;
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            padding: 18px 20px;
+            font-family: 'Georgia', serif;
+            font-size: 0.92rem;
+            line-height: 1.75;
+            resize: vertical;
+            min-height: 140px;
+        }
+        .input-panel textarea:focus { outline: none; }
+        .input-panel textarea::placeholder { color: var(--muted); font-style: italic; }
+
+        /* Actions */
+        .actions { display: flex; gap: 12px; align-items: center; margin-bottom: 32px; }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.03em;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover { background: var(--accent-light); }
+        .btn-primary:disabled { background: var(--border); cursor: not-allowed; opacity: 0.6; }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 11px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent); color: var(--text); }
+
+        .status { font-size: 0.78rem; color: var(--muted); font-family: monospace; margin-left: auto; }
+
+        /* Error banner */
+        .error-banner {
+            background: #2a0d0d;
+            border: 1px solid var(--danger);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 0.83rem;
+            color: #e07070;
+            font-family: monospace;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 12px; height: 12px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent-light);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Results */
+        .results { display: none; }
+        .results.visible { display: block; }
+
+        /* Video idea cards */
+        .ideas-list { display: flex; flex-direction: column; gap: 14px; }
+
+        .idea-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px 22px;
+            transition: border-color 0.2s;
+        }
+        .idea-card:hover { border-color: var(--accent); }
+
+        .idea-number {
+            font-size: 0.65rem;
+            font-family: monospace;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .idea-title {
+            font-size: 1.05rem;
+            color: var(--gold);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        .idea-hook {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.65;
+            font-style: italic;
+            opacity: 0.85;
+        }
+
+        /* Reply output */
+        .reply-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .reply-panel-header {
+            background: #16162e;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .reply-panel-header h2 {
+            font-size: 0.85rem;
+            font-family: monospace;
+            color: var(--gold);
+            letter-spacing: 0.04em;
+        }
+        .reply-text {
+            padding: 22px 24px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text);
+            white-space: pre-wrap;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-family: monospace;
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .copy-btn:hover { border-color: var(--accent); color: var(--text); }
+        .copy-btn.copied { border-color: var(--success); color: var(--success); }
+
+        /* Raw fallback */
+        .raw-output {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 22px 24px;
+            font-size: 0.9rem;
+            line-height: 1.75;
+            white-space: pre-wrap;
+            color: var(--text);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>Creator Tool</h1>
+        <div class="subtitle">LoreBySpec — video ideas &amp; comment replies</div>
+    </div>
+    <a href="index.html">&#8592; portfolio</a>
+</header>
+
+<main>
+    <div class="api-bar">
+        <label>ANTHROPIC API KEY</label>
+        <input type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
+        <span class="api-hint">session only &middot; never stored</span>
+    </div>
+
+    <div class="mode-toggle">
+        <button class="mode-btn active" id="btnVideoIdeas" onclick="setMode('videoIdeas')">Video Ideas</button>
+        <button class="mode-btn" id="btnCommentReply" onclick="setMode('commentReply')">Comment Reply</button>
+    </div>
+
+    <div id="videoIdeasUI">
+        <div class="input-panel">
+            <div class="input-panel-header">
+                <span class="icon">&#10022;</span>
+                <h2>topic or theme</h2>
+            </div>
+            <textarea id="topicInput" placeholder="e.g. Ventus and Roxas — their connection, what it means for Sora's identity, and why the fandom keeps getting it wrong…" rows="6"></textarea>
+        </div>
+    </div>
+
+    <div id="commentReplyUI" style="display:none;">
+        <div class="input-panel">
+            <div class="input-panel-header">
+                <span class="icon">&#10022;</span>
+                <h2>viewer comment</h2>
+            </div>
+            <textarea id="commentInput" placeholder="Paste the viewer comment here…" rows="6"></textarea>
+        </div>
+    </div>
+
+    <div class="error-banner" id="errorBanner"></div>
+
+    <div class="actions">
+        <button class="btn-primary" id="submitBtn" onclick="submit()">Generate Ideas</button>
+        <button class="btn-secondary" onclick="clearAll()">Clear</button>
+        <span class="status" id="statusText"></span>
+    </div>
+
+    <div class="results" id="results"></div>
+</main>
+
+<footer>
+    built for LoreBySpec &middot; powered by Claude Haiku 4.5 &middot; no data stored
+</footer>
+
+<script>
+    let currentMode = 'videoIdeas';
+    let lastReplyText = '';
+
+    function setMode(mode) {
+        currentMode = mode;
+        document.getElementById('videoIdeasUI').style.display = mode === 'videoIdeas' ? '' : 'none';
+        document.getElementById('commentReplyUI').style.display = mode === 'commentReply' ? '' : 'none';
+        document.getElementById('btnVideoIdeas').classList.toggle('active', mode === 'videoIdeas');
+        document.getElementById('btnCommentReply').classList.toggle('active', mode === 'commentReply');
+        document.getElementById('submitBtn').textContent = mode === 'videoIdeas' ? 'Generate Ideas' : 'Draft Reply';
+        clearResults();
+    }
+
+    function clearResults() {
+        const results = document.getElementById('results');
+        results.innerHTML = '';
+        results.classList.remove('visible');
+        document.getElementById('errorBanner').style.display = 'none';
+        document.getElementById('statusText').textContent = '';
+    }
+
+    function clearAll() {
+        document.getElementById('topicInput').value = '';
+        document.getElementById('commentInput').value = '';
+        clearResults();
+    }
+
+    function showError(msg) {
+        const banner = document.getElementById('errorBanner');
+        banner.textContent = msg;
+        banner.style.display = 'block';
+    }
+
+    async function submit() {
+        const rawKey = document.getElementById('apiKey').value;
+        const apiKey = rawKey.replace(/[^\x20-\x7E]/g, '').trim();
+        const submitBtn = document.getElementById('submitBtn');
+        const statusText = document.getElementById('statusText');
+        const results = document.getElementById('results');
+
+        document.getElementById('errorBanner').style.display = 'none';
+
+        if (!apiKey) return showError('Enter your Anthropic API key above.');
+        if (!apiKey.startsWith('sk-ant-')) return showError('API key looks wrong — should start with sk-ant-. Clear the field and re-paste.');
+
+        const inputEl = currentMode === 'videoIdeas'
+            ? document.getElementById('topicInput')
+            : document.getElementById('commentInput');
+        const userContent = inputEl.value.trim();
+
+        if (!userContent) {
+            return showError(currentMode === 'videoIdeas'
+                ? 'Paste a topic or theme to generate ideas for.'
+                : 'Paste a viewer comment to reply to.');
+        }
+
+        submitBtn.disabled = true;
+        results.innerHTML = '';
+        results.classList.remove('visible');
+        statusText.innerHTML = '<span class="spinner"></span> thinking…';
+
+        const systemPrompts = {
+            videoIdeas: `You are a content strategist for LoreBySpec, a Kingdom Hearts theory and analysis YouTube channel. Generate video ideas that go beyond surface-level recaps — the audience is lore-literate and hungry for angles they haven't considered.
+
+Given a topic or theme, return exactly 5 video angle ideas. For each, provide:
+- A YouTube video title (6–12 words, specific and curiosity-driven — not clickbait, but genuinely compelling)
+- A one-sentence hook explaining the unique angle, the insight it surfaces, or why a KH lore audience would click
+
+Format your response exactly like this, with no preamble or closing remarks:
+
+1. [Title]
+Hook: [One sentence]
+
+2. [Title]
+Hook: [One sentence]
+
+3. [Title]
+Hook: [One sentence]
+
+4. [Title]
+Hook: [One sentence]
+
+5. [Title]
+Hook: [One sentence]`,
+
+            commentReply: `You are LoreBySpec, a Kingdom Hearts YouTube creator known for warm, thorough lore analysis. You're drafting a reply to a viewer comment.
+
+Write a reply that is:
+- Genuine and warm — like talking to a fellow fan who cares about the lore
+- Knowledgeable — reference specific lore details, games, or moments when it adds value
+- Concise: 2–4 sentences
+- Never sycophantic — do not open with "great question", "love this", "so glad you asked", or similar
+- Written in first person as yourself
+
+Respond with only the reply text. No labels, no quotation marks, no meta-commentary.`
+        };
+
+        const maxTokens = { videoIdeas: 800, commentReply: 300 };
+
+        try {
+            const response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'x-api-key': apiKey,
+                    'anthropic-version': '2023-06-01',
+                    'anthropic-dangerous-direct-browser-access': 'true',
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'claude-haiku-4-5-20251001',
+                    max_tokens: maxTokens[currentMode],
+                    system: systemPrompts[currentMode],
+                    messages: [{ role: 'user', content: userContent }]
+                })
+            });
+
+            if (!response.ok) {
+                const err = await response.json().catch(() => ({}));
+                throw new Error(err.error?.message || `API error ${response.status}`);
+            }
+
+            const data = await response.json();
+            const text = data.content[0].text;
+
+            results.innerHTML = currentMode === 'videoIdeas' ? renderIdeas(text) : renderReply(text);
+            results.classList.add('visible');
+            statusText.textContent = 'done · claude haiku 4.5';
+
+        } catch (err) {
+            showError(err.message);
+            statusText.textContent = '';
+        } finally {
+            submitBtn.disabled = false;
+        }
+    }
+
+    function renderIdeas(text) {
+        const lines = text.trim().split('\n').filter(l => l.trim());
+        const ideas = [];
+        let current = null;
+
+        for (const line of lines) {
+            const titleMatch = line.match(/^(\d+)\.\s+(.+)/);
+            const hookMatch = line.match(/^Hook:\s+(.+)/i);
+            if (titleMatch) {
+                if (current) ideas.push(current);
+                current = { num: titleMatch[1], title: titleMatch[2].trim(), hook: '' };
+            } else if (hookMatch && current) {
+                current.hook = hookMatch[1].trim();
+            }
+        }
+        if (current) ideas.push(current);
+
+        if (!ideas.length) {
+            return `<div class="raw-output">${escapeHtml(text)}</div>`;
+        }
+
+        return `<div class="ideas-list">${ideas.map(idea => `
+            <div class="idea-card">
+                <div class="idea-number">idea ${escapeHtml(idea.num)} of ${ideas.length}</div>
+                <div class="idea-title">${escapeHtml(idea.title)}</div>
+                <div class="idea-hook">${escapeHtml(idea.hook)}</div>
+            </div>`).join('')}</div>`;
+    }
+
+    function renderReply(text) {
+        lastReplyText = text.trim();
+        return `<div class="reply-panel">
+            <div class="reply-panel-header">
+                <h2>drafted reply</h2>
+                <button class="copy-btn" id="copyBtn" onclick="copyReply()">copy</button>
+            </div>
+            <div class="reply-text">${escapeHtml(lastReplyText)}</div>
+        </div>`;
+    }
+
+    function copyReply() {
+        navigator.clipboard.writeText(lastReplyText).then(() => {
+            const btn = document.getElementById('copyBtn');
+            btn.textContent = 'copied ✓';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+    }
+
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+</script>
+
+</body>
+</html>
