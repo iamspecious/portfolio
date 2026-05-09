@@ -1301,16 +1301,18 @@
                             <strong>Constraints</strong>
                             <ul>
                                 <li><strong>Requires your own API key</strong> — no shared backend means users need an Anthropic account. One-time setup, but it's real friction for anyone who isn't already in the API ecosystem.</li>
-                                <li><strong>Output parser is format-dependent</strong> — the Video Ideas renderer relies on the model returning a numbered list in exactly the expected shape. If Claude adds preamble or changes structure, the parser falls back to raw text. Proper structured output (JSON mode) would fix this.</li>
-                                <li><strong>Comment Reply has no video context</strong> — the tool doesn't know which video the comment is on, so the reply is lore-nerd in tone but can't be video-specific. A URL input (via Jina or similar) would let it read the video description or transcript.</li>
-                                <li><strong>No idea history</strong> — refresh the page and everything clears. There's no way to compare two idea runs or revisit last session's output without a persistence layer.</li>
+                                <li><strong>Jina description fetch is best-effort</strong> — YouTube is heavily JavaScript-rendered, so Jina may return partial content or time out on some videos. The tool degrades gracefully (title-only, or no video context) rather than blocking, but a dedicated YouTube Data API integration would be more reliable.</li>
+                                <li><strong>No per-idea copy buttons</strong> — individual idea titles and hooks aren't individually copyable yet. Worth adding if this becomes a daily-use workflow tool rather than a brainstorm aid.</li>
                             </ul>
                         </div>
 
                         <p style="margin-top: 10px;">
                             <span class="tech-tag">HTML/CSS/JS</span>
                             <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Tool Use / Structured Output</span>
                             <span class="tech-tag">Haiku 4.5</span>
+                            <span class="tech-tag">YouTube oEmbed</span>
+                            <span class="tech-tag">Jina Reader</span>
                             <span class="tech-tag">Direct browser API access</span>
                             <span class="tech-tag">Client-side only</span>
                             <span class="tech-tag">GitHub Pages</span>
@@ -1384,6 +1386,54 @@
                                 <p>
                                     <span class="tag tag-done">Done</span>
                                     v1.0 live. Video Ideas renders five idea cards (title in gold, hook in italic). Comment Reply renders a bordered panel with a copy button. Parser falls back to raw pre-formatted text if the model deviates from expected structure. API key validation strips non-ASCII before any header is set — same fix as the Lore Checker.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — v2 iteration</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Two constraints from v1 were worth fixing immediately: the text parser for Video Ideas was brittle against model formatting changes, and Comment Reply had no knowledge of which video the comment was on — making it generic lore-nerd rather than video-specific.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    Replaced the Video Ideas text parser with Claude's tool use API. Defining a JSON schema and forcing <code>tool_choice: {type: "tool"}</code> means the model returns structured data regardless of how it phrases the response. No more numbered-list parsing, no fallback needed. Every field is validated individually with a specific error message if missing.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Added a YouTube URL field to Comment Reply. Fetches video title via YouTube's oEmbed endpoint (free, no key, CORS-enabled) and description excerpt via Jina Reader. Both are non-fatal: oEmbed failure = no video context at all, Jina failure = title-only context. The system prompt forks based on what was retrieved. A "video context used" tag appears on the reply panel so it's clear when the context was applied.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Added a stage log panel that shows each fetch and API step as it runs, with per-stage ✓/✗ states. Replaces silent failures with visible progress — you can see exactly where a fetch degraded and why, rather than getting an unexpected result with no explanation.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Removed "no session history" from constraints after reviewing whether it was actually a limitation. It isn't — each interaction is self-contained (video + comment → reply, topic → ideas). There's nothing to compare across sessions and nothing that would improve with persistence. It was a reflexive constraint, not a real one.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v2.0 live. Structured output via tool use for Video Ideas. YouTube URL input with oEmbed + Jina context for Comment Reply. Stage-by-stage error handling with specific user-facing messages at every failure point. Non-fatal fetches degrade gracefully rather than blocking.
                                 </p>
                             </div>
 
