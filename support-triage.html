@@ -312,6 +312,8 @@
         .model-option .model-price { font-size: 0.68rem; color: var(--muted); margin-left: 4px; }
         .model-option:has(input:checked) .model-price { color: var(--accent-light); }
         .model-rec { font-size: 0.65rem; background: #0d2e1a; color: #2dc653; padding: 1px 6px; border-radius: 3px; font-family: monospace; }
+        .model-auto-label { font-size: 0.65rem; color: var(--muted); font-family: monospace; margin-left: 2px; }
+        .model-option:has(input:checked) .model-auto-label { color: var(--accent-light); }
         .model-auto { font-size: 0.65rem; background: #2e240d; color: var(--warning); padding: 1px 6px; border-radius: 3px; font-family: monospace; display: none; margin-left: auto; }
 
         .char-counter {
@@ -459,7 +461,7 @@
         <div class="panel-header">
             <span class="icon">📩</span>
             <h2>customer message</h2>
-            <span class="char-counter" id="charCounter">0 / 3,000</span>
+            <span class="char-counter" id="charCounter">0 / 5,000</span>
         </div>
         <textarea id="message" placeholder="Paste anything — a customer message, an error log, a stack trace, or a support thread transcript. Real, anonymised, or fabricated.
 
@@ -474,12 +476,13 @@ Logs work too: TypeError: Cannot read properties of undefined (reading 'user') a
             <input type="radio" name="model" value="claude-haiku-4-5-20251001" checked>
             <span class="model-name">Haiku 4.5</span>
             <span class="model-price" id="priceHaiku">~0.20¢</span>
-            <span class="model-rec">recommended</span>
+            <span class="model-rec">recommended · under 5,000 chars</span>
         </label>
         <label class="model-option">
             <input type="radio" name="model" value="claude-sonnet-4-6">
             <span class="model-name">Sonnet 4.6</span>
             <span class="model-price" id="priceSonnet">~0.60¢</span>
+            <span class="model-auto-label">over 5,000 chars · up to 10,000</span>
         </label>
         <span class="model-auto" id="modelAuto">auto-switched — input over 5k</span>
     </div>
@@ -552,6 +555,12 @@ Logs work too: TypeError: Cannot read properties of undefined (reading 'user') a
         radio.addEventListener('change', function() {
             autoSwitched = false;
             document.getElementById('modelAuto').style.display = 'none';
+            const len = document.getElementById('message').value.length;
+            const hardLimit = this.value === 'claude-sonnet-4-6' ? SONNET_HARD : HAIKU_HARD;
+            const counter = document.getElementById('charCounter');
+            counter.textContent = `${len.toLocaleString()} / ${hardLimit.toLocaleString()}`;
+            counter.className = 'char-counter' + (len > hardLimit ? ' over' : len > SOFT_LIMIT ? ' warn' : '');
+            updatePrices();
         });
     });
 
@@ -573,7 +582,7 @@ Logs work too: TypeError: Cannot read properties of undefined (reading 'user') a
 
         const hardLimit = sonnet.checked ? SONNET_HARD : HAIKU_HARD;
         const counter = document.getElementById('charCounter');
-        counter.textContent = `${len.toLocaleString()} / ${SOFT_LIMIT.toLocaleString()}`;
+        counter.textContent = `${len.toLocaleString()} / ${hardLimit.toLocaleString()}`;
         counter.className = 'char-counter' + (len > hardLimit ? ' over' : len > SOFT_LIMIT ? ' warn' : '');
 
         updatePrices();
