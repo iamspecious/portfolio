@@ -1016,21 +1016,91 @@
 
 
     <!-- ═══════════════════════════════════════
-         DIGITAL TEST RESEARCH
+         DIGITAL TEST RESEARCH — CONFIRMED FINDINGS
     ════════════════════════════════════════ -->
     <div class="section">
-        <div class="section-label">Digital Pregnancy Test Internals — Research Thread</div>
+        <div class="section-label">Clearblue Digital — Confirmed Internals</div>
 
-        <p>Clearblue Digital tests are a small embedded system in a plastic casing. Our working hypothesis: the gap between what they do and what they could do for a blind user is not a full redesign — it's an output modality addition.</p>
+        <p>Multiple independent teardowns (Foone/Hackaday 2020, wemakethings.net 2014, and others) have documented the PCB in detail. We no longer need to speculate about what's inside.</p>
 
-        <h2>What we know</h2>
-        <p><strong>Inside the reading stick:</strong> A standard lateral flow strip reads hCG concentration. An internal optical sensor reads the strip result. A microcontroller processes this and drives an LCD panel. A battery powers the system for the ~6-minute display window.</p>
-        <p><strong>What we don't yet know:</strong> Which MCU is used, whether it has unused GPIO pins, what the firmware architecture looks like, whether the firmware is read-protected, and whether the manufacturer has any accessibility roadmap or interest in a partnership.</p>
+        <h2>What's on the PCB</h2>
+        <p><strong>Optical system:</strong> 3–4 red/infrared LEDs illuminate the test strip from below. 1–2 phototransistors sit between them, measuring reflected light intensity from the strip lines. A plastic light baffle prevents direct LED-to-sensor coupling — the sensor only reads reflected light. The Weeks Indicator variant quantifies hCG level from the analogue intensity of the reflected signal, not just line presence or absence.</p>
+        <p><strong>Display:</strong> A small segment LCD — not dot-matrix or OLED. Displays "Pregnant" / "Not Pregnant" in text segments plus a Smart Countdown progress bar. The positive result is held on screen for up to one month; negative for approximately 24 hours. Both are firmware timers running in MCU HALT mode, drawing microamp-level current. No separate discrete timing hardware exists.</p>
+        <p><strong>Battery:</strong> Either a single <code>CR1616</code> lithium coin cell (3V, ~55 mAh) or two <code>LR44</code> alkaline cells in series (~3V, ~190 mAh) depending on variant. A passive piezo buzzer playing a short result beep would consume approximately 5–15 mC — less than 0.03% of the CR1616's capacity. Power is not the constraint.</p>
 
-        <h2>Three research paths</h2>
-        <p><strong>Hardware path:</strong> If the MCU has spare GPIO and program memory — common in cost-optimised embedded designs — a piezo buzzer or small speaker can be added with a firmware change. This is a hardware revision, not a redesign. Significantly shorter path to market.</p>
-        <p><strong>Parallel MCU path:</strong> If the original firmware is locked, a small secondary microcontroller (attached externally or embedded in an accessory) reads the LCD output optically and drives audio independently. No modification of the original system required. Avoids any firmware IP issues.</p>
-        <p><strong>Partnership path:</strong> Clearblue (Procter &amp; Gamble) and other manufacturers have accessibility and CSR teams. A working prototype and a documented user need is a credible starting point for a licensed audio edition. This is not a long shot — accessibility features in consumer products are increasingly a regulatory expectation, not a luxury.</p>
+        <h2>The MCU — and the finding that changes everything</h2>
+        <p>The microcontroller is confirmed across multiple teardowns as either the <strong>Holtek HT48C06</strong> or <strong>Holtek HT48R065B</strong>. Neither is a custom ASIC — both are standard off-the-shelf 8-bit OTP parts with full public datasheets.</p>
+
+        <div class="problem-block" style="border-left-color: var(--accent2);">
+            <p><strong>The HT48C06 has native buzzer drive pins built into the silicon.</strong></p>
+            <p>Pins PB0 and PB1 are a dedicated complementary buzzer driving pair with a built-in programmable frequency divider (PFD). Connecting a passive piezo element to these pins requires no external driver transistor and no additional circuitry. The hardware to make the stick beep on a result is already specced into the chip that is already inside the device.</p>
+            <p>The reason Clearblue Digital makes no sound is not a hardware limitation. It is a product decision.</p>
+        </div>
+
+        <h2>What OTP means in practice</h2>
+        <p>OTP stands for one-time programmable. The firmware is burned into the chip at manufacture and cannot be read out or overwritten. Any third party — or SPD themselves for a new SKU — would need to write replacement firmware from scratch. The optical sensing algorithm, the threshold logic, the countdown timing: all of it would need to be reverse engineered and reimplemented. This is not impossible, but it is a significant engineering undertaking.</p>
+        <p>Some units use a COB (chip-on-board) package where the MCU die is encapsulated in an epoxy blob. In these variants the chip cannot be physically removed or identified without destroying the board — specifically designed to prevent modification.</p>
+
+        <h2>The real constraint: physical space</h2>
+        <p>The stick enclosure is moulded to extremely tight tolerances. A passive piezo disc (even a 10mm diameter, 0.3mm thick SMD type) adds physical volume that does not currently exist inside the stick. Any audio addition to an existing Clearblue Digital reading stick requires a new enclosure revision — new injection moulding tooling. The electronics are not the blocker. The plastic is.</p>
+
+        <h2>Three paths — updated assessment</h2>
+        <p><strong>Hardware modification (third party):</strong> Technically possible in principle — the chip has the buzzer pins — but OTP firmware means the sensing logic must be rewritten from scratch, COB variants cannot be touched, and the enclosure must be redesigned. Not a hobbyist project. A significant embedded systems engineering effort with regulatory complications for any commercial product.</p>
+        <p><strong>Parallel MCU path:</strong> A small secondary microcontroller reads the LCD segment outputs optically and drives audio independently, without touching the original firmware. Avoids the OTP problem. Still requires enclosure modification to accommodate the extra electronics. The most realistic third-party hardware path.</p>
+        <p><strong>Manufacturer partnership (recommended):</strong> SPD/P&amp;G holds the cleared IP, manufacturing relationships, and existing 510(k) submissions. A new SKU — same strip, same optical reader, new enclosure with a speaker cavity, new firmware using the buzzer pins already in the chip — is the cleanest path. The incremental BOM cost of a passive piezo in mass production is approximately £0.10–0.30. Enclosure tooling change and firmware rewrite are one-time costs. The regulatory path is a new 510(k) with the existing Clearblue system as a strong predicate.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         ACCESSIBLE PREGNANCY TEST LANDSCAPE
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Existing Accessible Pregnancy Tests — What's Already Been Tried</div>
+
+        <p>We are not the first people to work on this problem. Three significant prior efforts are documented — and one of them directly challenges our audio-first instinct in a way we have to take seriously.</p>
+
+        <h2>RNIB Accessible Pregnancy Test — The &amp; Partnership London, 2020</h2>
+        <p>The RNIB commissioned a prototype in 2020. The design team conducted user research with blind and visually impaired people before building anything. Their finding changed the output modality entirely: <strong>blind users did not want audio output.</strong></p>
+        <p>The reason: any tone or voice has emotional valence. A beep sounds either positive or negative. A spoken result — however clinically framed — carries an emotional register. Users taking the test are often hoping for a specific outcome. They did not want a machine to telegraph that outcome through tone before they had a moment to process it themselves.</p>
+        <p>The RNIB prototype used <strong>tactile output</strong> — a mechanical button that physically raises when the result is positive. Emotionally neutral. Physically unambiguous. No sound, no screen. The prototype was never commercialised.</p>
+
+        <h2>APT — Accessible Pregnancy Test, James Dyson Award 2022</h2>
+        <p>The APT design reached the same conclusion independently. The result is communicated via <strong>haptic vibration</strong>: one pulse for negative, two pulses for positive. No audio. The privacy and emotional neutrality reasoning matches the RNIB finding exactly. The design won the James Dyson Award in 2022 and remains at prototype stage.</p>
+
+        <h2>AMY — University of Limerick, Universal Design Grand Challenge 2025</h2>
+        <p>AMY takes a different approach entirely — it is a saliva-based (not urine/hCG) test that uses <strong>NFC tap to phone</strong>. The phone's existing screen reader (VoiceOver or TalkBack) reads the result aloud. Audio output is delegated to infrastructure the user already has and has already configured to their preference. AMY won the Universal Design Grand Challenge in 2025.</p>
+
+        <h2>What this means for PregVoice</h2>
+        <div class="problem-block" style="border-left-color: var(--warm);">
+            <p><strong>The RNIB finding directly challenges our audio-first design. We cannot ignore it.</strong></p>
+            <p>If the most thorough user research in this space found that blind users prefer tactile or haptic output over audio — specifically because audio has emotional valence — we need to take that seriously before we build anything. Our existing tap-to-hear model partially addresses this: the user controls the moment they receive the result rather than having it announced at the machine's timing. But "audio on demand" is still audio, and the RNIB finding suggests some users may not want it at all regardless of timing.</p>
+            <p><strong>Revised position:</strong> Haptic output is not a fallback — it is a first-class output modality, and for some users it will be the preferred primary mode. The design must support haptic-only use as a complete, uncompromised experience. Community research (which we have not yet done) will determine whether the RNIB finding generalises or is specific to their user group. We do not design around this finding before doing our own research.</p>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         PATENT LANDSCAPE & REGULATORY
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Patent Landscape &amp; Regulatory Path</div>
+
+        <h2>SPD/Clearblue patent portfolio</h2>
+        <p>SPD Swiss Precision Diagnostics GmbH (the P&amp;G entity behind Clearblue) holds patents covering the optical reader mechanism, the immunoassay system, the digital display integration, and the product industrial design. Key grants include WO2016156981A1 (digital optical reader) and US20150094227A1 (Weeks Indicator quantification).</p>
+        <p><strong>SPD holds no patent covering audio output from a pregnancy test.</strong> This is a gap in their portfolio. It means the concept is not legally blocked from their side — but it also means anyone pursuing audio output (including SPD) needs to assess the third-party patent below.</p>
+
+        <h2>Third-party audio patent: WO2014158850 / AU2014241791B2</h2>
+        <p>"Diagnostic Test Device with Audible Feedback" — granted patent, not assigned to SPD. This patent describes a lateral flow assay device (explicitly including pregnancy tests) with an audio output component: an audio chip with stored digitised speech and a microcontroller that signals the chip to play an audible result. It covers both a beep/tone result signal and a spoken word announcement.</p>
+        <p><strong>This is a freedom-to-operate concern for anyone adding audio to a lateral flow test reader</strong> — including our Layer 3 standalone reader device, and including SPD if they pursue a licensed audio edition. A freedom-to-operate analysis is required before any hardware with audio output on a lateral flow result is commercialised. This does not affect the smartphone Layer 1 (which is not a lateral flow device).</p>
+
+        <h2>Regulatory classification</h2>
+        <p><strong>FDA (United States):</strong> Clearblue Digital is Class II, product code LCX, regulated under 21 CFR 862.1155. The complete kit — strip, sampler, and electronic reader — is cleared under a single 510(k) submission. Adding audio output to the reader is a user interface change to a cleared Class II IVD — this requires a new 510(k) submission. Estimated regulatory timeline: 12–24 months. Estimated cost: $250K–$1M depending on clinical data required. SPD holds clearances K060128, K200913, K213379, and others.</p>
+        <p><strong>EU (IVDR):</strong> OTC hCG pregnancy tests are Class B under EU 2017/746 (IVDR Annex II and Rule 4). Class B requires Notified Body involvement. Adding audio would require updating the technical documentation and CE certificate via the Notified Body.</p>
+        <p><strong>For PregVoice specifically:</strong> Our smartphone Layer 1 is an accessibility reading aid, not a modification to the test itself — it does not fall under these regulatory paths. Layer 3 (standalone reader accessory) sits in the same "reads visual output of completed test" category, but if designed to work with a cleared lateral flow device, it may attract regulatory scrutiny as an accessory to that device. Legal review before any Layer 3 commercialisation is required.</p>
+
+        <h2>Manufacturer entry point</h2>
+        <p>The right entry point for a partnership conversation is the <strong>Clearblue Innovation Centre, Bedford, UK</strong> (Stannard Way, Priory Business Park, Bedford MK44 3UP) — SPD's primary R&amp;D facility. P&amp;G has a documented accessibility commitments programme and disability inclusion function within their ESG structure. Engaging via that channel may open a faster route than a cold commercial approach.</p>
+        <p>The RNIB's 2020 prototype generated significant press. Clearblue's team is almost certainly aware of the unmet need. The question is whether the 510(k) regulatory cost and niche SKU economics make a business case. A compelling prototype and quantified market size data strengthen that conversation significantly.</p>
     </div>
 
 
@@ -1172,6 +1242,72 @@
                 Draft haptic patterns established: long-short-short (negative), short-short-long (positive), six rapid (inconclusive), three long (error). Rationale: simple enough to learn once, distinctive enough not to misread under stress, compatible with standard phone vibration APIs. Pending validation with blind and low-vision community members before finalising.</p>
             </div>
 
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — teardown research complete: MCU confirmed</span>
+                <p><span class="tag tag-done">Done</span>
+                Multiple independent teardowns confirm the Clearblue Digital reading stick contains a Holtek HT48C06 or HT48R065B — a standard off-the-shelf 8-bit OTP MCU, not a custom ASIC. Full public datasheets available. This is a significant finding: it means the chip can be sourced, studied, and potentially replaced. It is not a black box.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — the buzzer pins are already there</span>
+                <p><span class="tag tag-done">Done</span>
+                The HT48C06 has a dedicated complementary buzzer drive pair (PB0/PB1) and a built-in programmable frequency divider — native silicon features for driving a piezo element directly, no external driver required. The hardware to make the stick beep on a result is already specced into the chip inside the device. The reason Clearblue Digital makes no sound is a product decision, not a hardware limitation. This changes the manufacturer partnership conversation significantly.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — the real blocker: the enclosure, not the electronics</span>
+                <p><span class="tag tag-issue">Issue</span>
+                The stick enclosure is moulded to extremely tight tolerances. Adding any speaker or piezo disc — even a thin SMD type — requires a new enclosure revision and injection moulding tooling. The PCB also uses COB (epoxy blob) packaging in some variants, making chip-level modification impossible without destroying the board. The electronics are not the constraint. The plastic is. Any Layer 2 partnership conversation needs to lead with this: a new enclosure SKU, not a modification to the existing one.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — OTP firmware: reading it is not possible</span>
+                <p><span class="tag tag-issue">Issue</span>
+                OTP (one-time programmable) means the firmware is burned at manufacture and cannot be read out or overwritten. Any new firmware — for a partnership audio SKU or a parallel MCU approach — must be written from scratch. The optical sensing algorithm, threshold logic, and countdown timing all need to be reverse engineered and reimplemented. The chip is standard and purchasable; the firmware knowledge is not transferable. This is the largest engineering unknown for any hardware path.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — RNIB finding: blind users rejected audio output</span>
+                <p><span class="tag tag-issue">Issue</span>
+                The RNIB's 2020 accessible pregnancy test prototype conducted user research before building. Finding: blind users did not want audio output. Reason: any tone or voice has emotional valence — it sounds either positive or negative — and users did not want a machine to telegraph the outcome before they had a moment to process it. The RNIB chose tactile output (a mechanical button that raises on positive). The APT (James Dyson Award 2022) reached the same conclusion independently and used haptic vibration. This is a direct challenge to our audio-first design that we cannot design around without our own community research.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — revised position: haptic is primary, not fallback</span>
+                <p><span class="tag tag-pivot">Pivot</span>
+                The RNIB and APT findings shift haptic from "audio fallback" to "first-class output modality." The tap-to-hear model we designed (haptic signals ready, audio only on tap) partially addresses the valence concern — the user controls the emotional moment, not the machine. But some users may never want audio regardless of timing. The design must support haptic-only as a complete, uncompromised experience. This does not remove audio from the design; it removes audio as the assumed primary output. Community research will determine the right default.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — existing landscape: three prior efforts, none commercial</span>
+                <p><span class="tag tag-note">Note</span>
+                Three documented accessible pregnancy test projects exist: RNIB (tactile, 2020), APT (haptic, 2022), AMY (NFC to phone screen reader, 2025 award). None are commercially available. AMY's approach — delegating audio to the phone's existing screen reader via NFC — is elegant: it leverages infrastructure the user has already configured to their preference, rather than building a new audio system from scratch. Worth considering for our Layer 1 alongside direct camera recognition.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — patent landscape: third-party audio patent is a FTO risk</span>
+                <p><span class="tag tag-issue">Issue</span>
+                WO2014158850 / AU2014241791B2 ("Diagnostic Test Device with Audible Feedback") is a granted patent covering audio output on a lateral flow assay device — explicitly including pregnancy tests — not assigned to SPD. Anyone adding audio to a lateral flow test reader, including our Layer 3 standalone device and any SPD audio SKU, needs a freedom-to-operate analysis against this patent before commercialisation. Our smartphone Layer 1 is not a lateral flow device and is not affected. Filed as a standing legal risk — not blocking research, but blocking any commercial hardware launch without FTO clearance.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — SPD holds no audio patent: gap confirmed</span>
+                <p><span class="tag tag-note">Note</span>
+                SPD's patent portfolio covers the optical reader, immunoassay, display integration, and industrial design. There is no SPD/Clearblue patent on audio output from a pregnancy test. This means the concept is not legally blocked from their side. A partnership conversation about an audio SKU is not walking into their existing IP. The conversation needs to address the third-party WO2014158850 FTO question, but that's a solvable problem (license or design around), not a veto.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — regulatory path confirmed: new 510(k) required</span>
+                <p><span class="tag tag-note">Note</span>
+                FDA classification confirmed: Class II, product code LCX, 21 CFR 862.1155. The electronic reader and strip are cleared together under a single 510(k). Adding audio output to the reader is a user interface change — not a minor modification under 21 CFR Part 820. A new 510(k) is required, using the existing Clearblue system as predicate. Timeline: 12–24 months. Cost: $250K–$1M. EU path: IVDR Class B, Notified Body update required. This is the realistic regulatory cost SPD would face for an audio SKU. It is not prohibitive for a company of P&amp;G's scale, but it needs a clear commercial case to justify it.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — manufacturer entry point identified</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Primary target for a partnership conversation: Clearblue Innovation Centre, Bedford, UK (Stannard Way, Priory Business Park). This is SPD's R&amp;D home. Secondary route: P&amp;G's disability inclusion and ESG function, which has a documented accessibility commitments programme and may open faster than a cold commercial approach. The RNIB's 2020 work generated significant press — Clearblue's team is aware of the need. The conversation needs: (1) a working prototype demonstrating the concept, (2) quantified market size data, (3) a regulatory summary showing the 510(k) path is clear. We do not yet have all three.</p>
+            </div>
+
         </div>
     </div>
 
@@ -1183,14 +1319,14 @@
         <div class="section-label">What's Next</div>
 
         <div class="next-steps">
-            <h3>Active workstreams</h3>
+            <h3>Active workstreams — updated after teardown research</h3>
             <ol>
-                <li><strong>Web prototype (Layer 1):</strong> Build a browser-based MVP using <code>getUserMedia</code> and TensorFlow.js. Validate recognition accuracy across Clearblue, First Response, and own-brand tests under varied lighting before committing to native. The tap-to-hear model and haptic patterns will be testable at this stage.</li>
-                <li><strong>Hardware teardown (Layer 2):</strong> Examine a Clearblue Digital reading stick — photograph PCB, identify MCU, check GPIO availability and program memory. Document findings in this log. If audio addition is feasible as a hardware revision, draft a proof-of-concept circuit.</li>
-                <li><strong>Community research:</strong> Engage blind and low-vision communities (r/Blind, RNIB, NAB, VIP community forums) before any UX is locked. Understand lived experience, existing workarounds, and what "good" actually looks like from the user's perspective. No design decisions get made without this input.</li>
-                <li><strong>Training data strategy:</strong> Map the dataset requirements: brands, orientations, lighting, camera quality tiers. Investigate whether synthetic augmentation can cover edge cases without needing thousands of real test images — important given the sensitivity of the domain.</li>
-                <li><strong>Legal review:</strong> Confirm the regulatory classification framing (accessibility tool, not diagnostic device) with a legal professional familiar with FDA and MDR before any public release or manufacturer outreach. Establish the responsible disclosure policy and open source licence selection.</li>
-                <li><strong>Translation groundwork:</strong> Identify native-speaker translators with medical language awareness for the six priority languages. Establish review process for result strings. Draft the language selection and voice preview flow.</li>
+                <li><strong>Community research (now the priority):</strong> The RNIB finding — that blind users rejected audio output because of emotional valence — cannot be designed around without our own research. Engage blind and low-vision communities (r/Blind, RNIB forums, NAB, VIP networks) to understand whether this finding generalises, what output modalities users actually want, and what a good solution looks like from their side. No UX decisions are locked until this is done.</li>
+                <li><strong>Web prototype (Layer 1):</strong> Build a browser-based MVP using <code>getUserMedia</code> and TensorFlow.js. Validate recognition accuracy across Clearblue, First Response, and own-brand tests under varied lighting. Test the tap-to-hear model and haptic-only mode as equal-first-class paths — not audio-primary with haptic fallback.</li>
+                <li><strong>Manufacturer partnership groundwork (Layer 2):</strong> Hardware teardown research is now complete — MCU is confirmed (Holtek HT48C06/HT48R065B), buzzer pins are native to the chip, and the enclosure is the constraint. Next step is building the three things needed for a credible conversation with Clearblue Innovation Centre, Bedford: (1) a working prototype, (2) quantified market size data, (3) a regulatory summary showing the 510(k) path is clear.</li>
+                <li><strong>Freedom-to-operate review (Layer 3):</strong> WO2014158850 (audible feedback on lateral flow device) must be assessed before any hardware with audio output on a lateral flow result is commercialised. This is not optional. Commission a FTO analysis before any Layer 3 hardware reaches production.</li>
+                <li><strong>Training data strategy:</strong> Map dataset requirements for Layer 1: brands, orientations, lighting, camera quality tiers. Investigate synthetic augmentation to cover edge cases without needing large volumes of real test images — important given the sensitivity of the domain.</li>
+                <li><strong>Legal and translation groundwork:</strong> Confirm the regulatory classification framing with a legal professional familiar with FDA and MDR. Begin identifying native-speaker translators with medical language awareness for the six priority languages. Establish the open source licence and responsible disclosure policy.</li>
             </ol>
         </div>
     </div>
