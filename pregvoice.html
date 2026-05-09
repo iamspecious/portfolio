@@ -758,12 +758,97 @@
 
 
     <!-- ═══════════════════════════════════════
+         OUTPUT MODALITY DESIGN
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Output Modality Design — Rethinking the RNIB Finding</div>
+
+        <p>The RNIB's 2020 finding that blind users rejected audio deserves a closer reading. The prototypes they tested used a voice saying "Pregnant" or "Not Pregnant." The problem was not audio — it was <strong>linguistic content with inherent emotional weight</strong>. Any word carries meaning. "Pregnant" said in any voice, with any inflection, is a statement about someone's body and their future. Users did not want a machine making that statement at a moment they hadn't controlled.</p>
+
+        <p>A bleep has none of that. A single tone is not a word. It carries no linguistic valence, no implied emotion, no cultural connotation. It is information in the most neutral possible form. This is the same reason airport security uses tones not voices, and why medical monitors use alarms not announcements — neutrality by design.</p>
+
+        <p>The other concern the RNIB finding raises — which is separate and equally valid — is that not all pregnancy results are good or wanted. A positive result can mean joy, or devastation, depending entirely on context. A negative result can be a relief or a loss. The system cannot know which, and must not presume. A bleep says nothing about how to feel. A voice saying "Congratulations — you are pregnant" says everything. Even a clinical voice saying "The test shows a positive result" has linguistic content the user must process in the moment they receive unexpected or unwanted news. Tones sidestep this entirely.</p>
+
+        <h2>The revised output hierarchy</h2>
+
+        <div class="audio-options">
+            <div class="audio-option">
+                <div class="opt-label opt-default">Primary</div>
+                <h4>Tones — bleeps</h4>
+                <p>Simple audio tones on result. No words, no inflection, no emotional valence. Universal across all languages and cultures. Works on any phone with a speaker. Played through earphones when connected for privacy; through phone speaker only on active tap.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-optional">Secondary</div>
+                <h4>Haptic vibration</h4>
+                <p>Pulse patterns as a non-audio fallback. Useful in genuinely silent environments or for users with hearing impairments. Acknowledged as device-dependent — phone haptic motor quality varies significantly across manufacturers, ages, and price points.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-optional">Opt-in only</div>
+                <h4>Voice announcement</h4>
+                <p>Spoken result in the user's chosen language and phrasing. Available for users who specifically want it — not the default. Clinical framing only ("The test shows a positive result"). Never auto-plays without explicit preference setting.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-never">Never</div>
+                <h4>Auto-announce on speaker</h4>
+                <p>No output mode — tone, haptic, or voice — activates automatically without a user trigger. The result is always ready and waiting. The user chooses the moment they receive it.</p>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 28px;">The tone schema</h2>
+        <p>Simple, unambiguous, learnable in one read. The number of bleeps maps to the number of possible outcomes — not a Morse pattern, not a rising/falling cadence, just a count. Counts are cognitively the simplest possible encoding and work across every language and culture.</p>
+
+        <div class="devlog" style="border-radius: 8px; overflow: hidden; margin-top: 16px;">
+            <table class="haptic-table">
+                <thead>
+                    <tr>
+                        <th>Tone</th>
+                        <th>Result</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>· (1 bleep)</td>
+                        <td>Positive / pregnant</td>
+                        <td>One bleep, one result. No rising/falling implication — just a count. The user decides what one means to them.</td>
+                    </tr>
+                    <tr>
+                        <td>· · (2 bleeps)</td>
+                        <td>Negative / not pregnant</td>
+                        <td>Two bleeps, different count, unambiguous. No cadence designed to sound negative or positive.</td>
+                    </tr>
+                    <tr>
+                        <td>· · · (3 bleeps)</td>
+                        <td>Inconclusive / re-check</td>
+                        <td>Three bleeps. A third distinct count — clearly different from one or two, no emotional register attached.</td>
+                    </tr>
+                    <tr>
+                        <td>· · · · (4 rapid bleeps)</td>
+                        <td>Error / unreadable</td>
+                        <td>Four fast bleeps, faster cadence than the others — signals that something went wrong with the scan, distinct from any result.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top: 14px; font-size: 13px; color: var(--muted);">Tone frequency, duration, and spacing will be validated with blind and low-vision users. The schema above is the starting hypothesis.</p>
+
+        <h2>Why tones are more reliable than haptics as primary output</h2>
+        <p>Phone haptic motors are not standardised. A flagship iPhone produces crisp, precise vibration. A mid-range Android from 2020 may have a motor that barely registers at full volume. A budget phone may not differentiate reliably between a long and short pulse. The user holding the phone at an angle, through a case, or with reduced sensation in their hand compounds this further.</p>
+        <p>Phone speakers are far more consistent. Even a cheap handset from 2018 will produce a clearly audible bleep through its speaker, and a clearly audible bleep through connected earphones. The gap in reliability between a £50 phone speaker and a £1,000 phone speaker is far smaller than the gap in their haptic motors.</p>
+        <p>Haptic remains in the design as a genuine fallback — for silent environments, for users with hearing impairments, for moments when earphones aren't available and the speaker isn't an option. But it is not the primary delivery mechanism, and the design acknowledges its device-dependency rather than assuming it works uniformly.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
          HAPTIC LANGUAGE
     ════════════════════════════════════════ -->
     <div class="section">
-        <div class="section-label">Haptic Result Language</div>
+        <div class="section-label">Haptic Result Language — Secondary Output</div>
 
-        <p>Audio isn't always available — public spaces, shared housing, hearing impairments, no headphones to hand. The haptic language is a complete fallback, not an afterthought. The patterns are simple enough to learn in 30 seconds and distinctive enough not to misread under stress.</p>
+        <p>Haptic is a genuine and important output modality — for users in silent environments, with hearing impairments, or in situations where audio of any kind isn't possible. It is not a degraded experience; it is a different one. The caveat is that it is device-dependent in a way that tones are not, and the design must acknowledge this rather than paper over it.</p>
+
+        <p>Haptic motor quality varies significantly across phone models, ages, and price points. The patterns below are designed to remain distinguishable even on weaker motors — but user testing across a range of devices is required before these are finalised.</p>
 
         <div class="devlog" style="border-radius: 8px; overflow: hidden; margin-top: 16px;">
             <table class="haptic-table">
@@ -777,29 +862,29 @@
                 <tbody>
                     <tr>
                         <td>— · ·</td>
-                        <td>Not pregnant</td>
-                        <td>One long, two short — mirrors Morse "D". Falling cadence. Easy to remember as "Done, not pregnant."</td>
+                        <td>Positive / pregnant</td>
+                        <td>One long, two short. Mirrors the tone count concept — one primary pulse signals the primary outcome.</td>
                     </tr>
                     <tr>
                         <td>· · —</td>
-                        <td>Pregnant</td>
-                        <td>Two short, one long — rising pattern feels affirmative. Mirrors Morse "W".</td>
+                        <td>Negative / not pregnant</td>
+                        <td>Two short, one long. Distinct cadence from the positive pattern — different enough even on weaker motors.</td>
                     </tr>
                     <tr>
                         <td>· · · · · ·</td>
                         <td>Inconclusive / re-check</td>
-                        <td>Six rapid pulses, repeating every 3s. Clearly different cadence — signals "try again" without panic.</td>
+                        <td>Six rapid pulses, repeating every 3s. Clearly different cadence from either result — signals "try again."</td>
                     </tr>
                     <tr>
                         <td>— — —</td>
                         <td>Error / unreadable</td>
-                        <td>Three slow long pulses. Deliberate, heavy — distinct from any result pattern. Something is wrong with the scan, not the test.</td>
+                        <td>Three slow long pulses. Deliberate and heavy — distinct from any result pattern. Something went wrong with the scan.</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <p style="margin-top: 14px; font-size: 13px; color: var(--muted);">These patterns will be validated with blind and low-vision users before they are finalised. The above is a hypothesis, not a specification.</p>
+        <p style="margin-top: 14px; font-size: 13px; color: var(--muted);">Haptic patterns will be tested across a range of phone models before finalising — including budget Android devices where motor quality is lowest. If patterns cannot be reliably distinguished on a defined minimum spec device, the design will be revised.</p>
     </div>
 
 
@@ -1306,6 +1391,36 @@
                 <span class="timestamp">2026-05-09 — manufacturer entry point identified</span>
                 <p><span class="tag tag-decision">Decision</span>
                 Primary target for a partnership conversation: Clearblue Innovation Centre, Bedford, UK (Stannard Way, Priory Business Park). This is SPD's R&amp;D home. Secondary route: P&amp;G's disability inclusion and ESG function, which has a documented accessibility commitments programme and may open faster than a cold commercial approach. The RNIB's 2020 work generated significant press — Clearblue's team is aware of the need. The conversation needs: (1) a working prototype demonstrating the concept, (2) quantified market size data, (3) a regulatory summary showing the 510(k) path is clear. We do not yet have all three.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — RNIB finding reframed: it's linguistic valence, not audio itself</span>
+                <p><span class="tag tag-pivot">Pivot</span>
+                Closer reading of the RNIB finding: their prototype used a voice saying "Pregnant" or "Not Pregnant." The issue was not that sound played — it was that words carry inherent emotional weight. Any voice, however clinical, is making a statement about the person's body and future at a moment they may not be ready for. A bleep carries no linguistic content, no cultural connotation, and no implied emotional register. The RNIB found against voice. They did not test tones. The design implication is not "no audio" — it is "no words."</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — context: not all results are good or wanted</span>
+                <p><span class="tag tag-note">Note</span>
+                This point cannot be designed around — it must be designed from. A positive result can be the best news of someone's life or devastating news depending entirely on context: wanted pregnancy, unwanted pregnancy, fertility treatment, contraceptive failure, post-miscarriage monitoring. A negative result is equally context-dependent. The system cannot know which situation it is in and must not presume. A bleep says nothing about how to feel. A voice saying anything — however carefully worded — says something. Tones are the only audio format that stays genuinely neutral.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — decision: tones as primary audio output, not voice</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Primary audio output is now simple tones: 1 bleep = positive, 2 bleeps = negative, 3 bleeps = inconclusive, 4 rapid bleeps = error. Count-based, not cadence-based — a count is the simplest possible encoding, learnable in one read, universal across languages and cultures. No linguistic valence. No words. The user receives the count and applies their own emotional context to it. Voice announcement remains available as an explicit opt-in for users who want it, using clinical framing, but is not the default and will never auto-play.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — haptic motor variability: a real constraint</span>
+                <p><span class="tag tag-issue">Issue</span>
+                Phone haptic motors are not standardised. A flagship device produces precise, differentiated vibration. A budget Android may not reliably distinguish between a long and short pulse — and the user holding the phone through a case, at an angle, or with reduced hand sensation compounds this. Phone speakers are far more consistent across device tiers: a £50 phone speaker and a £1,000 phone speaker both produce a clearly audible bleep. The gap in haptic motor quality across devices is much larger than the gap in speaker quality. This is why tones are primary and haptic is secondary — not because haptic is less important, but because it is less reliable as a universal baseline.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — revised output hierarchy confirmed</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Final output hierarchy: (1) Tones — primary audio, neutral, universal, device-consistent, played through earphones for privacy or phone speaker on user tap; (2) Haptic — secondary, genuine fallback for silent environments and hearing impaired users, acknowledged as device-dependent; (3) Voice — opt-in only, clinical phrasing, user-configured language, never the default; (4) Auto-announce — does not exist in any form. All outputs are triggered by user action, never by the system. The tap-to-hear model applies to tones, not just voice.</p>
             </div>
 
         </div>
