@@ -1588,6 +1588,78 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — done</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Confirmation modal live. Pricing displayed uses the current rates ($3.00/M input, $15.00/M output, dated May 2026) so it's transparent about when those figures were last updated. No request fires on Sonnet without acknowledgement. Haiku requests are unaffected — no friction for the common case.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    The confirmation covers both manual and auto-switched Sonnet use — there's no meaningful distinction from a cost perspective. What matters is that the user sees a number, reads a price, and chooses to proceed. Implemented as a Promise-based overlay: <code>triage()</code> awaits <code>confirmSonnetCost()</code>, which resolves <code>true</code> on confirm and <code>false</code> on cancel, so the async flow is clean and the request is never partially started.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Add a pre-flight confirmation modal that fires whenever a Sonnet request is about to be sent — whether the user manually selected Sonnet or the tool auto-switched. The modal shows the exact character count at click time, recalculates the cost fresh from the current message length, and requires an explicit "Send anyway" before the request fires. Cancel returns to the tool with no side effects.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Follow-up from Rainbow: the live cost estimate in the model bar is useful, but it doesn't force the user to acknowledge the cost before they commit. A user could auto-switch to Sonnet, not notice the estimate update, and send a large request without realising the price difference. The model bar display is passive — it updates, but it doesn't interrupt.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — model switcher done</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Model bar live: Haiku selected by default with a "recommended" badge, Sonnet available for longer or higher-stakes tickets. Truncation bug fixed — total sent is always ≤ hardLimit. Cost estimates update on every keystroke. The lore checker already had this pattern; applying it here was straightforward once the right constants were in place.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Cost estimates update live as you type. Formula: input tokens estimated as 250 (prompt overhead) + <code>ceil(messageLength / 4)</code>, output fixed at 300 tokens. At empty the display reads ~0.20¢ (Haiku) and ~0.60¢ (Sonnet). A 5,000-char message costs about ~0.28¢ on Haiku; the same at 10,000 chars on Sonnet is about ~1.05¢. The estimates are approximate — actual tokenisation varies — but they give the user a real-time sense of relative cost.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Auto-switch logic: if the user types past 5,000 characters while on Haiku, the tool silently switches to Sonnet and shows a small amber badge — "auto-switched — input over 5k". If they delete back below 5,000, it reverts to Haiku. If the user manually picks a model, <code>autoSwitched</code> is cleared and the auto-revert no longer fires — their choice takes over.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Add a Haiku / Sonnet model switcher — borrowed from the lore checker pattern — to solve the truncation bug properly and add cost transparency at the same time. The fix: define <code>TRUNCATION_NOTE</code> as a constant, slice to <code>hardLimit - TRUNCATION_NOTE.length</code> before appending, so the total is always exactly <code>hardLimit</code>. The switcher makes <code>hardLimit</code> model-dependent: 5,000 chars for Haiku, 10,000 for Sonnet.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — truncation bug</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Rainbow spotted a bug in the character limit: slicing input to exactly 5,000 characters and then appending <code>'\n\n[Input truncated at 5,000 characters]'</code> (36 chars) sends 5,036 characters to the API — silently exceeding the stated limit. A small off-by-one in principle, but it breaks the contract with the user and means the truncation note itself is the overflow.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-05-08 — verified</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>
