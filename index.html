@@ -1501,6 +1501,38 @@
                                 </p>
                             </div>
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Follow-up from Rainbow: the live cost estimate in the model bar is useful, but it doesn't force the user to acknowledge the cost before they commit. A user could auto-switch to Sonnet, not notice the estimate update, and send a large request without realising the price difference. The model bar display is passive — it updates, but it doesn't interrupt.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Add a pre-flight confirmation modal that fires whenever a Sonnet request is about to be sent — whether the user manually selected Sonnet or the tool auto-switched. The modal shows the exact character count at click time, recalculates the cost fresh from the current message length, and requires an explicit "Send anyway" before the request fires. Cancel returns to the tool with no side effects.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    The confirmation covers both manual and auto-switched Sonnet use — there's no meaningful distinction from a cost perspective. What matters is that the user sees a number, reads a price, and chooses to proceed. Implemented as a Promise-based overlay: <code>triage()</code> awaits <code>confirmSonnetCost()</code>, which resolves <code>true</code> on confirm and <code>false</code> on cancel, so the async flow is clean and the request is never partially started.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — done</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Confirmation modal live. Pricing displayed uses the current rates ($3.00/M input, $15.00/M output, dated May 2026) so it's transparent about when those figures were last updated. No request fires on Sonnet without acknowledgement. Haiku requests are unaffected — no friction for the common case.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 
