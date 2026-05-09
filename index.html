@@ -1811,6 +1811,30 @@
                                 </p>
                             </div>
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — teardown complete: MCU confirmed, buzzer pins native to the chip</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Clearblue Digital MCU confirmed as Holtek HT48C06 / HT48R065B — off-the-shelf 8-bit OTP parts with public datasheets, not custom ASICs. Critical finding: the HT48C06 has dedicated buzzer drive pins (PB0/PB1) and a programmable frequency divider built into the silicon. Connecting a piezo element requires no external driver. The hardware to make the stick beep already exists inside it. The reason it makes no sound is a product decision, not a hardware limitation. Enclosure moulding tolerances are the actual constraint — any audio addition requires a new enclosure SKU, not a modification to the existing one. OTP firmware is unreadable; any partner would need to rewrite sensing logic from scratch.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — RNIB finding: users rejected audio for emotional valence reasons</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    The RNIB's 2020 accessible pregnancy test prototype — the most thorough user research in this space — found blind users did not want audio output. Any tone or voice sounds either positive or negative, and users did not want a machine to telegraph the emotional outcome before they were ready. RNIB used tactile output. APT (James Dyson Award 2022) independently reached the same conclusion and used haptic. This directly challenges our audio-first design. Revised position: haptic is a first-class output modality, not a fallback. The design must support haptic-only as a complete, uncompromised experience. Community research now the immediate priority before any UX decisions are locked.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — patent and regulatory landscape confirmed</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    SPD/Clearblue holds no patent on audio output from a pregnancy test — a gap in their portfolio, and not a blocker for a partnership conversation. Third-party patent WO2014158850 ("Diagnostic Test Device with Audible Feedback") covers audio output on lateral flow readers and requires freedom-to-operate analysis before any audio hardware is commercialised. FDA regulatory path confirmed: Class II, new 510(k) required for audio addition, 12–24 month timeline, $250K–$1M cost. Manufacturer entry point: Clearblue Innovation Centre, Bedford, UK. The conversation needs a working prototype, market size data, and a regulatory summary. We do not yet have all three.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 
