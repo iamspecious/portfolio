@@ -1640,6 +1640,25 @@
                             </div>
                         </div>
 
+                        <div class="project-wins">
+                            <strong>Why this approach works</strong>
+                            <ul>
+                                <li><strong>No new hardware required</strong> — Layer 1 works on any smartphone the person already owns. Zero additional cost to the user for the most accessible path.</li>
+                                <li><strong>Free, forever</strong> — on-device ML, Web Speech API, GitHub Pages hosting. No server, no API calls, no running costs. Nothing to eventually put behind a paywall.</li>
+                                <li><strong>Privacy by architecture, not policy</strong> — the camera frame is processed in memory and discarded. No image is saved, no data is sent anywhere. Open source so anyone can verify this, not just trust it.</li>
+                                <li><strong>Works offline</strong> — the app must function with no internet connection during the reading window. On-device inference means no network dependency at the moment that matters.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Hard constraints we're working around</strong>
+                            <ul>
+                                <li><strong>Reliability is a release gate, not a metric</strong> — a false positive or false negative carries real psychological and medical consequences. The tool does not ship without a validated confidence threshold and a clear "re-check recommended" path below it.</li>
+                                <li><strong>Medical-adjacent at every step</strong> — "reads the visual output of a completed test" must remain the design boundary in code, language, and legal framing. Any drift toward diagnostic territory changes the regulatory picture entirely.</li>
+                                <li><strong>Co-design is non-negotiable</strong> — blind and low-vision users must be involved at every major UX decision point, not consulted after the fact. This adds time. It's not optional.</li>
+                                <li><strong>Hardware unknowns for Layers 2 &amp; 3</strong> — digital test PCB internals are still being researched. Manufacturer partnership and custom accessory paths are unconfirmed until teardown findings are in.</li>
+                            </ul>
+                        </div>
+
                         <p style="margin-top: 10px;">
                             <span class="tech-tag">Computer Vision</span>
                             <span class="tech-tag">On-device ML</span>
