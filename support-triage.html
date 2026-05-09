@@ -276,6 +276,44 @@
 
         .copy-btn:hover { border-color: var(--success); color: var(--success); background: transparent; }
 
+        .model-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .model-bar > label:first-child {
+            font-size: 0.75rem;
+            color: var(--muted);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .model-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .model-option:has(input:checked) { border-color: var(--accent); background: #0d1f1d; }
+        .model-option input { accent-color: var(--accent); cursor: pointer; }
+        .model-option .model-name { font-size: 0.8rem; font-family: monospace; color: var(--text); }
+        .model-option .model-price { font-size: 0.68rem; color: var(--muted); margin-left: 4px; }
+        .model-option:has(input:checked) .model-price { color: var(--accent-light); }
+        .model-rec { font-size: 0.65rem; background: #0d2e1a; color: #2dc653; padding: 1px 6px; border-radius: 3px; font-family: monospace; }
+        .model-auto { font-size: 0.65rem; background: #2e240d; color: var(--warning); padding: 1px 6px; border-radius: 3px; font-family: monospace; display: none; margin-left: auto; }
+
         .char-counter {
             margin-left: auto;
             font-size: 0.65rem;
@@ -341,6 +379,63 @@
             color: var(--muted);
             font-family: monospace;
         }
+
+        .confirm-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confirm-modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-top: 2px solid var(--warning);
+            border-radius: 10px;
+            padding: 28px 32px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .confirm-modal h3 {
+            font-size: 0.85rem;
+            color: var(--warning);
+            font-family: monospace;
+            letter-spacing: 0.04em;
+            margin-bottom: 16px;
+        }
+
+        .confirm-modal p {
+            font-size: 0.84rem;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .confirm-modal .confirm-cost {
+            font-size: 1.6rem;
+            color: var(--accent-light);
+            font-family: monospace;
+            text-align: center;
+            margin: 18px 0;
+        }
+
+        .confirm-modal .confirm-meta {
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-family: monospace;
+            line-height: 1.5;
+        }
+
+        .confirm-modal .confirm-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+            justify-content: flex-end;
+        }
     </style>
 </head>
 <body>
@@ -373,6 +468,22 @@ Example: Hi, I've been charged twice this month and my account still shows as in
 Logs work too: TypeError: Cannot read properties of undefined (reading 'user') at checkout.js:142..."></textarea>
     </div>
 
+    <div class="model-bar">
+        <label>MODEL</label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-haiku-4-5-20251001" checked>
+            <span class="model-name">Haiku 4.5</span>
+            <span class="model-price" id="priceHaiku">~0.20¢</span>
+            <span class="model-rec">recommended</span>
+        </label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-sonnet-4-6">
+            <span class="model-name">Sonnet 4.6</span>
+            <span class="model-price" id="priceSonnet">~0.60¢</span>
+        </label>
+        <span class="model-auto" id="modelAuto">auto-switched — input over 5k</span>
+    </div>
+
     <div class="error-banner" id="errorBanner"></div>
 
     <div class="actions">
@@ -390,19 +501,103 @@ Logs work too: TypeError: Cannot read properties of undefined (reading 'user') a
 </main>
 
 <footer>
-    support triage demo · powered by Claude Haiku · ~0.2¢ per triage · no data stored
+    support triage demo · powered by Claude · no data stored
 </footer>
 
+<div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-modal">
+        <h3>⚠ confirm before sending</h3>
+        <p>You're about to send <strong><span id="confirmChars">0</span> characters</strong> using <strong>Sonnet 4.6</strong>.</p>
+        <div class="confirm-cost" id="confirmCost">~0.00¢</div>
+        <p class="confirm-meta">Estimated at $3.00/M input · $15.00/M output · prices as of May 2026</p>
+        <div class="confirm-actions">
+            <button class="btn-secondary" id="confirmCancel" style="padding: 9px 18px;">Cancel</button>
+            <button id="confirmProceed" style="padding: 9px 18px;">Send anyway</button>
+        </div>
+    </div>
+</div>
+
 <script>
-    const SOFT_LIMIT = 3000;
-    const HARD_LIMIT = 5000;
+    const SOFT_LIMIT  = 3000;
+    const HAIKU_HARD  = 5000;
+    const SONNET_HARD = 10000;
+    const TRUNCATION_NOTE = '\n\n[Input truncated to fit token limit]';
+
+    const MODEL_PRICING = {
+        'claude-haiku-4-5-20251001': { input: 0.80, output: 4.00 },
+        'claude-sonnet-4-6':         { input: 3.00, output: 15.00 }
+    };
+
+    let autoSwitched = false;
+
+    function selectedModel() {
+        return document.querySelector('input[name="model"]:checked').value;
+    }
+
+    function estimateCost(modelId, messageLength) {
+        const inputTokens = 250 + Math.ceil(messageLength / 4);
+        const outputTokens = 300;
+        const m = MODEL_PRICING[modelId];
+        const cents = ((inputTokens * m.input + outputTokens * m.output) / 1_000_000) * 100;
+        return `~${cents.toFixed(2)}¢`;
+    }
+
+    function updatePrices() {
+        const len = document.getElementById('message').value.length;
+        document.getElementById('priceHaiku').textContent  = estimateCost('claude-haiku-4-5-20251001', len);
+        document.getElementById('priceSonnet').textContent = estimateCost('claude-sonnet-4-6', len);
+    }
+
+    document.querySelectorAll('input[name="model"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            autoSwitched = false;
+            document.getElementById('modelAuto').style.display = 'none';
+        });
+    });
 
     document.getElementById('message').addEventListener('input', function() {
         const len = this.value.length;
+        const haiku  = document.querySelector('input[value="claude-haiku-4-5-20251001"]');
+        const sonnet = document.querySelector('input[value="claude-sonnet-4-6"]');
+        const autoNote = document.getElementById('modelAuto');
+
+        if (len > HAIKU_HARD && haiku.checked) {
+            sonnet.checked = true;
+            autoSwitched = true;
+            autoNote.style.display = 'inline';
+        } else if (len <= HAIKU_HARD && autoSwitched) {
+            haiku.checked = true;
+            autoSwitched = false;
+            autoNote.style.display = 'none';
+        }
+
+        const hardLimit = sonnet.checked ? SONNET_HARD : HAIKU_HARD;
         const counter = document.getElementById('charCounter');
         counter.textContent = `${len.toLocaleString()} / ${SOFT_LIMIT.toLocaleString()}`;
-        counter.className = 'char-counter' + (len > HARD_LIMIT ? ' over' : len > SOFT_LIMIT ? ' warn' : '');
+        counter.className = 'char-counter' + (len > hardLimit ? ' over' : len > SOFT_LIMIT ? ' warn' : '');
+
+        updatePrices();
     });
+
+    function confirmSonnetCost(charCount) {
+        return new Promise(resolve => {
+            document.getElementById('confirmChars').textContent = charCount.toLocaleString();
+            document.getElementById('confirmCost').textContent = estimateCost('claude-sonnet-4-6', charCount);
+
+            const overlay = document.getElementById('confirmOverlay');
+            overlay.style.display = 'flex';
+
+            const close = result => {
+                overlay.style.display = 'none';
+                document.getElementById('confirmProceed').onclick = null;
+                document.getElementById('confirmCancel').onclick = null;
+                resolve(result);
+            };
+
+            document.getElementById('confirmProceed').onclick = () => close(true);
+            document.getElementById('confirmCancel').onclick = () => close(false);
+        });
+    }
 
     async function triage() {
         const apiKey = document.getElementById('apiKey').value.trim();
@@ -419,8 +614,14 @@ Logs work too: TypeError: Cannot read properties of undefined (reading 'user') a
         if (!apiKey.startsWith('sk-ant-')) return showError('API key format looks wrong — Anthropic keys start with sk-ant-. Check you\'ve pasted the full key.');
         if (!message) return showError('Paste a customer message to triage.');
 
-        const processedMessage = message.length > HARD_LIMIT
-            ? message.slice(0, HARD_LIMIT) + '\n\n[Input truncated at 5,000 characters]'
+        const model = selectedModel();
+        if (model === 'claude-sonnet-4-6') {
+            const confirmed = await confirmSonnetCost(message.length);
+            if (!confirmed) return;
+        }
+        const hardLimit = model === 'claude-sonnet-4-6' ? SONNET_HARD : HAIKU_HARD;
+        const processedMessage = message.length > hardLimit
+            ? message.slice(0, hardLimit - TRUNCATION_NOTE.length) + TRUNCATION_NOTE
             : message;
 
         triageBtn.disabled = true;
@@ -437,7 +638,7 @@ Logs work too: TypeError: Cannot read properties of undefined (reading 'user') a
                     'anthropic-dangerous-direct-browser-calls': 'true'
                 },
                 body: JSON.stringify({
-                    model: 'claude-haiku-4-5-20251001',
+                    model: model,
                     max_tokens: 1000,
                     system: `You are a support triage specialist. When given a customer message — which may be a written message, an error log, a stack trace, or a support thread excerpt — respond with exactly three sections using these markdown headers:
 
