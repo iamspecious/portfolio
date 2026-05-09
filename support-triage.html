@@ -276,6 +276,70 @@
 
         .copy-btn:hover { border-color: var(--success); color: var(--success); background: transparent; }
 
+        .model-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .model-bar > label:first-child {
+            font-size: 0.75rem;
+            color: var(--muted);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .model-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .model-option:has(input:checked) { border-color: var(--accent); background: #0d1f1d; }
+        .model-option input { accent-color: var(--accent); cursor: pointer; }
+        .model-option .model-name { font-size: 0.8rem; font-family: monospace; color: var(--text); }
+        .model-option .model-price { font-size: 0.68rem; color: var(--muted); margin-left: 4px; }
+        .model-option:has(input:checked) .model-price { color: var(--accent-light); }
+        .model-rec { font-size: 0.65rem; background: #0d2e1a; color: #2dc653; padding: 1px 6px; border-radius: 3px; font-family: monospace; }
+        .model-auto { font-size: 0.65rem; background: #2e240d; color: var(--warning); padding: 1px 6px; border-radius: 3px; font-family: monospace; display: none; margin-left: auto; }
+
+        .char-counter {
+            margin-left: auto;
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .char-counter.warn { color: var(--warning); }
+        .char-counter.over { color: var(--danger); }
+
+        .browser-note {
+            background: #1a1e2e;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--muted);
+            border-radius: 0 6px 6px 0;
+            padding: 10px 14px;
+            margin-bottom: 16px;
+            font-size: 0.72rem;
+            font-family: monospace;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .browser-note strong { color: #a0b4cc; }
+
         .spinner {
             display: inline-block;
             width: 14px;
@@ -338,10 +402,29 @@
         <div class="panel-header">
             <span class="icon">📩</span>
             <h2>customer message</h2>
+            <span class="char-counter" id="charCounter">0 / 3,000</span>
         </div>
-        <textarea id="message" placeholder="Paste the customer message here. Real, anonymised, or fabricated — whatever you want to triage.
+        <textarea id="message" placeholder="Paste anything — a customer message, an error log, a stack trace, or a support thread transcript. Real, anonymised, or fabricated.
 
-Example: Hi, I've been charged twice this month and my account still shows as inactive. I've emailed three times with no response. This is really frustrating — I need this sorted today as I have a client presentation tomorrow that depends on this software."></textarea>
+Example: Hi, I've been charged twice this month and my account still shows as inactive. I've emailed three times with no response. This is really frustrating — I need this sorted today as I have a client presentation tomorrow that depends on this software.
+
+Logs work too: TypeError: Cannot read properties of undefined (reading 'user') at checkout.js:142..."></textarea>
+    </div>
+
+    <div class="model-bar">
+        <label>MODEL</label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-haiku-4-5-20251001" checked>
+            <span class="model-name">Haiku 4.5</span>
+            <span class="model-price" id="priceHaiku">~0.20¢</span>
+            <span class="model-rec">recommended</span>
+        </label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-sonnet-4-6">
+            <span class="model-name">Sonnet 4.6</span>
+            <span class="model-price" id="priceSonnet">~0.60¢</span>
+        </label>
+        <span class="model-auto" id="modelAuto">auto-switched — input over 5k</span>
     </div>
 
     <div class="error-banner" id="errorBanner"></div>
@@ -365,6 +448,67 @@ Example: Hi, I've been charged twice this month and my account still shows as in
 </footer>
 
 <script>
+    const SOFT_LIMIT  = 3000;
+    const HAIKU_HARD  = 5000;
+    const SONNET_HARD = 10000;
+    const TRUNCATION_NOTE = '\n\n[Input truncated to fit token limit]';
+
+    const MODEL_PRICING = {
+        'claude-haiku-4-5-20251001': { input: 0.80, output: 4.00 },
+        'claude-sonnet-4-6':         { input: 3.00, output: 15.00 }
+    };
+
+    let autoSwitched = false;
+
+    function selectedModel() {
+        return document.querySelector('input[name="model"]:checked').value;
+    }
+
+    function estimateCost(modelId, messageLength) {
+        const inputTokens = 250 + Math.ceil(messageLength / 4);
+        const outputTokens = 300;
+        const m = MODEL_PRICING[modelId];
+        const cents = ((inputTokens * m.input + outputTokens * m.output) / 1_000_000) * 100;
+        return `~${cents.toFixed(2)}¢`;
+    }
+
+    function updatePrices() {
+        const len = document.getElementById('message').value.length;
+        document.getElementById('priceHaiku').textContent  = estimateCost('claude-haiku-4-5-20251001', len);
+        document.getElementById('priceSonnet').textContent = estimateCost('claude-sonnet-4-6', len);
+    }
+
+    document.querySelectorAll('input[name="model"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            autoSwitched = false;
+            document.getElementById('modelAuto').style.display = 'none';
+        });
+    });
+
+    document.getElementById('message').addEventListener('input', function() {
+        const len = this.value.length;
+        const haiku  = document.querySelector('input[value="claude-haiku-4-5-20251001"]');
+        const sonnet = document.querySelector('input[value="claude-sonnet-4-6"]');
+        const autoNote = document.getElementById('modelAuto');
+
+        if (len > HAIKU_HARD && haiku.checked) {
+            sonnet.checked = true;
+            autoSwitched = true;
+            autoNote.style.display = 'inline';
+        } else if (len <= HAIKU_HARD && autoSwitched) {
+            haiku.checked = true;
+            autoSwitched = false;
+            autoNote.style.display = 'none';
+        }
+
+        const hardLimit = sonnet.checked ? SONNET_HARD : HAIKU_HARD;
+        const counter = document.getElementById('charCounter');
+        counter.textContent = `${len.toLocaleString()} / ${SOFT_LIMIT.toLocaleString()}`;
+        counter.className = 'char-counter' + (len > hardLimit ? ' over' : len > SOFT_LIMIT ? ' warn' : '');
+
+        updatePrices();
+    });
+
     async function triage() {
         const apiKey = document.getElementById('apiKey').value.trim();
         const message = document.getElementById('message').value.trim();
@@ -377,14 +521,21 @@ Example: Hi, I've been charged twice this month and my account still shows as in
         errorBanner.style.display = 'none';
 
         if (!apiKey) return showError('Enter your Anthropic API key above.');
+        if (!apiKey.startsWith('sk-ant-')) return showError('API key format looks wrong — Anthropic keys start with sk-ant-. Check you\'ve pasted the full key.');
         if (!message) return showError('Paste a customer message to triage.');
+
+        const model = selectedModel();
+        const hardLimit = model === 'claude-sonnet-4-6' ? SONNET_HARD : HAIKU_HARD;
+        const processedMessage = message.length > hardLimit
+            ? message.slice(0, hardLimit - TRUNCATION_NOTE.length) + TRUNCATION_NOTE
+            : message;
 
         triageBtn.disabled = true;
         statusText.innerHTML = '<span class="spinner"></span> triaging...';
         results.classList.remove('visible');
 
         try {
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
+            const response = await fetch('https://anthropic-proxy.work-specious.workers.dev', {
                 method: 'POST',
                 headers: {
                     'x-api-key': apiKey,
@@ -393,27 +544,40 @@ Example: Hi, I've been charged twice this month and my account still shows as in
                     'anthropic-dangerous-direct-browser-calls': 'true'
                 },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-6',
+                    model: model,
                     max_tokens: 1000,
-                    system: `You are a support triage specialist. When given a customer message, respond with exactly three sections using these markdown headers:
+                    system: `You are a support triage specialist. When given a customer message — which may be a written message, an error log, a stack trace, or a support thread excerpt — respond with exactly three sections using these markdown headers:
 
 ## Category
 State the category on the first line (choose the most fitting: Billing, Technical Issue, Account Access, Bug Report, Feature Request, General Inquiry, Complaint, Cancellation, or Other). Then add 1–2 sentences explaining why this category fits.
 
 ## Urgency
-State the urgency level on the first line — exactly one of: Low, Medium, High, or Critical. Then add 1–2 sentences of reasoning. Consider: tone and emotional state of the customer, implied business impact, time sensitivity, and how long the issue has been ongoing.
+State the urgency level on the first line — exactly one of: Low, Medium, High, or Critical. Then add 1–2 sentences of reasoning. Consider: tone and emotional state of the customer, implied business impact, time sensitivity, how long the issue has been ongoing, and for logs or error traces, the severity and type of error.
 
 ## Suggested Response
-Write a first response the support agent can send as-is or adapt. It should be warm, professional, and specific to what the customer described. Do not use placeholder text like [NAME] or [PRODUCT] — write it ready to send. Keep it under 150 words.
+Write a first response the support agent can send as-is or adapt. It should be warm, professional, and specific to what the customer described. If the input is a log or error snippet with no accompanying message, write a response acknowledging the technical issue and requesting any relevant context (steps to reproduce, environment, account details). Do not use placeholder text like [NAME] or [PRODUCT] — write it ready to send. Keep it under 150 words.
 
 Be direct. No preamble or commentary outside these three sections.`,
-                    messages: [{ role: 'user', content: message }]
+                    messages: [{ role: 'user', content: processedMessage }]
                 })
             });
 
             if (!response.ok) {
-                const err = await response.json().catch(() => ({}));
-                throw new Error(err.error?.message || `API error ${response.status}`);
+                const errData = await response.json().catch(() => ({}));
+                const msg = errData.error?.message || '';
+                if (response.status === 401) {
+                    throw new Error('Authentication failed (401) — your API key is invalid or expired. Check it in your Anthropic console.');
+                } else if (response.status === 403) {
+                    throw new Error('Access forbidden (403) — your API key may not have permission for this model.');
+                } else if (response.status === 429) {
+                    throw new Error('Rate limited (429) — you\'ve hit your usage limit. Wait a moment and try again.');
+                } else if (response.status === 400) {
+                    throw new Error(`Bad request (400) — ${msg || 'check your input and API key'}`);
+                } else if (response.status >= 500) {
+                    throw new Error(`Anthropic server error (${response.status}) — the service may be temporarily unavailable. Try again in a moment.`);
+                } else {
+                    throw new Error(msg || `API error ${response.status}`);
+                }
             }
 
             const data = await response.json();
@@ -424,7 +588,16 @@ Be direct. No preamble or commentary outside these three sections.`,
             statusText.textContent = 'done';
 
         } catch (err) {
-            showError(err.message);
+            console.error('Triage error:', err);
+            if (err instanceof TypeError) {
+                showError(
+                    'Network error — the request failed before reaching the API. ' +
+                    'Possible causes: a browser extension blocking api.anthropic.com, a firewall or VPN, or a CORS restriction. ' +
+                    'Open your browser console (F12 → Console tab) to see the specific error.'
+                );
+            } else {
+                showError(err.message);
+            }
             statusText.textContent = '';
         } finally {
             triageBtn.disabled = false;
