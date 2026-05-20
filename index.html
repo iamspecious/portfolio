@@ -1548,7 +1548,7 @@
                          SUPPORT TICKET TRIAGE — AI TOOL
                     ===================================================== -->
                     <div class="project">
-                        <h3>Support Ticket Triage Tool <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <h3>Support Ticket Triage Tool <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>Paste a customer message, error log, or support thread — and Claude returns a category, an urgency level (colour-coded Low to Critical), and a suggested first response ready to copy and send. One input, one button. Built to directly demonstrate the kind of tool you'd build or configure in a support or implementation role.</p>
                         <div class="highlights">
@@ -1572,6 +1572,13 @@
                                 <span class="win-title">Prompt is tunable</span>
                                 <p class="win-detail">Categories, urgency signals, and response tone can be adjusted for any product in minutes. That's the implementation judgment this demonstrates.</p>
                             </div>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Roadmap</strong>
+                            <ul>
+                                <li><strong>Bulk mode</strong> — paste a batch of tickets (newline-separated or numbered), run them sequentially through the same triage pipeline, and get a full results table. One API call per ticket keeps the cost model identical (~0.2¢ each) and the output clean. No queue management, no backend, just a loop.</li>
+                                <li><strong>CSV export</strong> — after a bulk run, export the full triage results as a CSV: ticket text, category, urgency, suggested response. Pure client-side via the Blob API — nothing leaves the browser. Paste in, triage, download. Drop it straight into a spreadsheet or ticket system.</li>
+                            </ul>
                         </div>
                         <p>
                             <span class="tech-tag">HTML/CSS/JS</span>
