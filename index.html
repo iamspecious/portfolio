@@ -95,6 +95,36 @@
             border-radius: 0 6px 6px 0;
         }
 
+        .roadmap {
+            margin: 14px 0 10px 0;
+            padding: 12px 16px;
+            background: #f4f0fb;
+            border-left: 3px solid #7b5ea7;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .roadmap strong.roadmap-heading {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #4a3570;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .roadmap ol {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 0.83rem;
+            color: #333;
+            line-height: 1.85;
+        }
+
+        .roadmap li { margin-bottom: 6px; }
+        .roadmap li:last-child { margin-bottom: 0; }
+        .roadmap li strong { color: #4a3570; }
+
         .project-wins strong {
             display: block;
             font-size: 0.72rem;
@@ -539,7 +569,7 @@
                          FAQ CHATBOT — AI TOOL
                     ===================================================== -->
                     <div class="project">
-                        <h3>FAQ Chatbot <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <h3>FAQ Chatbot <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>Paste a company's FAQ or internal knowledge base, paste a customer message, and get an answer grounded entirely in those docs — nothing made up, nothing hallucinated. Built to show how a lightweight AI support chatbot actually works: no vector database, no embeddings pipeline, no backend. Just a system prompt, a context window, and a model that knows to say "I don't have that" when the docs don't cover it.</p>
                         <p>The goal is a tool a client could realistically drop into their website with minimal setup — and a devlog that walks through every decision, tradeoff, and constraint so someone reading it understands not just what was built, but why it works and where it breaks.</p>
@@ -585,6 +615,15 @@
                             <span class="tech-tag">Prompt engineering</span>
                         </p>
                         <a class="tool-link-badge" href="faq-chatbot.html" target="_blank">Open Tool →</a>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Prompt caching</strong> — The single biggest cost lever that stays close to the current architecture. Requires adding a thin backend (a serverless function) to hold the KB server-side and mark it as a cacheable prefix in Anthropic's API. Cache hits cost 10% of normal input rate — a 60K char KB drops from ~$0.012 to ~$0.0012 per query on cached calls. Same model, same prompt logic, just stops re-reading the full document on every single request. Right first step once query volume makes it worth the minimal infrastructure overhead.</li>
+                                <li><strong>KB distillation</strong> — A one-time client-side preprocessing step: Claude reads your full docs and produces a compressed, Q&amp;A-optimised summary stored alongside the original in localStorage. Smaller compressed KB means cheaper queries with no backend required. Trade-off: compression loses some detail, so this suits broad FAQ coverage more than precise technical docs where exact wording matters. No infrastructure cost — just one extra API call upfront.</li>
+                                <li><strong>RAG pipeline</strong> — The right answer for document sets too large for context or for high-volume deployments where per-query cost needs to be pushed as low as possible. Chunk the docs, generate embeddings once (cheap — text-embedding models cost a fraction of chat models), store in a vector database, retrieve only the two or three relevant chunks per query. Meaningful infrastructure step up: embedding model, vector store, retrieval logic. Makes sense when the KB outgrows what context-window retrieval can handle cleanly.</li>
+                            </ol>
+                        </div>
 
                         <div class="devlog">
                             <div class="devlog-header">
@@ -789,6 +828,38 @@
                                 <p>
                                     <span class="tag tag-done">Done</span>
                                     v0.3 live. Debounced KB save + beforeunload safety net. API cost unchanged. Browser overhead reduced significantly on large KBs.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — roadmap: the re-reading problem</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    The core inefficiency in the current design: every single query re-sends the full knowledge base. The KB doesn't change between queries, but the model re-reads all of it every time. For a 60K char KB that's ~15,000 input tokens on every call — whether the question needs one sentence of docs or all of them. This is the thing the roadmap is built around fixing, in order of complexity and infrastructure cost.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — roadmap step 1: prompt caching</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Anthropic's prompt caching feature lets you mark a prefix of the context (e.g. the system prompt including the full KB) as cacheable. First call is a cache miss — costs 125% of normal input rate. Subsequent calls within 5 minutes are cache hits — cost 10% of normal input rate. For a 60K char KB, that flips the input cost from ~$0.012 per query to ~$0.0012 on cache hits. 10× reduction on KB token cost for free, effectively. Constraint: requires a backend. Prompt caching only works on server-side API calls — you can't send the cache-control headers from a browser. So this step means adding a thin proxy: one serverless function that holds the KB, manages the cache headers, and forwards the user's question. At low volume, serverless costs near nothing. This is the right first step once query volume justifies it.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — roadmap step 2: KB distillation</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    An option that stays within the current client-side architecture: a one-time preprocessing step where Claude reads the full KB and produces a compressed, Q&amp;A-optimised version. Paste your 60K char policy docs, click Compress — Claude distills them down to the 15K chars of actual answerable facts. Store the compressed version in localStorage. Every subsequent query uses the smaller, cheaper version. Cost: one API call upfront (~$0.013 for a 60K char doc), then ongoing savings on every query. No backend required. The honest trade-off: compression is lossy. A distilled KB won't answer every edge case the original would — it suits a broad FAQ better than a technical manual where exact wording matters. Useful as an intermediate step before adding proper infrastructure.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-09 — roadmap step 3: RAG</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Retrieval-Augmented Generation is the full answer to the re-reading problem: chunk the docs, embed each chunk once using a cheap embedding model (text-embedding-3-small costs ~$0.02/MTok — a 100-page doc embeds for under a cent), store the vectors, and at query time retrieve only the 2–3 most relevant chunks to send alongside the question. Queries go from sending 15,000 tokens to sending ~500. Cost per query drops by ~96% compared to the current full-KB approach. The infrastructure price: you need an embedding model, a vector store, and retrieval logic. That's a real architectural step up. It makes sense when the KB is too large for context-window retrieval to work cleanly, or when you're handling enough volume that even prompt-cached queries add up. Not the right first step — but the right answer at scale.
                                 </p>
                             </div>
 
