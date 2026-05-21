@@ -1595,6 +1595,30 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-05-21 — live + roadmap</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Badge updated from "In Progress" to "Live" — tool is fully functional and available. Roadmap block added to the project card covering the two most useful next builds: bulk mode and CSV export.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-21</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Bulk mode design: accept a batch of tickets (newline-separated or numbered), run them through the existing triage pipeline one at a time in a loop. One API call per ticket — same ~0.2¢ cost model, no change to the prompt, no queue infrastructure. The output becomes a table rather than three panels. Same architecture, bigger input.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-21</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    CSV export design: pure client-side via the Blob API. After a bulk run, serialise each row (ticket text, category, urgency, suggested response) into a CSV string, wrap in a Blob, create an object URL, trigger a download. No server, no data leaves the browser. The file is generated and consumed entirely in the tab — consistent with the no-backend constraint and no new privacy surface.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-05-09 — done</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>
