@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PregVoice — Research &amp; Devlog</title>
+    <style>
+        :root {
+            --bg: #0a0d0f;
+            --surface: #111518;
+            --surface2: #161b1e;
+            --border: #2a3238;
+            --accent: #4a9aba;
+            --accent2: #7ec8a4;
+            --warm: #e8b86d;
+            --danger: #d4615a;
+            --muted: #6b7c85;
+            --text: #d0dde4;
+            --text-dim: #8a9ba5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            padding: 40px 20px 80px;
+        }
+
+        .container { max-width: 820px; margin: 0 auto; }
+
+        .back-link {
+            display: inline-block;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 36px;
+            letter-spacing: 0.03em;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent); }
+
+        .page-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: #1e2e38;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 3px;
+            padding: 2px 8px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #eaf4f8;
+            margin-bottom: 12px;
+        }
+
+        .tagline {
+            color: var(--text-dim);
+            font-size: 16px;
+            max-width: 620px;
+            line-height: 1.6;
+        }
+
+        .section { margin-bottom: 52px; }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #eaf4f8;
+            margin-bottom: 10px;
+            margin-top: 24px;
+        }
+
+        h2:first-child { margin-top: 0; }
+
+        p {
+            color: var(--text-dim);
+            margin-bottom: 14px;
+        }
+        p:last-child { margin-bottom: 0; }
+
+        /* ── Problem block ── */
+        .problem-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--danger);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+        .problem-block p { margin-bottom: 10px; font-size: 15px; }
+
+        /* ── Layer cards ── */
+        .layer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+        .layer-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 18px 20px;
+        }
+        .layer-number {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .layer-card h3 { font-size: 14px; font-weight: 600; color: #eaf4f8; margin-bottom: 8px; }
+        .layer-card p { font-size: 13px; color: var(--text-dim); margin: 0; }
+        .layer-status {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            padding: 2px 6px;
+            margin-top: 12px;
+        }
+        .status-active  { background: #1a2e1e; color: var(--accent2); border: 1px solid var(--accent2); }
+        .status-research{ background: #1e2730; color: var(--accent);  border: 1px solid var(--accent);  }
+        .status-concept { background: #2a2218; color: var(--warm);    border: 1px solid var(--warm);    }
+
+        /* ── Constraint grid ── */
+        .constraint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        .constraint-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+        .constraint-card .label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .label-hard       { color: var(--danger); }
+        .label-design     { color: var(--warm); }
+        .label-regulatory { color: var(--accent); }
+        .constraint-card h4 { font-size: 13px; font-weight: 600; color: #eaf4f8; margin-bottom: 6px; }
+        .constraint-card p  { font-size: 12px; color: var(--text-dim); margin: 0; line-height: 1.5; }
+
+        /* ── Risk table ── */
+        .risk-wrapper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .risk-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .risk-table th {
+            text-align: left;
+            padding: 9px 14px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            background: var(--surface2);
+        }
+        .risk-table td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #1a2228;
+            color: var(--text-dim);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .risk-table tr:last-child td { border-bottom: none; }
+        .risk-table td:first-child { color: #eaf4f8; font-weight: 500; width: 26%; }
+        .risk-table td:nth-child(2),
+        .risk-table td:nth-child(3) { width: 10%; white-space: nowrap; }
+
+        .sev-critical { color: #d55b5b; font-weight: 700; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .sev-high     { color: #d59b5b; font-weight: 700; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .sev-medium   { color: #a07fd4; font-weight: 700; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .sev-low      { color: #5dbb8a; font-weight: 700; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+        /* ── Privacy flow ── */
+        .privacy-flow {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        .privacy-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 14px 20px;
+            border-bottom: 1px solid #1a2228;
+        }
+        .privacy-step:last-child { border-bottom: none; }
+        .step-num {
+            font-size: 11px;
+            font-weight: 700;
+            font-family: monospace;
+            color: var(--accent2);
+            min-width: 28px;
+            padding-top: 2px;
+        }
+        .step-content h4 { font-size: 13px; font-weight: 600; color: #eaf4f8; margin-bottom: 4px; }
+        .step-content p  { font-size: 12.5px; color: var(--text-dim); margin: 0; line-height: 1.5; }
+
+        .audio-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .audio-option {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 14px 16px;
+        }
+        .audio-option .opt-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .opt-default  { color: var(--accent2); }
+        .opt-optional { color: var(--warm); }
+        .opt-never    { color: var(--danger); }
+        .audio-option h4 { font-size: 13px; font-weight: 600; color: #eaf4f8; margin-bottom: 5px; }
+        .audio-option p  { font-size: 12px; color: var(--text-dim); margin: 0; line-height: 1.5; }
+
+        /* ── Haptic table ── */
+        .haptic-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .haptic-table th {
+            text-align: left;
+            padding: 8px 12px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            background: var(--surface2);
+        }
+        .haptic-table td {
+            padding: 10px 12px;
+            color: var(--text-dim);
+            border-bottom: 1px solid #1a2228;
+            vertical-align: top;
+        }
+        .haptic-table tr:last-child td { border-bottom: none; }
+        .haptic-table td:first-child {
+            font-family: monospace;
+            color: var(--accent);
+            font-size: 15px;
+            letter-spacing: 0.15em;
+            white-space: nowrap;
+        }
+
+        /* ── Ethics grid ── */
+        .ethics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+        }
+        .ethics-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent2);
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+        .ethics-card h4 { font-size: 13px; font-weight: 600; color: #eaf4f8; margin-bottom: 6px; }
+        .ethics-card p  { font-size: 12px; color: var(--text-dim); margin: 0; line-height: 1.5; }
+
+        /* ── Language grid ── */
+        .lang-note {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .lang-note p { font-size: 13.5px; margin: 0; }
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+        }
+        .lang-chip {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 9px 12px;
+        }
+        .lang-chip.lang-priority { border-color: #2a4e3e; }
+        .lang-chip .lang-name   { font-size: 13px; font-weight: 600; color: #eaf4f8; display: block; margin-bottom: 2px; }
+        .lang-chip .lang-native { font-size: 11px; color: var(--muted); display: block; }
+        .lang-chip .lang-status { font-size: 10px; color: var(--accent2); display: block; margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* ── Framework comparison ── */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .framework-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+        .framework-card.chosen { border-color: var(--accent2); }
+        .fw-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .fw-chosen { color: var(--accent2); }
+        .fw-later  { color: var(--warm); }
+        .fw-out    { color: var(--muted); }
+        .framework-card h4 { font-size: 13px; font-weight: 600; color: #eaf4f8; margin-bottom: 8px; }
+        .framework-card ul { padding-left: 14px; color: var(--text-dim); font-size: 12px; }
+        .framework-card li { margin-bottom: 4px; line-height: 1.4; }
+
+        .cost-breakdown {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-top: 16px;
+        }
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 18px;
+            border-bottom: 1px solid #1a2228;
+            font-size: 13px;
+        }
+        .cost-row:last-child { border-bottom: none; }
+        .cost-row span { color: var(--text-dim); }
+        .cost-row .cost-val { font-family: monospace; font-weight: 600; }
+        .cost-zero { color: var(--accent2); }
+        .cost-small { color: var(--warm); }
+
+        /* ── Devlog ── */
+        .devlog {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .devlog-header {
+            background: var(--surface2);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .devlog-header span { font-family: monospace; font-size: 13px; color: var(--accent2); }
+        .devlog-header small { color: var(--muted); font-size: 12px; }
+        .devlog-entry {
+            padding: 16px 20px;
+            border-bottom: 1px solid #1a2228;
+        }
+        .devlog-entry:last-child { border-bottom: none; }
+        .timestamp {
+            display: block;
+            font-size: 11px;
+            font-family: monospace;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            padding: 2px 7px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .tag-decision { background: #1a2e1e; color: #5dbb8a; border: 1px solid #2a4e38; }
+        .tag-tried    { background: #1a2234; color: #5b9bd5; border: 1px solid #2a3a54; }
+        .tag-pivot    { background: #2e2418; color: #d59b5b; border: 1px solid #4e3a28; }
+        .tag-done     { background: #1a2e1a; color: #5dbb5d; border: 1px solid #2a4e2a; }
+        .tag-note     { background: #22183a; color: #a07fd4; border: 1px solid #3a2858; }
+        .tag-issue    { background: #2e1a1a; color: #d55b5b; border: 1px solid #4e2a2a; }
+        .devlog-entry p {
+            color: var(--text-dim);
+            font-size: 13.5px;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        code {
+            font-family: monospace;
+            font-size: 12px;
+            background: #1a2228;
+            color: var(--accent);
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        /* ── Next steps ── */
+        .next-steps {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent2);
+            border-radius: 6px;
+            padding: 20px 24px;
+        }
+        .next-steps h3 {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent2);
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .next-steps ol { padding-left: 18px; color: var(--text-dim); font-size: 14px; }
+        .next-steps li { margin-bottom: 10px; line-height: 1.6; }
+        .next-steps li:last-child { margin-bottom: 0; }
+
+        /* ── Footer ── */
+        .page-footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .page-footer a { color: var(--muted); text-decoration: none; }
+        .page-footer a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <a class="back-link" href="index.html#projects">← back to portfolio</a>
+
+    <div class="page-header">
+        <div class="status-badge">Research &amp; Planning</div>
+        <h1>PregVoice</h1>
+        <p class="tagline">A layered accessibility project giving blind and visually impaired pregnant people an independent, private way to read a pregnancy test result. No sighted assistance required.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         THE PROBLEM
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">The Problem</div>
+
+        <div class="problem-block">
+            <p>A blind or visually impaired person taking a home pregnancy test cannot independently read the result.</p>
+            <p>Every current path — line tests, digital tests, dip tests — produces a visual output only. Reading it means handing the test to someone else, describing a live camera feed to a volunteer service, or hoping for help. There is no standard, private, independent route.</p>
+            <p>This matters because pregnancy is one of the most private moments in a person's life. The gap is structural, not accidental — and it's solvable.</p>
+        </div>
+
+        <h2>Why existing solutions fall short</h2>
+        <p><strong>Be My Eyes / Aira</strong> — These connect blind users with sighted volunteers or AI via live camera. Technically usable, but they require streaming video of a pregnancy test to a third-party server or stranger. The privacy cost is prohibitive. These are valuable tools; this is not their right use case.</p>
+        <p><strong>Clearblue Digital</strong> — The closest existing product. High-contrast LCD text ("Pregnant" / "Not Pregnant") helps low-vision users with magnification, but produces no audio, no haptic, no screen-reader output. The hardware for an audio edition is practically already inside the stick.</p>
+        <p><strong>Voice assistants</strong> — Siri and Google Assistant describe what they see generally. They are not calibrated for the specificity required here: one line vs. two, or reading a small LCD in poor lighting. General is not good enough for this.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         THREE LAYERS
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Our Approach — Three Layers</div>
+
+        <p style="margin-bottom: 20px;">We work in layers: starting with what requires no new hardware, moving toward purpose-built solutions if the accessible path proves unreliable.</p>
+
+        <div class="layer-grid">
+            <div class="layer-card">
+                <div class="layer-number">Layer 1</div>
+                <h3>Smartphone Camera</h3>
+                <p>Point your phone at the test. The app reads the result using on-device ML — no image leaves the phone. Works with tests you already buy, on hardware you already own.</p>
+                <div class="layer-status status-active">Active build</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-number">Layer 2</div>
+                <h3>Digital Test Partnership</h3>
+                <p>Clearblue Digital tests already contain a microcontroller and battery. Research track: can audio output be added via hardware revision, firmware change, or manufacturer collaboration?</p>
+                <div class="layer-status status-research">In research</div>
+            </div>
+            <div class="layer-card">
+                <div class="layer-number">Layer 3</div>
+                <h3>Standalone Reader Device</h3>
+                <p>A small clip-on accessory: holds the test in position, reads line intensity via colour sensor, outputs audio and haptic. No phone required. Estimated BOM under £5 at volume.</p>
+                <div class="layer-status status-concept">Concept</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         CONSTRAINTS
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Constraints We're Designing Around</div>
+
+        <div class="constraint-grid">
+            <div class="constraint-card">
+                <div class="label label-hard">Hard constraint</div>
+                <h4>Result reliability</h4>
+                <p>A false positive or missed positive is not acceptable. Any recognition system must meet a defined reliability threshold before it replaces the confidence a sighted person would have. The MVP ships with a confidence score and an explicit "re-check recommended" path below that threshold.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-hard">Hard constraint</div>
+                <h4>Privacy by default</h4>
+                <p>No image, result, or metadata leaves the device without an explicit user opt-in. On-device processing is a design requirement, not an optimisation. Any cloud fallback requires informed, active consent — not buried in a settings menu.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-regulatory">Regulatory</div>
+                <h4>Not a diagnostic device</h4>
+                <p>PregVoice reads the visual output of a completed test. The test itself is the regulated product. This distinction must be maintained in product design and all public language to stay clear of FDA (US) and MDR (EU) medical device classification.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-design">Design constraint</div>
+                <h4>Test timing window</h4>
+                <p>Line tests are valid within a 3–10 minute window. Faint lines fade. The reader must work on first attempt — no boot sequences, no repositioning loops. Digital tests hold results for ~6 minutes, which gives more working time.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-design">Design constraint</div>
+                <h4>Lighting variation</h4>
+                <p>A bathroom at 3am looks nothing like one at noon. The recognition model must handle low light, overhead fluorescents, and warm incandescent reliably — all are common in real use conditions.</p>
+            </div>
+            <div class="constraint-card">
+                <div class="label label-design">Design constraint</div>
+                <h4>Cost accessibility</h4>
+                <p>The people who need this most may not have the latest phone or disposable income for accessories. Layer 1 must work on mid-range Android from 2020 onwards. Layer 3 must be priced as an essential, not a peripheral. The tool itself is and will remain free.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         RISK ASSESSMENT
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Risk Assessment</div>
+
+        <p style="margin-bottom: 16px;">A formal look at what can go wrong, how likely it is, and what we do about it. These are living entries — updated as the build progresses and new risks surface.</p>
+
+        <div class="risk-wrapper">
+            <table class="risk-table">
+                <thead>
+                    <tr>
+                        <th>Risk</th>
+                        <th>Likelihood</th>
+                        <th>Impact</th>
+                        <th>Mitigation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>False positive result</td>
+                        <td><span class="sev-medium">Medium</span></td>
+                        <td><span class="sev-critical">Critical</span></td>
+                        <td>Confidence threshold with mandatory "re-check recommended" prompt below it. Always advise confirming with a healthcare provider. Never present a result as certain.</td>
+                    </tr>
+                    <tr>
+                        <td>False negative result</td>
+                        <td><span class="sev-medium">Medium</span></td>
+                        <td><span class="sev-critical">Critical</span></td>
+                        <td>Same threshold mechanism. Faint-line detection is the hardest case — the model must be calibrated to err toward "inconclusive" rather than "negative" when confidence is borderline.</td>
+                    </tr>
+                    <tr>
+                        <td>Privacy breach via image</td>
+                        <td><span class="sev-low">Low</span></td>
+                        <td><span class="sev-critical">Critical</span></td>
+                        <td>On-device ML only. No image is written to disk, no screenshot taken, no data sent anywhere. Camera frames are processed in memory and immediately discarded. Open source code is the verification mechanism.</td>
+                    </tr>
+                    <tr>
+                        <td>Audio disclosure in public</td>
+                        <td><span class="sev-high">High</span></td>
+                        <td><span class="sev-high">High</span></td>
+                        <td>Tap-to-hear model as the default (see Privacy Architecture). Result is never spoken without active user trigger. Earphone-only mode available. Haptic-first fallback available.</td>
+                    </tr>
+                    <tr>
+                        <td>Language output error</td>
+                        <td><span class="sev-medium">Medium</span></td>
+                        <td><span class="sev-high">High</span></td>
+                        <td>Result strings professionally translated, not machine-generated. Clinical phrasing ("The test shows a positive result") is less culturally ambiguous than personal phrasing. Language set is user-selectable, not assumed from locale.</td>
+                    </tr>
+                    <tr>
+                        <td>Accessibility failure on low-end hardware</td>
+                        <td><span class="sev-medium">Medium</span></td>
+                        <td><span class="sev-high">High</span></td>
+                        <td>Minimum spec target: Android 10, 2GB RAM, 8MP camera. Model benchmarked on low-spec devices before release. Graceful degradation: if confidence is persistently low, the app directs the user to an alternative approach rather than silently returning a bad result.</td>
+                    </tr>
+                    <tr>
+                        <td>Regulatory misclassification</td>
+                        <td><span class="sev-low">Low</span></td>
+                        <td><span class="sev-high">High</span></td>
+                        <td>Legal review before any public release. The "reads visual output, does not perform test" distinction is maintained in code (no modification of test hardware) and in all product language. Documented legal basis kept in the repository.</td>
+                    </tr>
+                    <tr>
+                        <td>Training data bias</td>
+                        <td><span class="sev-medium">Medium</span></td>
+                        <td><span class="sev-high">High</span></td>
+                        <td>Dataset must cover all major test brands, lighting conditions, orientations, and phone camera quality levels. Results must not systematically vary by any of these factors. Equity testing is a release requirement, not a post-launch audit.</td>
+                    </tr>
+                    <tr>
+                        <td>OS-level data retention</td>
+                        <td><span class="sev-low">Low</span></td>
+                        <td><span class="sev-high">High</span></td>
+                        <td>App never requests camera roll permission — uses live camera feed only. No screenshot API called. On PWA: no localStorage, no sessionStorage, no IndexedDB write for results. On native: no Photos library access requested.</td>
+                    </tr>
+                    <tr>
+                        <td>Project abandonment / hosting failure</td>
+                        <td><span class="sev-low">Low</span></td>
+                        <td><span class="sev-medium">Medium</span></td>
+                        <td>Open source under a permissive licence means any fork can survive the original going down. Hosting on GitHub Pages can migrate to GitLab Pages, Cloudflare Pages, or self-hosting — all free, all trivial for a static site. The tool runs entirely client-side; there is no server to lose.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         PRIVACY ARCHITECTURE
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Privacy Architecture</div>
+
+        <p>Health data is uniquely sensitive. A pregnancy test result is arguably among the most personal data a person can generate. The privacy model here isn't a policy document — it's a set of technical commitments built into the architecture from day one.</p>
+
+        <h2>Zero-retention guarantee</h2>
+
+        <div class="privacy-flow">
+            <div class="privacy-step">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                    <h4>Camera feed opened in memory only</h4>
+                    <p>The app reads a live stream from the camera. No frame is written to disk, no screenshot is captured, no image file is created at any point in the process.</p>
+                </div>
+            </div>
+            <div class="privacy-step">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                    <h4>On-device inference — nothing leaves the phone</h4>
+                    <p>The classification model runs locally via TensorFlow.js (PWA) or ML Kit (native). The pixel data from the camera frame is processed in JavaScript memory or native memory buffers and immediately released. No API call is made. No network request is sent.</p>
+                </div>
+            </div>
+            <div class="privacy-step">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                    <h4>Result delivered, then discarded</h4>
+                    <p>The classification result is passed to the audio/haptic output layer and displayed momentarily on screen. It is not stored in <code>localStorage</code>, <code>sessionStorage</code>, <code>IndexedDB</code>, or any other persistence mechanism. Closing the app leaves no trace of a result.</p>
+                </div>
+            </div>
+            <div class="privacy-step">
+                <div class="step-num">04</div>
+                <div class="step-content">
+                    <h4>No analytics, no crash reporting, no telemetry</h4>
+                    <p>The app does not load any third-party scripts — no Google Analytics, no Sentry, no Hotjar, nothing. There are no network requests at all during normal use. This is verifiable by anyone: the source is open and the Network tab in DevTools will be empty.</p>
+                </div>
+            </div>
+            <div class="privacy-step">
+                <div class="step-num">05</div>
+                <div class="step-content">
+                    <h4>Open source as the trust mechanism</h4>
+                    <p>Privacy policies are promises. Code is evidence. The repository is public specifically so any developer can verify that what the app claims to do is what it actually does. No closed binaries, no obfuscated code.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 28px;">Audio privacy — the tap-to-hear model</h2>
+        <p>A key design question: should the app speak the result immediately, or should the user actively choose to hear it? Blurting a result aloud in a shared bathroom, a public toilet, or with a partner nearby strips the user of control at exactly the moment they need it most. Our answer: the user decides when they hear the result.</p>
+
+        <div class="audio-options">
+            <div class="audio-option">
+                <div class="opt-label opt-default">Default</div>
+                <h4>Tap to hear</h4>
+                <p>Processing completes silently. The phone gives a gentle haptic pulse to signal the result is ready. The user taps the screen — or double-taps for haptic-only — to trigger audio. The result is never spoken without an active user gesture.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-optional">Optional</div>
+                <h4>Earphone mode</h4>
+                <p>When enabled, the app detects connected headphones via the Web Audio API and will only auto-speak if earphones are plugged in. On phone speaker, it stays silent. Gives hands-free use without the public disclosure risk.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-optional">Optional</div>
+                <h4>Delayed read timer</h4>
+                <p>The user can set a timer (10–60 seconds) between completing the scan and receiving the haptic signal. Designed for people who need a moment to move to a private space, put in headphones, or emotionally prepare before hearing the result.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-never">Never</div>
+                <h4>Auto-speak on phone speaker</h4>
+                <p>The app will never automatically speak a result on the phone speaker without user action. This mode does not exist. There is no setting that enables it. The architecture does not permit it as a default state.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         OUTPUT MODALITY DESIGN
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Output Modality Design — Rethinking the RNIB Finding</div>
+
+        <p>The RNIB's 2020 finding that blind users rejected audio deserves a closer reading. The prototypes they tested used a voice saying "Pregnant" or "Not Pregnant." The problem was not audio — it was <strong>linguistic content with inherent emotional weight</strong>. Any word carries meaning. "Pregnant" said in any voice, with any inflection, is a statement about someone's body and their future. Users did not want a machine making that statement at a moment they hadn't controlled.</p>
+
+        <p>A bleep has none of that. A single tone is not a word. It carries no linguistic valence, no implied emotion, no cultural connotation. It is information in the most neutral possible form. This is the same reason airport security uses tones not voices, and why medical monitors use alarms not announcements — neutrality by design.</p>
+
+        <p>The other concern the RNIB finding raises — which is separate and equally valid — is that not all pregnancy results are good or wanted. A positive result can mean joy, or devastation, depending entirely on context. A negative result can be a relief or a loss. The system cannot know which, and must not presume. A bleep says nothing about how to feel. A voice saying "Congratulations — you are pregnant" says everything. Even a clinical voice saying "The test shows a positive result" has linguistic content the user must process in the moment they receive unexpected or unwanted news. Tones sidestep this entirely.</p>
+
+        <h2>The revised output hierarchy</h2>
+
+        <div class="audio-options">
+            <div class="audio-option">
+                <div class="opt-label opt-default">Primary</div>
+                <h4>Tones — bleeps</h4>
+                <p>Simple audio tones on result. No words, no inflection, no emotional valence. Universal across all languages and cultures. Works on any phone with a speaker. Played through earphones when connected for privacy; through phone speaker only on active tap.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-optional">Secondary</div>
+                <h4>Haptic vibration</h4>
+                <p>Pulse patterns as a non-audio fallback. Useful in genuinely silent environments or for users with hearing impairments. Acknowledged as device-dependent — phone haptic motor quality varies significantly across manufacturers, ages, and price points.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-optional">Opt-in only</div>
+                <h4>Voice announcement</h4>
+                <p>Spoken result in the user's chosen language and phrasing. Available for users who specifically want it — not the default. Clinical framing only ("The test shows a positive result"). Never auto-plays without explicit preference setting.</p>
+            </div>
+            <div class="audio-option">
+                <div class="opt-label opt-never">Never</div>
+                <h4>Auto-announce on speaker</h4>
+                <p>No output mode — tone, haptic, or voice — activates automatically without a user trigger. The result is always ready and waiting. The user chooses the moment they receive it.</p>
+            </div>
+        </div>
+
+        <h2 style="margin-top: 28px;">The tone schema</h2>
+        <p>Simple, unambiguous, learnable in one read. The number of bleeps maps to the number of possible outcomes — not a Morse pattern, not a rising/falling cadence, just a count. Counts are cognitively the simplest possible encoding and work across every language and culture.</p>
+
+        <div class="devlog" style="border-radius: 8px; overflow: hidden; margin-top: 16px;">
+            <table class="haptic-table">
+                <thead>
+                    <tr>
+                        <th>Tone</th>
+                        <th>Result</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>· (1 bleep)</td>
+                        <td>Positive / pregnant</td>
+                        <td>One bleep, one result. No rising/falling implication — just a count. The user decides what one means to them.</td>
+                    </tr>
+                    <tr>
+                        <td>· · (2 bleeps)</td>
+                        <td>Negative / not pregnant</td>
+                        <td>Two bleeps, different count, unambiguous. No cadence designed to sound negative or positive.</td>
+                    </tr>
+                    <tr>
+                        <td>· · · (3 bleeps)</td>
+                        <td>Inconclusive / re-check</td>
+                        <td>Three bleeps. A third distinct count — clearly different from one or two, no emotional register attached.</td>
+                    </tr>
+                    <tr>
+                        <td>· · · · (4 rapid bleeps)</td>
+                        <td>Error / unreadable</td>
+                        <td>Four fast bleeps, faster cadence than the others — signals that something went wrong with the scan, distinct from any result.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top: 14px; font-size: 13px; color: var(--muted);">Tone frequency, duration, and spacing will be validated with blind and low-vision users. The schema above is the starting hypothesis.</p>
+
+        <h2>Why tones are more reliable than haptics as primary output</h2>
+        <p>Phone haptic motors are not standardised. A flagship iPhone produces crisp, precise vibration. A mid-range Android from 2020 may have a motor that barely registers at full volume. A budget phone may not differentiate reliably between a long and short pulse. The user holding the phone at an angle, through a case, or with reduced sensation in their hand compounds this further.</p>
+        <p>Phone speakers are far more consistent. Even a cheap handset from 2018 will produce a clearly audible bleep through its speaker, and a clearly audible bleep through connected earphones. The gap in reliability between a £50 phone speaker and a £1,000 phone speaker is far smaller than the gap in their haptic motors.</p>
+        <p>Haptic remains in the design as a genuine fallback — for silent environments, for users with hearing impairments, for moments when earphones aren't available and the speaker isn't an option. But it is not the primary delivery mechanism, and the design acknowledges its device-dependency rather than assuming it works uniformly.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         HAPTIC LANGUAGE
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Haptic Result Language — Secondary Output</div>
+
+        <p>Haptic is a genuine and important output modality — for users in silent environments, with hearing impairments, or in situations where audio of any kind isn't possible. It is not a degraded experience; it is a different one. The caveat is that it is device-dependent in a way that tones are not, and the design must acknowledge this rather than paper over it.</p>
+
+        <p>Haptic motor quality varies significantly across phone models, ages, and price points. The patterns below are designed to remain distinguishable even on weaker motors — but user testing across a range of devices is required before these are finalised.</p>
+
+        <div class="devlog" style="border-radius: 8px; overflow: hidden; margin-top: 16px;">
+            <table class="haptic-table">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Result</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>— · ·</td>
+                        <td>Positive / pregnant</td>
+                        <td>One long, two short. Mirrors the tone count concept — one primary pulse signals the primary outcome.</td>
+                    </tr>
+                    <tr>
+                        <td>· · —</td>
+                        <td>Negative / not pregnant</td>
+                        <td>Two short, one long. Distinct cadence from the positive pattern — different enough even on weaker motors.</td>
+                    </tr>
+                    <tr>
+                        <td>· · · · · ·</td>
+                        <td>Inconclusive / re-check</td>
+                        <td>Six rapid pulses, repeating every 3s. Clearly different cadence from either result — signals "try again."</td>
+                    </tr>
+                    <tr>
+                        <td>— — —</td>
+                        <td>Error / unreadable</td>
+                        <td>Three slow long pulses. Deliberate and heavy — distinct from any result pattern. Something went wrong with the scan.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top: 14px; font-size: 13px; color: var(--muted);">Haptic patterns will be tested across a range of phone models before finalising — including budget Android devices where motor quality is lowest. If patterns cannot be reliably distinguished on a defined minimum spec device, the design will be revised.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         MULTILINGUAL ACCESSIBILITY
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Multilingual Accessibility</div>
+
+        <p>A tool for accessibility that only works in English is not an accessibility tool. Language is not a secondary concern — it is as fundamental as the audio output itself. Every person who needs this tool deserves to hear the result in their own language, delivered with cultural sensitivity.</p>
+
+        <div class="lang-note">
+            <p><strong>Language detection approach:</strong> The browser's <code>navigator.language</code> suggests a starting point, but it reflects the device locale — not necessarily the user's spoken language. On first launch, PregVoice will present a language selection with a voice preview ("Tap to hear how the result will sound in this language") so the user confirms their preference explicitly. This choice is stored locally and does not require network access.</p>
+        </div>
+
+        <h2>Priority languages for initial release</h2>
+        <p style="margin-bottom: 16px;">Prioritised by global spoken prevalence, Web Speech API support quality, and the blind/low-vision community representation in each language group.</p>
+
+        <div class="lang-grid">
+            <div class="lang-chip lang-priority">
+                <span class="lang-name">English</span>
+                <span class="lang-native">English</span>
+                <span class="lang-status">✓ Priority</span>
+            </div>
+            <div class="lang-chip lang-priority">
+                <span class="lang-name">Spanish</span>
+                <span class="lang-native">Español</span>
+                <span class="lang-status">✓ Priority</span>
+            </div>
+            <div class="lang-chip lang-priority">
+                <span class="lang-name">Arabic</span>
+                <span class="lang-native">العربية</span>
+                <span class="lang-status">✓ Priority</span>
+            </div>
+            <div class="lang-chip lang-priority">
+                <span class="lang-name">French</span>
+                <span class="lang-native">Français</span>
+                <span class="lang-status">✓ Priority</span>
+            </div>
+            <div class="lang-chip lang-priority">
+                <span class="lang-name">Portuguese</span>
+                <span class="lang-native">Português</span>
+                <span class="lang-status">✓ Priority</span>
+            </div>
+            <div class="lang-chip lang-priority">
+                <span class="lang-name">Hindi</span>
+                <span class="lang-native">हिन्दी</span>
+                <span class="lang-status">✓ Priority</span>
+            </div>
+            <div class="lang-chip">
+                <span class="lang-name">Mandarin</span>
+                <span class="lang-native">普通话</span>
+                <span class="lang-status">Phase 2</span>
+            </div>
+            <div class="lang-chip">
+                <span class="lang-name">Swahili</span>
+                <span class="lang-native">Kiswahili</span>
+                <span class="lang-status">Phase 2</span>
+            </div>
+            <div class="lang-chip">
+                <span class="lang-name">Urdu</span>
+                <span class="lang-native">اردو</span>
+                <span class="lang-status">Phase 2</span>
+            </div>
+            <div class="lang-chip">
+                <span class="lang-name">Bengali</span>
+                <span class="lang-native">বাংলা</span>
+                <span class="lang-status">Phase 2</span>
+            </div>
+        </div>
+
+        <h2>Translation standards</h2>
+        <p><strong>Professional translation, not machine output.</strong> Result strings will be translated by native speakers with awareness of clinical and medical language in their cultural context. Machine translation is used for first-draft reference only — no string ships to production without human review.</p>
+        <p><strong>Clinical phrasing, not personal.</strong> "The test shows a positive result" is less culturally variable than "You are pregnant." The latter carries weight that lands differently in different cultural contexts. Clinical language is more consistently interpretable across languages and more defensible from a regulatory standpoint. The user can customise phrasing in settings.</p>
+        <p><strong>Grammatical gender.</strong> Many languages (French, Spanish, Arabic, German, Portuguese) have grammatically gendered constructions. The tool is not the place to make assumptions about the user's gender — result strings will be structured to be grammatically neutral where possible, or will offer an explicit preference setting where the language makes neutrality difficult.</p>
+        <p><strong>RTL layout support.</strong> Arabic, Hebrew, Urdu, and Persian are right-to-left scripts. The UI must respond correctly to RTL direction — this is a layout requirement, not a post-launch fix.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         ETHICS & CODE OF CONDUCT
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Ethics &amp; Code of Conduct</div>
+
+        <p>PregVoice handles a sensitive health moment for a marginalised group. The standard "be nice to each other" code of conduct isn't enough here — we need explicit commitments about what we will and won't do, and those commitments must be enforced in code, not just in policy.</p>
+
+        <div class="ethics-grid">
+            <div class="ethics-card">
+                <h4>Primary axiom: do no harm</h4>
+                <p>Every design decision is tested against a single question: could this harm the person using it? A false result, a privacy breach, a confusing output in a stressful moment — all qualify as harm. This axiom overrides convenience, speed to market, and cost.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>No monetisation of users, ever</h4>
+                <p>The tool is free. There is no premium tier, no in-app purchase, no advertising, no data brokering, no partnership that generates revenue from user behaviour. If sustaining the project requires money, the source will be disclosed and users will never be the product.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>Open source as a trust mechanism</h4>
+                <p>Privacy promises are words. Code is evidence. The full codebase — including the ML model architecture, the inference logic, and every audio string — is publicly auditable. Anyone can verify that the app does exactly what it says and nothing else.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>No design decisions without community input</h4>
+                <p>Blind and low-vision users must be involved at every major UX decision point — not as a post-launch survey, but as participants in the design process itself. Decisions made without this input will be revisited when it is available.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>Equity testing is a release requirement</h4>
+                <p>The recognition model must perform equally across all major test brands, lighting conditions, device camera qualities, and any other axis that could create a two-tier experience. If performance is systematically worse for any subgroup, the tool does not ship.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>Cultural sensitivity at every layer</h4>
+                <p>Pregnancy has different cultural weight in different communities. The tool must not assume a single emotional register — neither congratulatory nor clinical by default. Phrasing is neutral and configurable. No emoji, no exclamation marks, no assumptions about how someone might want to receive this information.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>Transparent governance</h4>
+                <p>Public changelog, public roadmap, public issue tracker. Maintainers are named. Decisions are documented — including ones that turned out to be wrong. The devlog you are reading is part of this commitment.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>Responsible disclosure policy</h4>
+                <p>A documented, public process for reporting security or privacy vulnerabilities. Reports are acknowledged within 48 hours. Confirmed issues are addressed before public disclosure. No reporter is penalised for finding a problem.</p>
+            </div>
+            <div class="ethics-card">
+                <h4>Contributor code of conduct</h4>
+                <p>Contributors working in this space must understand the sensitivity of the domain. Contributions that trivialise the use case, introduce privacy-reducing features, or fail equity testing standards will not be merged regardless of technical quality.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         FRAMEWORK & SUSTAINABILITY
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Framework &amp; Sustainability — Keeping It Free</div>
+
+        <p>An accessibility tool that costs money to use has already failed at its primary goal. Every architectural decision is evaluated partly through the lens of: does this create a running cost that would eventually force us to charge users or find commercial backing?</p>
+
+        <h2>Framework choice</h2>
+
+        <div class="framework-grid">
+            <div class="framework-card chosen">
+                <div class="fw-label fw-chosen">✓ Chosen — Phase 1</div>
+                <h4>Progressive Web App (PWA)</h4>
+                <ul>
+                    <li>No app store — works from a URL, no install required</li>
+                    <li>No approval gatekeeping from Apple or Google</li>
+                    <li>Free hosting on GitHub Pages</li>
+                    <li>TensorFlow.js runs the ML model in-browser</li>
+                    <li>Service worker enables full offline use</li>
+                    <li>Shareable as a link — zero friction for referrals</li>
+                    <li>WCAG compliance is straightforward to audit in HTML</li>
+                </ul>
+            </div>
+            <div class="framework-card">
+                <div class="fw-label fw-later">→ Phase 2 if needed</div>
+                <h4>React Native / Flutter</h4>
+                <ul>
+                    <li>Better camera control and ML performance</li>
+                    <li>Richer haptic patterns (native vibration API)</li>
+                    <li>Can use ML Kit (Android) / Vision (iOS) directly</li>
+                    <li>Single codebase for both platforms</li>
+                    <li>Requires app store approval and listing</li>
+                    <li>Download friction — raises barrier to access</li>
+                </ul>
+            </div>
+            <div class="framework-card">
+                <div class="fw-label fw-out">✗ Ruled out</div>
+                <h4>Server-rendered app</h4>
+                <ul>
+                    <li>Requires running infrastructure → monthly cost</li>
+                    <li>Creates a server that has access to user data</li>
+                    <li>Single point of failure for the privacy guarantee</li>
+                    <li>Adds maintenance burden and attack surface</li>
+                    <li>No benefit over PWA for this use case</li>
+                </ul>
+            </div>
+        </div>
+
+        <p><strong>Why PWA first:</strong> The camera API and TensorFlow.js have matured enough to support reliable on-device inference in a browser context. PWA removes every barrier to access — no account, no download, no OS version restriction, no app store approval. It can be shared as a URL and used immediately. If Phase 1 proves that camera-based recognition is reliable enough, Phase 2 (native) may never be necessary.</p>
+
+        <h2>Cost model</h2>
+
+        <div class="cost-breakdown">
+            <div class="cost-row">
+                <span>Hosting (GitHub Pages)</span>
+                <span class="cost-val cost-zero">£0 / month</span>
+            </div>
+            <div class="cost-row">
+                <span>ML inference (on-device, TensorFlow.js)</span>
+                <span class="cost-val cost-zero">£0 / use</span>
+            </div>
+            <div class="cost-row">
+                <span>Audio synthesis (Web Speech API, on-device)</span>
+                <span class="cost-val cost-zero">£0 / use</span>
+            </div>
+            <div class="cost-row">
+                <span>Analytics / crash reporting</span>
+                <span class="cost-val cost-zero">None — by design</span>
+            </div>
+            <div class="cost-row">
+                <span>Domain name (optional custom domain)</span>
+                <span class="cost-val cost-small">~£10 / year</span>
+            </div>
+            <div class="cost-row">
+                <span>Professional translations (one-time per language)</span>
+                <span class="cost-val cost-small">Volunteer / grant</span>
+            </div>
+        </div>
+
+        <p style="margin-top: 16px;"><strong>What if GitHub changes their pricing?</strong> The app is pure static HTML, CSS, and JS. It can run from any file host — GitLab Pages, Cloudflare Pages, Netlify, or a self-hosted NGINX server. The open source licence means any fork can survive the original going down. The tool has zero lock-in to any single provider because it has zero server dependencies.</p>
+
+        <h2>Open source governance</h2>
+        <p>Open source without governance is a bus-factor problem. The project will maintain: a named maintainer group, a documented contribution process, a clear licence (MIT or Apache 2.0 — to be confirmed with legal review), a security disclosure policy, and a public changelog. Anyone can fork; the canonical version will be the one that maintains the ethics and privacy standards above.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         DIGITAL TEST RESEARCH — CONFIRMED FINDINGS
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Clearblue Digital — Confirmed Internals</div>
+
+        <p>Multiple independent teardowns (Foone/Hackaday 2020, wemakethings.net 2014, and others) have documented the PCB in detail. We no longer need to speculate about what's inside.</p>
+
+        <h2>What's on the PCB</h2>
+        <p><strong>Optical system:</strong> 3–4 red/infrared LEDs illuminate the test strip from below. 1–2 phototransistors sit between them, measuring reflected light intensity from the strip lines. A plastic light baffle prevents direct LED-to-sensor coupling — the sensor only reads reflected light. The Weeks Indicator variant quantifies hCG level from the analogue intensity of the reflected signal, not just line presence or absence.</p>
+        <p><strong>Display:</strong> A small segment LCD — not dot-matrix or OLED. Displays "Pregnant" / "Not Pregnant" in text segments plus a Smart Countdown progress bar. The positive result is held on screen for up to one month; negative for approximately 24 hours. Both are firmware timers running in MCU HALT mode, drawing microamp-level current. No separate discrete timing hardware exists.</p>
+        <p><strong>Battery:</strong> Either a single <code>CR1616</code> lithium coin cell (3V, ~55 mAh) or two <code>LR44</code> alkaline cells in series (~3V, ~190 mAh) depending on variant. A passive piezo buzzer playing a short result beep would consume approximately 5–15 mC — less than 0.03% of the CR1616's capacity. Power is not the constraint.</p>
+
+        <h2>The MCU — and the finding that changes everything</h2>
+        <p>The microcontroller is confirmed across multiple teardowns as either the <strong>Holtek HT48C06</strong> or <strong>Holtek HT48R065B</strong>. Neither is a custom ASIC — both are standard off-the-shelf 8-bit OTP parts with full public datasheets.</p>
+
+        <div class="problem-block" style="border-left-color: var(--accent2);">
+            <p><strong>The HT48C06 has native buzzer drive pins built into the silicon.</strong></p>
+            <p>Pins PB0 and PB1 are a dedicated complementary buzzer driving pair with a built-in programmable frequency divider (PFD). Connecting a passive piezo element to these pins requires no external driver transistor and no additional circuitry. The hardware to make the stick beep on a result is already specced into the chip that is already inside the device.</p>
+            <p>The reason Clearblue Digital makes no sound is not a hardware limitation. It is a product decision.</p>
+        </div>
+
+        <h2>What OTP means in practice</h2>
+        <p>OTP stands for one-time programmable. The firmware is burned into the chip at manufacture and cannot be read out or overwritten. Any third party — or SPD themselves for a new SKU — would need to write replacement firmware from scratch. The optical sensing algorithm, the threshold logic, the countdown timing: all of it would need to be reverse engineered and reimplemented. This is not impossible, but it is a significant engineering undertaking.</p>
+        <p>Some units use a COB (chip-on-board) package where the MCU die is encapsulated in an epoxy blob. In these variants the chip cannot be physically removed or identified without destroying the board — specifically designed to prevent modification.</p>
+
+        <h2>The real constraint: physical space</h2>
+        <p>The stick enclosure is moulded to extremely tight tolerances. A passive piezo disc (even a 10mm diameter, 0.3mm thick SMD type) adds physical volume that does not currently exist inside the stick. Any audio addition to an existing Clearblue Digital reading stick requires a new enclosure revision — new injection moulding tooling. The electronics are not the blocker. The plastic is.</p>
+
+        <h2>Three paths — updated assessment</h2>
+        <p><strong>Hardware modification (third party):</strong> Technically possible in principle — the chip has the buzzer pins — but OTP firmware means the sensing logic must be rewritten from scratch, COB variants cannot be touched, and the enclosure must be redesigned. Not a hobbyist project. A significant embedded systems engineering effort with regulatory complications for any commercial product.</p>
+        <p><strong>Parallel MCU path:</strong> A small secondary microcontroller reads the LCD segment outputs optically and drives audio independently, without touching the original firmware. Avoids the OTP problem. Still requires enclosure modification to accommodate the extra electronics. The most realistic third-party hardware path.</p>
+        <p><strong>Manufacturer partnership (recommended):</strong> SPD/P&amp;G holds the cleared IP, manufacturing relationships, and existing 510(k) submissions. A new SKU — same strip, same optical reader, new enclosure with a speaker cavity, new firmware using the buzzer pins already in the chip — is the cleanest path. The incremental BOM cost of a passive piezo in mass production is approximately £0.10–0.30. Enclosure tooling change and firmware rewrite are one-time costs. The regulatory path is a new 510(k) with the existing Clearblue system as a strong predicate.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         ACCESSIBLE PREGNANCY TEST LANDSCAPE
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Existing Accessible Pregnancy Tests — What's Already Been Tried</div>
+
+        <p>We are not the first people to work on this problem. Three significant prior efforts are documented — and one of them directly challenges our audio-first instinct in a way we have to take seriously.</p>
+
+        <h2>RNIB Accessible Pregnancy Test — The &amp; Partnership London, 2020</h2>
+        <p>The RNIB commissioned a prototype in 2020. The design team conducted user research with blind and visually impaired people before building anything. Their finding changed the output modality entirely: <strong>blind users did not want audio output.</strong></p>
+        <p>The reason: any tone or voice has emotional valence. A beep sounds either positive or negative. A spoken result — however clinically framed — carries an emotional register. Users taking the test are often hoping for a specific outcome. They did not want a machine to telegraph that outcome through tone before they had a moment to process it themselves.</p>
+        <p>The RNIB prototype used <strong>tactile output</strong> — a mechanical button that physically raises when the result is positive. Emotionally neutral. Physically unambiguous. No sound, no screen. The prototype was never commercialised.</p>
+
+        <h2>APT — Accessible Pregnancy Test, James Dyson Award 2022</h2>
+        <p>The APT design reached the same conclusion independently. The result is communicated via <strong>haptic vibration</strong>: one pulse for negative, two pulses for positive. No audio. The privacy and emotional neutrality reasoning matches the RNIB finding exactly. The design won the James Dyson Award in 2022 and remains at prototype stage.</p>
+
+        <h2>AMY — University of Limerick, Universal Design Grand Challenge 2025</h2>
+        <p>AMY takes a different approach entirely — it is a saliva-based (not urine/hCG) test that uses <strong>NFC tap to phone</strong>. The phone's existing screen reader (VoiceOver or TalkBack) reads the result aloud. Audio output is delegated to infrastructure the user already has and has already configured to their preference. AMY won the Universal Design Grand Challenge in 2025.</p>
+
+        <h2>What this means for PregVoice</h2>
+        <div class="problem-block" style="border-left-color: var(--warm);">
+            <p><strong>The RNIB finding directly challenges our audio-first design. We cannot ignore it.</strong></p>
+            <p>If the most thorough user research in this space found that blind users prefer tactile or haptic output over audio — specifically because audio has emotional valence — we need to take that seriously before we build anything. Our existing tap-to-hear model partially addresses this: the user controls the moment they receive the result rather than having it announced at the machine's timing. But "audio on demand" is still audio, and the RNIB finding suggests some users may not want it at all regardless of timing.</p>
+            <p><strong>Revised position:</strong> Haptic output is not a fallback — it is a first-class output modality, and for some users it will be the preferred primary mode. The design must support haptic-only use as a complete, uncompromised experience. Community research (which we have not yet done) will determine whether the RNIB finding generalises or is specific to their user group. We do not design around this finding before doing our own research.</p>
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         PATENT LANDSCAPE & REGULATORY
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Patent Landscape &amp; Regulatory Path</div>
+
+        <h2>SPD/Clearblue patent portfolio</h2>
+        <p>SPD Swiss Precision Diagnostics GmbH (the P&amp;G entity behind Clearblue) holds patents covering the optical reader mechanism, the immunoassay system, the digital display integration, and the product industrial design. Key grants include WO2016156981A1 (digital optical reader) and US20150094227A1 (Weeks Indicator quantification).</p>
+        <p><strong>SPD holds no patent covering audio output from a pregnancy test.</strong> This is a gap in their portfolio. It means the concept is not legally blocked from their side — but it also means anyone pursuing audio output (including SPD) needs to assess the third-party patent below.</p>
+
+        <h2>Third-party audio patent: WO2014158850 / AU2014241791B2</h2>
+        <p>"Diagnostic Test Device with Audible Feedback" — granted patent, not assigned to SPD. This patent describes a lateral flow assay device (explicitly including pregnancy tests) with an audio output component: an audio chip with stored digitised speech and a microcontroller that signals the chip to play an audible result. It covers both a beep/tone result signal and a spoken word announcement.</p>
+        <p><strong>This is a freedom-to-operate concern for anyone adding audio to a lateral flow test reader</strong> — including our Layer 3 standalone reader device, and including SPD if they pursue a licensed audio edition. A freedom-to-operate analysis is required before any hardware with audio output on a lateral flow result is commercialised. This does not affect the smartphone Layer 1 (which is not a lateral flow device).</p>
+
+        <h2>Regulatory classification</h2>
+        <p><strong>FDA (United States):</strong> Clearblue Digital is Class II, product code LCX, regulated under 21 CFR 862.1155. The complete kit — strip, sampler, and electronic reader — is cleared under a single 510(k) submission. Adding audio output to the reader is a user interface change to a cleared Class II IVD — this requires a new 510(k) submission. Estimated regulatory timeline: 12–24 months. Estimated cost: $250K–$1M depending on clinical data required. SPD holds clearances K060128, K200913, K213379, and others.</p>
+        <p><strong>EU (IVDR):</strong> OTC hCG pregnancy tests are Class B under EU 2017/746 (IVDR Annex II and Rule 4). Class B requires Notified Body involvement. Adding audio would require updating the technical documentation and CE certificate via the Notified Body.</p>
+        <p><strong>For PregVoice specifically:</strong> Our smartphone Layer 1 is an accessibility reading aid, not a modification to the test itself — it does not fall under these regulatory paths. Layer 3 (standalone reader accessory) sits in the same "reads visual output of completed test" category, but if designed to work with a cleared lateral flow device, it may attract regulatory scrutiny as an accessory to that device. Legal review before any Layer 3 commercialisation is required.</p>
+
+        <h2>Manufacturer entry point</h2>
+        <p>The right entry point for a partnership conversation is the <strong>Clearblue Innovation Centre, Bedford, UK</strong> (Stannard Way, Priory Business Park, Bedford MK44 3UP) — SPD's primary R&amp;D facility. P&amp;G has a documented accessibility commitments programme and disability inclusion function within their ESG structure. Engaging via that channel may open a faster route than a cold commercial approach.</p>
+        <p>The RNIB's 2020 prototype generated significant press. Clearblue's team is almost certainly aware of the unmet need. The question is whether the 510(k) regulatory cost and niche SKU economics make a business case. A compelling prototype and quantified market size data strengthen that conversation significantly.</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         DEVLOG
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">Devlog</div>
+
+        <div class="devlog">
+            <div class="devlog-header">
+                <span>// research log</span>
+                <small>updated as we go</small>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — problem framing</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Starting narrow: one gap, one user group, one moment. "Making pregnancy tests accessible" is too broad to build from. "A blind pregnant person cannot independently read a home pregnancy test result" is buildable. Everything else follows.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — who we're designing for</span>
+                <p><span class="tag tag-note">Note</span>
+                Primary user: blind or severely visually impaired person taking a home pregnancy test alone. Secondary: low-vision users who can see something but not enough to read a faint second line confidently. Both share the same core need: a reliable, private, independent result.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — existing tools audit</span>
+                <p><span class="tag tag-tried">Tried</span>
+                Mapped existing solutions: Be My Eyes, Aira, VoiceOver/TalkBack (can't describe test results), Clearblue Digital (visual text only). None provide independent, private result reading. Be My Eyes and Aira require a third party to see the result — not acceptable as a default for this use case.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — layer 1: smartphone camera</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Phase 1 targets hardware everyone already owns. The recognition problem is constrained: we're classifying a small number of specific visual states (one line, two lines, digital text). That's well-defined classification, not open-ended computer vision. Tractable.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — privacy: cloud vision is a no</span>
+                <p><span class="tag tag-issue">Issue</span>
+                Cloud vision APIs require uploading a photo of the test to a remote server. This image carries health information tied to a specific moment — arguably among the most sensitive data a person generates. Sending it anywhere, even with strong privacy policies, is the wrong default. Non-negotiable.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — on-device ML as the answer</span>
+                <p><span class="tag tag-pivot">Pivot</span>
+                TensorFlow.js (PWA) and ML Kit (native) both run inference on-device with no data leaving the phone. For line detection and LCD text classification, the model complexity is low — well within what a mid-range phone from 2020 can handle offline. Privacy preserved by architecture, not policy.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — audio privacy: tap-to-hear model</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Auto-speaking on the phone speaker is never acceptable. A result announced in a shared bathroom, a public toilet, or with a partner in the next room removes the user's control at exactly the moment they need it most. Default: haptic signal when ready, audio only on tap. This is not a setting — it is the architecture.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — earphone detection and delay timer</span>
+                <p><span class="tag tag-note">Note</span>
+                Two optional audio modes beyond tap-to-hear: (1) Earphone mode — auto-speaks only if headphones are connected, silent on speaker. (2) Delay timer — user configures a pause (10–60s) between scan completion and haptic signal, giving time to move somewhere private or emotionally prepare. Both are opt-in. Neither changes the default.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — risk assessment: false result is the primary concern</span>
+                <p><span class="tag tag-issue">Issue</span>
+                A false positive or false negative in this context isn't an inconvenience — it has real psychological and medical consequences. The model must ship with a confidence threshold below which it returns "inconclusive, re-check recommended" rather than a result. It must also never present a result as certain. The language is always "the test shows" not "you are."</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — risk: audio disclosure in public</span>
+                <p><span class="tag tag-decision">Decision</span>
+                This risk is rated High likelihood if not actively mitigated — bathrooms are shared, speakers are loud. Addressed by the tap-to-hear model as the unconfigurable default. Earphone mode and delay timer are the user-level mitigations. Added to the risk register as a closed risk (architecturally resolved), not an open one.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — risk: OS-level data retention</span>
+                <p><span class="tag tag-note">Note</span>
+                Potential gap: even if we don't save images, could the OS? Investigated: camera roll access is a separate permission from live camera access. The app will only request <code>getUserMedia</code> (live stream). No <code>Photos</code> library permission is ever requested. <code>localStorage</code>, <code>sessionStorage</code>, and <code>IndexedDB</code> will never receive a result value. Crash reporting is explicitly excluded.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — regulatory framing established</span>
+                <p><span class="tag tag-decision">Decision</span>
+                PregVoice reads the visual output of a completed test. It does not perform or interpret the diagnostic process. The test is the regulated product. The reader is an accessibility tool. This distinction is enforced in code (we never touch the test hardware) and in all public language. Filed as a standing constraint.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — multilingual: language selection model</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Browser locale is a hint, not a confirmed preference. First launch presents a language selection with a voice preview. The user confirms before proceeding. Choice stored in <code>localStorage</code> (language preference only — no health data). No network request required at any point.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — multilingual: clinical phrasing decision</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Result strings use clinical framing: "The test shows a positive result" not "You are pregnant." This is less culturally variable, grammatically easier to keep gender-neutral, and more defensible from a regulatory language standpoint. Personal phrasing is available as a user preference for those who want it.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — multilingual: translation standards</span>
+                <p><span class="tag tag-note">Note</span>
+                All result strings require professional human translation with clinical/medical language awareness. Machine translation is a first-draft reference only. Priority languages for release: English, Spanish, Arabic, French, Portuguese, Hindi. RTL layout support (Arabic, Urdu, Hebrew) is a layout requirement, not a post-launch fix.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — framework decision: PWA first</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Progressive Web App for Phase 1. No app store, no approval gatekeeping, no install friction. Shareable as a URL. GitHub Pages hosting is free. TensorFlow.js handles on-device inference. Service worker enables offline use — critical, because the app must work with no network connection during the reading window. If camera recognition proves unreliable in the browser, Phase 2 is native (React Native or Flutter) for better ML Kit/Vision framework access.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — sustainability: zero running cost is the goal</span>
+                <p><span class="tag tag-note">Note</span>
+                Hosting: GitHub Pages (free). Inference: on-device (free per use). Audio: Web Speech API (free). Analytics: none (by design). The only real costs are a domain (~£10/year) and professional translations (one-time per language, seeking grant/volunteer funding). The tool has no server, no database, no API calls — nothing to pay for month to month.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — ethics: open source as trust</span>
+                <p><span class="tag tag-decision">Decision</span>
+                The repository will be public and auditable from day one. Not as a contribution invitation (though contributions are welcome) but because users handling sensitive health data deserve to be able to verify what the tool does. Privacy policies are words. Code is evidence.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — ethics: equity testing as release gate</span>
+                <p><span class="tag tag-decision">Decision</span>
+                The recognition model must be tested across all major test brands, lighting conditions, device camera qualities, and result types before any public release. If performance is systematically worse for any subgroup, the tool does not ship. Equity testing is a release requirement, not an audit. This applies to multilingual output too — "Inconclusive" in English and Arabic must both be as clear.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — digital test internals research thread opened</span>
+                <p><span class="tag tag-note">Note</span>
+                Ordered a Clearblue Digital reading stick for PCB examination. Working hypothesis: the electronics to support audio are simpler to add than a full redesign — the MCU, battery, and optical sensor are already there. Key unknowns: chipset, GPIO availability, firmware lock status. Findings will be documented here.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-08 — haptic language: pattern hypothesis</span>
+                <p><span class="tag tag-note">Note</span>
+                Draft haptic patterns established: long-short-short (negative), short-short-long (positive), six rapid (inconclusive), three long (error). Rationale: simple enough to learn once, distinctive enough not to misread under stress, compatible with standard phone vibration APIs. Pending validation with blind and low-vision community members before finalising.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — teardown research complete: MCU confirmed</span>
+                <p><span class="tag tag-done">Done</span>
+                Multiple independent teardowns confirm the Clearblue Digital reading stick contains a Holtek HT48C06 or HT48R065B — a standard off-the-shelf 8-bit OTP MCU, not a custom ASIC. Full public datasheets available. This is a significant finding: it means the chip can be sourced, studied, and potentially replaced. It is not a black box.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — the buzzer pins are already there</span>
+                <p><span class="tag tag-done">Done</span>
+                The HT48C06 has a dedicated complementary buzzer drive pair (PB0/PB1) and a built-in programmable frequency divider — native silicon features for driving a piezo element directly, no external driver required. The hardware to make the stick beep on a result is already specced into the chip inside the device. The reason Clearblue Digital makes no sound is a product decision, not a hardware limitation. This changes the manufacturer partnership conversation significantly.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — the real blocker: the enclosure, not the electronics</span>
+                <p><span class="tag tag-issue">Issue</span>
+                The stick enclosure is moulded to extremely tight tolerances. Adding any speaker or piezo disc — even a thin SMD type — requires a new enclosure revision and injection moulding tooling. The PCB also uses COB (epoxy blob) packaging in some variants, making chip-level modification impossible without destroying the board. The electronics are not the constraint. The plastic is. Any Layer 2 partnership conversation needs to lead with this: a new enclosure SKU, not a modification to the existing one.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — OTP firmware: reading it is not possible</span>
+                <p><span class="tag tag-issue">Issue</span>
+                OTP (one-time programmable) means the firmware is burned at manufacture and cannot be read out or overwritten. Any new firmware — for a partnership audio SKU or a parallel MCU approach — must be written from scratch. The optical sensing algorithm, threshold logic, and countdown timing all need to be reverse engineered and reimplemented. The chip is standard and purchasable; the firmware knowledge is not transferable. This is the largest engineering unknown for any hardware path.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — RNIB finding: blind users rejected audio output</span>
+                <p><span class="tag tag-issue">Issue</span>
+                The RNIB's 2020 accessible pregnancy test prototype conducted user research before building. Finding: blind users did not want audio output. Reason: any tone or voice has emotional valence — it sounds either positive or negative — and users did not want a machine to telegraph the outcome before they had a moment to process it. The RNIB chose tactile output (a mechanical button that raises on positive). The APT (James Dyson Award 2022) reached the same conclusion independently and used haptic vibration. This is a direct challenge to our audio-first design that we cannot design around without our own community research.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — revised position: haptic is primary, not fallback</span>
+                <p><span class="tag tag-pivot">Pivot</span>
+                The RNIB and APT findings shift haptic from "audio fallback" to "first-class output modality." The tap-to-hear model we designed (haptic signals ready, audio only on tap) partially addresses the valence concern — the user controls the emotional moment, not the machine. But some users may never want audio regardless of timing. The design must support haptic-only as a complete, uncompromised experience. This does not remove audio from the design; it removes audio as the assumed primary output. Community research will determine the right default.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — existing landscape: three prior efforts, none commercial</span>
+                <p><span class="tag tag-note">Note</span>
+                Three documented accessible pregnancy test projects exist: RNIB (tactile, 2020), APT (haptic, 2022), AMY (NFC to phone screen reader, 2025 award). None are commercially available. AMY's approach — delegating audio to the phone's existing screen reader via NFC — is elegant: it leverages infrastructure the user has already configured to their preference, rather than building a new audio system from scratch. Worth considering for our Layer 1 alongside direct camera recognition.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — patent landscape: third-party audio patent is a FTO risk</span>
+                <p><span class="tag tag-issue">Issue</span>
+                WO2014158850 / AU2014241791B2 ("Diagnostic Test Device with Audible Feedback") is a granted patent covering audio output on a lateral flow assay device — explicitly including pregnancy tests — not assigned to SPD. Anyone adding audio to a lateral flow test reader, including our Layer 3 standalone device and any SPD audio SKU, needs a freedom-to-operate analysis against this patent before commercialisation. Our smartphone Layer 1 is not a lateral flow device and is not affected. Filed as a standing legal risk — not blocking research, but blocking any commercial hardware launch without FTO clearance.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — SPD holds no audio patent: gap confirmed</span>
+                <p><span class="tag tag-note">Note</span>
+                SPD's patent portfolio covers the optical reader, immunoassay, display integration, and industrial design. There is no SPD/Clearblue patent on audio output from a pregnancy test. This means the concept is not legally blocked from their side. A partnership conversation about an audio SKU is not walking into their existing IP. The conversation needs to address the third-party WO2014158850 FTO question, but that's a solvable problem (license or design around), not a veto.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — regulatory path confirmed: new 510(k) required</span>
+                <p><span class="tag tag-note">Note</span>
+                FDA classification confirmed: Class II, product code LCX, 21 CFR 862.1155. The electronic reader and strip are cleared together under a single 510(k). Adding audio output to the reader is a user interface change — not a minor modification under 21 CFR Part 820. A new 510(k) is required, using the existing Clearblue system as predicate. Timeline: 12–24 months. Cost: $250K–$1M. EU path: IVDR Class B, Notified Body update required. This is the realistic regulatory cost SPD would face for an audio SKU. It is not prohibitive for a company of P&amp;G's scale, but it needs a clear commercial case to justify it.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — manufacturer entry point identified</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Primary target for a partnership conversation: Clearblue Innovation Centre, Bedford, UK (Stannard Way, Priory Business Park). This is SPD's R&amp;D home. Secondary route: P&amp;G's disability inclusion and ESG function, which has a documented accessibility commitments programme and may open faster than a cold commercial approach. The RNIB's 2020 work generated significant press — Clearblue's team is aware of the need. The conversation needs: (1) a working prototype demonstrating the concept, (2) quantified market size data, (3) a regulatory summary showing the 510(k) path is clear. We do not yet have all three.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — RNIB finding reframed: it's linguistic valence, not audio itself</span>
+                <p><span class="tag tag-pivot">Pivot</span>
+                Closer reading of the RNIB finding: their prototype used a voice saying "Pregnant" or "Not Pregnant." The issue was not that sound played — it was that words carry inherent emotional weight. Any voice, however clinical, is making a statement about the person's body and future at a moment they may not be ready for. A bleep carries no linguistic content, no cultural connotation, and no implied emotional register. The RNIB found against voice. They did not test tones. The design implication is not "no audio" — it is "no words."</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — context: not all results are good or wanted</span>
+                <p><span class="tag tag-note">Note</span>
+                This point cannot be designed around — it must be designed from. A positive result can be the best news of someone's life or devastating news depending entirely on context: wanted pregnancy, unwanted pregnancy, fertility treatment, contraceptive failure, post-miscarriage monitoring. A negative result is equally context-dependent. The system cannot know which situation it is in and must not presume. A bleep says nothing about how to feel. A voice saying anything — however carefully worded — says something. Tones are the only audio format that stays genuinely neutral.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — decision: tones as primary audio output, not voice</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Primary audio output is now simple tones: 1 bleep = positive, 2 bleeps = negative, 3 bleeps = inconclusive, 4 rapid bleeps = error. Count-based, not cadence-based — a count is the simplest possible encoding, learnable in one read, universal across languages and cultures. No linguistic valence. No words. The user receives the count and applies their own emotional context to it. Voice announcement remains available as an explicit opt-in for users who want it, using clinical framing, but is not the default and will never auto-play.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — haptic motor variability: a real constraint</span>
+                <p><span class="tag tag-issue">Issue</span>
+                Phone haptic motors are not standardised. A flagship device produces precise, differentiated vibration. A budget Android may not reliably distinguish between a long and short pulse — and the user holding the phone through a case, at an angle, or with reduced hand sensation compounds this. Phone speakers are far more consistent across device tiers: a £50 phone speaker and a £1,000 phone speaker both produce a clearly audible bleep. The gap in haptic motor quality across devices is much larger than the gap in speaker quality. This is why tones are primary and haptic is secondary — not because haptic is less important, but because it is less reliable as a universal baseline.</p>
+            </div>
+
+            <div class="devlog-entry">
+                <span class="timestamp">2026-05-09 — revised output hierarchy confirmed</span>
+                <p><span class="tag tag-decision">Decision</span>
+                Final output hierarchy: (1) Tones — primary audio, neutral, universal, device-consistent, played through earphones for privacy or phone speaker on user tap; (2) Haptic — secondary, genuine fallback for silent environments and hearing impaired users, acknowledged as device-dependent; (3) Voice — opt-in only, clinical phrasing, user-configured language, never the default; (4) Auto-announce — does not exist in any form. All outputs are triggered by user action, never by the system. The tap-to-hear model applies to tones, not just voice.</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════
+         NEXT STEPS
+    ════════════════════════════════════════ -->
+    <div class="section">
+        <div class="section-label">What's Next</div>
+
+        <div class="next-steps">
+            <h3>Active workstreams — updated after teardown research</h3>
+            <ol>
+                <li><strong>Community research (now the priority):</strong> The RNIB finding — that blind users rejected audio output because of emotional valence — cannot be designed around without our own research. Engage blind and low-vision communities (r/Blind, RNIB forums, NAB, VIP networks) to understand whether this finding generalises, what output modalities users actually want, and what a good solution looks like from their side. No UX decisions are locked until this is done.</li>
+                <li><strong>Web prototype (Layer 1):</strong> Build a browser-based MVP using <code>getUserMedia</code> and TensorFlow.js. Validate recognition accuracy across Clearblue, First Response, and own-brand tests under varied lighting. Test the tap-to-hear model and haptic-only mode as equal-first-class paths — not audio-primary with haptic fallback.</li>
+                <li><strong>Manufacturer partnership groundwork (Layer 2):</strong> Hardware teardown research is now complete — MCU is confirmed (Holtek HT48C06/HT48R065B), buzzer pins are native to the chip, and the enclosure is the constraint. Next step is building the three things needed for a credible conversation with Clearblue Innovation Centre, Bedford: (1) a working prototype, (2) quantified market size data, (3) a regulatory summary showing the 510(k) path is clear.</li>
+                <li><strong>Freedom-to-operate review (Layer 3):</strong> WO2014158850 (audible feedback on lateral flow device) must be assessed before any hardware with audio output on a lateral flow result is commercialised. This is not optional. Commission a FTO analysis before any Layer 3 hardware reaches production.</li>
+                <li><strong>Training data strategy:</strong> Map dataset requirements for Layer 1: brands, orientations, lighting, camera quality tiers. Investigate synthetic augmentation to cover edge cases without needing large volumes of real test images — important given the sensitivity of the domain.</li>
+                <li><strong>Legal and translation groundwork:</strong> Confirm the regulatory classification framing with a legal professional familiar with FDA and MDR. Begin identifying native-speaker translators with medical language awareness for the six priority languages. Establish the open source licence and responsible disclosure policy.</li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="page-footer">
+        <span>PregVoice — Research &amp; Planning Phase — 2025–Present</span>
+        <a href="index.html#projects">← Portfolio</a>
+    </div>
+
+</div>
+</body>
+</html>

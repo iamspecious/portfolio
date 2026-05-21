@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Writing Portfolio — Spec Coda-Bishop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .doc-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* Nav */
+        .back-link {
+            color: #b392f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 40px;
+        }
+        .back-link:hover { color: #d2b3ff; }
+
+        /* Document header */
+        .doc-header {
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+
+        .doc-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #b392f0;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .doc-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #e6edf3;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .doc-subtitle {
+            font-size: 0.92rem;
+            color: #8b949e;
+            margin-bottom: 14px;
+        }
+
+        .doc-intro {
+            font-size: 0.88rem;
+            color: #8b949e;
+            line-height: 1.65;
+            margin-top: 14px;
+        }
+
+        .doc-byline {
+            font-size: 0.82rem;
+            color: #8b949e;
+            margin-top: 12px;
+        }
+        .doc-byline a { color: #b392f0; text-decoration: none; }
+        .doc-byline a:hover { color: #d2b3ff; }
+
+        /* Framing note */
+        .framing-note {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+
+        .framing-note .note-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #b392f0;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .framing-note p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .framing-note p:last-child { margin-bottom: 0; }
+
+        /* Capabilities grid */
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 48px;
+        }
+
+        .capability-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-top: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .cap-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #b392f0;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cap-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .cap-body {
+            font-size: 0.8rem;
+            color: #8b949e;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 52px;
+        }
+
+        .toc-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        /* Sections */
+        .doc-section { margin-bottom: 60px; }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .section-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #b392f0;
+            font-family: 'Consolas', monospace;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+        }
+
+        .section-tagline {
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        /* Context block */
+        .context-block {
+            background: #0f1318;
+            border-left: 3px solid #30363d;
+            padding: 14px 18px;
+            margin-bottom: 28px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .context-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .context-block p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Subsection headers */
+        .subsection { margin-bottom: 36px; }
+
+        .subsection-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #b392f0;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection-title::before {
+            content: '▸';
+            font-size: 0.65rem;
+        }
+
+        /* Content headings */
+        .content-heading {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin: 22px 0 10px;
+        }
+
+        /* Body text */
+        .doc-body p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+
+        /* Tables */
+        .doc-table-wrap {
+            overflow-x: auto;
+            margin: 14px 0 24px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.83rem;
+        }
+
+        .doc-table th {
+            background: #161b22;
+            color: #e6edf3;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+            white-space: nowrap;
+        }
+
+        .doc-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .doc-table tr:last-child td { border-bottom: none; }
+        .doc-table tr:nth-child(even) td { background: #0f1318; }
+
+        .doc-table td code, .doc-table th code {
+            background: #21262d;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.82rem;
+            color: #79c0ff;
+            font-family: 'Consolas', monospace;
+        }
+
+        .doc-table .cell-mono {
+            font-family: 'Consolas', monospace;
+            color: #79c0ff;
+            font-size: 0.82rem;
+        }
+
+        /* Code blocks */
+        .code-block {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin: 14px 0 24px;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: #c9d1d9;
+            line-height: 1.65;
+            margin: 0;
+            white-space: pre;
+        }
+
+        .code-block .comment { color: #8b949e; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .function { color: #d2a8ff; }
+
+        /* Callout boxes */
+        .callout {
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 14px 0 24px;
+        }
+
+        .callout-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .callout p {
+            font-size: 0.86rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .callout.key-point {
+            background: #0d2818;
+            border-left: 4px solid #3fb950;
+        }
+        .callout.key-point .callout-label { color: #3fb950; }
+        .callout.key-point p { color: #7ee787; }
+
+        .callout.note {
+            background: #161b22;
+            border-left: 4px solid #388bfd;
+        }
+        .callout.note .callout-label { color: #388bfd; }
+        .callout.note p { color: #b0c4f0; }
+
+        .callout.heads-up {
+            background: #1f1500;
+            border-left: 4px solid #d29922;
+        }
+        .callout.heads-up .callout-label { color: #d29922; }
+        .callout.heads-up p { color: #e3b341; }
+
+        .callout.silent-failure {
+            background: #1a0e0e;
+            border-left: 4px solid #f85149;
+        }
+        .callout.silent-failure .callout-label { color: #f85149; }
+        .callout.silent-failure p { color: #ffa198; }
+
+        .callout.shortcut {
+            background: #0d1b2e;
+            border-left: 4px solid #388bfd;
+        }
+        .callout.shortcut .callout-label { color: #79c0ff; }
+        .callout.shortcut p { color: #b0c4f0; }
+
+        /* Escalation threshold */
+        .escalation-box {
+            background: #1f1500;
+            border: 1px solid #d29922;
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin: 20px 0 28px;
+        }
+
+        .escalation-box .esc-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #d29922;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .escalation-box p {
+            font-size: 0.86rem;
+            color: #e3b341;
+            line-height: 1.65;
+            margin-bottom: 10px;
+        }
+
+        .escalation-box p:last-child { margin-bottom: 0; }
+
+        .escalation-box ul {
+            margin: 8px 0 0;
+            padding-left: 18px;
+        }
+
+        .escalation-box li {
+            font-size: 0.86rem;
+            color: #e3b341;
+            line-height: 1.65;
+            margin-bottom: 5px;
+        }
+
+        /* Triage steps */
+        .triage-steps {
+            list-style: decimal;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .triage-steps li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+
+        /* Bullet list */
+        .doc-list {
+            list-style: disc;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .doc-list li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        /* Divider between subsections */
+        .subsection-divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 32px 0;
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #30363d;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #8b949e;
+        }
+
+        .doc-footer a { color: #b392f0; text-decoration: none; }
+        .doc-footer a:hover { color: #d2b3ff; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .capabilities { grid-template-columns: 1fr; }
+            .doc-title { font-size: 1.35rem; }
+            .section-num { font-size: 1.2rem; }
+            .doc-table { font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-container">
+
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <div class="doc-header">
+        <span class="doc-label">Operations, People &amp; Technical Support · Portfolio Sample</span>
+        <h1 class="doc-title">Technical Writing Portfolio</h1>
+        <p class="doc-subtitle">Specious Coda-Bishop · Operations, People &amp; Technical Support</p>
+        <p class="doc-intro">Four reference-quality playbook documents demonstrating technical depth, process documentation, and cross-audience communication across ops and HR systems. Each document is written for a different primary audience — from technical support agents to non-technical finance and HR stakeholders — to show range as well as depth.</p>
+        <p class="doc-byline">Spec Coda-Bishop &nbsp;·&nbsp; <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+    <!-- Capabilities -->
+    <div class="capabilities">
+        <div class="capability-card">
+            <span class="cap-label">Capability 1</span>
+            <span class="cap-title">Technical depth for practitioner audiences</span>
+            <p class="cap-body">API troubleshooting and SQL diagnostics written for people who need to use them under real ticket pressure — precise, structured, and opinionated about resolution order.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Capability 2</span>
+            <span class="cap-title">Cross-audience translation</span>
+            <p class="cap-body">EOR payroll explainer written for non-technical stakeholders with no assumed background. Same domain knowledge, completely different register and structure.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Capability 3</span>
+            <span class="cap-title">Process design embedded in documentation</span>
+            <p class="cap-body">The escalation playbook doesn't describe a process — it is the process. Decision logic, SLAs, and routing criteria are structured to replace tribal knowledge, not supplement it.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Capability 4</span>
+            <span class="cap-title">Knowing what not to say</span>
+            <p class="cap-body">Every document is scoped. The SQL guide covers missing and null records, not wrong values. The EOR explainer covers the payroll cycle, not employment law. Scope discipline is a writing skill.</p>
+        </div>
+    </div>
+
+    <!-- TOC -->
+    <div class="toc">
+        <span class="toc-label">Contents</span>
+        <div class="doc-table-wrap" style="margin:0;border:none;">
+            <table class="doc-table">
+                <thead>
+                    <tr><th>#</th><th>Document</th><th>Audience</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="cell-mono">01</td><td>API Troubleshooting Playbook — Zendesk → Slack Integration Failure</td><td>Technical ops / support agents</td></tr>
+                    <tr><td class="cell-mono">02</td><td>SQL Missing Data Audit Guide — Diagnosing Absent or Incomplete Records</td><td>Ops analysts / payroll leads</td></tr>
+                    <tr><td class="cell-mono">03</td><td>System Explainer: EOR Payroll Processing</td><td>Non-technical stakeholders</td></tr>
+                    <tr><td class="cell-mono">04</td><td>Support Escalation Playbook — Tiered Decision Logic for Ops/HR Tickets</td><td>Support agents / ops coordinators</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- SECTION 01 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <div>
+                <span class="section-title">API Troubleshooting Playbook</span>
+                <span class="section-tagline">Zendesk → Slack Integration Failure</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+            <div class="context-block">
+                <span class="context-label">Purpose</span>
+                <p>This playbook guides technical ops staff through diagnosing and resolving failures in the Zendesk–Slack integration. It covers webhook misconfigurations, authentication failures, payload schema mismatches, and silent delivery failures. It assumes working knowledge of both platforms and access to Zendesk Admin, Slack App management, and server/webhook logs.</p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Background — How the Integration Works</div>
+                <p>Zendesk sends event-triggered notifications to Slack via outbound webhooks or the official Zendesk for Slack app. The two main delivery paths are:</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Path</th><th>Method</th><th>Common Use</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Native App</td><td>OAuth + Slack Events API</td><td>Ticket sidebar, /zendesk slash commands</td></tr>
+                            <tr><td>Custom Webhook</td><td>HTTP POST to Slack Incoming Webhook URL</td><td>Custom alerts, ticket routing notifications</td></tr>
+                            <tr><td>Zendesk Triggers + HTTP Target</td><td>REST POST to Slack Webhook</td><td>Conditional alerts based on ticket rules</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Failures can occur at any point in this chain. The first step in any investigation is identifying which path is broken.</p>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 1 — Establish the Failure Type</div>
+                <p class="content-heading">Classify Before You Investigate</p>
+                <p>Before touching any configuration, identify which failure class you're dealing with. This avoids chasing the wrong layer.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Symptom</th><th>Likely Failure Layer</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Notifications stopped entirely</td><td>Webhook URL expired or channel deleted</td></tr>
+                            <tr><td>Some notifications arrive, some don't</td><td>Trigger condition logic or filter mismatch</td></tr>
+                            <tr><td>Notifications arrive but are malformed</td><td>Payload schema / template error</td></tr>
+                            <tr><td><code>403</code> or <code>401</code> errors in logs</td><td>Authentication / token expiry</td></tr>
+                            <tr><td><code>200 OK</code> in logs but nothing in Slack</td><td>Webhook URL is stale (Slack returns 200 on some invalid URLs)</td></tr>
+                            <tr><td>Slash commands broken but alerts fine</td><td>OAuth scope issue or app reinstall required</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 2 — Check Webhook Delivery Logs</div>
+                <p class="content-heading">Zendesk Side</p>
+                <p>Navigate to <strong>Admin Center → Apps and Integrations → Targets</strong> (for legacy HTTP targets) or <strong>Webhooks</strong> (for newer webhook config).</p>
+                <ol class="triage-steps">
+                    <li>Open the relevant webhook or HTTP target.</li>
+                    <li>Select <strong>Activity</strong> or <strong>Delivery Log</strong>.</li>
+                    <li>Filter for failed deliveries in the relevant timeframe.</li>
+                    <li>Note the HTTP response code returned by Slack.</li>
+                </ol>
+                <div class="callout note">
+                    <span class="callout-label">Key Codes</span>
+                    <p><code>200</code> = delivered (but check Slack anyway) &nbsp;·&nbsp; <code>404</code> = webhook URL not found &nbsp;·&nbsp; <code>410</code> = webhook URL revoked by Slack &nbsp;·&nbsp; <code>403</code>/<code>401</code> = auth failure &nbsp;·&nbsp; <code>5xx</code> = Slack-side error, usually transient.</p>
+                </div>
+
+                <p class="content-heading">Slack Side</p>
+                <p>In Slack, navigate to your workspace <strong>App Management → Custom Integrations → Incoming Webhooks</strong>.</p>
+                <ol class="triage-steps">
+                    <li>Confirm the webhook URL still exists and is active.</li>
+                    <li>Check which channel it posts to — channels get archived or renamed.</li>
+                    <li>If using the Zendesk App rather than a custom webhook, go to <strong>Installed Apps → Zendesk</strong> and check whether the app shows a configuration error or requires reauthorisation.</li>
+                </ol>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 3 — Test the Webhook Directly</div>
+                <p class="content-heading">Isolate the Integration from Zendesk</p>
+                <p>Before debugging Zendesk trigger logic, confirm the webhook URL itself is functional by sending a test payload directly.</p>
+                <div class="code-block"><pre><span class="comment"># Send a test POST to your Slack webhook URL</span>
+curl -X POST -H 'Content-type: application/json' \
+  --data '{"text": "Webhook test from ops debug - ignore"}' \
+  https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+
+<span class="comment"># Expected: HTTP 200, message appears in target Slack channel
+# If you get 'no_service' or 'invalid_payload': webhook is broken at Slack end
+# If you get a 200 but no message: check channel permissions or archival</span></pre></div>
+                <div class="callout key-point">
+                    <span class="callout-label">Key Point</span>
+                    <p>If this test fails, the webhook URL needs to be regenerated. Do not continue debugging Zendesk configuration until the URL is confirmed live.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 4 — Inspect Payload Schema</div>
+                <p class="content-heading">Common Payload Errors</p>
+                <ul class="doc-list">
+                    <li>Unescaped special characters in ticket subject or body fields breaking JSON structure</li>
+                    <li>Deprecated attachment fields — Slack has migrated to Block Kit; legacy payload formats may still post but render incorrectly</li>
+                    <li>Missing required fields — Slack requires at minimum either <code>text</code> or a <code>blocks</code> array</li>
+                    <li>Channel field included in payload for an Incoming Webhook — Incoming Webhooks post to a fixed channel; adding a <code>channel</code> field causes rejection</li>
+                </ul>
+
+                <p class="content-heading">Valid Minimal Payload</p>
+                <div class="code-block"><pre>{
+  "text": "[{{ticket.status}}] Ticket #{{ticket.id}}: {{ticket.title}}",
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Ticket #{{ticket.id}}*\n{{ticket.title}}"
+      }
+    }
+  ]
+}</pre></div>
+                <div class="callout note">
+                    <span class="callout-label">Note</span>
+                    <p>Always include a top-level <code>text</code> field alongside <code>blocks</code>. Slack uses it as a fallback for notifications and accessibility. Blocks-only payloads are valid but will show no preview text in mobile push notifications.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 5 — Auth and OAuth Issues</div>
+                <p class="content-heading">Token Expiry and Scope Failures</p>
+                <p>If the Zendesk for Slack app (rather than a raw webhook) is being used, failures are more likely to be OAuth-related.</p>
+                <ol class="triage-steps">
+                    <li>In Zendesk, go to <strong>Admin Center → Integrations → Slack</strong>. Check whether the integration shows a reconnection prompt — this indicates the OAuth token has expired or been revoked.</li>
+                    <li>In Slack, go to <strong>Installed Apps → Zendesk → App Settings</strong> and confirm the app has the required scopes: <code>chat:write</code>, <code>channels:read</code>, <code>users:read</code>.</li>
+                    <li>If scopes have changed (e.g. after a Slack policy update), the app will need to be reauthorised by a Slack admin.</li>
+                </ol>
+                <div class="callout silent-failure">
+                    <span class="callout-label">Watch For — Silent Token Revocation</span>
+                    <p>If a Slack admin revoked the app's token without informing the Zendesk admin, all notifications will silently stop. There will be no error in Zendesk because Zendesk receives a 200 from Slack's API even after token revocation in some scenarios. Always cross-check both sides.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Resolution Checklist</div>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Check</th><th>Confirmed</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Webhook URL tested directly and returns 200 with message</td><td>☐</td></tr>
+                            <tr><td>Zendesk delivery log shows no 4xx errors for past 24h</td><td>☐</td></tr>
+                            <tr><td>Payload schema validated (<code>text</code> field present, no stale attachment format)</td><td>☐</td></tr>
+                            <tr><td>Target Slack channel confirmed active and not archived</td><td>☐</td></tr>
+                            <tr><td>OAuth token/scopes confirmed if using Zendesk App</td><td>☐</td></tr>
+                            <tr><td>Trigger conditions reviewed and tested with a live ticket</td><td>☐</td></tr>
+                            <tr><td>Incident logged with root cause and resolution for future reference</td><td>☐</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 02 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <div>
+                <span class="section-title">SQL Missing Data Audit Guide</span>
+                <span class="section-tagline">Diagnosing Absent or Incomplete Records</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+            <div class="context-block">
+                <span class="context-label">Purpose</span>
+                <p>This guide walks through a structured approach to diagnosing missing or incomplete records in operational databases — payroll runs, headcount exports, onboarding completions, or any dataset where expected rows are absent. It assumes basic SQL proficiency and read access to the relevant tables.</p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Step 1 — Define 'Missing'</div>
+                <p class="content-heading">Know What You're Looking For Before You Query</p>
+                <p>Missing data has three distinct forms. Treating them the same leads to querying the wrong thing.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Row missing entirely</strong></td><td>Record does not exist in the table</td><td>Employee not in payroll run</td></tr>
+                            <tr><td><strong>Row exists, field is NULL</strong></td><td>Record present but field has no value</td><td>Start date column is NULL</td></tr>
+                            <tr><td><strong>Row exists, field is wrong</strong></td><td>Record present but value is incorrect or stale</td><td>Wrong cost centre code</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>This guide focuses on the first two. Establish which type you have before writing any query.</p>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 2 — Establish the Expected Population</div>
+                <p class="content-heading">Build a Source of Truth First</p>
+                <p>The most common mistake in missing data investigations is jumping straight to the broken table without first establishing what should be there. Define your expected population from a reliable source, then compare.</p>
+                <div class="code-block"><pre><span class="comment">-- Step 1: Define expected population
+-- All active employees as of the payroll run date</span>
+SELECT
+  e.employee_id,
+  e.full_name,
+  e.employment_status,
+  e.start_date
+FROM employees e
+WHERE e.employment_status = 'active'
+  AND e.start_date <= '2026-03-01'   <span class="comment">-- payroll run date</span>
+  AND (e.end_date IS NULL OR e.end_date > '2026-03-01');
+
+<span class="comment">-- Step 2: See who actually appeared in the run</span>
+SELECT DISTINCT employee_id
+FROM payroll_runs
+WHERE run_date = '2026-03-01';
+
+<span class="comment">-- Step 3: Find the gap</span>
+SELECT
+  e.employee_id,
+  e.full_name,
+  e.start_date
+FROM employees e
+WHERE e.employment_status = 'active'
+  AND e.start_date <= '2026-03-01'
+  AND (e.end_date IS NULL OR e.end_date > '2026-03-01')
+  AND e.employee_id NOT IN (
+    SELECT employee_id FROM payroll_runs
+    WHERE run_date = '2026-03-01'
+  );</pre></div>
+                <div class="callout heads-up">
+                    <span class="callout-label">Tip — NOT IN and NULLs</span>
+                    <p>Use <code>NOT IN</code> with caution if the subquery might return NULLs — <code>NOT IN</code> with a NULL in the list returns no rows. Use <code>NOT EXISTS</code> or a <code>LEFT JOIN</code> instead if NULL values are possible in the <code>employee_id</code> column of <code>payroll_runs</code>.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 3 — Safer Gap Query with LEFT JOIN</div>
+                <p class="content-heading">Handling NULLs Correctly</p>
+                <div class="code-block"><pre><span class="comment">-- LEFT JOIN approach: safer when NULLs may be present</span>
+SELECT
+  e.employee_id,
+  e.full_name,
+  e.start_date,
+  pr.run_date   <span class="comment">-- will be NULL if employee is missing from run</span>
+FROM employees e
+LEFT JOIN payroll_runs pr
+  ON e.employee_id = pr.employee_id
+  AND pr.run_date = '2026-03-01'
+WHERE e.employment_status = 'active'
+  AND e.start_date <= '2026-03-01'
+  AND (e.end_date IS NULL OR e.end_date > '2026-03-01')
+  AND pr.employee_id IS NULL;   <span class="comment">-- the gap condition</span></pre></div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 4 — Check for NULLs in Key Fields</div>
+                <p class="content-heading">When the Row Exists But the Data Doesn't</p>
+                <p>If rows are present but downstream reports are broken, NULL fields are usually the cause. Check systematically.</p>
+                <div class="code-block"><pre><span class="comment">-- Audit NULLs across key fields for active employees</span>
+SELECT
+  employee_id,
+  full_name,
+  CASE WHEN cost_centre IS NULL THEN 'MISSING' ELSE 'OK' END AS cost_centre_status,
+  CASE WHEN contract_type IS NULL THEN 'MISSING' ELSE 'OK' END AS contract_type_status,
+  CASE WHEN pay_currency IS NULL THEN 'MISSING' ELSE 'OK' END AS currency_status,
+  CASE WHEN bank_account_id IS NULL THEN 'MISSING' ELSE 'OK' END AS bank_status
+FROM employees
+WHERE employment_status = 'active'
+  AND (
+    cost_centre IS NULL
+    OR contract_type IS NULL
+    OR pay_currency IS NULL
+    OR bank_account_id IS NULL
+  );
+
+<span class="comment">-- Count scale of the problem</span>
+SELECT
+  COUNT(*) AS total_active,
+  SUM(CASE WHEN cost_centre IS NULL THEN 1 ELSE 0 END) AS missing_cost_centre,
+  SUM(CASE WHEN bank_account_id IS NULL THEN 1 ELSE 0 END) AS missing_bank
+FROM employees
+WHERE employment_status = 'active';</pre></div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Step 5 — Trace the Data Origin</div>
+                <p class="content-heading">Find Where It Should Have Come From</p>
+                <p>Once you know which records are missing, trace backwards through the data pipeline to find where the gap was introduced.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Pipeline Stage</th><th>What to Check</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Source system (HRIS / EOR platform)</td><td>Was the employee created? Is their profile complete?</td></tr>
+                            <tr><td>ETL / sync job</td><td>Did the sync run? Did it error silently? Check job logs.</td></tr>
+                            <tr><td>Staging or intermediary table</td><td>Does the record exist here but not in the final table?</td></tr>
+                            <tr><td>Transform logic</td><td>Is there a filter condition excluding the record unintentionally?</td></tr>
+                            <tr><td>Permissions</td><td>Does the query user have access to all partitions / schemas?</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="code-block"><pre><span class="comment">-- Check if record exists in staging but not production</span>
+SELECT 'staging' AS source, employee_id FROM staging.employees
+WHERE employee_id = '12345'
+UNION ALL
+SELECT 'production' AS source, employee_id FROM employees
+WHERE employee_id = '12345';
+
+<span class="comment">-- If it's in staging but not production, the ETL step is where it dropped</span></pre></div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Resolution and Documentation</div>
+                <ol class="triage-steps">
+                    <li>Document the gap: how many records, which fields, which timeframe.</li>
+                    <li>Identify the root cause layer (source, sync, transform, permissions).</li>
+                    <li>Apply fix at the correct layer — patching production data without fixing the source will recur.</li>
+                    <li>Re-run the gap query after the fix to confirm zero results.</li>
+                    <li>Add a monitoring query or alert if this data is business-critical.</li>
+                </ol>
+                <div class="callout silent-failure">
+                    <span class="callout-label">Important</span>
+                    <p>Never delete or overwrite records during a missing data investigation without a backup and a confirmed understanding of why the record is wrong. What looks like a duplicate is sometimes valid — e.g. rehires, contractor-to-employee conversions, multi-entity employees.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 03 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <div>
+                <span class="section-title">System Explainer: EOR Payroll Processing</span>
+                <span class="section-tagline">How Employer of Record Platforms Process Global Payroll</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+            <div class="context-block">
+                <span class="context-label">Audience</span>
+                <p>This document is written for non-technical stakeholders — team leads, finance partners, or new hires who need to understand what an EOR platform does, why payroll timelines work the way they do, and what happens when something goes wrong. No technical background is assumed.</p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">What Is an EOR?</div>
+                <p class="content-heading">The Short Version</p>
+                <p>When your company hires someone in a country where you don't have a legal entity, you can't pay them directly — you're not registered as an employer there. An Employer of Record (EOR) solves this by becoming the legal employer on paper, handling payroll, taxes, and compliance in that country on your behalf.</p>
+                <p>Your employee still works for you in practice. The EOR handles the legal and administrative layer you can't.</p>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">The Payroll Cycle</div>
+                <p class="content-heading">How a Payment Gets From You to Your Employee</p>
+                <p>The process is more involved than a direct bank transfer. Here is what happens each month, in order:</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Stage</th><th>What Happens</th><th>Who Acts</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>1. Data collection</strong></td><td>EOR platform collects salary, expenses, and changes for the period</td><td>HR / Ops</td></tr>
+                            <tr><td><strong>2. Payroll calculation</strong></td><td>Platform calculates gross pay, tax, social contributions per local law</td><td>EOR platform</td></tr>
+                            <tr><td><strong>3. Invoice generation</strong></td><td>EOR invoices your company for total cost (salary + employer contributions + fee)</td><td>EOR</td></tr>
+                            <tr><td><strong>4. Funds transfer</strong></td><td>Your company transfers funds to EOR</td><td>Finance</td></tr>
+                            <tr><td><strong>5. Local payroll run</strong></td><td>EOR pays the employee and remits taxes to local authorities</td><td>EOR</td></tr>
+                            <tr><td><strong>6. Payslip delivery</strong></td><td>Employee receives payslip through the platform</td><td>EOR platform</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout note">
+                    <span class="callout-label">Why Does It Take So Long?</span>
+                    <p>Steps 3–5 often span 5–10 business days because EORs must account for bank processing times in multiple countries, local payroll authority deadlines, and currency conversion. A delay at any stage cascades to the next.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">What Can Go Wrong</div>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Issue</th><th>What's Happening</th><th>First Step</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Employee not in payroll run</td><td>Employee record was not submitted or approved before the cutoff</td><td>Check if onboarding was completed in the platform before the cutoff date</td></tr>
+                            <tr><td>Payslip shows wrong amount</td><td>Salary data, FX rate, or benefit deductions may be incorrect</td><td>Compare payslip breakdown against the contract and raise a query with the EOR</td></tr>
+                            <tr><td>Payment delayed</td><td>Funds transfer from your company may not have cleared in time</td><td>Check with Finance that the EOR invoice was paid by the required date</td></tr>
+                            <tr><td>Tax code incorrect</td><td>Employee's tax situation may not have been set up correctly</td><td>EOR needs the employee's local tax ID or residency documentation</td></tr>
+                            <tr><td>Benefits deduction missing</td><td>Benefit enrolment may not have synced to payroll in time</td><td>Confirm enrolment was completed before the platform's benefits cutoff</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">What the Platform Does vs. What Your Team Does</div>
+                <p>A common source of confusion is who is responsible for what. The EOR platform automates a lot, but your ops and HR team still owns key inputs.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Your Team Owns</th><th>The EOR Platform Handles</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Submitting employee data accurately and on time</td><td>Calculating local taxes and contributions</td></tr>
+                            <tr><td>Approving changes before the payroll cutoff</td><td>Generating compliant payslips</td></tr>
+                            <tr><td>Ensuring Finance pays EOR invoices on time</td><td>Remitting taxes to local authorities</td></tr>
+                            <tr><td>Managing employee queries about their contract</td><td>Processing salary payments in local currency</td></tr>
+                            <tr><td>Offboarding employees and updating the platform</td><td>Maintaining compliance with local employment law</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout key-point">
+                    <span class="callout-label">Remember</span>
+                    <p>The EOR platform processes what it's given. Errors in the output almost always trace back to incomplete or late input. The single most effective thing your team can do to prevent payroll issues is submit changes early and check the platform's cutoff calendar at the start of each month.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 04 -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <div>
+                <span class="section-title">Support Escalation Playbook</span>
+                <span class="section-tagline">Tiered Decision Logic for Ops and HR Support Tickets</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+            <div class="context-block">
+                <span class="context-label">Purpose</span>
+                <p>This playbook defines how ops and HR support tickets should be triaged, routed, and escalated. It is designed to reduce resolution time, prevent over-escalation, and ensure the right person handles each issue at the right level. It is written for support agents, ops coordinators, and first-line HR contacts.</p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">The Three-Tier Model</div>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Tier</th><th>Who Handles It</th><th>Typical Resolution Time</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Tier 1 — Self-serve / First response</strong></td><td>Support agent or HR coordinator</td><td>Same day</td></tr>
+                            <tr><td><strong>Tier 2 — Specialist review</strong></td><td>Senior ops, payroll lead, or HRBP</td><td>1–3 business days</td></tr>
+                            <tr><td><strong>Tier 3 — Escalation / External</strong></td><td>EOR provider, legal, platform support</td><td>3–5+ business days</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>The goal is to resolve as much as possible at Tier 1 and only escalate when the issue genuinely requires it. Tier 3 should be rare.</p>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Tier 1 — First Response</div>
+                <p class="content-heading">Criteria for Tier 1</p>
+                <p>A ticket stays at Tier 1 if all of the following are true:</p>
+                <ul class="doc-list">
+                    <li>The issue can be resolved using existing documentation, platform access, or standard process</li>
+                    <li>No changes to employment terms, payroll, or compliance are required</li>
+                    <li>The employee or requester is not in distress and the issue is not time-critical</li>
+                    <li>No third-party action (EOR, legal, benefits provider) is required</li>
+                </ul>
+
+                <p class="content-heading">Tier 1 Examples</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Ticket Type</th><th>Resolution Path</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>How do I update my bank details?</td><td>Direct to platform self-serve guide</td></tr>
+                            <tr><td>I can't log into the HR system</td><td>Password reset or IT handoff</td></tr>
+                            <tr><td>When is the next payroll cutoff?</td><td>Check cutoff calendar, reply directly</td></tr>
+                            <tr><td>How do I request leave?</td><td>Point to policy doc or HRIS walkthrough</td></tr>
+                            <tr><td>I need a copy of my payslip</td><td>Download from platform or generate on their behalf</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Tier 2 — Specialist Review</div>
+                <p class="content-heading">Criteria for Escalation to Tier 2</p>
+                <p>Escalate to Tier 2 when any of the following apply:</p>
+                <ul class="doc-list">
+                    <li>The issue involves a payroll discrepancy or missed payment</li>
+                    <li>A change to contract terms, salary, or working hours is involved</li>
+                    <li>The ticket requires cross-system investigation (e.g. HRIS data does not match payroll platform)</li>
+                    <li>The issue has been open at Tier 1 for more than one business day without resolution</li>
+                    <li>The employee is asking about tax, legal entitlements, or compliance matters</li>
+                </ul>
+
+                <p class="content-heading">How to Escalate to Tier 2</p>
+                <ol class="triage-steps">
+                    <li>Add a clear summary note to the ticket: what was reported, what was investigated, what is unresolved.</li>
+                    <li>Tag or assign to the relevant specialist using your ticketing system's assignment rules.</li>
+                    <li>Do not close or put the ticket on hold — keep it active and update the employee that their issue is being reviewed.</li>
+                    <li>If the issue is time-critical (e.g. employee has not been paid), flag as urgent and contact the specialist directly rather than waiting for queue pickup.</li>
+                </ol>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Tier 3 — External Escalation</div>
+                <p class="content-heading">Criteria for Escalation to Tier 3</p>
+                <p>Tier 3 involves escalating outside your team to an EOR provider, benefits vendor, legal counsel, or platform support. This should only happen when:</p>
+                <ul class="doc-list">
+                    <li>The issue requires the EOR to take action on their system (e.g. missed payroll run, incorrect tax filing)</li>
+                    <li>A platform bug or outage is confirmed or suspected</li>
+                    <li>Legal advice or a formal employment law determination is needed</li>
+                    <li>A data protection or compliance incident is involved</li>
+                </ul>
+
+                <p class="content-heading">External Escalation Process</p>
+                <ol class="triage-steps">
+                    <li>Confirm internally that the issue cannot be resolved without external action.</li>
+                    <li>Gather all relevant data before contacting the third party: employee ID, ticket history, dates, error messages, screenshots.</li>
+                    <li>Use the designated escalation channel for the provider — do not use general support queues for urgent issues.</li>
+                    <li>Log the escalation reference number in the original ticket.</li>
+                    <li>Set a follow-up reminder. Do not leave external escalations unmonitored.</li>
+                </ol>
+
+                <div class="escalation-box">
+                    <span class="esc-label">Important — Payroll Escalations to EOR</span>
+                    <p>When escalating payroll issues to an EOR, always include:</p>
+                    <ul>
+                        <li>The employee's contract country</li>
+                        <li>The payroll run date</li>
+                        <li>The exact discrepancy amount</li>
+                    </ul>
+                    <p>Incomplete escalations significantly increase resolution time.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Escalation Decision Quick Reference</div>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Question</th><th>If Yes →</th><th>If No →</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Can this be resolved with existing docs/access?</td><td>Resolve at Tier 1</td><td>Move to next question</td></tr>
+                            <tr><td>Does it involve payroll, salary, or compliance?</td><td>Escalate to Tier 2</td><td>Move to next question</td></tr>
+                            <tr><td>Does it require EOR or external vendor action?</td><td>Escalate to Tier 3</td><td>Review with Tier 2 before escalating</td></tr>
+                            <tr><td>Is it a potential data/legal incident?</td><td>Escalate to Tier 3 immediately + notify manager</td><td>Proceed with standard triage</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">SLAs and Expectations</div>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead>
+                            <tr><th>Tier</th><th>First Response SLA</th><th>Resolution Target</th><th>Breach Action</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Tier 1</strong></td><td>4 business hours</td><td>Same day</td><td>Escalate to Tier 2</td></tr>
+                            <tr><td><strong>Tier 2</strong></td><td>1 business day</td><td>1–3 business days</td><td>Flag to team lead</td></tr>
+                            <tr><td><strong>Tier 3</strong></td><td>1 business day (your acknowledgement to employee)</td><td>Per vendor SLA</td><td>Escalate internally and chase vendor</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="callout note">
+                    <span class="callout-label">Note</span>
+                    <p>SLAs apply from the moment a ticket is received, not from when it is first read. Ensure ticket queues are monitored during business hours and that out-of-office cover is in place for critical queues.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+        <p><a href="index.html">← Back to Portfolio</a></p>
+        <p style="margin-top:10px;">Spec Coda-Bishop &nbsp;·&nbsp; <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+</div>
+</body>
+</html>
