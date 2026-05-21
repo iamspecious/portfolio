@@ -1548,7 +1548,7 @@
                          SUPPORT TICKET TRIAGE — AI TOOL
                     ===================================================== -->
                     <div class="project">
-                        <h3>Support Ticket Triage Tool <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <h3>Support Ticket Triage Tool <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>Paste a customer message, error log, or support thread — and Claude returns a category, an urgency level (colour-coded Low to Critical), and a suggested first response ready to copy and send. One input, one button. Built to directly demonstrate the kind of tool you'd build or configure in a support or implementation role.</p>
                         <div class="highlights">
@@ -1573,12 +1573,12 @@
                                 <p class="win-detail">Categories, urgency signals, and response tone can be adjusted for any product in minutes. That's the implementation judgment this demonstrates.</p>
                             </div>
                         </div>
-                        <div class="project-constraints">
-                            <strong>Roadmap</strong>
-                            <ul>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
                                 <li><strong>Bulk mode</strong> — paste a batch of tickets (newline-separated or numbered), run them sequentially through the same triage pipeline, and get a full results table. One API call per ticket keeps the cost model identical (~0.2¢ each) and the output clean. No queue management, no backend, just a loop.</li>
                                 <li><strong>CSV export</strong> — after a bulk run, export the full triage results as a CSV: ticket text, category, urgency, suggested response. Pure client-side via the Blob API — nothing leaves the browser. Paste in, triage, download. Drop it straight into a spreadsheet or ticket system.</li>
-                            </ul>
+                            </ol>
                         </div>
                         <p>
                             <span class="tech-tag">HTML/CSS/JS</span>
@@ -1588,10 +1588,10 @@
                         </p>
                         <a class="tool-link-badge" href="support-triage.html" target="_blank">Open Tool →</a>
 
-                                                <div class="devlog">
+                        <div class="devlog">
                             <div class="devlog-header">
                                 <span>// devlog</span>
-                                <small>running build notes — dated as we go</small>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
                             </div>
 
                             <div class="devlog-entry">
@@ -1602,273 +1602,273 @@
                                 </p>
                             </div>
 
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-21</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Bulk mode design: accept a batch of tickets (newline-separated or numbered), run them through the existing triage pipeline one at a time in a loop. One API call per ticket — same ~0.2¢ cost model, no change to the prompt, no queue infrastructure. The output becomes a table rather than three panels. Same architecture, bigger input.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-21</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    CSV export design: pure client-side via the Blob API. After a bulk run, serialise each row (ticket text, category, urgency, suggested response) into a CSV string, wrap in a Blob, create an object URL, trigger a download. No server, no data leaves the browser. The file is generated and consumed entirely in the tab — consistent with the no-backend constraint and no new privacy surface.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — done</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Confirmation modal live. Pricing displayed uses the current rates ($3.00/M input, $15.00/M output, dated May 2026) so it's transparent about when those figures were last updated. No request fires on Sonnet without acknowledgement. Haiku requests are unaffected — no friction for the common case.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    The confirmation covers both manual and auto-switched Sonnet use — there's no meaningful distinction from a cost perspective. What matters is that the user sees a number, reads a price, and chooses to proceed. Implemented as a Promise-based overlay: <code>triage()</code> awaits <code>confirmSonnetCost()</code>, which resolves <code>true</code> on confirm and <code>false</code> on cancel, so the async flow is clean and the request is never partially started.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Add a pre-flight confirmation modal that fires whenever a Sonnet request is about to be sent — whether the user manually selected Sonnet or the tool auto-switched. The modal shows the exact character count at click time, recalculates the cost fresh from the current message length, and requires an explicit "Send anyway" before the request fires. Cancel returns to the tool with no side effects.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Follow-up from Rainbow: the live cost estimate in the model bar is useful, but it doesn't force the user to acknowledge the cost before they commit. A user could auto-switch to Sonnet, not notice the estimate update, and send a large request without realising the price difference. The model bar display is passive — it updates, but it doesn't interrupt.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — model switcher done</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Model bar live: Haiku selected by default with a "recommended" badge, Sonnet available for longer or higher-stakes tickets. Truncation bug fixed — total sent is always ≤ hardLimit. Cost estimates update on every keystroke. The lore checker already had this pattern; applying it here was straightforward once the right constants were in place.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Cost estimates update live as you type. Formula: input tokens estimated as 250 (prompt overhead) + <code>ceil(messageLength / 4)</code>, output fixed at 300 tokens. At empty the display reads ~0.20¢ (Haiku) and ~0.60¢ (Sonnet). A 5,000-char message costs about ~0.28¢ on Haiku; the same at 10,000 chars on Sonnet is about ~1.05¢. The estimates are approximate — actual tokenisation varies — but they give the user a real-time sense of relative cost.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Auto-switch logic: if the user types past 5,000 characters while on Haiku, the tool silently switches to Sonnet and shows a small amber badge — "auto-switched — input over 5k". If they delete back below 5,000, it reverts to Haiku. If the user manually picks a model, <code>autoSwitched</code> is cleared and the auto-revert no longer fires — their choice takes over.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Add a Haiku / Sonnet model switcher — borrowed from the lore checker pattern — to solve the truncation bug properly and add cost transparency at the same time. The fix: define <code>TRUNCATION_NOTE</code> as a constant, slice to <code>hardLimit - TRUNCATION_NOTE.length</code> before appending, so the total is always exactly <code>hardLimit</code>. The switcher makes <code>hardLimit</code> model-dependent: 5,000 chars for Haiku, 10,000 for Sonnet.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — truncation bug</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Rainbow spotted a bug in the character limit: slicing input to exactly 5,000 characters and then appending <code>'\n\n[Input truncated at 5,000 characters]'</code> (36 chars) sends 5,036 characters to the API — silently exceeding the stated limit. A small off-by-one in principle, but it breaks the contract with the user and means the truncation note itself is the overflow.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — verified</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Both tools confirmed working end-to-end — support triage and lore checker tested live with a real API key and real input. The proxy resolves the CORS issue across all browsers. Removed the "best on desktop" browser warning from the tools since it's no longer accurate. Total time from "Load failed" with no context to a working cross-browser solution: one debugging session, one Cloudflare account, 25 lines of Worker code.
-                                </p>
-                            </div>
-
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 21 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 33 older entries</button>
 
                             <div class="devlog-overflow">
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — proxy deployed</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Cloudflare Worker deployed at <code>anthropic-proxy.work-specious.workers.dev</code>. 25 lines. Handles CORS preflight (OPTIONS → 204 with <code>Access-Control-Allow-Origin: *</code>), forwards POST to Anthropic server-to-server, returns response with CORS headers attached. All three tools updated to call the proxy instead of <code>api.anthropic.com</code> directly. Worker code saved to <code>proxy/worker.js</code> in the repo. Free tier covers 100,000 requests/day — more than enough for a portfolio demo.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-21</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Bulk mode design: accept a batch of tickets (newline-separated or numbered), run them through the existing triage pipeline one at a time in a loop. One API call per ticket — same ~0.2¢ cost model, no change to the prompt, no queue infrastructure. The output becomes a table rather than three panels. Same architecture, bigger input.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    This affects all three tools — lore checker, support triage, FAQ chatbot — since all use the same fetch pattern and the same header. The <code>anthropic-dangerous-direct-browser-calls</code> approach does not work from <code>iamspecious.github.io</code>. The no-backend architecture has hit its hard limit for this use case. Decision: deploy a Cloudflare Worker as a thin CORS proxy — handles the preflight server-side, free tier (100,000 requests/day), no infrastructure to maintain, works everywhere. A non-working portfolio tool demonstrates nothing; a tool that works and has a documented fix for a real architectural problem demonstrates more than one that never broke.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-21</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        CSV export design: pure client-side via the Blob API. After a bulk run, serialise each row (ticket text, category, urgency, suggested response) into a CSV string, wrap in a Blob, create an object URL, trigger a download. No server, no data leaves the browser. The file is generated and consumed entirely in the tab — consistent with the no-backend constraint and no new privacy surface.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    The <code>anthropic-dangerous-direct-browser-calls: true</code> header is supposed to signal Anthropic's server to return <code>Access-Control-Allow-Origin</code> in its preflight response. The mechanism breaks at the preflight stage: the browser sends an OPTIONS request first, the server must include CORS headers in that response, and only then does the browser allow the actual POST through. Anthropic's server is not returning those CORS headers for the <code>iamspecious.github.io</code> origin — so the POST never fires. The header exists in the request the browser intends to send, but the server's OPTIONS response contains no CORS headers at all.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09 — done</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Confirmation modal live. Pricing displayed uses the current rates ($3.00/M input, $15.00/M output, dated May 2026) so it's transparent about when those figures were last updated. No request fires on Sonnet without acknowledgement. Haiku requests are unaffected — no friction for the common case.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — root cause confirmed</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Chrome console test on desktop, fresh install, no extensions, GitHub Pages origin. Exact error: <em>"Access to fetch at 'https://api.anthropic.com/v1/messages' from origin 'https://iamspecious.github.io' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource."</em> The domain is reachable (api.anthropic.com returns 404 at root, as expected). The failure is CORS, not DNS, not network, not key format.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The confirmation covers both manual and auto-switched Sonnet use — there's no meaningful distinction from a cost perspective. What matters is that the user sees a number, reads a price, and chooses to proceed. Implemented as a Promise-based overlay: <code>triage()</code> awaits <code>confirmSonnetCost()</code>, which resolves <code>true</code> on confirm and <code>false</code> on cancel, so the async flow is clean and the request is never partially started.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    The fundamental constraint here is the "no backend" architecture. A backend proxy would handle the API call server-side and return the result to the browser — no cross-origin request, no CORS, no preflight, works everywhere including iOS Safari. But adding a backend contradicts the design constraint and the point of the demo: to show what you can build and deploy without infrastructure. That trade-off is real and documented. The right answer for a production tool is a thin backend. The right answer for a portfolio demo is the browser compatibility notice.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Add a pre-flight confirmation modal that fires whenever a Sonnet request is about to be sent — whether the user manually selected Sonnet or the tool auto-switched. The modal shows the exact character count at click time, recalculates the cost fresh from the current message length, and requires an explicit "Send anyway" before the request fires. Cancel returns to the tool with no side effects.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Added a browser compatibility notice to both tools — displayed above the API key bar. States clearly: best on desktop, Chrome and Firefox most reliable, mobile Safari may block cross-origin requests. Includes the iOS-specific workarounds: disable Content Blockers (Settings → Safari → Content Blockers), disable iCloud Private Relay, or try Chrome/Firefox for iOS.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Follow-up from Rainbow: the live cost estimate in the model bar is useful, but it doesn't force the user to acknowledge the cost before they commit. A user could auto-switch to Sonnet, not notice the estimate update, and send a large request without realising the price difference. The model bar display is passive — it updates, but it doesn't interrupt.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Mobile Safari also has no accessible developer console on-device. The "open F12 → Console" instruction in our improved error message is useless on iOS — there is no F12. Debugging a network error on mobile Safari requires pairing the device with a Mac running desktop Safari and using Remote Web Inspector, or testing on a desktop browser instead. Two issues surfaced from one test: the CORS restriction and the unreachable console.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09 — model switcher done</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Model bar live: Haiku selected by default with a "recommended" badge, Sonnet available for longer or higher-stakes tickets. Truncation bug fixed — total sent is always ≤ hardLimit. Cost estimates update on every keystroke. The lore checker already had this pattern; applying it here was straightforward once the right constants were in place.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — browser confirmed</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Browser confirmed as mobile Safari on iOS. This is the specific environment where direct cross-origin API calls are most restricted. When a request includes custom headers (like <code>x-api-key</code> and <code>anthropic-dangerous-direct-browser-calls</code>), the browser fires a CORS preflight OPTIONS request first. iOS Safari handles this preflight more aggressively than desktop browsers — in some iOS configurations it blocks the request entirely before we get any response.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Cost estimates update live as you type. Formula: input tokens estimated as 250 (prompt overhead) + <code>ceil(messageLength / 4)</code>, output fixed at 300 tokens. At empty the display reads ~0.20¢ (Haiku) and ~0.60¢ (Sonnet). A 5,000-char message costs about ~0.28¢ on Haiku; the same at 10,000 chars on Sonnet is about ~1.05¢. The estimates are approximate — actual tokenisation varies — but they give the user a real-time sense of relative cost.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Applied the same error handling improvements to the FAQ chatbot — it had identical single-line catch block with the same gap. Any tool making direct browser API calls needs this treatment. The lesson: a generic catch block is not error handling, it's error hiding. Stage-specific messages let users actually diagnose what went wrong instead of guessing.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Auto-switch logic: if the user types past 5,000 characters while on Haiku, the tool silently switches to Sonnet and shows a small amber badge — "auto-switched — input over 5k". If they delete back below 5,000, it reverts to Haiku. If the user manually picks a model, <code>autoSwitched</code> is cleared and the auto-revert no longer fires — their choice takes over.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Rewrote error handling across three stages. Stage 1 — before the request: validate that the API key starts with <code>sk-ant-</code> and show a specific message if not. Stage 2 — API error response: break down <code>!response.ok</code> by HTTP status. 401 = bad key, 403 = no permission, 429 = rate limited, 400 = bad request, 500+ = server error. Each gets its own message and its own next step. Stage 3 — network failure: catch <code>TypeError</code> separately from other errors and show a specific "network error" message with instructions to open the browser console (F12 → Console) for the actual error. Also added <code>console.error()</code> logging so there is always a full trace available.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Add a Haiku / Sonnet model switcher — borrowed from the lore checker pattern — to solve the truncation bug properly and add cost transparency at the same time. The fix: define <code>TRUNCATION_NOTE</code> as a constant, slice to <code>hardLimit - TRUNCATION_NOTE.length</code> before appending, so the total is always exactly <code>hardLimit</code>. The switcher makes <code>hardLimit</code> model-dependent: 5,000 chars for Haiku, 10,000 for Sonnet.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    "Load failed" is what Safari throws when <code>fetch()</code> fails at the network layer before any response is received. Chrome calls it "Failed to fetch", Firefox calls it "NetworkError when attempting to fetch resource". All three are the same thing: the request never reached the API. Possible causes: a browser extension blocking api.anthropic.com, a CORS restriction, a firewall or VPN, or Safari's stricter cross-origin enforcement. The character cap was not the issue — the test message was under 200 characters.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-09 — truncation bug</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Rainbow spotted a bug in the character limit: slicing input to exactly 5,000 characters and then appending <code>'\n\n[Input truncated at 5,000 characters]'</code> (36 chars) sends 5,036 characters to the API — silently exceeding the stated limit. A small off-by-one in principle, but it breaks the contract with the user and means the truncation note itself is the overflow.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — live test</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    First real test with a live API key failed. Button returned "Load failed" — two words, no context, no HTTP status, no indication of where in the chain it broke. From a debugging standpoint, completely useless.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08 — verified</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Both tools confirmed working end-to-end — support triage and lore checker tested live with a real API key and real input. The proxy resolves the CORS issue across all browsers. Removed the "best on desktop" browser warning from the tools since it's no longer accurate. Total time from "Load failed" with no context to a working cross-browser solution: one debugging session, one Cloudflare account, 25 lines of Worker code.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Updated the placeholder and system prompt to explicitly support error snippets, stack traces, and log excerpts. Structured text is actually easier to triage than messy prose — the model reads it cleanly. For log-only inputs the suggested response acknowledges the error and asks for context (steps to reproduce, environment, account details) rather than pretending it's a normal message.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08 — proxy deployed</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Cloudflare Worker deployed at <code>anthropic-proxy.work-specious.workers.dev</code>. 25 lines. Handles CORS preflight (OPTIONS → 204 with <code>Access-Control-Allow-Origin: *</code>), forwards POST to Anthropic server-to-server, returns response with CORS headers attached. All three tools updated to call the proxy instead of <code>api.anthropic.com</code> directly. Worker code saved to <code>proxy/worker.js</code> in the repo. Free tier covers 100,000 requests/day — more than enough for a portfolio demo.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Added a character counter with a soft warning at 3,000 and hard truncation at 5,000 — applied client-side before the API call. Support tickets rarely hit this. Error logs and paste dumps can. Truncation keeps a runaway paste from spiking cost; a note in the payload tells the model what happened. The limit also keeps max_tokens at 1,000 and the system prompt compact — three short sections is all this needs.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        This affects all three tools — lore checker, support triage, FAQ chatbot — since all use the same fetch pattern and the same header. The <code>anthropic-dangerous-direct-browser-calls</code> approach does not work from <code>iamspecious.github.io</code>. The no-backend architecture has hit its hard limit for this use case. Decision: deploy a Cloudflare Worker as a thin CORS proxy — handles the preflight server-side, free tier (100,000 requests/day), no infrastructure to maintain, works everywhere. A non-working portfolio tool demonstrates nothing; a tool that works and has a documented fix for a real architectural problem demonstrates more than one that never broke.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Switched model from Sonnet to Haiku. Triage is pattern recognition and professional writing — Haiku handles it comfortably. Cost drops from ~$1.80 to ~$0.42 per 1,000 triages. "Cents not euros" isn't a nice-to-have, it's a design constraint if this is going to be a viable tool rather than just a demo.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The <code>anthropic-dangerous-direct-browser-calls: true</code> header is supposed to signal Anthropic's server to return <code>Access-Control-Allow-Origin</code> in its preflight response. The mechanism breaks at the preflight stage: the browser sends an OPTIONS request first, the server must include CORS headers in that response, and only then does the browser allow the actual POST through. Anthropic's server is not returning those CORS headers for the <code>iamspecious.github.io</code> origin — so the POST never fires. The header exists in the request the browser intends to send, but the server's OPTIONS response contains no CORS headers at all.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    The prompt is the meaningful part of this tool. Knowing what signals push a ticket from Medium to High, what tone to set, what categories fit a given product — that's the support judgment this tool demonstrates. The code is a vehicle for the prompt.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08 — root cause confirmed</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Chrome console test on desktop, fresh install, no extensions, GitHub Pages origin. Exact error: <em>"Access to fetch at 'https://api.anthropic.com/v1/messages' from origin 'https://iamspecious.github.io' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource."</em> The domain is reachable (api.anthropic.com returns 404 at root, as expected). The failure is CORS, not DNS, not network, not key format.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Added a copy button to the Suggested Response section. Not in the original brief, but practically obvious: in any real support workflow, the next thing you do after reading a suggested response is paste it somewhere. One click.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The fundamental constraint here is the "no backend" architecture. A backend proxy would handle the API call server-side and return the result to the browser — no cross-origin request, no CORS, no preflight, works everywhere including iOS Safari. But adding a backend contradicts the design constraint and the point of the demo: to show what you can build and deploy without infrastructure. That trade-off is real and documented. The right answer for a production tool is a thin backend. The right answer for a portfolio demo is the browser compatibility notice.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-tried">Tried</span>
-                                    First prompt draft had Claude return urgency as a 1–5 score. Dropped it. Labels (Low / Medium / High / Critical) are what support teams actually use in tooling, and they read faster at a glance. Mapped each to a colour indicator so urgency is visible before you read a word.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Added a browser compatibility notice to both tools — displayed above the API key bar. States clearly: best on desktop, Chrome and Firefox most reliable, mobile Safari may block cross-origin requests. Includes the iOS-specific workarounds: disable Content Blockers (Settings → Safari → Content Blockers), disable iCloud Private Relay, or try Chrome/Firefox for iOS.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Three outputs: Category, Urgency, Suggested Response. Category and Urgency are the triage layer. The Suggested Response is what turns classification into action — and the output that makes this demonstrable in an interview. "Here's the tool. Here's what it produces."
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Mobile Safari also has no accessible developer console on-device. The "open F12 → Console" instruction in our improved error message is useless on iOS — there is no F12. Debugging a network error on mobile Safari requires pairing the device with a Mac running desktop Safari and using Remote Web Inspector, or testing on a desktop browser instead. Two issues surfaced from one test: the CORS restriction and the unreachable console.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    One input box, one button. The brief was explicit about minimal surface area. Resisted adding dropdowns, severity sliders, ticket history. The AI does the categorisation — that's the whole point. Adding a form would undermine the argument.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08 — browser confirmed</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Browser confirmed as mobile Safari on iOS. This is the specific environment where direct cross-origin API calls are most restricted. When a request includes custom headers (like <code>x-api-key</code> and <code>anthropic-dangerous-direct-browser-calls</code>), the browser fires a CORS preflight OPTIONS request first. iOS Safari handles this preflight more aggressively than desktop browsers — in some iOS configurations it blocks the request entirely before we get any response.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — initial build</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Same architecture as the KH Lore Checker: single file, no backend, GitHub Pages. If the pattern works for one tool, it works for two. The whole portfolio stays static and the tools are shareable as direct links.
-                                </p>
-                            </div>
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Applied the same error handling improvements to the FAQ chatbot — it had identical single-line catch block with the same gap. Any tool making direct browser API calls needs this treatment. The lesson: a generic catch block is not error handling, it's error hiding. Stage-specific messages let users actually diagnose what went wrong instead of guessing.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Rewrote error handling across three stages. Stage 1 — before the request: validate that the API key starts with <code>sk-ant-</code> and show a specific message if not. Stage 2 — API error response: break down <code>!response.ok</code> by HTTP status. 401 = bad key, 403 = no permission, 429 = rate limited, 400 = bad request, 500+ = server error. Each gets its own message and its own next step. Stage 3 — network failure: catch <code>TypeError</code> separately from other errors and show a specific "network error" message with instructions to open the browser console (F12 → Console) for the actual error. Also added <code>console.error()</code> logging so there is always a full trace available.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        "Load failed" is what Safari throws when <code>fetch()</code> fails at the network layer before any response is received. Chrome calls it "Failed to fetch", Firefox calls it "NetworkError when attempting to fetch resource". All three are the same thing: the request never reached the API. Possible causes: a browser extension blocking api.anthropic.com, a CORS restriction, a firewall or VPN, or Safari's stricter cross-origin enforcement. The character cap was not the issue — the test message was under 200 characters.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08 — live test</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        First real test with a live API key failed. Button returned "Load failed" — two words, no context, no HTTP status, no indication of where in the chain it broke. From a debugging standpoint, completely useless.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Updated the placeholder and system prompt to explicitly support error snippets, stack traces, and log excerpts. Structured text is actually easier to triage than messy prose — the model reads it cleanly. For log-only inputs the suggested response acknowledges the error and asks for context (steps to reproduce, environment, account details) rather than pretending it's a normal message.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Added a character counter with a soft warning at 3,000 and hard truncation at 5,000 — applied client-side before the API call. Support tickets rarely hit this. Error logs and paste dumps can. Truncation keeps a runaway paste from spiking cost; a note in the payload tells the model what happened. The limit also keeps max_tokens at 1,000 and the system prompt compact — three short sections is all this needs.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Switched model from Sonnet to Haiku. Triage is pattern recognition and professional writing — Haiku handles it comfortably. Cost drops from ~$1.80 to ~$0.42 per 1,000 triages. "Cents not euros" isn't a nice-to-have, it's a design constraint if this is going to be a viable tool rather than just a demo.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The prompt is the meaningful part of this tool. Knowing what signals push a ticket from Medium to High, what tone to set, what categories fit a given product — that's the support judgment this tool demonstrates. The code is a vehicle for the prompt.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Added a copy button to the Suggested Response section. Not in the original brief, but practically obvious: in any real support workflow, the next thing you do after reading a suggested response is paste it somewhere. One click.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-tried">Tried</span>
+                                        First prompt draft had Claude return urgency as a 1–5 score. Dropped it. Labels (Low / Medium / High / Critical) are what support teams actually use in tooling, and they read faster at a glance. Mapped each to a colour indicator so urgency is visible before you read a word.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Three outputs: Category, Urgency, Suggested Response. Category and Urgency are the triage layer. The Suggested Response is what turns classification into action — and the output that makes this demonstrable in an interview. "Here's the tool. Here's what it produces."
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        One input box, one button. The brief was explicit about minimal surface area. Resisted adding dropdowns, severity sliders, ticket history. The AI does the categorisation — that's the whole point. Adding a form would undermine the argument.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08 — initial build</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Same architecture as the KH Lore Checker: single file, no backend, GitHub Pages. If the pattern works for one tool, it works for two. The whole portfolio stays static and the tools are shareable as direct links.
+                                    </p>
+                                </div>
 
                             </div>
                         </div>
