@@ -614,6 +614,21 @@
             color: #8b949e !important;
         }
 
+        .badge.bg-success {
+            background-color: #1a4731 !important;
+            color: #3fb950 !important;
+        }
+
+        .badge.bg-warning {
+            background-color: #3d2c00 !important;
+            color: #e3b341 !important;
+        }
+
+        .badge.bg-danger {
+            background-color: #3d0c0c !important;
+            color: #f85149 !important;
+        }
+
         /* About */
         .about-card {
             background: #161b22;
@@ -1168,20 +1183,41 @@
                          LORE CHECKER — AI TOOL FOR LOREBYSPEC
                     ===================================================== -->
                     <div class="project">
-                        <h3>KH Lore Consistency Checker <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <h3>KH Lore Consistency Checker <span class="badge bg-warning" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>May 2025 – Present</strong></p>
                         <p>A theory stress-tester built for my YouTube channel <strong>LorebySpec</strong>. Kingdom Hearts has 25+ years of lore across 15+ titles — this tool lets you paste in a theory, supply relevant wiki links or context, and get a structured AI analysis: contradictions against canon, logical weaknesses, clarifying questions a skeptical viewer would ask, and an overall verdict. Built for real content prep, not as a demo.</p>
 
-                        <div class="project-wins">
-                            <strong>Wins</strong>
-                            <ul>
-                                <li><strong>Open by design</strong> — no account, no login, no subscription. Bring your own Anthropic API key and the tool works. Nothing stored, nothing tracked.</li>
-                                <li><strong>Costs cents, not euros</strong> — default model (Haiku 4.5) runs a typical theory check for ~$0.001. You'd need 1,000 checks to spend a dollar. Cost shown live in the UI per check.</li>
-                                <li><strong>Zero infrastructure</strong> — pure static HTML, no server, no database, no hosting cost. Lives on GitHub Pages. Nothing to maintain or secure.</li>
-                                <li><strong>Solved CORS without a backend</strong> — browsers can't fetch external wiki pages directly. Used Jina Reader as a lightweight proxy to pull live KH wiki content client-side. No server code needed.</li>
-                                <li><strong>Prompt-engineered output</strong> — returns four consistent sections every time: Contradictions, Weaknesses, Clarifying Questions, Overall Assessment. Structured for scriptwriting, not just reading.</li>
-                                <li><strong>Actually used in production</strong> — built for real LorebySpec video prep, not as a demo. Every decision was made with cost, speed, and practical use in mind.</li>
-                            </ul>
+                        <div class="highlights">
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Open by design</span>
+                                <p class="win-detail">No account, no login, no subscription. Bring your own Anthropic API key and the tool works. Nothing stored, nothing tracked.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Costs cents, not euros</span>
+                                <p class="win-detail">Default model (Haiku 4.5) runs a typical theory check for ~$0.001. You'd need 1,000 checks to spend a dollar. Cost shown live in the UI per check.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Zero infrastructure</span>
+                                <p class="win-detail">Pure static HTML, no server, no database, no hosting cost. Lives on GitHub Pages. Nothing to maintain or secure.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Solved CORS without a backend</span>
+                                <p class="win-detail">Browsers can't fetch external wiki pages directly. Used Jina Reader as a lightweight proxy to pull live KH wiki content client-side. No server code needed.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Prompt-engineered output</span>
+                                <p class="win-detail">Returns four consistent sections every time: Contradictions, Weaknesses, Clarifying Questions, Overall Assessment. Structured for scriptwriting, not just reading.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Actually used in production</span>
+                                <p class="win-detail">Built for real LorebySpec video prep, not as a demo. Every decision was made with cost, speed, and practical use in mind.</p>
+                            </div>
                         </div>
                         <div class="project-constraints">
                             <strong>Constraints</strong>
@@ -1205,7 +1241,7 @@
                         <div class="devlog">
                             <div class="devlog-header">
                                 <span>// devlog</span>
-                                <small>running build notes — dated as we go</small>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
                             </div>
 
                             <div class="devlog-entry">
@@ -1377,19 +1413,36 @@
                          LOREBYSPEC CREATOR TOOL
                     ===================================================== -->
                     <div class="project">
-                        <h3>LoreBySpec Creator Tool <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <h3>LoreBySpec Creator Tool <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>A two-mode content assistant built for my YouTube channel <strong>LoreBySpec</strong>. Toggle between <strong>Video Ideas</strong> — paste a topic or theme and get five titled angles with one-sentence hooks — and <strong>Comment Reply</strong> — paste a viewer comment and get a drafted reply in a warm, knowledgeable, lore-nerd voice. Both modes call the Anthropic API directly from the browser. One tool, one key, two workflows.</p>
 
-                        <div class="project-wins">
-                            <strong>Wins</strong>
-                            <ul>
-                                <li><strong>Two tools, one file</strong> — Video Ideas and Comment Reply share an API key bar and shell without needing separate pages, build steps, or navigation. The toggle is the only UI decision needed.</li>
-                                <li><strong>No proxy layer</strong> — uses Anthropic's <code>anthropic-dangerous-direct-browser-access</code> header to call the API natively from the browser. No Cloudflare Worker, no relay, no CORS gymnastics.</li>
-                                <li><strong>Structured idea cards</strong> — Video Ideas responses are parsed from the model's numbered list into discrete cards (title + hook) rather than a wall of text. Scannable and visually distinct.</li>
-                                <li><strong>Prompt-engineered voice</strong> — the Comment Reply system prompt bans sycophantic openers ("great question!") by name, and anchors the persona specifically as LoreBySpec rather than a generic assistant.</li>
-                                <li><strong>Zero storage, zero friction</strong> — session-only API key, no login, no account, no database. Paste key, write prompt, get output.</li>
-                            </ul>
+                        <div class="highlights">
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Two tools, one file</span>
+                                <p class="win-detail">Video Ideas and Comment Reply share an API key bar and shell without needing separate pages, build steps, or navigation. The toggle is the only UI decision needed.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">No proxy layer</span>
+                                <p class="win-detail">Uses Anthropic's direct browser access header to call the API natively. No Cloudflare Worker, no relay, no CORS gymnastics.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Structured idea cards</span>
+                                <p class="win-detail">Video Ideas responses are parsed into discrete cards (title + hook) rather than a wall of text. Scannable and visually distinct.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Prompt-engineered voice</span>
+                                <p class="win-detail">The Comment Reply system prompt bans sycophantic openers ("great question!") by name, and anchors the persona specifically as LoreBySpec rather than a generic assistant.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Zero storage, zero friction</span>
+                                <p class="win-detail">Session-only API key, no login, no account, no database. Paste key, write prompt, get output.</p>
+                            </div>
                         </div>
                         <div class="project-constraints">
                             <strong>Constraints</strong>
@@ -1416,7 +1469,7 @@
                         <div class="devlog">
                             <div class="devlog-header">
                                 <span>// devlog</span>
-                                <small>running build notes — dated as we go</small>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
                             </div>
 
                             <div class="devlog-entry">
@@ -1947,230 +2000,6 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — initial build</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Same architecture as the other tools: single HTML file, no backend, GitHub Pages. The pattern works — a static file with a client-side API call is shareable as a direct link with zero setup. No reason to introduce a server unless we need one.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    The knowledge base goes directly into Claude's context window as part of the system prompt. No vector database, no embedding model, no similarity search. Claude reads the entire KB and finds the relevant section itself — the same way a human would skim a help doc.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Why this works: Claude Haiku has a 200K token context window — roughly 150,000 words, or about 250 pages of text. Most company FAQ docs are well under 10,000 words. The entire knowledge base fits comfortably, and Claude's comprehension across that context is strong enough for straightforward Q&amp;A. This is sometimes called "long-context retrieval" — using the model's context window as the retrieval mechanism instead of a separate search system.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    The system prompt contains one critical rule: if the question cannot be answered from the knowledge base, respond with a specific "I don't have that in our documentation" message. Without this, Claude will produce a confident, helpful, entirely fabricated answer. The grounding constraint is the whole point of the tool — it's what makes it trustworthy rather than just fluent.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Model: Claude Haiku 4.5. Max output: 600 tokens. FAQ answers are 2–4 sentences — even a generous response rarely hits 200 tokens. 600 gives headroom without waste. Haiku handles this pattern easily; Sonnet is overkill and 10× more expensive per query.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-tried">Tried</span>
-                                    Considered adding streaming output so the answer appears word-by-word. FAQ answers are 2–4 sentences and Haiku responds in under 2 seconds. Streaming adds code complexity and browser compatibility surface area for a response that's already fast enough to feel instant. Dropped.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — constraint: cost scales with KB size</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Every query re-sends the full knowledge base. A 5K char FAQ costs ~$0.001 per query. A 60K char KB costs ~$0.01. Still cheap in absolute terms, but if you're handling 10,000 queries a month against a large KB, you're looking at ~$100/month in input tokens alone — before output. For high-volume use, caching common answers or splitting the KB by topic would reduce this significantly.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — constraint: context window ceiling</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    The 60K char hard limit in this tool is a practical ceiling, not a model limit. Claude can technically handle much more. But past ~60K chars, you're paying meaningfully per query and the user experience of pasting 100K chars into a textarea is poor. For larger knowledge bases — multi-section product docs, extensive policy manuals — the right answer is a proper RAG pipeline: chunk the docs, embed them, and retrieve only the relevant chunks per query. This tool demonstrates the concept; that's the production version.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Production path for a real client deployment: add a thin backend (a single serverless function works) that holds the API key, rate-limits requests, and optionally caches responses for common questions. The KB can be stored server-side so clients never see it. The system prompt, grounding rule, and model call are identical to this demo — the only thing that changes is where the API key lives.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — wins &amp; losses</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    <strong>Wins:</strong> Zero infrastructure for the demo. Works with any plain text KB — no preprocessing required. Claude's semantic understanding handles paraphrased questions that would defeat keyword search. Grounded by design: explicit fallback when the docs don't cover something. Cheap enough to run as a real tool, not just a demo. One file, shareable as a direct link.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    <strong>Constraints:</strong> Cost scales linearly with KB size — not a problem at small scale, matters at volume. No conversation history: each question is independent, so follow-up questions don't carry context from the previous answer. API key is client-side, so it's visible in the browser's network tab — fine for a demo, not for production. No logging or analytics out of the box. Can't handle non-text content (images, tables in PDFs, charts). Beyond ~60K chars, a proper RAG pipeline is the right answer.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v0.1 live. Two inputs (KB + question), one output (answer), cost shown per query. Character counters with soft warnings at 20K chars for the KB and 500 chars for the question. Hard truncation at 60K / 1K with an injected note so the model knows input was cut.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — tackling permanence: KB persistence</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Saved the knowledge base to <code>localStorage</code> on every keystroke. It survives page refreshes, tab closes, and browser restarts on the same device — so you set up your docs once and they're there next session. A "saved locally" badge appears in the KB panel header, with a clear link if you want to wipe it. 60K chars = ~60KB, well inside localStorage's ~5MB per-origin limit.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — cost impact of KB permanence</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Permanence is a silent cost amplifier. Every query re-sends the full KB regardless of how long it's been sitting in storage. A user who pastes a 60K char KB (~15K tokens) and walks away for a month is still paying ~$0.012 per query in input tokens every time they return — and they might not remember how large their KB is. At low volume this is trivial. At 1,000 queries/month against a large KB, input costs alone run ~$12. It's still cheap, but it's no longer invisible. Production deployments with a backend could cache the system prompt using Anthropic's prompt caching feature, which reduces repeated KB costs by up to 90% — but that requires a server.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: stale knowledge base</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    localStorage doesn't know your docs changed. A company updates its refund policy in January; the stored KB still says December's policy. The tool gives confidently correct answers based on outdated information. There's no version check, no sync, no expiry. For this demo tool, the mitigation is user discipline — clear and re-paste when docs change. In a production deployment, the KB would live server-side and be updated there; client-side storage wouldn't be in the picture at all.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: shared devices and cross-device gaps</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    localStorage is browser-and-device-specific. Two people using the same browser on the same machine share the same stored KB — one person's company docs will silently appear for the next user. Conversely, someone who sets up the KB on their desktop opens a blank KB on their laptop. For a single-user demo tool this is acceptable friction. For any kind of team deployment it's a problem that only a server-side KB solves. Also worth noting: "clear browsing data" wipes localStorage with no warning. Users who clear their browser routinely will lose the saved KB and may not immediately realise why.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: localStorage is readable plain text</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    The stored KB sits in plain text in the browser's localStorage, visible to anyone who opens DevTools → Application → Local Storage. Any JavaScript running on the page can also read it. For a public FAQ this is irrelevant. For a company storing internal pricing, HR policies, or anything sensitive — don't use client-side storage. This is another reason the right production architecture keeps the KB server-side, behind authentication, with the client only ever receiving the answer.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — multi-turn conversation history</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Added a <code>conversationHistory</code> array that accumulates each Q&amp;A pair. Every call to the API now includes the full exchange history alongside the system prompt, so follow-up questions work: "Can I return it?" → "How long will that take?" carries context correctly. A "New Chat" button resets the history and wipes the conversation thread. The question textarea clears after each submission so the next question is always a fresh input.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — cost impact of conversation history</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Conversation history accumulates input tokens on every turn. The KB (~15K tokens for a 60K char doc) dominates cost early on — each exchange adds maybe 100–400 tokens of conversation context, which is 1–3% extra per turn. By exchange 10, the history might add 2,000–4,000 tokens, roughly a 15–25% cost increase per call compared to turn 1. The KB itself doesn't change; it's the conversation that grows. Capped at sending the last 20 messages (10 exchanges) to the API to prevent runaway costs on very long sessions. The full visual history is always shown — only what gets sent to the API is trimmed.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: KB changes mid-conversation</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Nothing stops someone from editing the KB while a conversation is in progress. If they do, subsequent answers draw from the updated KB, but earlier answers in the same thread used the old one. The conversation thread could silently contain contradictions. The tool doesn't warn about this. For a demo, it's acceptable. For anything real, the KB should be locked for the duration of a session, or the UI should force a new chat when the KB changes.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Added a "quality in, quality out" note at the bottom of the KB panel. It's subtle — small, italic, monospace — but it sets the right expectation before anyone hits Ask. Vague docs produce vague answers. A one-line FAQ that says "we have a refund policy" without explaining what it is will produce an answer that says "we have a refund policy" without explaining what it is. The tool is only as good as what you feed it.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v0.2 live. KB persists via localStorage with saved/clear indicator. Multi-turn conversation thread with per-exchange cost and copy buttons. Session total cost shown in conversation header. New Chat button to reset. QIGO note in KB panel. All constraints documented above rather than hidden.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — debouncing localStorage writes</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Switched from saving on every keystroke to a debounced save: the write only fires 800ms after the user stops typing. A <code>beforeunload</code> listener acts as a safety net — if the tab closes before the debounce timer fires, the save happens immediately on the way out. The "saved locally" badge still appears as soon as the user types (it's not delayed), so the UX is unchanged.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — does this affect API cost? No.</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    To be direct: debouncing has zero effect on Anthropic API spend. localStorage is entirely client-side — Anthropic never sees it. The only things that drive API cost are KB size (input tokens per query), conversation history length (accumulates across turns), and how often someone hits Ask. None of those change. What debouncing does affect is browser resource usage: <code>localStorage.setItem</code> is synchronous and serialises the full KB string on the main thread on every call. With a 60K char KB and 300 keystrokes in an editing session, the old approach meant ~18MB of data serialised to disk in a few minutes — wasteful and jank-inducing on older hardware or mobile. Debouncing turns those ~300 disk writes into roughly one. Right pattern, wrong reason to expect cost savings.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v0.3 live. Debounced KB save + beforeunload safety net. API cost unchanged. Browser overhead reduced significantly on large KBs.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — roadmap: the re-reading problem</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    The core inefficiency in the current design: every single query re-sends the full knowledge base. The KB doesn't change between queries, but the model re-reads all of it every time. For a 60K char KB that's ~15,000 input tokens on every call — whether the question needs one sentence of docs or all of them. This is the thing the roadmap is built around fixing, in order of complexity and infrastructure cost.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — roadmap step 1: prompt caching</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Anthropic's prompt caching feature lets you mark a prefix of the context (e.g. the system prompt including the full KB) as cacheable. First call is a cache miss — costs 125% of normal input rate. Subsequent calls within 5 minutes are cache hits — cost 10% of normal input rate. For a 60K char KB, that flips the input cost from ~$0.012 per query to ~$0.0012 on cache hits. 10× reduction on KB token cost for free, effectively. Constraint: requires a backend. Prompt caching only works on server-side API calls — you can't send the cache-control headers from a browser. So this step means adding a thin proxy: one serverless function that holds the KB, manages the cache headers, and forwards the user's question. At low volume, serverless costs near nothing. This is the right first step once query volume justifies it.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — roadmap step 2: KB distillation</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    An option that stays within the current client-side architecture: a one-time preprocessing step where Claude reads the full KB and produces a compressed, Q&amp;A-optimised version. Paste your 60K char policy docs, click Compress — Claude distills them down to the 15K chars of actual answerable facts. Store the compressed version in localStorage. Every subsequent query uses the smaller, cheaper version. Cost: one API call upfront (~$0.013 for a 60K char doc), then ongoing savings on every query. No backend required. The honest trade-off: compression is lossy. A distilled KB won't answer every edge case the original would — it suits a broad FAQ better than a technical manual where exact wording matters. Useful as an intermediate step before adding proper infrastructure.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
                                 <span class="timestamp">2026-05-09 — roadmap step 3: RAG</span>
                                 <p>
                                     <span class="tag tag-note">Note</span>
@@ -2178,311 +2007,237 @@
                                 </p>
                             </div>
 
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 28 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — roadmap step 2: KB distillation</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        An option that stays within the current client-side architecture: a one-time preprocessing step where Claude reads the full KB and produces a compressed, Q&amp;A-optimised version. Paste your 60K char policy docs, click Compress — Claude distills them down to the 15K chars of actual answerable facts. Store the compressed version in localStorage. Every subsequent query uses the smaller, cheaper version. Cost: one API call upfront (~$0.013 for a 60K char doc), then ongoing savings on every query. No backend required. The honest trade-off: compression is lossy. A distilled KB won't answer every edge case the original would — it suits a broad FAQ better than a technical manual where exact wording matters. Useful as an intermediate step before adding proper infrastructure.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — roadmap step 1: prompt caching</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Anthropic's prompt caching feature lets you mark a prefix of the context (e.g. the system prompt including the full KB) as cacheable. First call is a cache miss — costs 125% of normal input rate. Subsequent calls within 5 minutes are cache hits — cost 10% of normal input rate. For a 60K char KB, that flips the input cost from ~$0.012 per query to ~$0.0012 on cache hits. 10× reduction on KB token cost for free, effectively. Constraint: requires a backend. Prompt caching only works on server-side API calls — you can't send the cache-control headers from a browser. So this step means adding a thin proxy: one serverless function that holds the KB, manages the cache headers, and forwards the user's question. At low volume, serverless costs near nothing. This is the right first step once query volume justifies it.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — roadmap: the re-reading problem</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The core inefficiency in the current design: every single query re-sends the full knowledge base. The KB doesn't change between queries, but the model re-reads all of it every time. For a 60K char KB that's ~15,000 input tokens on every call — whether the question needs one sentence of docs or all of them. This is the thing the roadmap is built around fixing, in order of complexity and infrastructure cost.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        v0.3 live. Debounced KB save + beforeunload safety net. API cost unchanged. Browser overhead reduced significantly on large KBs.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — does this affect API cost? No.</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        To be direct: debouncing has zero effect on Anthropic API spend. localStorage is entirely client-side — Anthropic never sees it. The only things that drive API cost are KB size (input tokens per query), conversation history length (accumulates across turns), and how often someone hits Ask. None of those change. What debouncing does affect is browser resource usage: <code>localStorage.setItem</code> is synchronous and serialises the full KB string on the main thread on every call. With a 60K char KB and 300 keystrokes in an editing session, the old approach meant ~18MB of data serialised to disk in a few minutes — wasteful and jank-inducing on older hardware or mobile. Debouncing turns those ~300 disk writes into roughly one. Right pattern, wrong reason to expect cost savings.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — debouncing localStorage writes</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Switched from saving on every keystroke to a debounced save: the write only fires 800ms after the user stops typing. A <code>beforeunload</code> listener acts as a safety net — if the tab closes before the debounce timer fires, the save happens immediately on the way out. The "saved locally" badge still appears as soon as the user types (it's not delayed), so the UX is unchanged.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        v0.2 live. KB persists via localStorage with saved/clear indicator. Multi-turn conversation thread with per-exchange cost and copy buttons. Session total cost shown in conversation header. New Chat button to reset. QIGO note in KB panel. All constraints documented above rather than hidden.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Added a "quality in, quality out" note at the bottom of the KB panel. It's subtle — small, italic, monospace — but it sets the right expectation before anyone hits Ask. Vague docs produce vague answers. A one-line FAQ that says "we have a refund policy" without explaining what it is will produce an answer that says "we have a refund policy" without explaining what it is. The tool is only as good as what you feed it.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — hiccup: KB changes mid-conversation</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Nothing stops someone from editing the KB while a conversation is in progress. If they do, subsequent answers draw from the updated KB, but earlier answers in the same thread used the old one. The conversation thread could silently contain contradictions. The tool doesn't warn about this. For a demo, it's acceptable. For anything real, the KB should be locked for the duration of a session, or the UI should force a new chat when the KB changes.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — cost impact of conversation history</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Conversation history accumulates input tokens on every turn. The KB (~15K tokens for a 60K char doc) dominates cost early on — each exchange adds maybe 100–400 tokens of conversation context, which is 1–3% extra per turn. By exchange 10, the history might add 2,000–4,000 tokens, roughly a 15–25% cost increase per call compared to turn 1. The KB itself doesn't change; it's the conversation that grows. Capped at sending the last 20 messages (10 exchanges) to the API to prevent runaway costs on very long sessions. The full visual history is always shown — only what gets sent to the API is trimmed.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — multi-turn conversation history</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Added a <code>conversationHistory</code> array that accumulates each Q&amp;A pair. Every call to the API now includes the full exchange history alongside the system prompt, so follow-up questions work: "Can I return it?" → "How long will that take?" carries context correctly. A "New Chat" button resets the history and wipes the conversation thread. The question textarea clears after each submission so the next question is always a fresh input.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — hiccup: localStorage is readable plain text</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        The stored KB sits in plain text in the browser's localStorage, visible to anyone who opens DevTools → Application → Local Storage. Any JavaScript running on the page can also read it. For a public FAQ this is irrelevant. For a company storing internal pricing, HR policies, or anything sensitive — don't use client-side storage. This is another reason the right production architecture keeps the KB server-side, behind authentication, with the client only ever receiving the answer.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — hiccup: shared devices and cross-device gaps</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        localStorage is browser-and-device-specific. Two people using the same browser on the same machine share the same stored KB — one person's company docs will silently appear for the next user. Conversely, someone who sets up the KB on their desktop opens a blank KB on their laptop. For a single-user demo tool this is acceptable friction. For any kind of team deployment it's a problem that only a server-side KB solves. Also worth noting: "clear browsing data" wipes localStorage with no warning. Users who clear their browser routinely will lose the saved KB and may not immediately realise why.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — hiccup: stale knowledge base</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        localStorage doesn't know your docs changed. A company updates its refund policy in January; the stored KB still says December's policy. The tool gives confidently correct answers based on outdated information. There's no version check, no sync, no expiry. For this demo tool, the mitigation is user discipline — clear and re-paste when docs change. In a production deployment, the KB would live server-side and be updated there; client-side storage wouldn't be in the picture at all.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — cost impact of KB permanence</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Permanence is a silent cost amplifier. Every query re-sends the full KB regardless of how long it's been sitting in storage. A user who pastes a 60K char KB (~15K tokens) and walks away for a month is still paying ~$0.012 per query in input tokens every time they return — and they might not remember how large their KB is. At low volume this is trivial. At 1,000 queries/month against a large KB, input costs alone run ~$12. It's still cheap, but it's no longer invisible. Production deployments with a backend could cache the system prompt using Anthropic's prompt caching feature, which reduces repeated KB costs by up to 90% — but that requires a server.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-09 — tackling permanence: KB persistence</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Saved the knowledge base to <code>localStorage</code> on every keystroke. It survives page refreshes, tab closes, and browser restarts on the same device — so you set up your docs once and they're there next session. A "saved locally" badge appears in the KB panel header, with a clear link if you want to wipe it. 60K chars = ~60KB, well inside localStorage's ~5MB per-origin limit.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        v0.1 live. Two inputs (KB + question), one output (answer), cost shown per query. Character counters with soft warnings at 20K chars for the KB and 500 chars for the question. Hard truncation at 60K / 1K with an injected note so the model knows input was cut.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        <strong>Constraints:</strong> Cost scales linearly with KB size — not a problem at small scale, matters at volume. No conversation history: each question is independent, so follow-up questions don't carry context from the previous answer. API key is client-side, so it's visible in the browser's network tab — fine for a demo, not for production. No logging or analytics out of the box. Can't handle non-text content (images, tables in PDFs, charts). Beyond ~60K chars, a proper RAG pipeline is the right answer.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08 — wins &amp; losses</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        <strong>Wins:</strong> Zero infrastructure for the demo. Works with any plain text KB — no preprocessing required. Claude's semantic understanding handles paraphrased questions that would defeat keyword search. Grounded by design: explicit fallback when the docs don't cover something. Cheap enough to run as a real tool, not just a demo. One file, shareable as a direct link.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Production path for a real client deployment: add a thin backend (a single serverless function works) that holds the API key, rate-limits requests, and optionally caches responses for common questions. The KB can be stored server-side so clients never see it. The system prompt, grounding rule, and model call are identical to this demo — the only thing that changes is where the API key lives.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08 — constraint: context window ceiling</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        The 60K char hard limit in this tool is a practical ceiling, not a model limit. Claude can technically handle much more. But past ~60K chars, you're paying meaningfully per query and the user experience of pasting 100K chars into a textarea is poor. For larger knowledge bases — multi-section product docs, extensive policy manuals — the right answer is a proper RAG pipeline: chunk the docs, embed them, and retrieve only the relevant chunks per query. This tool demonstrates the concept; that's the production version.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08 — constraint: cost scales with KB size</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Every query re-sends the full knowledge base. A 5K char FAQ costs ~$0.001 per query. A 60K char KB costs ~$0.01. Still cheap in absolute terms, but if you're handling 10,000 queries a month against a large KB, you're looking at ~$100/month in input tokens alone — before output. For high-volume use, caching common answers or splitting the KB by topic would reduce this significantly.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-tried">Tried</span>
+                                        Considered adding streaming output so the answer appears word-by-word. FAQ answers are 2–4 sentences and Haiku responds in under 2 seconds. Streaming adds code complexity and browser compatibility surface area for a response that's already fast enough to feel instant. Dropped.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Model: Claude Haiku 4.5. Max output: 600 tokens. FAQ answers are 2–4 sentences — even a generous response rarely hits 200 tokens. 600 gives headroom without waste. Haiku handles this pattern easily; Sonnet is overkill and 10× more expensive per query.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The system prompt contains one critical rule: if the question cannot be answered from the knowledge base, respond with a specific "I don't have that in our documentation" message. Without this, Claude will produce a confident, helpful, entirely fabricated answer. The grounding constraint is the whole point of the tool — it's what makes it trustworthy rather than just fluent.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Why this works: Claude Haiku has a 200K token context window — roughly 150,000 words, or about 250 pages of text. Most company FAQ docs are well under 10,000 words. The entire knowledge base fits comfortably, and Claude's comprehension across that context is strong enough for straightforward Q&amp;A. This is sometimes called "long-context retrieval" — using the model's context window as the retrieval mechanism instead of a separate search system.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The knowledge base goes directly into Claude's context window as part of the system prompt. No vector database, no embedding model, no similarity search. Claude reads the entire KB and finds the relevant section itself — the same way a human would skim a help doc.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-08 — initial build</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Same architecture as the other tools: single HTML file, no backend, GitHub Pages. The pattern works — a static file with a client-side API call is shareable as a direct link with zero setup. No reason to introduce a server unless we need one.
+                                    </p>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-
-                         FAQ CHATBOT — AI TOOL
-                    ===================================================== -->
-                    <div class="project">
-                        <h3>FAQ Chatbot <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
-                        <p><strong>May 2026 – Present</strong></p>
-                        <p>Paste a company's FAQ or internal knowledge base, paste a customer message, and get an answer grounded entirely in those docs — nothing made up, nothing hallucinated. Built to show how a lightweight AI support chatbot actually works: no vector database, no embeddings pipeline, no backend. Just a system prompt, a context window, and a model that knows to say "I don't have that" when the docs don't cover it.</p>
-                        <p>The goal is a tool a client could realistically drop into their website with minimal setup — and a devlog that walks through every decision, tradeoff, and constraint so someone reading it understands not just what was built, but why it works and where it breaks.</p>
-
-                        <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Paste anything</span>
-                                <p class="win-detail">Works with any plain text: Notion exports, Confluence pages, Google Docs, Zendesk article dumps, or a hand-written FAQ. No formatting required. If you can copy it, it works.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Claude does the search</span>
-                                <p class="win-detail">No vector database, no embeddings, no semantic search infrastructure. The knowledge base goes into Claude's context window and the model finds the relevant answer natively — including paraphrased questions that wouldn't match keyword search.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Grounded by design</span>
-                                <p class="win-detail">The system prompt explicitly instructs Claude: only answer from the provided docs. If the answer isn't there, say so. This is the critical design choice — without it, the model will helpfully hallucinate a plausible-sounding answer.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Sub-cent answers</span>
-                                <p class="win-detail">A small FAQ (5K chars) costs ~$0.001 per query on Haiku. A large one (60K chars) runs ~$0.01. Still cheaper than a human response. Cost shown live after each query so there are no surprises.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Drop-in ready</span>
-                                <p class="win-detail">One HTML file. Add an API key and paste your docs. No install, no setup, no infrastructure. In a real deployment, you'd swap the client-side API key for a backend proxy — but the logic is identical.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Shows the real pattern</span>
-                                <p class="win-detail">KB-in-context is the core of most RAG-lite chatbots — even expensive ones. This demo strips away the infrastructure to show the concept clearly: the prompt engineering, the grounding rule, and where the limits actually are.</p>
-                            </div>
-                        </div>
-
-                        <p style="margin-top: 10px;">
-                            <span class="tech-tag">HTML/CSS/JS</span>
-                            <span class="tech-tag">Claude API (Anthropic)</span>
-                            <span class="tech-tag">Client-side only</span>
-                            <span class="tech-tag">GitHub Pages</span>
-                            <span class="tech-tag">Prompt engineering</span>
-                        </p>
-                        <a class="tool-link-badge" href="faq-chatbot.html" target="_blank">Open Tool →</a>
-
-                        <div class="roadmap">
-                            <strong class="roadmap-heading">// roadmap</strong>
-                            <ol>
-                                <li><strong>Prompt caching</strong> — The single biggest cost lever that stays close to the current architecture. Requires adding a thin backend (a serverless function) to hold the KB server-side and mark it as a cacheable prefix in Anthropic's API. Cache hits cost 10% of normal input rate — a 60K char KB drops from ~$0.012 to ~$0.0012 per query on cached calls. Same model, same prompt logic, just stops re-reading the full document on every single request. Right first step once query volume makes it worth the minimal infrastructure overhead.</li>
-                                <li><strong>KB distillation</strong> — A one-time client-side preprocessing step: Claude reads your full docs and produces a compressed, Q&amp;A-optimised summary stored alongside the original in localStorage. Smaller compressed KB means cheaper queries with no backend required. Trade-off: compression loses some detail, so this suits broad FAQ coverage more than precise technical docs where exact wording matters. No infrastructure cost — just one extra API call upfront.</li>
-                                <li><strong>RAG pipeline</strong> — The right answer for document sets too large for context or for high-volume deployments where per-query cost needs to be pushed as low as possible. Chunk the docs, generate embeddings once (cheap — text-embedding models cost a fraction of chat models), store in a vector database, retrieve only the two or three relevant chunks per query. Meaningful infrastructure step up: embedding model, vector store, retrieval logic. Makes sense when the KB outgrows what context-window retrieval can handle cleanly.</li>
-                            </ol>
-                        </div>
-
-                        <div class="devlog">
-                            <div class="devlog-header">
-                                <span>// devlog</span>
-                                <small>running build notes — decisions, pivots, wins, and constraints</small>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — initial build</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Same architecture as the other tools: single HTML file, no backend, GitHub Pages. The pattern works — a static file with a client-side API call is shareable as a direct link with zero setup. No reason to introduce a server unless we need one.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    The knowledge base goes directly into Claude's context window as part of the system prompt. No vector database, no embedding model, no similarity search. Claude reads the entire KB and finds the relevant section itself — the same way a human would skim a help doc.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Why this works: Claude Haiku has a 200K token context window — roughly 150,000 words, or about 250 pages of text. Most company FAQ docs are well under 10,000 words. The entire knowledge base fits comfortably, and Claude's comprehension across that context is strong enough for straightforward Q&amp;A. This is sometimes called "long-context retrieval" — using the model's context window as the retrieval mechanism instead of a separate search system.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    The system prompt contains one critical rule: if the question cannot be answered from the knowledge base, respond with a specific "I don't have that in our documentation" message. Without this, Claude will produce a confident, helpful, entirely fabricated answer. The grounding constraint is the whole point of the tool — it's what makes it trustworthy rather than just fluent.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Model: Claude Haiku 4.5. Max output: 600 tokens. FAQ answers are 2–4 sentences — even a generous response rarely hits 200 tokens. 600 gives headroom without waste. Haiku handles this pattern easily; Sonnet is overkill and 10× more expensive per query.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-tried">Tried</span>
-                                    Considered adding streaming output so the answer appears word-by-word. FAQ answers are 2–4 sentences and Haiku responds in under 2 seconds. Streaming adds code complexity and browser compatibility surface area for a response that's already fast enough to feel instant. Dropped.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — constraint: cost scales with KB size</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Every query re-sends the full knowledge base. A 5K char FAQ costs ~$0.001 per query. A 60K char KB costs ~$0.01. Still cheap in absolute terms, but if you're handling 10,000 queries a month against a large KB, you're looking at ~$100/month in input tokens alone — before output. For high-volume use, caching common answers or splitting the KB by topic would reduce this significantly.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — constraint: context window ceiling</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    The 60K char hard limit in this tool is a practical ceiling, not a model limit. Claude can technically handle much more. But past ~60K chars, you're paying meaningfully per query and the user experience of pasting 100K chars into a textarea is poor. For larger knowledge bases — multi-section product docs, extensive policy manuals — the right answer is a proper RAG pipeline: chunk the docs, embed them, and retrieve only the relevant chunks per query. This tool demonstrates the concept; that's the production version.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Production path for a real client deployment: add a thin backend (a single serverless function works) that holds the API key, rate-limits requests, and optionally caches responses for common questions. The KB can be stored server-side so clients never see it. The system prompt, grounding rule, and model call are identical to this demo — the only thing that changes is where the API key lives.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08 — wins &amp; losses</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    <strong>Wins:</strong> Zero infrastructure for the demo. Works with any plain text KB — no preprocessing required. Claude's semantic understanding handles paraphrased questions that would defeat keyword search. Grounded by design: explicit fallback when the docs don't cover something. Cheap enough to run as a real tool, not just a demo. One file, shareable as a direct link.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    <strong>Constraints:</strong> Cost scales linearly with KB size — not a problem at small scale, matters at volume. No conversation history: each question is independent, so follow-up questions don't carry context from the previous answer. API key is client-side, so it's visible in the browser's network tab — fine for a demo, not for production. No logging or analytics out of the box. Can't handle non-text content (images, tables in PDFs, charts). Beyond ~60K chars, a proper RAG pipeline is the right answer.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-08</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v0.1 live. Two inputs (KB + question), one output (answer), cost shown per query. Character counters with soft warnings at 20K chars for the KB and 500 chars for the question. Hard truncation at 60K / 1K with an injected note so the model knows input was cut.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — tackling permanence: KB persistence</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Saved the knowledge base to <code>localStorage</code> on every keystroke. It survives page refreshes, tab closes, and browser restarts on the same device — so you set up your docs once and they're there next session. A "saved locally" badge appears in the KB panel header, with a clear link if you want to wipe it. 60K chars = ~60KB, well inside localStorage's ~5MB per-origin limit.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — cost impact of KB permanence</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Permanence is a silent cost amplifier. Every query re-sends the full KB regardless of how long it's been sitting in storage. A user who pastes a 60K char KB (~15K tokens) and walks away for a month is still paying ~$0.012 per query in input tokens every time they return — and they might not remember how large their KB is. At low volume this is trivial. At 1,000 queries/month against a large KB, input costs alone run ~$12. It's still cheap, but it's no longer invisible. Production deployments with a backend could cache the system prompt using Anthropic's prompt caching feature, which reduces repeated KB costs by up to 90% — but that requires a server.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: stale knowledge base</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    localStorage doesn't know your docs changed. A company updates its refund policy in January; the stored KB still says December's policy. The tool gives confidently correct answers based on outdated information. There's no version check, no sync, no expiry. For this demo tool, the mitigation is user discipline — clear and re-paste when docs change. In a production deployment, the KB would live server-side and be updated there; client-side storage wouldn't be in the picture at all.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: shared devices and cross-device gaps</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    localStorage is browser-and-device-specific. Two people using the same browser on the same machine share the same stored KB — one person's company docs will silently appear for the next user. Conversely, someone who sets up the KB on their desktop opens a blank KB on their laptop. For a single-user demo tool this is acceptable friction. For any kind of team deployment it's a problem that only a server-side KB solves. Also worth noting: "clear browsing data" wipes localStorage with no warning. Users who clear their browser routinely will lose the saved KB and may not immediately realise why.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: localStorage is readable plain text</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    The stored KB sits in plain text in the browser's localStorage, visible to anyone who opens DevTools → Application → Local Storage. Any JavaScript running on the page can also read it. For a public FAQ this is irrelevant. For a company storing internal pricing, HR policies, or anything sensitive — don't use client-side storage. This is another reason the right production architecture keeps the KB server-side, behind authentication, with the client only ever receiving the answer.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — multi-turn conversation history</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Added a <code>conversationHistory</code> array that accumulates each Q&amp;A pair. Every call to the API now includes the full exchange history alongside the system prompt, so follow-up questions work: "Can I return it?" → "How long will that take?" carries context correctly. A "New Chat" button resets the history and wipes the conversation thread. The question textarea clears after each submission so the next question is always a fresh input.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — cost impact of conversation history</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    Conversation history accumulates input tokens on every turn. The KB (~15K tokens for a 60K char doc) dominates cost early on — each exchange adds maybe 100–400 tokens of conversation context, which is 1–3% extra per turn. By exchange 10, the history might add 2,000–4,000 tokens, roughly a 15–25% cost increase per call compared to turn 1. The KB itself doesn't change; it's the conversation that grows. Capped at sending the last 20 messages (10 exchanges) to the API to prevent runaway costs on very long sessions. The full visual history is always shown — only what gets sent to the API is trimmed.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — hiccup: KB changes mid-conversation</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Nothing stops someone from editing the KB while a conversation is in progress. If they do, subsequent answers draw from the updated KB, but earlier answers in the same thread used the old one. The conversation thread could silently contain contradictions. The tool doesn't warn about this. For a demo, it's acceptable. For anything real, the KB should be locked for the duration of a session, or the UI should force a new chat when the KB changes.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Added a "quality in, quality out" note at the bottom of the KB panel. It's subtle — small, italic, monospace — but it sets the right expectation before anyone hits Ask. Vague docs produce vague answers. A one-line FAQ that says "we have a refund policy" without explaining what it is will produce an answer that says "we have a refund policy" without explaining what it is. The tool is only as good as what you feed it.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v0.2 live. KB persists via localStorage with saved/clear indicator. Multi-turn conversation thread with per-exchange cost and copy buttons. Session total cost shown in conversation header. New Chat button to reset. QIGO note in KB panel. All constraints documented above rather than hidden.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — debouncing localStorage writes</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Switched from saving on every keystroke to a debounced save: the write only fires 800ms after the user stops typing. A <code>beforeunload</code> listener acts as a safety net — if the tab closes before the debounce timer fires, the save happens immediately on the way out. The "saved locally" badge still appears as soon as the user types (it's not delayed), so the UX is unchanged.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — does this affect API cost? No.</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    To be direct: debouncing has zero effect on Anthropic API spend. localStorage is entirely client-side — Anthropic never sees it. The only things that drive API cost are KB size (input tokens per query), conversation history length (accumulates across turns), and how often someone hits Ask. None of those change. What debouncing does affect is browser resource usage: <code>localStorage.setItem</code> is synchronous and serialises the full KB string on the main thread on every call. With a 60K char KB and 300 keystrokes in an editing session, the old approach meant ~18MB of data serialised to disk in a few minutes — wasteful and jank-inducing on older hardware or mobile. Debouncing turns those ~300 disk writes into roughly one. Right pattern, wrong reason to expect cost savings.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v0.3 live. Debounced KB save + beforeunload safety net. API cost unchanged. Browser overhead reduced significantly on large KBs.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — roadmap: the re-reading problem</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    The core inefficiency in the current design: every single query re-sends the full knowledge base. The KB doesn't change between queries, but the model re-reads all of it every time. For a 60K char KB that's ~15,000 input tokens on every call — whether the question needs one sentence of docs or all of them. This is the thing the roadmap is built around fixing, in order of complexity and infrastructure cost.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — roadmap step 1: prompt caching</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    Anthropic's prompt caching feature lets you mark a prefix of the context (e.g. the system prompt including the full KB) as cacheable. First call is a cache miss — costs 125% of normal input rate. Subsequent calls within 5 minutes are cache hits — cost 10% of normal input rate. For a 60K char KB, that flips the input cost from ~$0.012 per query to ~$0.0012 on cache hits. 10× reduction on KB token cost for free, effectively. Constraint: requires a backend. Prompt caching only works on server-side API calls — you can't send the cache-control headers from a browser. So this step means adding a thin proxy: one serverless function that holds the KB, manages the cache headers, and forwards the user's question. At low volume, serverless costs near nothing. This is the right first step once query volume justifies it.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — roadmap step 2: KB distillation</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    An option that stays within the current client-side architecture: a one-time preprocessing step where Claude reads the full KB and produces a compressed, Q&amp;A-optimised version. Paste your 60K char policy docs, click Compress — Claude distills them down to the 15K chars of actual answerable facts. Store the compressed version in localStorage. Every subsequent query uses the smaller, cheaper version. Cost: one API call upfront (~$0.013 for a 60K char doc), then ongoing savings on every query. No backend required. The honest trade-off: compression is lossy. A distilled KB won't answer every edge case the original would — it suits a broad FAQ better than a technical manual where exact wording matters. Useful as an intermediate step before adding proper infrastructure.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-05-09 — roadmap step 3: RAG</span>
-                                <p>
-                                    <span class="tag tag-note">Note</span>
-                                    Retrieval-Augmented Generation is the full answer to the re-reading problem: chunk the docs, embed each chunk once using a cheap embedding model (text-embedding-3-small costs ~$0.02/MTok — a 100-page doc embeds for under a cent), store the vectors, and at query time retrieve only the 2–3 most relevant chunks to send alongside the question. Queries go from sending 15,000 tokens to sending ~500. Cost per query drops by ~96% compared to the current full-KB approach. The infrastructure price: you need an embedding model, a vector store, and retrieval logic. That's a real architectural step up. It makes sense when the KB is too large for context-window retrieval to work cleanly, or when you're handling enough volume that even prompt-cached queries add up. Not the right first step — but the right answer at scale.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <hr>
-=======
                     </div><!-- /project-block: FAQ Chatbot -->
 
                     <div class="project-block" data-category="technical">
@@ -2492,7 +2247,7 @@
                          PREGVOICE — ACCESSIBILITY TOOL
                     ===================================================== -->
                     <div class="project">
-                        <h3>PregVoice <span class="badge bg-secondary" style="font-size:0.65rem; vertical-align: middle;">Research &amp; Planning</span></h3>
+                        <h3>PregVoice <span class="badge bg-danger" style="font-size:0.65rem; vertical-align: middle;">Research &amp; Planning</span></h3>
                         <p><strong>Feb 2025 – Present</strong></p>
                         <p>A layered accessibility project tackling one specific, overlooked gap: blind and visually impaired people cannot independently read a pregnancy test. The result is a deeply private moment that requires asking someone else — stripping dignity from an already vulnerable experience. PregVoice works through the problem in phases, from smartphone-first solutions requiring no new hardware, to researching the internals of existing digital tests, to evaluating custom hardware if no off-the-shelf path is viable.</p>
 
@@ -2529,25 +2284,6 @@
                             </div>
                         </div>
 
-                        <div class="project-wins">
-                            <strong>Why this approach works</strong>
-                            <ul>
-                                <li><strong>No new hardware required</strong> — Layer 1 works on any smartphone the person already owns. Zero additional cost to the user for the most accessible path.</li>
-                                <li><strong>Free, forever</strong> — on-device ML, Web Speech API, GitHub Pages hosting. No server, no API calls, no running costs. Nothing to eventually put behind a paywall.</li>
-                                <li><strong>Privacy by architecture, not policy</strong> — the camera frame is processed in memory and discarded. No image is saved, no data is sent anywhere. Open source so anyone can verify this, not just trust it.</li>
-                                <li><strong>Works offline</strong> — the app must function with no internet connection during the reading window. On-device inference means no network dependency at the moment that matters.</li>
-                            </ul>
-                        </div>
-                        <div class="project-constraints">
-                            <strong>Hard constraints we're working around</strong>
-                            <ul>
-                                <li><strong>Reliability is a release gate, not a metric</strong> — a false positive or false negative carries real psychological and medical consequences. The tool does not ship without a validated confidence threshold and a clear "re-check recommended" path below it.</li>
-                                <li><strong>Medical-adjacent at every step</strong> — "reads the visual output of a completed test" must remain the design boundary in code, language, and legal framing. Any drift toward diagnostic territory changes the regulatory picture entirely.</li>
-                                <li><strong>Co-design is non-negotiable</strong> — blind and low-vision users must be involved at every major UX decision point, not consulted after the fact. This adds time. It's not optional.</li>
-                                <li><strong>Hardware unknowns for Layers 2 &amp; 3</strong> — digital test PCB internals are still being researched. Manufacturer partnership and custom accessory paths are unconfirmed until teardown findings are in.</li>
-                            </ul>
-                        </div>
-
                         <p style="margin-top: 10px;">
                             <span class="tech-tag">Computer Vision</span>
                             <span class="tech-tag">On-device ML</span>
@@ -2561,7 +2297,7 @@
                                                 <div class="devlog">
                             <div class="devlog-header">
                                 <span>// devlog</span>
-                                <small>research log — updated as we go</small>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
                             </div>
 
                             <div class="devlog-entry">
