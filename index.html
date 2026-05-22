@@ -404,37 +404,16 @@
                         <p><strong>May 2025 – Present</strong></p>
                         <p>A theory stress-tester built for my YouTube channel <strong>LorebySpec</strong>. Kingdom Hearts has 25+ years of lore across 15+ titles — this tool lets you paste in a theory, supply relevant wiki links or context, and get a structured AI analysis: contradictions against canon, logical weaknesses, clarifying questions a skeptical viewer would ask, and an overall verdict. Built for real content prep, not as a demo.</p>
 
-                        <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Open by design</span>
-                                <p class="win-detail">No account, no login, no subscription. Bring your own Anthropic API key and the tool works. Nothing stored, nothing tracked.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Costs cents, not euros</span>
-                                <p class="win-detail">Default model (Haiku 4.5) runs a typical theory check for ~$0.001. You'd need 1,000 checks to spend a dollar. Cost shown live in the UI per check.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Zero infrastructure</span>
-                                <p class="win-detail">Pure static HTML, no server, no database, no hosting cost. Lives on GitHub Pages. Nothing to maintain or secure.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Solved CORS without a backend</span>
-                                <p class="win-detail">Browsers can't fetch external wiki pages directly. Used Jina Reader as a lightweight proxy to pull live KH wiki content client-side. No server code needed.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Prompt-engineered output</span>
-                                <p class="win-detail">Returns four consistent sections every time: Contradictions, Weaknesses, Clarifying Questions, Overall Assessment. Structured for scriptwriting, not just reading.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Actually used in production</span>
-                                <p class="win-detail">Built for real LorebySpec video prep, not as a demo. Every decision was made with cost, speed, and practical use in mind.</p>
-                            </div>
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Open by design</strong> — No account, no login, no subscription. Bring your own Anthropic API key and the tool works. Nothing stored, nothing tracked.</li>
+                                <li><strong>Costs cents, not euros</strong> — Default model (Haiku 4.5) runs a typical theory check for ~$0.001. You'd need 1,000 checks to spend a dollar. Cost shown live in the UI per check.</li>
+                                <li><strong>Zero infrastructure</strong> — Pure static HTML, no server, no database, no hosting cost. Lives on GitHub Pages. Nothing to maintain or secure.</li>
+                                <li><strong>Solved CORS without a backend</strong> — Browsers can't fetch external wiki pages directly. Used Jina Reader as a lightweight proxy to pull live KH wiki content client-side. No server code needed.</li>
+                                <li><strong>Prompt-engineered output</strong> — Returns four consistent sections every time: Contradictions, Weaknesses, Clarifying Questions, Overall Assessment. Structured for scriptwriting, not just reading.</li>
+                                <li><strong>Actually used in production</strong> — Built for real LorebySpec video prep, not as a demo. Every decision was made with cost, speed, and practical use in mind.</li>
+                            </ul>
                         </div>
                         <div class="project-constraints">
                             <strong>Constraints</strong>
@@ -634,32 +613,15 @@
                         <p><strong>May 2026 – Present</strong></p>
                         <p>A two-mode content assistant built for my YouTube channel <strong>LoreBySpec</strong>. Toggle between <strong>Video Ideas</strong> — paste a topic or theme and get five titled angles with one-sentence hooks — and <strong>Comment Reply</strong> — paste a viewer comment and get a drafted reply in a warm, knowledgeable, lore-nerd voice. Both modes call the Anthropic API directly from the browser. One tool, one key, two workflows.</p>
 
-                        <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Two tools, one file</span>
-                                <p class="win-detail">Video Ideas and Comment Reply share an API key bar and shell without needing separate pages, build steps, or navigation. The toggle is the only UI decision needed.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">No proxy layer</span>
-                                <p class="win-detail">Uses Anthropic's direct browser access header to call the API natively. No Cloudflare Worker, no relay, no CORS gymnastics.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Structured idea cards</span>
-                                <p class="win-detail">Video Ideas responses are parsed into discrete cards (title + hook) rather than a wall of text. Scannable and visually distinct.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Prompt-engineered voice</span>
-                                <p class="win-detail">The Comment Reply system prompt bans sycophantic openers ("great question!") by name, and anchors the persona specifically as LoreBySpec rather than a generic assistant.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Zero storage, zero friction</span>
-                                <p class="win-detail">Session-only API key, no login, no account, no database. Paste key, write prompt, get output.</p>
-                            </div>
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Two tools, one file</strong> — Video Ideas and Comment Reply share an API key bar and shell without needing separate pages, build steps, or navigation. The toggle is the only UI decision needed.</li>
+                                <li><strong>No proxy layer</strong> — Uses Anthropic's direct browser access header to call the API natively. No Cloudflare Worker, no relay, no CORS gymnastics.</li>
+                                <li><strong>Structured idea cards</strong> — Video Ideas responses are parsed into discrete cards (title + hook) rather than a wall of text. Scannable and visually distinct.</li>
+                                <li><strong>Prompt-engineered voice</strong> — The Comment Reply system prompt bans sycophantic openers ("great question!") by name, and anchors the persona specifically as LoreBySpec rather than a generic assistant.</li>
+                                <li><strong>Zero storage, zero friction</strong> — Session-only API key, no login, no account, no database. Paste key, write prompt, get output.</li>
+                            </ul>
                         </div>
                         <div class="project-constraints">
                             <strong>Constraints</strong>
@@ -821,27 +783,14 @@
                         <h3>Support Ticket Triage Tool <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>Paste a customer message, error log, or support thread — and Claude returns a category, an urgency level (colour-coded Low to Critical), and a suggested first response ready to copy and send. One input, one button. Built to directly demonstrate the kind of tool you'd build or configure in a support or implementation role.</p>
-                        <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">No backend</span>
-                                <p class="win-detail">Shareable as a direct link, runs in any browser with just an API key. Zero setup friction for whoever you send it to.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Costs pennies</span>
-                                <p class="win-detail">Built on Claude Haiku (~0.2¢ per triage). Viable as a real tool, not just a portfolio demo.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Paste anything</span>
-                                <p class="win-detail">Customer messages, error logs, stack traces. Structured input triages cleanly, and the suggested response adapts to what it received.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Prompt is tunable</span>
-                                <p class="win-detail">Categories, urgency signals, and response tone can be adjusted for any product in minutes. That's the implementation judgment this demonstrates.</p>
-                            </div>
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>No backend</strong> — Shareable as a direct link, runs in any browser with just an API key. Zero setup friction for whoever you send it to.</li>
+                                <li><strong>Costs pennies</strong> — Built on Claude Haiku (~0.2¢ per triage). Viable as a real tool, not just a portfolio demo.</li>
+                                <li><strong>Paste anything</strong> — Customer messages, error logs, stack traces. Structured input triages cleanly, and the suggested response adapts to what it received.</li>
+                                <li><strong>Prompt is tunable</strong> — Categories, urgency signals, and response tone can be adjusted for any product in minutes. That's the implementation judgment this demonstrates.</li>
+                            </ul>
                         </div>
                         <div class="roadmap">
                             <strong class="roadmap-heading">// roadmap</strong>
@@ -1159,37 +1108,16 @@
                         <p>Paste a company's FAQ or internal knowledge base, paste a customer message, and get an answer grounded entirely in those docs — nothing made up, nothing hallucinated. Built to show how a lightweight AI support chatbot actually works: no vector database, no embeddings pipeline, no backend. Just a system prompt, a context window, and a model that knows to say "I don't have that" when the docs don't cover it.</p>
                         <p>The goal is a tool a client could realistically drop into their website with minimal setup — and a devlog that walks through every decision, tradeoff, and constraint so someone reading it understands not just what was built, but why it works and where it breaks.</p>
 
-                        <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Paste anything</span>
-                                <p class="win-detail">Works with any plain text: Notion exports, Confluence pages, Google Docs, Zendesk article dumps, or a hand-written FAQ. No formatting required. If you can copy it, it works.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Claude does the search</span>
-                                <p class="win-detail">No vector database, no embeddings, no semantic search infrastructure. The knowledge base goes into Claude's context window and the model finds the relevant answer natively — including paraphrased questions that wouldn't match keyword search.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Grounded by design</span>
-                                <p class="win-detail">The system prompt explicitly instructs Claude: only answer from the provided docs. If the answer isn't there, say so. This is the critical design choice — without it, the model will helpfully hallucinate a plausible-sounding answer.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Sub-cent answers</span>
-                                <p class="win-detail">A small FAQ (5K chars) costs ~$0.001 per query on Haiku. A large one (60K chars) runs ~$0.01. Still cheaper than a human response. Cost shown live after each query so there are no surprises.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Drop-in ready</span>
-                                <p class="win-detail">One HTML file. Add an API key and paste your docs. No install, no setup, no infrastructure. In a real deployment, you'd swap the client-side API key for a backend proxy — but the logic is identical.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Shows the real pattern</span>
-                                <p class="win-detail">KB-in-context is the core of most RAG-lite chatbots — even expensive ones. This demo strips away the infrastructure to show the concept clearly: the prompt engineering, the grounding rule, and where the limits actually are.</p>
-                            </div>
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Paste anything</strong> — Works with any plain text: Notion exports, Confluence pages, Google Docs, Zendesk article dumps, or a hand-written FAQ. No formatting required. If you can copy it, it works.</li>
+                                <li><strong>Claude does the search</strong> — No vector database, no embeddings, no semantic search infrastructure. The knowledge base goes into Claude's context window and the model finds the relevant answer natively — including paraphrased questions that wouldn't match keyword search.</li>
+                                <li><strong>Grounded by design</strong> — The system prompt explicitly instructs Claude: only answer from the provided docs. If the answer isn't there, say so. This is the critical design choice — without it, the model will helpfully hallucinate a plausible-sounding answer.</li>
+                                <li><strong>Sub-cent answers</strong> — A small FAQ (5K chars) costs ~$0.001 per query on Haiku. A large one (60K chars) runs ~$0.01. Still cheaper than a human response. Cost shown live after each query so there are no surprises.</li>
+                                <li><strong>Drop-in ready</strong> — One HTML file. Add an API key and paste your docs. No install, no setup, no infrastructure. In a real deployment, you'd swap the client-side API key for a backend proxy — but the logic is identical.</li>
+                                <li><strong>Shows the real pattern</strong> — KB-in-context is the core of most RAG-lite chatbots — even expensive ones. This demo strips away the infrastructure to show the concept clearly: the prompt engineering, the grounding rule, and where the limits actually are.</li>
+                            </ul>
                         </div>
 
                         <p style="margin-top: 10px;">
@@ -1467,42 +1395,28 @@
                         <p><strong>May 2026 – Present</strong></p>
                         <p>A Customer Success copilot built specifically for the PostHog CS role — managing 25–40 accounts across a $20k–$100k+ ARR range. Paste any incoming signal (Slack, email, ticket, usage note), add customer context, and choose a mode: Triage + Next Action, Draft Response, Escalation Strategy, or Health Assessment. The tool is encoded with PostHog's product suite, billing model, and the sales-known vs. self-served customer distinction — so outputs are calibrated to the actual relationship dynamics, not generic CS advice.</p>
 
-                        <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">focus</span>
-                                <span class="win-title">Cognitive load reduction</span>
-                                <p class="win-detail">A 35-account book is never one thing at once. The tool is built around the "spinning plates" reality — triaging priority across relationships, not just tickets.</p>
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Focus</span>
+                                <span class="layer-title">Cognitive load reduction</span>
+                                <p>A 35-account book is never one thing at once. The tool is built around the "spinning plates" reality — triaging priority across relationships, not just tickets.</p>
                             </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">Two customer types, two registers</span>
-                                <p class="win-detail">Sales-known and self-served customers need fundamentally different handling. The prompt encodes this — different tone, different risk model, different recommended actions.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">ARR-aware prioritisation</span>
-                                <p class="win-detail">A billing question from a $100k+ enterprise reads differently than the same question from a $20k self-serve customer. Priority reasoning is tier-calibrated, not just severity-based.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">win</span>
-                                <span class="win-title">PostHog-specific encoding</span>
-                                <p class="win-detail">Product suite, credit billing model, renewal moments, silent churn patterns — the prompt reflects actual domain knowledge, not a generic SaaS CS template.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">design</span>
-                                <span class="win-title">Customer integrity preserved</span>
-                                <p class="win-detail">Drafts are calibrated to feel personal, not templated. The tool produces responses that reference what matters to this customer type — not copy-paste boilerplate that erodes trust over time.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">constraint</span>
-                                <span class="win-title">Copy-paste friction is real</span>
-                                <p class="win-detail">Every signal requires manual copy-paste and context entry. For a 35-account book, that overhead adds up fast. V1 proves the prompt engineering works. Whether paste-and-go is the right interaction model for this workflow is an open question — and the honest answer is probably no.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">constraint</span>
-                                <span class="win-title">No live data</span>
-                                <p class="win-detail">Health assessments and triage work from what you paste in, not from live usage metrics, Stripe signals, or Slack activity. A real CS automation layer would need API integrations and a backend — both out of scope for a client-side portfolio tool.</p>
-                            </div>
+                        </div>
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Two customer types, two registers</strong> — Sales-known and self-served customers need fundamentally different handling. The prompt encodes this — different tone, different risk model, different recommended actions.</li>
+                                <li><strong>ARR-aware prioritisation</strong> — A billing question from a $100k+ enterprise reads differently than the same question from a $20k self-serve customer. Priority reasoning is tier-calibrated, not just severity-based.</li>
+                                <li><strong>PostHog-specific encoding</strong> — Product suite, credit billing model, renewal moments, silent churn patterns — the prompt reflects actual domain knowledge, not a generic SaaS CS template.</li>
+                                <li><strong>Customer integrity preserved</strong> — Drafts are calibrated to feel personal, not templated. The tool produces responses that reference what matters to this customer type — not copy-paste boilerplate that erodes trust over time.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Copy-paste friction is real</strong> — Every signal requires manual copy-paste and context entry. For a 35-account book, that overhead adds up fast. V1 proves the prompt engineering works. Whether paste-and-go is the right interaction model for this workflow is an open question — and the honest answer is probably no.</li>
+                                <li><strong>No live data</strong> — Health assessments and triage work from what you paste in, not from live usage metrics, Stripe signals, or Slack activity. A real CS automation layer would need API integrations and a backend — both out of scope for a client-side portfolio tool.</li>
+                            </ul>
                         </div>
 
                         <div class="roadmap">
@@ -1764,22 +1678,24 @@
                         <p><strong>Feb 2025 – Present</strong></p>
                         <p>A layered accessibility project tackling one specific, overlooked gap: blind and visually impaired people cannot independently read a pregnancy test. The result is a deeply private moment that requires asking someone else — stripping dignity from an already vulnerable experience. PregVoice works through the problem in phases, from smartphone-first solutions requiring no new hardware, to researching the internals of existing digital tests, to evaluating custom hardware if no off-the-shelf path is viable.</p>
 
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Focus</span>
+                                <span class="layer-title">Privacy by default</span>
+                                <p>A person shouldn't need to hand their phone to someone else, or broadcast a health result, to know if they're pregnant. Every design decision is filtered through: does this preserve independence?</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Focus</span>
+                                <span class="layer-title">Smartphone first</span>
+                                <p>The most accessible solution uses hardware people already own. Phase 1 explores camera-based result recognition with on-device processing — no cloud upload, no new purchases.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Focus</span>
+                                <span class="layer-title">Open &amp; collaborative</span>
+                                <p>This can't be built well without input from blind and low-vision users, hardware engineers, and medical device specialists. The devlog is the starting point for that conversation.</p>
+                            </div>
+                        </div>
                         <div class="highlights">
-                            <div class="highlight-card">
-                                <span class="win-label">focus</span>
-                                <span class="win-title">Privacy by default</span>
-                                <p class="win-detail">A person shouldn't need to hand their phone to someone else, or broadcast a health result, to know if they're pregnant. Every design decision is filtered through: does this preserve independence?</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">focus</span>
-                                <span class="win-title">Smartphone first</span>
-                                <p class="win-detail">The most accessible solution uses hardware people already own. Phase 1 explores camera-based result recognition with on-device processing — no cloud upload, no new purchases.</p>
-                            </div>
-                            <div class="highlight-card">
-                                <span class="win-label">constraint</span>
-                                <span class="win-title">Medical-adjacent</span>
-                                <p class="win-detail">Anything that "reads" a medical test result sits close to regulated territory. The tool reads the visual output — it doesn't perform the test. That distinction shapes every technical decision.</p>
-                            </div>
                             <div class="highlight-card">
                                 <span class="win-label">research</span>
                                 <span class="win-title">Digital test internals</span>
@@ -1790,11 +1706,12 @@
                                 <span class="win-title">Haptic fallback</span>
                                 <p class="win-detail">Audio isn't always possible — public spaces, shared housing, no headphones available. Designing a haptic result language (e.g. pulse patterns) as a non-audio, non-visual fallback.</p>
                             </div>
-                            <div class="highlight-card">
-                                <span class="win-label">focus</span>
-                                <span class="win-title">Open &amp; collaborative</span>
-                                <p class="win-detail">This can't be built well without input from blind and low-vision users, hardware engineers, and medical device specialists. The devlog is the starting point for that conversation.</p>
-                            </div>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Medical-adjacent</strong> — Anything that "reads" a medical test result sits close to regulated territory. The tool reads the visual output — it doesn't perform the test. That distinction shapes every technical decision.</li>
+                            </ul>
                         </div>
 
                         <p style="margin-top: 10px;">
