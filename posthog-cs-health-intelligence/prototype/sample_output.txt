@@ -1,0 +1,59 @@
+MORNING PRIORITY LIST — 2026-05-22
+============================================================
+
+URGENT  (3 accounts)
+
+  Clarity Finance  ($50k–$100k, sales-assisted)
+    [URGENT]  Failed payment
+            Why:  Billing has lapsed. Every day without resolution raises churn risk and makes the conversation harder.
+         Action:  Call or Slack the account contact today. Resolve payment before opening the renewal conversation.
+    [WATCH]  Renewal in 45 days
+            Why:  Renewal is approaching. Now is the right time to open the conversation, not closer to the date.
+         Action:  Schedule a renewal check-in. Ask how they're tracking against their original goals.
+
+  Skyline DevOps  ($20k–$50k, self-serve)
+    [URGENT]  65 days since last contact
+            Why:  For a self-serve customer, silence at 65 days is a late-stage warning sign.
+         Action:  Reach out today. Keep it short — check in on their current work, not on the account.
+    [URGENT]  Usage declining for 5 weeks
+            Why:  Extended usage decline is the most reliable early churn signal in a PLG product.
+         Action:  Reach out to understand what changed. Ask about their workflow, not about the drop in usage.
+    [URGENT]  Support ticket open 12 days
+            Why:  A ticket this old is no longer just a technical issue — it's a relationship signal.
+         Action:  Escalate internally today. Message the customer directly to acknowledge the delay.
+    [WATCH]  Renewal in 40 days
+            Why:  Renewal is approaching. Now is the right time to open the conversation, not closer to the date.
+         Action:  Schedule a renewal check-in. Ask how they're tracking against their original goals.
+
+  Vanta Commerce  ($50k–$100k, sales-assisted)
+    [URGENT]  Renewal in 25 days
+            Why:  The renewal window is closing. If this conversation hasn't started, start it today.
+         Action:  Send a renewal summary this week. Confirm satisfaction, address open concerns, and agree next steps.
+
+WATCH  (3 accounts)
+
+  Finboard  ($20k–$50k, self-serve)
+    [WATCH]  47 days since last contact
+            Why:  Approaching the silence threshold for self-serve accounts. Worth a brief check-in before it becomes a flag.
+         Action:  Send a low-pressure message this week. Reference something specific — a recent product update or their setup.
+    [WATCH]  Usage declining for 3 weeks
+            Why:  Usage has started dipping. Could be seasonal; could be structural. Worth watching.
+         Action:  Flag for review. If it continues another week, reach out proactively.
+
+  Rowan Digital  ($50k–$100k, sales-assisted)
+    [WATCH]  22 days since last contact
+            Why:  Approaching the silence threshold for sales-assisted accounts. Worth a brief check-in before it becomes a flag.
+         Action:  Send a low-pressure message this week. Reference something specific — a recent product update or their setup.
+
+  Loopout  ($20k–$50k, sales-assisted)
+    [WATCH]  Support ticket open 8 days
+            Why:  Ticket is aging. Customers notice when issues go quiet.
+         Action:  Check ticket status. If it's stuck, escalate to support engineering.
+
+OK  (4 accounts)
+
+  GrowthStack  ($50k–$100k, sales-assisted)
+  Panda Analytics  ($20k–$50k, self-serve)
+    ↑ expansion signal: Adopted Session Replay this month — usage up 40% week-over-week
+  Meridian Labs  ($20k–$50k, self-serve)
+  Baseline Corp  ($20k–$50k, self-serve)
