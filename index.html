@@ -1495,8 +1495,13 @@
                             </div>
                             <div class="highlight-card">
                                 <span class="win-label">constraint</span>
-                                <span class="win-title">Works on what you paste</span>
-                                <p class="win-detail">No live data integrations — health assessments and triage work from what the CSM provides. This is a copilot, not a dashboard. The human stays in the loop.</p>
+                                <span class="win-title">Copy-paste friction is real</span>
+                                <p class="win-detail">Every signal requires manual copy-paste and context entry. For a 35-account book, that overhead adds up fast. V1 proves the prompt engineering works. Whether paste-and-go is the right interaction model for this workflow is an open question — and the honest answer is probably no.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">constraint</span>
+                                <span class="win-title">No live data</span>
+                                <p class="win-detail">Health assessments and triage work from what you paste in, not from live usage metrics, Stripe signals, or Slack activity. A real CS automation layer would need API integrations and a backend — both out of scope for a client-side portfolio tool.</p>
                             </div>
                         </div>
 
@@ -1505,7 +1510,13 @@
                             <ol>
                                 <li><strong>Batch signal queue</strong> — paste the morning's inbox as numbered items, get a priority-ordered queue with a recommended action per signal. The "spinning plates" problem at scale: which plates are wobbling right now?</li>
                                 <li><strong>Account snapshot cards</strong> — lightweight account profiles (ARR, products, champion, renewal date, last contact) that persist in localStorage. Populate once, reference on every signal. Reduces context-entry friction to near zero.</li>
-                                <li><strong>Red flag digest</strong> — input 5–10 account summaries, get back a ranked list of which accounts need proactive attention this week. Proactive CSM work, not just reactive triage.</li>
+                                <li><strong>Red flag digest</strong> — input 5–10 account summaries, get back a ranked list of which accounts need proactive attention this week. Proactive CSM work, not just reactive triage. The implementation of "never be surprised when a customer leaves."</li>
+                                <li><strong>Technical first-line debug mode</strong> — paste an error, stack trace, or technical complaint; get a structured diagnostic walkthrough before deciding whether to escalate. Encode common PostHog failure patterns: SDK ingestion issues, event schema mismatches, feature flag targeting edge cases, session replay blocked by CSPs, Data Pipelines auth failures. The CSM is first responder, not just a pass-through to support.</li>
+                                <li><strong>Feedback router</strong> — a dedicated mode for when the signal is customer feedback rather than a problem. Takes a pain point or feature request and produces: a one-paragraph internal product signal (what the customer actually needs, not the feature they asked for), a recommended internal recipient (product, docs, support), and a brief acknowledgement to send back to the customer. Implements the "own their feedback" responsibility explicitly.</li>
+                                <li><strong>Proactive outreach planner</strong> — three playbooks triggered by account state rather than incoming signals: new self-serve at 30/60/90 days (activation timing), approaching renewal (value review conversation), champion has recently changed (relationship reset). Shifts the tool from reactive to proactive — the difference between a CSM who feels like a friend and one who only appears when something breaks.</li>
+                                <li><strong>Renewal prep mode</strong> — commercial-specific mode. Input ARR, tenure, products adopted, usage trend, and open issues. Output: value story (what this customer has gotten from PostHog this year), anticipated objections and how to address them, renewal structure recommendation (flat/expansion/multi-year), and what success looks like for the call. Demonstrates the commercial layer of the role, not just the support layer.</li>
+                                <li><strong>QBR / EBR prep assistant</strong> — for accounts at $50k+ ARR, quarterly business reviews are standard. Input account data and get a structured agenda: usage highlights, success metrics framing, product roadmap discussion points, suggested next 90-day goals. Separate from renewal prep — QBRs are relationship investments, not closing conversations.</li>
+                                <li><strong>V2 architecture decision: copilot or dashboard?</strong> — the current build is a paste-and-go copilot. That's appropriate for V1 proof of concept, but the real friction in a 35-account book isn't generating outputs — it's having to manually copy-paste context for every signal. V2 should seriously evaluate: persistent account profiles (localStorage minimum, backend if viable), live integration hooks (PostHog API for usage data, Slack for message volume, Stripe for billing signals), and a lightweight dashboard view showing account health at a glance without needing to trigger a prompt. V1 and V2 will coexist — the evolution is the artefact, not just the outcome.</li>
                             </ol>
                         </div>
 
@@ -1525,6 +1536,22 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-05-22 — is this actually useful?</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    V1 works as a proof of concept but the interaction model has a real problem: it requires copy-pasting every signal individually. For a CSM managing 35 accounts who's already cognitively loaded, adding friction at the point of highest demand is counterproductive. The tool was designed to reduce cognitive load and it may be adding it instead. The paste-and-go mechanic made sense for a single-tool demo, but it doesn't map to how a CSM's day actually flows. This is the core question V2 has to answer before building more features on top of the same interaction model.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-22 — version preservation as a principle</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    When V2 is built, V1 stays. The file doesn't get overwritten — it gets succeeded. The evolution from paste-and-go copilot to something with persistent state (or a full dashboard) is the actual story, and that story only exists if both versions are visible. Every build should be treated as a dated artefact: posthog-cs-copilot.html is V1, V2 gets its own file and its own devlog. What worked, what didn't, what changed — that's the devlog's job to document. The portfolio is the record, not just the outcome.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-05-22 — tool shipped, devlog open</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>
@@ -1532,9 +1559,81 @@
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 14 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 21 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — the copy-paste problem in detail</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        The friction point is real: a CSM opens their morning Slack, has 8 messages across 6 accounts, and to use this tool they need to copy each message, switch tabs, paste, fill in context, hit analyse, read the output, switch back. That's 8 context switches before 9am. The tool was conceived as cognitive load reduction but the interaction adds its own load. The question isn't whether the AI output is good — it is — it's whether the delivery mechanism gets in the way of the work it's supposed to accelerate. A dashboard that watches for signals and surfaces them without manual paste would be structurally better for this workflow.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — copilot vs. dashboard: the architecture fork</span>
+                                    <p>
+                                        <span class="tag tag-pivot">Pivot</span>
+                                        Two fundamentally different tools could serve this role. Copilot (current): you bring it a signal, it tells you what to do. Dashboard: it watches your accounts and surfaces signals to you. The copilot is buildable client-side with no backend. The dashboard requires integrations — PostHog's API, Stripe webhooks, Slack message volume — which means a backend, authentication, and ongoing maintenance. V1 proves the prompt engineering and the domain knowledge are sound. V2 needs to decide which architecture actually fits the workflow before adding features. Building more features on a fundamentally friction-heavy interaction model doesn't fix the model.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — feedback routing is a missing mode</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The brief explicitly calls out "owning their feedback and making sure it gets to the wider PostHog team." That's a distinct workflow from triage. A customer mentions a pain point in passing — not a ticket, not a complaint, just a friction they mention while asking about something else. The current tool categorises this as a "Feature Request" signal type but produces no output for the internal side: what do you tell the product team, how do you frame it, who should it go to? Feedback routing is an internal communication task, not a customer response task. It needs its own mode.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — technical first-line as a mindset, not a mode</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The brief says the CSM is "the first person to dig into customer issues, often solving them yourself rather than immediately passing to support." The current escalation mode starts from the assumption that escalation is likely — it helps you decide how to escalate, not whether you need to. A first-line debugging mode flips this: given a PostHog error or technical complaint, work through a structured diagnostic first. Common patterns worth encoding: SDK not initialising (autocapture vs. manual event setup), events ingesting but not appearing in dashboards (ingestion lag, property schema mismatch, team data isolation), feature flags not resolving (targeting rule logic, local evaluation vs. remote), session replay gaps (CSP headers blocking the script, sampling rate, rage click thresholds). Solving these before escalating is faster for the customer and builds trust faster than routing.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — never be surprised as an architectural principle</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        "Your aim is to never be surprised when a customer tells us they are leaving." That's not a workflow tip — it's an architectural requirement. The red flag list handles the reactive case (the customer signals something). But the proactive case — an account that's been quiet, whose usage has drifted, whose champion hasn't been seen for three weeks — requires scanning across all accounts on a schedule, not waiting for a signal to arrive. The red flag digest (roadmap item 3) is the implementation of this principle. The devlog should name the principle explicitly so it's clear what that roadmap item is actually solving.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — proactive vs. reactive balance</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The current tool is almost entirely reactive: something arrives, you process it. But the brief describes a proactive role — building relationships, watching health data, acting early. A good CSM probably runs 70% reactive and 30% proactive at minimum, and the proactive side is what separates great from average. Proactive outreach that adds value (sharing a relevant PostHog feature update, noting that their funnel conversion has improved since they implemented the flag they asked about) builds the relationship differently than "just checking in" messages. The tool has no playbook for this yet.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — self-serve first-touch timing</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Self-served customers who've never spoken to anyone at PostHog represent a specific timing problem. Too early (day 2, before they've done anything meaningful) and it feels like surveillance. Too late (day 45, after they've already decided it's not working) and you missed the window. Best practice in PLG CS suggests 14–21 days is the sweet spot: enough time to have done something, not so long that frustration has set in. But the trigger should be activation-based, not time-based — reaching out when they've completed a meaningful action (first dashboard created, first flag deployed) lands better than a calendar-triggered message. The tool has no playbook for this specific flow.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — leading vs. lagging churn indicators</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The red flag list currently mixes leading and lagging indicators without distinguishing them. Lagging: "evaluating alternatives", billing frustration, explicit complaints — the customer is already partway out the door. Leading: usage drop, contact silence, low feature adoption despite high ARR — the customer hasn't decided to leave but the trajectory points there. The tool's health assessment treats all signals the same. A more sophisticated health model weights leading indicators higher for early intervention, because by the time the lagging indicators appear the window for intervention is narrower. Worth encoding this distinction in V2's health scoring.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — what "build automations" means at this ARR range</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The brief explicitly invites automation: "If you want to build automations to help you, go for it." At $20k–$100k ARR, the automation stack that would make the biggest difference: (1) PostHog's own API for usage data — query event volumes, feature adoption rates, and DAU per customer on a schedule; (2) Stripe webhooks for billing signals — overages, upcoming renewals, failed payments; (3) Slack message frequency monitoring per customer channel. These three data sources cover the three dimensions of customer health (product, commercial, relationship) and none of them require complex infrastructure. This tool is the first layer — prompt engineering and domain knowledge. The next layer is piping real data into those prompts automatically.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-05-22 — what this tool is actually for</span>
