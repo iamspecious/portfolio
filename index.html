@@ -2242,6 +2242,203 @@
 
                     <div class="project-block" data-category="technical">
 
+                    <!-- ====================================================
+                         POSTHOG CSM COPILOT — AI TOOL
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>PostHog CSM Copilot <span class="badge bg-warning text-dark" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>May 2026 – Present</strong></p>
+                        <p>A Customer Success copilot built specifically for the PostHog CS role — managing 25–40 accounts across a $20k–$100k+ ARR range. Paste any incoming signal (Slack, email, ticket, usage note), add customer context, and choose a mode: Triage + Next Action, Draft Response, Escalation Strategy, or Health Assessment. The tool is encoded with PostHog's product suite, billing model, and the sales-known vs. self-served customer distinction — so outputs are calibrated to the actual relationship dynamics, not generic CS advice.</p>
+
+                        <div class="highlights">
+                            <div class="highlight-card">
+                                <span class="win-label">focus</span>
+                                <span class="win-title">Cognitive load reduction</span>
+                                <p class="win-detail">A 35-account book is never one thing at once. The tool is built around the "spinning plates" reality — triaging priority across relationships, not just tickets.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">Two customer types, two registers</span>
+                                <p class="win-detail">Sales-known and self-served customers need fundamentally different handling. The prompt encodes this — different tone, different risk model, different recommended actions.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">ARR-aware prioritisation</span>
+                                <p class="win-detail">A billing question from a $100k+ enterprise reads differently than the same question from a $20k self-serve customer. Priority reasoning is tier-calibrated, not just severity-based.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">win</span>
+                                <span class="win-title">PostHog-specific encoding</span>
+                                <p class="win-detail">Product suite, credit billing model, renewal moments, silent churn patterns — the prompt reflects actual domain knowledge, not a generic SaaS CS template.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">design</span>
+                                <span class="win-title">Customer integrity preserved</span>
+                                <p class="win-detail">Drafts are calibrated to feel personal, not templated. The tool produces responses that reference what matters to this customer type — not copy-paste boilerplate that erodes trust over time.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="win-label">constraint</span>
+                                <span class="win-title">Works on what you paste</span>
+                                <p class="win-detail">No live data integrations — health assessments and triage work from what the CSM provides. This is a copilot, not a dashboard. The human stays in the loop.</p>
+                            </div>
+                        </div>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Batch signal queue</strong> — paste the morning's inbox as numbered items, get a priority-ordered queue with a recommended action per signal. The "spinning plates" problem at scale: which plates are wobbling right now?</li>
+                                <li><strong>Account snapshot cards</strong> — lightweight account profiles (ARR, products, champion, renewal date, last contact) that persist in localStorage. Populate once, reference on every signal. Reduces context-entry friction to near zero.</li>
+                                <li><strong>Red flag digest</strong> — input 5–10 account summaries, get back a ranked list of which accounts need proactive attention this week. Proactive CSM work, not just reactive triage.</li>
+                            </ol>
+                        </div>
+
+                        <p>
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Client-side</span>
+                            <span class="tech-tag">No backend</span>
+                            <span class="tech-tag">PostHog</span>
+                        </p>
+                        <a class="tool-link-badge" href="posthog-cs-copilot.html" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-22 — tool shipped, devlog open</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    V1 of the PostHog CSM Copilot is live. Four modes: Triage + Next Action, Draft Response, Escalation Strategy, Health Assessment. Customer context panel with type, ARR tier, tenure, and product checkboxes. Deep PostHog encoding in the system prompt — product suite, billing model, red flag list, customer type distinction. Roadmap established.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 14 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — what this tool is actually for</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The PostHog CSM role covers 25–40 paying accounts simultaneously. The challenge isn't that any individual account is hard — it's that you have 35 plates spinning at once and you need to know which ones are wobbling. This tool is about cognitive load reduction, not just triage. The output isn't just "here's a draft reply" — it's "here's what this signal means, how urgent it is relative to everything else on your plate, and exactly what to do next."
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — why not extend support-triage</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Support triage is about ticket severity — what urgency level and what's a good first response. CSM work is a different layer. The CSM owns the commercial relationship, not just the technical issue. A billing question from a $100k enterprise customer is a different signal to the same question from a $20k self-serve account — same words, completely different stakes and required response. A generic triage tool can't make that distinction without bespoke encoding. Separate tool, separate prompt architecture.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — the two customer types are load-bearing</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Sales-known and self-served customers need different handling at every layer. Sales-known: has an established relationship, expects warmth and memory of past context, reads absence of contact as neglect. Self-served: has never spoken to a human at PostHog, high silent churn risk, first contact must feel like a knowledgeable friend not an account manager chasing a renewal. Getting the tone wrong with a self-served customer — especially on first contact — can permanently poison the relationship. This distinction is encoded into every mode's output logic.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — four modes, one surface</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        A CSM's day involves several distinct cognitive tasks: reading incoming signals and prioritising them, drafting responses, deciding when and how to escalate, and periodically reviewing account health. These share the same input (customer context + a signal) but produce completely different outputs. Rather than four separate tools, one surface with mode tabs keeps the context panel persistent and reduces the "start over" friction. The mode selector changes the system prompt; everything else stays the same.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — ARR-tier-aware priority reasoning</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Priority isn't just severity of the issue — it's severity × relationship weight × commercial stakes. The same billing question rates differently at $20k vs. $100k+ ARR. The same technical issue rates differently at 1 month tenure vs. 2 years — a new customer hitting a bug is more likely to churn than an established one. Encoding this into the triage prompt means the CSM gets recommendations calibrated to the actual account, not just the ticket surface.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — PostHog product suite encoding</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The base prompt encodes PostHog's six core products with a one-liner on each: Product Analytics, Session Replay, Feature Flags, A/B Testing, Error Monitoring, Data Pipelines. Error Monitoring is flagged as newer and still growing adoption — relevant because customers using it are higher engagement signals, and bugs/limitations there carry more frustration because the product is still maturing. This context lets the model give product-specific recommendations rather than generic SaaS advice.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — credit billing as a distinct risk surface</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        PostHog's billing model is credit-based. Customers buy event/session bundles upfront. This means usage spikes create billing surprises — a customer's usage doubles and suddenly they're out of credits and getting throttled, or they get an unexpected overage invoice. This is a friction pattern specific to PostHog and not common to SaaS broadly. Encoding it means the model recognises "we're running low on credits" signals as commercial moments requiring a specific kind of response (renewal conversation, usage review), not just billing support.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — red flags as institutional knowledge</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The red flag list in the prompt isn't a generic churn signal list — it's a set of specific behavioural patterns that precede churn in CSM work: usage drop thresholds, silence windows, specific language patterns, renewal proximity combined with any negative signal. These are things an experienced CSM develops instinctively over years. Encoding them explicitly means the tool can surface them even when the CSM is on their 20th message of the day and their pattern-matching is depleted. The goal is to be the fresh pair of eyes that never gets tired.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — customer integrity as a design constraint</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        "Maintaining customer integrity" was the explicit brief: responses must feel personal and genuine, not like they came from a template engine. The draft prompt explicitly instructs the model to avoid openers like "Hope you're well!", to calibrate warmth to customer type, and to never use placeholders. This is a quality floor, not a stylistic preference. A CSM who sends template-y responses to 35 accounts will eventually lose relationships because customers notice — and the damage accumulates silently before they say anything.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — escalation levels as a decision tree</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The escalation mode offers five levels: Solo, Support Engineering, Product Team, Manager/Leadership, Executive. This isn't just taxonomy — each level implies a different internal action and a different external message. Getting the escalation level wrong in either direction is costly: under-escalating a commercial risk leaves a $100k account unprotected; over-escalating a technical question burns internal capital and signals poor judgement. The mode produces both an internal handoff draft and a customer-facing holding message, because both need to happen simultaneously and both need to be calibrated.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — health assessment as weekly discipline</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The health mode is designed for periodic account reviews, not reactive triage. The output includes a Green/Yellow/Red score, a key signals breakdown (positive and concerning), renewal and expansion risk, and 30-day recommended plays. The plays are intentionally specific enough to schedule — not "check in with the customer" but "book a usage review call to address the Session Replay adoption gap from last month". Vague action items don't get done. Specific ones do.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — what this tool can't do</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Real customer health monitoring would pull live data: product usage metrics, Stripe billing data, Slack message frequency, ticket open rates. This tool works entirely on what the CSM pastes in. That's a genuine constraint — a health assessment is only as good as the signals the CSM provides. It's a copilot, not a dashboard. The roadmap includes account snapshot cards (localStorage persistence) to reduce context entry friction, and a batch red flag digest to do proactive portfolio scanning — but real data integration would need a backend.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — multi-threading as an unbuilt layer</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The job description calls out multi-threading explicitly: knowing key people at each company, managing escalations across stakeholders. The current tool handles single-signal, single-account responses. Multi-threading intelligence — "you have the technical champion but not the business buyer, and renewal is in 60 days" — requires persistent account state across contacts. That's account snapshot cards in v2. For now, the context notes field is the escape hatch: the CSM can paste relationship context manually and the model will factor it in.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — model selection reasoning</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Haiku 4.5 is default. For the majority of signals — a Slack message, a ticket, a quick health check — Haiku is fast and sufficient. The nuance in the output comes primarily from the prompt engineering and the customer context, not model capability. Sonnet is recommended for complex escalation strategy decisions or health assessments where you're weighing multiple signals against each other. Same cost confirmation pattern as the other portfolio tools: no Sonnet request fires without the user seeing a price and acknowledging it.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    </div><!-- /project-block: PostHog CSM Copilot -->
+
+                    <div class="project-block" data-category="technical">
+
                     <!-- PregVoice -->
                     <!-- ====================================================
                          PREGVOICE — ACCESSIBILITY TOOL

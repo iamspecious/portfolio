@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostHog CSM Copilot — Specious Coda Bishop</title>
+    <style>
+        :root {
+            --bg: #0b0e12;
+            --surface: #141a24;
+            --surface2: #1b2333;
+            --border: #232d42;
+            --accent: #e8602a;
+            --accent-light: #f5924e;
+            --warm: #f5c482;
+            --text: #e2e8f2;
+            --muted: #7a8fa6;
+            --danger: #e63946;
+            --warning: #f4a261;
+            --success: #2dc653;
+            --info: #5b9bd5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #080b10 0%, #131c2e 50%, #080b10 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            color: var(--accent-light);
+            letter-spacing: 0.05em;
+        }
+
+        header .subtitle {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 4px;
+            font-family: monospace;
+        }
+
+        header a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-family: monospace;
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        header a:hover { color: var(--text); border-color: var(--accent); }
+
+        main {
+            flex: 1;
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 36px 24px;
+            width: 100%;
+        }
+
+        /* API bar */
+        .api-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .api-bar label {
+            font-size: 0.74rem;
+            color: var(--muted);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .api-bar input {
+            flex: 1;
+            min-width: 180px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.84rem;
+            font-family: monospace;
+        }
+
+        .api-bar input:focus { outline: none; border-color: var(--accent); }
+
+        .api-bar select {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: monospace;
+            cursor: pointer;
+        }
+
+        .model-hint {
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-family: monospace;
+            transition: color 0.2s;
+        }
+
+        /* Context panel */
+        .context-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+        }
+
+        .panel-label {
+            font-family: monospace;
+            font-size: 0.76rem;
+            color: var(--accent-light);
+            margin-bottom: 14px;
+            letter-spacing: 0.03em;
+        }
+
+        .panel-label .optional {
+            color: var(--muted);
+        }
+
+        .context-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .context-field > label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--muted);
+            font-family: monospace;
+            margin-bottom: 6px;
+            letter-spacing: 0.03em;
+        }
+
+        .context-field select {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 7px 10px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+        }
+
+        .context-field select:focus { outline: none; border-color: var(--accent); }
+
+        .radio-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            padding-top: 2px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .products-row {
+            margin-bottom: 12px;
+        }
+
+        .products-row > label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--muted);
+            font-family: monospace;
+            margin-bottom: 8px;
+            letter-spacing: 0.03em;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .context-notes {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-family: 'Georgia', serif;
+            resize: vertical;
+            min-height: 48px;
+        }
+
+        .context-notes:focus { outline: none; border-color: var(--accent); }
+        .context-notes::placeholder { color: var(--muted); }
+
+        /* Mode tabs */
+        .mode-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .mode-tab {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-tab:hover { color: var(--text); border-color: var(--muted); }
+
+        .mode-tab.active {
+            background: rgba(232, 96, 42, 0.1);
+            border-color: var(--accent);
+            color: var(--accent-light);
+        }
+
+        /* Signal input */
+        .signal-input {
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-family: 'Georgia', serif;
+            resize: vertical;
+            min-height: 126px;
+            margin-bottom: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .signal-input:focus { outline: none; border-color: var(--accent); }
+        .signal-input::placeholder { color: var(--muted); }
+
+        /* Action row */
+        .action-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 10px 26px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            font-family: monospace;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover { background: var(--accent-light); }
+        .btn-primary:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-family: monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+        .status-text {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* Error banner */
+        .error-banner {
+            display: none;
+            background: rgba(230, 57, 70, 0.1);
+            border: 1px solid rgba(230, 57, 70, 0.4);
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: #f08090;
+            line-height: 1.5;
+        }
+
+        /* Spinner */
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .spinner {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        /* Results */
+        .results-panel { display: none; }
+        .results-panel.visible { display: block; }
+
+        .result-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+        }
+
+        .result-section h3 {
+            font-size: 0.74rem;
+            font-family: monospace;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .result-section p {
+            font-size: 0.87rem;
+            line-height: 1.65;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .result-section p:last-child { margin-bottom: 0; }
+
+        .result-section ul, .result-section ol {
+            padding-left: 18px;
+        }
+
+        .result-section li {
+            font-size: 0.87rem;
+            line-height: 1.65;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        /* Red flags section */
+        .result-section.redflag {
+            border-color: rgba(230, 57, 70, 0.35);
+            background: rgba(230, 57, 70, 0.05);
+        }
+
+        .result-section.redflag h3 { color: #f08090; }
+
+        /* Draft/handoff sections */
+        .result-section.draft { border-color: rgba(91, 155, 213, 0.3); }
+
+        .draft-text {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 12px 14px;
+            font-size: 0.86rem;
+            line-height: 1.7;
+            color: var(--text);
+            white-space: pre-wrap;
+            font-family: 'Georgia', serif;
+        }
+
+        .copy-btn {
+            margin-left: auto;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-family: monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover { color: var(--text); border-color: var(--accent); }
+
+        /* Badges */
+        .badge-signal {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-family: monospace;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: rgba(245, 146, 78, 0.14);
+            color: var(--accent-light);
+            border: 1px solid rgba(245, 146, 78, 0.3);
+        }
+
+        .badge-priority {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-family: monospace;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .badge-priority.low    { background: rgba(45, 198, 83, 0.12); color: #2dc653; border: 1px solid rgba(45, 198, 83, 0.28); }
+        .badge-priority.medium { background: rgba(244, 162, 97, 0.14); color: #f4a261; border: 1px solid rgba(244, 162, 97, 0.3); }
+        .badge-priority.high   { background: rgba(232, 96, 42, 0.14); color: var(--accent-light); border: 1px solid rgba(232, 96, 42, 0.3); }
+        .badge-priority.critical { background: rgba(230, 57, 70, 0.18); color: #e63946; border: 1px solid rgba(230, 57, 70, 0.4); }
+
+        .badge-health {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-family: monospace;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .badge-health.green  { background: rgba(45, 198, 83, 0.12); color: #2dc653; border: 1px solid rgba(45, 198, 83, 0.28); }
+        .badge-health.yellow { background: rgba(244, 162, 97, 0.14); color: #f4a261; border: 1px solid rgba(244, 162, 97, 0.3); }
+        .badge-health.red    { background: rgba(230, 57, 70, 0.18); color: #e63946; border: 1px solid rgba(230, 57, 70, 0.4); }
+
+        .badge-channel {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-family: monospace;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: rgba(45, 198, 83, 0.1);
+            color: #2dc653;
+            border: 1px solid rgba(45, 198, 83, 0.24);
+        }
+
+        .badge-escalation {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-family: monospace;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: rgba(91, 155, 213, 0.14);
+            color: var(--info);
+            border: 1px solid rgba(91, 155, 213, 0.3);
+        }
+
+        /* Raw fallback */
+        .raw-output {
+            font-size: 0.86rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            color: var(--text);
+        }
+
+        /* Cost modal */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay.visible { display: flex; }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 28px 32px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal h3 {
+            font-size: 1rem;
+            color: var(--warm);
+            margin-bottom: 12px;
+        }
+
+        .modal p {
+            font-size: 0.85rem;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .modal-cost {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--accent-light);
+            margin: 12px 0;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.7rem;
+            color: var(--muted);
+            font-family: monospace;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            .context-grid { grid-template-columns: 1fr 1fr; }
+            header { flex-direction: column; align-items: flex-start; gap: 12px; }
+            main { padding: 24px 16px; }
+        }
+
+        @media (max-width: 440px) {
+            .context-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>PostHog CSM Copilot</h1>
+        <div class="subtitle">// signal triage · response drafting · escalation · health assessment</div>
+    </div>
+    <a href="index.html">← portfolio</a>
+</header>
+
+<main>
+
+    <div class="api-bar">
+        <label>api key</label>
+        <input type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off" />
+        <select id="modelSelect" onchange="updateModelHint()">
+            <option value="claude-haiku-4-5-20251001">Haiku 4.5 — ~0.2¢/signal</option>
+            <option value="claude-sonnet-4-6">Sonnet 4.6 — ~2¢/signal</option>
+        </select>
+        <span id="modelHint" class="model-hint">haiku: fast and sufficient for most signals</span>
+    </div>
+
+    <div class="context-panel">
+        <div class="panel-label">// customer context <span class="optional">— optional, adds precision</span></div>
+
+        <div class="context-grid">
+            <div class="context-field">
+                <label>customer type</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="custType" value="sales" checked> Sales-known</label>
+                    <label><input type="radio" name="custType" value="selfserve"> Self-served</label>
+                </div>
+            </div>
+            <div class="context-field">
+                <label>arr tier</label>
+                <select id="arrTier">
+                    <option value="">— unknown</option>
+                    <option value="20-50k">$20k–$50k</option>
+                    <option value="50-100k">$50k–$100k</option>
+                    <option value="100k+">$100k+</option>
+                </select>
+            </div>
+            <div class="context-field">
+                <label>tenure</label>
+                <select id="tenure">
+                    <option value="">— unknown</option>
+                    <option value="new">&lt; 3 months</option>
+                    <option value="growing">3–12 months</option>
+                    <option value="established">1–2 years</option>
+                    <option value="longterm">2+ years</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="products-row">
+            <label>products in use</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" class="prod-check" value="Product Analytics"> Product Analytics</label>
+                <label><input type="checkbox" class="prod-check" value="Session Replay"> Session Replay</label>
+                <label><input type="checkbox" class="prod-check" value="Feature Flags"> Feature Flags</label>
+                <label><input type="checkbox" class="prod-check" value="A/B Testing"> A/B Testing</label>
+                <label><input type="checkbox" class="prod-check" value="Error Monitoring"> Error Monitoring</label>
+                <label><input type="checkbox" class="prod-check" value="Data Pipelines"> Data Pipelines</label>
+            </div>
+        </div>
+
+        <textarea id="contextNotes" class="context-notes" rows="2" placeholder="Key context: renewal date, ongoing issue, champion name, anything the tool should know..."></textarea>
+    </div>
+
+    <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="triage" onclick="setMode('triage')">Triage + Next Action</button>
+        <button class="mode-tab" data-mode="draft" onclick="setMode('draft')">Draft Response</button>
+        <button class="mode-tab" data-mode="escalation" onclick="setMode('escalation')">Escalation Strategy</button>
+        <button class="mode-tab" data-mode="health" onclick="setMode('health')">Health Assessment</button>
+    </div>
+
+    <textarea id="signal" class="signal-input" placeholder="Paste anything — Slack message, email, support ticket, usage note, call summary..."></textarea>
+
+    <div class="action-row">
+        <button id="analyseBtn" class="btn-primary" onclick="analyse()">Analyse Signal</button>
+        <span id="statusText" class="status-text"></span>
+        <button class="btn-ghost" onclick="clearAll()">clear</button>
+    </div>
+
+    <div id="errorBanner" class="error-banner"></div>
+
+    <div id="results" class="results-panel">
+        <div id="resultsBody"></div>
+    </div>
+
+</main>
+
+<footer>
+    built for PostHog CSM role · powered by Claude · anthropic-proxy.work-specious.workers.dev · no data stored
+</footer>
+
+<div id="costOverlay" class="overlay">
+    <div class="modal">
+        <h3>Sonnet 4.6 — confirm cost</h3>
+        <p>Sonnet is ~10× more expensive than Haiku. Estimated cost for this signal:</p>
+        <div id="modalCostText" class="modal-cost"></div>
+        <p style="color: var(--muted); font-size: 0.78rem;">Pricing: $3.00/M input · $15.00/M output (May 2026)</p>
+        <div class="modal-actions">
+            <button class="btn-primary" id="confirmProceed">Proceed</button>
+            <button class="btn-ghost" id="confirmCancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const PROXY = 'https://anthropic-proxy.work-specious.workers.dev';
+    const HAIKU_HARD  = 15000;
+    const SONNET_HARD = 25000;
+    const TRUNCATION_NOTE = '\n\n[Signal truncated for length]';
+
+    let currentMode = 'triage';
+
+    const PLACEHOLDERS = {
+        triage:     'Paste anything — Slack message, email, support ticket, usage note, call summary...',
+        draft:      'Paste the message you need to respond to — Slack, email, support ticket...',
+        escalation: 'Describe the situation that needs escalating. Include what\'s been tried and the customer\'s current state...',
+        health:     'Paste usage signals, recent comms, renewal notes, account history — anything available for this account...'
+    };
+
+    function setMode(mode) {
+        currentMode = mode;
+        document.querySelectorAll('.mode-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+        document.getElementById('signal').placeholder = PLACEHOLDERS[mode];
+    }
+
+    function updateModelHint() {
+        const model = document.getElementById('modelSelect').value;
+        const hint  = document.getElementById('modelHint');
+        if (model === 'claude-sonnet-4-6') {
+            hint.textContent = 'sonnet: more nuanced — good for complex escalations or health reviews';
+            hint.style.color = '#f4a261';
+        } else {
+            hint.textContent = 'haiku: fast and sufficient for most signals';
+            hint.style.color = '';
+        }
+    }
+
+    function buildContext() {
+        const typeVal  = document.querySelector('input[name="custType"]:checked')?.value || 'sales';
+        const arr      = document.getElementById('arrTier').value;
+        const tenure   = document.getElementById('tenure').value;
+        const products = [...document.querySelectorAll('.prod-check:checked')].map(c => c.value);
+        const notes    = document.getElementById('contextNotes').value.trim();
+
+        const tenureMap = { new: '< 3 months', growing: '3–12 months', established: '1–2 years', longterm: '2+ years' };
+        const typeLabel = typeVal === 'sales'
+            ? 'Sales-known (came through the sales process, has an established CSM relationship, expects proactive contact)'
+            : 'Self-served (never spoke to anyone at PostHog, higher silent churn risk, first contact must feel warm not sales-y)';
+
+        const parts = [`Customer type: ${typeLabel}`];
+        if (arr)            parts.push(`ARR tier: ${arr}`);
+        if (tenure)         parts.push(`Tenure: ${tenureMap[tenure] || tenure}`);
+        if (products.length) parts.push(`Products in use: ${products.join(', ')}`);
+        if (notes)          parts.push(`Additional context: ${notes}`);
+
+        return '\n\nCUSTOMER CONTEXT:\n' + parts.join('\n');
+    }
+
+    const BASE_PROMPT = `You are a Customer Success copilot for PostHog (posthog.com), the open-source product analytics platform. You assist a CSM who manages 25–40 accounts in the $20k–$100k+ ARR range. Your role is to reduce cognitive load — the CSM is spinning plates across a large book of business and needs precise, actionable outputs, not vague guidance.
+
+PostHog's core product suite:
+- Product Analytics: event tracking, funnels, retention, cohorts, dashboards
+- Session Replay: video-style session recordings with console logs, network activity, heatmaps
+- Feature Flags: controlled rollouts, beta access management, gradual releases
+- A/B Testing: experimentation with statistical significance
+- Error Monitoring: crash tracking and error alerting (newer product, still growing adoption)
+- Data Pipelines / CDP: event streaming, data transformation, warehouse sync
+
+Billing model: primarily credit-based with annual renewals. Customers buy bundles of event credits, session recording credits, etc. Usage spikes can surprise customers on their next invoice — this is a common source of friction. Credit top-ups, overages, and annual renewals are all commercial moments that need careful handling.
+
+Two customer types with fundamentally different dynamics:
+- Sales-known: went through a formal sales process. Has a named relationship with the CSM. Expects the CSM to know their context, their use case, their team structure. Absence of contact is noticed and reads as neglect. Warmth and memory of past conversations is expected.
+- Self-served: found PostHog, signed up, and paid with a card. Has never spoken to anyone at PostHog. Could be 2 engineers and a Stripe account. High silent churn risk — they will downgrade or cancel without warning. First contact must feel genuinely helpful, not like a sales call triggered by a usage alert. Tone: a knowledgeable friend who works there, not an account manager chasing a renewal.
+
+ARR tier context:
+- $20–50k: Often a smaller team or early-stage company. Price sensitivity is real. Can feel de-prioritised if response times are slow. Watch for quiet non-renewal — they may not escalate, just leave.
+- $50–100k: Mid-market. Usually has both a technical champion (engineer or data team) and a business buyer (product lead, VP). Renewals involve both. Lose the technical champion and you lose the account.
+- $100k+: Enterprise. Multi-threading is non-negotiable — if the champion leaves without you having exec relationships, the account churns on renewal. Needs strategic attention, not just reactive support.
+
+Red flags that should always be surfaced:
+- Usage drop > 30% over 4 weeks (classic silent churn precursor)
+- Key contact gone quiet > 3 weeks with no response to outreach
+- Billing or pricing frustration expressed with a negative tone
+- Language like "evaluating alternatives", "looking at Amplitude", "reassessing our tools"
+- Support ticket or Slack message unanswered for > 24 hours (relationship damage accumulates fast)
+- A core feature the customer relies on has a known bug, limitation, or is being deprecated
+- Renewal within 90 days combined with any negative signal — even a small one`;
+
+    const MODE_PROMPTS = {
+        triage: `
+
+You are in TRIAGE + NEXT ACTION mode. The CSM has a full inbox and needs to know: what is this, how urgent is it, and what do I do right now?
+
+Respond with exactly five sections using these markdown headers:
+
+## Signal Type
+State the signal type on the first line. Choose: Technical Issue, Billing / Commercial, Feature Request, Escalation, Engagement Risk, Expansion Opportunity, Relationship Check-in, or Other. Then 1–2 sentences explaining what this really is — not just the surface issue but what it signals about the account.
+
+## Priority
+State the priority level on the first line — exactly one of: Low, Medium, High, or Critical. Factor in ARR tier, customer type, and tenure when provided. A $100k+ customer with a billing question is High minimum. A self-served customer going quiet is Medium minimum regardless of ARR. Give 1–2 sentences of reasoning that shows you understand the relational and commercial stakes, not just the technical severity.
+
+## Root Cause Layer
+State the layer on the first line: Technical, Commercial, Relationship, or Expansion. Then explain what's driving this beneath the surface. The presented problem and the real problem are often different.
+
+## Next Action
+State the specific action on the first line — not "follow up" but "send a Slack message acknowledging X and asking for Y". Then add timing: respond now (within 1 hour), respond today (within 4 hours), respond this week, or schedule proactively. Explain why that timing for this account.
+
+## Red Flags
+List any red flags from the PostHog CSM red flag list that this signal triggers. If none, write "None identified." Don't invent flags that aren't there, but don't underplay real ones.
+
+No preamble. Exactly these five sections. Be direct.`,
+
+        draft: `
+
+You are in DRAFT RESPONSE mode. The CSM needs a message ready to send or adapt — not a template, a real response.
+
+Respond with exactly four sections:
+
+## Signal Summary
+One sentence: what is this actually about and what does this customer need right now?
+
+## Recommended Channel
+State the channel on the first line: Slack DM, Email, Video Call, or Support Ticket Reply. One sentence explaining why this channel for this situation and customer type.
+
+## Draft
+Write the full customer-facing message ready to send. Calibration:
+- PostHog customers are mostly technical — be direct, get to the point, skip empty openers like "Hope you're well!"
+- Sales-known customers: warmer, more personal, can reference past conversations or their specific setup
+- Self-served customers: genuine and helpful, not sales-y — they're not expecting a human to reach out
+- Never use placeholders like [NAME] or [PRODUCT] — write it ready to send
+- Under 200 words. No corporate-speak.
+
+## Tone Notes
+1–2 sentences explaining the tone choices: why this register for this customer type and situation.
+
+No preamble. Exactly these four sections.`,
+
+        escalation: `
+
+You are in ESCALATION STRATEGY mode. The CSM needs to decide how far to take this and what to say to their team and the customer.
+
+Respond with exactly four sections:
+
+## Escalation Level
+State the level on the first line: Solo (CSM handles alone), Support Engineering (bring in support/engineering for technical depth), Product Team (bug, limitation, or roadmap question that needs product input), Manager / Leadership (commercial risk, contractual issue, or customer threatening churn), or Executive (major account, exec relationship needed, or situation that could go public). Then explain why this level.
+
+## Reasoning
+2–3 sentences. What makes this situation require escalation at all? What risk are you managing by escalating vs. handling solo?
+
+## Internal Handoff
+Write the message the CSM pastes to their team (Slack or ticket). Include: what the customer needs, what's been tried already, what the ask is, urgency level, and ARR context. Ready to paste.
+
+## Customer Message
+Write what to tell the customer while the escalation is in progress. Sets realistic expectations without over-promising. Warm and direct, no corporate-speak.
+
+No preamble. Exactly these four sections.`,
+
+        health: `
+
+You are in HEALTH ASSESSMENT mode. The CSM is doing a periodic review of an account and needs a clear read on where it stands.
+
+Respond with exactly four sections:
+
+## Health Score
+State the score on the first line: Green (healthy, low churn risk), Yellow (watch closely, some concerning signals), or Red (at risk, action needed now). Then 1–2 sentences of overall assessment.
+
+## Key Signals
+Bullet list of specific things that point to health or risk. Use + for positive signals, ! for concerning ones. Be concrete — "Session Replay usage is up 40% this month" not "usage is increasing".
+
+## Risk Level
+Two lines:
+- Renewal risk: Low / Medium / High — one sentence reason
+- Expansion potential: Low / Medium / High — one sentence reason
+Factor in ARR tier and customer type.
+
+## Recommended Plays
+Numbered list of 2–4 specific actions the CSM should take in the next 30 days. Concrete enough to act on — not "check in" but "schedule a 30-minute review call to walk through their funnel setup and unblock the Product Analytics questions from last month's ticket".
+
+No preamble. Exactly these four sections.`
+    };
+
+    function buildSystemPrompt(mode) {
+        return BASE_PROMPT + (MODE_PROMPTS[mode] || MODE_PROMPTS.triage);
+    }
+
+    function estimateCost(inputLength) {
+        const inputTokens  = Math.ceil(inputLength / 4) + 1400;
+        const outputTokens = 500;
+        const cost = (inputTokens / 1e6) * 3.00 + (outputTokens / 1e6) * 15.00;
+        return cost < 0.01 ? '< $0.01' : `~$${cost.toFixed(3)}`;
+    }
+
+    function confirmSonnetCost(inputLength) {
+        return new Promise(resolve => {
+            document.getElementById('modalCostText').textContent = estimateCost(inputLength);
+            const overlay = document.getElementById('costOverlay');
+            overlay.classList.add('visible');
+
+            const close = result => {
+                overlay.classList.remove('visible');
+                document.getElementById('confirmProceed').onclick = null;
+                document.getElementById('confirmCancel').onclick  = null;
+                resolve(result);
+            };
+
+            document.getElementById('confirmProceed').onclick = () => close(true);
+            document.getElementById('confirmCancel').onclick  = () => close(false);
+        });
+    }
+
+    async function analyse() {
+        const apiKey   = document.getElementById('apiKey').value.trim();
+        const signal   = document.getElementById('signal').value.trim();
+        const errEl    = document.getElementById('errorBanner');
+        const statusEl = document.getElementById('statusText');
+        const btn      = document.getElementById('analyseBtn');
+        const results  = document.getElementById('results');
+        const body     = document.getElementById('resultsBody');
+
+        errEl.style.display = 'none';
+
+        if (!apiKey) return showError('Enter your Anthropic API key above.');
+        if (!apiKey.startsWith('sk-ant-')) return showError('API key looks wrong — Anthropic keys start with sk-ant-. Check you\'ve pasted the full key.');
+        if (!signal)  return showError('Paste a customer signal to analyse.');
+
+        const model = document.getElementById('modelSelect').value;
+        if (model === 'claude-sonnet-4-6') {
+            const ok = await confirmSonnetCost(signal.length);
+            if (!ok) return;
+        }
+
+        const hardLimit = model === 'claude-sonnet-4-6' ? SONNET_HARD : HAIKU_HARD;
+        const processed = signal.length > hardLimit
+            ? signal.slice(0, hardLimit - TRUNCATION_NOTE.length) + TRUNCATION_NOTE
+            : signal;
+
+        const userContent = processed + buildContext();
+
+        btn.disabled = true;
+        statusEl.innerHTML = '<span class="spinner"></span> analysing...';
+        results.classList.remove('visible');
+
+        try {
+            const resp = await fetch(PROXY, {
+                method: 'POST',
+                headers: {
+                    'x-api-key':    apiKey,
+                    'anthropic-version': '2023-06-01',
+                    'content-type': 'application/json',
+                    'anthropic-dangerous-direct-browser-calls': 'true'
+                },
+                body: JSON.stringify({
+                    model,
+                    max_tokens: 1400,
+                    system: buildSystemPrompt(currentMode),
+                    messages: [{ role: 'user', content: userContent }]
+                })
+            });
+
+            if (!resp.ok) {
+                const err = await resp.json().catch(() => ({}));
+                const msg = err.error?.message || '';
+                if (resp.status === 401) throw new Error('Authentication failed (401) — API key invalid or expired.');
+                if (resp.status === 403) throw new Error('Access forbidden (403) — key may lack permission for this model.');
+                if (resp.status === 429) throw new Error('Rate limited (429) — usage limit hit. Wait a moment and retry.');
+                if (resp.status === 400) throw new Error(`Bad request (400) — ${msg || 'check your input and key'}`);
+                if (resp.status >= 500)  throw new Error(`Anthropic server error (${resp.status}) — try again in a moment.`);
+                throw new Error(msg || `API error ${resp.status}`);
+            }
+
+            const data = await resp.json();
+            body.innerHTML = renderOutput(data.content[0].text, currentMode);
+            results.classList.add('visible');
+            statusEl.textContent = 'done';
+
+        } catch (err) {
+            console.error(err);
+            if (err instanceof TypeError) {
+                showError('Network error — request failed before reaching the API. Check for extensions blocking the proxy, a VPN, or a firewall. Open the browser console (F12) for details.');
+            } else {
+                showError(err.message);
+            }
+            statusEl.textContent = '';
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    function renderOutput(text, mode) {
+        const parts = text.split(/^## /m).filter(Boolean);
+        if (parts.length < 2) {
+            return `<div class="result-section"><div class="raw-output">${esc(text)}</div></div>`;
+        }
+
+        return parts.map(part => {
+            const lines = part.split('\n');
+            const title = lines[0].trim();
+            let body    = lines.slice(1).join('\n').trim();
+
+            let sectionClass = '';
+            let badge = '';
+            let copyBtn = '';
+
+            const firstLine = body.split('\n')[0]?.trim() || '';
+            const fl = firstLine.toLowerCase();
+
+            if (title === 'Signal Type') {
+                badge = `<span class="badge-signal">${esc(firstLine)}</span>`;
+                body  = body.split('\n').slice(1).join('\n').trim();
+            } else if (title === 'Priority') {
+                const level = ['critical','high','medium','low'].find(l => fl === l || fl.startsWith(l + ' '));
+                if (level) {
+                    badge = `<span class="badge-priority ${level}">${cap(level)}</span>`;
+                    if (fl === level) body = body.split('\n').slice(1).join('\n').trim();
+                }
+            } else if (title === 'Health Score') {
+                const level = ['green','yellow','red'].find(l => fl === l || fl.startsWith(l + ' ') || fl.startsWith(l + '('));
+                if (level) {
+                    badge = `<span class="badge-health ${level}">${cap(level)}</span>`;
+                    if (fl === level) body = body.split('\n').slice(1).join('\n').trim();
+                }
+            } else if (title === 'Escalation Level') {
+                badge = `<span class="badge-escalation">${esc(firstLine)}</span>`;
+                body  = body.split('\n').slice(1).join('\n').trim();
+            } else if (title === 'Recommended Channel') {
+                badge = `<span class="badge-channel">${esc(firstLine)}</span>`;
+                body  = body.split('\n').slice(1).join('\n').trim();
+            } else if (title === 'Red Flags') {
+                sectionClass = 'redflag';
+            }
+
+            const isDraft = (title === 'Draft' || title === 'Internal Handoff' || title === 'Customer Message');
+            if (isDraft) {
+                sectionClass = 'draft';
+                copyBtn = `<button class="copy-btn" onclick="copyText(this)" data-text="${escAttr(body)}">copy</button>`;
+            }
+
+            const renderedBody = isDraft
+                ? `<div class="draft-text">${esc(body)}</div>`
+                : renderBody(body);
+
+            return `<div class="result-section ${sectionClass}"><h3>${esc(title)}${badge ? ' ' + badge : ''}${copyBtn ? ' ' + copyBtn : ''}</h3>${renderedBody}</div>`;
+        }).join('');
+    }
+
+    function renderBody(body) {
+        const rows = body.split('\n').map(line => {
+            const t = line.trim();
+            if (!t) return '';
+            const isBullet   = /^[-*+!]\s/.test(t);
+            const isNumbered = /^\d+\.\s/.test(t);
+            const content    = esc(t.replace(/^[-*+!]\s|^\d+\.\s/, '')).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            if (isBullet || isNumbered) return `<li>${content}</li>`;
+            return `<p>${content}</p>`;
+        }).join('');
+        return rows.includes('<li>')
+            ? rows.replace(/(<li>.*?<\/li>)+/gs, m => `<ul>${m}</ul>`)
+            : rows;
+    }
+
+    function copyText(btn) {
+        navigator.clipboard.writeText(btn.dataset.text).then(() => {
+            btn.textContent = 'copied!';
+            setTimeout(() => btn.textContent = 'copy', 2000);
+        }).catch(() => {
+            btn.textContent = 'failed';
+            setTimeout(() => btn.textContent = 'copy', 2000);
+        });
+    }
+
+    function showError(msg) {
+        const el = document.getElementById('errorBanner');
+        el.textContent = msg;
+        el.style.display = 'block';
+    }
+
+    function clearAll() {
+        document.getElementById('signal').value = '';
+        document.getElementById('contextNotes').value = '';
+        document.getElementById('results').classList.remove('visible');
+        document.getElementById('errorBanner').style.display = 'none';
+        document.getElementById('statusText').textContent = '';
+    }
+
+    const esc     = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const escAttr = s => esc(s).replace(/"/g,'&quot;');
+    const cap     = s => s.charAt(0).toUpperCase() + s.slice(1);
+</script>
+
+</body>
+</html>

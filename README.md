@@ -13,6 +13,7 @@ Operations professional with over a decade across people operations, strategic H
 | [KH Lore Consistency Checker](https://iamspecious.github.io/portfolio/lore-checker.html) | AI theory stress-tester for Kingdom Hearts canon — paste a theory, supply wiki links, get structured contradictions, weaknesses, and a verdict | In Progress |
 | [Support Ticket Triage Tool](https://iamspecious.github.io/portfolio/support-triage.html) | Paste a customer message or error log, get a category, colour-coded urgency, and a ready-to-send draft reply | In Progress |
 | [FAQ / Knowledge Base Chatbot](https://iamspecious.github.io/portfolio/faq-chatbot.html) | Paste docs, ask a question, get a grounded answer — or "not in our docs" when it's not there. No hallucination, no backend | In Progress |
+| [PostHog CSM Copilot](https://iamspecious.github.io/portfolio/posthog-cs-copilot.html) | Customer Success copilot for managing a 25–40 account portfolio: signal triage, response drafting, escalation strategy, and health assessment — encoded with PostHog's product suite, billing model, and customer type dynamics | In Progress |
 | [PregVoice](https://iamspecious.github.io/portfolio/pregvoice.html) | Accessibility project: independent pregnancy test result reading for blind and visually impaired users via on-device ML, audio, and haptics | Research & Planning |
 
 ---
