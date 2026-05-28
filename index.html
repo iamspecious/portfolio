@@ -1918,6 +1918,251 @@
 
                     </div><!-- /project-block: PregVoice -->
 
+                    <div class="project-block" data-category="technical">
+
+                    <!-- ====================================================
+                         ERROR LOG INTERPRETER
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Error Log Interpreter <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>May 2026 – Present</strong></p>
+                        <p>Paste a browser console error, a Vite build error, or a stack trace — and get back a plain English breakdown aimed at developers who are still learning to read output. The tool does more than translate: it distinguishes between where an error <em>surfaces</em> and where the actual problem <em>originated</em>, which are often in completely different places. A TypeError inside a React renderer usually means something went wrong several steps earlier. A build failure citing a missing module often means a misconfigured import path, not a missing package. Getting that distinction right is the first real debugging skill.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Root cause framing</strong> — The "Real Problem" section explicitly addresses the error-surface vs error-origin gap. Beginners consistently debug the wrong location because the error message points there; this tool corrects that instinct.</li>
+                                <li><strong>Five structured sections</strong> — What it means, where the real problem is, where to look, what to try, and an error handling coaching section. Each one solves a different part of the beginner's confusion.</li>
+                                <li><strong>Coaching built in</strong> — The final section doesn't just explain what went wrong. It tells you where error handling should have been placed, why that layer matters, and what principle the error illustrates. Code hygiene is taught through the error, not separately from it.</li>
+                                <li><strong>Context input improves accuracy</strong> — An optional second panel lets you add framework, what you were doing, and any relevant code. Root cause analysis with context is significantly more targeted than without.</li>
+                                <li><strong>Entry-level first</strong> — The output is written for someone who is still learning. No jargon without an explanation, no "just check your code" non-answers. Every section is specific to the actual error provided.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>No memory of the codebase</strong> — The tool only sees what's pasted. Without the surrounding code, some root cause analysis is necessarily probabilistic — it gives the most likely candidates, not a guaranteed answer.</li>
+                                <li><strong>Error quality varies</strong> — Minified stack traces and cryptic build tool output are harder to interpret than clear runtime errors. The tool will do its best but flags when the error itself lacks information.</li>
+                                <li><strong>Requires an API key</strong> — No shared backend, so users need an Anthropic account. One-time setup, but it's friction a hosted version would remove.</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Senior/advanced mode toggle</strong> — The current output is calibrated for beginners. A mode switch would change the register: shorter explanations, deeper technical detail, skipping the hand-holding and going straight to the likely culprit and fix. Same five sections, different depth per level.</li>
+                                <li><strong>Framework-aware analysis</strong> — Detect whether the error is a React, Vue, Next.js, or Vite-specific pattern and tailor the "Where To Look" section accordingly. React hydration errors and Vite import resolution failures have known patterns; naming them explicitly saves a lot of hunting.</li>
+                                <li><strong>CI/build log mode</strong> — Extend the input to accept multi-line build logs, not just single error messages. CI output is full of noise; extracting the signal (the actual failing step) and explaining it is a different skill from reading a browser console error.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">No backend</span>
+                        </p>
+                        <a class="tool-link-badge" href="error-interpreter.html" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-28 — live</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v1.0 live. Both tools (Error Interpreter and Debug Helper) deployed and linked from the portfolio. The error-surface vs error-origin distinction is the core value proposition — tested against a range of real errors (TypeError, ReferenceError, Vite import failures, CORS errors) and the root cause framing holds up well across all of them.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 7 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Added a contextual callout to the "Real Problem" section in the rendered output — a small amber-bordered note that reads "Where an error appears is often not where the bug lives." It's only four words of UI but it primes the reader to hold the root cause section differently. Without the framing, people skim the section as if it's just more explanation of the error.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Set max_tokens to 1,400. Five detailed sections averaging 200–250 tokens each covers the output without leaving room for padding. Tested at 900 (too thin for the coaching section), 1,200 (borderline), 1,400 (consistently complete). Output tokens cost 5× more than input on Haiku — kept the cap tight.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Five sections, not three. First instinct was three (explain, diagnose, fix) but the coaching section earns its weight — it's what separates a translation tool from a teaching tool. The "Where To Look" and "What To Try" split also matters: one answers WHERE to investigate, the other answers HOW. Merging them into a single "next steps" list collapses the distinction between understanding and action.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Color-coded result sections: plain-English explanation in calm blue (informational), root cause in amber (needs attention), where to look in bright amber (investigative), what to try in green (action), coaching in purple (growth). Each color signals a different kind of reading — you scan the results differently knowing which section you're in.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Warm amber/ember color palette — not red. The tool is about errors but the experience should feel constructive, not alarming. Red signals danger and tends to put people on the defensive. Amber signals "pay attention here" without the connotation that something is catastrophically wrong. Important when the audience is beginners who already feel anxious about errors.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Monospace textarea for the error input, serif for context. Errors should look like errors — monospace signals "this is technical output, paste it as-is." The context panel is where you write prose, so serif is appropriate there. Small UX detail that reinforces the mental model of each panel.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28 — core design</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The error-surface vs error-origin gap is the tool's core value. Every beginner debugging tutorial says "read the error" — but few explain that the error location and the error cause are structurally different things. A React TypeError at render time almost never means the component is broken; it means something upstream returned the wrong shape. Building that instinct early saves hours of debugging time later. The "Real Problem" section is the reason this tool exists.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    </div><!-- /project-block: Error Log Interpreter -->
+
+                    <div class="project-block" data-category="technical">
+
+                    <!-- ====================================================
+                         DEBUG HELPER
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Debug Helper <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>May 2026 – Present</strong></p>
+                        <p>A structured debugging coach for when you're stuck — whether you have an error message or not. Most debugging tools assume you have something to debug <em>against</em>. The harder case is when your code runs, produces no output, and gives you nothing to go on. This tool has three modes: I have an error (want a plan, not just an explanation), code runs but does the wrong thing, and total silence — nothing happens at all. The silent mode is built specifically around the most common causes of hidden failures: swallowed catch blocks, unhandled promise rejections, missing await, and event handlers that never attached. It coaches the debugging process, not just the answer.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Covers the silent failure case</strong> — The hardest debugging situation for beginners isn't an error they don't understand. It's code that runs quietly and does nothing. The silent mode specifically addresses the common causes: a catch block that swallows the error, an async function that resolves to a Promise object instead of the value, an event listener attached to the wrong element.</li>
+                                <li><strong>Teaches process, not just answers</strong> — Every debugging plan section explains WHY you're doing each step, not just what. A developer who understands why you add a console.log before the data fetch (to confirm the fetch even ran) will know where to add logging on the next bug without being told.</li>
+                                <li><strong>Three modes, one tool</strong> — A single text input handles three fundamentally different debugging situations. The mode selector changes both the placeholder text and the framing passed to the model — the debugging plan for "wrong output" is structurally different from the plan for "complete silence."</li>
+                                <li><strong>Logging guidance is explicit</strong> — The "Where To Add Logging" section gives the actual console.log syntax to use, not just "add some logging." Specific beats generic for beginners who aren't sure where to start.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Context-limited plans</strong> — The debugging plan is only as good as the description. Vague input ("it doesn't work") produces vague plans. The placeholder text models a useful level of detail, but the quality ceiling is the quality of the description.</li>
+                                <li><strong>No execution</strong> — The tool can't run the code, check the network, or inspect live state. It reasons from description, not from observation. A real debugger with breakpoints will always be more precise for an active session.</li>
+                                <li><strong>Requires an API key</strong> — No shared backend, same friction as the other tools in the portfolio.</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Pair with Error Interpreter</strong> — Add a "Take this to the Error Interpreter →" link when the situation involves a specific error message. The two tools are complementary: Interpreter explains what an error means, Debug Helper generates the plan for fixing it. Right now they're two separate tabs; a handoff link closes the loop.</li>
+                                <li><strong>Framework-aware plans</strong> — Detect common framework patterns in the pasted code (React hooks, async/await, fetch calls, Express routes) and tailor the debugging plan to that context. The logging guidance for a React state bug is different from the guidance for a Node async bug — naming the right tools (React DevTools, Node inspector) matters.</li>
+                                <li><strong>Step-by-step interactive mode</strong> — Rather than delivering the full plan upfront, walk through one step at a time. After each step, ask: did that reveal anything? Then adapt. More conversation, less prescription — better for genuinely stuck cases where the problem is unknown.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Claude API (Anthropic)</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">No backend</span>
+                        </p>
+                        <a class="tool-link-badge" href="debug-helper.html" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-28 — live</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v1.0 live. Three-mode structure holds up well across test cases. The silent mode in particular produces genuinely useful output — the swallowed catch and missing await explanations are exactly what beginners need to hear and rarely do. The cool blue palette reads as methodical and calm, which is the right register for a debugging tool (contrast with the error interpreter's amber — different emotional tone for a different use case).
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 6 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Set max_tokens to 1,500. The debugging plan section alone needs 400–500 tokens to be genuinely useful at 5–7 numbered steps with explanations. Testing at 1,200 showed the "What This Teaches" section getting truncated. 1,500 gives consistent full output across all three modes.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The "Where To Add Logging" section specifically mandates the actual log syntax — <code>console.log('label:', variable)</code> — not just "add logging here." Beginners often know they should add logs but don't know where to add them or what to log. Making the suggestion concrete (before the fetch, after the assignment, inside the if branch) is the difference between useful and vague.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Mode selector as full-width styled cards, not a model-bar-style compact row. Three modes is a meaningful choice with a paragraph of explanation each — it deserves more visual weight than a compact radio toggle. The card style also lets each option carry a subtitle explaining when to use it, which reduces the guessing.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Silent failures are a genuine beginner trap. When code produces no output and no error, beginners often assume the code didn't run. The actual common causes — a catch block that swallows the error without logging it, an async function called without await, an event listener attached to a null element — are not intuitive. The silent mode was designed specifically to surface these, because no other debugging tool explains the absence of output rather than the presence of an error.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Cool slate/blue palette — deliberately different from the Error Interpreter's amber. Two tools in the same portfolio sharing a color scheme would blur the distinction. More importantly, the emotional register should differ: amber for "here's what's wrong" (attention-drawing), blue for "here's how to find it" (methodical, calm). Color communicates the relationship to the problem.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-28 — design rationale</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Structured as a companion to the Error Log Interpreter, not a competitor. The Interpreter answers "what does this mean?" — this tool answers "how do I approach finding and fixing it?" Same audience (beginners), different moment in the debugging process. A developer will often need both: one to understand the error, one to plan the fix. Keeping them as two separate tools with clear roles is cleaner than one multi-purpose tool that tries to do everything.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    </div><!-- /project-block: Debug Helper -->
+
                     <div class="project-block" data-category="writing">
                     <div class="project">
                         <h3>Technical Writing Portfolio <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
