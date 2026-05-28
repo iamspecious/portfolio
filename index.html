@@ -1669,6 +1669,154 @@
 
                     <div class="project-block" data-category="technical">
 
+                    <!-- ====================================================
+                         POSTHOG CS HEALTH INTELLIGENCE — PYTHON PROTOTYPE
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>PostHog CS Health Intelligence <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Complete</span></h3>
+                        <p><strong>May 2026</strong></p>
+                        <p>A research-backed prototype targeting the gap between signal collection and prioritised action in CS. PostHog's tooling (Vitally, CDP, Zapier) covers monitoring well — the morning question it doesn't answer is <em>who needs me today, why, and what do I actually say?</em> The prototype is a structured JSON account model and a Python script that reads it and produces a ranked morning action list: URGENT first, then WATCH, then OK. Each flagged account shows the specific signal that triggered it, a plain-English reason it matters, and a concrete suggested action. No composite health score. No frontend. The complexity lives in the design decisions, not the code.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">No composite score</span>
+                                <p>Composite scores hide the shape of a problem. An account with strong usage and a failed payment looks fine on a health score. It isn't. Signals are surfaced individually — what triggered it and why — so the shape of the risk is visible.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Two customer types, two threshold sets</span>
+                                <p>Self-serve silence at 30 days is expected. Sales-assisted silence at 21 days is a WATCH flag. This distinction runs through every signal in the script — not just noted in a comment.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Leading indicators weighted over lagging ones</strong> — Days since last contact, usage trend, and renewal proximity fire before a problem is visible. The "never be surprised" success condition in the PostHog brief requires seeing things before they become conversations.</li>
+                                <li><strong>Failed billing always ranks first within URGENT</strong> — Explicitly scored with a boost so a billing failure on a $67k account surfaces above multi-signal lower-ARR accounts that may already have churned. One line in the code, one paragraph in the devlog explaining why.</li>
+                                <li><strong>Expansion signals as a separate track</strong> — A self-serve account adopting Session Replay with 40% usage growth is a conversation starter, not an emergency. It appears in the OK section with a note rather than bumping the account into WATCH. Positive signals matter but they're not urgent.</li>
+                                <li><strong>Every field, threshold, and ranking decision is documented</strong> — The devlog covers the data model field by field, the threshold choices and their reasoning, and one output format decision that changed during the build (URGENT signals now always render first within an account).</li>
+                                <li><strong>Under 130 lines of Python with no external dependencies</strong> — Complexity lives in the design decisions. The code itself should be readable by someone who doesn't write Python.</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>No live data integration</strong> — The account model is manually maintained JSON. In practice this data would flow from Vitally, Salesforce, and PostHog's CDP. The prototype demonstrates the logic layer; the plumbing would depend on what data the team has already structured.</li>
+                                <li><strong>Slack channel activity is tracked but not scored</strong> — <code>slack_channel_active</code> is in the account model because Slack silence is a meaningful signal for PostHog's ICP. It's not wired into threshold logic because it would need per-account baseline data to fire meaningfully — a channel that's always quiet is different from one that went quiet.</li>
+                                <li><strong>Open unresolved issues are tracked but not ranked</strong> — The count is visible in the raw JSON for context but doesn't trigger a flag on its own. Issue severity matters more than count, and that's not something the current data model captures.</li>
+                            </ul>
+                        </div>
+
+                        <p>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">JSON</span>
+                            <span class="tech-tag">No dependencies</span>
+                            <span class="tech-tag">PostHog</span>
+                        </p>
+                        <a class="tool-link-badge" href="https://github.com/iamspecious/portfolio/tree/main/posthog-cs-health-intelligence" target="_blank">View on GitHub →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-22 — expansion signals as a separate track</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Panda Analytics has no risk flags — usage is up 40% week-over-week and they just adopted Session Replay. That's an expansion signal, not an urgency flag. Moving them into WATCH would be wrong; making them invisible would be a missed conversation. The account model includes an <code>expansion_signal</code> field — a string or null. In the OK section, any account with a value gets an arrow and the signal description. Expansion signals are conversation starters. They live in their own track so the triage logic stays clean.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-22 — output format: why text, why three tiers</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The output is plain terminal text. Not JSON, not a dashboard. The morning list is meant to be read, not processed — a CSM should be able to scan it and know their first three actions in under two minutes. Three tiers (URGENT / WATCH / OK) map to three behavioural responses. A numeric health score doesn't. One format decision changed during the build: initially signals rendered in evaluation order, which put a WATCH above three URGENT signals for Skyline DevOps. Fixed with a one-line sort in <code>format_account</code> — URGENT signals always render first within an account.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-22 — threshold choices and one ranking decision</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Self-serve contact threshold is 45/60 days; sales-assisted is 21/30. Self-serve usage decline fires after 2/4 weeks; sales-assisted after 1/3. The shorter tolerances for sales-assisted reflect the stronger expectation of active use that comes with a managed relationship. Within the URGENT tier, failed billing gets a scoring boost (+50) so it always floats above accounts flagged only for renewal timing. The alternative was pure signal-count ranking — which would let a multi-signal $19k self-serve account that's probably already churning outrank a billing failure on a $67k sales-assisted account with renewal in 45 days. That felt wrong.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-05-22 — building the account data model</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Went through each field explicitly. <code>arr</code> and <code>arr_tier</code> are separate — the numeric ARR is used for ranking, the tier string is used for display. <code>usage_weeks_declining</code> is distinct from <code>usage_trend</code> because the threshold checks need a duration, not just a direction. <code>slack_channel_active</code> is included because Slack silence is a meaningful signal for PostHog's ICP, even though it's not currently wired into threshold logic. <code>expansion_signal</code> is a nullable string, not a boolean — the description is what matters. Fields excluded: <code>champion_name</code>, <code>products_in_use</code>, <code>tenure</code> — all relevant context, none of them change the script's output.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 6 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — scope constraint, logged deliberately</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The prototype is scoped to what can be fully explained and defended in an interview without notes. Every function, every field, every threshold has a reason that can be stated clearly in plain English. If a future iteration warrants more complexity — live API integration, a proper frontend, multi-CSM views — the devlog will record why that complexity was added and what problem it solved. Complexity without documented rationale is technical debt.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — deciding what not to build</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        It would be easy to build a full health dashboard — React frontend, live PostHog API integration, Stripe webhooks. That would duplicate Vitally, which PostHog already pays for. It also wouldn't be defensible in an interview — the question would shift from "why these decisions?" to "explain your framework choices." Over-engineering is a CS anti-pattern too: a CSM who ships something their team can't understand is creating a liability. The prototype is a JSON model and a short Python script. The complexity lives in the design decisions, not the code.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — no composite health score</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        PostHog's stack uses Vitally's composite score — that's right for a team-wide tool. But composite scores have a failure mode: they hide the shape of a problem. A customer with strong usage, an active Slack channel, and a health score of 78 might have an unanswered renewal conversation from 3 weeks ago. The composite score looks fine. The account is at risk. The prototype surfaces signals individually — each with a plain-English reason and a suggested action. Not a number.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — two customer types, two baselines</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        A self-serve customer being quiet for 30 days is expected — they chose not to talk to anyone. A sales-assisted customer being quiet for 14 days after a personal onboarding is a flag. The account model includes a <code>customer_type</code> field and all signal thresholds adjust accordingly. This is one of the few places the code makes an explicit behavioural claim — and it's here in the devlog so it's defensible.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — understanding the existing stack</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        PostHog's CS automation stack from their handbook: Vitally (composite health scores, synced from Salesforce, PostHog usage, BuildBetter, Stripe), PostHog CDP (usage milestone alerts piped to Vitally/Slack), BuildBetter (call analysis, auto-syncs feature requests), Zapier (renewal reminders, billing events), Pylon (Slack Connect channel management), Salesforce (CRM backbone). The stack covers monitoring. The gap is in prioritisation and action — a CSM opening Vitally to find 12 indicators and 3 Zapier alerts still has to decide where to start. That's where this project lives.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-05-22 — reading the brief properly</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        The brief contains two distinct problems: the signal problem (leading indicators, never be surprised) and the relationship problem (self-serve vs sales-assisted, Slack-first ICP, different engagement models for each). It also contains an explicit invitation: "If you want to build automations to help you, go for it." At PostHog, where engineers build their own tooling and the culture values autonomy, that line is a signal about what kind of person they're hiring. This project is built from the perspective of a CSM designing the automation layer they'd actually want.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: PostHog CS Health Intelligence -->
+
+                    <div class="project-block" data-category="technical">
+
                     <!-- PregVoice -->
                     <!-- ====================================================
                          PREGVOICE — ACCESSIBILITY TOOL
