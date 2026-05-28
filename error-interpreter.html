@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Log Interpreter — Specious Coda Bishop</title>
+    <style>
+        :root {
+            --bg: #0d0900;
+            --surface: #160e00;
+            --border: #2a1e00;
+            --accent: #c98a2b;
+            --accent-light: #e8a83a;
+            --warm: #e8623a;
+            --text: #ede8d5;
+            --muted: #7a6840;
+            --danger: #e04040;
+            --warning: #e8a83a;
+            --success: #2dc653;
+            --info: #4a9eda;
+            --wisdom: #9b7bc9;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0d0900 0%, #1e1000 50%, #0d0900 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            color: var(--accent-light);
+            letter-spacing: 0.05em;
+        }
+
+        header .subtitle {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 4px;
+            font-family: monospace;
+        }
+
+        header a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-family: monospace;
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        header a:hover { color: var(--text); border-color: var(--accent); }
+
+        main {
+            flex: 1;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            width: 100%;
+        }
+
+        .api-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .api-bar label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .api-bar input {
+            flex: 1;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        .api-bar input:focus { outline: none; border-color: var(--accent); }
+
+        .api-bar .api-hint {
+            font-size: 0.7rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .panel-header {
+            background: #1a1000;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-header .icon { font-size: 1rem; }
+
+        .panel-header h2 {
+            font-size: 0.85rem;
+            font-weight: normal;
+            color: var(--accent-light);
+            letter-spacing: 0.04em;
+            font-family: monospace;
+        }
+
+        .panel-header .optional-badge {
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-family: monospace;
+            margin-left: auto;
+            background: var(--bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .panel-header .char-counter {
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-family: monospace;
+            margin-left: auto;
+        }
+
+        .panel-header .char-counter.warn { color: var(--warning); }
+        .panel-header .char-counter.over { color: var(--danger); }
+
+        .panel textarea {
+            width: 100%;
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            padding: 16px;
+            font-family: 'Georgia', serif;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            resize: vertical;
+            min-height: 180px;
+        }
+
+        .panel textarea.mono {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.82rem;
+            min-height: 160px;
+        }
+
+        .panel textarea:focus { outline: none; }
+        .panel textarea::placeholder { color: var(--muted); font-style: italic; }
+
+        .model-bar {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .model-bar > label:first-child {
+            font-size: 0.75rem;
+            color: var(--muted);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .model-option {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .model-option:has(input:checked) { border-color: var(--accent); background: #1a1000; }
+        .model-option input { accent-color: var(--accent); cursor: pointer; }
+        .model-option .model-name { font-size: 0.8rem; font-family: monospace; color: var(--text); }
+        .model-option .model-price { font-size: 0.68rem; color: var(--muted); margin-left: 4px; }
+        .model-option:has(input:checked) .model-price { color: var(--accent-light); }
+        .model-rec { font-size: 0.65rem; background: #0d2e1a; color: #2dc653; padding: 1px 6px; border-radius: 3px; font-family: monospace; }
+        .model-auto { font-size: 0.65rem; background: #2e1e00; color: var(--warning); padding: 1px 6px; border-radius: 3px; font-family: monospace; display: none; margin-left: auto; }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.03em;
+            transition: background 0.2s;
+        }
+
+        button:hover { background: var(--accent-light); }
+        button:disabled { background: var(--border); cursor: not-allowed; opacity: 0.6; }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 11px 20px;
+        }
+
+        .btn-secondary:hover { border-color: var(--accent); color: var(--text); background: transparent; }
+
+        .status {
+            font-size: 0.78rem;
+            color: var(--muted);
+            font-family: monospace;
+            margin-left: auto;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent-light);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .error-banner {
+            background: #2a0d0d;
+            border: 1px solid var(--danger);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 0.83rem;
+            color: #e07070;
+            font-family: monospace;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .results {
+            display: none;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .results.visible { display: block; }
+
+        .results-header {
+            background: #1a1000;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .results-header h2 {
+            font-size: 0.85rem;
+            font-family: monospace;
+            color: var(--accent-light);
+            letter-spacing: 0.04em;
+        }
+
+        .results-body { padding: 24px; }
+
+        .result-section { margin-bottom: 28px; }
+        .result-section:last-child { margin-bottom: 0; }
+
+        .result-section h3 {
+            font-size: 0.75rem;
+            font-family: monospace;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-section.what-it-means h3 { color: var(--info); }
+        .result-section.real-problem h3 { color: var(--warning); }
+        .result-section.where-to-look h3 { color: var(--accent-light); }
+        .result-section.what-to-try h3 { color: var(--success); }
+        .result-section.coaching h3 { color: var(--wisdom); }
+
+        .result-section p { font-size: 0.9rem; line-height: 1.7; color: var(--text); margin-bottom: 10px; }
+        .result-section p:last-child { margin-bottom: 0; }
+        .result-section ul, .result-section ol { padding-left: 22px; }
+        .result-section li { font-size: 0.9rem; line-height: 1.7; color: var(--text); margin-bottom: 8px; }
+
+        .real-problem-callout {
+            background: #1e1600;
+            border: 1px solid #2a2000;
+            border-left: 3px solid var(--warning);
+            border-radius: 0 6px 6px 0;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+            font-size: 0.78rem;
+            font-family: monospace;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1a1000;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            color: var(--accent-light);
+        }
+
+        .raw-output {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            color: var(--text);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>Error Log Interpreter</h1>
+        <div class="subtitle">paste an error · plain English explanation + root cause analysis</div>
+    </div>
+    <a href="index.html">← portfolio</a>
+</header>
+
+<main>
+    <div class="api-bar">
+        <label>ANTHROPIC API KEY</label>
+        <input type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
+        <span class="api-hint">session only — not stored</span>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <span class="icon">🔴</span>
+            <h2>error message</h2>
+            <span class="char-counter" id="charCounter">0 chars</span>
+        </div>
+        <textarea id="errorInput" class="mono" placeholder="Paste your error here. Browser console errors, Vite/build errors, stack traces, Node errors — anything from your console or terminal.
+
+Examples:
+  TypeError: Cannot read properties of undefined (reading 'map')
+  Uncaught ReferenceError: userData is not defined at main.js:14
+  [vite] Internal server error: Failed to resolve import &quot;react&quot;
+  CORS error: Access to fetch at '...' has been blocked by CORS policy
+  SyntaxError: Unexpected token '&lt;' — common Vite config issue"></textarea>
+    </div>
+
+    <div class="panel">
+        <div class="panel-header">
+            <span class="icon">📋</span>
+            <h2>context</h2>
+            <span class="optional-badge">optional — improves analysis</span>
+        </div>
+        <textarea id="contextInput" placeholder="What were you doing when this happened? What framework or tools are you using? What did you expect to happen? Any relevant code?
+
+Even a rough description helps narrow down the root cause. Example: 'I'm using React and Vite. The error shows up when I click Submit on my form. I was trying to loop through a list of users I fetched from an API.'"></textarea>
+    </div>
+
+    <div class="model-bar">
+        <label>MODEL</label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-haiku-4-5-20251001" checked>
+            <span class="model-name">Haiku 4.5</span>
+            <span class="model-price" id="priceHaiku">~0.22¢</span>
+            <span class="model-rec">recommended</span>
+        </label>
+        <label class="model-option">
+            <input type="radio" name="model" value="claude-sonnet-4-6">
+            <span class="model-name">Sonnet 4.6</span>
+            <span class="model-price" id="priceSonnet">~0.65¢</span>
+        </label>
+        <span class="model-auto" id="modelAuto">auto-switched — large input</span>
+    </div>
+
+    <div class="error-banner" id="errorBanner"></div>
+
+    <div class="actions">
+        <button id="analyzeBtn" onclick="analyzeError()">Interpret Error</button>
+        <button class="btn-secondary" onclick="clearAll()">Clear</button>
+        <span class="status" id="statusText"></span>
+    </div>
+
+    <div class="results" id="results">
+        <div class="results-header">
+            <h2>// interpretation</h2>
+        </div>
+        <div class="results-body" id="resultsBody"></div>
+    </div>
+</main>
+
+<footer>
+    error log interpreter · powered by Claude · no data stored
+</footer>
+
+<script>
+    const HAIKU_LIMIT  = 6000;
+    const SONNET_LIMIT = 12000;
+
+    const MODEL_PRICING = {
+        'claude-haiku-4-5-20251001': { input: 0.80, output: 4.00 },
+        'claude-sonnet-4-6':         { input: 3.00, output: 15.00 }
+    };
+
+    const SECTION_MAP = {
+        'What This Means':      'what-it-means',
+        'The Real Problem':     'real-problem',
+        'Where To Look':        'where-to-look',
+        'What To Try':          'what-to-try',
+        'Error Handling Coach': 'coaching'
+    };
+
+    const SYSTEM_PROMPT = `You are a senior developer and patient coding coach. You help beginners and intermediate developers understand error messages and build better debugging instincts.
+
+When given an error — browser console error, Vite/build error, stack trace, or any code error — respond with EXACTLY these five sections using these markdown headers:
+
+## What This Means
+Explain this specific error in plain English. Write for someone who is still learning to code. If the error has a type name (TypeError, ReferenceError, SyntaxError, etc.), first explain in one sentence what that CATEGORY of error means in general — then explain what THIS specific error is saying. Maximum 3–4 sentences. No jargon without a plain explanation alongside it.
+
+## The Real Problem
+This is the most critical section. The place where an error appears is NOT always where the bug lives. Errors surface where JavaScript (or the build tool) ran out of options — often inside a library, framework's render cycle, or a generic error handler — far from where the actual mistake was made.
+
+Analyse: where did this error SURFACE vs where did it likely ORIGINATE? Give 2–3 candidate root causes, ranked by likelihood. Be specific and concrete — name the pattern or the layer. Example: "This error fired inside React's renderer, but the actual cause is almost certainly in the code that supplies data to this component — something passed undefined where an array was expected." If relevant, explain WHY errors sometimes appear far from their origin.
+
+## Where To Look
+List 3–5 specific places to investigate, as bullet points. Be concrete — name the type of file, the kind of code pattern, what to look for there. Tell the developer WHERE to look and WHAT to look for, not just "check your code."
+
+## What To Try
+Give 4–6 concrete debugging steps, numbered in order from quickest to most involved. Start with the simplest possible check (add a console.log, look at a specific tab in the browser, check if a value exists before using it). Work toward more thorough investigation. Every step must be specific and immediately actionable.
+
+## Error Handling Coach
+Build good habits here. Address three things:
+1. Where should error handling have been added to catch this problem earlier or show a clearer message? Be specific about the layer — name it (e.g. "in the async function that fetches data, before it passes the result along", "in the component that receives this prop, before it tries to use it").
+2. Why does error handling at THAT layer matter — what does it prevent or surface that a later layer wouldn't?
+3. One broader principle this error illustrates that the developer can apply to future code.
+
+Write as an encouraging coach. Frame mistakes as the normal path to learning. End with something concrete the developer now understands that they didn't before.
+
+Be specific to the actual error provided. Do not give generic advice that could apply to any error.`;
+
+    let autoSwitched = false;
+
+    function selectedModel() {
+        return document.querySelector('input[name="model"]:checked').value;
+    }
+
+    function totalLength() {
+        return document.getElementById('errorInput').value.length +
+               document.getElementById('contextInput').value.length;
+    }
+
+    function estimateCost(modelId, len) {
+        const inputTokens  = 500 + Math.ceil(len / 4);
+        const outputTokens = 600;
+        const m = MODEL_PRICING[modelId];
+        const cents = ((inputTokens * m.input + outputTokens * m.output) / 1_000_000) * 100;
+        return `~${cents.toFixed(2)}¢`;
+    }
+
+    function updateUI() {
+        const len       = totalLength();
+        const haiku     = document.querySelector('input[value="claude-haiku-4-5-20251001"]');
+        const sonnet    = document.querySelector('input[value="claude-sonnet-4-6"]');
+        const autoNote  = document.getElementById('modelAuto');
+
+        if (len > HAIKU_LIMIT && haiku.checked) {
+            sonnet.checked = true;
+            autoSwitched   = true;
+            autoNote.style.display = 'inline';
+        } else if (len <= HAIKU_LIMIT && autoSwitched) {
+            haiku.checked  = false;
+            sonnet.checked = false;
+            haiku.checked  = true;
+            autoSwitched   = false;
+            autoNote.style.display = 'none';
+        }
+
+        const limit   = sonnet.checked ? SONNET_LIMIT : HAIKU_LIMIT;
+        const counter = document.getElementById('charCounter');
+        counter.textContent = `${len.toLocaleString()} chars`;
+        counter.className   = 'char-counter' +
+            (len > limit ? ' over' : len > Math.floor(limit * 0.7) ? ' warn' : '');
+
+        document.getElementById('priceHaiku').textContent  = estimateCost('claude-haiku-4-5-20251001', len);
+        document.getElementById('priceSonnet').textContent = estimateCost('claude-sonnet-4-6', len);
+    }
+
+    document.getElementById('errorInput').addEventListener('input', updateUI);
+    document.getElementById('contextInput').addEventListener('input', updateUI);
+    document.querySelectorAll('input[name="model"]').forEach(r => {
+        r.addEventListener('change', () => { autoSwitched = false; document.getElementById('modelAuto').style.display = 'none'; updateUI(); });
+    });
+
+    async function analyzeError() {
+        const apiKey      = document.getElementById('apiKey').value.trim().replace(/[^\x20-\x7E]/g, '');
+        const errorInput  = document.getElementById('errorInput').value.trim();
+        const contextInput = document.getElementById('contextInput').value.trim();
+        const errorBanner = document.getElementById('errorBanner');
+        const statusText  = document.getElementById('statusText');
+        const analyzeBtn  = document.getElementById('analyzeBtn');
+        const results     = document.getElementById('results');
+        const resultsBody = document.getElementById('resultsBody');
+
+        errorBanner.style.display = 'none';
+
+        if (!apiKey) return showError('Enter your Anthropic API key above.');
+        if (!apiKey.startsWith('sk-ant-')) return showError('API key format looks wrong — Anthropic keys start with sk-ant-. Check you\'ve pasted the full key.');
+        if (!errorInput) return showError('Paste an error message to interpret.');
+
+        const model = selectedModel();
+        const limit = model === 'claude-sonnet-4-6' ? SONNET_LIMIT : HAIKU_LIMIT;
+
+        let userMessage = `ERROR:\n${errorInput}`;
+        if (contextInput) userMessage += `\n\nCONTEXT:\n${contextInput}`;
+        if (userMessage.length > limit) userMessage = userMessage.slice(0, limit - 60) + '\n\n[Input truncated]';
+
+        analyzeBtn.disabled = true;
+        statusText.innerHTML = '<span class="spinner"></span> interpreting...';
+        results.classList.remove('visible');
+
+        try {
+            const response = await fetch('https://anthropic-proxy.work-specious.workers.dev', {
+                method: 'POST',
+                headers: {
+                    'x-api-key': apiKey,
+                    'anthropic-version': '2023-06-01',
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model,
+                    max_tokens: 1400,
+                    system: SYSTEM_PROMPT,
+                    messages: [{ role: 'user', content: userMessage }]
+                })
+            });
+
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                const msg = errData.error?.message || '';
+                if (response.status === 401) throw new Error('Authentication failed (401) — your API key is invalid or expired. Check it in your Anthropic console.');
+                if (response.status === 403) throw new Error('Access forbidden (403) — your API key may not have permission for this model.');
+                if (response.status === 429) throw new Error('Rate limited (429) — you\'ve hit your usage limit. Wait a moment and try again.');
+                if (response.status === 400) throw new Error(`Bad request (400) — ${msg || 'check your input and API key'}`);
+                if (response.status >= 500) throw new Error(`Anthropic server error (${response.status}) — the service may be temporarily unavailable. Try again in a moment.`);
+                throw new Error(msg || `API error ${response.status}`);
+            }
+
+            const data = await response.json();
+            const text = data.content[0].text;
+
+            resultsBody.innerHTML = renderOutput(text);
+            results.classList.add('visible');
+            statusText.textContent = 'done';
+
+        } catch (err) {
+            if (err instanceof TypeError) {
+                showError('Network error — the request failed before reaching the API. A browser extension, VPN, or firewall may be blocking it. Open your browser console (F12 → Console) for the specific error.');
+            } else {
+                showError(err.message);
+            }
+            statusText.textContent = '';
+        } finally {
+            analyzeBtn.disabled = false;
+        }
+    }
+
+    function renderOutput(text) {
+        const parts = text.split(/^## /m).filter(Boolean);
+        if (parts.length < 2) return `<div class="raw-output">${escapeHtml(text)}</div>`;
+
+        return parts.map(part => {
+            const lines    = part.split('\n');
+            const title    = lines[0].trim();
+            const body     = lines.slice(1).join('\n').trim();
+            const cssClass = SECTION_MAP[title] || '';
+
+            let extra = '';
+            if (cssClass === 'real-problem') {
+                extra = `<div class="real-problem-callout">⚠ Where an error appears is often not where the bug lives. The analysis below looks at where the problem likely originated.</div>`;
+            }
+
+            return `<div class="result-section ${cssClass}">
+                <h3>${escapeHtml(title)}</h3>
+                ${extra}${renderBody(body)}
+            </div>`;
+        }).join('');
+    }
+
+    function renderBody(body) {
+        const lines = body.split('\n');
+        let html    = '';
+        let inList  = false;
+        let listTag = '';
+
+        for (const rawLine of lines) {
+            const line = rawLine.trimEnd();
+            if (!line.trim()) {
+                if (inList) { html += `</${listTag}>`; inList = false; }
+                continue;
+            }
+            const isBullet   = /^[-*]\s/.test(line.trim());
+            const isNumbered = /^\d+\.\s/.test(line.trim());
+
+            if (isBullet) {
+                if (!inList || listTag !== 'ul') { if (inList) html += `</${listTag}>`; html += '<ul>'; inList = true; listTag = 'ul'; }
+                html += `<li>${formatInline(line.trim().replace(/^[-*]\s/, ''))}</li>`;
+            } else if (isNumbered) {
+                if (!inList || listTag !== 'ol') { if (inList) html += `</${listTag}>`; html += '<ol>'; inList = true; listTag = 'ol'; }
+                html += `<li>${formatInline(line.trim().replace(/^\d+\.\s/, ''))}</li>`;
+            } else {
+                if (inList) { html += `</${listTag}>`; inList = false; }
+                html += `<p>${formatInline(line.trim())}</p>`;
+            }
+        }
+        if (inList) html += `</${listTag}>`;
+        return html;
+    }
+
+    function formatInline(text) {
+        return escapeHtml(text)
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function showError(msg) {
+        const banner = document.getElementById('errorBanner');
+        banner.textContent = msg;
+        banner.style.display = 'block';
+    }
+
+    function clearAll() {
+        document.getElementById('errorInput').value   = '';
+        document.getElementById('contextInput').value = '';
+        document.getElementById('results').classList.remove('visible');
+        document.getElementById('errorBanner').style.display = 'none';
+        document.getElementById('statusText').textContent    = '';
+        updateUI();
+    }
+</script>
+
+</body>
+</html>
