@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Adaptation Showcase — Spec Coda-Bishop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .doc-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* Nav */
+        .back-link {
+            color: #b392f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 40px;
+        }
+        .back-link:hover { color: #d2b3ff; }
+
+        /* Document header */
+        .doc-header {
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+
+        .doc-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #b392f0;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .doc-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #e6edf3;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .doc-subtitle {
+            font-size: 0.92rem;
+            color: #8b949e;
+            margin-bottom: 14px;
+        }
+
+        .doc-intro {
+            font-size: 0.88rem;
+            color: #8b949e;
+            line-height: 1.65;
+            margin-top: 14px;
+        }
+
+        .doc-byline {
+            font-size: 0.82rem;
+            color: #8b949e;
+            margin-top: 12px;
+        }
+        .doc-byline a { color: #b392f0; text-decoration: none; }
+        .doc-byline a:hover { color: #d2b3ff; }
+
+        /* Framing note */
+        .framing-note {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+
+        .framing-note .note-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #b392f0;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .framing-note p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .framing-note p:last-child { margin-bottom: 0; }
+
+        /* Capabilities grid */
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 48px;
+        }
+
+        .capability-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-top: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .cap-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #b392f0;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cap-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .cap-body {
+            font-size: 0.8rem;
+            color: #8b949e;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 52px;
+        }
+
+        .toc-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        /* Sections */
+        .doc-section { margin-bottom: 60px; }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .section-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #b392f0;
+            font-family: 'Consolas', monospace;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+        }
+
+        .section-tagline {
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        /* Context block */
+        .context-block {
+            background: #0f1318;
+            border-left: 3px solid #30363d;
+            padding: 14px 18px;
+            margin-bottom: 28px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .context-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .context-block p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Subsection headers */
+        .subsection { margin-bottom: 36px; }
+
+        .subsection-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #b392f0;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection-title::before {
+            content: '▸';
+            font-size: 0.65rem;
+        }
+
+        /* Content headings */
+        .content-heading {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin: 22px 0 10px;
+        }
+
+        /* Body text */
+        .doc-body p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+
+        /* Tables */
+        .doc-table-wrap {
+            overflow-x: auto;
+            margin: 14px 0 24px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.83rem;
+        }
+
+        .doc-table th {
+            background: #161b22;
+            color: #e6edf3;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+            white-space: nowrap;
+        }
+
+        .doc-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        .doc-table tr:last-child td { border-bottom: none; }
+        .doc-table tr:nth-child(even) td { background: #0f1318; }
+
+        .doc-table .cell-mono {
+            font-family: 'Consolas', monospace;
+            color: #79c0ff;
+            font-size: 0.82rem;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 14px 0 24px;
+        }
+
+        .callout-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .callout p {
+            font-size: 0.86rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .callout.note {
+            background: #161b22;
+            border-left: 4px solid #388bfd;
+        }
+        .callout.note .callout-label { color: #388bfd; }
+        .callout.note p { color: #b0c4f0; }
+
+        .callout.heads-up {
+            background: #1f1500;
+            border-left: 4px solid #d29922;
+        }
+        .callout.heads-up .callout-label { color: #d29922; }
+        .callout.heads-up p { color: #e3b341; }
+
+        .callout.reflection {
+            background: #0d1020;
+            border-left: 4px solid #b392f0;
+        }
+        .callout.reflection .callout-label { color: #b392f0; }
+        .callout.reflection p { color: #c9d1d9; font-style: italic; }
+
+        /* Triage steps */
+        .triage-steps {
+            list-style: decimal;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .triage-steps li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+
+        /* Nested callout within a list item */
+        .triage-steps li .callout {
+            margin-top: 12px;
+            margin-bottom: 0;
+        }
+
+        /* Bullet list */
+        .doc-list {
+            list-style: disc;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .doc-list li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        /* Divider between subsections */
+        .subsection-divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 32px 0;
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #30363d;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #8b949e;
+        }
+
+        .doc-footer a { color: #b392f0; text-decoration: none; }
+        .doc-footer a:hover { color: #d2b3ff; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .capabilities { grid-template-columns: 1fr; }
+            .doc-title { font-size: 1.35rem; }
+            .section-num { font-size: 1.2rem; }
+            .doc-table { font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-container">
+
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <div class="doc-header">
+        <span class="doc-label">Technical Writing · Voice Adaptation · Portfolio Sample</span>
+        <h1 class="doc-title">Voice Adaptation Showcase</h1>
+        <p class="doc-subtitle">Specious Coda-Bishop · Technical Writing Portfolio</p>
+        <p class="doc-intro">The same content — a short how-to guide for setting up two-factor authentication on a fictional app called Forma — written three times, each version calibrated to a different company's documented voice principles: Apple, Mailchimp, and PostHog.</p>
+        <p class="doc-byline">Spec Coda-Bishop &nbsp;·&nbsp; <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+    <div class="framing-note">
+        <span class="note-label">About This Document</span>
+        <p>Writing in a company's voice is a research discipline, not intuition. It requires reading the source guide, identifying the principles that apply to the content type, and making deliberate choices at the sentence level. A hiring manager should be able to read each section, look up the source guide, and verify that the writing genuinely reflects the documented principles.</p>
+        <p>Two-factor authentication was chosen as the subject because it is universally understood, has clear steps, involves a security-critical moment that tests tone judgment, and is relevant to developer tooling contexts — making it a useful stress test for voice adaptation across different registers.</p>
+        <p>Spec's natural writing register is Apple-influenced: second person, active voice, imperative steps, precision over warmth. Section 01 represents native range. Sections 02 and 03 show deliberate departure from it.</p>
+    </div>
+
+    <div class="capabilities">
+        <div class="capability-card">
+            <span class="cap-label">Section 01</span>
+            <span class="cap-title">Apple</span>
+            <p class="cap-body">Precise, user-empathetic, every state accounted for, calm and clear, never condescending. The closest register to native.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Section 02</span>
+            <span class="cap-title">Mailchimp</span>
+            <p class="cap-body">Warm, human, dry humour where appropriate, plainspoken, genuine. Clarity over entertainment, always.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Section 03</span>
+            <span class="cap-title">PostHog</span>
+            <p class="cap-body">Direct, developer-first, opinionated, no filler. Assumes technical competence. Gets to the point fast.</p>
+        </div>
+    </div>
+
+    <div class="toc">
+        <span class="toc-label">Sources</span>
+        <div class="doc-table-wrap" style="margin:0;border:none;">
+            <table class="doc-table">
+                <thead>
+                    <tr><th>#</th><th>Company</th><th>Style Guide</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cell-mono">01</td>
+                        <td>Apple</td>
+                        <td><a href="https://support.apple.com/guide/applestyleguide/welcome/web" style="color:#b392f0;text-decoration:none;">support.apple.com/guide/applestyleguide/welcome/web</a></td>
+                    </tr>
+                    <tr>
+                        <td class="cell-mono">02</td>
+                        <td>Mailchimp</td>
+                        <td><a href="https://styleguide.mailchimp.com/voice-and-tone/" style="color:#b392f0;text-decoration:none;">styleguide.mailchimp.com/voice-and-tone/</a></td>
+                    </tr>
+                    <tr>
+                        <td class="cell-mono">03</td>
+                        <td>PostHog</td>
+                        <td><a href="https://posthog.com/handbook/content-and-docs/writing-for-posthog" style="color:#b392f0;text-decoration:none;">posthog.com/handbook/content-and-docs/writing-for-posthog</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 01 — APPLE
+    ===================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <div>
+                <span class="section-title">Apple</span>
+                <span class="section-tagline">Precise, user-empathetic, every state accounted for, calm and clear</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+
+            <div class="context-block">
+                <span class="context-label">Source</span>
+                <p><a href="https://support.apple.com/guide/applestyleguide/welcome/web" style="color:#b392f0;text-decoration:none;">support.apple.com/guide/applestyleguide/welcome/web</a></p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Key Principles Applied</div>
+                <ul class="doc-list">
+                    <li>Imperative mood for all steps — instructions begin with the action, not the context</li>
+                    <li>Second person ("you", "your") throughout; no passive constructions</li>
+                    <li>Every UI element named exactly as it appears onscreen, with its position stated when helpful</li>
+                    <li>Security warnings delivered as plain information, not alarm — calm, proportionate, actionable</li>
+                </ul>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Set up two-factor authentication in Forma</div>
+
+                <p>Two-factor authentication adds a second layer of security to your Forma account. After you set it up, signing in requires both your password and a verification code from your phone.</p>
+
+                <p class="content-heading">Before you begin</p>
+                <p>Make sure you have your phone nearby. You'll need it to complete setup and to confirm that everything is working.</p>
+
+                <p class="content-heading">To set up two-factor authentication:</p>
+                <ol class="triage-steps">
+                    <li>Open Forma and sign in to your account.</li>
+                    <li>Click your profile picture in the top-right corner, then click <strong>Account Settings</strong>.</li>
+                    <li>Click <strong>Security</strong>.</li>
+                    <li>Under Two-Factor Authentication, click <strong>Set Up</strong>.</li>
+                    <li>Choose how you want to receive verification codes:
+                        <ul class="doc-list" style="margin-top:8px;margin-bottom:0;">
+                            <li><strong>Authenticator app</strong> — An app on your phone generates a six-digit code each time you sign in. This method works without a cellular connection.</li>
+                            <li><strong>Text message</strong> — Forma sends a code to your mobile number each time you sign in.</li>
+                        </ul>
+                    </li>
+                    <li>Follow the onscreen instructions for the method you chose:
+                        <ul class="doc-list" style="margin-top:8px;margin-bottom:0;">
+                            <li><strong>Authenticator app:</strong> Open your authenticator app and scan the QR code displayed in Forma.</li>
+                            <li><strong>Text message:</strong> Enter your mobile number, then click <strong>Send Code</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>Enter the six-digit verification code in the field provided, then click <strong>Verify</strong>.</li>
+                    <li>Forma displays a set of recovery codes.
+                        <div class="callout heads-up">
+                            <span class="callout-label">Important</span>
+                            <p>Store your recovery codes in a safe place before you click <strong>Done</strong>. If you lose access to your phone, these codes are the only way to regain access to your account. Each code can be used only once.</p>
+                        </div>
+                    </li>
+                    <li>Click <strong>Done</strong>.</li>
+                </ol>
+
+                <p>Two-factor authentication is now active on your account. The next time you sign in, Forma will ask for your password and a verification code from your phone.</p>
+
+                <div class="callout note">
+                    <span class="callout-label">If you don't receive a code</span>
+                    <p>Check that your phone has a signal if you're using text messages, or that your authenticator app is showing the correct time. If the problem persists, click <strong>Resend Code</strong>, or contact Forma Support.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Reflection</div>
+                <div class="callout reflection">
+                    <span class="callout-label">Writing Notes</span>
+                    <p>Apple documentation accounts for failure states without dramatising them. The "If you don't receive a code" note isn't a warning block — it's the next piece of information the reader might need, placed at the natural point where they'd need it. The hardest discipline was naming every UI element precisely ("click your profile picture in the top-right corner") rather than assuming the user will find things. Apple's voice trusts readers to succeed while quietly preparing them for the case where they don't — and it does that without a single sentence that reads as anxious.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 02 — MAILCHIMP
+    ===================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <div>
+                <span class="section-title">Mailchimp</span>
+                <span class="section-tagline">Warm, human, dry humour where appropriate, plainspoken, genuine</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+
+            <div class="context-block">
+                <span class="context-label">Source</span>
+                <p><a href="https://styleguide.mailchimp.com/voice-and-tone/" style="color:#b392f0;text-decoration:none;">styleguide.mailchimp.com/voice-and-tone/</a></p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Key Principles Applied</div>
+                <ul class="doc-list">
+                    <li>Plainspoken — no jargon, no hyperbole, sentences that say exactly what they mean</li>
+                    <li>Genuine — relatable framing that acknowledges the reader's situation without being preachy</li>
+                    <li>Dry humour applied once, where it fits naturally, not engineered (the backup codes step)</li>
+                    <li>Tone shifts at the security moment: straight-faced rather than light, because clarity matters more than entertainment</li>
+                </ul>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">How to set up two-factor authentication on Forma</div>
+
+                <p>Two-factor authentication means that even if someone gets hold of your password, they still can't get into your account without your phone. It takes about two minutes to turn on.</p>
+
+                <p><strong>What you'll need:</strong> your phone, and a few minutes.</p>
+
+                <p class="content-heading">Steps</p>
+                <ol class="triage-steps">
+                    <li>Sign in to Forma and open the account menu in the top-right corner.</li>
+                    <li>Go to <strong>Account Settings</strong>, then click <strong>Security</strong>.</li>
+                    <li>Under Two-Factor Authentication, click <strong>Set Up</strong>.</li>
+                    <li>Pick how you want to receive verification codes:
+                        <ul class="doc-list" style="margin-top:8px;margin-bottom:0;">
+                            <li><strong>Authenticator app</strong> — an app on your phone generates a code whenever you need one. Works offline.</li>
+                            <li><strong>Text message</strong> — Forma sends a code to your phone number each time you sign in.</li>
+                        </ul>
+                    </li>
+                    <li>Complete setup for the method you chose:
+                        <ul class="doc-list" style="margin-top:8px;margin-bottom:0;">
+                            <li><strong>Authenticator app:</strong> open your app and scan the QR code Forma shows you.</li>
+                            <li><strong>Text message:</strong> enter your phone number and click <strong>Send Code</strong>.</li>
+                        </ul>
+                    </li>
+                    <li>Enter the six-digit code and click <strong>Verify</strong>.</li>
+                    <li>Forma will show you a list of recovery codes. These are how you get back into your account if you lose your phone or can't access your codes.<br><br>Write them down. Somewhere real — not a sticky note on your monitor. A password manager works well.</li>
+                    <li>Click <strong>Done</strong>.</li>
+                </ol>
+
+                <p>That's it. Two-factor authentication is now turned on. The next time you sign in, Forma will ask for your password and a code from your phone.</p>
+
+                <div class="callout note">
+                    <span class="callout-label">Didn't receive a code?</span>
+                    <p>Check your signal, or try the resend option. If neither works, Forma's support team can help.</p>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Reflection</div>
+                <div class="callout reflection">
+                    <span class="callout-label">Writing Notes</span>
+                    <p>The trickiest moment was the recovery code warning. Mailchimp's guide is explicit that tone should match the reader's emotional state — and at the "write your codes down" step, the reader is mildly impatient, not anxious. A full caution block would lose them. "Write them down. Somewhere real." carries the seriousness without slowing things down. The other deliberate choice was closing with "That's it" rather than a formal confirmation sentence — Mailchimp's warmth lives in exactly those small concessions to how people actually talk.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ====================================================
+         SECTION 03 — POSTHOG
+    ===================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <div>
+                <span class="section-title">PostHog</span>
+                <span class="section-tagline">Direct, developer-first, opinionated, no filler</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+
+            <div class="context-block">
+                <span class="context-label">Source</span>
+                <p><a href="https://posthog.com/handbook/content-and-docs/writing-for-posthog" style="color:#b392f0;text-decoration:none;">posthog.com/handbook/content-and-docs/writing-for-posthog</a></p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">Key Principles Applied</div>
+                <ul class="doc-list">
+                    <li>No preamble — open with the task path, not an explanation of what 2FA is</li>
+                    <li>Opinionated where it matters: a clear recommendation between the two methods, with a reason</li>
+                    <li>No hand-holding on concepts developers own (passwords, QR codes, authenticator apps)</li>
+                    <li>Flat, dense structure — no nested callouts, no reassurance padding</li>
+                </ul>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Enable 2FA on Forma</div>
+
+                <p>Go to <strong>Account Settings → Security → Two-Factor Authentication</strong> and click <strong>Set Up</strong>.</p>
+
+                <p class="content-heading">Choose your verification method</p>
+
+                <p><strong>Authenticator app</strong> (recommended) — open Duo, Authy, or Google Authenticator, scan the QR code Forma shows you, then enter the six-digit code. Works offline, more reliable than SMS.</p>
+
+                <p><strong>Text message</strong> — enter your phone number, receive a code, enter it. Fine if you don't want to install an app.</p>
+
+                <p><strong>Save your recovery codes.</strong> Forma generates a set of single-use codes after you verify. Store them in your password manager. If you lose your phone without these, account recovery goes through support and takes time.</p>
+
+                <p>Click <strong>Done</strong>. 2FA is now active on the account. You'll see a code prompt on every subsequent login.</p>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Reflection</div>
+                <div class="callout reflection">
+                    <span class="callout-label">Writing Notes</span>
+                    <p>PostHog's voice required the sharpest edit — the work is almost entirely subtraction. The first draft included an opening sentence explaining what 2FA is; it was cut because PostHog's audience already knows. The recommendation to prefer authenticator apps over SMS is deliberately opinionated: PostHog's handbook states explicitly that "it's better to be slightly wrong, or controversial, than say nothing." The → path notation replaces numbered navigation steps — a PostHog docs convention that signals developer familiarity without explaining itself.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="doc-footer">
+        <p><a href="index.html">← Back to Portfolio</a></p>
+        <p style="margin-top:10px;">Spec Coda-Bishop &nbsp;·&nbsp; <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+</div>
+</body>
+</html>
