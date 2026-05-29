@@ -18,6 +18,7 @@ Operations professional with over a decade across people operations, strategic H
 | [PregVoice](https://iamspecious.github.io/portfolio/pregvoice.html) | Accessibility project: independent pregnancy test result reading for blind and visually impaired users via on-device ML, audio, and haptics | Research & Planning |
 | [Cat API Documentation](./cat-api-documentation.md) | Professional API documentation sample built for a technical writing portfolio — covers authentication, parameters, response schema, error states, and pagination. | Complete |
 | [Voice & Tone Guide](./voice-and-tone-guide.md) | Internal contributor guide defining voice, tone principles, and writing standards for technical documentation teams. | Complete |
+| [Voice Adaptation Showcase](./voice-adaptation-showcase.md) | Three versions of the same technical content written in Apple, Mailchimp, and PostHog's documented voice — demonstrating range and style guide research. | Complete |
 
 ---
 
