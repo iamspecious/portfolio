@@ -1,8 +1,3 @@
----
-layout: default
-title: "Cat API Documentation — GET /v1/images/search"
----
-
 # GET /v1/images/search
 
 The Cat API — Images Search endpoint.
