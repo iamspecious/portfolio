@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice &amp; Tone Guide — Technical Documentation Teams · Spec Coda-Bishop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .doc-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* Nav */
+        .back-link {
+            color: #b392f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 40px;
+        }
+        .back-link:hover { color: #d2b3ff; }
+
+        /* Document header */
+        .doc-header {
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+        }
+
+        .doc-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #b392f0;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .doc-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #e6edf3;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .doc-subtitle {
+            font-size: 0.92rem;
+            color: #8b949e;
+            margin-bottom: 14px;
+        }
+
+        .doc-intro {
+            font-size: 0.88rem;
+            color: #8b949e;
+            line-height: 1.65;
+            margin-top: 14px;
+        }
+
+        .doc-byline {
+            font-size: 0.82rem;
+            color: #8b949e;
+            margin-top: 12px;
+        }
+        .doc-byline a { color: #b392f0; text-decoration: none; }
+        .doc-byline a:hover { color: #d2b3ff; }
+
+        /* Framing note */
+        .framing-note {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+
+        .framing-note .note-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #b392f0;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .framing-note p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .framing-note p:last-child { margin-bottom: 0; }
+
+        /* Capabilities grid */
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 52px;
+        }
+
+        .capability-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-top: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .cap-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #b392f0;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cap-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .cap-body {
+            font-size: 0.8rem;
+            color: #8b949e;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* Sections */
+        .doc-section { margin-bottom: 64px; }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 12px;
+            margin-bottom: 28px;
+        }
+
+        .section-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #b392f0;
+            font-family: 'Consolas', monospace;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+        }
+
+        .section-tagline {
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        /* Subsection */
+        .subsection { margin-bottom: 40px; }
+
+        .subsection-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #b392f0;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection-title::before {
+            content: '▸';
+            font-size: 0.65rem;
+        }
+
+        .subsection-divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 36px 0;
+        }
+
+        /* Body text */
+        .doc-body p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .doc-body p:last-child { margin-bottom: 0; }
+
+        /* Inline code */
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #161b22;
+            color: #79c0ff;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.88em;
+            border: 1px solid #21262d;
+        }
+
+        /* Voice characteristic header */
+        .voice-char {
+            margin-bottom: 36px;
+        }
+
+        .voice-char-title {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin-bottom: 8px;
+        }
+
+        .voice-char-title em {
+            color: #b392f0;
+            font-style: normal;
+        }
+
+        .voice-char p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        /* Before / After blocks */
+        .before-after {
+            margin: 4px 0 0;
+        }
+
+        .example-block {
+            padding: 12px 16px;
+            margin-bottom: 6px;
+            border-radius: 0 4px 4px 0;
+            font-size: 0.86rem;
+            line-height: 1.7;
+        }
+
+        .example-block .ex-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .example-block p {
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .example-block.before {
+            background: #1a0e0e;
+            border-left: 3px solid #f85149;
+        }
+        .example-block.before .ex-label { color: #f85149; }
+        .example-block.before p { color: #ffa198; }
+        .example-block.before code {
+            background: #2a1010;
+            color: #ff8080;
+            border-color: #4a1515;
+        }
+
+        .example-block.after {
+            background: #0d1a10;
+            border-left: 3px solid #3fb950;
+        }
+        .example-block.after .ex-label { color: #3fb950; }
+        .example-block.after p { color: #7ee787; }
+        .example-block.after code {
+            background: #0d2010;
+            color: #56d364;
+            border-color: #1a4020;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 14px 0 24px;
+        }
+
+        .callout-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .callout p {
+            font-size: 0.86rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .callout.note {
+            background: #161b22;
+            border-left: 4px solid #388bfd;
+        }
+        .callout.note .callout-label { color: #388bfd; }
+        .callout.note p { color: #b0c4f0; }
+
+        .callout.context {
+            background: #0f1318;
+            border-left: 4px solid #30363d;
+        }
+        .callout.context .callout-label { color: #8b949e; }
+        .callout.context p { color: #c9d1d9; }
+
+        .callout.warning {
+            background: #1f1500;
+            border-left: 4px solid #d29922;
+        }
+        .callout.warning .callout-label { color: #d29922; }
+        .callout.warning p { color: #e3b341; }
+
+        /* Principle block */
+        .principle {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+        }
+
+        .principle-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .principle-num {
+            font-family: 'Consolas', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #b392f0;
+            flex-shrink: 0;
+        }
+
+        .principle-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #e6edf3;
+        }
+
+        .principle-rule {
+            font-size: 0.84rem;
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            padding-left: 28px;
+        }
+
+        .principle .before-after {
+            padding-left: 28px;
+        }
+
+        /* Tables */
+        .doc-table-wrap {
+            overflow-x: auto;
+            margin: 14px 0 24px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.83rem;
+        }
+
+        .doc-table th {
+            background: #161b22;
+            color: #e6edf3;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+            white-space: nowrap;
+        }
+
+        .doc-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+            vertical-align: top;
+            line-height: 1.6;
+            font-size: 0.86rem;
+        }
+
+        .doc-table tr:last-child td { border-bottom: none; }
+        .doc-table tr:nth-child(even) td { background: #0f1318; }
+
+        /* Bullet list */
+        .doc-list {
+            list-style: disc;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .doc-list li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.65;
+            padding: 12px 16px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li:nth-child(even) { background: #0f1318; }
+
+        .check-icon {
+            color: #b392f0;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-family: 'Consolas', monospace;
+        }
+
+        /* Tone context block */
+        .tone-context {
+            margin-bottom: 36px;
+        }
+
+        .tone-context-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin-bottom: 6px;
+        }
+
+        .tone-context p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 10px;
+        }
+
+        .tone-example {
+            background: #0f1318;
+            border-left: 3px solid #30363d;
+            padding: 14px 18px;
+            border-radius: 0 4px 4px 0;
+            margin-top: 10px;
+        }
+
+        .tone-example-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .tone-example p {
+            font-size: 0.86rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .tone-example ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .tone-example ol li {
+            font-size: 0.86rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 4px;
+            padding-left: 4px;
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #30363d;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #8b949e;
+        }
+
+        .doc-footer a { color: #b392f0; text-decoration: none; }
+        .doc-footer a:hover { color: #d2b3ff; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .capabilities { grid-template-columns: 1fr; }
+            .doc-title { font-size: 1.35rem; }
+            .section-num { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-container">
+
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <div class="doc-header">
+        <span class="doc-label">Technical Writing · Documentation Standards · Portfolio Sample</span>
+        <h1 class="doc-title">Voice &amp; Tone Guide for Technical Documentation Teams</h1>
+        <p class="doc-subtitle">Specious Coda-Bishop · Technical Writing Portfolio</p>
+        <p class="doc-intro">Internal contributor guide defining voice, tone, and writing standards for technical documentation teams — written to give contributors a clear, actionable framework they can apply without needing to ask for guidance on every decision.</p>
+        <p class="doc-byline">Spec Coda-Bishop &nbsp;·&nbsp; <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+    <div class="framing-note">
+        <span class="note-label">About This Document</span>
+        <p>Documentation is used in moments of friction. A reader arrives because something isn't working, because they're learning something unfamiliar, or because they need to make a decision quickly. Inconsistent voice forces the reader to decode <em>how</em> something is written at the exact moment they're trying to understand <em>what</em> it says. That overhead is avoidable.</p>
+        <p>This guide is for contributors who write technical documentation but are not professional writers. It defines the voice characteristics that stay constant, how tone shifts by context, and the writing principles that keep documentation consistent and useful. Every example uses real documentation scenarios — no generic advice.</p>
+        <p>The guide itself follows the standards it defines: direct, precise, no setup sentences, active voice throughout.</p>
+    </div>
+
+    <div class="capabilities">
+        <div class="capability-card">
+            <span class="cap-label">Voice</span>
+            <span class="cap-title">Precise, not pedantic</span>
+            <p class="cap-body">Detail that serves the reader stays in. Detail that serves completeness for its own sake comes out.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Voice</span>
+            <span class="cap-title">Empathetic, not patronising</span>
+            <p class="cap-body">Acknowledge difficulty without condescension. Never "simply" or "just" for steps that aren't simple.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Voice</span>
+            <span class="cap-title">Direct, not terse</span>
+            <p class="cap-body">Get to the point without skipping the context that makes the point usable.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Voice</span>
+            <span class="cap-title">Confident, not absolute</span>
+            <p class="cap-body">State things clearly. Reserve hedges for genuinely uncertain outcomes — name specific exceptions rather than vague-hedging.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Voice</span>
+            <span class="cap-title">Consistent, not rigid</span>
+            <p class="cap-body">Same term for the same thing, always. Consistency is about terminology — not sentence rhythm.</p>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SECTION 01 — VOICE VS TONE
+    ========================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <div>
+                <span class="section-title">Voice vs Tone</span>
+                <span class="section-tagline">What stays constant. What changes.</span>
+            </div>
+        </div>
+
+        <div class="doc-body">
+            <p><strong style="color:#e6edf3;">Voice</strong> is consistent. It's the underlying character of the documentation — who we are as a team. Voice doesn't change based on what you're writing.</p>
+            <p><strong style="color:#e6edf3;">Tone</strong> is contextual. It's how we modulate that character depending on what the reader is trying to do and what they're likely feeling while they're doing it.</p>
+        </div>
+
+        <div class="callout note" style="margin-top:20px;">
+            <span class="callout-label">Technical Documentation Example</span>
+            <p>The same event — a breaking API change — requires different tone depending on where it appears:</p>
+        </div>
+
+        <div class="doc-table-wrap">
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th>Where it appears</th>
+                        <th>Tone</th>
+                        <th>Why</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Migration guide</strong></td>
+                        <td>Methodical, reassuring</td>
+                        <td>Reader is doing work they didn't plan. Acknowledge the effort, walk through it step by step.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>API reference entry</strong></td>
+                        <td>Flat, neutral</td>
+                        <td>Reader is looking up a fact. State the new behaviour, the old behaviour, the version it changed in. No warmth needed.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Release note</strong></td>
+                        <td>Brief, factual</td>
+                        <td>Reader is scanning for impact. One sentence stating what changed, a link to the migration guide for detail.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="doc-body">
+            <p>The voice — precise, direct, empathetic — stays constant across all three. The tone changes because the reader's situation is different in each.</p>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SECTION 02 — OUR VOICE
+    ========================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <div>
+                <span class="section-title">Our Voice</span>
+                <span class="section-tagline">Five characteristics. Each with a before and after.</span>
+            </div>
+        </div>
+
+        <!-- Precise -->
+        <div class="voice-char">
+            <p class="voice-char-title">We are <em>precise</em>, not pedantic.</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">We get the details right. We don't omit things that matter. But we don't list every qualifier and edge case inline when most readers don't need them. Detail that serves the reader stays in. Detail that serves completeness for its own sake comes out.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>The <code>limit</code> parameter, which accepts integer values within the inclusive range of 1 to 25, controls the total quantity of result objects returned within the JSON array response payload.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>The <code>limit</code> parameter controls how many results are returned. Accepts integers from 1 to 25.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- Empathetic -->
+        <div class="voice-char">
+            <p class="voice-char-title">We are <em>empathetic</em>, not patronising.</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">We acknowledge that some things are difficult, unfamiliar, or frustrating — without being condescending about it. We don't add "simply" or "just" to steps that aren't simple. We don't praise readers for completing routine tasks.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>Simply navigate to the settings panel and just click the toggle to enable the feature. Easy!</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Go to <strong>Settings</strong> and enable the feature toggle.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- Direct -->
+        <div class="voice-char">
+            <p class="voice-char-title">We are <em>direct</em>, not terse.</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">We get to the point without skipping the context that makes the point usable. A three-word instruction that leaves the reader stranded is not better than a sentence that orients them.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>Call <code>/v1/refresh</code>. Requires token. Returns 200.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Call <code>/v1/refresh</code> with a valid access token to start a new session. Returns <code>200 OK</code> on success.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- Confident -->
+        <div class="voice-char">
+            <p class="voice-char-title">We are <em>confident</em>, not absolute.</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">We state things clearly and without excessive hedging. We don't qualify every sentence with "should", "might", or "in most cases" when the behaviour is deterministic. When there are genuine exceptions, we name them specifically instead of hedging vaguely.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>This should work in most cases, though results may vary depending on your environment.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>This works for standard PostgreSQL setups. If you're using a managed database service, check your provider's documentation for the correct connection string format.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- Consistent -->
+        <div class="voice-char">
+            <p class="voice-char-title">We are <em>consistent</em>, not rigid.</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">We use the same term for the same thing every time — across a page, a doc set, a product. We don't vary terminology for stylistic variety. But consistency applies to terminology and structure, not sentence rhythm. Two sentences don't need to be built the same way to feel consistent.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>Click the <strong>Run</strong> button to execute the build. Hit <strong>Deploy</strong> to push your changes. Press the <strong>Rollback</strong> control to revert.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Click <strong>Run</strong> to start the build. Click <strong>Deploy</strong> to push your changes. Click <strong>Rollback</strong> to revert.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SECTION 03 — TONE BY CONTEXT
+    ========================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <div>
+                <span class="section-title">Tone by Context</span>
+                <span class="section-tagline">How the same voice sounds in different situations.</span>
+            </div>
+        </div>
+
+        <!-- Instructional -->
+        <div class="tone-context">
+            <p class="tone-context-title">Instructional content</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;">Task-focused, imperative, present tense. The reader is trying to do something. Walk them through it without editorialising. Each step is one action. Confirm what success looks like at the end.</p>
+            <div class="tone-example">
+                <span class="tone-example-label">Example</span>
+                <ol>
+                    <li>Open the project in your IDE.</li>
+                    <li>Navigate to <strong>File &gt; Settings &gt; Plugins</strong>.</li>
+                    <li>Search for the plugin by name and click <strong>Install</strong>.</li>
+                    <li>Restart the IDE when prompted. The plugin appears in the left sidebar after restart.</li>
+                </ol>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- Error messages -->
+        <div class="tone-context">
+            <p class="tone-context-title">Error messages</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;">State what happened, why it happened, and what to do next — in that order. Don't blame the user. Don't be vague. Don't pad with apologies.</p>
+            <div class="before-after" style="margin-top:12px;">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>An unexpected error has occurred. Please try again later.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p><code>401 Unauthorized</code> — The API key is missing or invalid. Check that the <code>x-api-key</code> header is included in your request and that the value matches your dashboard key exactly.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- API reference -->
+        <div class="tone-context">
+            <p class="tone-context-title">API reference documentation</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;">Flat and neutral. No personality, no softening, no encouragement. State the input, the behaviour, the output, and the constraints. Use tables for structured data. The reader is using this as a lookup, not reading end-to-end.</p>
+            <div class="tone-example">
+                <span class="tone-example-label">Example</span>
+                <p><strong style="color:#e6edf3;"><code>order</code></strong> <code>string</code> — Optional. Sort order for results. Accepted values: <code>RANDOM</code>, <code>ASC</code>, <code>DESC</code>. Default: <code>RANDOM</code>. When set to <code>RANDOM</code>, pagination is disabled and the <code>page</code> parameter is ignored.</p>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- Onboarding -->
+        <div class="tone-context">
+            <p class="tone-context-title">Onboarding content</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;">Warmer than reference documentation, but still direct. Anticipate the questions a new user is likely to have and answer them before they need to ask. Explain <em>why</em> as well as <em>how</em>. Acknowledge when something won't make full sense until later.</p>
+            <div class="tone-example">
+                <span class="tone-example-label">Example</span>
+                <p>Before you can make API requests, you'll need an API key. Keys identify your account and track usage against your monthly limit. You can generate one from the dashboard — it takes under a minute, and you'll only need to do it once.</p>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <!-- Warnings -->
+        <div class="tone-context">
+            <p class="tone-context-title">Warnings and cautions</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;">Lead with the consequence, not the action. The reader needs to understand what they're risking before they decide whether to proceed. Keep it short. Don't bury the warning in a long paragraph.</p>
+            <div class="before-after" style="margin-top:12px;">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>Note: Please be aware that running this command in a production environment without first taking a backup of your database could potentially result in permanent data loss.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p><strong>Warning:</strong> This command permanently deletes data. Back up your database before running it in a production environment.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SECTION 04 — WRITING PRINCIPLES
+    ========================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <div>
+                <span class="section-title">Writing Principles</span>
+                <span class="section-tagline">Eight actionable rules. Each with a name, a reason, and a before/after.</span>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">01</span>
+                <span class="principle-name">Lead with the action</span>
+            </div>
+            <p class="principle-rule">Put the verb at the start of instructions. Readers scan for what to do next — don't make them hunt for it inside a noun-heavy phrase.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>Selection of the correct environment variable is necessary before deployment.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Set the correct environment variable before deploying.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">02</span>
+                <span class="principle-name">Write for the user's current state</span>
+            </div>
+            <p class="principle-rule">Ask: what does this reader already know, and what are they trying to accomplish right now? Don't assume they've read everything that came before, but don't re-explain basics they must already have to be at this step.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>As mentioned in the introduction, authentication is required. Authenticated users can access all endpoints.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Authenticated requests unlock all endpoints. See <a href="#" style="color:#56d364;text-decoration:none;">Authentication</a> if you haven't set up a key yet.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">03</span>
+                <span class="principle-name">Prefer active voice</span>
+            </div>
+            <p class="principle-rule">Active sentences are shorter, clearer, and easier to act on. Passive voice hides who does what — and in technical documentation, that ambiguity costs the reader time.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>The configuration file is generated automatically when the project is initialised.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>The IDE generates a configuration file when you initialise the project.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">04</span>
+                <span class="principle-name">One idea per sentence</span>
+            </div>
+            <p class="principle-rule">If a sentence needs a semicolon or a second clause joined by "and", consider splitting it. Readers of technical documentation are often scanning under pressure — shorter sentences parse faster.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>The webhook fires on every push event, and you can configure it to filter by branch, though this requires setting up a filter rule in the payload settings, which is covered in the next section.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>The webhook fires on every push event. You can filter by branch using a payload filter rule — see Filtering webhooks.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">05</span>
+                <span class="principle-name">Use second person</span>
+            </div>
+            <p class="principle-rule">"You" keeps focus on the reader and what they need to do. Avoid "the user", "one", or "developers should" — these create distance and make instructions feel like they're describing someone else.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>Developers should ensure the dependency is installed before running the build script.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Install the dependency before running the build script.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">06</span>
+                <span class="principle-name">Cut the setup</span>
+            </div>
+            <p class="principle-rule">Don't explain what you're about to explain. Don't open with "In this section, we will cover...". Don't close with "As you can see...". Start the explanation. The reader is already here.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>In this section, we will walk through the process of configuring your environment. This is an important step that many new users find confusing.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Configure your environment before running the project for the first time.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">07</span>
+                <span class="principle-name">Name the behaviour, not the category</span>
+            </div>
+            <p class="principle-rule">Describe what a thing does in this specific context, not what kind of thing it is. Readers need to know what happens — not what label applies.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>The <code>retry</code> parameter is a configuration option that affects request behaviour.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>The <code>retry</code> parameter sets the number of times the client retries a failed request before returning an error.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="principle">
+            <div class="principle-header">
+                <span class="principle-num">08</span>
+                <span class="principle-name">End steps with an outcome</span>
+            </div>
+            <p class="principle-rule">When writing instructions, tell the reader what success looks like after each significant step. Don't leave them wondering whether they did it right.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Before</span>
+                    <p>Run <code>npm install</code>.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">After</span>
+                    <p>Run <code>npm install</code>. Once it completes, a <code>node_modules</code> directory appears in the project root.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SECTION 05 — COMMON MISTAKES
+    ========================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">05</span>
+            <div>
+                <span class="section-title">Common Mistakes</span>
+                <span class="section-tagline">Six patterns that break the voice. Real examples of what not to do and why.</span>
+            </div>
+        </div>
+
+        <div class="voice-char">
+            <p class="voice-char-title" style="color:#f85149;">"Simply" and "just"</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">These words don't add warmth — they minimise difficulty. When the step turns out not to be simple, they make the reader feel inadequate. Cut them entirely.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Don't write</span>
+                    <p>Simply restart the server to apply the changes.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">Write</span>
+                    <p>Restart the server to apply the changes.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="voice-char">
+            <p class="voice-char-title" style="color:#f85149;">Nominalised verbs</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">Turning verbs into nouns adds length without adding meaning. Common offenders: "make a selection" (select), "perform a restart" (restart), "provide configuration" (configure), "give consideration to" (consider).</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Don't write</span>
+                    <p>Make a selection from the available options and perform a confirmation of your choice.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">Write</span>
+                    <p>Select an option and confirm.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="voice-char">
+            <p class="voice-char-title" style="color:#f85149;">Hedging deterministic behaviour</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">When something always happens, say so. Reserve "should", "may", and "might" for genuinely uncertain outcomes — when the result depends on the user's environment or a condition you can't predict.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Don't write</span>
+                    <p>Setting this flag should cause the build to skip tests.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">Write</span>
+                    <p>Setting this flag skips the test suite.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="voice-char">
+            <p class="voice-char-title" style="color:#f85149;">Stacked noun phrases</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">A chain of nouns used as modifiers becomes ambiguous and slow to parse. Break the chain or restructure the phrase.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Don't write</span>
+                    <p>Check the authentication token validation error handling configuration.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">Write</span>
+                    <p>Check how error handling is configured for authentication token validation.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="voice-char">
+            <p class="voice-char-title" style="color:#f85149;">Passive voice hiding the actor</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">The passive is occasionally appropriate, but it becomes a problem when it obscures who is responsible for an action — especially in instructions, where the reader needs to know who does what.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Don't write</span>
+                    <p>The flag should be set before the build is run.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">Write</span>
+                    <p>Set the flag before running the build.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="subsection-divider">
+
+        <div class="voice-char">
+            <p class="voice-char-title" style="color:#f85149;">Undefined jargon</p>
+            <p style="font-size:0.88rem;color:#c9d1d9;line-height:1.75;margin-bottom:14px;">Terms obvious to you after months in the codebase may not be obvious to a reader encountering them for the first time. Define or link technical terms on their first use — even when it feels unnecessary.</p>
+            <div class="before-after">
+                <div class="example-block before">
+                    <span class="ex-label">Don't write</span>
+                    <p>Enable the EAP channel before installing the nightly build.</p>
+                </div>
+                <div class="example-block after">
+                    <span class="ex-label">Write</span>
+                    <p>Enable the Early Access Program (EAP) channel before installing the nightly build.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         SECTION 06 — CONTRIBUTOR CHECKLIST
+    ========================================================== -->
+    <div class="doc-section">
+        <div class="section-header">
+            <span class="section-num">06</span>
+            <div>
+                <span class="section-title">Contributor Checklist</span>
+                <span class="section-tagline">Use this before submitting documentation for review.</span>
+            </div>
+        </div>
+
+        <ul class="checklist">
+            <li><span class="check-icon">☐</span>Does every instruction step start with an imperative verb?</li>
+            <li><span class="check-icon">☐</span>Have you used "you" consistently instead of "the user" or "developers"?</li>
+            <li><span class="check-icon">☐</span>Have you used the same term for the same thing throughout the document?</li>
+            <li><span class="check-icon">☐</span>Is each sentence one idea? Check for sentences with multiple clauses joined by "and" or separated by semicolons.</li>
+            <li><span class="check-icon">☐</span>Have you removed setup sentences that don't add information? ("In this section, we will...")</li>
+            <li><span class="check-icon">☐</span>Does each warning lead with the consequence, not the action?</li>
+            <li><span class="check-icon">☐</span>Have you defined or linked technical terms on their first use?</li>
+            <li><span class="check-icon">☐</span>Does each significant instruction step end with what success looks like?</li>
+            <li><span class="check-icon">☐</span>Have you removed "simply", "just", "easy", and "obvious" from all instructions?</li>
+            <li><span class="check-icon">☐</span>Have you replaced passive constructions with active ones wherever the actor is relevant?</li>
+            <li><span class="check-icon">☐</span>Does the tone match the content type? (Reference: flat and neutral. Onboarding: warmer. Error messages: specific and actionable.)</li>
+            <li><span class="check-icon">☐</span>Have you read the document as someone encountering this feature for the first time?</li>
+        </ul>
+    </div>
+
+    <div class="doc-footer">
+        <p>Spec Coda-Bishop &nbsp;·&nbsp; <a href="index.html">Back to portfolio</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+</div>
+</body>
+</html>
