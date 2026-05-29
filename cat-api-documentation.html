@@ -302,6 +302,8 @@
             margin: 0;
         }
 
+        .callout p + p { margin-top: 8px; }
+
         .callout.key-point {
             background: #0d2818;
             border-left: 4px solid #3fb950;
@@ -427,20 +429,23 @@
         </div>
 
         <div class="doc-body">
-            <p>The <code>/v1/images/search</code> endpoint returns a list of cat images matching the specified filters. It is the primary way to retrieve image data from The Cat API — whether that's a single random image for a quick embed, a filtered set of images for a specific breed, or a paginated result set for a browsable gallery.</p>
-            <p>Unauthenticated requests return one random image with no filtering or pagination. An API key unlocks batch retrieval up to 25 results per request, breed and category filtering, and stable paginated result sets.</p>
+            <p>The Cat API is a free, publicly available REST API for cat images and breed data. It's a genuinely useful tool for prototyping, testing, or building anything that needs placeholder imagery — and it happens to be cats, which is rarely a problem.</p>
+            <p>This document covers one endpoint: <code>GET /v1/images/search</code>. It's the one you'll use most. Send a request, get cat images back. By default it returns one random image — no setup, no key, nothing to configure. Once you add an API key, you unlock filtering by breed or category, pagination, and batch retrieval up to 25 results per request.</p>
+
+            <p class="content-heading">Common use cases</p>
 
             <div class="doc-table-wrap">
                 <table class="doc-table">
                     <thead>
-                        <tr><th>Use case</th><th>Approach</th></tr>
+                        <tr><th>What you want to do</th><th>How to do it</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Display a random cat image</td><td>Call without an API key — returns one random image by default</td></tr>
-                        <tr><td>Retrieve images for a specific breed</td><td>Use <code>breed_ids</code> with a valid API key</td></tr>
-                        <tr><td>Build a browsable gallery</td><td>Use <code>order=ASC</code> with <code>page</code> and <code>limit</code> to paginate through a stable result set</td></tr>
-                        <tr><td>Filter by file type</td><td>Use <code>mime_types</code> to restrict to <code>jpg</code>, <code>png</code>, or <code>gif</code></td></tr>
-                        <tr><td>Embed a raw image directly</td><td>Set <code>format=src</code> — the API responds with the image file rather than a JSON body</td></tr>
+                        <tr><td>Show a random cat image on a page</td><td>Call the endpoint with no parameters — one random image, no key required</td></tr>
+                        <tr><td>Show only a specific breed</td><td>Use <code>breed_ids</code> with an API key</td></tr>
+                        <tr><td>Build a browsable gallery with pages</td><td>Use <code>order=ASC</code>, <code>limit</code>, and <code>page</code> to step through results in order</td></tr>
+                        <tr><td>Show breed facts alongside the photo</td><td>Use <code>has_breeds=1</code> — the response will include a full breed data object</td></tr>
+                        <tr><td>Only return still photos, no GIFs</td><td>Use <code>mime_types=jpg,png</code></td></tr>
+                        <tr><td>Embed an image directly in an <code>&lt;img&gt;</code> tag</td><td>Set <code>format=src</code> — the API returns the raw image file instead of JSON</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -457,38 +462,39 @@
         </div>
 
         <div class="doc-body">
-            <p>The API uses key-based authentication passed as a request header.</p>
+            <p>An API key is a unique string that identifies your account to the API. Think of it as a membership card — free to get, and it unlocks significantly more of the API than you can access without one.</p>
+            <p>You pass your API key in the request header as <code>x-api-key</code>. If you don't include it, the API still works — you just get one random image per call with no filtering. That's fine for a quick test. It's not enough to build anything real.</p>
 
+            <p class="content-heading">How to send the key</p>
             <div class="doc-table-wrap">
                 <table class="doc-table">
                     <thead>
-                        <tr><th>Header</th><th>Value</th></tr>
+                        <tr><th>Header name</th><th>Value</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>x-api-key</code></td><td>Your API key from the Cat API dashboard</td></tr>
+                        <tr><td><code>x-api-key</code></td><td>Your API key, copied from the <a href="https://thecatapi.com" style="color:#b392f0;">thecatapi.com</a> dashboard</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <p>Get a free API key at <a href="https://thecatapi.com" style="color:#b392f0;">thecatapi.com</a>. You can make unauthenticated requests, but they are significantly restricted.</p>
-
+            <p class="content-heading">What the key unlocks</p>
             <div class="doc-table-wrap">
                 <table class="doc-table">
                     <thead>
-                        <tr><th></th><th>Unauthenticated</th><th>Authenticated</th></tr>
+                        <tr><th></th><th>Without a key</th><th>With a key</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Max results per request</td><td>1</td><td>25</td></tr>
-                        <tr><td>Filter by breed or category</td><td>No</td><td>Yes</td></tr>
+                        <tr><td>Images per request</td><td>1</td><td>Up to 25</td></tr>
+                        <tr><td>Filter by breed or category</td><td>No — parameters are silently ignored</td><td>Yes</td></tr>
                         <tr><td>Pagination</td><td>No</td><td>Yes</td></tr>
-                        <tr><td>Monthly request limit</td><td>—</td><td>10,000 (free) / 100,000 (premium)</td></tr>
+                        <tr><td>Monthly request allowance</td><td>No limit, but no tracking either</td><td>10,000 (free) / 100,000 (premium)</td></tr>
                     </tbody>
                 </table>
             </div>
 
-            <div class="callout note">
-                <span class="callout-label">Note</span>
-                <p>The header name is lowercase: <code>x-api-key</code>. Using a different casing (e.g. <code>X-Api-Key</code>) may cause the key to be ignored in some environments, returning a 401.</p>
+            <div class="callout heads-up">
+                <span class="callout-label">Watch out — casing matters</span>
+                <p>The header name must be lowercase: <code>x-api-key</code>. Some HTTP clients normalise header casing automatically, but not all of them. If your key appears valid but you're getting a <code>401</code>, check that the header name isn't being sent as <code>X-Api-Key</code> or <code>X-API-Key</code>.</p>
             </div>
         </div>
     </div>
@@ -508,7 +514,13 @@
                 <span class="endpoint-url">https://api.thecatapi.com/v1/images/search</span>
             </div>
 
-            <p>All requests to this endpoint use the HTTP <code>GET</code> method. Parameters are passed as query strings. No request body is required or accepted.</p>
+            <p><strong>GET</strong> is an HTTP method that means "give me data." You're not creating anything, not updating anything — you're just asking for cat images and the API is handing them back. All the options you want (how many images, which breed, what format) are added to the URL as query parameters after a <code>?</code>, or passed as headers. There's no request body.</p>
+            <p>The URL above is the full path to the endpoint. Everything after the <code>?</code> in your request is a query parameter — covered in the next section.</p>
+
+            <div class="callout note">
+                <span class="callout-label">What's a query parameter?</span>
+                <p>A query parameter is a key-value pair appended to a URL to customise a request. The first one starts with <code>?</code>; any additional ones are separated by <code>&amp;</code>. For example: <code>?limit=10&amp;order=ASC&amp;breed_ids=beng</code> passes three parameters at once. Order doesn't matter.</p>
+            </div>
         </div>
     </div>
 
@@ -518,87 +530,146 @@
             <span class="section-num">04</span>
             <div>
                 <span class="section-title">Query Parameters</span>
-                <span class="section-tagline">All parameters are optional</span>
+                <span class="section-tagline">All parameters are optional — the endpoint works with none of them</span>
             </div>
         </div>
 
         <div class="doc-body">
-            <div class="doc-table-wrap">
-                <table class="doc-table">
-                    <thead>
-                        <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th><th>Example</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>limit</code></td>
-                            <td>integer</td>
-                            <td><code>1</code></td>
-                            <td>Number of results to return. Maximum <code>25</code>. Values above <code>1</code> require a valid API key.</td>
-                            <td><code>limit=10</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>page</code></td>
-                            <td>integer</td>
-                            <td><code>0</code></td>
-                            <td>Page offset for paginated results. Zero-indexed. Only applies when <code>order</code> is <code>ASC</code> or <code>DESC</code> — ignored when <code>order=RANDOM</code>.</td>
-                            <td><code>page=2</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>order</code></td>
-                            <td>string</td>
-                            <td><code>RANDOM</code></td>
-                            <td>Sort order for results. <code>RANDOM</code> disables pagination. Accepted values: <code>RANDOM</code>, <code>ASC</code>, <code>DESC</code>.</td>
-                            <td><code>order=ASC</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>breed_ids</code></td>
-                            <td>string</td>
-                            <td>—</td>
-                            <td>Comma-separated breed IDs to filter by. Returns only images associated with the specified breeds. See <code>GET /v1/breeds</code> for valid IDs.</td>
-                            <td><code>breed_ids=beng,abys</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>category_ids</code></td>
-                            <td>string</td>
-                            <td>—</td>
-                            <td>Comma-separated category IDs to filter by. See <code>GET /v1/categories</code> for valid IDs.</td>
-                            <td><code>category_ids=1,5</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>has_breeds</code></td>
-                            <td>integer</td>
-                            <td><code>0</code></td>
-                            <td>When set to <code>1</code>, returns only images that have breed data attached. Useful when you need breed information guaranteed in the response.</td>
-                            <td><code>has_breeds=1</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>mime_types</code></td>
-                            <td>string</td>
-                            <td>All types</td>
-                            <td>Comma-separated list of image types to include. Accepted values: <code>jpg</code>, <code>png</code>, <code>gif</code>.</td>
-                            <td><code>mime_types=jpg,png</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>size</code></td>
-                            <td>string</td>
-                            <td><code>med</code></td>
-                            <td>Image size variant to return. Accepted values: <code>thumb</code>, <code>small</code>, <code>med</code>, <code>full</code>.</td>
-                            <td><code>size=full</code></td>
-                        </tr>
-                        <tr>
-                            <td><code>format</code></td>
-                            <td>string</td>
-                            <td><code>json</code></td>
-                            <td>Response format. <code>json</code> returns a JSON array. <code>src</code> returns the raw image file directly — useful for embedding in an <code>&lt;img&gt;</code> tag.</td>
-                            <td><code>format=json</code></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <p>These are the knobs you can turn to shape what the API gives back. None of them are required. Leave them all out and you get one random cat image — totally valid. Add them to get more specific.</p>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">How many and in what order</div>
+
+                <p class="content-heading">limit</p>
+                <p>Controls how many images come back in a single response. The default is <code>1</code>. The maximum is <code>25</code>. If you want more than one image, you need an API key.</p>
+                <p><strong>When to use it:</strong> Any time you need more than a single cat — loading a grid, pre-fetching a batch, or building something that needs variety on the same page load.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Max</th><th>Requires key?</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>limit</code></td><td>integer</td><td><code>1</code></td><td><code>25</code></td><td>Only for values above 1</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="content-heading">order</p>
+                <p>Controls whether results come back in a stable, predictable sequence or in a random shuffle each time.</p>
+                <ul class="doc-list">
+                    <li><strong>RANDOM</strong> (default) — different images every call. Good for widgets, splash screens, anything where novelty is the point. Pagination doesn't work in this mode.</li>
+                    <li><strong>ASC / DESC</strong> — results come back in a consistent order based on when the images were added to the API. Use either of these when you want to page through a stable result set — e.g. a gallery where users can go forward and back without seeing repeats.</li>
+                </ul>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Accepted values</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>order</code></td><td>string</td><td><code>RANDOM</code></td><td><code>RANDOM</code>, <code>ASC</code>, <code>DESC</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="content-heading">page</p>
+                <p>When you're using <code>order=ASC</code> or <code>order=DESC</code>, you can step through the full result set in chunks using <code>page</code>. It's zero-indexed, so the first page is <code>page=0</code>, the second is <code>page=1</code>, and so on.</p>
+                <p><strong>When to use it:</strong> Pagination. If you're fetching 10 images at a time and want the next 10, increment the page number. See Section 09 for a worked example.</p>
+                <p><strong>Note:</strong> This parameter does nothing when <code>order=RANDOM</code>. The API ignores it silently.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Note</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>page</code></td><td>integer</td><td><code>0</code></td><td>Zero-indexed. Ignored when <code>order=RANDOM</code>.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Filtering by breed and category</div>
+
+                <p class="content-heading">breed_ids</p>
+                <p>Pass one or more breed IDs to get back images of only those breeds. IDs are short strings like <code>beng</code> for Bengal or <code>abys</code> for Abyssinian. Separate multiple IDs with a comma.</p>
+                <p><strong>When to use it:</strong> When your app is about a specific breed, or when a user has selected a breed from a list and you're fetching images to match. To get the full list of valid breed IDs, call <code>GET /v1/breeds</code>.</p>
+                <p><strong>Requires an API key.</strong> Without one, this parameter is silently ignored and you'll get a random image with no filtering applied.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Example</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>breed_ids</code></td><td>string</td><td>—</td><td><code>breed_ids=beng,abys</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="content-heading">category_ids</p>
+                <p>Similar to <code>breed_ids</code>, but for categories. Categories are broader groupings — things like "hats" or "boxes" — rather than breed-specific. Pass one or more category IDs as a comma-separated list. Call <code>GET /v1/categories</code> for the full list.</p>
+                <p><strong>Requires an API key.</strong></p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Example</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>category_ids</code></td><td>string</td><td>—</td><td><code>category_ids=1,5</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="content-heading">has_breeds</p>
+                <p>By default, the API returns whatever images it finds — not all of them have breed data attached. Set <code>has_breeds=1</code> to filter out any image that doesn't come with a <code>breeds</code> object in the response.</p>
+                <p><strong>When to use it:</strong> Whenever you want to display breed information alongside the image — name, description, temperament, origin. Without this filter, the <code>breeds</code> array may come back empty even when you're not filtering by a specific breed.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Accepted values</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>has_breeds</code></td><td>integer</td><td><code>0</code></td><td><code>0</code> (off) or <code>1</code> (on)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Controlling the image itself</div>
+
+                <p class="content-heading">mime_types</p>
+                <p>The Cat API serves JPGs, PNGs, and GIFs. By default you'll get a mix of all three. Pass one or more types to restrict what comes back.</p>
+                <p><strong>When to use it:</strong> If your UI can't handle GIFs, or you specifically want animated images, or you're compressing images downstream and need a consistent format.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Accepted values</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>mime_types</code></td><td>string</td><td>All types</td><td><code>jpg</code>, <code>png</code>, <code>gif</code> (comma-separated)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="content-heading">size</p>
+                <p>The API stores images in multiple size variants. This parameter tells it which one to give you. <code>med</code> is a good default for most display contexts. Use <code>thumb</code> for compact grids or lists, and <code>full</code> when you need the original resolution.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Options (smallest → largest)</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>size</code></td><td>string</td><td><code>med</code></td><td><code>thumb</code>, <code>small</code>, <code>med</code>, <code>full</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="content-heading">format</p>
+                <p>By default the API responds with JSON — a structured data object containing the image URL, dimensions, and any breed or category info. Setting <code>format=src</code> changes the response entirely: instead of JSON, you get back the raw image file itself.</p>
+                <p><strong>When to use it:</strong> When you want to point an <code>&lt;img&gt;</code> tag directly at the API endpoint without any JavaScript. The endpoint URL becomes the image source. All other parameters still apply, so you can still filter by breed, type, or size.</p>
+                <div class="doc-table-wrap">
+                    <table class="doc-table">
+                        <thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Accepted values</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>format</code></td><td>string</td><td><code>json</code></td><td><code>json</code>, <code>src</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="callout heads-up">
-                <span class="callout-label">Heads Up — breed_ids and category_ids require an API key</span>
-                <p>Filtering by <code>breed_ids</code> or <code>category_ids</code> requires a valid <code>x-api-key</code> header. These parameters are silently ignored on unauthenticated requests rather than returning an error.</p>
+                <span class="callout-label">Heads up — filtering silently fails without a key</span>
+                <p><code>breed_ids</code> and <code>category_ids</code> require a valid API key. Without one, these parameters are silently ignored — you won't get an error, just unfiltered results. If your filtering appears to have no effect, check that your <code>x-api-key</code> header is present and correct.</p>
             </div>
         </div>
     </div>
@@ -613,15 +684,40 @@
         </div>
 
         <div class="doc-body">
-            <p>Retrieve 5 Bengal cat images in ascending order, with breed data included, starting from the first page.</p>
+            <p>The examples below use <code>curl</code>, a command-line tool for making HTTP requests. It comes pre-installed on macOS and Linux, and is available on Windows via WSL or Git Bash. You can paste these directly into a terminal — just replace <code>YOUR_API_KEY</code> with your actual key.</p>
+
+            <p class="content-heading">Authenticated request — 5 Bengal images with breed data</p>
 
             <div class="code-block"><pre>curl -X GET <span class="string">"https://api.thecatapi.com/v1/images/search?limit=5&has_breeds=1&breed_ids=beng&order=ASC&page=0"</span> \
   -H <span class="string">"x-api-key: YOUR_API_KEY"</span></pre></div>
 
+            <p>Here's what each part is doing:</p>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead><tr><th>Part</th><th>What it does</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>curl -X GET</code></td><td>Makes an HTTP GET request — reading data, not sending any</td></tr>
+                        <tr><td><code>limit=5</code></td><td>Return 5 images instead of the default 1</td></tr>
+                        <tr><td><code>has_breeds=1</code></td><td>Only return images that have breed data attached</td></tr>
+                        <tr><td><code>breed_ids=beng</code></td><td>Filter for Bengal cats only (<code>beng</code> is Bengal's ID in the API)</td></tr>
+                        <tr><td><code>order=ASC</code></td><td>Return images in a consistent order so pagination works correctly</td></tr>
+                        <tr><td><code>page=0</code></td><td>Start from the first page of results (zero-indexed)</td></tr>
+                        <tr><td><code>-H "x-api-key: ..."</code></td><td>Sends the API key as a request header, which is required for filtering to work</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
             <p class="content-heading">Minimal unauthenticated request</p>
-            <p>Returns one random image with no breed data. No headers required.</p>
+            <p>No key, no parameters. Returns a single random cat image. Good for a quick check that the API is responding.</p>
 
             <div class="code-block"><pre>curl -X GET <span class="string">"https://api.thecatapi.com/v1/images/search"</span></pre></div>
+
+            <p class="content-heading">Using format=src to embed directly</p>
+            <p>This returns the raw image file, not JSON. The URL below can be used as the <code>src</code> attribute of an <code>&lt;img&gt;</code> tag.</p>
+
+            <div class="code-block"><pre><span class="comment">&lt;!-- A random still cat photo, embedded directly with no JavaScript --&gt;</span>
+&lt;img src=<span class="string">"https://api.thecatapi.com/v1/images/search?format=src&mime_types=jpg"</span>
+     alt=<span class="string">"A random cat"</span>&gt;</pre></div>
         </div>
     </div>
 
@@ -635,22 +731,24 @@
         </div>
 
         <div class="doc-body">
-            <p>The endpoint returns a JSON array. Each element is an image object.</p>
+            <p>When <code>format=json</code> (the default), the API responds with a JSON array — a list of image objects, one per result. Even if you asked for only one image, it comes back as an array with a single item.</p>
+            <p>Understanding what fields come back — and when — saves debugging time. The <code>breeds</code> array, for example, is always present in the response, but it's empty unless you've asked for images with breed data attached.</p>
 
             <div class="subsection">
                 <div class="subsection-title">Image Object</div>
+                <p>Every image in the response includes these fields.</p>
                 <div class="doc-table-wrap">
                     <table class="doc-table">
                         <thead>
-                            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                            <tr><th>Field</th><th>Type</th><th>What it contains</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>id</code></td><td>string</td><td>Unique identifier for the image.</td></tr>
-                            <tr><td><code>url</code></td><td>string</td><td>Direct URL to the image file.</td></tr>
-                            <tr><td><code>width</code></td><td>integer</td><td>Image width in pixels.</td></tr>
+                            <tr><td><code>id</code></td><td>string</td><td>A unique identifier for this image — useful if you want to request it directly later via <code>GET /v1/images/{image_id}</code>.</td></tr>
+                            <tr><td><code>url</code></td><td>string</td><td>The direct URL to the image file. This is what you'll put in an <code>&lt;img&gt;</code> tag or display to the user.</td></tr>
+                            <tr><td><code>width</code></td><td>integer</td><td>Image width in pixels. Useful for calculating aspect ratios or setting container dimensions before the image loads.</td></tr>
                             <tr><td><code>height</code></td><td>integer</td><td>Image height in pixels.</td></tr>
-                            <tr><td><code>breeds</code></td><td>array</td><td>Breed objects associated with this image. Empty array if no breeds are attached. Populated when <code>has_breeds=1</code> or <code>breed_ids</code> is specified.</td></tr>
-                            <tr><td><code>categories</code></td><td>array</td><td>Category objects associated with this image. Empty array if no categories match.</td></tr>
+                            <tr><td><code>breeds</code></td><td>array</td><td>A list of breed objects for this image. Empty (<code>[]</code>) if no breed data is attached. Use <code>has_breeds=1</code> or <code>breed_ids</code> to guarantee this is populated.</td></tr>
+                            <tr><td><code>categories</code></td><td>array</td><td>A list of category objects for this image. Empty (<code>[]</code>) if no categories are assigned or if you didn't filter by <code>category_ids</code>.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -659,21 +757,22 @@
             <hr class="subsection-divider">
 
             <div class="subsection">
-                <div class="subsection-title">Breed Object (within <code>breeds</code>)</div>
+                <div class="subsection-title">Breed Object (inside the <code>breeds</code> array)</div>
+                <p>When a breed is attached to an image, each item in the <code>breeds</code> array contains the following. Most images have either zero or one breed — multiple is uncommon.</p>
                 <div class="doc-table-wrap">
                     <table class="doc-table">
                         <thead>
-                            <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                            <tr><th>Field</th><th>Type</th><th>What it contains</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>id</code></td><td>string</td><td>Unique breed identifier (e.g. <code>beng</code> for Bengal).</td></tr>
-                            <tr><td><code>name</code></td><td>string</td><td>Breed name.</td></tr>
-                            <tr><td><code>description</code></td><td>string</td><td>Summary description of the breed.</td></tr>
-                            <tr><td><code>temperament</code></td><td>string</td><td>Comma-separated temperament traits.</td></tr>
-                            <tr><td><code>origin</code></td><td>string</td><td>Country of origin.</td></tr>
-                            <tr><td><code>life_span</code></td><td>string</td><td>Typical lifespan range in years (e.g. <code>"12 - 15"</code>).</td></tr>
-                            <tr><td><code>wikipedia_url</code></td><td>string</td><td>Wikipedia URL for this breed.</td></tr>
-                            <tr><td><code>reference_image_id</code></td><td>string</td><td>ID of the canonical reference image for this breed.</td></tr>
+                            <tr><td><code>id</code></td><td>string</td><td>The breed's short identifier (e.g. <code>beng</code>). This is what you pass to <code>breed_ids</code> when filtering.</td></tr>
+                            <tr><td><code>name</code></td><td>string</td><td>The breed's full name (e.g. <code>Bengal</code>).</td></tr>
+                            <tr><td><code>description</code></td><td>string</td><td>A paragraph-length description of the breed's personality and characteristics.</td></tr>
+                            <tr><td><code>temperament</code></td><td>string</td><td>A comma-separated list of personality traits (e.g. <code>"Alert, Agile, Energetic, Demanding, Intelligent"</code>).</td></tr>
+                            <tr><td><code>origin</code></td><td>string</td><td>The country the breed originates from.</td></tr>
+                            <tr><td><code>life_span</code></td><td>string</td><td>Typical lifespan as a range (e.g. <code>"12 - 15"</code>, in years).</td></tr>
+                            <tr><td><code>wikipedia_url</code></td><td>string</td><td>A link to the breed's Wikipedia article, if one is available.</td></tr>
+                            <tr><td><code>reference_image_id</code></td><td>string</td><td>The ID of the canonical reference image for this breed. You can fetch it directly using <code>GET /v1/images/{image_id}</code>.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -682,21 +781,21 @@
             <hr class="subsection-divider">
 
             <div class="subsection">
-                <div class="subsection-title">Pagination Response Header</div>
-                <p>When <code>order</code> is <code>ASC</code> or <code>DESC</code>, the response includes an additional header:</p>
+                <div class="subsection-title">Pagination Header</div>
+                <p>When you use <code>order=ASC</code> or <code>order=DESC</code>, the API includes an extra HTTP response header alongside the JSON body.</p>
                 <div class="doc-table-wrap">
                     <table class="doc-table">
                         <thead>
-                            <tr><th>Header</th><th>Type</th><th>Description</th></tr>
+                            <tr><th>Header</th><th>What it tells you</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>pagination-count</code></td><td>integer</td><td>Total number of results matching the current query. Use this to calculate total pages: <code>ceil(pagination-count / limit)</code>.</td></tr>
+                            <tr><td><code>pagination-count</code></td><td>The total number of images matching your current query — across all pages, not just the current one. Divide by your <code>limit</code> value to calculate how many pages exist.</td></tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="callout note">
-                    <span class="callout-label">Note</span>
-                    <p><code>pagination-count</code> is absent when <code>order=RANDOM</code>. Random requests return an independent set each time — there is no stable total to paginate against.</p>
+                    <span class="callout-label">Response headers vs response body</span>
+                    <p>The <code>pagination-count</code> value arrives as an HTTP header, not inside the JSON. In <code>curl</code>, use the <code>-i</code> flag to see headers alongside the response body. In JavaScript, access it via <code>response.headers.get('pagination-count')</code>.</p>
                 </div>
             </div>
         </div>
@@ -712,21 +811,28 @@
         </div>
 
         <div class="doc-body">
-            <p>Response for a request with <code>has_breeds=1&breed_ids=beng</code>. The <code>breeds</code> array is populated; <code>categories</code> is empty because no category filter was applied.</p>
+            <p>This is what the API returns for a request with <code>has_breeds=1&amp;breed_ids=beng&amp;limit=1</code>. The <code>breeds</code> array is populated with a full breed object. The <code>categories</code> array is empty because no category filter was applied.</p>
 
             <div class="code-block"><pre>[
   {
+    <span class="comment">/* The image's unique ID — use this to fetch it directly later */</span>
     <span class="key">"id"</span>: <span class="string">"O3btzLlsRf"</span>,
+
+    <span class="comment">/* The actual image URL — put this in your img src */</span>
     <span class="key">"url"</span>: <span class="string">"https://cdn2.thecatapi.com/images/O3btzLlsRf.jpg"</span>,
+
     <span class="key">"width"</span>: 1200,
     <span class="key">"height"</span>: 800,
+
+    <span class="comment">/* breeds is populated because we used has_breeds=1 */</span>
     <span class="key">"breeds"</span>: [
       {
         <span class="key">"id"</span>: <span class="string">"beng"</span>,
         <span class="key">"name"</span>: <span class="string">"Bengal"</span>,
-        <span class="key">"description"</span>: <span class="string">"Bengals are a lot of fun to live with, but they're definitely
-          not the cat for everyone, or for first-time cat owners. Extremely active,
-          curious, and always alert, nothing escapes their attention."</span>,
+        <span class="key">"description"</span>: <span class="string">"Bengals are a lot of fun to live with, but they're
+          definitely not the cat for everyone, or for first-time cat owners.
+          Extremely active, curious, and always alert, nothing escapes
+          their attention."</span>,
         <span class="key">"temperament"</span>: <span class="string">"Alert, Agile, Energetic, Demanding, Intelligent"</span>,
         <span class="key">"origin"</span>: <span class="string">"United States"</span>,
         <span class="key">"life_span"</span>: <span class="string">"12 - 15"</span>,
@@ -734,6 +840,8 @@
         <span class="key">"reference_image_id"</span>: <span class="string">"O3btzLlsRf"</span>
       }
     ],
+
+    <span class="comment">/* Empty because we didn't filter by category */</span>
     <span class="key">"categories"</span>: []
   }
 ]</pre></div>
@@ -750,38 +858,45 @@
         </div>
 
         <div class="doc-body">
+            <p>The API uses standard HTTP status codes. If something goes wrong, the status code tells you where to look first.</p>
+
             <div class="doc-table-wrap">
                 <table class="doc-table">
                     <thead>
-                        <tr><th>Status</th><th>Meaning</th><th>Cause</th><th>Resolution</th></tr>
+                        <tr><th>Status</th><th>What it means</th><th>Most likely cause</th><th>What to do</th></tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><code>400</code></td>
                             <td>Bad Request</td>
-                            <td>A query parameter contains an unrecognised value (e.g. <code>order=NEWEST</code>).</td>
-                            <td>Check parameter names and accepted values against the table in Section 04.</td>
+                            <td>You've passed a parameter value the API doesn't recognise — for example <code>order=NEWEST</code> or <code>size=large</code>.</td>
+                            <td>Check the accepted values in Section 04. Typos in parameter values are the most common cause.</td>
                         </tr>
                         <tr>
                             <td><code>401</code></td>
                             <td>Unauthorized</td>
-                            <td>The <code>x-api-key</code> header is missing or contains an invalid key.</td>
-                            <td>Confirm the header name is lowercase (<code>x-api-key</code>) and the value matches your dashboard key exactly. If using an environment variable, check it is being interpolated correctly.</td>
+                            <td>The API key is missing, malformed, or invalid. Also fires if the header name is wrong.</td>
+                            <td>Double-check: (1) the header is named <code>x-api-key</code> in lowercase, (2) the key value is copied exactly from your dashboard with no extra spaces, (3) you haven't accidentally committed a placeholder like <code>YOUR_API_KEY</code>.</td>
                         </tr>
                         <tr>
                             <td><code>429</code></td>
                             <td>Too Many Requests</td>
-                            <td>Monthly request allowance has been exhausted.</td>
-                            <td>Upgrade to a premium plan, or wait for the allowance to reset at the start of the next billing month.</td>
+                            <td>You've used up your monthly request allowance — 10,000 on the free tier.</td>
+                            <td>Upgrade to a premium plan, or wait until the start of the next billing month for the allowance to reset. If you're hitting this in development, consider caching responses locally rather than calling the API repeatedly.</td>
                         </tr>
                         <tr>
                             <td><code>500</code></td>
                             <td>Internal Server Error</td>
-                            <td>An unexpected error on the API side unrelated to your request.</td>
-                            <td>Retry with exponential backoff. If the issue persists, check <a href="https://thecatapi.com" style="color:#b392f0;">thecatapi.com</a> for service status.</td>
+                            <td>Something went wrong on the API's side. Your request was fine — the server had a problem.</td>
+                            <td>Wait a moment and try again. If it keeps happening, check <a href="https://thecatapi.com" style="color:#b392f0;">thecatapi.com</a> for any service status announcements. Use exponential backoff if you're retrying automatically — don't hammer a struggling server.</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div class="callout note">
+                <span class="callout-label">What is exponential backoff?</span>
+                <p>If a request fails and you retry automatically, don't retry immediately — wait a moment first, then progressively longer between each attempt. For example: wait 1 second, retry; wait 2 seconds, retry; wait 4 seconds, retry. This avoids flooding a server that's already struggling, and is considered standard practice for handling transient failures.</p>
             </div>
         </div>
     </div>
@@ -797,38 +912,45 @@
 
         <div class="doc-body">
             <div class="subsection">
-                <div class="subsection-title">Pagination Behaviour</div>
-                <p>Pagination is only available when <code>order</code> is <code>ASC</code> or <code>DESC</code>. When <code>order=RANDOM</code> (the default), the <code>page</code> parameter is ignored and each request returns an independent random set — there is no stable sequence to page through.</p>
-                <p>When pagination is active, check the <code>pagination-count</code> response header for the total number of results matching your query. Use it to calculate total pages:</p>
-                <div class="code-block"><pre>total_pages = ceil(pagination-count / limit)</pre></div>
-            </div>
+                <div class="subsection-title">How Pagination Works</div>
+                <p>Pagination lets you fetch large result sets in manageable chunks instead of all at once. Here's how it works in practice.</p>
+                <p>Say you want to show all Bengal cat images, 10 at a time. Your first request looks like this:</p>
+                <div class="code-block"><pre>?breed_ids=beng&order=ASC&limit=10&page=0</pre></div>
+                <p>The response body gives you 10 images. The <code>pagination-count</code> response header tells you, say, <code>87</code> — meaning there are 87 Bengal images in total. That means 9 pages (⌈87 ÷ 10⌉ = 9). To get the next batch, increment <code>page</code>:</p>
+                <div class="code-block"><pre>?breed_ids=beng&order=ASC&limit=10&page=1  <span class="comment"># images 11–20</span>
+?breed_ids=beng&order=ASC&limit=10&page=2  <span class="comment"># images 21–30</span>
+<span class="comment"># ...and so on</span></pre></div>
 
-            <hr class="subsection-divider">
-
-            <div class="subsection">
-                <div class="subsection-title">Rate Limits</div>
-                <p>Free-tier accounts are limited to 10,000 requests per month. Premium accounts receive 100,000 requests per month. No per-second rate limit is documented. For high-volume usage, implement standard exponential backoff on <code>429</code> responses.</p>
-            </div>
-
-            <hr class="subsection-divider">
-
-            <div class="subsection">
-                <div class="subsection-title">Authenticated vs. Unauthenticated Requests</div>
-                <p>Unauthenticated requests (no <code>x-api-key</code> header) always return exactly one random image, regardless of the <code>limit</code> or <code>page</code> values passed. The <code>breed_ids</code>, <code>category_ids</code>, and <code>has_breeds</code> parameters are silently ignored — they do not return an error, they simply have no effect.</p>
                 <div class="callout key-point">
-                    <span class="callout-label">Key Point</span>
-                    <p>If filtering appears to have no effect on your request, confirm the <code>x-api-key</code> header is present and valid. Silent ignore is the failure mode for unauthenticated filter parameters — not an error response.</p>
+                    <span class="callout-label">Key Rule — order must not be RANDOM</span>
+                    <p>Pagination only works when <code>order</code> is <code>ASC</code> or <code>DESC</code>. With <code>RANDOM</code> (the default), the API returns a different random set every time — there's no stable sequence to page through. Setting <code>page=2</code> with <code>order=RANDOM</code> doesn't return the "second page of random results" — it just returns another random set and ignores <code>page</code> entirely.</p>
                 </div>
             </div>
 
             <hr class="subsection-divider">
 
             <div class="subsection">
-                <div class="subsection-title">Using format=src</div>
-                <p>When <code>format=src</code> is set, the API responds with the raw image file rather than a JSON body. This allows you to use the endpoint URL directly as an image source:</p>
-                <div class="code-block"><pre><span class="comment">&lt;!-- Embeds a random cat image directly, no JavaScript required --&gt;</span>
-&lt;img src=<span class="string">"https://api.thecatapi.com/v1/images/search?format=src&mime_types=jpg"</span> alt=<span class="string">"A random cat"</span>&gt;</pre></div>
-                <p>All other filtering parameters still apply when using <code>format=src</code>.</p>
+                <div class="subsection-title">Rate Limits</div>
+                <p>Rate limits on the Cat API are monthly, not per-second. You won't get throttled for making rapid requests — but you will run out of allowance if you make too many calls across the month.</p>
+                <ul class="doc-list">
+                    <li><strong>Free tier:</strong> 10,000 requests per month</li>
+                    <li><strong>Premium tier:</strong> 100,000 requests per month</li>
+                </ul>
+                <p>If you're building something in development and burning through requests quickly, cache the responses locally. Fetching the same breed's images over and over during testing is a quick way to hit your limit before anything is even deployed.</p>
+            </div>
+
+            <hr class="subsection-divider">
+
+            <div class="subsection">
+                <div class="subsection-title">Authenticated vs. Unauthenticated — The Silent Failure Problem</div>
+                <p>The API doesn't error when you pass filtering parameters without a key — it just ignores them and returns a random image. This is the most common source of confusion when first using the API.</p>
+                <p>If you're getting random results when you expected filtered ones, and everything looks right in your code, the problem is almost always a missing or invalid <code>x-api-key</code> header. Check these in order:</p>
+                <ul class="doc-list">
+                    <li>Is the header present at all in the request?</li>
+                    <li>Is it named <code>x-api-key</code> in lowercase?</li>
+                    <li>Is the value your actual key from the dashboard, not a placeholder?</li>
+                    <li>Is the environment variable or config file actually being read by your code?</li>
+                </ul>
             </div>
         </div>
     </div>
