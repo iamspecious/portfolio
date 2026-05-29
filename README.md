@@ -16,6 +16,7 @@ Operations professional with over a decade across people operations, strategic H
 | [PostHog CSM Copilot](https://iamspecious.github.io/portfolio/posthog-cs-copilot.html) | Customer Success copilot for managing a 25–40 account portfolio: signal triage, response drafting, escalation strategy, and health assessment — encoded with PostHog's product suite, billing model, and customer type dynamics | In Progress |
 | [PostHog CS Health Intelligence](./posthog-cs-health-intelligence/) | Research-backed prototype for the CS prioritisation gap: a structured account model and Python script that produces a ranked morning action list — signals individually surfaced with plain-English reasons and suggested actions, thresholds differentiated by customer type | Complete |
 | [PregVoice](https://iamspecious.github.io/portfolio/pregvoice.html) | Accessibility project: independent pregnancy test result reading for blind and visually impaired users via on-device ML, audio, and haptics | Research & Planning |
+| [Cat API Documentation](./cat-api-documentation.md) | Professional API documentation sample built for a technical writing portfolio — covers authentication, parameters, response schema, error states, and pagination. | Complete |
 
 ---
 
