@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Voice & Tone Guide for Technical Documentation Teams"
+---
+
 # Voice & Tone Guide for Technical Documentation Teams
 
 Internal contributor guide defining voice, tone, and writing standards for technical documentation teams.
