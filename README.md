@@ -17,6 +17,7 @@ Operations professional with over a decade across people operations, strategic H
 | [PostHog CS Health Intelligence](./posthog-cs-health-intelligence/) | Research-backed prototype for the CS prioritisation gap: a structured account model and Python script that produces a ranked morning action list — signals individually surfaced with plain-English reasons and suggested actions, thresholds differentiated by customer type | Complete |
 | [PregVoice](https://iamspecious.github.io/portfolio/pregvoice.html) | Accessibility project: independent pregnancy test result reading for blind and visually impaired users via on-device ML, audio, and haptics | Research & Planning |
 | [Cat API Documentation](./cat-api-documentation.md) | Professional API documentation sample built for a technical writing portfolio — covers authentication, parameters, response schema, error states, and pagination. | Complete |
+| [Voice & Tone Guide](./voice-and-tone-guide.md) | Internal contributor guide defining voice, tone principles, and writing standards for technical documentation teams. | Complete |
 
 ---
 
