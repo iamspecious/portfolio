@@ -1,3 +1,8 @@
+---
+layout: default
+title: "Voice Adaptation Showcase"
+---
+
 # Voice Adaptation Showcase
 
 ## About This Document
