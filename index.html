@@ -2537,6 +2537,12 @@
                                 <li><strong>EmailJS integration</strong> — Collect an email address early in the flow and auto-send the <code>.ics</code> as an attachment on confirmation. Free tier covers 200 emails/month. Closes the gap between downloading and receiving.</li>
                                 <li><strong>Sender personalisation mode</strong> — A <code>?setup</code> URL parameter opens extended config: custom opening message, pre-selected restaurants to steer the choice, a locked-in date. The "sinister version" — fully documented.</li>
                                 <li><strong>OpenTable affiliate integration</strong> — Currently a search deep-link. With affiliate approval, a cleaner availability-surfacing handoff with direct reservation links per restaurant.</li>
+                                <li><strong>Activity type selection</strong> — Before cuisine, ask what kind of date it is: four cards, four different flows.<br><br>
+                                    <em>Get some food</em> — current restaurant flow, unchanged.<br><br>
+                                    <em>Go for a coffee</em> — same Foursquare query, category switched to <code>café</code>. Skip the booking step entirely — coffee shops don't take reservations. Flow shortens: coffee type preference (espresso, filter, something sweet) → venue selection → calendar invite.<br><br>
+                                    <em>Do an activity</em> — two realistic API options. Eventbrite has a free REST API with location-based event search, no OAuth required: returns events by city, category (arts, sports, music, food), and date range. Meetup.com uses GraphQL and requires OAuth but covers a wider range of recurring local meetups and hobby groups. Either surfaces a list of upcoming things to do; the booking step links to the event page directly.<br><br>
+                                    <em>Go to the cinema</em> — the hardest of the four. No universal public showtimes API exists. TMDB (free, API key only) covers film metadata and posters. For local showtimes the realistic path is: TMDB for film discovery → present a list of currently showing films → link to the local cinema's booking page with the film pre-searched. Chains like Vue, Odeon, and Cineworld don't have public APIs, so the handoff is a search link rather than a direct booking. Covers the experience of choosing a film together even if the booking happens on the cinema's site.
+                                </li>
                             </ol>
                         </div>
 
@@ -2553,6 +2559,14 @@
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-07 — fix</span>
+                                <p>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Demo mode was returning the same four restaurants regardless of cuisine or location — a hardcoded list that didn't change between sessions. Fixed by making demo data cuisine-specific: each of the six cuisine types now maps to its own set of four plausible restaurant names, so the cards at least match what was selected. An info banner now tells the user they're seeing sample results and where to add an API key for real ones. Also: changed location field label from "And where are you?" to "Where would you like to go?" — more accurate since it's asking about the destination, not the person's current position.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
