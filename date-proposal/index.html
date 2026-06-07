@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Question For You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --rose:        #E8739A;
+            --rose-dark:   #C45580;
+            --rose-pale:   #FEF0F4;
+            --rose-border: #F5D0E0;
+            --shadow:      rgba(232, 115, 154, 0.22);
+            --text:        #1F1F1F;
+            --muted:       #999999;
+            --bg:          #FAFAFA;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* ── Steps ─────────────────────────── */
+
+        .step {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 24px;
+            width: 100%;
+            max-width: 660px;
+            min-height: 100dvh;
+        }
+
+        .step.active {
+            display: flex;
+            animation: fadeUp 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Typography ─────────────────────── */
+
+        .headline {
+            font-size: clamp(2.4rem, 6.5vw, 4rem);
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.15;
+            margin-bottom: 14px;
+            letter-spacing: -0.025em;
+        }
+
+        .subline {
+            font-size: 1.05rem;
+            color: var(--muted);
+            font-weight: 400;
+            margin-bottom: 48px;
+            line-height: 1.65;
+            max-width: 360px;
+        }
+
+        /* ── Buttons ────────────────────────── */
+
+        .btn-yes {
+            background: var(--rose);
+            color: #fff;
+            border: none;
+            padding: 18px 60px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 24px var(--shadow);
+            letter-spacing: 0.01em;
+        }
+
+        .btn-yes:hover {
+            background: var(--rose-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px var(--shadow);
+        }
+
+        .btn-yes:active { transform: translateY(0); }
+
+        #noBtn {
+            /* Starts inline, JS switches to fixed on first escape */
+            background: transparent;
+            color: #ccc;
+            border: 1.5px solid #e8e8e8;
+            padding: 11px 26px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-radius: 100px;
+            cursor: pointer;
+            margin-top: 18px;
+            transition: opacity 0.3s ease, color 0.2s ease;
+            user-select: none;
+        }
+
+        .btn-primary {
+            background: var(--rose);
+            color: #fff;
+            border: none;
+            padding: 16px 48px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 18px var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--rose-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            background: #e0e0e0;
+            color: #bbb;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--rose);
+            border: 2px solid var(--rose-border);
+            padding: 14px 40px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--rose-pale);
+            border-color: var(--rose);
+        }
+
+        /* ── Text inputs ─────────────────────── */
+
+        .input-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 380px;
+            margin-bottom: 28px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 16px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            background: #fff;
+            border: 2px solid #ededed;
+            border-radius: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .text-input:focus { border-color: var(--rose-border); }
+        .text-input::placeholder { color: #d0d0d0; font-weight: 400; }
+
+        /* ── Option grids (cuisine + vibe) ───── */
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 480px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 420px) {
+            .option-grid { grid-template-columns: repeat(2, 1fr); }
+            .option-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .option-card {
+            background: #fff;
+            border: 2px solid #ebebeb;
+            border-radius: 20px;
+            padding: 22px 10px 18px;
+            cursor: pointer;
+            transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .option-card:hover {
+            border-color: var(--rose-border);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(232, 115, 154, 0.1);
+        }
+
+        .option-card.selected {
+            border-color: var(--rose);
+            background: var(--rose-pale);
+        }
+
+        .option-emoji { font-size: 1.9rem; line-height: 1; }
+        .option-label { font-size: 0.83rem; font-weight: 700; color: var(--text); }
+
+        /* ── Restaurant cards ────────────────── */
+
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            width: 100%;
+            max-width: 560px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 460px) {
+            .restaurant-grid { grid-template-columns: 1fr; }
+        }
+
+        .restaurant-card {
+            background: #fff;
+            border: 2px solid #ebebeb;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+            text-align: left;
+        }
+
+        .restaurant-card:hover {
+            border-color: var(--rose-border);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(232, 115, 154, 0.12);
+        }
+
+        .restaurant-card.selected {
+            border-color: var(--rose);
+            box-shadow: 0 0 0 3px rgba(232, 115, 154, 0.15);
+        }
+
+        .restaurant-photo {
+            width: 100%;
+            height: 118px;
+            background: var(--rose-pale);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.6rem;
+            overflow: hidden;
+        }
+
+        .restaurant-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .restaurant-info { padding: 14px 14px 16px; }
+
+        .restaurant-name {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .restaurant-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .restaurant-rating { color: var(--rose); font-weight: 700; }
+
+        .restaurant-address {
+            font-size: 0.74rem;
+            color: var(--muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ── Loading ─────────────────────────── */
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            padding: 40px 0;
+        }
+
+        .loading.hidden { display: none; }
+
+        .loading-dots { display: flex; gap: 9px; }
+
+        .loading-dots span {
+            width: 10px;
+            height: 10px;
+            background: var(--rose-border);
+            border-radius: 50%;
+            animation: dotPulse 1.3s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(2) { animation-delay: 0.22s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.44s; }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% { transform: scale(0.75); opacity: 0.45; }
+            40%            { transform: scale(1.1);  opacity: 1; }
+        }
+
+        /* ── Date & Time ─────────────────────── */
+
+        .datetime-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+            max-width: 420px;
+            margin-bottom: 32px;
+        }
+
+        .date-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            background: #fff;
+            border: 2px solid #ededed;
+            border-radius: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .date-input:focus { border-color: var(--rose-border); }
+
+        .time-section-head {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            width: 100%;
+            text-align: left;
+        }
+
+        .time-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .time-chip {
+            padding: 10px 20px;
+            border: 2px solid #ededed;
+            border-radius: 100px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+            background: #fff;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s, color 0.15s;
+        }
+
+        .time-chip:hover { border-color: var(--rose-border); }
+
+        .time-chip.selected {
+            background: var(--rose);
+            border-color: var(--rose);
+            color: #fff;
+        }
+
+        /* ── Confirmation card ───────────────── */
+
+        .confirm-card {
+            background: #fff;
+            border: 2px solid var(--rose-border);
+            border-radius: 28px;
+            padding: 36px 32px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 32px rgba(232, 115, 154, 0.08);
+        }
+
+        .confirm-emoji { font-size: 3.2rem; margin-bottom: 18px; }
+
+        .confirm-title {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .confirm-restaurant {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--rose);
+            margin-bottom: 6px;
+        }
+
+        .confirm-detail {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .confirm-divider {
+            border: none;
+            border-top: 1px solid var(--rose-border);
+            margin: 22px 0;
+        }
+
+        .confirm-note {
+            font-size: 0.88rem;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .action-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .portfolio-link {
+            font-size: 0.78rem;
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .portfolio-link:hover { color: var(--muted); }
+
+        /* ── Error banner ────────────────────── */
+
+        .error-banner {
+            background: #fff5f5;
+            border: 1px solid #ffc8c8;
+            border-radius: 12px;
+            padding: 11px 16px;
+            font-size: 0.82rem;
+            color: #c0392b;
+            max-width: 480px;
+            margin-top: 14px;
+        }
+
+        .error-banner.hidden { display: none; }
+
+        /* ── Step progress dots ──────────────── */
+
+        #stepDots {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .step-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #e8e8e8;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .step-dot.done    { background: var(--rose-border); }
+        .step-dot.current { background: var(--rose); transform: scale(1.3); }
+
+        /* ── Config ──────────────────────────── */
+
+        #configToggle {
+            position: fixed;
+            top: 14px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            font-size: 1.05rem;
+            cursor: pointer;
+            opacity: 0.22;
+            transition: opacity 0.2s;
+            z-index: 100;
+            padding: 6px;
+        }
+
+        #configToggle:hover { opacity: 0.5; }
+
+        #configOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            animation: fadeIn 0.2s ease;
+        }
+
+        #configOverlay.hidden { display: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .config-box {
+            background: #fff;
+            border-radius: 28px;
+            padding: 36px 32px;
+            max-width: 420px;
+            width: 90%;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .config-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .config-desc {
+            font-size: 0.84rem;
+            color: var(--muted);
+            margin-bottom: 22px;
+            line-height: 1.65;
+        }
+
+        .config-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            margin-bottom: 7px;
+        }
+
+        .config-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.92rem;
+            color: var(--text);
+            background: #f6f6f6;
+            border: 2px solid #ededed;
+            border-radius: 12px;
+            outline: none;
+            margin-bottom: 18px;
+            transition: border-color 0.2s;
+        }
+
+        .config-input:focus { border-color: var(--rose-border); }
+
+        .config-actions { display: flex; gap: 10px; }
+
+        .config-save {
+            flex: 1;
+            background: var(--rose);
+            color: #fff;
+            border: none;
+            padding: 13px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .config-save:hover { background: var(--rose-dark); }
+
+        .config-cancel {
+            background: #f2f2f2;
+            color: var(--muted);
+            border: none;
+            padding: 13px 22px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .config-hint {
+            font-size: 0.73rem;
+            color: #ccc;
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        .config-hint a { color: #ccc; }
+    </style>
+</head>
+<body>
+
+    <!-- Progress dots (shown from step 2 onwards) -->
+    <div id="stepDots"></div>
+
+    <!-- Config gear -->
+    <button id="configToggle" onclick="toggleConfig()" title="Configure">⚙</button>
+
+    <!-- Config overlay -->
+    <div id="configOverlay" class="hidden">
+        <div class="config-box">
+            <div class="config-title">Configure</div>
+            <p class="config-desc">Add a Foursquare API key to pull live restaurants. Without one the demo runs with sample data. Your key lives in this browser only — it never leaves your device.</p>
+            <div class="config-label">Foursquare API Key</div>
+            <input type="password" id="fsqKeyInput" class="config-input" placeholder="fsq3XXXXXXXXXXXXXXXXX" autocomplete="off">
+            <div class="config-label">Opening message</div>
+            <input type="text" id="customMsgInput" class="config-input" placeholder="I've been wanting to ask you this for a while." maxlength="120">
+            <div class="config-actions">
+                <button class="config-save" onclick="saveConfig()">Save</button>
+                <button class="config-cancel" onclick="toggleConfig()">Cancel</button>
+            </div>
+            <p class="config-hint">Free API key at <a href="https://foursquare.com/developers" target="_blank">foursquare.com/developers</a></p>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         STEP 1 — The Question
+    ════════════════════════════════════════ -->
+    <div class="step active" id="step-1">
+        <div class="headline">Will you go on a<br>date with me?</div>
+        <p class="subline" id="openingMsg">I've been wanting to ask you this for a while.</p>
+        <button class="btn-yes" id="yesBtn" onclick="onYes()">Yes ✨</button>
+        <button id="noBtn" onclick="onNoClick()">No</button>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         STEP 2 — Name & Location
+    ════════════════════════════════════════ -->
+    <div class="step" id="step-2">
+        <div class="headline">I'm so glad.</div>
+        <p class="subline">Let's plan something you'll love.<br>What's your name, and where are you?</p>
+        <div class="input-stack">
+            <input type="text" class="text-input" id="nameInput" placeholder="Your name" autocomplete="off">
+            <input type="text" class="text-input" id="locationInput" placeholder="City or neighbourhood" autocomplete="off">
+        </div>
+        <button class="btn-primary" onclick="onDetailsNext()">Let's go →</button>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         STEP 3 — Cuisine
+    ════════════════════════════════════════ -->
+    <div class="step" id="step-3">
+        <div class="headline" id="cuisineHeadline">What are you<br>in the mood for?</div>
+        <p class="subline">We'll find somewhere you'll love.</p>
+        <div class="option-grid" id="cuisineGrid"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         STEP 4 — Vibe
+    ════════════════════════════════════════ -->
+    <div class="step" id="step-4">
+        <div class="headline">What's the vibe?</div>
+        <p class="subline" id="vibeSubline">How are we doing this?</p>
+        <div class="option-grid cols-3" id="vibeGrid"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         STEP 5 — Restaurant Selection
+    ════════════════════════════════════════ -->
+    <div class="step" id="step-5">
+        <div class="headline">Pick your spot</div>
+        <p class="subline" id="restaurantSubline">A few places I think you'll love.</p>
+        <div id="restaurantLoading" class="loading">
+            <div class="loading-dots"><span></span><span></span><span></span></div>
+            <p>Finding somewhere perfect...</p>
+        </div>
+        <div class="restaurant-grid" id="restaurantGrid" style="display:none;"></div>
+        <div id="restaurantError" class="error-banner hidden"></div>
+        <button class="btn-primary" id="restaurantNextBtn" onclick="goToStep(6)" disabled style="display:none; margin-top: 12px;">That's the one →</button>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         STEP 6 — Date & Time
+    ════════════════════════════════════════ -->
+    <div class="step" id="step-6">
+        <div class="headline">When works<br>for you?</div>
+        <p class="subline">Pick a day and I'll sort the rest.</p>
+        <div class="datetime-wrap">
+            <input type="date" class="date-input" id="dateInput" onchange="onDateChange()">
+            <div class="time-section-head">Morning</div>
+            <div class="time-grid" id="lunchGrid"></div>
+            <div class="time-section-head" style="margin-top:6px;">Evening</div>
+            <div class="time-grid" id="dinnerGrid"></div>
+        </div>
+        <button class="btn-primary" id="dateNextBtn" onclick="onDateNext()" disabled>Perfect →</button>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         STEP 7 — Confirmation
+    ════════════════════════════════════════ -->
+    <div class="step" id="step-7">
+        <div class="confirm-card" id="confirmCard"></div>
+        <div class="action-group">
+            <button class="btn-primary" onclick="openBooking()">Book the table →</button>
+            <button class="btn-secondary" onclick="downloadCalendar()">Save to calendar</button>
+        </div>
+        <a class="portfolio-link" href="../index.html">← back to portfolio</a>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // Config & State
+        // ═══════════════════════════════════════
+
+        let fsqKey    = localStorage.getItem('date_fsq_key') || '';
+        let customMsg = localStorage.getItem('date_msg')     || '';
+
+        const state = {
+            name:       '',
+            location:   '',
+            cuisine:    null,   // { id, label, emoji, query }
+            vibe:       null,   // { id, label, emoji, minPrice, maxPrice }
+            restaurant: null,   // Foursquare result object or demo object
+            date:       '',     // YYYY-MM-DD
+            time:       ''      // HH:MM
+        };
+
+        // ═══════════════════════════════════════
+        // Static Data
+        // ═══════════════════════════════════════
+
+        const cuisines = [
+            { id: 'italian',  label: 'Italian',  emoji: '🍝', query: 'Italian restaurant'  },
+            { id: 'japanese', label: 'Japanese', emoji: '🍣', query: 'Japanese restaurant' },
+            { id: 'french',   label: 'French',   emoji: '🥂', query: 'French restaurant'   },
+            { id: 'mexican',  label: 'Mexican',  emoji: '🌮', query: 'Mexican restaurant'  },
+            { id: 'indian',   label: 'Indian',   emoji: '🍛', query: 'Indian restaurant'   },
+            { id: 'american', label: 'American', emoji: '🍔', query: 'American restaurant' },
+        ];
+
+        const vibes = [
+            { id: 'casual',     label: 'Casual',      emoji: '☀️',  minPrice: 1, maxPrice: 2 },
+            { id: 'datenight',  label: 'Date Night',  emoji: '🕯️', minPrice: 2, maxPrice: 3 },
+            { id: 'finedining', label: 'Fine Dining', emoji: '✨',  minPrice: 3, maxPrice: 4 },
+        ];
+
+        const lunchSlots  = ['11:30', '12:00', '12:30', '13:00'];
+        const dinnerSlots = ['18:30', '19:00', '19:30', '20:00', '20:30'];
+
+        const demoRestaurants = [
+            { fsq_id: 'd1', name: 'La Petite Fleur',  rating: 9.1, price: 3, location: { formatted_address: '12 Rosewood Lane, Garden Quarter' }, photos: [], website: '' },
+            { fsq_id: 'd2', name: 'Sakura Garden',    rating: 8.7, price: 2, location: { formatted_address: '44 Blossom Street, Riverside' },       photos: [], website: '' },
+            { fsq_id: 'd3', name: 'Il Cielo',         rating: 8.9, price: 3, location: { formatted_address: '7 Castello Road, Old Town' },           photos: [], website: '' },
+            { fsq_id: 'd4', name: 'The Garden Room',  rating: 8.4, price: 2, location: { formatted_address: '3 Garden Square, Northside' },          photos: [], website: '' },
+        ];
+
+        // ═══════════════════════════════════════
+        // No button — the famous mechanic
+        // ═══════════════════════════════════════
+
+        let noEscapes  = 0;
+        let noFixed    = false;
+        let noClicks   = 0;
+        const noBtn    = document.getElementById('noBtn');
+
+        document.addEventListener('mousemove', (e) => {
+            if (!document.getElementById('step-1').classList.contains('active')) return;
+            if (noBtn.disabled || noBtn.style.opacity === '0') return;
+
+            const rect = noBtn.getBoundingClientRect();
+            const cx   = rect.left + rect.width  / 2;
+            const cy   = rect.top  + rect.height / 2;
+            const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+            if (dist < 95) {
+                if (!noFixed) {
+                    noBtn.style.position  = 'fixed';
+                    noBtn.style.left      = cx + 'px';
+                    noBtn.style.top       = cy + 'px';
+                    noBtn.style.transform = 'translate(-50%, -50%)';
+                    noBtn.style.margin    = '0';
+                    noFixed = true;
+                }
+
+                noEscapes++;
+
+                const angle = Math.atan2(cy - e.clientY, cx - e.clientX);
+                const jump  = 170 + Math.random() * 110;
+
+                let nx = cx + Math.cos(angle) * jump;
+                let ny = cy + Math.sin(angle) * jump;
+
+                nx = Math.max(60,  Math.min(window.innerWidth  - 60,  nx));
+                ny = Math.max(40,  Math.min(window.innerHeight - 40,  ny));
+
+                noBtn.style.left = nx + 'px';
+                noBtn.style.top  = ny + 'px';
+
+                if (noEscapes >= 5) vanishNoBtn();
+            }
+        });
+
+        function onNoClick() {
+            noClicks++;
+            if (noClicks === 1) {
+                noBtn.textContent = 'Are you sure?';
+            } else if (noClicks === 2) {
+                noBtn.textContent = 'Really...?';
+            } else {
+                vanishNoBtn();
+            }
+        }
+
+        function vanishNoBtn() {
+            noBtn.style.opacity = '0';
+            noBtn.disabled = true;
+            setTimeout(() => {
+                noBtn.style.display = 'none';
+            }, 350);
+            document.getElementById('openingMsg').textContent = 'The universe agrees.';
+        }
+
+        // ═══════════════════════════════════════
+        // Step navigation
+        // ═══════════════════════════════════════
+
+        let currentStep = 1;
+
+        function goToStep(n) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${n}`).classList.add('active');
+            currentStep = n;
+            renderDots(n);
+            window.scrollTo(0, 0);
+
+            if (n === 5) loadRestaurants();
+            if (n === 6) buildTimePickers();
+        }
+
+        function renderDots(n) {
+            const dotsEl = document.getElementById('stepDots');
+            if (n <= 1) { dotsEl.innerHTML = ''; return; }
+
+            // Steps 2–7 → 6 dots
+            dotsEl.innerHTML = Array.from({ length: 6 }, (_, i) => {
+                const stepNum = i + 2;
+                let cls = '';
+                if (stepNum < n)  cls = 'done';
+                if (stepNum === n) cls = 'current';
+                return `<div class="step-dot ${cls}"></div>`;
+            }).join('');
+        }
+
+        function onYes() {
+            const btn = document.getElementById('yesBtn');
+            btn.textContent = '💕';
+            btn.style.transition = 'transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s';
+            btn.style.transform  = 'scale(1.18)';
+            btn.style.boxShadow  = '0 18px 50px rgba(232,115,154,0.45)';
+
+            setTimeout(() => {
+                noBtn.style.display = 'none';
+                goToStep(2);
+                btn.textContent = 'Yes ✨';
+                btn.style.transform = '';
+                btn.style.boxShadow = '';
+            }, 480);
+        }
+
+        function onDetailsNext() {
+            const name     = document.getElementById('nameInput').value.trim();
+            const location = document.getElementById('locationInput').value.trim();
+            if (!name || !location) return;
+            state.name     = name;
+            state.location = location;
+
+            const firstName = name.split(' ')[0];
+            document.getElementById('cuisineHeadline').innerHTML = `What are you<br>in the mood for, ${escHtml(firstName)}?`;
+            document.getElementById('vibeSubline').textContent   = `How are we doing this, ${firstName}?`;
+
+            goToStep(3);
+        }
+
+        function onDateChange() {
+            state.date = document.getElementById('dateInput').value;
+            checkDateReady();
+        }
+
+        function onDateNext() {
+            if (!state.date || !state.time) return;
+            buildConfirmCard();
+            goToStep(7);
+        }
+
+        function checkDateReady() {
+            document.getElementById('dateNextBtn').disabled = !(state.date && state.time);
+        }
+
+        // ═══════════════════════════════════════
+        // Cuisine grid
+        // ═══════════════════════════════════════
+
+        function buildCuisineGrid() {
+            document.getElementById('cuisineGrid').innerHTML = cuisines.map(c => `
+                <div class="option-card" onclick="selectCuisine('${c.id}')">
+                    <span class="option-emoji">${c.emoji}</span>
+                    <span class="option-label">${c.label}</span>
+                </div>
+            `).join('');
+        }
+
+        function selectCuisine(id) {
+            state.cuisine = cuisines.find(c => c.id === id);
+            document.querySelectorAll('#cuisineGrid .option-card').forEach((el, i) => {
+                el.classList.toggle('selected', cuisines[i].id === id);
+            });
+            setTimeout(() => goToStep(4), 340);
+        }
+
+        // ═══════════════════════════════════════
+        // Vibe grid
+        // ═══════════════════════════════════════
+
+        function buildVibeGrid() {
+            document.getElementById('vibeGrid').innerHTML = vibes.map(v => `
+                <div class="option-card" onclick="selectVibe('${v.id}')">
+                    <span class="option-emoji">${v.emoji}</span>
+                    <span class="option-label">${v.label}</span>
+                </div>
+            `).join('');
+        }
+
+        function selectVibe(id) {
+            state.vibe = vibes.find(v => v.id === id);
+            document.querySelectorAll('#vibeGrid .option-card').forEach((el, i) => {
+                el.classList.toggle('selected', vibes[i].id === id);
+            });
+            setTimeout(() => goToStep(5), 340);
+        }
+
+        // ═══════════════════════════════════════
+        // Restaurant loading
+        // ═══════════════════════════════════════
+
+        async function loadRestaurants() {
+            const grid    = document.getElementById('restaurantGrid');
+            const loading = document.getElementById('restaurantLoading');
+            const errEl   = document.getElementById('restaurantError');
+            const nextBtn = document.getElementById('restaurantNextBtn');
+
+            grid.style.display  = 'none';
+            nextBtn.style.display = 'none';
+            nextBtn.disabled    = true;
+            loading.classList.remove('hidden');
+            errEl.classList.add('hidden');
+            state.restaurant = null;
+
+            document.getElementById('restaurantSubline').textContent =
+                `Finding ${state.cuisine.label} spots near ${state.location}...`;
+
+            let results;
+
+            if (fsqKey) {
+                try {
+                    results = await fetchFoursquare();
+                } catch (err) {
+                    console.warn('Foursquare error:', err.message);
+                    results = demoRestaurants;
+                    errEl.textContent = 'Could not reach Foursquare — showing sample restaurants.';
+                    errEl.classList.remove('hidden');
+                }
+            } else {
+                await new Promise(r => setTimeout(r, 1400));
+                results = demoRestaurants;
+            }
+
+            const topFour = results.slice(0, 4);
+            loading.classList.add('hidden');
+            renderRestaurantCards(topFour);
+            grid.style.display    = 'grid';
+            nextBtn.style.display = 'block';
+
+            document.getElementById('restaurantSubline').textContent =
+                `A few places I think you'll love, ${state.name.split(' ')[0]}.`;
+        }
+
+        async function fetchFoursquare() {
+            const params = new URLSearchParams({
+                query:  state.cuisine.query,
+                near:   state.location,
+                limit:  '8',
+                fields: 'fsq_id,name,location,rating,price,photos,categories,website',
+            });
+
+            if (state.vibe) {
+                params.set('min_price', state.vibe.minPrice);
+                params.set('max_price', state.vibe.maxPrice);
+            }
+
+            const res = await fetch(`https://api.foursquare.com/v3/places/search?${params}`, {
+                headers: { 'Authorization': fsqKey, 'Accept': 'application/json' }
+            });
+
+            if (!res.ok) {
+                const body = await res.text();
+                throw new Error(`${res.status}: ${body.slice(0, 120)}`);
+            }
+
+            const data = await res.json();
+            return data.results || [];
+        }
+
+        function renderRestaurantCards(list) {
+            const grid = document.getElementById('restaurantGrid');
+
+            grid.innerHTML = list.map(r => {
+                const hasPhoto  = r.photos && r.photos.length > 0;
+                const photoHtml = hasPhoto
+                    ? `<img src="${r.photos[0].prefix}400x240${r.photos[0].suffix}" alt="${escHtml(r.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<span style=font-size:2.6rem>${state.cuisine.emoji}</span>'">`
+                    : `<span style="font-size:2.6rem;">${state.cuisine.emoji}</span>`;
+
+                const rating  = r.rating  ? `★ ${(r.rating / 2).toFixed(1)}` : '';
+                const price   = r.price   ? '$'.repeat(r.price)               : '';
+                const address = r.location?.formatted_address || r.location?.address || '';
+
+                return `<div class="restaurant-card" data-id="${r.fsq_id}" onclick="selectRestaurant('${r.fsq_id}')">
+                    <div class="restaurant-photo">${photoHtml}</div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">${escHtml(r.name)}</div>
+                        <div class="restaurant-meta">
+                            ${rating ? `<span class="restaurant-rating">${rating}</span>` : ''}
+                            ${price  ? `<span>${price}</span>`                            : ''}
+                        </div>
+                        <div class="restaurant-address">${escHtml(address)}</div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            grid._data = list;
+        }
+
+        function selectRestaurant(id) {
+            const grid = document.getElementById('restaurantGrid');
+            state.restaurant = grid._data.find(r => r.fsq_id === id) || null;
+
+            document.querySelectorAll('.restaurant-card').forEach(el => {
+                el.classList.toggle('selected', el.dataset.id === id);
+            });
+
+            document.getElementById('restaurantNextBtn').disabled = false;
+        }
+
+        // ═══════════════════════════════════════
+        // Date & Time pickers
+        // ═══════════════════════════════════════
+
+        function buildTimePickers() {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('dateInput').min = tomorrow.toISOString().split('T')[0];
+            state.date = '';
+            state.time = '';
+            document.getElementById('dateNextBtn').disabled = true;
+
+            document.getElementById('lunchGrid').innerHTML  = lunchSlots.map(t  => timeChip(t)).join('');
+            document.getElementById('dinnerGrid').innerHTML = dinnerSlots.map(t => timeChip(t)).join('');
+        }
+
+        function timeChip(t) {
+            return `<button class="time-chip" onclick="selectTime('${t}')">${t}</button>`;
+        }
+
+        function selectTime(t) {
+            state.time = t;
+            document.querySelectorAll('.time-chip').forEach(el => {
+                el.classList.toggle('selected', el.textContent === t);
+            });
+            checkDateReady();
+        }
+
+        // ═══════════════════════════════════════
+        // Confirmation card
+        // ═══════════════════════════════════════
+
+        function buildConfirmCard() {
+            const r         = state.restaurant;
+            const rName     = r?.name || 'Your restaurant';
+            const address   = r?.location?.formatted_address || '';
+            const [y, mo, d] = state.date.split('-').map(Number);
+            const dateObj   = new Date(y, mo - 1, d);
+            const dateStr   = dateObj.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+
+            document.getElementById('confirmCard').innerHTML = `
+                <div class="confirm-emoji">🌹</div>
+                <div class="confirm-title">It's a date.</div>
+                <div class="confirm-restaurant">${escHtml(rName)}</div>
+                <div class="confirm-detail">${escHtml(dateStr)} at ${state.time}</div>
+                ${address ? `<div class="confirm-detail">${escHtml(address)}</div>` : ''}
+                <hr class="confirm-divider">
+                <p class="confirm-note">Can't wait, ${escHtml(state.name.split(' ')[0])}.</p>
+            `;
+        }
+
+        // ═══════════════════════════════════════
+        // Booking
+        // ═══════════════════════════════════════
+
+        function openBooking() {
+            const r       = state.restaurant;
+            const rName   = encodeURIComponent(r?.name || '');
+            const dt      = encodeURIComponent(`${state.date}T${state.time}`);
+
+            const target  = (r?.website && r.website !== '')
+                ? r.website
+                : `https://www.opentable.com/s/?term=${rName}&dateTime=${dt}&covers=2`;
+
+            window.open(target, '_blank', 'noopener');
+        }
+
+        // ═══════════════════════════════════════
+        // Calendar (.ics)
+        // ═══════════════════════════════════════
+
+        function downloadCalendar() {
+            const r       = state.restaurant;
+            const rName   = r?.name || 'Our Date';
+            const address = r?.location?.formatted_address || '';
+
+            // Date parts
+            const datePart = state.date.replace(/-/g, '');
+            const [h, m]   = state.time.split(':').map(Number);
+            const startStr = `${datePart}T${pad(h)}${pad(m)}00`;
+            const endStr   = `${datePart}T${pad(h + 2)}${pad(m)}00`;
+            const stampStr = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+
+            const ics = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Date Night//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VEVENT',
+                `UID:${Date.now()}@date-night`,
+                `DTSTAMP:${stampStr}`,
+                `DTSTART:${startStr}`,
+                `DTEND:${endStr}`,
+                `SUMMARY:Date night at ${rName}`,
+                `LOCATION:${address}`,
+                `DESCRIPTION:A date you're going to love.`,
+                'STATUS:CONFIRMED',
+                'END:VEVENT',
+                'END:VCALENDAR',
+            ].join('\r\n');
+
+            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.href     = url;
+            a.download = 'date-night.ics';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ═══════════════════════════════════════
+        // Config panel
+        // ═══════════════════════════════════════
+
+        function toggleConfig() {
+            const panel = document.getElementById('configOverlay');
+            const hidden = panel.classList.toggle('hidden');
+            if (!hidden) {
+                document.getElementById('fsqKeyInput').value   = fsqKey;
+                document.getElementById('customMsgInput').value = customMsg;
+            }
+        }
+
+        function saveConfig() {
+            fsqKey    = document.getElementById('fsqKeyInput').value.trim();
+            customMsg = document.getElementById('customMsgInput').value.trim();
+            if (fsqKey)    localStorage.setItem('date_fsq_key', fsqKey);
+            else           localStorage.removeItem('date_fsq_key');
+            if (customMsg) localStorage.setItem('date_msg', customMsg);
+            else           localStorage.removeItem('date_msg');
+            if (customMsg) document.getElementById('openingMsg').textContent = customMsg;
+            toggleConfig();
+        }
+
+        // ═══════════════════════════════════════
+        // Utilities
+        // ═══════════════════════════════════════
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function escHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // ═══════════════════════════════════════
+        // Init
+        // ═══════════════════════════════════════
+
+        buildCuisineGrid();
+        buildVibeGrid();
+
+        if (customMsg) {
+            document.getElementById('openingMsg').textContent = customMsg;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && currentStep === 2) onDetailsNext();
+        });
+
+        // Close config on overlay click
+        document.getElementById('configOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) toggleConfig();
+        });
+    </script>
+</body>
+</html>

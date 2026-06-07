@@ -390,6 +390,7 @@
                     <div class="project-filters">
                         <button class="filter-btn active" data-filter="all">All</button>
                         <button class="filter-btn" data-filter="ai-tools">AI Tools</button>
+                        <button class="filter-btn" data-filter="engineering">Engineering</button>
                         <button class="filter-btn" data-filter="research">Research</button>
                         <button class="filter-btn" data-filter="writing">Writing &amp; Docs</button>
                         <button class="filter-btn" data-filter="operations">Operations</button>
@@ -2497,6 +2498,112 @@
                         </p>
                     </div>
                     </div><!-- /project-block -->
+
+                    <div class="project-block" data-category="engineering research">
+
+                    <!-- ====================================================
+                         DATE PROPOSAL WEBSITE
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Date Proposal Website <span class="badge bg-warning text-dark" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>A recreation and technical deconstruction of a viral moment: a developer who built a website to ask someone out on a date — complete with a "No" button that runs from the cursor, progressive preference questions, live restaurant discovery, table booking, and a calendar invite delivered to her phone. The project started as a research question — <em>how much of this was technically real, and how much was a well-designed illusion?</em> — and became a working tool.</p>
+                        <p style="margin-top: 10px;">The interesting part isn't the UI mechanics. The interesting part is the booking. There is no public API that lets a third party programmatically complete a restaurant reservation — not OpenTable, not Resy, not Tock. What looked like magic was almost certainly a pre-constructed OpenTable deep-link with the restaurant, date, and party size already filled in. She booked it herself. She just didn't know she was the one doing it.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>The running No button</strong> — Mouse proximity detection via <code>mousemove</code> events, <code>getBoundingClientRect()</code> for position, trigonometry for the escape direction. Switches from inline to fixed positioning on first escape to avoid a visible jump. Fades out after five near-misses. Mobile fallback degrades the button text through three taps before disabling it.</li>
+                                <li><strong>Restaurant discovery via Foursquare</strong> — Cuisine + location filtering, price tier matching (Casual / Date Night / Fine Dining), photos, ratings, and addresses. Free tier gives 10,000 calls/month. Foursquare v3 supports CORS from the browser natively — no proxy required.</li>
+                                <li><strong>Calendar invite in 30 lines</strong> — Generates and downloads an <code>.ics</code> file (RFC 5545 iCalendar format). Opens natively in Google Calendar, Apple Calendar, and Outlook on any device. When accepted it triggers reminders like any other event.</li>
+                                <li><strong>The booking gap is documented, not hidden</strong> — The README explains exactly why true programmatic booking doesn't exist for outside developers, and what the "Book the table" button actually does (an OpenTable search deep-link pre-filled with restaurant, date, time, and party size).</li>
+                                <li><strong>Demo mode</strong> — Without a Foursquare API key, the tool runs with sample restaurants and a simulated loading delay. The experience is identical. No broken state for portfolio visitors.</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Programmatic table booking doesn't exist via public API</strong> — OpenTable has an affiliate program (3–4 week approval, still a deep-link handoff, not a booking). Resy is enterprise-only. The third-party Apify wrapper ($3.99/booking) is ToS-violating and fragile. The booking step is an honest handoff, not real automation.</li>
+                                <li><strong>Foursquare API key required for live data</strong> — The tool ships with demo restaurants without one. The config panel (⚙ gear icon) handles setup without disrupting the experience for the recipient.</li>
+                                <li><strong>No email sending</strong> — The calendar invite downloads as an <code>.ics</code> file rather than being emailed. EmailJS (free: 200 emails/month) would close this gap.</li>
+                                <li><strong>Desktop-first mechanic</strong> — The No button escape uses <code>mousemove</code> events, which don't fire on touch devices. Mobile gets a tap-degradation fallback instead.</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>EmailJS integration</strong> — Collect an email address early in the flow and auto-send the <code>.ics</code> as an attachment on confirmation. Free tier covers 200 emails/month. Closes the gap between downloading and receiving.</li>
+                                <li><strong>Sender personalisation mode</strong> — A <code>?setup</code> URL parameter opens extended config: custom opening message, pre-selected restaurants to steer the choice, a locked-in date. The "sinister version" — fully documented.</li>
+                                <li><strong>OpenTable affiliate integration</strong> — Currently a search deep-link. With affiliate approval, a cleaner availability-surfacing handoff with direct reservation links per restaurant.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Foursquare Places API</span>
+                            <span class="tech-tag">iCalendar (.ics)</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">No backend</span>
+                        </p>
+                        <a class="tool-link-badge" href="date-proposal/" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-07 — building</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v1 complete. Full seven-step wizard: the question, name and location, cuisine, vibe, restaurant selection (Foursquare API or demo), date and time, confirmation. Calendar <code>.ics</code> generation working. OpenTable deep-link booking handoff working. Config panel for sender API key setup — saves to <code>localStorage</code>, invisible to the recipient.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 4 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        White background and Nunito font. Every other tool in this portfolio is dark — intentionally. This site should look like something built for a person, not a developer. The constraint in the brief was aesthetic before it was technical: bubbly, clean, fluid. Nunito's rounded letterforms suit the tone. One accent colour (rose #E8739A) used across the whole experience, nothing else.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The No button starts as an inline element and switches to <code>position: fixed</code> on the first escape, recording its <code>getBoundingClientRect()</code> coordinates first so the switch is invisible. After that it moves via <code>left</code>/<code>top</code> in fixed space. On mobile, <code>mousemove</code> events don't fire — instead three clicks degrade the button text ("Are you sure?" → "Really...?" → vanish). Same behavioural outcome, different mechanism.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Foursquare over Yelp. Yelp eliminated their free tier mid-2025 with minimal notice — now ~$8–$15 per 1,000 calls. Foursquare's basic tier gives 10,000 free calls/month with cuisine search, price tiers, photos, and addresses. More than adequate. Foursquare v3 also allows CORS from the browser directly — no proxy needed, keeping the no-backend principle intact.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — research</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The booking gap. No public API exists for programmatically completing a restaurant reservation — OpenTable, Resy, and Tock are all gated behind partnership agreements or don't exist for outside developers at all. The original viral site was almost certainly constructing a pre-filled OpenTable deep-link. She completed the booking herself. The site made her feel like it happened automatically. The "Book the table" button in this project does the same thing and the README says so clearly.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Date Proposal Website -->
 
             <!-- Working with Spec -->
             <div class="tab-pane fade" id="working-with-spec" role="tabpanel">
