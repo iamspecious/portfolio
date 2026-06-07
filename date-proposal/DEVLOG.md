@@ -4,6 +4,32 @@
 
 ---
 
+## Entry 007 — Demo Mode Bug, Location Label, and Roadmap Expansion
+
+**Date:** June 2026
+**Status:** Fixed / Planning
+
+**Bug: demo mode returned the same restaurants for every location and cuisine.**
+
+The original fallback data was a single hardcoded array of four restaurants — La Petite Fleur, Sakura Garden, Il Cielo, The Garden Room — returned unconditionally whenever no Foursquare API key was configured. Trying London then Ghent produced identical results. Selecting Italian then Mexican produced identical results. The data wasn't wrong, it just wasn't aware of anything the user had told it.
+
+Fixed by replacing the single array with a `demoRestaurantsByCuisine` object keyed by cuisine ID. Each of the six cuisines now maps to four contextually appropriate restaurant names. The addresses remain generic (the demo genuinely doesn't know the location) but the names at least match what was asked for. An info-styled banner now appears in demo mode explaining the situation and pointing to the config panel — honesty over pretending the results are real.
+
+**Label change: "And where are you?" → "Where would you like to go?"**
+
+The original wording implied the person's current location. The field is actually asking where they want to go for the date — a destination question, not a presence question. Small change, more accurate.
+
+**Roadmap expansion: activity type selection.**
+
+The next logical evolution of the experience is asking *what kind* of date it is before asking where. Four options, four different discovery paths:
+
+- **Food** — existing restaurant flow, unchanged.
+- **Coffee** — same Foursquare query, category switched to `café`. No booking step needed. Flow is shorter.
+- **Activity** — Eventbrite has a free REST API (no OAuth) for location-based event search by category and date. Meetup.com uses GraphQL with OAuth but has broader recurring-meetup coverage. Either is a realistic implementation path.
+- **Cinema** — the hardest. No universal showtimes API. Realistic approach: TMDB (free, API-key-only) for film discovery and posters, then a search deep-link to the local cinema's booking page. Same handoff model as restaurants — looks like discovery, ends at the venue's own booking flow.
+
+---
+
 ## Entry 006 — UX Fixes: Name Collection and Sticky Button
 
 **Date:** June 2026

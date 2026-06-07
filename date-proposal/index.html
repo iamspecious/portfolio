@@ -743,9 +743,9 @@
     <div class="step" id="step-2">
         <div class="headline" id="gladHeadline">I'm so glad,</div>
         <input type="text" class="name-blank-input" id="nameInput" placeholder="your name" autocomplete="off" maxlength="40">
-        <p class="subline" style="margin-bottom: 16px;">And where are you?</p>
+        <p class="subline" style="margin-bottom: 16px;">Where would you like to go?</p>
         <div class="input-stack" style="margin-bottom: 28px;">
-            <input type="text" class="text-input" id="locationInput" placeholder="City or neighbourhood" autocomplete="off">
+            <input type="text" class="text-input" id="locationInput" placeholder="City, neighbourhood, or area" autocomplete="off">
         </div>
         <button class="btn-primary" onclick="onDetailsNext()">Let's go →</button>
     </div>
@@ -855,12 +855,46 @@
         const lunchSlots  = ['11:30', '12:00', '12:30', '13:00'];
         const dinnerSlots = ['18:30', '19:00', '19:30', '20:00', '20:30'];
 
-        const demoRestaurants = [
-            { fsq_id: 'd1', name: 'La Petite Fleur',  rating: 9.1, price: 3, location: { formatted_address: '12 Rosewood Lane, Garden Quarter' }, photos: [], website: '' },
-            { fsq_id: 'd2', name: 'Sakura Garden',    rating: 8.7, price: 2, location: { formatted_address: '44 Blossom Street, Riverside' },       photos: [], website: '' },
-            { fsq_id: 'd3', name: 'Il Cielo',         rating: 8.9, price: 3, location: { formatted_address: '7 Castello Road, Old Town' },           photos: [], website: '' },
-            { fsq_id: 'd4', name: 'The Garden Room',  rating: 8.4, price: 2, location: { formatted_address: '3 Garden Square, Northside' },          photos: [], website: '' },
-        ];
+        // Cuisine-specific demo data — used when no Foursquare API key is configured.
+        // Generic addresses intentionally, since location isn't resolved in demo mode.
+        const demoRestaurantsByCuisine = {
+            italian: [
+                { fsq_id: 'i1', name: 'Il Forno',           rating: 9.0, price: 3, location: { formatted_address: '14 Via Roma, Old Quarter'          }, photos: [], website: '' },
+                { fsq_id: 'i2', name: 'Osteria della Rosa',  rating: 8.6, price: 2, location: { formatted_address: '7 Garden Street, West End'          }, photos: [], website: '' },
+                { fsq_id: 'i3', name: 'La Cucina',           rating: 8.8, price: 3, location: { formatted_address: '22 Market Lane, City Centre'         }, photos: [], website: '' },
+                { fsq_id: 'i4', name: 'Trattoria Giardino',  rating: 8.4, price: 2, location: { formatted_address: '3 Bloom Square, Riverside'           }, photos: [], website: '' },
+            ],
+            japanese: [
+                { fsq_id: 'j1', name: 'Sakura',              rating: 9.1, price: 3, location: { formatted_address: '18 Harbour Road, Waterfront'         }, photos: [], website: '' },
+                { fsq_id: 'j2', name: 'Nishiki',             rating: 8.5, price: 2, location: { formatted_address: '31 Oak Street, Midtown'              }, photos: [], website: '' },
+                { fsq_id: 'j3', name: 'Yuki',                rating: 8.9, price: 3, location: { formatted_address: '9 Pine Lane, East Village'           }, photos: [], website: '' },
+                { fsq_id: 'j4', name: 'Hana',                rating: 8.7, price: 2, location: { formatted_address: '44 Cedar Row, North Quarter'         }, photos: [], website: '' },
+            ],
+            french: [
+                { fsq_id: 'f1', name: 'La Petite Fleur',     rating: 9.2, price: 4, location: { formatted_address: '12 Rosewood Lane, Garden Quarter'    }, photos: [], website: '' },
+                { fsq_id: 'f2', name: 'Brasserie Lyon',      rating: 8.6, price: 3, location: { formatted_address: '5 Boulevard West, City Centre'        }, photos: [], website: '' },
+                { fsq_id: 'f3', name: 'Chez Marcel',         rating: 8.8, price: 3, location: { formatted_address: '28 Elm Street, South Quarter'         }, photos: [], website: '' },
+                { fsq_id: 'f4', name: 'Le Jardin',           rating: 9.0, price: 4, location: { formatted_address: '1 Palace Gate, Heritage District'     }, photos: [], website: '' },
+            ],
+            mexican: [
+                { fsq_id: 'm1', name: 'Casa Azteca',         rating: 8.8, price: 2, location: { formatted_address: '7 Spice Row, Market District'         }, photos: [], website: '' },
+                { fsq_id: 'm2', name: 'El Rancho',           rating: 8.4, price: 1, location: { formatted_address: '19 Sun Street, West Quarter'          }, photos: [], website: '' },
+                { fsq_id: 'm3', name: 'La Cantina',          rating: 8.7, price: 2, location: { formatted_address: '33 Cobble Lane, Old Town'             }, photos: [], website: '' },
+                { fsq_id: 'm4', name: 'Fuego',               rating: 9.0, price: 3, location: { formatted_address: '2 Flame Yard, Arts Quarter'           }, photos: [], website: '' },
+            ],
+            indian: [
+                { fsq_id: 'n1', name: 'Spice Garden',        rating: 8.9, price: 2, location: { formatted_address: '15 Saffron Street, South End'         }, photos: [], website: '' },
+                { fsq_id: 'n2', name: 'The Maharaja',        rating: 8.5, price: 3, location: { formatted_address: '8 Palace Road, Heritage Quarter'       }, photos: [], website: '' },
+                { fsq_id: 'n3', name: 'Bombay Kitchen',      rating: 8.7, price: 2, location: { formatted_address: '27 Curry Mile, East District'          }, photos: [], website: '' },
+                { fsq_id: 'n4', name: 'Masala Bay',          rating: 9.1, price: 3, location: { formatted_address: '4 Harbour View, Waterfront'            }, photos: [], website: '' },
+            ],
+            american: [
+                { fsq_id: 'a1', name: 'The Yard',            rating: 8.6, price: 2, location: { formatted_address: '3 Garden Square, Northside'           }, photos: [], website: '' },
+                { fsq_id: 'a2', name: 'Smoke & Salt',        rating: 9.0, price: 3, location: { formatted_address: '17 Brick Lane, East Quarter'          }, photos: [], website: '' },
+                { fsq_id: 'a3', name: 'Borough Grill',       rating: 8.4, price: 2, location: { formatted_address: '44 Market Street, City Centre'         }, photos: [], website: '' },
+                { fsq_id: 'a4', name: 'The Garden Room',     rating: 8.8, price: 3, location: { formatted_address: '22 Park Avenue, West End'             }, photos: [], website: '' },
+            ],
+        };
 
         // ═══════════════════════════════════════
         // No button — the famous mechanic
@@ -1084,13 +1118,17 @@
                     results = await fetchFoursquare();
                 } catch (err) {
                     console.warn('Foursquare error:', err.message);
-                    results = demoRestaurants;
+                    results = getDemoRestaurants();
                     errEl.textContent = 'Could not reach Foursquare — showing sample restaurants.';
+                    errEl.style.cssText = '';
                     errEl.classList.remove('hidden');
                 }
             } else {
-                await new Promise(r => setTimeout(r, 1400));
-                results = demoRestaurants;
+                await new Promise(r => setTimeout(r, 1200));
+                results = getDemoRestaurants();
+                errEl.textContent = `Sample results only — add a Foursquare key via ⚙ for real ${state.cuisine.label} spots near ${state.location}.`;
+                errEl.style.cssText = 'background:#f0f4ff; border-color:#c0d0f5; color:#3a5cb5;';
+                errEl.classList.remove('hidden');
             }
 
             const topFour = results.slice(0, 4);
@@ -1100,6 +1138,10 @@
 
             document.getElementById('restaurantSubline').textContent =
                 `A few places I think you'll love, ${state.name.split(' ')[0]}.`;
+        }
+
+        function getDemoRestaurants() {
+            return demoRestaurantsByCuisine[state.cuisine?.id] || demoRestaurantsByCuisine.french;
         }
 
         async function fetchFoursquare() {
