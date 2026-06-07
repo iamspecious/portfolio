@@ -647,6 +647,57 @@
         }
 
         .config-hint a { color: #ccc; }
+
+        /* ── Name fill-in-the-blank ──────────────── */
+
+        .name-blank-input {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(2.4rem, 6.5vw, 4rem);
+            font-weight: 800;
+            color: var(--rose);
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid var(--rose-border);
+            outline: none;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            letter-spacing: -0.025em;
+            padding: 2px 8px 6px;
+            margin-bottom: 24px;
+            transition: border-color 0.2s;
+            display: block;
+        }
+
+        .name-blank-input::placeholder {
+            color: #edccd8;
+            font-weight: 300;
+        }
+
+        .name-blank-input:focus {
+            border-bottom-color: var(--rose);
+        }
+
+        /* ── Sticky restaurant proceed button ───── */
+
+        #stickyProceed {
+            position: fixed;
+            bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+            left: 50%;
+            transform: translateX(-50%) translateY(16px);
+            z-index: 150;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+            box-shadow: 0 6px 28px rgba(232, 115, 154, 0.4);
+        }
+
+        #stickyProceed.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -661,8 +712,10 @@
     <div id="configOverlay" class="hidden">
         <div class="config-box">
             <div class="config-title">Configure</div>
-            <p class="config-desc">Add a Foursquare API key to pull live restaurants. Without one the demo runs with sample data. Your key lives in this browser only — it never leaves your device.</p>
-            <div class="config-label">Foursquare API Key</div>
+            <p class="config-desc">Set up before sharing the link. Your settings live in this browser only — they never leave your device.</p>
+            <div class="config-label">Their name (pre-fills so they never have to type it)</div>
+            <input type="text" id="recipientNameInput" class="config-input" placeholder="e.g. Sophie" autocomplete="off" maxlength="40">
+            <div class="config-label">Foursquare API Key (for live restaurants)</div>
             <input type="password" id="fsqKeyInput" class="config-input" placeholder="fsq3XXXXXXXXXXXXXXXXX" autocomplete="off">
             <div class="config-label">Opening message</div>
             <input type="text" id="customMsgInput" class="config-input" placeholder="I've been wanting to ask you this for a while." maxlength="120">
@@ -688,10 +741,10 @@
          STEP 2 — Name & Location
     ════════════════════════════════════════ -->
     <div class="step" id="step-2">
-        <div class="headline">I'm so glad.</div>
-        <p class="subline">Let's plan something you'll love.<br>What's your name, and where are you?</p>
-        <div class="input-stack">
-            <input type="text" class="text-input" id="nameInput" placeholder="Your name" autocomplete="off">
+        <div class="headline" id="gladHeadline">I'm so glad,</div>
+        <input type="text" class="name-blank-input" id="nameInput" placeholder="your name" autocomplete="off" maxlength="40">
+        <p class="subline" style="margin-bottom: 16px;">And where are you?</p>
+        <div class="input-stack" style="margin-bottom: 28px;">
             <input type="text" class="text-input" id="locationInput" placeholder="City or neighbourhood" autocomplete="off">
         </div>
         <button class="btn-primary" onclick="onDetailsNext()">Let's go →</button>
@@ -727,8 +780,11 @@
         </div>
         <div class="restaurant-grid" id="restaurantGrid" style="display:none;"></div>
         <div id="restaurantError" class="error-banner hidden"></div>
-        <button class="btn-primary" id="restaurantNextBtn" onclick="goToStep(6)" disabled style="display:none; margin-top: 12px;">That's the one →</button>
+        <div style="height: 88px;"></div><!-- spacer so last card clears the sticky button -->
     </div>
+
+    <!-- Sticky proceed button (step 5 only) -->
+    <button id="stickyProceed" class="btn-primary" onclick="goToStep(6)">That's the one →</button>
 
     <!-- ════════════════════════════════════════
          STEP 6 — Date & Time
@@ -763,8 +819,9 @@
         // Config & State
         // ═══════════════════════════════════════
 
-        let fsqKey    = localStorage.getItem('date_fsq_key') || '';
-        let customMsg = localStorage.getItem('date_msg')     || '';
+        let fsqKey        = localStorage.getItem('date_fsq_key')   || '';
+        let customMsg     = localStorage.getItem('date_msg')       || '';
+        let recipientName = localStorage.getItem('date_rec_name') || '';
 
         const state = {
             name:       '',
@@ -884,6 +941,12 @@
             renderDots(n);
             window.scrollTo(0, 0);
 
+            // Allow scrolling on restaurant step so all cards and the sticky button are reachable
+            document.body.style.overflowY = (n === 5) ? 'auto' : '';
+
+            // Hide sticky proceed button when leaving step 5
+            if (n !== 5) document.getElementById('stickyProceed').classList.remove('visible');
+
             if (n === 5) loadRestaurants();
             if (n === 6) buildTimePickers();
         }
@@ -919,9 +982,16 @@
         }
 
         function onDetailsNext() {
-            const name     = document.getElementById('nameInput').value.trim();
+            const nameEl   = document.getElementById('nameInput');
             const location = document.getElementById('locationInput').value.trim();
-            if (!name || !location) return;
+            if (!location) return;
+
+            // Use pre-configured name if the input is hidden, otherwise read it
+            const name = (nameEl.style.display === 'none')
+                ? recipientName
+                : nameEl.value.trim();
+            if (!name) return;
+
             state.name     = name;
             state.location = location;
 
@@ -997,11 +1067,9 @@
             const grid    = document.getElementById('restaurantGrid');
             const loading = document.getElementById('restaurantLoading');
             const errEl   = document.getElementById('restaurantError');
-            const nextBtn = document.getElementById('restaurantNextBtn');
 
-            grid.style.display  = 'none';
-            nextBtn.style.display = 'none';
-            nextBtn.disabled    = true;
+            grid.style.display = 'none';
+            document.getElementById('stickyProceed').classList.remove('visible');
             loading.classList.remove('hidden');
             errEl.classList.add('hidden');
             state.restaurant = null;
@@ -1028,8 +1096,7 @@
             const topFour = results.slice(0, 4);
             loading.classList.add('hidden');
             renderRestaurantCards(topFour);
-            grid.style.display    = 'grid';
-            nextBtn.style.display = 'block';
+            grid.style.display = 'grid';
 
             document.getElementById('restaurantSubline').textContent =
                 `A few places I think you'll love, ${state.name.split(' ')[0]}.`;
@@ -1098,7 +1165,7 @@
                 el.classList.toggle('selected', el.dataset.id === id);
             });
 
-            document.getElementById('restaurantNextBtn').disabled = false;
+            document.getElementById('stickyProceed').classList.add('visible');
         }
 
         // ═══════════════════════════════════════
@@ -1220,20 +1287,41 @@
             const panel = document.getElementById('configOverlay');
             const hidden = panel.classList.toggle('hidden');
             if (!hidden) {
-                document.getElementById('fsqKeyInput').value   = fsqKey;
-                document.getElementById('customMsgInput').value = customMsg;
+                document.getElementById('recipientNameInput').value = recipientName;
+                document.getElementById('fsqKeyInput').value        = fsqKey;
+                document.getElementById('customMsgInput').value     = customMsg;
             }
         }
 
         function saveConfig() {
-            fsqKey    = document.getElementById('fsqKeyInput').value.trim();
-            customMsg = document.getElementById('customMsgInput').value.trim();
-            if (fsqKey)    localStorage.setItem('date_fsq_key', fsqKey);
-            else           localStorage.removeItem('date_fsq_key');
-            if (customMsg) localStorage.setItem('date_msg', customMsg);
-            else           localStorage.removeItem('date_msg');
+            recipientName = document.getElementById('recipientNameInput').value.trim();
+            fsqKey        = document.getElementById('fsqKeyInput').value.trim();
+            customMsg     = document.getElementById('customMsgInput').value.trim();
+
+            if (recipientName) localStorage.setItem('date_rec_name', recipientName);
+            else               localStorage.removeItem('date_rec_name');
+            if (fsqKey)        localStorage.setItem('date_fsq_key', fsqKey);
+            else               localStorage.removeItem('date_fsq_key');
+            if (customMsg)     localStorage.setItem('date_msg', customMsg);
+            else               localStorage.removeItem('date_msg');
+
             if (customMsg) document.getElementById('openingMsg').textContent = customMsg;
+            applyRecipientName();
             toggleConfig();
+        }
+
+        function applyRecipientName() {
+            const nameInput  = document.getElementById('nameInput');
+            const gladEl     = document.getElementById('gladHeadline');
+            if (recipientName) {
+                // Pre-filled: show personalized headline, hide input field
+                gladEl.textContent     = `I'm so glad, ${recipientName}.`;
+                nameInput.style.display = 'none';
+            } else {
+                // Not pre-filled: show fill-in-the-blank
+                gladEl.textContent     = "I'm so glad,";
+                nameInput.style.display = '';
+            }
         }
 
         // ═══════════════════════════════════════
@@ -1256,6 +1344,7 @@
 
         buildCuisineGrid();
         buildVibeGrid();
+        applyRecipientName();
 
         if (customMsg) {
             document.getElementById('openingMsg').textContent = customMsg;
