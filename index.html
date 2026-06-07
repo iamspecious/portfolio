@@ -2556,6 +2556,22 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-06-07 — fix</span>
+                                <p>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Two UX fixes. Name collection is now a fill-in-the-blank embedded in the headline — the input is styled at headline scale with just a bottom border, so "I'm so glad, ______" reads as a sentence rather than a form field. If the sender pre-fills the recipient's name via the config panel, that step is replaced with a fully personalised "I'm so glad, [Name]." headline and the question never appears at all. Restaurant step: "That's the one →" is now a fixed button anchored to the bottom of the viewport, sliding up from below the moment a card is selected — visible on any screen size without scrolling.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-07</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The sticky button fix exposed a secondary issue: <code>body { overflow: hidden }</code> was blocking scroll on the restaurant step, clipping the bottom card behind the viewport edge on portrait mobile. Re-enabling scroll on step 5 only, plus an 88px spacer below the grid, means all four cards are reachable — the sticky button is just the faster path, not the only one.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-06-07 — building</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>

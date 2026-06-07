@@ -4,6 +4,23 @@
 
 ---
 
+## Entry 006 — UX Fixes: Name Collection and Sticky Button
+
+**Date:** June 2026
+**Status:** Fixed
+
+Two issues surfaced on mobile testing.
+
+**Name collection.** The original Step 2 had two plain text inputs — name and location — which read as a form rather than an experience. Replaced with a fill-in-the-blank embedded in the headline: "I'm so glad, ______." The input is styled at the same scale as the headline text, rose-coloured when active, with just a bottom border. It reads as a sentence the user completes, not a field they fill. Location stays as a standard input below it since "Where are you?" is innocuous enough to not need disguising.
+
+Added a recipient name field to the sender config panel (⚙). If the sender pre-fills it before sharing the link, Step 2 is replaced with a fully personalised "I'm so glad, [Name]." headline — the question never appears at all. This is the cleaner path when the sender already knows the name, which is presumably always.
+
+**Restaurant step button.** On portrait mobile the four restaurant cards fill the viewport height, pushing the proceed button off-screen below the fold. Fixed by switching to a `position: fixed` sticky button anchored to the bottom of the viewport (`bottom: 28px + env(safe-area-inset-bottom)`). It starts invisible and slides up from below as soon as a card is selected. No scrolling required.
+
+Secondary issue exposed by the fix: `body { overflow: hidden }` was preventing scroll on the restaurant step, so the bottom card was also partially clipped. Re-enabled `overflow-y: auto` on the body when step 5 is active, and added an 88px spacer below the restaurant grid so the last card clears the sticky button. The sticky button is the fast path; scrolling is available as a fallback.
+
+---
+
 ## Entry 001 — The Research Question
 
 **Date:** June 2026
