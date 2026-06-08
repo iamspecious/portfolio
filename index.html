@@ -2559,48 +2559,64 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06-08 — building</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Built the full activity type selector: four paths, one flow. <em>Food</em> — existing restaurant path, unchanged. <em>Coffee</em> — Foursquare café search, no booking step, morning/afternoon time slots. <em>Activity</em> — Eventbrite API with Arts, Sports, Music, and Classes categories; skips date/time since events have their own date. <em>Cinema</em> — TMDB now-playing films with genre filtering; skips date/time; "Find Showtimes" deep-links to a Google search. Step architecture changed from numeric IDs to semantic string IDs with a <code>FLOWS</code> routing object — each path is an array of step IDs, progress dots compute from the current path. Config panel expanded from two fields to five (name, message, Foursquare key, Eventbrite key, TMDB key). All three APIs have contextually appropriate demo fallbacks.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-06-07 — fix</span>
-                                <p>
-                                    <span class="tag tag-done">Fixed</span>
-                                    Demo mode was returning the same four restaurants regardless of cuisine or location — a hardcoded list that didn't change between sessions. Fixed by making demo data cuisine-specific: each of the six cuisine types now maps to its own set of four plausible restaurant names, so the cards at least match what was selected. An info banner now tells the user they're seeing sample results and where to add an API key for real ones. Also: changed location field label from "And where are you?" to "Where would you like to go?" — more accurate since it's asking about the destination, not the person's current position.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-06-07 — fix</span>
-                                <p>
-                                    <span class="tag tag-done">Fixed</span>
-                                    Two UX fixes. Name collection is now a fill-in-the-blank embedded in the headline — the input is styled at headline scale with just a bottom border, so "I'm so glad, ______" reads as a sentence rather than a form field. If the sender pre-fills the recipient's name via the config panel, that step is replaced with a fully personalised "I'm so glad, [Name]." headline and the question never appears at all. Restaurant step: "That's the one →" is now a fixed button anchored to the bottom of the viewport, sliding up from below the moment a card is selected — visible on any screen size without scrolling.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-06-07</span>
+                                <span class="timestamp">2026-06-08 — research</span>
                                 <p>
                                     <span class="tag tag-decision">Decision</span>
-                                    The sticky button fix exposed a secondary issue: <code>body { overflow: hidden }</code> was blocking scroll on the restaurant step, clipping the bottom card behind the viewport edge on portrait mobile. Re-enabling scroll on step 5 only, plus an 88px spacer below the grid, means all four cards are reachable — the sticky button is just the faster path, not the only one.
+                                    Mapped the local listings problem for cinema and theatre. No cinema chain (Vue, Odeon, Cineworld, AMC, UCI) has a public API — the data is locked in proprietary booking systems. TMDB gives film metadata only, not showtimes or venues. The best universal handoff is a structured Google search deep-link: Google aggregates real-time showtime data from chains worldwide and surfaces it as a rich widget. For theatre and professional events, <strong>Ticketmaster Discovery API</strong> (free, 5,000 calls/day, covers Europe) is a better fit than Eventbrite — returns actual shows with venue, date, time, and direct booking links. Eventbrite stays for community events and workshops.
                                 </p>
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06-07 — building</span>
+                                <span class="timestamp">2026-06-08 — planning</span>
                                 <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v1 complete. Full seven-step wizard: the question, name and location, cuisine, vibe, restaurant selection (Foursquare API or demo), date and time, confirmation. Calendar <code>.ics</code> generation working. OpenTable deep-link booking handoff working. Config panel for sender API key setup — saves to <code>localStorage</code>, invisible to the recipient.
+                                    <span class="tag tag-decision">Decision</span>
+                                    New transport step before confirm: <em>I'll pick you up</em> (collects their address, generates two separate <code>.ics</code> files — the event and a "Collect [Name] from [address]" reminder timed 40 minutes before), <em>I'll book a taxi</em> (notes it in the ICS description, optionally deep-links to Uber pre-filled with the venue address), or <em>You'll make your own way</em> (single ICS, no extra inputs). Two files rather than one combined event — cleaner for the recipient and simpler to implement.
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 9 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-08 — building</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Built the full activity type selector: four paths, one flow. <em>Food</em> — existing restaurant path, unchanged. <em>Coffee</em> — Foursquare café search, no booking step, morning/afternoon time slots. <em>Activity</em> — Eventbrite API with Arts, Sports, Music, and Classes categories; skips date/time since events have their own date. <em>Cinema</em> — TMDB now-playing films with genre filtering; skips date/time; "Find Showtimes" deep-links to a Google search. Step architecture changed from numeric IDs to semantic string IDs with a <code>FLOWS</code> routing object — each path is an array of step IDs, progress dots compute from the current path. Config panel expanded from two fields to five (name, message, Foursquare key, Eventbrite key, TMDB key). All three APIs have contextually appropriate demo fallbacks.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — fix</span>
+                                    <p>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Demo mode was returning the same four restaurants regardless of cuisine or location — a hardcoded list that didn't change between sessions. Fixed by making demo data cuisine-specific: each of the six cuisine types now maps to its own set of four plausible restaurant names, so the cards at least match what was selected. An info banner now tells the user they're seeing sample results and where to add an API key for real ones. Also: changed location field label from "And where are you?" to "Where would you like to go?" — more accurate since it's asking about the destination, not the person's current position.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — fix</span>
+                                    <p>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Two UX fixes. Name collection is now a fill-in-the-blank embedded in the headline — the input is styled at headline scale with just a bottom border, so "I'm so glad, ______" reads as a sentence rather than a form field. If the sender pre-fills the recipient's name via the config panel, that step is replaced with a fully personalised "I'm so glad, [Name]." headline and the question never appears at all. Restaurant step: "That's the one →" is now a fixed button anchored to the bottom of the viewport, sliding up from below the moment a card is selected — visible on any screen size without scrolling.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The sticky button fix exposed a secondary issue: <code>body { overflow: hidden }</code> was blocking scroll on the restaurant step, clipping the bottom card behind the viewport edge on portrait mobile. Re-enabling scroll on step 5 only, plus an 88px spacer below the grid, means all four cards are reachable — the sticky button is just the faster path, not the only one.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — building</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        v1 complete. Full seven-step wizard: the question, name and location, cuisine, vibe, restaurant selection (Foursquare API or demo), date and time, confirmation. Calendar <code>.ics</code> generation working. OpenTable deep-link booking handoff working. Config panel for sender API key setup — saves to <code>localStorage</code>, invisible to the recipient.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-06-07</span>
