@@ -21,12 +21,10 @@
             --bg:          #FAFAFA;
         }
 
-        html, body {
-            height: 100%;
-        }
+        html, body { height: 100%; }
 
         body {
-            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Nunito', -apple-system, sans-serif;
             background: var(--bg);
             min-height: 100dvh;
             display: flex;
@@ -74,9 +72,9 @@
             font-size: 1.05rem;
             color: var(--muted);
             font-weight: 400;
-            margin-bottom: 48px;
+            margin-bottom: 44px;
             line-height: 1.65;
-            max-width: 360px;
+            max-width: 380px;
         }
 
         /* ── Buttons ────────────────────────── */
@@ -91,32 +89,25 @@
             font-weight: 700;
             border-radius: 100px;
             cursor: pointer;
-            transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            transition: background .2s, transform .15s, box-shadow .2s;
             box-shadow: 0 6px 24px var(--shadow);
-            letter-spacing: 0.01em;
         }
 
-        .btn-yes:hover {
-            background: var(--rose-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px var(--shadow);
-        }
-
+        .btn-yes:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 12px 32px var(--shadow); }
         .btn-yes:active { transform: translateY(0); }
 
         #noBtn {
-            /* Starts inline, JS switches to fixed on first escape */
             background: transparent;
             color: #ccc;
             border: 1.5px solid #e8e8e8;
             padding: 11px 26px;
             font-family: 'Nunito', sans-serif;
-            font-size: 0.88rem;
+            font-size: .88rem;
             font-weight: 600;
             border-radius: 100px;
             cursor: pointer;
             margin-top: 18px;
-            transition: opacity 0.3s ease, color 0.2s ease;
+            transition: opacity .3s;
             user-select: none;
         }
 
@@ -130,22 +121,12 @@
             font-weight: 700;
             border-radius: 100px;
             cursor: pointer;
-            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            transition: background .2s, transform .15s, box-shadow .2s;
             box-shadow: 0 4px 18px var(--shadow);
         }
 
-        .btn-primary:hover {
-            background: var(--rose-dark);
-            transform: translateY(-1px);
-        }
-
-        .btn-primary:disabled {
-            background: #e0e0e0;
-            color: #bbb;
-            box-shadow: none;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-primary:hover { background: var(--rose-dark); transform: translateY(-1px); }
+        .btn-primary:disabled { background: #e0e0e0; color: #bbb; box-shadow: none; cursor: not-allowed; transform: none; }
 
         .btn-secondary {
             background: transparent;
@@ -157,24 +138,14 @@
             font-weight: 700;
             border-radius: 100px;
             cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
+            transition: background .2s, border-color .2s;
         }
 
-        .btn-secondary:hover {
-            background: var(--rose-pale);
-            border-color: var(--rose);
-        }
+        .btn-secondary:hover { background: var(--rose-pale); border-color: var(--rose); }
 
         /* ── Text inputs ─────────────────────── */
 
-        .input-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 380px;
-            margin-bottom: 28px;
-        }
+        .input-stack { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 380px; margin-bottom: 28px; }
 
         .text-input {
             width: 100%;
@@ -187,466 +158,11 @@
             border: 2px solid #ededed;
             border-radius: 16px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: border-color .2s;
         }
 
         .text-input:focus { border-color: var(--rose-border); }
         .text-input::placeholder { color: #d0d0d0; font-weight: 400; }
-
-        /* ── Option grids (cuisine + vibe) ───── */
-
-        .option-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            width: 100%;
-            max-width: 480px;
-            margin-bottom: 24px;
-        }
-
-        @media (max-width: 420px) {
-            .option-grid { grid-template-columns: repeat(2, 1fr); }
-            .option-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-        }
-
-        .option-card {
-            background: #fff;
-            border: 2px solid #ebebeb;
-            border-radius: 20px;
-            padding: 22px 10px 18px;
-            cursor: pointer;
-            transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .option-card:hover {
-            border-color: var(--rose-border);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(232, 115, 154, 0.1);
-        }
-
-        .option-card.selected {
-            border-color: var(--rose);
-            background: var(--rose-pale);
-        }
-
-        .option-emoji { font-size: 1.9rem; line-height: 1; }
-        .option-label { font-size: 0.83rem; font-weight: 700; color: var(--text); }
-
-        /* ── Restaurant cards ────────────────── */
-
-        .restaurant-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            width: 100%;
-            max-width: 560px;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 460px) {
-            .restaurant-grid { grid-template-columns: 1fr; }
-        }
-
-        .restaurant-card {
-            background: #fff;
-            border: 2px solid #ebebeb;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
-            text-align: left;
-        }
-
-        .restaurant-card:hover {
-            border-color: var(--rose-border);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 28px rgba(232, 115, 154, 0.12);
-        }
-
-        .restaurant-card.selected {
-            border-color: var(--rose);
-            box-shadow: 0 0 0 3px rgba(232, 115, 154, 0.15);
-        }
-
-        .restaurant-photo {
-            width: 100%;
-            height: 118px;
-            background: var(--rose-pale);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.6rem;
-            overflow: hidden;
-        }
-
-        .restaurant-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .restaurant-info { padding: 14px 14px 16px; }
-
-        .restaurant-name {
-            font-size: 0.92rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .restaurant-meta {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.78rem;
-            color: var(--muted);
-            margin-bottom: 5px;
-        }
-
-        .restaurant-rating { color: var(--rose); font-weight: 700; }
-
-        .restaurant-address {
-            font-size: 0.74rem;
-            color: var(--muted);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* ── Loading ─────────────────────────── */
-
-        .loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-            color: var(--muted);
-            font-size: 0.92rem;
-            padding: 40px 0;
-        }
-
-        .loading.hidden { display: none; }
-
-        .loading-dots { display: flex; gap: 9px; }
-
-        .loading-dots span {
-            width: 10px;
-            height: 10px;
-            background: var(--rose-border);
-            border-radius: 50%;
-            animation: dotPulse 1.3s ease-in-out infinite;
-        }
-
-        .loading-dots span:nth-child(2) { animation-delay: 0.22s; }
-        .loading-dots span:nth-child(3) { animation-delay: 0.44s; }
-
-        @keyframes dotPulse {
-            0%, 80%, 100% { transform: scale(0.75); opacity: 0.45; }
-            40%            { transform: scale(1.1);  opacity: 1; }
-        }
-
-        /* ── Date & Time ─────────────────────── */
-
-        .datetime-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-            width: 100%;
-            max-width: 420px;
-            margin-bottom: 32px;
-        }
-
-        .date-input {
-            width: 100%;
-            padding: 15px 20px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text);
-            background: #fff;
-            border: 2px solid #ededed;
-            border-radius: 16px;
-            outline: none;
-            transition: border-color 0.2s;
-            cursor: pointer;
-        }
-
-        .date-input:focus { border-color: var(--rose-border); }
-
-        .time-section-head {
-            font-size: 0.76rem;
-            font-weight: 700;
-            color: #ccc;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            width: 100%;
-            text-align: left;
-        }
-
-        .time-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: flex-start;
-            width: 100%;
-        }
-
-        .time-chip {
-            padding: 10px 20px;
-            border: 2px solid #ededed;
-            border-radius: 100px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--text);
-            background: #fff;
-            cursor: pointer;
-            transition: border-color 0.15s, background 0.15s, color 0.15s;
-        }
-
-        .time-chip:hover { border-color: var(--rose-border); }
-
-        .time-chip.selected {
-            background: var(--rose);
-            border-color: var(--rose);
-            color: #fff;
-        }
-
-        /* ── Confirmation card ───────────────── */
-
-        .confirm-card {
-            background: #fff;
-            border: 2px solid var(--rose-border);
-            border-radius: 28px;
-            padding: 36px 32px;
-            max-width: 420px;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 28px;
-            box-shadow: 0 8px 32px rgba(232, 115, 154, 0.08);
-        }
-
-        .confirm-emoji { font-size: 3.2rem; margin-bottom: 18px; }
-
-        .confirm-title {
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 10px;
-        }
-
-        .confirm-restaurant {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--rose);
-            margin-bottom: 6px;
-        }
-
-        .confirm-detail {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-bottom: 4px;
-        }
-
-        .confirm-divider {
-            border: none;
-            border-top: 1px solid var(--rose-border);
-            margin: 22px 0;
-        }
-
-        .confirm-note {
-            font-size: 0.88rem;
-            color: var(--muted);
-            font-style: italic;
-        }
-
-        .action-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .portfolio-link {
-            font-size: 0.78rem;
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .portfolio-link:hover { color: var(--muted); }
-
-        /* ── Error banner ────────────────────── */
-
-        .error-banner {
-            background: #fff5f5;
-            border: 1px solid #ffc8c8;
-            border-radius: 12px;
-            padding: 11px 16px;
-            font-size: 0.82rem;
-            color: #c0392b;
-            max-width: 480px;
-            margin-top: 14px;
-        }
-
-        .error-banner.hidden { display: none; }
-
-        /* ── Step progress dots ──────────────── */
-
-        #stepDots {
-            position: fixed;
-            top: 18px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 7px;
-            z-index: 50;
-            pointer-events: none;
-        }
-
-        .step-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #e8e8e8;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .step-dot.done    { background: var(--rose-border); }
-        .step-dot.current { background: var(--rose); transform: scale(1.3); }
-
-        /* ── Config ──────────────────────────── */
-
-        #configToggle {
-            position: fixed;
-            top: 14px;
-            right: 16px;
-            background: transparent;
-            border: none;
-            font-size: 1.05rem;
-            cursor: pointer;
-            opacity: 0.22;
-            transition: opacity 0.2s;
-            z-index: 100;
-            padding: 6px;
-        }
-
-        #configToggle:hover { opacity: 0.5; }
-
-        #configOverlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.35);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-            animation: fadeIn 0.2s ease;
-        }
-
-        #configOverlay.hidden { display: none; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-
-        .config-box {
-            background: #fff;
-            border-radius: 28px;
-            padding: 36px 32px;
-            max-width: 420px;
-            width: 90%;
-            animation: fadeUp 0.3s ease;
-        }
-
-        .config-title {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-
-        .config-desc {
-            font-size: 0.84rem;
-            color: var(--muted);
-            margin-bottom: 22px;
-            line-height: 1.65;
-        }
-
-        .config-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #bbb;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            margin-bottom: 7px;
-        }
-
-        .config-input {
-            width: 100%;
-            padding: 12px 16px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.92rem;
-            color: var(--text);
-            background: #f6f6f6;
-            border: 2px solid #ededed;
-            border-radius: 12px;
-            outline: none;
-            margin-bottom: 18px;
-            transition: border-color 0.2s;
-        }
-
-        .config-input:focus { border-color: var(--rose-border); }
-
-        .config-actions { display: flex; gap: 10px; }
-
-        .config-save {
-            flex: 1;
-            background: var(--rose);
-            color: #fff;
-            border: none;
-            padding: 13px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .config-save:hover { background: var(--rose-dark); }
-
-        .config-cancel {
-            background: #f2f2f2;
-            color: var(--muted);
-            border: none;
-            padding: 13px 22px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-        }
-
-        .config-hint {
-            font-size: 0.73rem;
-            color: #ccc;
-            margin-top: 14px;
-            text-align: center;
-        }
-
-        .config-hint a { color: #ccc; }
 
         /* ── Name fill-in-the-blank ──────────────── */
 
@@ -662,23 +178,312 @@
             width: 100%;
             max-width: 340px;
             text-align: center;
-            letter-spacing: -0.025em;
+            letter-spacing: -.025em;
             padding: 2px 8px 6px;
             margin-bottom: 24px;
-            transition: border-color 0.2s;
+            transition: border-color .2s;
             display: block;
         }
 
-        .name-blank-input::placeholder {
-            color: #edccd8;
-            font-weight: 300;
+        .name-blank-input::placeholder { color: #edccd8; font-weight: 300; }
+        .name-blank-input:focus { border-bottom-color: var(--rose); }
+
+        /* ── Option grids ─────────────────────── */
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 480px;
+            margin-bottom: 24px;
         }
 
-        .name-blank-input:focus {
-            border-bottom-color: var(--rose);
+        .option-grid.cols-2 { grid-template-columns: repeat(2, 1fr); max-width: 380px; }
+        .option-grid.cols-4 { grid-template-columns: repeat(2, 1fr); max-width: 420px; }
+
+        @media (max-width: 400px) { .option-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .option-card {
+            background: #fff;
+            border: 2px solid #ebebeb;
+            border-radius: 20px;
+            padding: 22px 10px 18px;
+            cursor: pointer;
+            transition: border-color .18s, transform .18s, box-shadow .18s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 9px;
         }
 
-        /* ── Sticky restaurant proceed button ───── */
+        .option-card:hover { border-color: var(--rose-border); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(232,115,154,.1); }
+        .option-card.selected { border-color: var(--rose); background: var(--rose-pale); }
+
+        .option-emoji { font-size: 1.9rem; line-height: 1; }
+        .option-label { font-size: .83rem; font-weight: 700; color: var(--text); }
+        .option-desc  { font-size: .72rem; color: var(--muted); line-height: 1.4; }
+
+        /* ── Activity type cards (2×2, bigger) ─── */
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            width: 100%;
+            max-width: 440px;
+            margin-bottom: 24px;
+        }
+
+        .activity-card {
+            background: #fff;
+            border: 2px solid #ebebeb;
+            border-radius: 24px;
+            padding: 28px 16px 22px;
+            cursor: pointer;
+            transition: border-color .2s, transform .2s, box-shadow .2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-card:hover { border-color: var(--rose-border); transform: translateY(-3px); box-shadow: 0 10px 26px rgba(232,115,154,.12); }
+        .activity-card.selected { border-color: var(--rose); background: var(--rose-pale); }
+
+        .activity-emoji { font-size: 2.4rem; line-height: 1; }
+        .activity-label { font-size: .95rem; font-weight: 800; color: var(--text); }
+        .activity-desc  { font-size: .76rem; color: var(--muted); line-height: 1.4; }
+
+        /* ── Venue cards (restaurants + cafés) ──── */
+
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            width: 100%;
+            max-width: 560px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 460px) { .venue-grid { grid-template-columns: 1fr; } }
+
+        .venue-card {
+            background: #fff;
+            border: 2px solid #ebebeb;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color .18s, transform .18s, box-shadow .18s;
+            text-align: left;
+        }
+
+        .venue-card:hover { border-color: var(--rose-border); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(232,115,154,.12); }
+        .venue-card.selected { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(232,115,154,.15); }
+
+        .venue-photo {
+            width: 100%;
+            height: 108px;
+            background: var(--rose-pale);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            overflow: hidden;
+        }
+
+        .venue-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .venue-info { padding: 13px 13px 15px; }
+        .venue-name { font-size: .92rem; font-weight: 800; color: var(--text); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .venue-meta { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--muted); margin-bottom: 4px; }
+        .venue-rating { color: var(--rose); font-weight: 700; }
+        .venue-address { font-size: .73rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* ── Event cards ────────────────────────── */
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            width: 100%;
+            max-width: 560px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 460px) { .event-grid { grid-template-columns: 1fr; } }
+
+        .event-card {
+            background: #fff;
+            border: 2px solid #ebebeb;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color .18s, transform .18s, box-shadow .18s;
+            text-align: left;
+        }
+
+        .event-card:hover { border-color: var(--rose-border); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(232,115,154,.12); }
+        .event-card.selected { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(232,115,154,.15); }
+
+        .event-date-bar {
+            background: var(--rose);
+            color: #fff;
+            padding: 10px 14px;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .04em;
+        }
+
+        .event-body { padding: 13px 14px 15px; }
+        .event-name { font-size: .9rem; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.35; }
+        .event-venue { font-size: .76rem; color: var(--muted); }
+        .event-time  { font-size: .76rem; color: var(--rose); font-weight: 700; margin-top: 4px; }
+
+        /* ── Film cards ─────────────────────────── */
+
+        .film-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            width: 100%;
+            max-width: 480px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 520px) { .film-grid { grid-template-columns: repeat(4, 1fr); max-width: 600px; } }
+
+        .film-card {
+            background: #fff;
+            border: 2px solid #ebebeb;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color .18s, transform .18s, box-shadow .18s;
+        }
+
+        .film-card:hover { border-color: var(--rose-border); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(232,115,154,.12); }
+        .film-card.selected { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(232,115,154,.15); }
+
+        .film-poster {
+            width: 100%;
+            aspect-ratio: 2/3;
+            background: #e8e0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            overflow: hidden;
+        }
+
+        .film-poster img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .film-info { padding: 10px 10px 12px; }
+        .film-title { font-size: .8rem; font-weight: 800; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
+        .film-meta  { font-size: .7rem; color: var(--muted); }
+        .film-rating { color: var(--rose); font-weight: 700; font-size: .7rem; }
+
+        /* ── Loading ─────────────────────────── */
+
+        .loading { display: flex; flex-direction: column; align-items: center; gap: 18px; color: var(--muted); font-size: .92rem; padding: 40px 0; }
+        .loading.hidden { display: none; }
+        .loading-dots { display: flex; gap: 9px; }
+
+        .loading-dots span {
+            width: 10px; height: 10px;
+            background: var(--rose-border);
+            border-radius: 50%;
+            animation: dotPulse 1.3s ease-in-out infinite;
+        }
+
+        .loading-dots span:nth-child(2) { animation-delay: .22s; }
+        .loading-dots span:nth-child(3) { animation-delay: .44s; }
+
+        @keyframes dotPulse {
+            0%,80%,100% { transform: scale(.75); opacity: .45; }
+            40%          { transform: scale(1.1);  opacity: 1; }
+        }
+
+        /* ── Date & Time ─────────────────────── */
+
+        .datetime-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 100%; max-width: 420px; margin-bottom: 32px; }
+
+        .date-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            background: #fff;
+            border: 2px solid #ededed;
+            border-radius: 16px;
+            outline: none;
+            transition: border-color .2s;
+            cursor: pointer;
+        }
+
+        .date-input:focus { border-color: var(--rose-border); }
+
+        .time-section-head { font-size: .76rem; font-weight: 700; color: #ccc; text-transform: uppercase; letter-spacing: .1em; width: 100%; text-align: left; }
+
+        .time-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; width: 100%; }
+
+        .time-chip {
+            padding: 10px 20px;
+            border: 2px solid #ededed;
+            border-radius: 100px;
+            font-family: 'Nunito', sans-serif;
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--text);
+            background: #fff;
+            cursor: pointer;
+            transition: border-color .15s, background .15s, color .15s;
+        }
+
+        .time-chip:hover { border-color: var(--rose-border); }
+        .time-chip.selected { background: var(--rose); border-color: var(--rose); color: #fff; }
+
+        /* ── Confirmation ────────────────────── */
+
+        .confirm-card {
+            background: #fff;
+            border: 2px solid var(--rose-border);
+            border-radius: 28px;
+            padding: 36px 32px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 32px rgba(232,115,154,.08);
+        }
+
+        .confirm-emoji  { font-size: 3.2rem; margin-bottom: 18px; }
+        .confirm-title  { font-size: 1.7rem; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+        .confirm-venue  { font-size: 1.15rem; font-weight: 700; color: var(--rose); margin-bottom: 6px; }
+        .confirm-detail { font-size: .9rem; color: var(--muted); margin-bottom: 4px; }
+        .confirm-divider { border: none; border-top: 1px solid var(--rose-border); margin: 22px 0; }
+        .confirm-note   { font-size: .88rem; color: var(--muted); font-style: italic; }
+
+        .action-group { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 28px; }
+        .portfolio-link { font-size: .78rem; color: #ccc; text-decoration: none; transition: color .2s; }
+        .portfolio-link:hover { color: var(--muted); }
+
+        /* ── Info / error banners ────────────── */
+
+        .info-banner, .error-banner {
+            border-radius: 12px;
+            padding: 11px 16px;
+            font-size: .82rem;
+            max-width: 520px;
+            margin-top: 14px;
+        }
+
+        .info-banner  { background: #f0f4ff; border: 1px solid #c0d0f5; color: #3a5cb5; }
+        .error-banner { background: #fff5f5; border: 1px solid #ffc8c8; color: #c0392b; }
+        .info-banner.hidden, .error-banner.hidden { display: none; }
+
+        /* ── Sticky venue proceed button ─────── */
 
         #stickyProceed {
             position: fixed;
@@ -688,49 +493,156 @@
             z-index: 150;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity .3s, transform .3s;
             white-space: nowrap;
-            box-shadow: 0 6px 28px rgba(232, 115, 154, 0.4);
+            box-shadow: 0 6px 28px rgba(232,115,154,.4);
         }
 
-        #stickyProceed.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
+        #stickyProceed.visible { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+
+        /* ── Step progress dots ──────────────── */
+
+        #stepDots {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            z-index: 50;
+            pointer-events: none;
         }
+
+        .step-dot { width: 6px; height: 6px; border-radius: 50%; background: #e8e8e8; transition: background .3s, transform .3s; }
+        .step-dot.done    { background: var(--rose-border); }
+        .step-dot.current { background: var(--rose); transform: scale(1.3); }
+
+        /* ── Config ──────────────────────────── */
+
+        #configToggle {
+            position: fixed;
+            top: 14px; right: 16px;
+            background: transparent; border: none;
+            font-size: 1.05rem; cursor: pointer;
+            opacity: .22; transition: opacity .2s;
+            z-index: 100; padding: 6px;
+        }
+
+        #configToggle:hover { opacity: .5; }
+
+        #configOverlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,.35);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 200;
+            animation: fadeIn .2s ease;
+        }
+
+        #configOverlay.hidden { display: none; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .config-box {
+            background: #fff;
+            border-radius: 28px;
+            padding: 36px 32px;
+            max-width: 440px;
+            width: 90%;
+            animation: fadeUp .3s ease;
+            max-height: 90dvh;
+            overflow-y: auto;
+        }
+
+        .config-title { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+        .config-desc  { font-size: .84rem; color: var(--muted); margin-bottom: 22px; line-height: 1.65; }
+        .config-label { font-size: .75rem; font-weight: 700; color: #bbb; text-transform: uppercase; letter-spacing: .09em; margin-bottom: 7px; }
+        .config-section-head { font-size: .82rem; font-weight: 700; color: var(--muted); margin: 18px 0 4px; }
+
+        .config-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: 'Nunito', sans-serif;
+            font-size: .92rem;
+            color: var(--text);
+            background: #f6f6f6;
+            border: 2px solid #ededed;
+            border-radius: 12px;
+            outline: none;
+            margin-bottom: 16px;
+            transition: border-color .2s;
+        }
+
+        .config-input:focus { border-color: var(--rose-border); }
+
+        .config-actions { display: flex; gap: 10px; }
+
+        .config-save {
+            flex: 1; background: var(--rose); color: #fff; border: none;
+            padding: 13px;
+            font-family: 'Nunito', sans-serif; font-size: .92rem; font-weight: 700;
+            border-radius: 12px; cursor: pointer; transition: background .2s;
+        }
+
+        .config-save:hover { background: var(--rose-dark); }
+
+        .config-cancel {
+            background: #f2f2f2; color: var(--muted); border: none;
+            padding: 13px 22px;
+            font-family: 'Nunito', sans-serif; font-size: .92rem; font-weight: 700;
+            border-radius: 12px; cursor: pointer;
+        }
+
+        .config-hint { font-size: .73rem; color: #ccc; margin-top: 14px; text-align: center; }
+        .config-hint a { color: #ccc; }
     </style>
 </head>
 <body>
 
-    <!-- Progress dots (shown from step 2 onwards) -->
     <div id="stepDots"></div>
-
-    <!-- Config gear -->
     <button id="configToggle" onclick="toggleConfig()" title="Configure">⚙</button>
 
     <!-- Config overlay -->
     <div id="configOverlay" class="hidden">
         <div class="config-box">
             <div class="config-title">Configure</div>
-            <p class="config-desc">Set up before sharing the link. Your settings live in this browser only — they never leave your device.</p>
-            <div class="config-label">Their name (pre-fills so they never have to type it)</div>
-            <input type="text" id="recipientNameInput" class="config-input" placeholder="e.g. Sophie" autocomplete="off" maxlength="40">
-            <div class="config-label">Foursquare API Key (for live restaurants)</div>
-            <input type="password" id="fsqKeyInput" class="config-input" placeholder="fsq3XXXXXXXXXXXXXXXXX" autocomplete="off">
+            <p class="config-desc">Set up before sharing the link. All keys live in this browser only — they never leave your device.</p>
+
+            <div class="config-label">Their name (skips the name question)</div>
+            <input type="text" id="cfgName" class="config-input" placeholder="e.g. Sophie" autocomplete="off" maxlength="40">
+
             <div class="config-label">Opening message</div>
-            <input type="text" id="customMsgInput" class="config-input" placeholder="I've been wanting to ask you this for a while." maxlength="120">
+            <input type="text" id="cfgMsg" class="config-input" placeholder="I've been wanting to ask you this for a while." maxlength="120">
+
+            <div class="config-section-head">API keys — all optional, demo mode works without them</div>
+
+            <div class="config-label">Foursquare (restaurants &amp; cafés)</div>
+            <input type="password" id="cfgFsq" class="config-input" placeholder="fsq3XXXXXXXXX" autocomplete="off">
+
+            <div class="config-label">Eventbrite (activities)</div>
+            <input type="password" id="cfgEvt" class="config-input" placeholder="your private token" autocomplete="off">
+
+            <div class="config-label">TMDB (cinema)</div>
+            <input type="password" id="cfgTmdb" class="config-input" placeholder="your API key" autocomplete="off">
+
             <div class="config-actions">
                 <button class="config-save" onclick="saveConfig()">Save</button>
                 <button class="config-cancel" onclick="toggleConfig()">Cancel</button>
             </div>
-            <p class="config-hint">Free API key at <a href="https://foursquare.com/developers" target="_blank">foursquare.com/developers</a></p>
+            <p class="config-hint">
+                <a href="https://foursquare.com/developers" target="_blank">foursquare.com/developers</a> ·
+                <a href="https://www.eventbrite.com/platform" target="_blank">eventbrite.com/platform</a> ·
+                <a href="https://www.themoviedb.org/settings/api" target="_blank">themoviedb.org</a>
+            </p>
         </div>
     </div>
+
+    <!-- Sticky venue proceed button -->
+    <button id="stickyProceed" class="btn-primary" onclick="onVenueNext()">That's the one →</button>
 
     <!-- ════════════════════════════════════════
          STEP 1 — The Question
     ════════════════════════════════════════ -->
-    <div class="step active" id="step-1">
+    <div class="step active" id="s-1">
         <div class="headline">Will you go on a<br>date with me?</div>
         <p class="subline" id="openingMsg">I've been wanting to ask you this for a while.</p>
         <button class="btn-yes" id="yesBtn" onclick="onYes()">Yes ✨</button>
@@ -740,7 +652,7 @@
     <!-- ════════════════════════════════════════
          STEP 2 — Name & Location
     ════════════════════════════════════════ -->
-    <div class="step" id="step-2">
+    <div class="step" id="s-2">
         <div class="headline" id="gladHeadline">I'm so glad,</div>
         <input type="text" class="name-blank-input" id="nameInput" placeholder="your name" autocomplete="off" maxlength="40">
         <p class="subline" style="margin-bottom: 16px;">Where would you like to go?</p>
@@ -751,250 +663,366 @@
     </div>
 
     <!-- ════════════════════════════════════════
-         STEP 3 — Cuisine
+         STEP — What would you like to do?
     ════════════════════════════════════════ -->
-    <div class="step" id="step-3">
+    <div class="step" id="s-what">
+        <div class="headline" id="whatHeadline">What would you<br>like to do?</div>
+        <p class="subline">Pick one and we'll plan around it.</p>
+        <div class="activity-grid">
+            <div class="activity-card" onclick="selectActivity('food')">
+                <span class="activity-emoji">🍽️</span>
+                <span class="activity-label">Get some food</span>
+                <span class="activity-desc">Find a restaurant, pick a table</span>
+            </div>
+            <div class="activity-card" onclick="selectActivity('coffee')">
+                <span class="activity-emoji">☕</span>
+                <span class="activity-label">Get a coffee</span>
+                <span class="activity-desc">A café, no reservations needed</span>
+            </div>
+            <div class="activity-card" onclick="selectActivity('activity')">
+                <span class="activity-emoji">🎭</span>
+                <span class="activity-label">Do something</span>
+                <span class="activity-desc">Art, sports, music, workshops</span>
+            </div>
+            <div class="activity-card" onclick="selectActivity('cinema')">
+                <span class="activity-emoji">🎬</span>
+                <span class="activity-label">See a film</span>
+                <span class="activity-desc">What's on at the cinema</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         FOOD PATH — Cuisine
+    ════════════════════════════════════════ -->
+    <div class="step" id="s-cuisine">
         <div class="headline" id="cuisineHeadline">What are you<br>in the mood for?</div>
         <p class="subline">We'll find somewhere you'll love.</p>
         <div class="option-grid" id="cuisineGrid"></div>
     </div>
 
     <!-- ════════════════════════════════════════
-         STEP 4 — Vibe
+         FOOD PATH — Vibe
     ════════════════════════════════════════ -->
-    <div class="step" id="step-4">
+    <div class="step" id="s-vibe">
         <div class="headline">What's the vibe?</div>
         <p class="subline" id="vibeSubline">How are we doing this?</p>
         <div class="option-grid cols-3" id="vibeGrid"></div>
     </div>
 
     <!-- ════════════════════════════════════════
-         STEP 5 — Restaurant Selection
+         FOOD PATH — Restaurant selection
     ════════════════════════════════════════ -->
-    <div class="step" id="step-5">
+    <div class="step" id="s-food-venues">
         <div class="headline">Pick your spot</div>
-        <p class="subline" id="restaurantSubline">A few places I think you'll love.</p>
-        <div id="restaurantLoading" class="loading">
+        <p class="subline" id="foodVenueSubline">A few places I think you'll love.</p>
+        <div id="foodLoading" class="loading">
             <div class="loading-dots"><span></span><span></span><span></span></div>
             <p>Finding somewhere perfect...</p>
         </div>
-        <div class="restaurant-grid" id="restaurantGrid" style="display:none;"></div>
-        <div id="restaurantError" class="error-banner hidden"></div>
-        <div style="height: 88px;"></div><!-- spacer so last card clears the sticky button -->
+        <div class="venue-grid" id="foodVenueGrid" style="display:none;"></div>
+        <div id="foodBanner" class="info-banner hidden"></div>
+        <div style="height:88px;"></div>
     </div>
 
-    <!-- Sticky proceed button (step 5 only) -->
-    <button id="stickyProceed" class="btn-primary" onclick="goToStep(6)">That's the one →</button>
+    <!-- ════════════════════════════════════════
+         COFFEE PATH — Style
+    ════════════════════════════════════════ -->
+    <div class="step" id="s-coffee-style">
+        <div class="headline">What are you<br>feeling?</div>
+        <p class="subline">We'll find the right kind of place.</p>
+        <div class="option-grid cols-2" id="coffeeStyleGrid"></div>
+    </div>
 
     <!-- ════════════════════════════════════════
-         STEP 6 — Date & Time
+         COFFEE PATH — Café selection
     ════════════════════════════════════════ -->
-    <div class="step" id="step-6">
-        <div class="headline">When works<br>for you?</div>
-        <p class="subline">Pick a day and I'll sort the rest.</p>
+    <div class="step" id="s-coffee-venues">
+        <div class="headline">Pick your café</div>
+        <p class="subline" id="coffeeVenueSubline">Somewhere worth going to.</p>
+        <div id="coffeeLoading" class="loading">
+            <div class="loading-dots"><span></span><span></span><span></span></div>
+            <p>Finding somewhere nice...</p>
+        </div>
+        <div class="venue-grid" id="coffeeVenueGrid" style="display:none;"></div>
+        <div id="coffeeBanner" class="info-banner hidden"></div>
+        <div style="height:88px;"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         ACTIVITY PATH — Category
+    ════════════════════════════════════════ -->
+    <div class="step" id="s-activity-cat">
+        <div class="headline">What kind of<br>thing?</div>
+        <p class="subline" id="activityCatSubline">We'll find something coming up near you.</p>
+        <div class="option-grid cols-2" id="activityCatGrid"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         ACTIVITY PATH — Event listing
+    ════════════════════════════════════════ -->
+    <div class="step" id="s-activity-events">
+        <div class="headline">What takes<br>your fancy?</div>
+        <p class="subline" id="activityEventsSubline">A few things coming up.</p>
+        <div id="activityLoading" class="loading">
+            <div class="loading-dots"><span></span><span></span><span></span></div>
+            <p>Finding events near you...</p>
+        </div>
+        <div class="event-grid" id="eventGrid" style="display:none;"></div>
+        <div id="activityBanner" class="info-banner hidden"></div>
+        <div style="height:88px;"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         CINEMA PATH — Genre
+    ════════════════════════════════════════ -->
+    <div class="step" id="s-cinema-genre">
+        <div class="headline">What's the<br>mood?</div>
+        <p class="subline">We'll find something good.</p>
+        <div class="option-grid" id="genreGrid"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         CINEMA PATH — Film selection
+    ════════════════════════════════════════ -->
+    <div class="step" id="s-cinema-films">
+        <div class="headline">Pick a film</div>
+        <p class="subline" id="filmsSubline">These are showing near you.</p>
+        <div id="filmsLoading" class="loading">
+            <div class="loading-dots"><span></span><span></span><span></span></div>
+            <p>Checking what's on...</p>
+        </div>
+        <div class="film-grid" id="filmGrid" style="display:none;"></div>
+        <div id="filmsBanner" class="info-banner hidden"></div>
+        <div style="height:88px;"></div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         SHARED — Date & Time
+    ════════════════════════════════════════ -->
+    <div class="step" id="s-datetime">
+        <div class="headline" id="datetimeHeadline">When works<br>for you?</div>
+        <p class="subline" id="datetimeSubline">Pick a day and I'll sort the rest.</p>
         <div class="datetime-wrap">
             <input type="date" class="date-input" id="dateInput" onchange="onDateChange()">
-            <div class="time-section-head">Morning</div>
-            <div class="time-grid" id="lunchGrid"></div>
-            <div class="time-section-head" style="margin-top:6px;">Evening</div>
-            <div class="time-grid" id="dinnerGrid"></div>
+            <div class="time-section-head" id="timeLabel1"></div>
+            <div class="time-grid" id="timeGrid1"></div>
+            <div class="time-section-head" id="timeLabel2" style="margin-top:6px;"></div>
+            <div class="time-grid" id="timeGrid2"></div>
         </div>
         <button class="btn-primary" id="dateNextBtn" onclick="onDateNext()" disabled>Perfect →</button>
     </div>
 
     <!-- ════════════════════════════════════════
-         STEP 7 — Confirmation
+         SHARED — Confirmation
     ════════════════════════════════════════ -->
-    <div class="step" id="step-7">
+    <div class="step" id="s-confirm">
         <div class="confirm-card" id="confirmCard"></div>
-        <div class="action-group">
-            <button class="btn-primary" onclick="openBooking()">Book the table →</button>
-            <button class="btn-secondary" onclick="downloadCalendar()">Save to calendar</button>
-        </div>
+        <div class="action-group" id="confirmActions"></div>
         <a class="portfolio-link" href="../index.html">← back to portfolio</a>
     </div>
 
     <script>
         // ═══════════════════════════════════════
-        // Config & State
+        // Config
         // ═══════════════════════════════════════
 
-        let fsqKey        = localStorage.getItem('date_fsq_key')   || '';
-        let customMsg     = localStorage.getItem('date_msg')       || '';
-        let recipientName = localStorage.getItem('date_rec_name') || '';
-
-        const state = {
-            name:       '',
-            location:   '',
-            cuisine:    null,   // { id, label, emoji, query }
-            vibe:       null,   // { id, label, emoji, minPrice, maxPrice }
-            restaurant: null,   // Foursquare result object or demo object
-            date:       '',     // YYYY-MM-DD
-            time:       ''      // HH:MM
+        let cfg = {
+            name:     localStorage.getItem('d_name')  || '',
+            msg:      localStorage.getItem('d_msg')   || '',
+            fsq:      localStorage.getItem('d_fsq')   || '',
+            evt:      localStorage.getItem('d_evt')   || '',
+            tmdb:     localStorage.getItem('d_tmdb')  || '',
         };
 
         // ═══════════════════════════════════════
-        // Static Data
+        // State
+        // ═══════════════════════════════════════
+
+        const state = {
+            name:         '',
+            location:     '',
+            activityType: null,    // 'food' | 'coffee' | 'activity' | 'cinema'
+            // food
+            cuisine:      null,
+            vibe:         null,
+            restaurant:   null,
+            // coffee
+            coffeeStyle:  null,
+            cafe:         null,
+            // activity
+            activityCat:  null,
+            event:        null,
+            // cinema
+            genre:        null,
+            film:         null,
+            // shared
+            date:         '',
+            time:         '',
+        };
+
+        // ═══════════════════════════════════════
+        // Flow paths (for progress dots)
+        // ═══════════════════════════════════════
+
+        const FLOWS = {
+            food:     ['s-what','s-cuisine','s-vibe','s-food-venues','s-datetime','s-confirm'],
+            coffee:   ['s-what','s-coffee-style','s-coffee-venues','s-datetime','s-confirm'],
+            activity: ['s-what','s-activity-cat','s-activity-events','s-confirm'],
+            cinema:   ['s-what','s-cinema-genre','s-cinema-films','s-confirm'],
+        };
+
+        // ═══════════════════════════════════════
+        // Static data
         // ═══════════════════════════════════════
 
         const cuisines = [
-            { id: 'italian',  label: 'Italian',  emoji: '🍝', query: 'Italian restaurant'  },
-            { id: 'japanese', label: 'Japanese', emoji: '🍣', query: 'Japanese restaurant' },
-            { id: 'french',   label: 'French',   emoji: '🥂', query: 'French restaurant'   },
-            { id: 'mexican',  label: 'Mexican',  emoji: '🌮', query: 'Mexican restaurant'  },
-            { id: 'indian',   label: 'Indian',   emoji: '🍛', query: 'Indian restaurant'   },
-            { id: 'american', label: 'American', emoji: '🍔', query: 'American restaurant' },
+            { id:'italian',  label:'Italian',  emoji:'🍝', query:'Italian restaurant'  },
+            { id:'japanese', label:'Japanese', emoji:'🍣', query:'Japanese restaurant' },
+            { id:'french',   label:'French',   emoji:'🥂', query:'French restaurant'   },
+            { id:'mexican',  label:'Mexican',  emoji:'🌮', query:'Mexican restaurant'  },
+            { id:'indian',   label:'Indian',   emoji:'🍛', query:'Indian restaurant'   },
+            { id:'american', label:'American', emoji:'🍔', query:'American restaurant' },
         ];
 
         const vibes = [
-            { id: 'casual',     label: 'Casual',      emoji: '☀️',  minPrice: 1, maxPrice: 2 },
-            { id: 'datenight',  label: 'Date Night',  emoji: '🕯️', minPrice: 2, maxPrice: 3 },
-            { id: 'finedining', label: 'Fine Dining', emoji: '✨',  minPrice: 3, maxPrice: 4 },
+            { id:'casual',     label:'Casual',      emoji:'☀️',  minPrice:1, maxPrice:2 },
+            { id:'datenight',  label:'Date Night',  emoji:'🕯️', minPrice:2, maxPrice:3 },
+            { id:'finedining', label:'Fine Dining', emoji:'✨',  minPrice:3, maxPrice:4 },
         ];
 
-        const lunchSlots  = ['11:30', '12:00', '12:30', '13:00'];
-        const dinnerSlots = ['18:30', '19:00', '19:30', '20:00', '20:30'];
+        const coffeeStyles = [
+            { id:'espresso', label:'Espresso',     emoji:'☕', desc:'Flat whites, lattes, caps',      query:'espresso bar'           },
+            { id:'filter',   label:'Filter',       emoji:'🫖', desc:'Pour-overs, batch brew',         query:'specialty filter coffee' },
+            { id:'sweet',    label:'Something sweet', emoji:'🍫', desc:'Matcha, hot choc, chai',     query:'café dessert drinks'    },
+            { id:'tea',      label:'Tea',          emoji:'🍵', desc:'Herbal, chai, English',           query:'tea house café'         },
+        ];
 
-        // Cuisine-specific demo data — used when no Foursquare API key is configured.
-        // Generic addresses intentionally, since location isn't resolved in demo mode.
-        const demoRestaurantsByCuisine = {
-            italian: [
-                { fsq_id: 'i1', name: 'Il Forno',           rating: 9.0, price: 3, location: { formatted_address: '14 Via Roma, Old Quarter'          }, photos: [], website: '' },
-                { fsq_id: 'i2', name: 'Osteria della Rosa',  rating: 8.6, price: 2, location: { formatted_address: '7 Garden Street, West End'          }, photos: [], website: '' },
-                { fsq_id: 'i3', name: 'La Cucina',           rating: 8.8, price: 3, location: { formatted_address: '22 Market Lane, City Centre'         }, photos: [], website: '' },
-                { fsq_id: 'i4', name: 'Trattoria Giardino',  rating: 8.4, price: 2, location: { formatted_address: '3 Bloom Square, Riverside'           }, photos: [], website: '' },
-            ],
-            japanese: [
-                { fsq_id: 'j1', name: 'Sakura',              rating: 9.1, price: 3, location: { formatted_address: '18 Harbour Road, Waterfront'         }, photos: [], website: '' },
-                { fsq_id: 'j2', name: 'Nishiki',             rating: 8.5, price: 2, location: { formatted_address: '31 Oak Street, Midtown'              }, photos: [], website: '' },
-                { fsq_id: 'j3', name: 'Yuki',                rating: 8.9, price: 3, location: { formatted_address: '9 Pine Lane, East Village'           }, photos: [], website: '' },
-                { fsq_id: 'j4', name: 'Hana',                rating: 8.7, price: 2, location: { formatted_address: '44 Cedar Row, North Quarter'         }, photos: [], website: '' },
-            ],
-            french: [
-                { fsq_id: 'f1', name: 'La Petite Fleur',     rating: 9.2, price: 4, location: { formatted_address: '12 Rosewood Lane, Garden Quarter'    }, photos: [], website: '' },
-                { fsq_id: 'f2', name: 'Brasserie Lyon',      rating: 8.6, price: 3, location: { formatted_address: '5 Boulevard West, City Centre'        }, photos: [], website: '' },
-                { fsq_id: 'f3', name: 'Chez Marcel',         rating: 8.8, price: 3, location: { formatted_address: '28 Elm Street, South Quarter'         }, photos: [], website: '' },
-                { fsq_id: 'f4', name: 'Le Jardin',           rating: 9.0, price: 4, location: { formatted_address: '1 Palace Gate, Heritage District'     }, photos: [], website: '' },
-            ],
-            mexican: [
-                { fsq_id: 'm1', name: 'Casa Azteca',         rating: 8.8, price: 2, location: { formatted_address: '7 Spice Row, Market District'         }, photos: [], website: '' },
-                { fsq_id: 'm2', name: 'El Rancho',           rating: 8.4, price: 1, location: { formatted_address: '19 Sun Street, West Quarter'          }, photos: [], website: '' },
-                { fsq_id: 'm3', name: 'La Cantina',          rating: 8.7, price: 2, location: { formatted_address: '33 Cobble Lane, Old Town'             }, photos: [], website: '' },
-                { fsq_id: 'm4', name: 'Fuego',               rating: 9.0, price: 3, location: { formatted_address: '2 Flame Yard, Arts Quarter'           }, photos: [], website: '' },
-            ],
-            indian: [
-                { fsq_id: 'n1', name: 'Spice Garden',        rating: 8.9, price: 2, location: { formatted_address: '15 Saffron Street, South End'         }, photos: [], website: '' },
-                { fsq_id: 'n2', name: 'The Maharaja',        rating: 8.5, price: 3, location: { formatted_address: '8 Palace Road, Heritage Quarter'       }, photos: [], website: '' },
-                { fsq_id: 'n3', name: 'Bombay Kitchen',      rating: 8.7, price: 2, location: { formatted_address: '27 Curry Mile, East District'          }, photos: [], website: '' },
-                { fsq_id: 'n4', name: 'Masala Bay',          rating: 9.1, price: 3, location: { formatted_address: '4 Harbour View, Waterfront'            }, photos: [], website: '' },
-            ],
-            american: [
-                { fsq_id: 'a1', name: 'The Yard',            rating: 8.6, price: 2, location: { formatted_address: '3 Garden Square, Northside'           }, photos: [], website: '' },
-                { fsq_id: 'a2', name: 'Smoke & Salt',        rating: 9.0, price: 3, location: { formatted_address: '17 Brick Lane, East Quarter'          }, photos: [], website: '' },
-                { fsq_id: 'a3', name: 'Borough Grill',       rating: 8.4, price: 2, location: { formatted_address: '44 Market Street, City Centre'         }, photos: [], website: '' },
-                { fsq_id: 'a4', name: 'The Garden Room',     rating: 8.8, price: 3, location: { formatted_address: '22 Park Avenue, West End'             }, photos: [], website: '' },
-            ],
+        const activityCats = [
+            { id:'arts',     label:'Arts & culture',     emoji:'🎨', desc:'Exhibitions, galleries, theatre', evtCat:'105,113' },
+            { id:'sports',   label:'Sports & outdoors',  emoji:'🏃', desc:'Active, outdoor, fitness',        evtCat:'108,109' },
+            { id:'music',    label:'Music & shows',      emoji:'🎵', desc:'Gigs, comedy, film screenings',   evtCat:'103,104' },
+            { id:'classes',  label:'Classes & workshops',emoji:'🎓', desc:'Cooking, crafts, learning',       evtCat:'102,117' },
+        ];
+
+        const genres = [
+            { id:'action',  label:'Action',    emoji:'💥', tmdbIds:[28,53]   },
+            { id:'comedy',  label:'Comedy',    emoji:'😂', tmdbIds:[35]      },
+            { id:'romance', label:'Romance',   emoji:'💕', tmdbIds:[10749]   },
+            { id:'horror',  label:'Horror',    emoji:'👻', tmdbIds:[27]      },
+            { id:'drama',   label:'Drama',     emoji:'🎭', tmdbIds:[18]      },
+            { id:'any',     label:'Anything',  emoji:'🎲', tmdbIds:[]        },
+        ];
+
+        // ── Demo data ───────────────────────────
+
+        const demoByCuisine = {
+            italian:  [ {fsq_id:'i1',name:'Il Forno',          rating:9.0,price:3,location:{formatted_address:'14 Via Roma, Old Quarter'},          photos:[],website:''}, {fsq_id:'i2',name:'Osteria della Rosa', rating:8.6,price:2,location:{formatted_address:'7 Garden Street, West End'},           photos:[],website:''}, {fsq_id:'i3',name:'La Cucina',         rating:8.8,price:3,location:{formatted_address:'22 Market Lane, City Centre'},        photos:[],website:''}, {fsq_id:'i4',name:'Trattoria Giardino',rating:8.4,price:2,location:{formatted_address:'3 Bloom Square, Riverside'},              photos:[],website:''} ],
+            japanese: [ {fsq_id:'j1',name:'Sakura',            rating:9.1,price:3,location:{formatted_address:'18 Harbour Road, Waterfront'},        photos:[],website:''}, {fsq_id:'j2',name:'Nishiki',           rating:8.5,price:2,location:{formatted_address:'31 Oak Street, Midtown'},               photos:[],website:''}, {fsq_id:'j3',name:'Yuki',             rating:8.9,price:3,location:{formatted_address:'9 Pine Lane, East Village'},           photos:[],website:''}, {fsq_id:'j4',name:'Hana',             rating:8.7,price:2,location:{formatted_address:'44 Cedar Row, North Quarter'},           photos:[],website:''} ],
+            french:   [ {fsq_id:'f1',name:'La Petite Fleur',   rating:9.2,price:4,location:{formatted_address:'12 Rosewood Lane, Garden Quarter'},   photos:[],website:''}, {fsq_id:'f2',name:'Brasserie Lyon',    rating:8.6,price:3,location:{formatted_address:'5 Boulevard West, City Centre'},        photos:[],website:''}, {fsq_id:'f3',name:'Chez Marcel',       rating:8.8,price:3,location:{formatted_address:'28 Elm Street, South Quarter'},          photos:[],website:''}, {fsq_id:'f4',name:'Le Jardin',         rating:9.0,price:4,location:{formatted_address:'1 Palace Gate, Heritage District'},        photos:[],website:''} ],
+            mexican:  [ {fsq_id:'m1',name:'Casa Azteca',       rating:8.8,price:2,location:{formatted_address:'7 Spice Row, Market District'},        photos:[],website:''}, {fsq_id:'m2',name:'El Rancho',         rating:8.4,price:1,location:{formatted_address:'19 Sun Street, West Quarter'},          photos:[],website:''}, {fsq_id:'m3',name:'La Cantina',        rating:8.7,price:2,location:{formatted_address:'33 Cobble Lane, Old Town'},              photos:[],website:''}, {fsq_id:'m4',name:'Fuego',             rating:9.0,price:3,location:{formatted_address:'2 Flame Yard, Arts Quarter'},              photos:[],website:''} ],
+            indian:   [ {fsq_id:'n1',name:'Spice Garden',      rating:8.9,price:2,location:{formatted_address:'15 Saffron Street, South End'},        photos:[],website:''}, {fsq_id:'n2',name:'The Maharaja',      rating:8.5,price:3,location:{formatted_address:'8 Palace Road, Heritage Quarter'},       photos:[],website:''}, {fsq_id:'n3',name:'Bombay Kitchen',    rating:8.7,price:2,location:{formatted_address:'27 Curry Mile, East District'},           photos:[],website:''}, {fsq_id:'n4',name:'Masala Bay',        rating:9.1,price:3,location:{formatted_address:'4 Harbour View, Waterfront'},             photos:[],website:''} ],
+            american: [ {fsq_id:'a1',name:'The Yard',          rating:8.6,price:2,location:{formatted_address:'3 Garden Square, Northside'},          photos:[],website:''}, {fsq_id:'a2',name:'Smoke & Salt',      rating:9.0,price:3,location:{formatted_address:'17 Brick Lane, East Quarter'},          photos:[],website:''}, {fsq_id:'a3',name:'Borough Grill',     rating:8.4,price:2,location:{formatted_address:'44 Market Street, City Centre'},          photos:[],website:''}, {fsq_id:'a4',name:'The Garden Room',   rating:8.8,price:3,location:{formatted_address:'22 Park Avenue, West End'},               photos:[],website:''} ],
+        };
+
+        const demoCafes = [
+            {fsq_id:'c1',name:'The Brew Room',     rating:9.0,price:1,location:{formatted_address:'4 Roast Lane, Merchants Quarter'},  photos:[],website:''},
+            {fsq_id:'c2',name:'Chapter One Coffee',rating:8.8,price:2,location:{formatted_address:'17 Library Street, West End'},      photos:[],website:''},
+            {fsq_id:'c3',name:'Bloom & Grind',     rating:9.2,price:2,location:{formatted_address:'3 Garden Row, Arts District'},      photos:[],website:''},
+            {fsq_id:'c4',name:'The Pour House',    rating:8.6,price:1,location:{formatted_address:'28 Mill Street, Riverside'},        photos:[],website:''},
+        ];
+
+        const demoEventsByCat = {
+            arts:    [ {id:'e1',name:'Impressionism: Light & Shadow',    venue:'City Museum',         dateLabel:'Sat 14 Jun',time:'10:00–18:00',url:''}, {id:'e2',name:'Evening with the Orchestra',     venue:'Grand Concert Hall',    dateLabel:'Fri 20 Jun',time:'19:30',url:''}, {id:'e3',name:'Photography Walk: Street Stories',venue:'Riverside Quarter',    dateLabel:'Sun 15 Jun',time:'14:00',url:''}, {id:'e4',name:'Ceramics Masterclass',           venue:'The Art Studio',        dateLabel:'Sat 21 Jun',time:'11:00',url:''} ],
+            sports:  [ {id:'e5',name:'Sunrise Parkrun',                  venue:'Victoria Park',        dateLabel:'Sun 15 Jun',time:'09:00',url:''}, {id:'e6',name:'Rock Climbing Taster Session',   venue:'The Bouldering Wall',   dateLabel:'Sat 14 Jun',time:'13:00',url:''}, {id:'e7',name:'Kayaking on the River',          venue:'Riverside Boathouse',   dateLabel:'Sun 22 Jun',time:'10:00',url:''}, {id:'e8',name:'Yoga in the Park',               venue:'Riverside Gardens',     dateLabel:'Sat 21 Jun',time:'08:00',url:''} ],
+            music:   [ {id:'e9', name:'Jazz Night at the Blue Note',     venue:'The Blue Note Bar',    dateLabel:'Fri 13 Jun',time:'20:00',url:''}, {id:'e10',name:'Open Air Cinema: Roman Holiday',venue:'City Park',             dateLabel:'Sat 21 Jun',time:'20:30',url:''}, {id:'e11',name:'Stand-Up Comedy Night',         venue:'The Laughing Fox',      dateLabel:'Fri 20 Jun',time:'19:30',url:''}, {id:'e12',name:'Live Music: Local Bands',       venue:'The Station',           dateLabel:'Sat 14 Jun',time:'21:00',url:''} ],
+            classes: [ {id:'e13',name:'Cocktail Making Evening',         venue:'The Spirit Lab',       dateLabel:'Sat 14 Jun',time:'18:00',url:''}, {id:'e14',name:'Sushi Making Masterclass',      venue:'Cooking School',        dateLabel:'Sun 22 Jun',time:'13:00',url:''}, {id:'e15',name:'Watercolour for Beginners',     venue:'Art House Studio',      dateLabel:'Sat 21 Jun',time:'10:00',url:''}, {id:'e16',name:'Sourdough Bread Baking',        venue:'The Baking Studio',     dateLabel:'Sun 15 Jun',time:'11:00',url:''} ],
+        };
+
+        const demoFilmsByGenre = {
+            action:  [ {id:'f1',title:'Thunder Road',      rating:7.8,runtime:'2h 8m',emoji:'💥',poster:null}, {id:'f2',title:'Eclipse',          rating:7.4,runtime:'1h 58m',emoji:'💥',poster:null}, {id:'f3',title:'Iron Protocol',    rating:6.9,runtime:'2h 14m',emoji:'💥',poster:null}, {id:'f4',title:'The Operative',    rating:7.6,runtime:'2h 2m', emoji:'💥',poster:null} ],
+            comedy:  [ {id:'f5',title:'Weekend Plans',     rating:7.5,runtime:'1h 42m',emoji:'😂',poster:null}, {id:'f6',title:'Room 404',         rating:8.1,runtime:'1h 55m',emoji:'😂',poster:null}, {id:'f7',title:'Perfect Timing',   rating:7.3,runtime:'1h 48m',emoji:'😂',poster:null}, {id:'f8',title:'The Laughing Man', rating:7.9,runtime:'1h 51m',emoji:'😂',poster:null} ],
+            romance: [ {id:'f9',title:'City of Stars',     rating:8.2,runtime:'2h 5m', emoji:'💕',poster:null}, {id:'f10',title:'Close Enough',   rating:7.6,runtime:'1h 52m',emoji:'💕',poster:null}, {id:'f11',title:'The Distance',    rating:7.8,runtime:'2h 1m', emoji:'💕',poster:null}, {id:'f12',title:'Every Other Sunday',rating:8.0,runtime:'1h 48m',emoji:'💕',poster:null} ],
+            horror:  [ {id:'f13',title:'Midnight',         rating:7.1,runtime:'1h 44m',emoji:'👻',poster:null}, {id:'f14',title:'The Neighbour',  rating:6.8,runtime:'1h 56m',emoji:'👻',poster:null}, {id:'f15',title:'Below',           rating:7.4,runtime:'1h 49m',emoji:'👻',poster:null}, {id:'f16',title:'Old Ground',      rating:6.9,runtime:'2h 2m', emoji:'👻',poster:null} ],
+            drama:   [ {id:'f17',title:'Echo',             rating:8.4,runtime:'2h 18m',emoji:'🎭',poster:null}, {id:'f18',title:'Still Waters',   rating:8.0,runtime:'2h 6m', emoji:'🎭',poster:null}, {id:'f19',title:'Homecoming',      rating:7.7,runtime:'1h 58m',emoji:'🎭',poster:null}, {id:'f20',title:'The Grand Illusion',rating:8.6,runtime:'2h 22m',emoji:'🎭',poster:null} ],
+            any:     [ {id:'f1',title:'Thunder Road',rating:7.8,runtime:'2h 8m',emoji:'💥',poster:null}, {id:'f6',title:'Room 404',rating:8.1,runtime:'1h 55m',emoji:'😂',poster:null}, {id:'f9',title:'City of Stars',rating:8.2,runtime:'2h 5m',emoji:'💕',poster:null}, {id:'f17',title:'Echo',rating:8.4,runtime:'2h 18m',emoji:'🎭',poster:null} ],
         };
 
         // ═══════════════════════════════════════
-        // No button — the famous mechanic
+        // No button mechanic
         // ═══════════════════════════════════════
 
-        let noEscapes  = 0;
-        let noFixed    = false;
-        let noClicks   = 0;
-        const noBtn    = document.getElementById('noBtn');
+        let noEscapes = 0, noFixed = false, noClicks = 0;
+        const noBtn = document.getElementById('noBtn');
 
-        document.addEventListener('mousemove', (e) => {
-            if (!document.getElementById('step-1').classList.contains('active')) return;
+        document.addEventListener('mousemove', e => {
+            if (!document.getElementById('s-1').classList.contains('active')) return;
             if (noBtn.disabled || noBtn.style.opacity === '0') return;
-
-            const rect = noBtn.getBoundingClientRect();
-            const cx   = rect.left + rect.width  / 2;
-            const cy   = rect.top  + rect.height / 2;
-            const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
-
-            if (dist < 95) {
+            const r = noBtn.getBoundingClientRect();
+            const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+            if (Math.hypot(e.clientX - cx, e.clientY - cy) < 95) {
                 if (!noFixed) {
-                    noBtn.style.position  = 'fixed';
-                    noBtn.style.left      = cx + 'px';
-                    noBtn.style.top       = cy + 'px';
-                    noBtn.style.transform = 'translate(-50%, -50%)';
-                    noBtn.style.margin    = '0';
+                    noBtn.style.position = 'fixed';
+                    noBtn.style.left = cx + 'px'; noBtn.style.top = cy + 'px';
+                    noBtn.style.transform = 'translate(-50%,-50%)';
+                    noBtn.style.margin = '0';
                     noFixed = true;
                 }
-
                 noEscapes++;
-
-                const angle = Math.atan2(cy - e.clientY, cx - e.clientX);
-                const jump  = 170 + Math.random() * 110;
-
-                let nx = cx + Math.cos(angle) * jump;
-                let ny = cy + Math.sin(angle) * jump;
-
-                nx = Math.max(60,  Math.min(window.innerWidth  - 60,  nx));
-                ny = Math.max(40,  Math.min(window.innerHeight - 40,  ny));
-
-                noBtn.style.left = nx + 'px';
-                noBtn.style.top  = ny + 'px';
-
+                const a = Math.atan2(cy - e.clientY, cx - e.clientX), j = 170 + Math.random() * 110;
+                noBtn.style.left = Math.max(60, Math.min(window.innerWidth  - 60, cx + Math.cos(a) * j)) + 'px';
+                noBtn.style.top  = Math.max(40, Math.min(window.innerHeight - 40, cy + Math.sin(a) * j)) + 'px';
                 if (noEscapes >= 5) vanishNoBtn();
             }
         });
 
         function onNoClick() {
             noClicks++;
-            if (noClicks === 1) {
-                noBtn.textContent = 'Are you sure?';
-            } else if (noClicks === 2) {
-                noBtn.textContent = 'Really...?';
-            } else {
-                vanishNoBtn();
-            }
+            if (noClicks === 1) noBtn.textContent = 'Are you sure?';
+            else if (noClicks === 2) noBtn.textContent = 'Really...?';
+            else vanishNoBtn();
         }
 
         function vanishNoBtn() {
             noBtn.style.opacity = '0';
             noBtn.disabled = true;
-            setTimeout(() => {
-                noBtn.style.display = 'none';
-            }, 350);
+            setTimeout(() => { noBtn.style.display = 'none'; }, 350);
             document.getElementById('openingMsg').textContent = 'The universe agrees.';
         }
 
         // ═══════════════════════════════════════
-        // Step navigation
+        // Navigation
         // ═══════════════════════════════════════
 
-        let currentStep = 1;
+        let currentStepId = '1';
 
-        function goToStep(n) {
+        function goToStep(id) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById(`step-${n}`).classList.add('active');
-            currentStep = n;
-            renderDots(n);
+            document.getElementById('s-' + id).classList.add('active');
+            currentStepId = id;
+            renderDots(id);
             window.scrollTo(0, 0);
 
-            // Allow scrolling on restaurant step so all cards and the sticky button are reachable
-            document.body.style.overflowY = (n === 5) ? 'auto' : '';
+            const venueSteps = ['food-venues', 'coffee-venues', 'activity-events', 'cinema-films'];
+            document.body.style.overflowY = venueSteps.includes(id) ? 'auto' : '';
+            if (!venueSteps.includes(id)) document.getElementById('stickyProceed').classList.remove('visible');
 
-            // Hide sticky proceed button when leaving step 5
-            if (n !== 5) document.getElementById('stickyProceed').classList.remove('visible');
-
-            if (n === 5) loadRestaurants();
-            if (n === 6) buildTimePickers();
+            if (id === 'food-venues')     loadFoodVenues();
+            if (id === 'coffee-venues')   loadCoffeeVenues();
+            if (id === 'activity-events') loadEvents();
+            if (id === 'cinema-films')    loadFilms();
+            if (id === 'datetime')        buildTimePickers();
+            if (id === 'confirm')         buildConfirmCard();
         }
 
-        function renderDots(n) {
-            const dotsEl = document.getElementById('stepDots');
-            if (n <= 1) { dotsEl.innerHTML = ''; return; }
-
-            // Steps 2–7 → 6 dots
-            dotsEl.innerHTML = Array.from({ length: 6 }, (_, i) => {
-                const stepNum = i + 2;
-                let cls = '';
-                if (stepNum < n)  cls = 'done';
-                if (stepNum === n) cls = 'current';
+        function renderDots(stepId) {
+            const el = document.getElementById('stepDots');
+            if (stepId === '1' || stepId === '2') { el.innerHTML = ''; return; }
+            const flow = FLOWS[state.activityType] || ['s-what'];
+            const fullId = 's-' + stepId;
+            const idx = flow.indexOf(fullId);
+            el.innerHTML = flow.map((s, i) => {
+                let cls = i < idx ? 'done' : i === idx ? 'current' : '';
                 return `<div class="step-dot ${cls}"></div>`;
             }).join('');
         }
@@ -1002,13 +1030,12 @@
         function onYes() {
             const btn = document.getElementById('yesBtn');
             btn.textContent = '💕';
-            btn.style.transition = 'transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s';
-            btn.style.transform  = 'scale(1.18)';
-            btn.style.boxShadow  = '0 18px 50px rgba(232,115,154,0.45)';
-
+            btn.style.transition = 'transform .4s cubic-bezier(.22,1,.36,1), box-shadow .3s';
+            btn.style.transform = 'scale(1.18)';
+            btn.style.boxShadow = '0 18px 50px rgba(232,115,154,.45)';
             setTimeout(() => {
                 noBtn.style.display = 'none';
-                goToStep(2);
+                goToStep('2');
                 btn.textContent = 'Yes ✨';
                 btn.style.transform = '';
                 btn.style.boxShadow = '';
@@ -1019,211 +1046,470 @@
             const nameEl   = document.getElementById('nameInput');
             const location = document.getElementById('locationInput').value.trim();
             if (!location) return;
-
-            // Use pre-configured name if the input is hidden, otherwise read it
-            const name = (nameEl.style.display === 'none')
-                ? recipientName
-                : nameEl.value.trim();
+            const name = nameEl.style.display === 'none' ? cfg.name : nameEl.value.trim();
             if (!name) return;
-
-            state.name     = name;
+            state.name = name;
             state.location = location;
-
-            const firstName = name.split(' ')[0];
-            document.getElementById('cuisineHeadline').innerHTML = `What are you<br>in the mood for, ${escHtml(firstName)}?`;
-            document.getElementById('vibeSubline').textContent   = `How are we doing this, ${firstName}?`;
-
-            goToStep(3);
+            const fn = name.split(' ')[0];
+            document.getElementById('whatHeadline').innerHTML = `What would you<br>like to do, ${escHtml(fn)}?`;
+            document.getElementById('activityCatSubline').textContent = `We'll find something coming up near ${escHtml(location)}.`;
+            goToStep('what');
         }
 
-        function onDateChange() {
-            state.date = document.getElementById('dateInput').value;
-            checkDateReady();
+        function selectActivity(type) {
+            state.activityType = type;
+            document.querySelectorAll('.activity-card').forEach(el => el.classList.remove('selected'));
+            if (type === 'food')     goToStep('cuisine');
+            if (type === 'coffee')   goToStep('coffee-style');
+            if (type === 'activity') goToStep('activity-cat');
+            if (type === 'cinema')   goToStep('cinema-genre');
         }
 
-        function onDateNext() {
-            if (!state.date || !state.time) return;
-            buildConfirmCard();
-            goToStep(7);
-        }
-
-        function checkDateReady() {
-            document.getElementById('dateNextBtn').disabled = !(state.date && state.time);
+        function onVenueNext() {
+            if (state.activityType === 'food'    && state.restaurant) goToStep('datetime');
+            if (state.activityType === 'coffee'  && state.cafe)       goToStep('datetime');
+            if (state.activityType === 'activity' && state.event)     goToStep('confirm');
+            if (state.activityType === 'cinema'  && state.film)       goToStep('confirm');
         }
 
         // ═══════════════════════════════════════
-        // Cuisine grid
+        // Cuisine + vibe grids
         // ═══════════════════════════════════════
 
         function buildCuisineGrid() {
-            document.getElementById('cuisineGrid').innerHTML = cuisines.map(c => `
-                <div class="option-card" onclick="selectCuisine('${c.id}')">
+            document.getElementById('cuisineGrid').innerHTML = cuisines.map(c =>
+                `<div class="option-card" onclick="selectCuisine('${c.id}')">
                     <span class="option-emoji">${c.emoji}</span>
                     <span class="option-label">${c.label}</span>
-                </div>
-            `).join('');
+                </div>`
+            ).join('');
         }
 
         function selectCuisine(id) {
             state.cuisine = cuisines.find(c => c.id === id);
-            document.querySelectorAll('#cuisineGrid .option-card').forEach((el, i) => {
-                el.classList.toggle('selected', cuisines[i].id === id);
-            });
-            setTimeout(() => goToStep(4), 340);
+            const fn = state.name.split(' ')[0];
+            document.getElementById('cuisineHeadline').innerHTML = `What are you<br>in the mood for, ${escHtml(fn)}?`;
+            document.getElementById('vibeSubline').textContent = `How are we doing this, ${fn}?`;
+            document.querySelectorAll('#cuisineGrid .option-card').forEach((el, i) =>
+                el.classList.toggle('selected', cuisines[i].id === id));
+            setTimeout(() => goToStep('vibe'), 340);
         }
 
-        // ═══════════════════════════════════════
-        // Vibe grid
-        // ═══════════════════════════════════════
-
         function buildVibeGrid() {
-            document.getElementById('vibeGrid').innerHTML = vibes.map(v => `
-                <div class="option-card" onclick="selectVibe('${v.id}')">
+            document.getElementById('vibeGrid').innerHTML = vibes.map(v =>
+                `<div class="option-card" onclick="selectVibe('${v.id}')">
                     <span class="option-emoji">${v.emoji}</span>
                     <span class="option-label">${v.label}</span>
-                </div>
-            `).join('');
+                </div>`
+            ).join('');
         }
 
         function selectVibe(id) {
             state.vibe = vibes.find(v => v.id === id);
-            document.querySelectorAll('#vibeGrid .option-card').forEach((el, i) => {
-                el.classList.toggle('selected', vibes[i].id === id);
-            });
-            setTimeout(() => goToStep(5), 340);
+            document.querySelectorAll('#vibeGrid .option-card').forEach((el, i) =>
+                el.classList.toggle('selected', vibes[i].id === id));
+            setTimeout(() => goToStep('food-venues'), 340);
         }
 
         // ═══════════════════════════════════════
-        // Restaurant loading
+        // Coffee style grid
         // ═══════════════════════════════════════
 
-        async function loadRestaurants() {
-            const grid    = document.getElementById('restaurantGrid');
-            const loading = document.getElementById('restaurantLoading');
-            const errEl   = document.getElementById('restaurantError');
+        function buildCoffeeStyleGrid() {
+            document.getElementById('coffeeStyleGrid').innerHTML = coffeeStyles.map(s =>
+                `<div class="option-card" onclick="selectCoffeeStyle('${s.id}')">
+                    <span class="option-emoji">${s.emoji}</span>
+                    <span class="option-label">${s.label}</span>
+                    <span class="option-desc">${s.desc}</span>
+                </div>`
+            ).join('');
+        }
+
+        function selectCoffeeStyle(id) {
+            state.coffeeStyle = coffeeStyles.find(s => s.id === id);
+            document.querySelectorAll('#coffeeStyleGrid .option-card').forEach((el, i) =>
+                el.classList.toggle('selected', coffeeStyles[i].id === id));
+            setTimeout(() => goToStep('coffee-venues'), 340);
+        }
+
+        // ═══════════════════════════════════════
+        // Activity category grid
+        // ═══════════════════════════════════════
+
+        function buildActivityCatGrid() {
+            document.getElementById('activityCatGrid').innerHTML = activityCats.map(c =>
+                `<div class="option-card" onclick="selectActivityCat('${c.id}')">
+                    <span class="option-emoji">${c.emoji}</span>
+                    <span class="option-label">${c.label}</span>
+                    <span class="option-desc">${c.desc}</span>
+                </div>`
+            ).join('');
+        }
+
+        function selectActivityCat(id) {
+            state.activityCat = activityCats.find(c => c.id === id);
+            document.querySelectorAll('#activityCatGrid .option-card').forEach((el, i) =>
+                el.classList.toggle('selected', activityCats[i].id === id));
+            setTimeout(() => goToStep('activity-events'), 340);
+        }
+
+        // ═══════════════════════════════════════
+        // Cinema genre grid
+        // ═══════════════════════════════════════
+
+        function buildGenreGrid() {
+            document.getElementById('genreGrid').innerHTML = genres.map(g =>
+                `<div class="option-card" onclick="selectGenre('${g.id}')">
+                    <span class="option-emoji">${g.emoji}</span>
+                    <span class="option-label">${g.label}</span>
+                </div>`
+            ).join('');
+        }
+
+        function selectGenre(id) {
+            state.genre = genres.find(g => g.id === id);
+            document.querySelectorAll('#genreGrid .option-card').forEach((el, i) =>
+                el.classList.toggle('selected', genres[i].id === id));
+            setTimeout(() => goToStep('cinema-films'), 340);
+        }
+
+        // ═══════════════════════════════════════
+        // Food venue loading
+        // ═══════════════════════════════════════
+
+        async function loadFoodVenues() {
+            const grid = document.getElementById('foodVenueGrid');
+            const loading = document.getElementById('foodLoading');
+            const banner = document.getElementById('foodBanner');
 
             grid.style.display = 'none';
-            document.getElementById('stickyProceed').classList.remove('visible');
             loading.classList.remove('hidden');
-            errEl.classList.add('hidden');
+            banner.classList.add('hidden');
             state.restaurant = null;
-
-            document.getElementById('restaurantSubline').textContent =
+            document.getElementById('stickyProceed').classList.remove('visible');
+            document.getElementById('foodVenueSubline').textContent =
                 `Finding ${state.cuisine.label} spots near ${state.location}...`;
 
             let results;
-
-            if (fsqKey) {
-                try {
-                    results = await fetchFoursquare();
-                } catch (err) {
-                    console.warn('Foursquare error:', err.message);
-                    results = getDemoRestaurants();
-                    errEl.textContent = 'Could not reach Foursquare — showing sample restaurants.';
-                    errEl.style.cssText = '';
-                    errEl.classList.remove('hidden');
+            if (cfg.fsq) {
+                try { results = await fetchFoursquare(state.cuisine.query, state.vibe); }
+                catch (e) {
+                    results = demoByCuisine[state.cuisine.id] || demoByCuisine.french;
+                    banner.textContent = 'Could not reach Foursquare — showing sample restaurants.';
+                    banner.className = 'error-banner';
+                    banner.classList.remove('hidden');
                 }
             } else {
-                await new Promise(r => setTimeout(r, 1200));
-                results = getDemoRestaurants();
-                errEl.textContent = `Sample results only — add a Foursquare key via ⚙ for real ${state.cuisine.label} spots near ${state.location}.`;
-                errEl.style.cssText = 'background:#f0f4ff; border-color:#c0d0f5; color:#3a5cb5;';
-                errEl.classList.remove('hidden');
+                await delay(1200);
+                results = demoByCuisine[state.cuisine.id] || demoByCuisine.french;
+                banner.textContent = `Sample results — add a Foursquare key via ⚙ for real ${state.cuisine.label} spots near ${state.location}.`;
+                banner.className = 'info-banner';
+                banner.classList.remove('hidden');
             }
 
-            const topFour = results.slice(0, 4);
             loading.classList.add('hidden');
-            renderRestaurantCards(topFour);
+            renderVenueCards(results.slice(0, 4), 'foodVenueGrid', 'restaurant', state.cuisine.emoji);
             grid.style.display = 'grid';
-
-            document.getElementById('restaurantSubline').textContent =
+            document.getElementById('foodVenueSubline').textContent =
                 `A few places I think you'll love, ${state.name.split(' ')[0]}.`;
         }
 
-        function getDemoRestaurants() {
-            return demoRestaurantsByCuisine[state.cuisine?.id] || demoRestaurantsByCuisine.french;
-        }
+        // ═══════════════════════════════════════
+        // Coffee venue loading
+        // ═══════════════════════════════════════
 
-        async function fetchFoursquare() {
-            const params = new URLSearchParams({
-                query:  state.cuisine.query,
-                near:   state.location,
-                limit:  '8',
-                fields: 'fsq_id,name,location,rating,price,photos,categories,website',
-            });
+        async function loadCoffeeVenues() {
+            const grid = document.getElementById('coffeeVenueGrid');
+            const loading = document.getElementById('coffeeLoading');
+            const banner = document.getElementById('coffeeBanner');
 
-            if (state.vibe) {
-                params.set('min_price', state.vibe.minPrice);
-                params.set('max_price', state.vibe.maxPrice);
+            grid.style.display = 'none';
+            loading.classList.remove('hidden');
+            banner.classList.add('hidden');
+            state.cafe = null;
+            document.getElementById('stickyProceed').classList.remove('visible');
+            document.getElementById('coffeeVenueSubline').textContent =
+                `Finding cafés near ${state.location}...`;
+
+            let results;
+            if (cfg.fsq) {
+                try { results = await fetchFoursquare(state.coffeeStyle?.query || 'coffee shop', null); }
+                catch (e) {
+                    results = demoCafes;
+                    banner.textContent = 'Could not reach Foursquare — showing sample cafés.';
+                    banner.className = 'error-banner';
+                    banner.classList.remove('hidden');
+                }
+            } else {
+                await delay(1200);
+                results = demoCafes;
+                banner.textContent = `Sample results — add a Foursquare key via ⚙ for real cafés near ${state.location}.`;
+                banner.className = 'info-banner';
+                banner.classList.remove('hidden');
             }
 
-            const res = await fetch(`https://api.foursquare.com/v3/places/search?${params}`, {
-                headers: { 'Authorization': fsqKey, 'Accept': 'application/json' }
-            });
-
-            if (!res.ok) {
-                const body = await res.text();
-                throw new Error(`${res.status}: ${body.slice(0, 120)}`);
-            }
-
-            const data = await res.json();
-            return data.results || [];
+            loading.classList.add('hidden');
+            renderVenueCards(results.slice(0, 4), 'coffeeVenueGrid', 'cafe', '☕');
+            grid.style.display = 'grid';
+            document.getElementById('coffeeVenueSubline').textContent =
+                `Somewhere worth going to, ${state.name.split(' ')[0]}.`;
         }
 
-        function renderRestaurantCards(list) {
-            const grid = document.getElementById('restaurantGrid');
+        // ── Shared venue card renderer ───────────
 
+        function renderVenueCards(list, gridId, stateKey, fallbackEmoji) {
+            const grid = document.getElementById(gridId);
             grid.innerHTML = list.map(r => {
-                const hasPhoto  = r.photos && r.photos.length > 0;
+                const hasPhoto = r.photos && r.photos.length > 0;
                 const photoHtml = hasPhoto
-                    ? `<img src="${r.photos[0].prefix}400x240${r.photos[0].suffix}" alt="${escHtml(r.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<span style=font-size:2.6rem>${state.cuisine.emoji}</span>'">`
-                    : `<span style="font-size:2.6rem;">${state.cuisine.emoji}</span>`;
-
-                const rating  = r.rating  ? `★ ${(r.rating / 2).toFixed(1)}` : '';
-                const price   = r.price   ? '$'.repeat(r.price)               : '';
+                    ? `<img src="${r.photos[0].prefix}400x240${r.photos[0].suffix}" alt="${escHtml(r.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<span style=font-size:2.4rem>${fallbackEmoji}</span>'">`
+                    : `<span style="font-size:2.4rem;">${fallbackEmoji}</span>`;
+                const rating  = r.rating  ? `★ ${(r.rating/2).toFixed(1)}` : '';
+                const price   = r.price   ? '$'.repeat(r.price) : '';
                 const address = r.location?.formatted_address || r.location?.address || '';
-
-                return `<div class="restaurant-card" data-id="${r.fsq_id}" onclick="selectRestaurant('${r.fsq_id}')">
-                    <div class="restaurant-photo">${photoHtml}</div>
-                    <div class="restaurant-info">
-                        <div class="restaurant-name">${escHtml(r.name)}</div>
-                        <div class="restaurant-meta">
-                            ${rating ? `<span class="restaurant-rating">${rating}</span>` : ''}
-                            ${price  ? `<span>${price}</span>`                            : ''}
+                return `<div class="venue-card" data-id="${r.fsq_id}" onclick="selectVenue('${r.fsq_id}','${stateKey}','${gridId}')">
+                    <div class="venue-photo">${photoHtml}</div>
+                    <div class="venue-info">
+                        <div class="venue-name">${escHtml(r.name)}</div>
+                        <div class="venue-meta">
+                            ${rating ? `<span class="venue-rating">${rating}</span>` : ''}
+                            ${price  ? `<span>${price}</span>` : ''}
                         </div>
-                        <div class="restaurant-address">${escHtml(address)}</div>
+                        <div class="venue-address">${escHtml(address)}</div>
                     </div>
                 </div>`;
             }).join('');
-
             grid._data = list;
         }
 
-        function selectRestaurant(id) {
-            const grid = document.getElementById('restaurantGrid');
-            state.restaurant = grid._data.find(r => r.fsq_id === id) || null;
+        function selectVenue(id, stateKey, gridId) {
+            const grid = document.getElementById(gridId);
+            state[stateKey] = grid._data.find(r => r.fsq_id === id) || null;
+            document.querySelectorAll(`#${gridId} .venue-card`).forEach(el =>
+                el.classList.toggle('selected', el.dataset.id === id));
+            document.getElementById('stickyProceed').classList.add('visible');
+        }
 
-            document.querySelectorAll('.restaurant-card').forEach(el => {
-                el.classList.toggle('selected', el.dataset.id === id);
+        // ── Foursquare fetch ─────────────────────
+
+        async function fetchFoursquare(query, vibe) {
+            const params = new URLSearchParams({
+                query, near: state.location, limit: '8',
+                fields: 'fsq_id,name,location,rating,price,photos,website',
             });
+            if (vibe) { params.set('min_price', vibe.minPrice); params.set('max_price', vibe.maxPrice); }
+            const res = await fetch(`https://api.foursquare.com/v3/places/search?${params}`, {
+                headers: { 'Authorization': cfg.fsq, 'Accept': 'application/json' }
+            });
+            if (!res.ok) throw new Error(res.status);
+            return (await res.json()).results || [];
+        }
 
+        // ═══════════════════════════════════════
+        // Activity event loading
+        // ═══════════════════════════════════════
+
+        async function loadEvents() {
+            const grid = document.getElementById('eventGrid');
+            const loading = document.getElementById('activityLoading');
+            const banner = document.getElementById('activityBanner');
+
+            grid.style.display = 'none';
+            loading.classList.remove('hidden');
+            banner.classList.add('hidden');
+            state.event = null;
+            document.getElementById('stickyProceed').classList.remove('visible');
+            document.getElementById('activityEventsSubline').textContent =
+                `${state.activityCat.label} events near ${state.location}...`;
+
+            let events;
+            if (cfg.evt) {
+                try { events = await fetchEventbrite(); }
+                catch (e) {
+                    events = demoEventsByCat[state.activityCat.id] || [];
+                    banner.textContent = 'Could not reach Eventbrite — showing sample events.';
+                    banner.className = 'error-banner';
+                    banner.classList.remove('hidden');
+                }
+            } else {
+                await delay(1400);
+                events = demoEventsByCat[state.activityCat.id] || [];
+                banner.textContent = `Sample events — add an Eventbrite key via ⚙ for real events near ${state.location}.`;
+                banner.className = 'info-banner';
+                banner.classList.remove('hidden');
+            }
+
+            loading.classList.add('hidden');
+            renderEventCards(events.slice(0, 4));
+            grid.style.display = 'grid';
+            document.getElementById('activityEventsSubline').textContent =
+                `A few things coming up, ${state.name.split(' ')[0]}.`;
+        }
+
+        async function fetchEventbrite() {
+            const now = new Date().toISOString();
+            const cat = state.activityCat?.evtCat || '';
+            const params = new URLSearchParams({
+                'location.address': state.location,
+                categories: cat,
+                'start_date.range_start': now,
+                expand: 'venue',
+                token: cfg.evt,
+            });
+            const res = await fetch(`https://www.eventbriteapi.com/v3/events/search/?${params}`);
+            if (!res.ok) throw new Error(res.status);
+            const data = await res.json();
+            return (data.events || []).map(e => ({
+                id: e.id,
+                name: e.name?.text || 'Event',
+                venue: e.venue?.name || '',
+                dateLabel: new Date(e.start?.local).toLocaleDateString('en-GB', {weekday:'short',day:'numeric',month:'short'}),
+                time: new Date(e.start?.local).toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'}),
+                url: e.url || '',
+                start: e.start?.local || '',
+            }));
+        }
+
+        function renderEventCards(list) {
+            const grid = document.getElementById('eventGrid');
+            grid.innerHTML = list.map(e =>
+                `<div class="event-card" data-id="${e.id}" onclick="selectEvent('${e.id}')">
+                    <div class="event-date-bar">${e.dateLabel}</div>
+                    <div class="event-body">
+                        <div class="event-name">${escHtml(e.name)}</div>
+                        <div class="event-venue">📍 ${escHtml(e.venue)}</div>
+                        <div class="event-time">${e.time}</div>
+                    </div>
+                </div>`
+            ).join('');
+            grid._data = list;
+        }
+
+        function selectEvent(id) {
+            const grid = document.getElementById('eventGrid');
+            state.event = grid._data.find(e => e.id === id) || null;
+            document.querySelectorAll('#eventGrid .event-card').forEach(el =>
+                el.classList.toggle('selected', el.dataset.id === id));
             document.getElementById('stickyProceed').classList.add('visible');
         }
 
         // ═══════════════════════════════════════
-        // Date & Time pickers
+        // Cinema film loading
+        // ═══════════════════════════════════════
+
+        async function loadFilms() {
+            const grid = document.getElementById('filmGrid');
+            const loading = document.getElementById('filmsLoading');
+            const banner = document.getElementById('filmsBanner');
+
+            grid.style.display = 'none';
+            loading.classList.remove('hidden');
+            banner.classList.add('hidden');
+            state.film = null;
+            document.getElementById('stickyProceed').classList.remove('visible');
+
+            let films;
+            if (cfg.tmdb) {
+                try { films = await fetchTMDB(); }
+                catch (e) {
+                    films = demoFilmsByGenre[state.genre?.id] || demoFilmsByGenre.any;
+                    banner.textContent = 'Could not reach TMDB — showing sample films.';
+                    banner.className = 'error-banner';
+                    banner.classList.remove('hidden');
+                }
+            } else {
+                await delay(1400);
+                films = demoFilmsByGenre[state.genre?.id] || demoFilmsByGenre.any;
+                banner.textContent = `Sample films — add a TMDB key via ⚙ for what's actually showing.`;
+                banner.className = 'info-banner';
+                banner.classList.remove('hidden');
+            }
+
+            loading.classList.add('hidden');
+            renderFilmCards(films.slice(0, 4));
+            grid.style.display = 'grid';
+            document.getElementById('filmsSubline').textContent =
+                `Pick one and we'll find a cinema near ${state.location}.`;
+        }
+
+        async function fetchTMDB() {
+            const res = await fetch(
+                `https://api.themoviedb.org/3/movie/now_playing?api_key=${cfg.tmdb}&language=en-US&page=1`
+            );
+            if (!res.ok) throw new Error(res.status);
+            const data = await res.json();
+            let results = data.results || [];
+
+            // Filter by genre if not "any"
+            const genreIds = state.genre?.tmdbIds || [];
+            if (genreIds.length > 0) {
+                results = results.filter(f => f.genre_ids.some(g => genreIds.includes(g)));
+            }
+
+            return results.map(f => ({
+                id: String(f.id),
+                title: f.title,
+                rating: f.vote_average?.toFixed(1),
+                runtime: '',
+                emoji: state.genre?.emoji || '🎬',
+                poster: f.poster_path ? `https://image.tmdb.org/t/p/w342${f.poster_path}` : null,
+            }));
+        }
+
+        function renderFilmCards(list) {
+            const grid = document.getElementById('filmGrid');
+            grid.innerHTML = list.map(f => {
+                const posterHtml = f.poster
+                    ? `<img src="${f.poster}" alt="${escHtml(f.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<span style=font-size:2.8rem>${f.emoji}</span>'">`
+                    : `<span style="font-size:2.8rem;">${f.emoji}</span>`;
+                return `<div class="film-card" data-id="${f.id}" onclick="selectFilm('${f.id}')">
+                    <div class="film-poster">${posterHtml}</div>
+                    <div class="film-info">
+                        <div class="film-title">${escHtml(f.title)}</div>
+                        <div class="film-meta">
+                            ${f.rating ? `<span class="film-rating">★ ${f.rating}</span>` : ''}
+                            ${f.runtime ? ` · ${f.runtime}` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+            grid._data = list;
+        }
+
+        function selectFilm(id) {
+            const grid = document.getElementById('filmGrid');
+            state.film = grid._data.find(f => f.id === id) || null;
+            document.querySelectorAll('#filmGrid .film-card').forEach(el =>
+                el.classList.toggle('selected', el.dataset.id === id));
+            document.getElementById('stickyProceed').classList.add('visible');
+        }
+
+        // ═══════════════════════════════════════
+        // Date & time
         // ═══════════════════════════════════════
 
         function buildTimePickers() {
             const tomorrow = new Date();
             tomorrow.setDate(tomorrow.getDate() + 1);
             document.getElementById('dateInput').min = tomorrow.toISOString().split('T')[0];
-            state.date = '';
-            state.time = '';
+            state.date = ''; state.time = '';
             document.getElementById('dateNextBtn').disabled = true;
 
-            document.getElementById('lunchGrid').innerHTML  = lunchSlots.map(t  => timeChip(t)).join('');
-            document.getElementById('dinnerGrid').innerHTML = dinnerSlots.map(t => timeChip(t)).join('');
+            if (state.activityType === 'coffee') {
+                document.getElementById('datetimeHeadline').innerHTML = 'When are you<br>thinking?';
+                document.getElementById('datetimeSubline').textContent = 'Pick a morning or afternoon.';
+                document.getElementById('timeLabel1').textContent = 'Morning';
+                document.getElementById('timeLabel2').textContent = 'Afternoon';
+                document.getElementById('timeGrid1').innerHTML = ['08:30','09:00','09:30','10:00','10:30'].map(timeChip).join('');
+                document.getElementById('timeGrid2').innerHTML = ['13:00','14:00','15:00','16:00'].map(timeChip).join('');
+            } else {
+                document.getElementById('datetimeHeadline').innerHTML = 'When works<br>for you?';
+                document.getElementById('datetimeSubline').textContent = 'Pick a day and I\'ll sort the rest.';
+                document.getElementById('timeLabel1').textContent = 'Lunch';
+                document.getElementById('timeLabel2').textContent = 'Dinner';
+                document.getElementById('timeGrid1').innerHTML = ['11:30','12:00','12:30','13:00'].map(timeChip).join('');
+                document.getElementById('timeGrid2').innerHTML = ['18:30','19:00','19:30','20:00','20:30'].map(timeChip).join('');
+            }
         }
 
         function timeChip(t) {
@@ -1232,33 +1518,94 @@
 
         function selectTime(t) {
             state.time = t;
-            document.querySelectorAll('.time-chip').forEach(el => {
-                el.classList.toggle('selected', el.textContent === t);
-            });
+            document.querySelectorAll('.time-chip').forEach(el =>
+                el.classList.toggle('selected', el.textContent === t));
             checkDateReady();
         }
 
+        function onDateChange() {
+            state.date = document.getElementById('dateInput').value;
+            checkDateReady();
+        }
+
+        function checkDateReady() {
+            document.getElementById('dateNextBtn').disabled = !(state.date && state.time);
+        }
+
+        function onDateNext() {
+            if (!state.date || !state.time) return;
+            goToStep('confirm');
+        }
+
         // ═══════════════════════════════════════
-        // Confirmation card
+        // Confirmation
         // ═══════════════════════════════════════
 
         function buildConfirmCard() {
-            const r         = state.restaurant;
-            const rName     = r?.name || 'Your restaurant';
-            const address   = r?.location?.formatted_address || '';
-            const [y, mo, d] = state.date.split('-').map(Number);
-            const dateObj   = new Date(y, mo - 1, d);
-            const dateStr   = dateObj.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+            const fn = state.name.split(' ')[0];
+            let emoji, title, venueName, detail1, detail2, note, actions;
+
+            if (state.activityType === 'food') {
+                const r = state.restaurant;
+                const [y,mo,d] = state.date.split('-').map(Number);
+                const dateStr = new Date(y,mo-1,d).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+                emoji    = '🌹';
+                title    = "It's a date.";
+                venueName = r?.name || '';
+                detail1  = `${dateStr} at ${state.time}`;
+                detail2  = r?.location?.formatted_address || '';
+                note     = `Can't wait, ${fn}.`;
+                actions  = `<button class="btn-primary" onclick="openBooking()">Book the table →</button>
+                            <button class="btn-secondary" onclick="downloadCalendar()">Save to calendar</button>`;
+
+            } else if (state.activityType === 'coffee') {
+                const c = state.cafe;
+                const [y,mo,d] = state.date.split('-').map(Number);
+                const dateStr = new Date(y,mo-1,d).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'});
+                emoji    = '☕';
+                title    = 'A coffee date.';
+                venueName = c?.name || '';
+                detail1  = `${dateStr} at ${state.time}`;
+                detail2  = c?.location?.formatted_address || '';
+                note     = `Can't wait, ${fn}.`;
+                actions  = `<button class="btn-primary" onclick="downloadCalendar()">Save to calendar</button>`;
+
+            } else if (state.activityType === 'activity') {
+                const ev = state.event;
+                emoji    = state.activityCat?.emoji || '🎭';
+                title    = 'Something different.';
+                venueName = ev?.name || '';
+                detail1  = ev ? `${ev.dateLabel} at ${ev.time}` : '';
+                detail2  = ev?.venue || '';
+                note     = `Can't wait, ${fn}.`;
+                const evUrl = ev?.url || `https://www.eventbrite.com/d/${encodeURIComponent(state.location)}/${encodeURIComponent(state.activityCat?.label || 'events')}/`;
+                actions  = `<button class="btn-primary" onclick="window.open('${evUrl}','_blank','noopener')">Get tickets →</button>
+                            <button class="btn-secondary" onclick="downloadCalendar()">Save to calendar</button>`;
+
+            } else if (state.activityType === 'cinema') {
+                const film = state.film;
+                emoji    = '🎬';
+                title    = 'Lights down.';
+                venueName = film?.title || '';
+                detail1  = `At a cinema near ${state.location}`;
+                detail2  = '';
+                note     = `Can't wait, ${fn}.`;
+                const searchQ = encodeURIComponent(`${film?.title || ''} cinema ${state.location} showtimes`);
+                actions  = `<button class="btn-primary" onclick="window.open('https://www.google.com/search?q=${searchQ}','_blank','noopener')">Find showtimes →</button>
+                            <button class="btn-secondary" onclick="downloadCalendar()">Save to calendar</button>`;
+            }
 
             document.getElementById('confirmCard').innerHTML = `
-                <div class="confirm-emoji">🌹</div>
-                <div class="confirm-title">It's a date.</div>
-                <div class="confirm-restaurant">${escHtml(rName)}</div>
-                <div class="confirm-detail">${escHtml(dateStr)} at ${state.time}</div>
-                ${address ? `<div class="confirm-detail">${escHtml(address)}</div>` : ''}
+                <div class="confirm-emoji">${emoji}</div>
+                <div class="confirm-title">${title}</div>
+                <div class="confirm-venue">${escHtml(venueName)}</div>
+                ${detail1 ? `<div class="confirm-detail">${escHtml(detail1)}</div>` : ''}
+                ${detail2 ? `<div class="confirm-detail">${escHtml(detail2)}</div>` : ''}
                 <hr class="confirm-divider">
-                <p class="confirm-note">Can't wait, ${escHtml(state.name.split(' ')[0])}.</p>
+                <p class="confirm-note">${note}</p>
             `;
+
+            document.getElementById('confirmActions').innerHTML = actions;
         }
 
         // ═══════════════════════════════════════
@@ -1266,14 +1613,12 @@
         // ═══════════════════════════════════════
 
         function openBooking() {
-            const r       = state.restaurant;
-            const rName   = encodeURIComponent(r?.name || '');
-            const dt      = encodeURIComponent(`${state.date}T${state.time}`);
-
-            const target  = (r?.website && r.website !== '')
+            const r = state.restaurant;
+            const name = encodeURIComponent(r?.name || '');
+            const dt   = encodeURIComponent(`${state.date}T${state.time}`);
+            const target = (r?.website && r.website !== '')
                 ? r.website
-                : `https://www.opentable.com/s/?term=${rName}&dateTime=${dt}&covers=2`;
-
+                : `https://www.opentable.com/s/?term=${name}&dateTime=${dt}&covers=2`;
             window.open(target, '_blank', 'noopener');
         }
 
@@ -1282,87 +1627,112 @@
         // ═══════════════════════════════════════
 
         function downloadCalendar() {
-            const r       = state.restaurant;
-            const rName   = r?.name || 'Our Date';
-            const address = r?.location?.formatted_address || '';
+            let summary, location, dtStart, dtEnd, description;
 
-            // Date parts
-            const datePart = state.date.replace(/-/g, '');
-            const [h, m]   = state.time.split(':').map(Number);
-            const startStr = `${datePart}T${pad(h)}${pad(m)}00`;
-            const endStr   = `${datePart}T${pad(h + 2)}${pad(m)}00`;
-            const stampStr = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+            if (state.activityType === 'food') {
+                const r = state.restaurant;
+                summary  = `Date night at ${r?.name || 'our restaurant'}`;
+                location = r?.location?.formatted_address || '';
+                dtStart  = isoToIcs(state.date, state.time);
+                dtEnd    = isoToIcs(state.date, addHours(state.time, 2));
+                description = 'A date you\'re going to love.';
+            } else if (state.activityType === 'coffee') {
+                const c = state.cafe;
+                summary  = `Coffee at ${c?.name || 'the café'}`;
+                location = c?.location?.formatted_address || '';
+                dtStart  = isoToIcs(state.date, state.time);
+                dtEnd    = isoToIcs(state.date, addHours(state.time, 1));
+                description = 'A coffee date.';
+            } else if (state.activityType === 'activity') {
+                const ev = state.event;
+                summary  = ev?.name || 'Our activity';
+                location = ev?.venue || state.location;
+                dtStart  = ev?.start ? ev.start.replace(/[-:]/g,'').replace('T','T').slice(0,15) : '';
+                dtEnd    = dtStart;
+                description = `${state.activityCat?.label || 'Activity'} near ${state.location}.`;
+            } else if (state.activityType === 'cinema') {
+                const f = state.film;
+                summary  = `${f?.title || 'Cinema'} at the cinema`;
+                location = state.location;
+                // All-day event (just the date)
+                const datePart = (state.date || new Date().toISOString().split('T')[0]).replace(/-/g,'');
+                dtStart  = `${datePart}`;
+                dtEnd    = `${datePart}`;
+                description = `Cinema near ${state.location}.`;
+            }
 
-            const ics = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'PRODID:-//Date Night//EN',
-                'CALSCALE:GREGORIAN',
-                'METHOD:PUBLISH',
-                'BEGIN:VEVENT',
-                `UID:${Date.now()}@date-night`,
-                `DTSTAMP:${stampStr}`,
-                `DTSTART:${startStr}`,
-                `DTEND:${endStr}`,
-                `SUMMARY:Date night at ${rName}`,
-                `LOCATION:${address}`,
-                `DESCRIPTION:A date you're going to love.`,
-                'STATUS:CONFIRMED',
-                'END:VEVENT',
-                'END:VCALENDAR',
-            ].join('\r\n');
+            const stamp = new Date().toISOString().replace(/[-:.]/g,'').slice(0,15) + 'Z';
+            const isAllDay = state.activityType === 'cinema' || (!state.date && state.activityType === 'activity');
 
-            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+            const lines = [
+                'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Date Night//EN',
+                'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+                `UID:${Date.now()}@date-night`, `DTSTAMP:${stamp}`,
+                isAllDay ? `DTSTART;VALUE=DATE:${dtStart}` : `DTSTART:${dtStart}`,
+                isAllDay ? `DTEND;VALUE=DATE:${dtEnd}`     : `DTEND:${dtEnd}`,
+                `SUMMARY:${summary}`, `LOCATION:${location}`,
+                `DESCRIPTION:${description}`, 'STATUS:CONFIRMED',
+                'END:VEVENT', 'END:VCALENDAR',
+            ];
+
+            const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
             const url  = URL.createObjectURL(blob);
             const a    = document.createElement('a');
-            a.href     = url;
-            a.download = 'date-night.ics';
-            a.click();
+            a.href = url; a.download = 'date-night.ics'; a.click();
             URL.revokeObjectURL(url);
         }
 
+        function isoToIcs(date, time) {
+            return date.replace(/-/g,'') + 'T' + time.replace(':','') + '00';
+        }
+
+        function addHours(time, h) {
+            const [hh, mm] = time.split(':').map(Number);
+            return `${pad(hh + h)}:${pad(mm)}`;
+        }
+
         // ═══════════════════════════════════════
-        // Config panel
+        // Config
         // ═══════════════════════════════════════
 
         function toggleConfig() {
-            const panel = document.getElementById('configOverlay');
-            const hidden = panel.classList.toggle('hidden');
+            const p = document.getElementById('configOverlay');
+            const hidden = p.classList.toggle('hidden');
             if (!hidden) {
-                document.getElementById('recipientNameInput').value = recipientName;
-                document.getElementById('fsqKeyInput').value        = fsqKey;
-                document.getElementById('customMsgInput').value     = customMsg;
+                document.getElementById('cfgName').value = cfg.name;
+                document.getElementById('cfgMsg').value  = cfg.msg;
+                document.getElementById('cfgFsq').value  = cfg.fsq;
+                document.getElementById('cfgEvt').value  = cfg.evt;
+                document.getElementById('cfgTmdb').value = cfg.tmdb;
             }
         }
 
         function saveConfig() {
-            recipientName = document.getElementById('recipientNameInput').value.trim();
-            fsqKey        = document.getElementById('fsqKeyInput').value.trim();
-            customMsg     = document.getElementById('customMsgInput').value.trim();
+            cfg.name = document.getElementById('cfgName').value.trim();
+            cfg.msg  = document.getElementById('cfgMsg').value.trim();
+            cfg.fsq  = document.getElementById('cfgFsq').value.trim();
+            cfg.evt  = document.getElementById('cfgEvt').value.trim();
+            cfg.tmdb = document.getElementById('cfgTmdb').value.trim();
 
-            if (recipientName) localStorage.setItem('date_rec_name', recipientName);
-            else               localStorage.removeItem('date_rec_name');
-            if (fsqKey)        localStorage.setItem('date_fsq_key', fsqKey);
-            else               localStorage.removeItem('date_fsq_key');
-            if (customMsg)     localStorage.setItem('date_msg', customMsg);
-            else               localStorage.removeItem('date_msg');
+            ['name','msg','fsq','evt','tmdb'].forEach(k => {
+                if (cfg[k]) localStorage.setItem('d_' + k, cfg[k]);
+                else        localStorage.removeItem('d_' + k);
+            });
 
-            if (customMsg) document.getElementById('openingMsg').textContent = customMsg;
+            if (cfg.msg) document.getElementById('openingMsg').textContent = cfg.msg;
             applyRecipientName();
             toggleConfig();
         }
 
         function applyRecipientName() {
-            const nameInput  = document.getElementById('nameInput');
-            const gladEl     = document.getElementById('gladHeadline');
-            if (recipientName) {
-                // Pre-filled: show personalized headline, hide input field
-                gladEl.textContent     = `I'm so glad, ${recipientName}.`;
-                nameInput.style.display = 'none';
+            const inp  = document.getElementById('nameInput');
+            const head = document.getElementById('gladHeadline');
+            if (cfg.name) {
+                head.textContent    = `I'm so glad, ${cfg.name}.`;
+                inp.style.display   = 'none';
             } else {
-                // Not pre-filled: show fill-in-the-blank
-                gladEl.textContent     = "I'm so glad,";
-                nameInput.style.display = '';
+                head.textContent    = "I'm so glad,";
+                inp.style.display   = '';
             }
         }
 
@@ -1371,13 +1741,10 @@
         // ═══════════════════════════════════════
 
         function pad(n) { return String(n).padStart(2, '0'); }
+        function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
         function escHtml(str) {
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
+            return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
 
         // ═══════════════════════════════════════
@@ -1386,18 +1753,18 @@
 
         buildCuisineGrid();
         buildVibeGrid();
+        buildCoffeeStyleGrid();
+        buildActivityCatGrid();
+        buildGenreGrid();
         applyRecipientName();
 
-        if (customMsg) {
-            document.getElementById('openingMsg').textContent = customMsg;
-        }
+        if (cfg.msg) document.getElementById('openingMsg').textContent = cfg.msg;
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && currentStep === 2) onDetailsNext();
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && currentStepId === '2') onDetailsNext();
         });
 
-        // Close config on overlay click
-        document.getElementById('configOverlay').addEventListener('click', (e) => {
+        document.getElementById('configOverlay').addEventListener('click', e => {
             if (e.target === e.currentTarget) toggleConfig();
         });
     </script>

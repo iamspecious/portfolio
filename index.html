@@ -2514,10 +2514,10 @@
                             <strong>Wins</strong>
                             <ul>
                                 <li><strong>The running No button</strong> — Mouse proximity detection via <code>mousemove</code> events, <code>getBoundingClientRect()</code> for position, trigonometry for the escape direction. Switches from inline to fixed positioning on first escape to avoid a visible jump. Fades out after five near-misses. Mobile fallback degrades the button text through three taps before disabling it.</li>
-                                <li><strong>Restaurant discovery via Foursquare</strong> — Cuisine + location filtering, price tier matching (Casual / Date Night / Fine Dining), photos, ratings, and addresses. Free tier gives 10,000 calls/month. Foursquare v3 supports CORS from the browser natively — no proxy required.</li>
-                                <li><strong>Calendar invite in 30 lines</strong> — Generates and downloads an <code>.ics</code> file (RFC 5545 iCalendar format). Opens natively in Google Calendar, Apple Calendar, and Outlook on any device. When accepted it triggers reminders like any other event.</li>
+                                <li><strong>Four activity paths, one flow</strong> — Food (restaurant discovery), Coffee (café search, no booking), Activity (Eventbrite events), Cinema (TMDB films → showtime search deep-link). Each path is defined as an ordered array of step IDs in a <code>FLOWS</code> object; navigation is string-based, progress dots compute dynamically from the current path. No numeric counters, no off-by-one bugs.</li>
+                                <li><strong>Multi-API demo fallbacks</strong> — All three live APIs (Foursquare, Eventbrite, TMDB) have contextually appropriate demo data that activates when no key is configured. Demo cafés, demo events keyed by category, demo films keyed by genre. No broken states for portfolio visitors.</li>
+                                <li><strong>Calendar invite in 30 lines</strong> — Generates and downloads an <code>.ics</code> file (RFC 5545 iCalendar format). Opens natively in Google Calendar, Apple Calendar, and Outlook on any device. Cinema path generates an all-day event (showtime unknown); food and coffee generate timed events with a two-hour end time.</li>
                                 <li><strong>The booking gap is documented, not hidden</strong> — The README explains exactly why true programmatic booking doesn't exist for outside developers, and what the "Book the table" button actually does (an OpenTable search deep-link pre-filled with restaurant, date, time, and party size).</li>
-                                <li><strong>Demo mode</strong> — Without a Foursquare API key, the tool runs with sample restaurants and a simulated loading delay. The experience is identical. No broken state for portfolio visitors.</li>
                             </ul>
                         </div>
 
@@ -2525,7 +2525,8 @@
                             <strong>Constraints</strong>
                             <ul>
                                 <li><strong>Programmatic table booking doesn't exist via public API</strong> — OpenTable has an affiliate program (3–4 week approval, still a deep-link handoff, not a booking). Resy is enterprise-only. The third-party Apify wrapper ($3.99/booking) is ToS-violating and fragile. The booking step is an honest handoff, not real automation.</li>
-                                <li><strong>Foursquare API key required for live data</strong> — The tool ships with demo restaurants without one. The config panel (⚙ gear icon) handles setup without disrupting the experience for the recipient.</li>
+                                <li><strong>No cinema showtimes API</strong> — TMDB covers film metadata and posters. For local showtimes, no universal public API exists. Vue, Odeon, and Cineworld don't have developer APIs. The "Find Showtimes" button deep-links to a Google search for the film + location + "cinema showtimes." Effective handoff, not a direct booking.</li>
+                                <li><strong>Three API keys required for live data</strong> — Foursquare (restaurants and cafés), Eventbrite (events), TMDB (films). All free tiers. The config panel handles all three. Demo mode runs without any.</li>
                                 <li><strong>No email sending</strong> — The calendar invite downloads as an <code>.ics</code> file rather than being emailed. EmailJS (free: 200 emails/month) would close this gap.</li>
                                 <li><strong>Desktop-first mechanic</strong> — The No button escape uses <code>mousemove</code> events, which don't fire on touch devices. Mobile gets a tap-degradation fallback instead.</li>
                             </ul>
@@ -2537,18 +2538,14 @@
                                 <li><strong>EmailJS integration</strong> — Collect an email address early in the flow and auto-send the <code>.ics</code> as an attachment on confirmation. Free tier covers 200 emails/month. Closes the gap between downloading and receiving.</li>
                                 <li><strong>Sender personalisation mode</strong> — A <code>?setup</code> URL parameter opens extended config: custom opening message, pre-selected restaurants to steer the choice, a locked-in date. The "sinister version" — fully documented.</li>
                                 <li><strong>OpenTable affiliate integration</strong> — Currently a search deep-link. With affiliate approval, a cleaner availability-surfacing handoff with direct reservation links per restaurant.</li>
-                                <li><strong>Activity type selection</strong> — Before cuisine, ask what kind of date it is: four cards, four different flows.<br><br>
-                                    <em>Get some food</em> — current restaurant flow, unchanged.<br><br>
-                                    <em>Go for a coffee</em> — same Foursquare query, category switched to <code>café</code>. Skip the booking step entirely — coffee shops don't take reservations. Flow shortens: coffee type preference (espresso, filter, something sweet) → venue selection → calendar invite.<br><br>
-                                    <em>Do an activity</em> — two realistic API options. Eventbrite has a free REST API with location-based event search, no OAuth required: returns events by city, category (arts, sports, music, food), and date range. Meetup.com uses GraphQL and requires OAuth but covers a wider range of recurring local meetups and hobby groups. Either surfaces a list of upcoming things to do; the booking step links to the event page directly.<br><br>
-                                    <em>Go to the cinema</em> — the hardest of the four. No universal public showtimes API exists. TMDB (free, API key only) covers film metadata and posters. For local showtimes the realistic path is: TMDB for film discovery → present a list of currently showing films → link to the local cinema's booking page with the film pre-searched. Chains like Vue, Odeon, and Cineworld don't have public APIs, so the handoff is a search link rather than a direct booking. Covers the experience of choosing a film together even if the booking happens on the cinema's site.
-                                </li>
                             </ol>
                         </div>
 
                         <p style="margin-top: 10px;">
                             <span class="tech-tag">HTML/CSS/JS</span>
                             <span class="tech-tag">Foursquare Places API</span>
+                            <span class="tech-tag">Eventbrite API</span>
+                            <span class="tech-tag">TMDB API</span>
                             <span class="tech-tag">iCalendar (.ics)</span>
                             <span class="tech-tag">Client-side only</span>
                             <span class="tech-tag">No backend</span>
@@ -2559,6 +2556,14 @@
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-08 — building</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Built the full activity type selector: four paths, one flow. <em>Food</em> — existing restaurant path, unchanged. <em>Coffee</em> — Foursquare café search, no booking step, morning/afternoon time slots. <em>Activity</em> — Eventbrite API with Arts, Sports, Music, and Classes categories; skips date/time since events have their own date. <em>Cinema</em> — TMDB now-playing films with genre filtering; skips date/time; "Find Showtimes" deep-links to a Google search. Step architecture changed from numeric IDs to semantic string IDs with a <code>FLOWS</code> routing object — each path is an array of step IDs, progress dots compute from the current path. Config panel expanded from two fields to five (name, message, Foursquare key, Eventbrite key, TMDB key). All three APIs have contextually appropriate demo fallbacks.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
@@ -2593,7 +2598,7 @@
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 4 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
 
                             <div class="devlog-overflow">
 
