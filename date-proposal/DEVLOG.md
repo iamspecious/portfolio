@@ -4,6 +4,65 @@
 
 ---
 
+## Entry 008 — Activity Type Selector: Four Paths, One Flow
+
+**Date:** June 2026
+**Status:** Built
+
+The roadmap called for asking *what kind* of date it is before asking where. This entry documents what was built, why the step architecture had to change, and what each path looks like.
+
+**The step ID problem.**
+
+The original flow used numeric step IDs (`step-1`, `step-2`, etc.) with a linear `currentStep` counter and `showStep(n)` calls. That's fine for a single path, but four branching paths need something more flexible. A step number is meaningless when "step 4" could be cuisine selection on the food path or coffee style on the coffee path.
+
+Replaced numeric IDs with semantic string IDs: `s-what`, `s-cuisine`, `s-vibe`, `s-food-venues`, `s-coffee-style`, `s-coffee-venues`, `s-activity-cat`, `s-activity-events`, `s-cinema-genre`, `s-cinema-films`, `s-datetime`, `s-confirm`. Navigation is now `goToStep(id)` — find the div with that ID, activate it. No counters, no arithmetic, no off-by-one bugs.
+
+Each path is defined as an ordered array of step IDs in a `FLOWS` object:
+
+```javascript
+const FLOWS = {
+    food:     ['s-what','s-cuisine','s-vibe','s-food-venues','s-datetime','s-confirm'],
+    coffee:   ['s-what','s-coffee-style','s-coffee-venues','s-datetime','s-confirm'],
+    activity: ['s-what','s-activity-cat','s-activity-events','s-confirm'],
+    cinema:   ['s-what','s-cinema-genre','s-cinema-films','s-confirm'],
+};
+```
+
+Progress dots render from the current flow array. Completed steps are computed by finding the current step's index in the array.
+
+**The four paths.**
+
+*Food* — unchanged from the original restaurant flow. Foursquare Places API, cuisine + vibe filters, four venue cards, date/time picker, OpenTable deep-link booking, .ics download.
+
+*Coffee* — same Foursquare query, category switched to café. No vibe filter (coffee shops don't have price tiers that map to vibe in a meaningful way). No booking step — you don't book a coffee. Time slots shifted to Morning (08:30–10:30) and Afternoon (13:00–16:00) since the old Lunch/Dinner slots were wrong for a coffee date.
+
+*Activity* — Eventbrite API (`/events/search/` with `?token=` auth, no OAuth). Category selector: Arts & Culture, Sports, Music, Classes & Workshops. Results show event name, date, venue, short description. No separate date/time step — events have their own date baked in. Goes straight to confirm.
+
+*Cinema* — TMDB API (`/movie/now_playing`, client-side genre filtering). Genre selector: Action, Comedy, Romance, Horror, Drama. Results show film poster, title, tagline, rating, runtime. No showtimes API exists that works universally; the "Find Showtimes" button deep-links to a Google search for the film + location + "cinema showtimes". The calendar invite uses an all-day ICS event since the actual showtime isn't known.
+
+**Time slots vary by path.**
+
+`buildTimePickers()` checks `state.activityType` and renders appropriate slots:
+- Food: Lunch 11:30–13:00, Dinner 18:30–20:30
+- Coffee: Morning 08:30–10:30, Afternoon 13:00–16:00
+- Activity and Cinema skip the time step entirely.
+
+**The confirm card is fully path-aware.**
+
+`buildConfirmCard()` checks `state.activityType` and renders different content for each path: restaurant name + booking button + .ics download for food; café name + .ics for coffee; event name + date + "Get Tickets" for activity; film poster + "Find Showtimes" for cinema. The ICS generator also branches by path — cinema generates an all-day event, everything else generates a timed event.
+
+**API keys, demo fallbacks.**
+
+The config panel grew from two fields (name, Foursquare key) to five: name, custom message, Foursquare key, Eventbrite key, TMDB key. Each stores to `localStorage`. Each has its own demo fallback that activates when no key is present:
+
+- Foursquare missing → `demoByCuisine` (restaurants) or `demoCafes` (coffee)
+- Eventbrite missing → `demoEventsByCat` keyed by category
+- TMDB missing → `demoFilmsByGenre` keyed by genre
+
+Demo data is contextually appropriate — demo events for Arts look different from demo events for Sports. All demos show an info banner explaining the situation.
+
+---
+
 ## Entry 007 — Demo Mode Bug, Location Label, and Roadmap Expansion
 
 **Date:** June 2026
