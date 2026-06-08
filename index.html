@@ -2559,16 +2559,32 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06-08 — building</span>
+                                <span class="timestamp">2026-06-08 — research</span>
                                 <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Built the full activity type selector: four paths, one flow. <em>Food</em> — existing restaurant path, unchanged. <em>Coffee</em> — Foursquare café search, no booking step, morning/afternoon time slots. <em>Activity</em> — Eventbrite API with Arts, Sports, Music, and Classes categories; skips date/time since events have their own date. <em>Cinema</em> — TMDB now-playing films with genre filtering; skips date/time; "Find Showtimes" deep-links to a Google search. Step architecture changed from numeric IDs to semantic string IDs with a <code>FLOWS</code> routing object — each path is an array of step IDs, progress dots compute from the current path. Config panel expanded from two fields to five (name, message, Foursquare key, Eventbrite key, TMDB key). All three APIs have contextually appropriate demo fallbacks.
+                                    <span class="tag tag-decision">Decision</span>
+                                    Mapped the local listings problem for cinema and theatre. No cinema chain (Vue, Odeon, Cineworld, AMC, UCI) has a public API — the data is locked in proprietary booking systems. TMDB gives film metadata only, not showtimes or venues. The best universal handoff is a structured Google search deep-link: Google aggregates real-time showtime data from chains worldwide and surfaces it as a rich widget. For theatre and professional events, <strong>Ticketmaster Discovery API</strong> (free, 5,000 calls/day, covers Europe) is a better fit than Eventbrite — returns actual shows with venue, date, time, and direct booking links. Eventbrite stays for community events and workshops.
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 8 older entries</button>
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-08 — planning</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    New transport step before confirm: <em>I'll pick you up</em> (collects their address, generates two separate <code>.ics</code> files — the event and a "Collect [Name] from [address]" reminder timed 40 minutes before), <em>I'll book a taxi</em> (notes it in the ICS description, optionally deep-links to Uber pre-filled with the venue address), or <em>You'll make your own way</em> (single ICS, no extra inputs). Two files rather than one combined event — cleaner for the recipient and simpler to implement.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 9 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-08 — building</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Built the full activity type selector: four paths, one flow. <em>Food</em> — existing restaurant path, unchanged. <em>Coffee</em> — Foursquare café search, no booking step, morning/afternoon time slots. <em>Activity</em> — Eventbrite API with Arts, Sports, Music, and Classes categories; skips date/time since events have their own date. <em>Cinema</em> — TMDB now-playing films with genre filtering; skips date/time; "Find Showtimes" deep-links to a Google search. Step architecture changed from numeric IDs to semantic string IDs with a <code>FLOWS</code> routing object — each path is an array of step IDs, progress dots compute from the current path. Config panel expanded from two fields to five (name, message, Foursquare key, Eventbrite key, TMDB key). All three APIs have contextually appropriate demo fallbacks.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-06-07 — fix</span>

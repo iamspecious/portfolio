@@ -4,6 +4,53 @@
 
 ---
 
+## Entry 009 — Local Listings Research and Transport Step Design
+
+**Date:** June 2026
+**Status:** Research / Planning
+
+**The local listings problem.**
+
+The request was simple: if someone says they want to see a play in London, or a specific film in Berlin, what can we actually surface? The answer exposed a structural problem across both cinema and theatre: the venues that hold the data have deliberately not made it available to outside developers. Their entire model depends on you booking through their site.
+
+**Cinema.**
+
+No major cinema chain — Vue, Odeon, Cineworld, AMC, Cineplex, UCI Kinowelt — has a public developer API. TMDB, which the current cinema path uses for film discovery, is a film *metadata* database. It knows what's now playing globally. It doesn't know which cinema in Berlin is showing Project Hail Mary at 7pm on Saturday, and it never will — that's not what it is.
+
+Google aggregates real-time showtime data directly from chains worldwide and presents it as a rich widget at the top of search results. This data is not available via any Google API. The practical conclusion: a structured Google search deep-link is the most honest and universally effective handoff that exists right now.
+
+```
+https://www.google.com/search?q=Project+Hail+Mary+showtimes+Berlin
+```
+
+That query returns a showtime widget with cinema names, times, and booking buttons sourced directly from chains — localised, current, and functional in every market. The user sees what they want to see; they just see it on Google rather than in this UI. Scraping is the alternative, but it's ToS-violating, fragile, and breaks with every site redesign.
+
+**Theatre and events.**
+
+Eventbrite — currently used for the activity path — skews toward community and self-organised events: workshops, meetups, food tours. It doesn't cover West End shows, the National Theatre, or professional music venues.
+
+**Ticketmaster Discovery API** is the right tool for professional entertainment. Free tier: 5,000 calls/day. Requires only an API key, no OAuth. Supports keyword search, city or lat/long location filtering, classification filtering (Arts & Theatre / Music / Sports), and date range. Returns event name, venue, date, time, and a direct ticket link. Coverage includes Europe — a Ticketmaster search for "theatre London" returns West End productions and major venue listings.
+
+The right split going forward:
+- **Ticketmaster** → professional entertainment (theatre, concerts, sports, shows)
+- **Eventbrite** → community events, workshops, meetups
+
+Both APIs are free at the usage levels this project requires. The activity path should support both or switch to Ticketmaster as the primary source.
+
+**Transport step design.**
+
+Before the confirm card, a new step: *"How would you like to get there?"* Three options:
+
+*I'll pick you up* — reveals a text input for their address. The confirm step generates two separate `.ics` downloads: the main event (venue, start time, address) and a second "collection reminder" event with a title like "Collect [Name] from [address]" timed 40 minutes before the main event. Two files, two separate invites in their calendar — cleaner than trying to encode both things in one event's description.
+
+*I'll book a taxi* — no extra inputs. The confirm card notes that transport is arranged. Could also construct an Uber deep-link (`https://m.uber.com/ul/?drop[0][formatted_address]=...`) pre-filled with the venue address where the API has returned one. The `.ics` description notes the taxi booking.
+
+*You'll make your own way* — nothing changes. Single `.ics` for the event only.
+
+The two-file approach for the pickup option is the simpler implementation: the `.ics` format supports it natively, and two distinct calendar entries are clearer for the recipient than a single event with a complex description trying to encode both pieces of information.
+
+---
+
 ## Entry 008 — Activity Type Selector: Four Paths, One Flow
 
 **Date:** June 2026
