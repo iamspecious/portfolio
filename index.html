@@ -23,6 +23,9 @@
                 <a class="nav-link" id="work-tab" data-bs-toggle="tab" href="#work" role="tab">Work Experience</a>
             </li>
             <li class="nav-item" role="presentation">
+                <a class="nav-link" id="case-studies-tab" data-bs-toggle="tab" href="#case-studies" role="tab">Case Studies</a>
+            </li>
+            <li class="nav-item" role="presentation">
                 <a class="nav-link" id="projects-tab" data-bs-toggle="tab" href="#projects" role="tab">Projects</a>
             </li>
             <li class="nav-item" role="presentation">
@@ -90,7 +93,7 @@
                             <div class="timeline-meta"><span class="org">Spec Solutions</span> · Jan 2023 – Present</div>
                             <div class="timeline-subhead">Customer Support Operations &amp; Service Optimisation</div>
                             <ul class="timeline-bullets">
-                                <li>Built and optimised customer support operations for a startup, implementing a ticket allocation system that reduced response times by 30% and increased customer satisfaction.</li>
+                                <li>Built and optimised customer support operations for a startup, implementing a ticket allocation system that reduced response times by 30% and increased customer satisfaction. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Developed a comprehensive knowledge base and implemented structured training for support teams, improving self-service resolution rates.</li>
                                 <li>Provided technical support for users and investigated app bugs, undocumented issues, and usability concerns, collaborating with developers to implement fixes.</li>
                                 <li>Created internal documentation and process guides to improve knowledge sharing across the team as a Tech Support &amp; QA Consultant for Joocie (via Consultancy) — Remote since Jan 2024.</li>
@@ -166,7 +169,7 @@
                             <div class="timeline-role">Customer Support Hero (Technical)</div>
                             <div class="timeline-meta"><span class="org">Stamped</span> · May 2020 – Jul 2020</div>
                             <ul class="timeline-bullets">
-                                <li>Led technical support for enterprise clients, resolving complex account-related issues and improving client satisfaction by 30%.</li>
+                                <li>Led technical support for enterprise clients, resolving complex account-related issues and improving client satisfaction by 30%. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Partnered with development teams to support clients building custom integrations and optimising API usage.</li>
                                 <li>Drove cross-functional collaboration to enhance troubleshooting processes and accelerate issue resolution.</li>
                                 <li>Managed sensitive customer data with a high level of confidentiality, maintaining compliance while resolving complex technical requests.</li>
@@ -218,7 +221,7 @@
                             <div class="timeline-role">Project Manager &amp; Research Assistant</div>
                             <div class="timeline-meta"><span class="org">Learnovate Centre, Trinity College Dublin</span> · Apr 2016 – Apr 2017 · Dublin, Ireland</div>
                             <ul class="timeline-bullets">
-                                <li>Led the €3M EU-funded DEVELOP project, collaborating with international partners to deliver research outcomes on time and in alignment with long-term objectives.</li>
+                                <li>Led the €3M EU-funded DEVELOP project, collaborating with international partners to deliver research outcomes on time and in alignment with long-term objectives. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Drove Agile methodologies to enhance team productivity and adapt to evolving project needs.</li>
                                 <li>Managed communication across European stakeholders, providing clear updates and resolving challenges to maintain momentum.</li>
                                 <li>Mentored new employees through onboarding and led informal team-building to strengthen workplace culture.</li>
@@ -378,6 +381,115 @@
                         </div>
                     </div>
                     </div><!-- /project-block: skills -->
+
+                </div>
+            </div>
+
+            <!-- Case Studies -->
+            <div class="tab-pane fade" id="case-studies" role="tabpanel">
+                <div class="section">
+                    <h2>Case Studies</h2>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 28px;">The Work Experience section lists outcomes. These case studies show the work behind them — the same show-don't-tell treatment as the Projects section, applied to real past work.</p>
+
+                    <!-- ====================================================
+                         CASE STUDY 1: Stamped Widget
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Diagnosing a Widget That Failed Four Different Ways</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 10px;">Stamped.io · Technical Support · 2020</p>
+
+                        <p>A recurring but genuinely tricky issue: the reviews widget would load its shell — the title, the star framework — but sit empty with no actual reviews inside. The frustrating part was that it never looked the same twice. Some clients saw a plain white box. Some saw a squashed outline like a collapsed table. Some saw the full shell with nothing inside. Four different symptoms, same underlying failure class.</p>
+
+                        <p style="margin-top: 10px;">I worked through it in layers rather than assuming a single cause each time. A white box was sometimes just white-on-white text styling — first thing I checked. A squashed box usually meant the client's own container CSS was overriding the widget's base config. Sometimes only part of the embed block had been copied, so the piece that actually called the data was missing entirely. The hardest cases were when everything was placed and styled correctly and it was still empty. That's where I went into Postman to manually check the API handshake and token authentication. Often the connection was fine, and the real problem was the client's own review data: if their export didn't cleanly separate title, star rating, comment, and verified purchase status, the widget had no way to know what went where.</p>
+
+                        <p style="margin-top: 10px;">I couldn't restructure a client's data for them, so the resolution was diagnosing exactly which fields were malformed, then walking them through sanitising and reformatting it before re-upload. Not elegant, but it got real reviews showing instead of an empty box.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>Reduced an ambiguous, frequently-escalated issue to a four-branch diagnostic that didn't require engineering involvement.</li>
+                                <li>Postman became a standard verification step for ruling out data-sync issues before assuming a display bug.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>No ability to fix malformed client data directly — every resolution depended on the client successfully following sanitisation guidance, which wasn't always fast or reliable.</li>
+                                <li>The diagnostic logic lived in my head; it was never written down at the time, which meant every new teammate had to rediscover it.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 2: Spec Solutions Ticket System
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Redesigning a Ticket System Under Live Load</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 10px;">Spec Solutions · Customer Support Operations</p>
+                        <!-- [DRAFT — confirm details with Spec] -->
+
+                        <p><em class="draft-flag">[DRAFT — confirm details with Spec before publishing]</em></p>
+
+                        <p style="margin-top: 10px;">The support operation was running on a flat queue: every ticket landed in the same place, with no mechanism for distinguishing an account-blocking issue from a general question. Volume was manageable, but response times were inconsistent — fast on quiet days, slow when things piled up — and there was no structural reason to expect that to change. Satisfaction scores reflected it.</p>
+
+                        <p style="margin-top: 10px;">The redesign centred on a priority-based allocation system: tickets were classified on intake by urgency and type, then routed to the appropriate queue rather than a single shared backlog. The classification logic was simple enough to run without a dedicated tool — it relied on intake form structure and a small triage decision tree that the support team could apply consistently. Response targets were set per tier so there was something concrete to measure against.</p>
+
+                        <p style="margin-top: 10px;">The structural change did most of the work. Within the same team headcount, response times dropped by approximately 30% and CSAT improved — not because the team was working faster, but because the right issues were reaching the right people without waiting behind lower-priority tickets.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>~30% reduction in response times from structural reallocation alone, without headcount change.</li>
+                                <li>CSAT improvement from more consistent handling — high-urgency issues no longer sat behind general queries.</li>
+                                <li>The triage logic was lightweight enough to be maintained by the team without ongoing specialist input.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>The classification system depended on intake form discipline — if tickets came in without sufficient context, triage defaulted to the general queue rather than correctly prioritising.</li>
+                                <li>The 30% figure is the best available metric; the baseline measurement methodology wasn't rigorous, so the exact delta should be treated as directional rather than precise.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 3: Learnovate DEVELOP Project
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Keeping a €3M Project Aligned Across Borders, Without Authority</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 10px;">Learnovate Centre, Trinity College Dublin · Project Management · 2016–2017</p>
+                        <!-- [DRAFT — confirm details with Spec] -->
+
+                        <p><em class="draft-flag">[DRAFT — confirm details with Spec before publishing]</em></p>
+
+                        <p style="margin-top: 10px;">The DEVELOP project was a €3M EU-funded research initiative spanning multiple international partners — including IBM and several major European universities. The structural challenge wasn't the budget or the scope; it was that I had coordination responsibility over organisations I had no authority over. Partner institutions had their own priorities, their own timelines, and their own reporting pressures. Keeping the project moving required making alignment feel worthwhile rather than mandatory.</p>
+
+                        <p style="margin-top: 10px;">The approach leaned heavily on visibility and rhythm. Stakeholder updates were made regular enough to feel routine rather than reactive — so partners weren't hearing from the project only when something had gone wrong. Agile methodologies gave the team an internal structure that made bottlenecks visible early, before they became delivery risks. Time zone spread across European partners meant asynchronous communication had to carry more weight than synchronous catch-ups; written updates needed to be genuinely informative rather than just covering ground.</p>
+
+                        <p style="margin-top: 10px;">The project came in on time and in alignment with its research objectives. Internal satisfaction across the team held at 98% through the project lifecycle — which, given the coordination complexity, reflected something more than good project hygiene.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>On-time delivery of a complex multi-partner EU-funded project against a €3M budget.</li>
+                                <li>98% internal CSAT maintained throughout — across a team managing the pressure of international partner coordination.</li>
+                                <li>Agile adoption gave the team a shared language for surfacing and resolving bottlenecks before they escalated.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>No direct authority over partner organisations — every alignment outcome depended on influence rather than instruction, which has a ceiling that's hard to predict in advance.</li>
+                                <li>European time zone spread meant synchronous resolution of blockers was sometimes a 24-hour lag. Some issues that could have been resolved in a ten-minute call took a full working day.</li>
+                                <li>EU reporting requirements created a documentation overhead that competed with delivery time, particularly at milestone periods.</li>
+                            </ul>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -2791,6 +2903,11 @@
     </div>
 
     <script>
+        function switchToTab(tabId) {
+            const tabEl = document.getElementById(tabId);
+            if (tabEl) bootstrap.Tab.getOrCreateInstance(tabEl).show();
+        }
+
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const group = btn.closest('.project-filters');

@@ -398,6 +398,34 @@ body { background-color: #f8f9fa; }
     line-height: 1.6;
 }
 
+/* ── Case Studies ── */
+.case-study-link {
+    font-size: 0.75rem;
+    color: #7b5ea7;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px dotted #c4b8e0;
+    padding-bottom: 1px;
+    margin-left: 4px;
+}
+
+.case-study-link:hover {
+    color: #a07fd4;
+    border-bottom-color: #a07fd4;
+}
+
+.draft-flag {
+    font-size: 0.78rem;
+    color: #7a5a00;
+    background: #fffbec;
+    border: 1px solid #e0c84b;
+    border-radius: 4px;
+    padding: 3px 9px;
+    display: inline-block;
+    font-style: normal;
+}
+
 .principle-callout {
     background: #f7f5fc;
     border-left: 4px solid #7b5ea7;
@@ -750,3 +778,5 @@ hr {
 .edu-qual { color: #e6edf3; }
 .edu-org { color: #b392f0; }
 .cert-list li { color: #c9d1d9; border-bottom-color: #21262d; }
+
+/* ── Case Studies cross-links & draft flag ── */
