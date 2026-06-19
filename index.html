@@ -23,6 +23,9 @@
                 <a class="nav-link" id="work-tab" data-bs-toggle="tab" href="#work" role="tab">Work Experience</a>
             </li>
             <li class="nav-item" role="presentation">
+                <a class="nav-link" id="case-studies-tab" data-bs-toggle="tab" href="#case-studies" role="tab">Case Studies</a>
+            </li>
+            <li class="nav-item" role="presentation">
                 <a class="nav-link" id="projects-tab" data-bs-toggle="tab" href="#projects" role="tab">Projects</a>
             </li>
             <li class="nav-item" role="presentation">
@@ -90,7 +93,7 @@
                             <div class="timeline-meta"><span class="org">Spec Solutions</span> · Jan 2023 – Present</div>
                             <div class="timeline-subhead">Customer Support Operations &amp; Service Optimisation</div>
                             <ul class="timeline-bullets">
-                                <li>Built and optimised customer support operations for a startup, implementing a ticket allocation system that reduced response times by 30% and increased customer satisfaction.</li>
+                                <li>Built and optimised customer support operations for a startup, implementing a ticket allocation system that reduced response times by 30% and increased customer satisfaction. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Developed a comprehensive knowledge base and implemented structured training for support teams, improving self-service resolution rates.</li>
                                 <li>Provided technical support for users and investigated app bugs, undocumented issues, and usability concerns, collaborating with developers to implement fixes.</li>
                                 <li>Created internal documentation and process guides to improve knowledge sharing across the team as a Tech Support &amp; QA Consultant for Joocie (via Consultancy) — Remote since Jan 2024.</li>
@@ -166,7 +169,7 @@
                             <div class="timeline-role">Customer Support Hero (Technical)</div>
                             <div class="timeline-meta"><span class="org">Stamped</span> · May 2020 – Jul 2020</div>
                             <ul class="timeline-bullets">
-                                <li>Led technical support for enterprise clients, resolving complex account-related issues and improving client satisfaction by 30%.</li>
+                                <li>Led technical support for enterprise clients, resolving complex account-related issues and improving client satisfaction by 30%. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Partnered with development teams to support clients building custom integrations and optimising API usage.</li>
                                 <li>Drove cross-functional collaboration to enhance troubleshooting processes and accelerate issue resolution.</li>
                                 <li>Managed sensitive customer data with a high level of confidentiality, maintaining compliance while resolving complex technical requests.</li>
@@ -218,7 +221,7 @@
                             <div class="timeline-role">Project Manager &amp; Research Assistant</div>
                             <div class="timeline-meta"><span class="org">Learnovate Centre, Trinity College Dublin</span> · Apr 2016 – Apr 2017 · Dublin, Ireland</div>
                             <ul class="timeline-bullets">
-                                <li>Led the €3M EU-funded DEVELOP project, collaborating with international partners to deliver research outcomes on time and in alignment with long-term objectives.</li>
+                                <li>Led the €3M EU-funded DEVELOP project, collaborating with international partners to deliver research outcomes on time and in alignment with long-term objectives. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Drove Agile methodologies to enhance team productivity and adapt to evolving project needs.</li>
                                 <li>Managed communication across European stakeholders, providing clear updates and resolving challenges to maintain momentum.</li>
                                 <li>Mentored new employees through onboarding and led informal team-building to strengthen workplace culture.</li>
@@ -378,6 +381,106 @@
                         </div>
                     </div>
                     </div><!-- /project-block: skills -->
+
+                </div>
+            </div>
+
+            <!-- Case Studies -->
+            <div class="tab-pane fade" id="case-studies" role="tabpanel">
+                <div class="section">
+                    <h2>Case Studies</h2>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 28px;">The Work Experience section lists outcomes. These case studies show the work behind them — the same show-don't-tell treatment as the Projects section, applied to real past work.</p>
+
+                    <!-- ====================================================
+                         CASE STUDY 1: Stamped widget diagnostic
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Diagnosing a Widget That Failed Four Different Ways</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 12px;">Stamped.io · Technical Support · 2020</p>
+
+                        <p>A recurring but genuinely tricky issue: the reviews widget would load its shell — the title, the star framework — but sit empty with no actual reviews inside. The frustrating part was that it never looked the same twice. Some clients saw a plain white box. Some saw a squashed outline like a collapsed table. Some saw the full shell with nothing inside. Four different symptoms, same underlying failure class.</p>
+
+                        <p style="margin-top: 10px;">I worked through it in layers rather than assuming a single cause each time. A white box was sometimes just white-on-white text styling, the first thing I checked. A squashed box usually meant the client's own container CSS was overriding the widget's base config. Sometimes only part of the embed block had been copied, so the piece that actually called the data was missing entirely. The hardest cases were when everything was placed and styled correctly and it was still empty. That's where I went into Postman to manually check the API handshake and token authentication. Often the connection was fine, and the real problem was the client's own review data: if their export didn't cleanly separate title, star rating, comment, and verified purchase status, the widget had no way to know what went where.</p>
+
+                        <p style="margin-top: 10px;">I couldn't restructure a client's data for them, so the resolution was diagnosing exactly which fields were malformed, then walking them through sanitising and reformatting it before re-upload. Not elegant, but it got real reviews showing instead of an empty box.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>Reduced an ambiguous, frequently-escalated issue to a four-branch diagnostic that didn't require engineering involvement.</li>
+                                <li>Postman became a standard verification step for ruling out data-sync issues before assuming a display bug.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>No ability to fix malformed client data directly — every resolution depended on the client successfully following sanitisation guidance, which wasn't always fast or reliable.</li>
+                                <li>The diagnostic logic lived in my head; it was never written down at the time, which meant every new teammate had to rediscover it.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 2: Spec Solutions ticket system
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Turning a Gmail Inbox Into an Actual Support System</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 12px;">Spec Solutions · Customer Support Operations</p>
+
+                        <p>Support was running out of a Gmail inbox and an unconfigured FreeScout instance. No tags, no SLA tracking, no ticket ownership: people just grabbed whatever was at the top of the queue and hoped nothing got missed. In practice that meant tickets falling through entirely, follow-ups forgotten, and a slow, inconsistent reply rate. Ownership was the core issue: people dipped in and out without anyone directly responsible for a given ticket.</p>
+
+                        <p style="margin-top: 10px;">The first step was making the tools we already had actually work: configuring close-time tracking, follow-up flags, macros for common responses, and forwarding rules to route different issue types correctly. But the bigger discovery was that a huge proportion of tickets were the same question in different words: where is my item. That's not a support problem, it's an information problem.</p>
+
+                        <p style="margin-top: 10px;">So rather than just answering that question faster, I worked on removing the need to ask it. We rebuilt the customer-facing platform so item status was tracked and visible stage by stage, and I built a chatbot, trained on documentation and common questions I'd written, to catch repetitive queries before they became tickets at all. We tested it as a standalone FAQ tool first, then moved it into Intercom once it was working properly.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>Cut response times by approximately 30% and lifted CSAT.</li>
+                                <li>Eliminated a whole category of ticket by building self-serve status tracking, rather than just getting faster at answering the same question.</li>
+                                <li>A documentation-trained chatbot meaningfully reduced inbound ticket volume.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>The fix required a genuine platform migration (Gmail and FreeScout to Intercom), which is disruptive and takes real adoption time.</li>
+                                <li>Self-serve tools only catch the questions you've already seen written down; novel issues still need a human.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 3: Learnovate DEVELOP project
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Keeping a €3M Project Aligned Across Borders, Without Authority</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 12px;">Learnovate Centre, Trinity College Dublin · Project Management · 2016–2017</p>
+
+                        <p>One partner organisation's work package had effectively gone to zero output, despite continuing to be paid, because of internal reshuffling on their end and the work simply not being prioritised. That package covered marketing and dissemination of the project's findings, which meant it was quietly putting visible deliverables at risk. Separately, a recurring friction point ran through the whole project: development teams consistently underestimated how long it actually takes to build substantial systems, which created constant pressure from stakeholder priorities and a real risk of scope creep becoming the default state rather than the exception.</p>
+
+                        <p style="margin-top: 10px;">I had no formal authority over any partner organisation, so the lever available to me was visibility, not enforcement. I ran regular check-ins directly with each work package lead, and sent a weekly email to every partner laying out exactly where the project stood and where the blockers were. That weekly update mattered more than it sounds: it created a shared, visible record that surfaced underperformance on its own, without anyone needing to be confronted directly about it. For the stalled work package specifically, I intervened directly to help realign what had fallen behind and get the marketing and dissemination output moving again before it became a funding or deliverable problem.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>A weekly visibility ritual surfaced underperformance naturally, without confrontation, and kept every partner accountable to the same shared picture.</li>
+                                <li>Direct intervention recovered a fully stalled work package before it became a deliverable or funding risk.</li>
+                                <li>A regular check-in rhythm with work package leads caught scope creep and timeline friction early enough to manage rather than firefight.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>No formal authority over partner organisations: the only real lever was visibility and relationship, not enforcement.</li>
+                                <li>The root cause of the stalled work package (the partner's internal reshuffling) was entirely outside Learnovate's control. The intervention managed the symptom, not the underlying cause.</li>
+                            </ul>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -2791,6 +2894,11 @@
     </div>
 
     <script>
+        function switchToTab(tabId) {
+            const tabEl = document.getElementById(tabId);
+            if (tabEl) bootstrap.Tab.getOrCreateInstance(tabEl).show();
+        }
+
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const group = btn.closest('.project-filters');
