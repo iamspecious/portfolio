@@ -522,11 +522,11 @@
   {
     "id": "tiktok-sponsorship-strategy",
     "schemaVersion": 1,
-    "type": "project",
+    "type": "case-study",
     "title": "Sponsorship Strategy for a TikTok Personality",
     "dateStart": "2025-01",
     "dateEnd": "2025-01",
-    "status": "complete",
+    "status": null,
     "domains": ["content-creation", "strategy"],
     "evidence": ["cross-functional-influence"],
     "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
@@ -537,16 +537,16 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Flagged for audit: this consulting deliverable sits between 'project' and 'case-study' types; currently typed as project as it produced a tangible deliverable."
+    "notes": "Retyped from 'project' to 'case-study' per Decision 1: consulting narrative output, not a built artifact."
   },
   {
     "id": "business-relocation-expansion",
     "schemaVersion": 1,
-    "type": "project",
+    "type": "case-study",
     "title": "Business Relocation & Expansion Strategy",
     "dateStart": "2024-12",
     "dateEnd": "2024-12",
-    "status": "complete",
+    "status": null,
     "domains": ["people-hr", "strategy"],
     "evidence": ["cross-functional-influence", "process-design"],
     "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
@@ -557,16 +557,16 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Flagged for audit: type classification (project vs. case-study). See TAGGING-AUDIT.md."
+    "notes": "Retyped from 'project' to 'case-study' per Decision 1: consulting narrative output, not a built artifact."
   },
   {
     "id": "leadership-coaching-project",
     "schemaVersion": 1,
-    "type": "project",
+    "type": "case-study",
     "title": "Leadership Coaching for a Growing Team",
     "dateStart": "2024-11",
     "dateEnd": "2024-12",
-    "status": "complete",
+    "status": null,
     "domains": ["people-hr"],
     "evidence": ["cross-functional-influence"],
     "context": { "stage": "agency-consulting", "level": "strategic", "engagement": "consulting" },
@@ -577,16 +577,16 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Flagged for audit: type classification (project vs. case-study). See TAGGING-AUDIT.md."
+    "notes": "Retyped from 'project' to 'case-study' per Decision 1: consulting narrative output, not a built artifact."
   },
   {
     "id": "optimising-cs-operations",
     "schemaVersion": 1,
-    "type": "project",
+    "type": "case-study",
     "title": "Optimising Customer Support Operations",
     "dateStart": "2024-06",
     "dateEnd": "2024-09",
-    "status": "complete",
+    "status": null,
     "domains": ["support-ops"],
     "evidence": ["process-design", "self-serve-deflection", "cost-discipline"],
     "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
@@ -597,16 +597,16 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Flagged for audit: type classification (project vs. case-study). See TAGGING-AUDIT.md."
+    "notes": "Retyped from 'project' to 'case-study' per Decision 1: consulting narrative output, not a built artifact."
   },
   {
     "id": "niche-market-web-dev-strategy",
     "schemaVersion": 1,
-    "type": "project",
+    "type": "case-study",
     "title": "Niche Market Strategy for Web Development",
     "dateStart": "2023-01",
     "dateEnd": "2023-02",
-    "status": "complete",
+    "status": null,
     "domains": ["strategy"],
     "evidence": ["diagnostic-reasoning", "cross-functional-influence"],
     "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
