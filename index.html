@@ -482,6 +482,52 @@
                         </div>
                     </div>
 
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 4: Denim brand turnaround
+                    ===================================================== -->
+                    <div class="project">
+                        <h3>Rebuilding a Denim Brand, Top to Tail</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 4px;">Customer Experience &amp; Operations · Early-stage made-to-order denim brand</p>
+                        <p style="font-size: 0.78rem; color: #999; margin: 0 0 14px;"><em>Client anonymised; reference available on request.</em></p>
+
+                        <p>I came to the company as an unhappy customer. The brand was in the worst of what the team called the great jean disaster — orders not landing, customers in the dark, a small founding team underwater, and a reputation taking on water with it. I'd been on the receiving end of it. But instead of just charging back and leaving a bad review, I reached out to the founder, who was visibly overwhelmed, and asked whether he wanted help.</p>
+
+                        <p style="margin-top: 10px;">A short while later I came aboard to rebuild the customer experience top to tail. Almost everything that followed was an exercise in rebuilding trust — with customers, and inside the team.</p>
+
+                        <p style="margin-top: 10px;"><strong>The diagnosis.</strong> Before touching anything, the founder and I worked through what we actually wanted the customer experience to <em>be</em> — not just "fewer angry emails," but the standard of care a customer should feel. Then I audited what was breaking it. Support was running out of an under-configured FreeScout instance and a Gmail setup with no real safeguards: no reliable way to catch unresolved problems before they aged out, no escalation path, nothing to stop things falling through. But the deeper finding was that support volume was a <em>symptom</em>. The single largest driver of inbound wasn't a support-process failure — it was customers having no visibility into where their order was. People weren't angry that the jeans were taking time; they were angry because they couldn't <em>see</em> anything. That reframing — inbound as a visibility problem, not a staffing problem — shaped everything after it.</p>
+
+                        <p style="margin-top: 16px;"><strong>What I did:</strong></p>
+                        <ul style="font-size: 0.88rem; color: #444; line-height: 1.75; padding-left: 18px; margin-top: 6px;">
+                            <li style="margin-bottom: 10px;"><strong>Rebuilt the support system with real safeguards.</strong> Reconfigured the FreeScout/Gmail setup into something that could actually hold a queue: tooling to surface unresolved and aging tickets, a defined escalation path, and the structure to stop problems disappearing silently. The goal was a system where nothing fell through, not just faster replies.</li>
+                            <li style="margin-bottom: 10px;"><strong>Solved inbound at the source — production transparency via RFID.</strong> The highest-leverage fix wasn't in support at all. I led a redesign of the customer-facing platform so customers could see exactly where their order was in production — and to make that real, we redesigned the factory floor around an RFID method that tracked each pattern piece and stage as it moved through the build. On the floor it gave tailors genuine accountability over where every piece was. Customer-side, it removed the anxiety generating most of the tickets. Inbound dropped significantly as a direct result. This is the piece I'm proudest of: a support fix that reached into the physical production process, because that's where the actual problem lived.</li>
+                            <li style="margin-bottom: 10px;"><strong>Deflected repeat questions with an FAQ chatbot.</strong> On top of the tracker, I built a prototype chatbot — later spun out as its own portfolio project — running through Intercom, pulling from internal FAQs to answer common questions. For logged-in users it could draw on their own data to answer order-specific questions. Together with the tracker, this took another layer of repetitive load off the queue so human attention went to the problems that actually needed a person.</li>
+                            <li style="margin-bottom: 10px;"><strong>Got the brand right where it mattered most — to backers.</strong> For the founder kits going out to early backers, I worked on what the packaging and welcome note should be so they embodied what we wanted the brand to stand for. The audience was backers and investors; at a moment when trust was the whole game, the physical artifact in their hands had to carry the brand, not undercut it.</li>
+                            <li style="margin-bottom: 10px;"><strong>Ran the EOR evaluation and selection for international expansion.</strong> As expansion approached, the team was about to become genuinely international — members across the UK, Canada, and the EU, with production in Türkiye. That created overlapping obligations: cross-border legal liability, right-to-work requirements across jurisdictions, and the problem of running payroll cleanly when there was no legal entity in the places people lived. My read was that an EOR was the right structure to absorb that complexity. So I ran the selection: set the criteria, evaluated options, and chose Oyster — not the cheapest, but the most responsive and hands-on, and the best fit for how we wanted to operate. We reached contract. The ink was effectively about to dry when the expansion funding was pulled and the plan stopped. This is an evaluation-and-selection story carried through to contract, not a multi-year operation — and I frame it that way.</li>
+                            <li style="margin-bottom: 10px;"><strong>Argued against outsourcing support — to protect the voice we'd just built.</strong> We debated whether to hand support to an agency. I argued against it. We'd only just nailed down our voice-and-tone standard, and outsourcing to an agent with a few hours a week on the contract meant betting our reputation — already fragile — on someone with little reason to care enough to protect that tone. I agreed the founder's time was better spent elsewhere; my position was that the answer was someone in-house we could properly mould, not an outsourced contract. A deliberate trade of short-term convenience for brand integrity at exactly the moment integrity mattered most.</li>
+                            <li style="margin-bottom: 0;"><strong>Navigated cross-border duty-of-care obligations.</strong> Part of the people side was working through overlapping obligations under unfamiliar cross-border employment law. The founder and I worked through what proper support and facilitation required, and I brought in fractional CTO consultations to review the tech stack and help steer technical direction. It reinforced why getting compliant employment structures in place mattered: people obligations and business needs aren't separable across jurisdictions.</li>
+                        </ul>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>Inbound fell significantly once the production tracker and FAQ bot were live — because the largest ticket driver (order-status anxiety) was removed at the source rather than absorbed by support.</li>
+                                <li>The factory floor gained real accountability through RFID stage-tracking, benefiting on-site staff as much as customers.</li>
+                                <li>Support gained a system that held — safeguards, escalation path, nothing falling silently through.</li>
+                                <li>The EOR selection reached contract with the right partner chosen for the company's specific multi-jurisdiction needs.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>The expansion funding was pulled, so the EOR was selected and contracted but never operated at scale — this is selection-and-scoping experience, not years of platform operation.</li>
+                                <li>Self-serve deflection only removes the questions you've already anticipated and documented; genuinely novel issues still need a person, by design.</li>
+                                <li>A production-tracking redesign depends on shop-floor adoption to stay accurate — the RFID method worked because the floor process was redesigned around it, not bolted on top.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
