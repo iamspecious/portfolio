@@ -249,6 +249,8 @@
       goToNode(opt.target);
     } else if (opt.lane) {
       showLane(opt.lane);
+    } else if (opt.action === 'restart') {
+      restartConversation();
     } else if (opt.action === 'skip') {
       collapse();
     } else if (opt.action === 'goto-about') {

@@ -39,7 +39,7 @@
       "options": [
         { "label": "Who are you, the digital one?",      "target": "whoareyou" },
         { "label": "Who is Spec, the actual person?",    "target": "whoisspec" },
-        { "label": "What's with all the Kingdom Hearts?","lane": "creator-lore" },
+        { "label": "What's with all the Kingdom Hearts?","target": "kh-lore" },
         { "label": "Where can I talk to Spec?",          "target": "contact" }
       ]
     },
@@ -62,6 +62,20 @@
       "options": [
         { "label": "Email",       "action": "contact-email" },
         { "label": "LinkedIn DM", "action": "contact-linkedin" }
+      ]
+    },
+    "kh-lore": {
+      "text": "LoreBySpec is Spec's Kingdom Hearts and video game lore channel on YouTube. Every week they produce a video untangling the mysteries surrounding the Kingdom Hearts franchise — and once a month they dive into other video games too. There's also a pre-production podcast called Thinking Through the Darkness, where Spec chats through theories before they become videos. It's a fairly new venture — the one-year anniversary is coming up soon — and they've already grown to over 580 subscribers. For an ultra-niche audience, that's genuinely impressive. So what brought you down this path?",
+      "options": [
+        { "label": "Show me the tools Spec built for the channel", "lane": "creator-lore" },
+        { "label": "Honestly I was just curious about the Kingdom Hearts thing", "target": "kh-just-curious" }
+      ]
+    },
+    "kh-just-curious": {
+      "text": "Ha — fair enough, it is a bit of a curveball on a portfolio site! Shall I take you back to the beginning, or are you happy to poke around yourself?",
+      "options": [
+        { "label": "Take me back to the beginning", "action": "restart" },
+        { "label": "I'll poke around, thanks",       "action": "skip" }
       ]
     },
     "nosy": {
