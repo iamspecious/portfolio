@@ -1,12 +1,12 @@
 {
-  "startNode": "open",
+  "startNode": "opening",
   "contacts": {
     "email": "work.specious@gmail.com",
     "linkedin": "https://www.linkedin.com/in/speciouscodabishop"
   },
   "nodes": {
-    "open": {
-      "text": "Hi there — I'm digital Spec. The real one built me and is upfront about it: there's no live brain in here, just a well-made script that runs on how Spec actually thinks. Real Spec needs sleep; I don't. So — what brings you here?",
+    "opening": {
+      "text": "Hi there! Nice to meet you and thanks for visiting today. I'm Digital Spec and I'll be guiding you through the portfolio today should you need the help. So, what brings you here?",
       "options": [
         { "label": "I'm hiring",                        "target": "hiring" },
         { "label": "I'm curious about Spec",            "target": "curious" },
@@ -15,7 +15,7 @@
       ]
     },
     "hiring": {
-      "text": "Straight to it. What are you hiring for?",
+      "text": "Great! So you're looking to hire for a role — what role is it? My job here is to pull from all of Spec's experience to give you a curated rundown of just what they can do!",
       "options": [
         { "label": "Ops / Strategy",           "lane": "ops-strategy" },
         { "label": "Technical Support",        "lane": "cs-support" },
@@ -25,57 +25,57 @@
       ]
     },
     "hiring-else": {
-      "text": "Fair — Spec doesn't fit one box. What's the shape of it?",
+      "text": "Oh? Interesting! What would you like to see examples of — what's the shape of it?",
       "options": [
-        { "label": "More strategy & systems",   "lane": "ops-strategy" },
-        { "label": "More customers & support",  "lane": "cs-support" },
-        { "label": "More building & tooling",   "lane": "builder-technical" },
-        { "label": "More people & compliance",  "lane": "people-hr" },
-        { "label": "Just show me everything",   "action": "skip" }
+        { "label": "More strategy & systems",  "lane": "ops-strategy" },
+        { "label": "More customers & support", "lane": "cs-support" },
+        { "label": "More building & tooling",  "lane": "builder-technical" },
+        { "label": "More people & compliance", "lane": "people-hr" },
+        { "label": "Just show me everything",  "action": "skip" }
       ]
     },
     "curious": {
-      "text": "Happy to talk. What are you curious about?",
+      "text": "That's ok! What are you curious about?",
       "options": [
-        { "label": "Who are you — the digital one?",      "target": "whoareyou" },
-        { "label": "Who is Spec — the actual person?",    "target": "whoisspec" },
-        { "label": "What's with all the Kingdom Hearts?", "lane": "creator-lore" },
-        { "label": "Where can I talk to Spec?",           "target": "contact" }
+        { "label": "Who are you, the digital one?",      "target": "whoareyou" },
+        { "label": "Who is Spec, the actual person?",    "target": "whoisspec" },
+        { "label": "What's with all the Kingdom Hearts?","lane": "creator-lore" },
+        { "label": "Where can I talk to Spec?",          "target": "contact" }
       ]
     },
     "whoareyou": {
-      "text": "I'm a script, not a mind. The real Spec built me with Claude, encoded on how they actually diagnose and decide, then went to sleep — which I don't do. I'm Spec Lite: good enough to tell you whether you'd get on with the real one.",
+      "text": "I'm Digital Spec. The real Spec built me using Claude, based on how real-life Spec would handle different challenges. Spec's portfolio is quite broad, so it made sense to build a chatbot of sorts to help guide people through their work. After all, they can't be around 24/7 to answer questions — but I can! I've no brain per se; all of this has been pre-programmed by Spec, so no AI hallucinations here.",
       "options": [
-        { "label": "Show me how you were built",      "lane": "builder-technical" },
-        { "label": "Where can I talk to the real Spec?", "target": "contact" }
+        { "label": "Show me how you were built",          "lane": "builder-technical" },
+        { "label": "Where can I talk to the real Spec?",  "target": "contact" }
       ]
     },
     "whoisspec": {
-      "text": "Spec is a generalist by design — a decade across people ops, support, and systems, plus a creative streak that runs from Kingdom Hearts lore analysis to building AI tools in public. The through-line is always the same: drawn to wherever the system needs thinking through.",
+      "text": "Happy to introduce them properly. Spec's a generalist by design — a decade across people ops, support, and systems, with a creative streak running through all of it. The short version: they're drawn to wherever something isn't quite working, and they find the structural reason why.",
       "options": [
-        { "label": "Show me the range",       "action": "goto-about" },
-        { "label": "Where can I talk to them?", "target": "contact" }
+        { "label": "Show me the range",        "action": "goto-about" },
+        { "label": "Where can I talk to them?","target": "contact" }
       ]
     },
     "contact": {
-      "text": "Here's the thing — the upgrade from Spec Lite to full Spec is free. It's called an email, and the real one actually replies.",
+      "text": "No problem — while I'm always free, there's no substitute for the real thing. Email or a LinkedIn DM works best; so which would you prefer?",
       "options": [
-        { "label": "Email Spec",               "action": "contact-email" },
-        { "label": "Find Spec on LinkedIn",    "action": "contact-linkedin" }
+        { "label": "Email",       "action": "contact-email" },
+        { "label": "LinkedIn DM", "action": "contact-linkedin" }
       ]
     },
     "nosy": {
-      "text": "A person after my own heart. Poke around yourself, or want something specific?",
+      "text": "No issues with being nosy here! Is there anything specific you're looking for, or are you happy to poke around yourself?",
       "options": [
-        { "label": "I'll poke around myself",    "action": "skip" },
-        { "label": "Show me something specific", "target": "nosy-specific" }
+        { "label": "Show me something specific", "target": "nosy-specific" },
+        { "label": "I'll poke around myself",    "action": "skip" }
       ]
     },
     "nosy-specific": {
-      "text": "Then here's what I'd show a friend:",
+      "text": "Then here's what I'd point you to first:",
       "options": [
         {
-          "label": "The thing I'm proudest of building",
+          "label": "The thing Spec's proudest of building",
           "action": "deeplink",
           "anchor": "#cs-denim-brand-turnaround-s2",
           "tab": "case-studies-tab"
@@ -85,7 +85,7 @@
           "lane": "builder-technical"
         },
         {
-          "label": "The one case study that shows how I think",
+          "label": "The one case study that shows how Spec thinks",
           "action": "deeplink",
           "anchor": "#cs-denim-brand-turnaround",
           "tab": "case-studies-tab"
