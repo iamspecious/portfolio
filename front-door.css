@@ -354,6 +354,31 @@
   line-height: 1.4;
 }
 
+/* ── Restart ── */
+.fd-restart {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.fd-restart-btn {
+  background: transparent;
+  border: none;
+  color: #484f58;
+  font-size: 0.72rem;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.13s;
+}
+
+.fd-restart-btn:hover,
+.fd-restart-btn:focus-visible {
+  color: #8b949e;
+  outline: 2px solid #30363d;
+  outline-offset: 2px;
+}
+
 /* ── Lane footer controls ── */
 .fd-lane-controls {
   margin-top: 12px;
