@@ -754,5 +754,27 @@
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": ""
+  },
+  {
+    "id": "proj-digital-spec-front-door",
+    "schemaVersion": 1,
+    "type": "project",
+    "title": "Digital Spec — Portfolio Front Door",
+    "dateStart": "2026-06",
+    "dateEnd": "present",
+    "status": "live",
+    "domains": ["frontend-dev"],
+    "evidence": ["build-in-public", "technical-depth", "process-design", "judgment-restraint"],
+    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
+    "tools": ["html-css-js"],
+    "summary": "The portfolio's branching front-door guide — tag-driven curation, built as an overlay, no AI.",
+    "anchor": "#proj-digital-spec-front-door",
+    "relatedIds": ["faq-chatbot"],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {
+      "builder-technical": "The portfolio's own front door — a tag-driven guide built as an overlay, no AI, fully documented."
+    },
+    "notes": ""
   }
 ]
