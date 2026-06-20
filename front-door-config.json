@@ -1,0 +1,96 @@
+{
+  "startNode": "open",
+  "contacts": {
+    "email": "work.specious@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/speciouscodabishop"
+  },
+  "nodes": {
+    "open": {
+      "text": "Hi there — I'm digital Spec. The real one built me and is upfront about it: there's no live brain in here, just a well-made script that runs on how Spec actually thinks. Real Spec needs sleep; I don't. So — what brings you here?",
+      "options": [
+        { "label": "I'm hiring",                        "target": "hiring" },
+        { "label": "I'm curious about Spec",            "target": "curious" },
+        { "label": "I'm just being nosy",               "target": "nosy" },
+        { "label": "No time — just show me everything", "action": "skip" }
+      ]
+    },
+    "hiring": {
+      "text": "Straight to it. What are you hiring for?",
+      "options": [
+        { "label": "Ops / Strategy",           "lane": "ops-strategy" },
+        { "label": "Technical Support",        "lane": "cs-support" },
+        { "label": "Technical Implementation", "lane": "implementation" },
+        { "label": "People-Ops / EOR",         "lane": "people-hr" },
+        { "label": "Something else",           "target": "hiring-else" }
+      ]
+    },
+    "hiring-else": {
+      "text": "Fair — Spec doesn't fit one box. What's the shape of it?",
+      "options": [
+        { "label": "More strategy & systems",   "lane": "ops-strategy" },
+        { "label": "More customers & support",  "lane": "cs-support" },
+        { "label": "More building & tooling",   "lane": "builder-technical" },
+        { "label": "More people & compliance",  "lane": "people-hr" },
+        { "label": "Just show me everything",   "action": "skip" }
+      ]
+    },
+    "curious": {
+      "text": "Happy to talk. What are you curious about?",
+      "options": [
+        { "label": "Who are you — the digital one?",      "target": "whoareyou" },
+        { "label": "Who is Spec — the actual person?",    "target": "whoisspec" },
+        { "label": "What's with all the Kingdom Hearts?", "lane": "creator-lore" },
+        { "label": "Where can I talk to Spec?",           "target": "contact" }
+      ]
+    },
+    "whoareyou": {
+      "text": "I'm a script, not a mind. The real Spec built me with Claude, encoded on how they actually diagnose and decide, then went to sleep — which I don't do. I'm Spec Lite: good enough to tell you whether you'd get on with the real one.",
+      "options": [
+        { "label": "Show me how you were built",      "lane": "builder-technical" },
+        { "label": "Where can I talk to the real Spec?", "target": "contact" }
+      ]
+    },
+    "whoisspec": {
+      "text": "Spec is a generalist by design — a decade across people ops, support, and systems, plus a creative streak that runs from Kingdom Hearts lore analysis to building AI tools in public. The through-line is always the same: drawn to wherever the system needs thinking through.",
+      "options": [
+        { "label": "Show me the range",       "action": "goto-about" },
+        { "label": "Where can I talk to them?", "target": "contact" }
+      ]
+    },
+    "contact": {
+      "text": "Here's the thing — the upgrade from Spec Lite to full Spec is free. It's called an email, and the real one actually replies.",
+      "options": [
+        { "label": "Email Spec",               "action": "contact-email" },
+        { "label": "Find Spec on LinkedIn",    "action": "contact-linkedin" }
+      ]
+    },
+    "nosy": {
+      "text": "A person after my own heart. Poke around yourself, or want something specific?",
+      "options": [
+        { "label": "I'll poke around myself",    "action": "skip" },
+        { "label": "Show me something specific", "target": "nosy-specific" }
+      ]
+    },
+    "nosy-specific": {
+      "text": "Then here's what I'd show a friend:",
+      "options": [
+        {
+          "label": "The thing I'm proudest of building",
+          "action": "deeplink",
+          "anchor": "#cs-denim-brand-turnaround-s2",
+          "tab": "case-studies-tab"
+        },
+        {
+          "label": "The messiest, most honest dev logs",
+          "lane": "builder-technical"
+        },
+        {
+          "label": "The one case study that shows how I think",
+          "action": "deeplink",
+          "anchor": "#cs-denim-brand-turnaround",
+          "tab": "case-studies-tab"
+        }
+      ]
+    }
+  }
+}
