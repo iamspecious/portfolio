@@ -18,177 +18,169 @@ Audience lanes are defined as **queries over those facets** in `lanes.json`. A l
 |---|---|
 | `work` | A paid or volunteer role held over time. |
 | `case-study` | A narrative deep-dive into a specific problem solved and how. |
-| `project` | A built artifact — tool, app, prototype, or concrete deliverable. |
-| `document` | A standalone written sample (documentation, guide, playbook). |
+| `project` | A built, deployable artifact — a tool, site, or prototype. Must be demonstrable. |
+| `document` | A standalone written deliverable: documentation, guide, playbook, or API reference. |
+
+**Schema rule:** `status` must be `null` for `work` and `case-study` items. Only `project` and `document` carry a `status` value.
 
 ---
 
-## 3. Facet: `domain` (1–3 per item)
-
-Apply a domain only where the item **demonstrates substantive work** in it — not where the domain is mentioned in passing or where a tool associated with that domain is named.
+## 3. Facet: `domain` (1–3 per item; apply only where the item *demonstrates substantive work*)
 
 | Value | Inclusion test |
 |---|---|
-| `customer-support` | Doing front-line or technical support directly with customers/users. |
-| `support-ops` | Building or optimising a support system — tooling, processes, deflection, training. Distinct from doing the support. |
-| `implementation-onboarding` | Configuring, rolling out, or onboarding customers onto a product or system. |
-| `operations` | General business/process operations not better covered by a more specific domain. |
-| `project-management` | Running projects: milestones, cross-org delivery, resourcing, stakeholder comms. |
-| `people-hr` | HR, compliance, EOR, hiring frameworks, leadership coaching, people systems. |
-| `community` | Community management, engagement, moderation, and growth. |
-| `strategy` | Positioning, market entry, org/commercial strategy — explicit strategic work, not just thinking strategically. |
-| `ai-engineering` | Building AI/LLM-backed tools: prompt architecture, model integration, output design. |
-| `frontend-dev` | Client-side build work: HTML/CSS/JS, browser APIs, static site deployment. |
-| `technical-writing` | Documentation, guides, playbooks, style/voice standards. |
-| `content-creation` | YouTube, journalism, creator output, editorial content strategy. |
-| `data-analysis` | SQL, product analytics, churn/LTV/retention modelling, dashboards. |
-| `research` | Structured research and feasibility work with documented findings. |
-| `security` | Cybersecurity work. **Flag rule**: any item tagged `security` must also appear in the audit's `flagged` list with note "in-training positioning — human review required." |
+| `customer-support` | Delivering direct support to end users — handling, resolving, communicating. |
+| `support-ops` | Building or running the systems and processes that support teams operate within. |
+| `implementation-onboarding` | Configuring, rolling out, or onboarding onto a product/system. |
+| `operations` | Cross-functional operational work: workflows, processes, logistics, coordination. |
+| `project-management` | Formal project management: planning, tracking, partner coordination, delivery. |
+| `people-hr` | Hiring, HR compliance, EOR, team structure, retention, coaching, labour law. |
+| `community` | Building, managing, or growing a community of people around a shared interest. |
+| `strategy` | Strategic advisory or positioning work with documented real-world impact. |
+| `ai-engineering` | Building AI-powered tools with real model integration (prompt, API, inference). |
+| `frontend-dev` | Writing production-level HTML/CSS/JS with demonstrable shipped UI. |
+| `technical-writing` | Writing documentation, guides, API references, or standards for technical audiences. |
+| `content-creation` | Creating audience-facing content: articles, videos, scripts, editorial strategy. |
+| `data-analysis` | Analysing data to generate insight — SQL, metrics, reporting, visualisation. |
+| `research` | Structured research producing outputs (reports, designs, findings, literature reviews). |
+| `security` | Substantive security work — threat modelling, incident response, pentesting. **Do not apply.** |
 
-### Anti-rules (enforced strictly)
-
-1. `people-hr` work is **never** `ai-engineering` or `frontend-dev`, even if a tool or platform is named.
-2. `community` is **never** `strategy` by default. Only add `strategy` if the item shows explicit org/commercial strategy work.
-3. `customer-support` (doing the support) and `support-ops` (building the system) are separate domains. Apply both only when the item genuinely shows both activities.
-4. A passing mention of a tool or skill does not earn a domain tag. Demonstrated work does.
+### Anti-rules (enforced; violations are audit failures)
+- `people-hr` is never `ai-engineering` or `frontend-dev`, even if a tool is named.
+- `community` is not `strategy` by default — strategy requires documented advisory output.
+- `customer-support` (doing support) ≠ `support-ops` (building the support system).
+- A passing mention of a tool or skill earns no domain tag.
+- `security` may not be applied to any current item — certifications are in-training only (flag in audit).
 
 ---
 
-## 4. Facet: `evidence` (1–4 per item)
-
-What does this item prove the person can do?
+## 4. Facet: `evidence` (1–4 per item; what the item *proves* the person can do)
 
 | Value | Inclusion test |
 |---|---|
-| `diagnostic-reasoning` | Traces a symptom to a structural cause rather than treating the surface. |
-| `process-design` | Designed or redesigned how work flows — not just followed a process. |
-| `cross-functional-influence` | Aligned multiple teams or functions toward a shared outcome. |
-| `influence-without-authority` | Drove meaningful outcomes without formal power over the parties involved. |
-| `technical-depth` | Demonstrates real technical capability: APIs, code, debugging, integration. |
-| `customer-facing` | Direct relationship/communication with customers or external parties. |
-| `writing-range` | Register or voice adaptation across different audiences or contexts. |
-| `cost-discipline` | Explicit, documented attention to cost/efficiency trade-offs. |
-| `build-in-public` | Transparent dev-log or decision documentation as it happened — not retrospective polish. |
-| `scaling` | Grew an organisation, community, or audience materially (with evidence). |
-| `self-serve-deflection` | Reduced demand on human effort by enabling people to help themselves. |
-| `judgment-restraint` | Explicitly chose not to build or do something, with documented rationale. |
-| `accessibility` | Accessibility-driven design or decisions — not just mentioning accessibility. |
+| `diagnostic-reasoning` | Traced a non-obvious root cause, structured a multi-branch diagnosis, or identified the real problem vs. the presented symptom. |
+| `process-design` | Designed or rebuilt a workflow, system, or operational process. |
+| `cross-functional-influence` | Coordinated across teams or stakeholders without direct authority. |
+| `influence-without-authority` | Drove outcomes through relationship, visibility, or facilitation rather than reporting line. |
+| `technical-depth` | Demonstrates substantial hands-on technical work — not just tool familiarity. |
+| `customer-facing` | Substantive direct customer interaction: support, advocacy, communication. |
+| `writing-range` | Shows breadth of register — technical, non-technical, or voice-adapted writing for different audiences. |
+| `cost-discipline` | Made a decision informed by cost trade-offs, or optimised for cost without sacrificing outcome. |
+| `build-in-public` | Documented the build process openly — decisions, pivots, constraints — not polished after the fact. |
+| `scaling` | Grew something measurably: audience, team, process capacity. |
+| `self-serve-deflection` | Reduced inbound volume by enabling users to answer their own questions. |
+| `judgment-restraint` | Chose not to build, include, or act — scope discipline demonstrated explicitly. |
+| `accessibility` | Demonstrated work on accessibility: design, assistive tech, inclusive practice. |
 
 ---
 
-## 5. Facet: `context`
+## 5. Facet: `context` (object; all three sub-fields required)
 
-Three independent sub-axes, applied where known:
+### `stage`
+| Value | Inclusion test |
+|---|---|
+| `startup` | Early-stage company: pre-product-market-fit to Series A. |
+| `scaleup` | Growth-stage company: Series A+, rapid hiring, scaling systems. |
+| `enterprise` | Large, established organisation. |
+| `nonprofit-academic` | Non-profit organisation or academic institution. |
+| `agency-consulting` | Agency or consulting firm. |
+| `personal-project` | Personal or self-directed work outside employment. |
 
-**Stage** (where the work happened organisationally):
-`startup` · `scaleup` · `enterprise` · `nonprofit-academic` · `agency-consulting` · `personal-project`
+### `level`
+| Value | Inclusion test |
+|---|---|
+| `ic` | Individual contributor — did the work hands-on. |
+| `lead` | Led a function, project, or small team with direct output responsibility. |
+| `strategic` | Set direction, defined scope, or made decisions at an organisational level. |
 
-**Level** (the seniority/scope of the work):
-`ic` · `lead` · `strategic`
-
-**Engagement** (the nature of the relationship):
-`employment` · `consulting` · `volunteer` · `personal`
+### `engagement`
+| Value | Inclusion test |
+|---|---|
+| `employment` | Salaried or contracted employment role. |
+| `consulting` | External consulting engagement. |
+| `volunteer` | Unpaid community or civic contribution. |
+| `personal` | Self-directed personal project. |
 
 ---
 
-## 6. Facet: `tools`
+## 6. Facet: `tools` (controlled; log additions in the audit)
 
-Controlled but extensible. New tools must be added here before use in `portfolio-index.json`, and noted in the audit's "New tools added" section.
+Current approved values:
+`zendesk` · `intercom` · `freescout` · `postman` · `api-debugging` · `har-analysis` · `sql` · `python` · `github-actions` · `claude-api` · `prompt-engineering` · `jina-reader` · `cloudflare-workers` · `tensorflow-js` · `html-css-js` · `coda` · `foursquare-api` · `eventbrite-api` · `tmdb-api` · `icalendar`
 
-### Baseline vocabulary (as of schema v1)
+To add a new tool: add it here first, then use it in the index. Document in TAGGING-AUDIT.md under "New tools added."
 
-`zendesk` · `intercom` · `freescout` · `postman` · `api-debugging` · `har-analysis` · `sql` · `python` · `github-actions` · `n8n` · `asana` · `coda` · `claude-api` · `prompt-engineering` · `jina-reader` · `cloudflare-workers` · `tensorflow-js` · `html-css-js`
+---
 
-### Added in this pass (v1 initial tagging)
+## 7. Facet: `status` (projects and documents only; null for work and case-study)
 
-| Tool slug | Description | Added for |
+| Value | Inclusion test |
+|---|---|
+| `live` | Deployed, accessible, and in active use. |
+| `in-progress` | Actively being built; not yet at a stable release. |
+| `research` | In research or planning phase; no shipped code or deliverable yet. |
+| `sample` | A portfolio sample demonstrating skill — not a production deployment. |
+| `complete` | Finished; not actively maintained or iterable. |
+
+---
+
+## 8. Dates
+
+- `dateStart` / `dateEnd`: `YYYY-MM` format, or `"present"` for ongoing.
+- Required for `work`, `case-study`, `project`. Optional but encouraged for `document`.
+- When only the year is known, approximate with `YYYY-01` / `YYYY-12` and document in `notes`.
+
+---
+
+## 9. Audience Lanes (queries over facets — never stamped on items)
+
+Defined in `lanes.json`. Summary:
+
+| Lane | Tier | Matches domains |
 |---|---|---|
-| `foursquare-api` | Foursquare Places API — venue/restaurant search | date-proposal-website |
-| `eventbrite-api` | Eventbrite API — event discovery | date-proposal-website |
-| `tmdb-api` | The Movie Database API — film metadata | date-proposal-website |
-| `icalendar` | RFC 5545 iCalendar format (.ics) — calendar invite generation | date-proposal-website |
+| `cs-support` | primary | `customer-support`, `support-ops` |
+| `implementation` | primary | `implementation-onboarding` |
+| `ops-strategy` | primary | `operations`, `strategy`, `project-management`, `people-hr` |
+| `people-hr` | primary | `people-hr`, `implementation-onboarding` |
+| `builder-technical` | primary | `ai-engineering`, `frontend-dev` |
+| `creator-lore` | primary | `content-creation` |
+| `documentation` | secondary / cross-cutting | `technical-writing` |
+
+`documentation` is cross-cutting: every primary lane should surface its top 1–2 `technical-writing` items as supporting evidence without those items leaving their home lane.
+
+Items with `people-hr` domain will appear in **both** `ops-strategy` and `people-hr` lanes — this is intentional. The lanes are distinct hiring contexts with different boost signals.
 
 ---
 
-## 7. Facet: `status` (projects and documents only)
+## 10. `lensByAudience` and `sectionsByLane`
 
-| Value | Inclusion test |
-|---|---|
-| `live` | Deployed and publicly accessible. |
-| `in-progress` | Active build; functional but not complete. |
-| `research` | In research/planning phase; no shipped artifact yet. |
-| `sample` | A portfolio writing sample rather than a shipped product. |
-| `complete` | Finished; no longer actively maintained or extended. |
+- `lensByAudience`: an object keyed by lane name. Value is a one-line framing of why this item is relevant for that lane's audience. Leave `{}` unless the item needs a custom framing.
+- `sectionsByLane`: an object keyed by lane name. Value is an array of integer section numbers (for case studies with numbered sections) indicating which sections are most relevant for that lane.
 
-`status` is `null` for `work` and `case-study` type items.
+Both fields are idempotent — re-running must extend, never overwrite, values already set.
 
 ---
 
-## 8. Structured Fields
+## 11. Override fields
 
-| Field | Type | Rules |
-|---|---|---|
-| `id` | string | Stable kebab-case slug derived from title. **Never rename after assignment.** |
-| `schemaVersion` | integer | Increment when the schema shape changes. Currently `1`. |
-| `type` | string | One of the four type values above. |
-| `title` | string | The display title of the item. |
-| `dateStart` | string | ISO `YYYY-MM` or `"present"`. Required for `work`, `case-study`, `project`. |
-| `dateEnd` | string | ISO `YYYY-MM` or `"present"`. Required for `work`, `case-study`, `project`. |
-| `status` | string or null | Required for `project` and `document`; `null` for `work` and `case-study`. |
-| `domains` | array | 1–3 domain values. |
-| `evidence` | array | 1–4 evidence values. |
-| `context` | object | `{ stage, level, engagement }`. Fill all three sub-axes where known. |
-| `tools` | array | Zero or more tool slugs from the controlled list. |
-| `summary` | string | Reuses existing copy from the site. Do not rewrite. |
-| `anchor` | string | In-page `#id` fragment or relative URL for standalone pages. |
-| `relatedIds` | array | IDs of genuinely related items (role → case study, tool → case study it came from). |
-| `audiencePin` | array | Lane names where this item is force-included regardless of facet query. Rare — document in `notes`. |
-| `audienceExclude` | array | Lane names where this item is force-excluded. Rare — document in `notes`. |
-| `lensByAudience` | object | Reserved for Phase 2; leave as `{}` in this pass. |
-| `notes` | string | Free text for audit flags, classification rationale, or human-review prompts. |
+- `audiencePin: []` — array of lane names. Forces the item to appear in those lanes even if the query doesn't match.
+- `audienceExclude: []` — array of lane names. Suppresses the item from those lanes even if the query matches.
+- Both must be documented in `notes` with a rationale when non-empty.
 
 ---
 
-## 9. Lane Query Definitions
+## 12. How to tag a new item (checklist)
 
-Lanes are defined in `lanes.json`. This section is the human-readable reference.
-
-| Lane | Include domains | Boost evidence | Max items |
-|---|---|---|---|
-| `cs-support` | `customer-support`, `support-ops` | `diagnostic-reasoning`, `self-serve-deflection`, `customer-facing` | 8 |
-| `implementation` | `implementation-onboarding`, `support-ops` | `process-design`, `technical-depth`, `self-serve-deflection` | 6 |
-| `ops-strategy` | `operations`, `strategy`, `project-management`, `people-hr` | `cross-functional-influence`, `influence-without-authority`, `process-design`, `cost-discipline` | 8 |
-| `builder-technical` | `ai-engineering`, `frontend-dev` | `technical-depth`, `build-in-public`, `judgment-restraint` | 8 |
-| `creator-lore` | `content-creation` | `writing-range`, `scaling`, `build-in-public` | 6 |
-| `documentation` _(proposed)_ | `technical-writing` | `writing-range`, `technical-depth`, `process-design` | 6 |
-| `people-hr` _(proposed)_ | `people-hr` | `process-design`, `cross-functional-influence`, `scaling` | 6 |
-
-Proposed lanes are defined in `lanes.json` under `_proposed_*` keys and must not be surfaced until a human approves them. See `TAGGING-AUDIT.md §Flagged for decision`.
-
----
-
-## 10. How to Tag a New Item
-
-1. **Read this document first.** Confirm you understand the anti-rules before tagging.
-2. **Assign `type`** — one value only. If ambiguous, see the `flagged` section in `TAGGING-AUDIT.md` for precedent.
-3. **Assign `domain`** — 1 to 3 values. Apply only where the item _demonstrates_ work, not where a domain is mentioned. Re-read the anti-rules.
-4. **Assign `evidence`** — 1 to 4 values. Be conservative. Over-tagging is a failure.
-5. **Assign `context`** — fill all three sub-axes. Use `personal-project` for solo personal builds.
-6. **Assign `tools`** — only tools actually used in the work. If a new tool is needed, add it to section 6 of this document first.
-7. **Set `status`** — required for `project` and `document`; `null` for `work` and `case-study`.
-8. **Set dates** — ISO `YYYY-MM`. If only a year is known, use `YYYY-01` and note the approximation in `notes`.
-9. **Set `anchor`** — add a stable `id` attribute to the corresponding HTML element if one does not exist. No other HTML changes.
-10. **Write `summary`** — copy the existing site description verbatim. Do not rewrite.
-11. **Set `relatedIds`** — link to genuinely related items only.
-12. **Update `TAGGING-AUDIT.md`** — re-run the validation pass and update stats.
-13. **If anything is ambiguous** — add to `notes` and the audit's `flagged` list. Never guess silently.
-
----
-
-## 11. Idempotency Contract
-
-Re-running the tagging process on updated content must:
-- **Extend** the index with new items.
-- **Preserve** existing `id` values unchanged.
-- **Never overwrite** `lensByAudience`, `audiencePin`, or `audienceExclude` values that have been set.
-- **Flag** any item whose `id` would conflict with an existing entry for human resolution.
+1. Assign a unique kebab-case `id` that won't clash with existing ids.
+2. Choose `type` (one only).
+3. Set `dateStart` / `dateEnd`. Use `"present"` if ongoing; approximate with `YYYY-01`/`YYYY-12` if only year is known.
+4. Set `status` — `null` for `work` and `case-study`; one of the five values for `project` and `document`.
+5. Apply `domains`: 1–3 maximum. Check anti-rules. If uncertain, use fewer tags and flag.
+6. Apply `evidence`: 1–4 maximum. Each tag must be directly demonstrated, not implied.
+7. Set `context`: all three sub-fields required.
+8. List `tools` used. Add any new tools to §6 of this document first.
+9. Write `summary`: one sentence, present tense, what it demonstrates.
+10. Set `anchor`: `#id-attr` for page items; filename for standalone documents (use `pageAnchor` as secondary for the in-page entry).
+11. Set `relatedIds`: other items in the index that substantiate or extend this one.
+12. Leave `lensByAudience`, `sectionsByLane`, `audiencePin`, `audienceExclude` as empty defaults unless there's a specific reason to populate them.
+13. Cross-check every tag against this document. If something doesn't fit, flag it in TAGGING-AUDIT.md — never invent a new tag mid-pass.
