@@ -12,19 +12,29 @@
     "label": "Implementation & Onboarding",
     "description": "For roles focused on configuring, rolling out, or onboarding customers onto products and systems.",
     "tier": "primary",
-    "include": { "domains": ["implementation-onboarding", "support-ops"] },
-    "boost": { "evidence": ["process-design", "technical-depth", "self-serve-deflection"] },
+    "include": { "domains": ["implementation-onboarding"] },
+    "boost": { "evidence": ["technical-depth", "process-design"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
     "maxItems": 6
   },
   "ops-strategy": {
     "label": "Operations & Strategy",
-    "description": "For roles in business operations, project management, people operations, and organisational strategy.",
+    "description": "For roles in business operations, project management, and organisational strategy.",
     "tier": "primary",
     "include": { "domains": ["operations", "strategy", "project-management", "people-hr"] },
-    "boost": { "evidence": ["cross-functional-influence", "influence-without-authority", "process-design", "cost-discipline"] },
+    "boost": { "evidence": ["influence-without-authority", "process-design", "judgment-restraint", "scaling"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
     "maxItems": 8
+  },
+  "people-hr": {
+    "label": "People Operations & HR",
+    "description": "For people ops, HR, EOR/compliance, and people-infrastructure roles.",
+    "tier": "primary",
+    "include": { "domains": ["people-hr", "implementation-onboarding"] },
+    "_includeNote": "implementation-onboarding pulled in only where engagement is EOR or people-infrastructure; general product onboarding items will co-appear but rank lower without evidence boost.",
+    "boost": { "evidence": ["cross-functional-influence", "process-design"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6
   },
   "builder-technical": {
     "label": "Builder / Technical",
