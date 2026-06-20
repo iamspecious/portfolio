@@ -550,6 +550,203 @@
                         <button class="filter-btn" data-filter="consulting">Consulting</button>
                     </div>
 
+                    <div class="project-block" data-category="engineering">
+
+                    <!-- ====================================================
+                         DIGITAL SPEC — PORTFOLIO FRONT DOOR
+                    ===================================================== -->
+                    <div class="project" id="proj-digital-spec-front-door">
+                        <h3>Digital Spec — Portfolio Front Door <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>The front door to this portfolio. Rather than dropping every visitor into the same wall of work, Digital Spec asks what brought them — hiring for a specific role, curious about the person, or just browsing — and curates a route accordingly. It's a branching, visual-novel-style guide built as an overlay on the static site. Crucially, it has no AI behind it: every path is pre-programmed, so there is nothing to hallucinate. The content it surfaces isn't hardcoded either — each route runs a query over a tagged index of the whole portfolio, so it pulls the right case studies and projects by their tags and stays current as work is added.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">No AI, by design</span>
+                                <p>Pre-programmed branching, not an LLM. Zero hallucination risk, and nothing it can say that Spec didn't write. The constraint is the feature: every word is accountable.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Curates by tags, not lists</span>
+                                <p>Routes query a tagged index of the whole portfolio rather than hardcoded item lists, so the right work surfaces automatically and no lane has to be hand-maintained.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Sorts visitors by intent, not topic</strong> — A hiring manager, a curious peer, and a casual browser each get a different, relevant route in a single tap.</li>
+                                <li><strong>Data-driven curation</strong> — Routes pull from a tagged index, so the right work surfaces automatically and nothing is hand-maintained per lane.</li>
+                                <li><strong>Transparent by construction</strong> — It states it's a pre-programmed guide with no AI and no hallucination risk, up front.</li>
+                                <li><strong>Additive and robust</strong> — Built as an overlay, so the full portfolio works untouched beneath it, and it collapses to a docked tab rather than trapping anyone.</li>
+                                <li><strong>Accessible</strong> — Keyboard-navigable, focus-managed, and reduced-motion aware.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Tappable-only by design</strong> — It can't answer a free-typed question, because it has no live brain — it guides, it doesn't converse.</li>
+                                <li><strong>Index is the source of truth</strong> — A route is only as good as the tags beneath it: a mis-tagged item surfaces in the wrong lane.</li>
+                                <li><strong>Curation order needs a human eye</strong> — The query surfaces matching items, but "lead with the strongest" is an editorial call, tuned by hand via lane sort and pin/exclude.</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Editorial tuning per lane</strong> — Lead each lane with its strongest proof and cap counts, via the lane sort and the per-item pin/exclude overrides.</li>
+                                <li><strong>New lanes as content grows</strong> — Add routes as new content types land (e.g. the implementation playbooks), without touching the conversation structure.</li>
+                                <li><strong>Returning-visitor touch</strong> — A light "here's what's new since you last looked" for repeat visits, session-aware.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">No backend</span>
+                            <span class="tech-tag">Pre-programmed (no AI)</span>
+                            <span class="tech-tag">Tag-driven content</span>
+                        </p>
+                        <a class="tool-link-badge" href="/" target="_blank">Live on this site — look for the Digital Spec tab.</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Project was sitting at the very bottom of the Projects tab — so the deeplink scrolled visually past every other project on the way down. Moved to the top of the section so the route lands cleanly.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    "Show me how you were built" was routing to the <em>builder-technical</em> lane — a curated list of AI tools — rather than this project. Root cause: this entry didn't exist in the portfolio index when that node was written, so the lane was the fallback. Added the index entry and updated the node to deeplink directly here.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    Dismiss-on-click-out replaced with collapse/expand. v1 removed the overlay on dismiss — a visitor navigating away and back lost their place entirely. Refactored: clicking outside, pressing Esc, or hitting the minimise button collapses the overlay to a docked "Ask Digital Spec" tab (bottom-right). It persists through the session and re-expands at the same node. Position preserved, no re-showing on page restore.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Language refresh. Naming rules applied across all nodes: Digital Spec = the guide; Spec = the human. "Spec Lite" (early working name) scrubbed entirely. All option labels rewritten in the visitor's voice — "I'm hiring" not "Hiring manager", "I'll poke around myself" not "Browse everything".
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06 — live</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v1 live. The portfolio's front door — a branching guide that routes visitors by what they came for. Built as an overlay on the static site; reads the tagged portfolio index for content, so it curates by tags rather than hardcoded lists. Because it carries this dev log, it surfaces in its own builder lane — the thing explaining the portfolio is a documented piece of it.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 10 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Posture-first, not content-first. The opening sorts by mindset — hiring, curious, nosy — not by topic. A visitor knows which they are instantly; leading with a job-category question forces a hiring frame on someone who's just browsing. Each posture gets its own register.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Digital Spec announces it's a construct, up front. No pretending to be a live assistant. The honesty is the pitch: the first thing a visitor learns is that this was built deliberately and runs on pre-set logic. For a portfolio whose value is transparency, a fake "live AI" would undercut the thing it's selling.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        No AI, by design. It would have been easy to wire an LLM in. Pre-programmed branching means zero hallucination risk and nothing it can say that Spec didn't write. Every word is accountable.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Decoupled structure from content. The dialogue lives in <code>front-door-config.json</code>; the content comes from the tagged portfolio index via lane queries. Lanes are queries over facet tags, never hardcoded item lists — so adding a project surfaces it automatically, and the conversation can change without touching content.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Tappable replies only — no text box. An open input promises a brain that isn't there; someone types a real question and hits a wall. Tappable choices keep the illusion honest and render as the visitor's own messages.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Never trap a busy visitor. A persistent skip, and the overlay collapses to a docked tab rather than vanishing — a recruiter with four minutes can dismiss it in one tap and still retrieve it. Charm for those who lean in, zero cost for those who don't.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Instant responses, no fake typing delays. Personality goes in the words, not artificial latency — especially for a recruiter-adjacent audience.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Graceful degradation. If a lane has no matching content yet, the node says so and routes to the full site rather than showing an empty box. The front door could ship before every lane was full.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Accessibility from the start. Full keyboard navigation, focus trapped while open and restored on collapse, Esc to collapse, reduced-motion respected. A guide some visitors can't operate isn't a guide.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Origin. This started as a slightly cynical proof of concept — how cheaply you can fake bespoke curation with the right wiring. The honest inversion became the point: a constructed guide that's loud about being constructed, backed by a real tagged index, is more transparent than most "handcrafted" portfolios.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Digital Spec Front Door -->
+
                     <div class="project-block" data-category="ai-tools">
 
                     <!-- ====================================================
@@ -2807,169 +3004,6 @@
 
                     </div><!-- /project -->
                     </div><!-- /project-block: Date Proposal Website -->
-
-                    <div class="project-block" data-category="engineering">
-
-                    <!-- ====================================================
-                         DIGITAL SPEC — PORTFOLIO FRONT DOOR
-                    ===================================================== -->
-                    <div class="project" id="proj-digital-spec-front-door">
-                        <h3>Digital Spec — Portfolio Front Door <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
-                        <p><strong>June 2026 – Present</strong></p>
-                        <p>The front door to this portfolio. Rather than dropping every visitor into the same wall of work, Digital Spec asks what brought them — hiring for a specific role, curious about the person, or just browsing — and curates a route accordingly. It's a branching, visual-novel-style guide built as an overlay on the static site. Crucially, it has no AI behind it: every path is pre-programmed, so there is nothing to hallucinate. The content it surfaces isn't hardcoded either — each route runs a query over a tagged index of the whole portfolio, so it pulls the right case studies and projects by their tags and stays current as work is added.</p>
-
-                        <div class="layer-grid">
-                            <div class="layer-card">
-                                <span class="layer-label">Design decision</span>
-                                <span class="layer-title">No AI, by design</span>
-                                <p>Pre-programmed branching, not an LLM. Zero hallucination risk, and nothing it can say that Spec didn't write. The constraint is the feature: every word is accountable.</p>
-                            </div>
-                            <div class="layer-card">
-                                <span class="layer-label">Design decision</span>
-                                <span class="layer-title">Curates by tags, not lists</span>
-                                <p>Routes query a tagged index of the whole portfolio rather than hardcoded item lists, so the right work surfaces automatically and no lane has to be hand-maintained.</p>
-                            </div>
-                        </div>
-
-                        <div class="project-wins">
-                            <strong>Wins</strong>
-                            <ul>
-                                <li><strong>Sorts visitors by intent, not topic</strong> — A hiring manager, a curious peer, and a casual browser each get a different, relevant route in a single tap.</li>
-                                <li><strong>Data-driven curation</strong> — Routes pull from a tagged index, so the right work surfaces automatically and nothing is hand-maintained per lane.</li>
-                                <li><strong>Transparent by construction</strong> — It states it's a pre-programmed guide with no AI and no hallucination risk, up front.</li>
-                                <li><strong>Additive and robust</strong> — Built as an overlay, so the full portfolio works untouched beneath it, and it collapses to a docked tab rather than trapping anyone.</li>
-                                <li><strong>Accessible</strong> — Keyboard-navigable, focus-managed, and reduced-motion aware.</li>
-                            </ul>
-                        </div>
-                        <div class="project-constraints">
-                            <strong>Constraints</strong>
-                            <ul>
-                                <li><strong>Tappable-only by design</strong> — It can't answer a free-typed question, because it has no live brain — it guides, it doesn't converse.</li>
-                                <li><strong>Index is the source of truth</strong> — A route is only as good as the tags beneath it: a mis-tagged item surfaces in the wrong lane.</li>
-                                <li><strong>Curation order needs a human eye</strong> — The query surfaces matching items, but "lead with the strongest" is an editorial call, tuned by hand via lane sort and pin/exclude.</li>
-                            </ul>
-                        </div>
-                        <div class="roadmap">
-                            <strong class="roadmap-heading">// roadmap</strong>
-                            <ol>
-                                <li><strong>Editorial tuning per lane</strong> — Lead each lane with its strongest proof and cap counts, via the lane sort and the per-item pin/exclude overrides.</li>
-                                <li><strong>New lanes as content grows</strong> — Add routes as new content types land (e.g. the implementation playbooks), without touching the conversation structure.</li>
-                                <li><strong>Returning-visitor touch</strong> — A light "here's what's new since you last looked" for repeat visits, session-aware.</li>
-                            </ol>
-                        </div>
-
-                        <p style="margin-top: 10px;">
-                            <span class="tech-tag">HTML/CSS/JS</span>
-                            <span class="tech-tag">Client-side only</span>
-                            <span class="tech-tag">No backend</span>
-                            <span class="tech-tag">Pre-programmed (no AI)</span>
-                            <span class="tech-tag">Tag-driven content</span>
-                        </p>
-                        <a class="tool-link-badge" href="/" target="_blank">Live on this site — look for the Digital Spec tab.</a>
-
-                        <div class="devlog">
-                            <div class="devlog-header">
-                                <span>// devlog</span>
-                                <small>running build notes — decisions, pivots, wins, and constraints</small>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-06 — live</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    v1 live. The portfolio's front door — a branching guide that routes visitors by what they came for. Built as an overlay on the static site; reads the tagged portfolio index for content, so it curates by tags rather than hardcoded lists. Because it carries this dev log, it surfaces in its own builder lane — the thing explaining the portfolio is a documented piece of it.
-                                </p>
-                            </div>
-
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 10 older entries</button>
-
-                            <div class="devlog-overflow">
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Posture-first, not content-first. The opening sorts by mindset — hiring, curious, nosy — not by topic. A visitor knows which they are instantly; leading with a job-category question forces a hiring frame on someone who's just browsing. Each posture gets its own register.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Digital Spec announces it's a construct, up front. No pretending to be a live assistant. The honesty is the pitch: the first thing a visitor learns is that this was built deliberately and runs on pre-set logic. For a portfolio whose value is transparency, a fake "live AI" would undercut the thing it's selling.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        No AI, by design. It would have been easy to wire an LLM in. Pre-programmed branching means zero hallucination risk and nothing it can say that Spec didn't write. Every word is accountable.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Decoupled structure from content. The dialogue lives in <code>front-door-config.json</code>; the content comes from the tagged portfolio index via lane queries. Lanes are queries over facet tags, never hardcoded item lists — so adding a project surfaces it automatically, and the conversation can change without touching content.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Tappable replies only — no text box. An open input promises a brain that isn't there; someone types a real question and hits a wall. Tappable choices keep the illusion honest and render as the visitor's own messages.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Never trap a busy visitor. A persistent skip, and the overlay collapses to a docked tab rather than vanishing — a recruiter with four minutes can dismiss it in one tap and still retrieve it. Charm for those who lean in, zero cost for those who don't.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Instant responses, no fake typing delays. Personality goes in the words, not artificial latency — especially for a recruiter-adjacent audience.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-note">Note</span>
-                                        Graceful degradation. If a lane has no matching content yet, the node says so and routes to the full site rather than showing an empty box. The front door could ship before every lane was full.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Accessibility from the start. Full keyboard navigation, focus trapped while open and restored on collapse, Esc to collapse, reduced-motion respected. A guide some visitors can't operate isn't a guide.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
-                                    <p>
-                                        <span class="tag tag-note">Note</span>
-                                        Origin. This started as a slightly cynical proof of concept — how cheaply you can fake bespoke curation with the right wiring. The honest inversion became the point: a constructed guide that's loud about being constructed, backed by a real tagged index, is more transparent than most "handcrafted" portfolios.
-                                    </p>
-                                </div>
-
-                            </div><!-- /devlog-overflow -->
-                        </div><!-- /devlog -->
-
-                    </div><!-- /project -->
-                    </div><!-- /project-block: Digital Spec Front Door -->
 
                 </div><!-- /section -->
             </div><!-- /tab-pane projects -->
