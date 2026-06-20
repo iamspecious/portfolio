@@ -620,6 +620,33 @@
                                 <p>
                                     <span class="tag tag-issue">Issue</span>
                                     <span class="tag tag-done">Fixed</span>
+                                    No way to go back or start over mid-conversation. Once you chose a path, you were committed. Added a quiet "↺ Start over" button that appears below the options from the second node onwards, and in lane result footers alongside the Back button.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Ctrl+R resumed the conversation at the last node — the overlay remembered which branch you were on across page reloads via sessionStorage. Unintuitive: a refresh should feel like a fresh start. Removed node caching entirely; collapse state is still remembered so the docked tab stays docked, but the conversation always restarts from the opening.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    "The thing Spec's proudest of building" deeplink was landing mid-case-study (an internal section anchor) rather than at the title. The config was referencing a sub-section ID. Updated to use the top-level entry anchor so the route lands at the heading.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
                                     Project was sitting at the very bottom of the Projects tab — so the deeplink scrolled visually past every other project on the way down. Moved to the top of the section so the route lands cleanly.
                                 </p>
                             </div>

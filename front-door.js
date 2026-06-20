@@ -11,7 +11,6 @@
 
   // ─── Session state keys ──────────────────────────────────────────────
   var SS_STATE = 'fd-state';   // 'open' | 'collapsed'
-  var SS_NODE  = 'fd-node';    // last node id
 
   Promise.all([
     fetch('front-door-config.json').then(function (r) { return r.json(); }),
@@ -31,10 +30,9 @@
   // ─── Boot ─────────────────────────────────────────────────────────────
   function boot() {
     var savedState = sessionStorage.getItem(SS_STATE);
-    var savedNode  = sessionStorage.getItem(SS_NODE);
 
-    // Restore current node from session, or default to startNode
-    currentNodeId = savedNode || config.startNode;
+    // Always start fresh — never resume mid-conversation across reloads
+    currentNodeId = config.startNode;
 
     buildDOM();
 
@@ -112,7 +110,6 @@
     var overlay = document.getElementById('fd-overlay');
     var tab     = document.getElementById('fd-tab');
 
-    if (currentNodeId) sessionStorage.setItem(SS_NODE, currentNodeId);
     sessionStorage.setItem(SS_STATE, 'collapsed');
 
     overlay.classList.add('fd-collapsed');
@@ -178,7 +175,6 @@
       return;
     }
     currentNodeId = nodeId;
-    sessionStorage.setItem(SS_NODE, nodeId);
     nodeStack.push(nodeId);
     appendSpecBubble(node.text);
     renderOptions(node.options);
@@ -200,6 +196,12 @@
     document.getElementById('fd-dialogue').appendChild(bubble);
   }
 
+  function restartConversation() {
+    document.getElementById('fd-dialogue').innerHTML = '';
+    nodeStack = [];
+    goToNode(config.startNode);
+  }
+
   function renderOptions(options) {
     var zone = document.getElementById('fd-interaction');
     zone.innerHTML = '';
@@ -219,6 +221,18 @@
     });
 
     zone.appendChild(group);
+
+    if (nodeStack.length > 1) {
+      var restartWrap = document.createElement('div');
+      restartWrap.className = 'fd-restart';
+      var restartBtn = document.createElement('button');
+      restartBtn.type = 'button';
+      restartBtn.className = 'fd-restart-btn';
+      restartBtn.textContent = '↺ Start over';
+      restartBtn.addEventListener('click', restartConversation);
+      restartWrap.appendChild(restartBtn);
+      zone.appendChild(restartWrap);
+    }
 
     var first = group.querySelector('button');
     if (first) first.focus();
@@ -295,6 +309,14 @@
     back.textContent = '← Back';
     back.addEventListener('click', function () { goBackToNode(fromNodeId); });
     controls.appendChild(back);
+
+    var restart = document.createElement('button');
+    restart.type = 'button';
+    restart.className = 'fd-restart-btn';
+    restart.textContent = '↺ Start over';
+    restart.addEventListener('click', restartConversation);
+    controls.appendChild(restart);
+
     zone.appendChild(controls);
 
     var firstCard = grid.querySelector('[tabindex="0"]');
