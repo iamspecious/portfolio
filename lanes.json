@@ -22,7 +22,7 @@
     "description": "For roles in business operations, project management, and organisational strategy.",
     "tier": "primary",
     "include": { "domains": ["operations", "strategy", "project-management", "people-hr"] },
-    "boost": { "evidence": ["influence-without-authority", "process-design", "judgment-restraint", "scaling"] },
+    "boost": { "evidence": ["influence-without-authority", "cross-functional-influence", "process-design", "judgment-restraint", "scaling"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
     "maxItems": 8
   },

@@ -44,6 +44,8 @@ Audience lanes are defined as **queries over those facets** in `lanes.json`. A l
 | `data-analysis` | Analysing data to generate insight — SQL, metrics, reporting, visualisation. |
 | `research` | Structured research producing outputs (reports, designs, findings, literature reviews). |
 | `security` | Substantive security work — threat modelling, incident response, pentesting. **Do not apply.** |
+| `vendor-management` | *(proposed — not yet applied)* Negotiating, selecting, or managing third-party vendors or partners across multiple stakeholders; includes contract negotiation, supplier evaluation, and ongoing vendor relationships. |
+| `events` | *(proposed — not yet applied)* Planning, coordinating, or executing events — in-person or virtual; includes logistics, venue, speaker/sponsor management, and attendee experience. |
 
 ### Anti-rules (enforced; violations are audit failures)
 - `people-hr` is never `ai-engineering` or `frontend-dev`, even if a tool is named.
