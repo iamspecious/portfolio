@@ -1,25 +1,26 @@
-/* front-door.js — digital Spec front-door overlay
+/* front-door.js — Digital Spec front-door overlay
    Additive / progressive enhancement. If this script errors or is
    removed, the underlying portfolio is unaffected.
 */
 (function () {
   'use strict';
 
-  // Skip if dismissed this session
-  if (sessionStorage.getItem('fd-dismissed')) return;
-
   var config, portfolioIndex, lanesData;
   var nodeStack = [];
-  var previousFocus = null;
+  var currentNodeId = null;
+
+  // ─── Session state keys ──────────────────────────────────────────────
+  var SS_STATE = 'fd-state';   // 'open' | 'collapsed'
+  var SS_NODE  = 'fd-node';    // last node id
 
   Promise.all([
     fetch('front-door-config.json').then(function (r) { return r.json(); }),
     fetch('portfolio-index.json').then(function (r) { return r.json(); }),
     fetch('lanes.json').then(function (r) { return r.json(); })
   ]).then(function (results) {
-    config = results[0];
+    config        = results[0];
     portfolioIndex = results[1];
-    lanesData = results[2];
+    lanesData     = results[2];
     boot();
   }).catch(function (err) {
     if (typeof console !== 'undefined') {
@@ -27,20 +28,39 @@
     }
   });
 
-  // ─── Boot ─────────────────────────────────────────────────────────
+  // ─── Boot ─────────────────────────────────────────────────────────────
   function boot() {
-    previousFocus = document.activeElement;
+    var savedState = sessionStorage.getItem(SS_STATE);
+    var savedNode  = sessionStorage.getItem(SS_NODE);
+
+    // Restore current node from session, or default to startNode
+    currentNodeId = savedNode || config.startNode;
+
     buildDOM();
-    goToNode(config.startNode);
+
+    if (savedState === 'collapsed') {
+      // Stay collapsed — show docked tab only
+      collapseInstant();
+    } else {
+      // First visit OR was open — expand (with entrance transition)
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          expand();
+        });
+      });
+    }
   }
 
-  // ─── DOM ──────────────────────────────────────────────────────────
+  // ─── DOM construction ─────────────────────────────────────────────────
   function buildDOM() {
+    // ── Overlay (starts in collapsed/hidden state) ──
     var overlay = document.createElement('div');
     overlay.id = 'fd-overlay';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', 'digital Spec — portfolio guide');
+    overlay.setAttribute('aria-label', 'Digital Spec — portfolio guide');
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.classList.add('fd-collapsed');
 
     overlay.innerHTML =
       '<div id="fd-backdrop"></div>' +
@@ -48,11 +68,12 @@
         '<div id="fd-header">' +
           '<div id="fd-brand">' +
             '<span id="fd-avatar" aria-hidden="true">dS</span>' +
-            '<span id="fd-speaker-name">digital Spec</span>' +
+            '<span id="fd-speaker-name">Digital Spec</span>' +
           '</div>' +
           '<div id="fd-persistent">' +
             '<button class="fd-persistent-btn fd-skip-btn" type="button">Skip to everything</button>' +
             '<button class="fd-persistent-btn fd-contact-btn" type="button">Talk to Spec</button>' +
+            '<button class="fd-minimize-btn" type="button" aria-label="Minimise Digital Spec" title="Minimise">&#8722;</button>' +
           '</div>' +
         '</div>' +
         '<div id="fd-scroll">' +
@@ -63,21 +84,101 @@
 
     document.body.appendChild(overlay);
 
-    document.getElementById('fd-backdrop').addEventListener('click', dismiss);
+    // ── Docked tab (hidden while overlay is expanded) ──
+    var tab = document.createElement('button');
+    tab.id = 'fd-tab';
+    tab.type = 'button';
+    tab.setAttribute('aria-label', 'Ask Digital Spec — open chat guide');
+    tab.setAttribute('aria-hidden', 'true');
+    tab.setAttribute('tabindex', '-1');
+    tab.innerHTML =
+      '<span id="fd-tab-avatar" aria-hidden="true">dS</span>' +
+      '<span id="fd-tab-label">Ask Digital Spec</span>';
+    document.body.appendChild(tab);
+
+    // ── Events ──
+    document.getElementById('fd-backdrop').addEventListener('click', collapse);
     overlay.addEventListener('keydown', handleKeydown);
-    overlay.querySelector('.fd-skip-btn').addEventListener('click', dismiss);
+    overlay.querySelector('.fd-skip-btn').addEventListener('click', collapse);
     overlay.querySelector('.fd-contact-btn').addEventListener('click', function () {
       goToNode('contact');
     });
+    overlay.querySelector('.fd-minimize-btn').addEventListener('click', collapse);
+    tab.addEventListener('click', expand);
   }
 
-  // ─── Node navigation ──────────────────────────────────────────────
+  // ─── Collapse / Expand ────────────────────────────────────────────────
+  function collapse() {
+    var overlay = document.getElementById('fd-overlay');
+    var tab     = document.getElementById('fd-tab');
+
+    if (currentNodeId) sessionStorage.setItem(SS_NODE, currentNodeId);
+    sessionStorage.setItem(SS_STATE, 'collapsed');
+
+    overlay.classList.add('fd-collapsed');
+    overlay.setAttribute('aria-hidden', 'true');
+
+    tab.classList.add('fd-tab-visible');
+    tab.setAttribute('aria-hidden', 'false');
+    tab.setAttribute('tabindex', '0');
+    tab.focus();
+  }
+
+  function collapseInstant() {
+    // Used on page load when already collapsed — no transition needed
+    var overlay = document.getElementById('fd-overlay');
+    var tab     = document.getElementById('fd-tab');
+    overlay.classList.add('fd-collapsed', 'fd-no-transition');
+    overlay.setAttribute('aria-hidden', 'true');
+    tab.classList.add('fd-tab-visible', 'fd-no-transition');
+    tab.setAttribute('aria-hidden', 'false');
+    tab.setAttribute('tabindex', '0');
+    // Remove no-transition flag after paint so future transitions work
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        overlay.classList.remove('fd-no-transition');
+        tab.classList.remove('fd-no-transition');
+      });
+    });
+  }
+
+  function expand() {
+    var overlay = document.getElementById('fd-overlay');
+    var tab     = document.getElementById('fd-tab');
+
+    sessionStorage.setItem(SS_STATE, 'open');
+
+    overlay.classList.remove('fd-collapsed');
+    overlay.setAttribute('aria-hidden', 'false');
+
+    tab.classList.remove('fd-tab-visible');
+    tab.setAttribute('aria-hidden', 'true');
+    tab.setAttribute('tabindex', '-1');
+
+    // If dialogue is empty (page reload or first ever open), render current node
+    var dialogue = document.getElementById('fd-dialogue');
+    if (!dialogue.hasChildNodes()) {
+      nodeStack = [];
+      goToNode(currentNodeId || config.startNode);
+    } else {
+      // DOM intact — just restore focus to the first interactive element
+      var focusTarget =
+        overlay.querySelector('#fd-interaction button:not([disabled])') ||
+        overlay.querySelector('#fd-interaction [tabindex="0"]') ||
+        overlay.querySelector('button:not([disabled])');
+      if (focusTarget) focusTarget.focus();
+    }
+  }
+
+  // ─── Node navigation ──────────────────────────────────────────────────
   function goToNode(nodeId) {
     var node = config.nodes[nodeId];
     if (!node) {
       if (typeof console !== 'undefined') console.warn('[front-door] unknown node:', nodeId);
       return;
     }
+    currentNodeId = nodeId;
+    sessionStorage.setItem(SS_NODE, nodeId);
     nodeStack.push(nodeId);
     appendSpecBubble(node.text);
     renderOptions(node.options);
@@ -123,13 +224,10 @@
     if (first) first.focus();
   }
 
-  // ─── Option dispatch ──────────────────────────────────────────────
+  // ─── Option dispatch ──────────────────────────────────────────────────
   function handleOption(opt, group) {
-    // Freeze the choice group
     var btns = group.querySelectorAll('button');
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].disabled = true;
-    }
+    for (var i = 0; i < btns.length; i++) { btns[i].disabled = true; }
 
     appendUserBubble(opt.label);
 
@@ -138,43 +236,39 @@
     } else if (opt.lane) {
       showLane(opt.lane);
     } else if (opt.action === 'skip') {
-      dismiss();
+      collapse();
     } else if (opt.action === 'goto-about') {
-      dismiss();
+      collapse();
       if (typeof switchToTab === 'function') switchToTab('about-tab');
     } else if (opt.action === 'contact-email') {
+      collapse();
       window.location.href = 'mailto:' + config.contacts.email;
     } else if (opt.action === 'contact-linkedin') {
+      collapse();
       window.open(config.contacts.linkedin, '_blank', 'noopener,noreferrer');
     } else if (opt.action === 'deeplink') {
-      dismiss();
+      collapse();
       doDeepLink(opt.tab, opt.anchor);
     }
   }
 
-  // ─── Lane results ─────────────────────────────────────────────────
+  // ─── Lane results ─────────────────────────────────────────────────────
   function showLane(laneId) {
     var lane = lanesData[laneId];
-    if (!lane) {
-      dismiss();
-      return;
-    }
+    if (!lane) { collapse(); return; }
 
     var items = queryLane(laneId);
-    // Capture the node we came from so back can return there
     var fromNodeId = nodeStack[nodeStack.length - 1];
 
     if (items.length === 0) {
-      appendSpecBubble(
-        'Still being curated — but everything\'s here. Have a look around.'
-      );
+      appendSpecBubble('Still being curated — but everything\'s here. Have a look around.');
       var zone = document.getElementById('fd-interaction');
       zone.innerHTML = '';
       var fb = document.createElement('button');
       fb.type = 'button';
       fb.className = 'fd-option';
       fb.textContent = 'Show me everything';
-      fb.addEventListener('click', dismiss);
+      fb.addEventListener('click', collapse);
       zone.appendChild(fb);
       fb.focus();
       scrollBottom();
@@ -209,7 +303,6 @@
   }
 
   function goBackToNode(nodeId) {
-    // Clear dialogue, trim stack to before this node, re-render it
     document.getElementById('fd-dialogue').innerHTML = '';
     var idx = nodeStack.lastIndexOf(nodeId);
     if (idx >= 0) nodeStack = nodeStack.slice(0, idx);
@@ -261,35 +354,30 @@
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', 'View ' + item.title);
-      var tab = routing.tab;
-      var anchor = routing.anchor;
+      var routeTab = routing.tab;
+      var routeAnchor = routing.anchor;
       var go = function () {
-        dismiss();
-        doDeepLink(tab, anchor);
+        collapse();
+        doDeepLink(routeTab, routeAnchor);
       };
       card.addEventListener('click', go);
       card.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          go();
-        }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); }
       });
     }
 
     return card;
   }
 
-  // ─── Lane query ───────────────────────────────────────────────────
+  // ─── Lane query ───────────────────────────────────────────────────────
   function queryLane(laneId) {
-    var lane = lanesData[laneId];
+    var lane          = lanesData[laneId];
     var includeDomains = lane.include.domains;
-    var boostEvidence = lane.boost.evidence;
-    var max = lane.maxItems || 8;
+    var boostEvidence  = lane.boost.evidence;
+    var max            = lane.maxItems || 8;
 
     var items = portfolioIndex.filter(function (item) {
-      return item.domains.some(function (d) {
-        return includeDomains.indexOf(d) >= 0;
-      });
+      return item.domains.some(function (d) { return includeDomains.indexOf(d) >= 0; });
     });
 
     items = items.map(function (item) {
@@ -302,112 +390,67 @@
     items.sort(function (a, b) {
       if (b.score !== a.score) return b.score - a.score;
       var toKey = function (s) { return s === 'present' ? '9999-99' : (s || '0000-00'); };
-      var ka = toKey(a.item.dateEnd);
-      var kb = toKey(b.item.dateEnd);
+      var ka = toKey(a.item.dateEnd), kb = toKey(b.item.dateEnd);
       return kb < ka ? -1 : kb > ka ? 1 : 0;
     });
 
     return items.slice(0, max).map(function (x) { return x.item; });
   }
 
-  // ─── Routing ──────────────────────────────────────────────────────
+  // ─── Routing ──────────────────────────────────────────────────────────
   function getRouting(item) {
     var anchor = item.anchor;
     if (!anchor) return null;
 
-    // Document whose anchor is a filename — use pageAnchor for in-page scroll
     if (anchor.charAt(0) !== '#') {
       var pa = item.pageAnchor;
       return pa ? { tab: 'projects-tab', anchor: pa } : null;
     }
 
     var tab;
-    if (anchor.indexOf('#work-') === 0)      tab = 'work-tab';
-    else if (anchor.indexOf('#cs-') === 0)   tab = 'case-studies-tab';
-    else                                      tab = 'projects-tab';
+    if (anchor.indexOf('#work-') === 0)    tab = 'work-tab';
+    else if (anchor.indexOf('#cs-') === 0) tab = 'case-studies-tab';
+    else                                   tab = 'projects-tab';
 
     return { tab: tab, anchor: anchor };
   }
 
   function doDeepLink(tabId, anchor) {
-    if (tabId && typeof switchToTab === 'function') {
-      switchToTab(tabId);
-    }
+    if (tabId && typeof switchToTab === 'function') switchToTab(tabId);
     if (anchor) {
       var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      // Defer until tab pane is visible
       setTimeout(function () {
         var el = document.querySelector(anchor);
-        if (el) {
-          el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-        }
+        if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
       }, 80);
     }
   }
 
-  // ─── Dismiss ──────────────────────────────────────────────────────
-  function dismiss() {
-    sessionStorage.setItem('fd-dismissed', '1');
-    var overlay = document.getElementById('fd-overlay');
-    if (!overlay) return;
-
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) {
-      overlay.parentNode && overlay.parentNode.removeChild(overlay);
-    } else {
-      overlay.classList.add('fd-exit');
-      overlay.addEventListener('animationend', function handler() {
-        overlay.removeEventListener('animationend', handler);
-        overlay.parentNode && overlay.parentNode.removeChild(overlay);
-      });
-      setTimeout(function () {
-        overlay.parentNode && overlay.parentNode.removeChild(overlay);
-      }, 400);
-    }
-
-    if (previousFocus && typeof previousFocus.focus === 'function') {
-      previousFocus.focus();
-    }
-  }
-
-  // ─── Focus trap + keyboard ─────────────────────────────────────────
+  // ─── Focus trap + keyboard ─────────────────────────────────────────────
   function handleKeydown(e) {
-    if (e.key === 'Escape') {
-      dismiss();
-      return;
-    }
+    if (e.key === 'Escape') { collapse(); return; }
     if (e.key !== 'Tab') return;
 
-    var overlay = document.getElementById('fd-overlay');
+    var overlay  = document.getElementById('fd-overlay');
     var focusable = overlay.querySelectorAll(
       'button:not([disabled]),[tabindex]:not([tabindex="-1"])'
     );
-    var arr = Array.prototype.slice.call(focusable);
+    var arr   = Array.prototype.slice.call(focusable);
     if (arr.length === 0) return;
     var first = arr[0];
-    var last = arr[arr.length - 1];
+    var last  = arr[arr.length - 1];
 
-    if (e.shiftKey) {
-      if (document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      }
-    } else {
-      if (document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
     }
   }
 
-  // ─── Scroll helper ─────────────────────────────────────────────────
+  // ─── Scroll ───────────────────────────────────────────────────────────
   function scrollBottom() {
     var scroll = document.getElementById('fd-scroll');
-    if (scroll) {
-      requestAnimationFrame(function () {
-        scroll.scrollTop = scroll.scrollHeight;
-      });
-    }
+    if (scroll) requestAnimationFrame(function () { scroll.scrollTop = scroll.scrollHeight; });
   }
 
 })();
