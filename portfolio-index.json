@@ -8,7 +8,7 @@
     "dateEnd": "present",
     "status": null,
     "domains": ["support-ops", "people-hr", "operations"],
-    "evidence": ["process-design", "cross-functional-influence", "self-serve-deflection", "cost-discipline"],
+    "evidence": ["process-design", "cross-functional-influence", "self-serve-deflection", "cost-discipline", "diagnostic-reasoning"],
     "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
     "tools": ["freescout", "intercom"],
     "summary": "Built and optimised customer support operations for a startup; led international expansion, HR compliance, and EOR projects; provided leadership coaching and community engagement programmes.",
@@ -287,7 +287,7 @@
     "dateStart": "2023-01",
     "dateEnd": "present",
     "status": null,
-    "domains": ["support-ops", "customer-support"],
+    "domains": ["support-ops", "customer-support", "implementation-onboarding"],
     "evidence": ["process-design", "self-serve-deflection", "diagnostic-reasoning", "cost-discipline"],
     "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
     "tools": ["freescout", "intercom"],
@@ -646,7 +646,9 @@
       "cs-support": [1, 2, 3],
       "implementation": [2, 3],
       "people-hr": [5, 7],
-      "ops-strategy": [4, 5, 6, 7]
+      "ops-strategy": [4, 5, 6, 7],
+      "builder-technical": [3],
+      "creator-lore": [4]
     },
     "notes": "Dates approximate — engagement ran across 2024 but precise months unavailable. EOR selection reached contract with Oyster; expansion funding was pulled before operation at scale."
   },
@@ -667,9 +669,9 @@
     "pageAnchor": "#doc-technical-writing-portfolio",
     "relatedIds": ["saas-integration-diagnostic-guide", "spec-solutions-support-ops"],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": ["ops-strategy"],
     "lensByAudience": {},
-    "notes": "Contains 4 sub-documents: API Troubleshooting Playbook (Zendesk→Slack), SQL Missing Data Audit Guide, EOR Payroll Processing Explainer, Support Escalation Playbook. Indexed as one item; deep-link anchors for sub-docs are within the page."
+    "notes": "audienceExclude[ops-strategy]: item ranks deceptively high in that lane due to support-ops and people-hr domains; it is documentation evidence, not strategy output. Contains 4 sub-documents: API Troubleshooting Playbook (Zendesk→Slack), SQL Missing Data Audit Guide, EOR Payroll Processing Explainer, Support Escalation Playbook. Indexed as one item; deep-link anchors for sub-docs are within the page."
   },
   {
     "id": "saas-integration-diagnostic-guide",

@@ -134,6 +134,34 @@ All five are now listed in TAXONOMY.md §6.
 
 ---
 
+## Changes Applied (post-v1 routing audit)
+
+| Item | Change |
+|---|---|
+| `spec-solutions-support-ops` | Added `implementation-onboarding` domain (chatbot + FreeScout platform rebuild qualifies) |
+| `spec-solutions-fractional-cos` | Added `diagnostic-reasoning` evidence (secures `cs-support` boost ranking) |
+| `technical-writing-portfolio` | Added `audienceExclude: ["ops-strategy"]` — item ranks by domain breadth, not strategy output; documented in notes |
+| `denim-brand-turnaround` | Added `sectionsByLane.builder-technical: [3]` and `sectionsByLane.creator-lore: [4]` |
+| `lanes.json ops-strategy boost` | Added `cross-functional-influence` — `business-relocation-expansion` and `leadership-coaching-project` clearly earn it |
+
+### Cross-functional influence — consulting items assessed
+
+| Item | Tag present | Assessment |
+|---|---|---|
+| `business-relocation-expansion` | ✓ | Earns it — EOR selection, legal, workspace scouting across multiple external parties |
+| `leadership-coaching-project` | ✓ | Earns it — cross-functional goal alignment across a leadership team |
+| `tiktok-sponsorship-strategy` | ✓ | Borderline — outreach to sponsors is stakeholder engagement but it's primarily a research/writing deliverable. Tag retained; watch if it inflates ops-strategy ranking unexpectedly. |
+| `niche-market-web-dev-strategy` | ✓ | Weak — advisory to a single developer, no clear multi-stakeholder landscape. Tag retained (removing would be a separate decision). |
+
+### Proposed new domain values (not yet applied to any item)
+
+- `vendor-management` — negotiating, selecting, or managing third-party vendors across multiple stakeholders
+- `events` — planning and executing in-person or virtual events
+
+Both added to TAXONOMY.md §3 as `*(proposed)*`. Apply only once backed by an indexed item.
+
+---
+
 ## Flagged Items (human decision required)
 
 ### §1 — Cybersecurity tagline: unbacked claim
