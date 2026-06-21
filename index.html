@@ -637,14 +637,22 @@
                                 <p>
                                     <span class="tag tag-issue">Issue</span>
                                     <span class="tag tag-done">Fixed</span>
-                                    Devlog was showing all 11 recent entries visible at once instead of just the most recent. Fixed: only the latest entry is now visible on load; all older entries collapse under the toggle. Updated toggle count from 10 to 21 to reflect the full history now in the overflow.
+                                    The scroll-jump bug that was fixed for lane results was still present across all other conversation paths — every node transition (hiring routes, curious, nosy, contact, etc.) rendered the bubble and options together then scrolled to the bottom, pushing the new question text above the fold. Fixed by applying the same 320ms deferred pattern to <code>goToNode</code>: bubble renders and scrolls into view first; options appear after a short pause.
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 21 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 22 older entries</button>
 
                             <div class="devlog-overflow">
 
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Devlog was showing all 11 recent entries visible at once instead of just the most recent. Fixed: only the latest entry is now visible on load; all older entries collapse under the toggle. Updated toggle count to reflect the full history now in the overflow.
+                                </p>
+                            </div>
 
                             <div class="devlog-entry">
                                 <span class="timestamp">2026-06-21</span>
