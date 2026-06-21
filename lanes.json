@@ -1,0 +1,68 @@
+{
+  "cs-support": {
+    "label": "Customer Support / CS Operations",
+    "description": "For hiring managers and teams looking for customer support, technical support, or support operations expertise.",
+    "tier": "primary",
+    "include": { "domains": ["customer-support", "support-ops"] },
+    "boost": { "evidence": ["diagnostic-reasoning", "self-serve-deflection", "customer-facing"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 8
+  },
+  "implementation": {
+    "label": "Implementation & Onboarding",
+    "description": "For roles focused on configuring, rolling out, or onboarding customers onto products and systems.",
+    "tier": "primary",
+    "include": { "domains": ["implementation-onboarding"] },
+    "boost": { "evidence": ["technical-depth", "process-design"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6
+  },
+  "ops-strategy": {
+    "label": "Operations & Strategy",
+    "description": "For roles in business operations, project management, and organisational strategy.",
+    "tier": "primary",
+    "include": { "domains": ["operations", "strategy", "project-management", "people-hr"] },
+    "boost": { "evidence": ["influence-without-authority", "cross-functional-influence", "process-design", "judgment-restraint", "scaling"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 8
+  },
+  "people-hr": {
+    "label": "People Operations & HR",
+    "description": "For people ops, HR, EOR/compliance, and people-infrastructure roles.",
+    "tier": "primary",
+    "include": { "domains": ["people-hr", "implementation-onboarding"] },
+    "_includeNote": "implementation-onboarding pulled in only where engagement is EOR or people-infrastructure; general product onboarding items will co-appear but rank lower without evidence boost.",
+    "boost": { "evidence": ["cross-functional-influence", "process-design"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6
+  },
+  "builder-technical": {
+    "label": "Builder / Technical",
+    "description": "For roles requiring demonstrated technical building — AI tools, frontend development, and prompt engineering.",
+    "tier": "primary",
+    "include": { "domains": ["ai-engineering", "frontend-dev"] },
+    "boost": { "evidence": ["technical-depth", "build-in-public", "judgment-restraint"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 8
+  },
+  "creator-lore": {
+    "label": "Creator / Content",
+    "description": "For roles or partnerships in content creation, tech journalism, and creator tooling.",
+    "tier": "primary",
+    "include": { "domains": ["content-creation"] },
+    "boost": { "evidence": ["writing-range", "scaling", "build-in-public"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6
+  },
+  "documentation": {
+    "label": "Technical Writing & Documentation",
+    "description": "For technical writing, documentation, and content strategy roles.",
+    "tier": "secondary",
+    "crossCutting": true,
+    "_crossCuttingNote": "Every primary hiring lane should additionally surface this lane's top 1–2 technical-writing items as supporting evidence. Items remain in their home lane; they are not re-assigned here.",
+    "include": { "domains": ["technical-writing"] },
+    "boost": { "evidence": ["writing-range", "technical-depth", "process-design"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6
+  }
+}

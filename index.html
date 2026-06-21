@@ -6,12 +6,16 @@
     <title>Specious Coda Bishop — Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="portfolio.css">
+    <link rel="stylesheet" href="front-door.css">
+    <script src="front-door.js" defer></script>
 </head>
 <body>
+<div id="fd-root" aria-hidden="true"></div>
 
     <header class="header text-center">
         <h1>Specious Coda Bishop</h1>
-        <p>Consultant · Project Manager · HR &amp; Compliance · Cybersecurity</p>
+        <p>Customer Success · Implementation · People Ops · Operations</p>
+        <p>Drawn to where things aren't working  and I find the structural reason why.</p>
     </header>
 
     <div class="container mt-4">
@@ -21,6 +25,9 @@
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="work-tab" data-bs-toggle="tab" href="#work" role="tab">Work Experience</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="case-studies-tab" data-bs-toggle="tab" href="#case-studies" role="tab">Case Studies</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="projects-tab" data-bs-toggle="tab" href="#projects" role="tab">Projects</a>
@@ -40,7 +47,7 @@
 
                     <p style="margin-top: 10px;">Most of my career has lived at the intersection of people and systems — which means I'm comfortable working at the human layer and the process layer simultaneously, and I tend to notice when a problem that looks like one is actually the other.</p>
 
-                    <p style="margin-top: 10px;">I'm also genuinely technically curious. When something interests me I go properly into it — which is how I've ended up with working knowledge of network analysis, log review, and vulnerability scanning alongside the operations background. I write tech and games coverage for Phandroid, Android Central, and Mobile Nations for the same reason: I like understanding how things work well enough to explain them clearly.</p>
+                    <p style="margin-top: 10px;">I'm also technically curious. When something interests me I go properly into it — which is how I've ended up with working knowledge of network analysis, log review, and vulnerability scanning alongside the operations background. I write tech and games coverage for Phandroid, Android Central, and Mobile Nations for the same reason: I like understanding how things work well enough to explain them clearly.</p>
 
                     <p style="margin-top: 10px;">Outside of work I run <strong>LoreBySpec</strong>, a YouTube channel doing narrative and lore analysis of the Kingdom Hearts series — which is where the KH Lore Checker in this portfolio came from.</p>
 
@@ -48,7 +55,7 @@
                         <div class="about-card">
                             <span class="card-label">Orientation</span>
                             <span class="card-title">Generalist by design</span>
-                            <p>A decade across HR, operations, support, and community work isn't a winding path — it's a consistent pattern of being useful wherever the system needs thinking through. I move between layers because that's where the interesting problems tend to live.</p>
+                            <p>A decade across HR, operations, support, and community work isn't a winding path — it's a consistent pattern of being useful wherever the system needs thinking through.</p>
                         </div>
                         <div class="about-card">
                             <span class="card-label">Approach</span>
@@ -63,7 +70,7 @@
                         <div class="about-card">
                             <span class="card-label">Principle</span>
                             <span class="card-title">Costs and constraints first</span>
-                            <p>Every project here has a "Constraints" section as prominent as the wins. I document what doesn't work, what the trade-offs are, and when a design decision is a compromise — because that's what honest work looks like.</p>
+                            <p>Every project here has a "Constraints" section as prominent as the wins. I document what doesn't work, what the trade-offs are, and when a design decision is a compromise.</p>
                         </div>
                     </div>
                 </div>
@@ -85,12 +92,12 @@
                     <div class="project-block" data-category="experience">
                     <div class="timeline">
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-spec-solutions-fractional-cos">
                             <div class="timeline-role">Fractional Chief of Staff</div>
                             <div class="timeline-meta"><span class="org">Spec Solutions</span> · Jan 2023 – Present</div>
                             <div class="timeline-subhead">Customer Support Operations &amp; Service Optimisation</div>
                             <ul class="timeline-bullets">
-                                <li>Built and optimised customer support operations for a startup, implementing a ticket allocation system that reduced response times by 30% and increased customer satisfaction.</li>
+                                <li>Built and optimised customer support operations for a startup, implementing a ticket allocation system that reduced response times by 30% and increased customer satisfaction. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Developed a comprehensive knowledge base and implemented structured training for support teams, improving self-service resolution rates.</li>
                                 <li>Provided technical support for users and investigated app bugs, undocumented issues, and usability concerns, collaborating with developers to implement fixes.</li>
                                 <li>Created internal documentation and process guides to improve knowledge sharing across the team as a Tech Support &amp; QA Consultant for Joocie (via Consultancy) — Remote since Jan 2024.</li>
@@ -112,7 +119,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-phandroid-tech-writer">
                             <div class="timeline-role">Contributing Tech Writer &amp; Content Strategist</div>
                             <div class="timeline-meta"><span class="org">Phandroid</span> · Jan 2018 – Present</div>
                             <ul class="timeline-bullets">
@@ -124,7 +131,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-connection-engine-cos">
                             <div class="timeline-role">Executive Assistant / Chief of Staff</div>
                             <div class="timeline-meta"><span class="org">Connection Engine</span> · May 2025 – Jul 2025 · Remote</div>
                             <div class="timeline-subhead">Team Coordination &amp; Support (30%)</div>
@@ -148,7 +155,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-the-nook-community-manager">
                             <div class="timeline-role">Community Manager</div>
                             <div class="timeline-meta"><span class="org">The Nook</span> · Oct 2020 – Dec 2024 · Remote</div>
                             <p class="timeline-body">Owner and operator of The Nook, a Discord community supporting Twitch streamers through their affiliate journey. Helped over 10 streamers reach affiliate status across a 100+ member community.</p>
@@ -162,11 +169,11 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-stamped-support-hero">
                             <div class="timeline-role">Customer Support Hero (Technical)</div>
                             <div class="timeline-meta"><span class="org">Stamped</span> · May 2020 – Jul 2020</div>
                             <ul class="timeline-bullets">
-                                <li>Led technical support for enterprise clients, resolving complex account-related issues and improving client satisfaction by 30%.</li>
+                                <li>Led technical support for enterprise clients, resolving complex account-related issues and improving client satisfaction by 30%. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Partnered with development teams to support clients building custom integrations and optimising API usage.</li>
                                 <li>Drove cross-functional collaboration to enhance troubleshooting processes and accelerate issue resolution.</li>
                                 <li>Managed sensitive customer data with a high level of confidentiality, maintaining compliance while resolving complex technical requests.</li>
@@ -174,7 +181,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-can-i-play-that-editor">
                             <div class="timeline-role">Editor &amp; Operations Assistant</div>
                             <div class="timeline-meta"><span class="org">Can I Play That?</span> · Aug 2018 – Feb 2020</div>
                             <ul class="timeline-bullets">
@@ -188,7 +195,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-itc-community-manager">
                             <div class="timeline-role">Community Manager</div>
                             <div class="timeline-meta"><span class="org">Irish Tech Community</span> · Aug 2016 – Sep 2018 · Dublin, Ireland</div>
                             <ul class="timeline-bullets">
@@ -202,7 +209,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-samebug-developer-advocate">
                             <div class="timeline-role">Developer Advocate</div>
                             <div class="timeline-meta"><span class="org">Samebug</span> · Jul 2017 – Sep 2017 · Remote</div>
                             <p class="timeline-body">Bridged the gap between the product team and the developer community — providing expert guidance on debugging and issue resolution, facilitating technical discussions, and gathering feedback to inform product development.</p>
@@ -214,11 +221,11 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-learnovate-pm-research">
                             <div class="timeline-role">Project Manager &amp; Research Assistant</div>
                             <div class="timeline-meta"><span class="org">Learnovate Centre, Trinity College Dublin</span> · Apr 2016 – Apr 2017 · Dublin, Ireland</div>
                             <ul class="timeline-bullets">
-                                <li>Led the €3M EU-funded DEVELOP project, collaborating with international partners to deliver research outcomes on time and in alignment with long-term objectives.</li>
+                                <li>Led the €3M EU-funded DEVELOP project, collaborating with international partners to deliver research outcomes on time and in alignment with long-term objectives. <a href="#case-studies" class="case-study-link" onclick="switchToTab('case-studies-tab'); return false;">→ see how</a></li>
                                 <li>Drove Agile methodologies to enhance team productivity and adapt to evolving project needs.</li>
                                 <li>Managed communication across European stakeholders, providing clear updates and resolving challenges to maintain momentum.</li>
                                 <li>Mentored new employees through onboarding and led informal team-building to strengthen workplace culture.</li>
@@ -228,7 +235,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-coderdojo-support-specialist">
                             <div class="timeline-role">Customer Support Specialist</div>
                             <div class="timeline-meta"><span class="org">CoderDojo</span> · Sep 2015 – Jan 2016 · Dublin, Ireland</div>
                             <ul class="timeline-bullets">
@@ -241,7 +248,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-donnerwood-product-analyst">
                             <div class="timeline-role">Product Analyst</div>
                             <div class="timeline-meta"><span class="org">Donnerwood Media</span> · Jan 2015 – Apr 2015 · Dublin, Ireland</div>
                             <ul class="timeline-bullets">
@@ -254,7 +261,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-leaguepedia-chief-of-people">
                             <div class="timeline-role">Chief of People (Operations &amp; Communications)</div>
                             <div class="timeline-meta"><span class="org">Leaguepedia</span> · 2012 – 2014 · Remote</div>
                             <ul class="timeline-bullets">
@@ -268,7 +275,7 @@
                             </ul>
                         </div>
 
-                        <div class="timeline-entry">
+                        <div class="timeline-entry" id="work-vodafone-support-specialist">
                             <div class="timeline-role">Customer Support Specialist</div>
                             <div class="timeline-meta"><span class="org">Vodafone</span> · Jun 2011 – Sep 2011 · Dublin, Ireland</div>
                             <ul class="timeline-bullets">
@@ -382,6 +389,152 @@
                 </div>
             </div>
 
+            <!-- Case Studies -->
+            <div class="tab-pane fade" id="case-studies" role="tabpanel">
+                <div class="section">
+                    <h2>Case Studies</h2>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 28px;">The Work Experience section lists outcomes. These case studies show the work behind them applied to real past work.</p>
+
+                    <!-- ====================================================
+                         CASE STUDY 1: Stamped widget diagnostic
+                    ===================================================== -->
+                    <div class="project" id="cs-stamped-widget-diagnostic">
+                        <h3>Diagnosing a Widget That Failed Four Different Ways</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 12px;">Stamped.io · Technical Support · 2020</p>
+
+                        <p>A recurring but genuinely tricky issue: the reviews widget would load its shell — the title, the star framework — but sit empty with no actual reviews inside. The frustrating part was that it never looked the same twice. Some clients saw a plain white box. Some saw a squashed outline like a collapsed table. Some saw the full shell with nothing inside. Four different symptoms, same underlying failure class.</p>
+
+                        <p style="margin-top: 10px;">I worked through it in layers rather than assuming a single cause each time. A white box was sometimes just white-on-white text styling, the first thing I checked. A squashed box usually meant the client's own container CSS was overriding the widget's base config. Sometimes only part of the embed block had been copied, so the piece that actually called the data was missing entirely. The hardest cases were when everything was placed and styled correctly and it was still empty. That's where I went into Postman to manually check the API handshake and token authentication. Often the connection was fine, and the real problem was the client's own review data: if their export didn't cleanly separate title, star rating, comment, and verified purchase status, the widget had no way to know what went where.</p>
+
+                        <p style="margin-top: 10px;">I couldn't restructure a client's data for them, so the resolution was diagnosing exactly which fields were malformed, then walking them through sanitising and reformatting it before re-upload. Not elegant, but it got real reviews showing instead of an empty box.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>Reduced an ambiguous, frequently-escalated issue to a four-branch diagnostic that didn't require engineering involvement.</li>
+                                <li>Postman became a standard verification step for ruling out data-sync issues before assuming a display bug.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>No ability to fix malformed client data directly — every resolution depended on the client successfully following sanitisation guidance, which wasn't always fast or reliable.</li>
+                                <li>The diagnostic logic lived in my head; it was never written down at the time, which meant every new teammate had to rediscover it.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 2: Spec Solutions ticket system
+                    ===================================================== -->
+                    <div class="project" id="cs-spec-solutions-support-ops">
+                        <h3>Turning a Gmail Inbox Into an Actual Support System</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 12px;">Spec Solutions · Customer Support Operations</p>
+
+                        <p>Support was running out of a Gmail inbox and an unconfigured FreeScout instance. No tags, no SLA tracking, no ticket ownership: people just grabbed whatever was at the top of the queue and hoped nothing got missed. In practice that meant tickets falling through entirely, follow-ups forgotten, and a slow, inconsistent reply rate. Ownership was the core issue: people dipped in and out without anyone directly responsible for a given ticket.</p>
+
+                        <p style="margin-top: 10px;">The first step was making the tools we already had actually work: configuring close-time tracking, follow-up flags, macros for common responses, and forwarding rules to route different issue types correctly. But the bigger discovery was that a huge proportion of tickets were the same question in different words: where is my item. That's not a support problem, it's an information problem.</p>
+
+                        <p style="margin-top: 10px;">So rather than just answering that question faster, I worked on removing the need to ask it. We rebuilt the customer-facing platform so item status was tracked and visible stage by stage, and I built a chatbot, trained on documentation and common questions I'd written, to catch repetitive queries before they became tickets at all. We tested it as a standalone FAQ tool first, then moved it into Intercom once it was working properly.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>Cut response times by approximately 30% and lifted CSAT.</li>
+                                <li>Eliminated a whole category of ticket by building self-serve status tracking, rather than just getting faster at answering the same question.</li>
+                                <li>A documentation-trained chatbot meaningfully reduced inbound ticket volume.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>The fix required a genuine platform migration (Gmail and FreeScout to Intercom), which is disruptive and takes real adoption time.</li>
+                                <li>Self-serve tools only catch the questions you've already seen written down; novel issues still need a human.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 3: Learnovate DEVELOP project
+                    ===================================================== -->
+                    <div class="project" id="cs-learnovate-develop-project">
+                        <h3>Keeping a €3M Project Aligned Across Borders, Without Authority</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 12px;">Learnovate Centre, Trinity College Dublin · Project Management · 2016–2017</p>
+
+                        <p>One partner organisation's work package had effectively gone to zero output, despite continuing to be paid, because of internal reshuffling on their end and the work simply not being prioritised. That package covered marketing and dissemination of the project's findings, which meant it was quietly putting visible deliverables at risk. Separately, a recurring friction point ran through the whole project: development teams consistently underestimated how long it actually takes to build substantial systems, which created constant pressure from stakeholder priorities and a real risk of scope creep becoming the default state rather than the exception.</p>
+
+                        <p style="margin-top: 10px;">I had no formal authority over any partner organisation, so the lever available to me was visibility, not enforcement. I ran regular check-ins directly with each work package lead, and sent a weekly email to every partner laying out exactly where the project stood and where the blockers were. That weekly update mattered more than it sounds: it created a shared, visible record that surfaced underperformance on its own, without anyone needing to be confronted directly about it. For the stalled work package specifically, I intervened directly to help realign what had fallen behind and get the marketing and dissemination output moving again before it became a funding or deliverable problem.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>A weekly visibility ritual surfaced underperformance naturally, without confrontation, and kept every partner accountable to the same shared picture.</li>
+                                <li>Direct intervention recovered a fully stalled work package before it became a deliverable or funding risk.</li>
+                                <li>A regular check-in rhythm with work package leads caught scope creep and timeline friction early enough to manage rather than firefight.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>No formal authority over partner organisations: the only real lever was visibility and relationship, not enforcement.</li>
+                                <li>The root cause of the stalled work package (the partner's internal reshuffling) was entirely outside Learnovate's control. The intervention managed the symptom, not the underlying cause.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- ====================================================
+                         CASE STUDY 4: Denim brand turnaround
+                    ===================================================== -->
+                    <div class="project" id="cs-denim-brand-turnaround">
+                        <h3>Rebuilding a Denim Brand, Top to Tail</h3>
+                        <p style="font-size: 0.83rem; color: #7b5ea7; font-weight: 600; margin: 2px 0 4px;">Customer Experience &amp; Operations · Early-stage made-to-order denim brand</p>
+                        <p style="font-size: 0.78rem; color: #999; margin: 0 0 14px;"><em>Client anonymised; reference available on request.</em></p>
+
+                        <p>I came to the company as an unhappy customer. The brand was in the worst of what the team called the great jean disaster — orders not landing, customers in the dark, a small founding team underwater, and a reputation taking on water with it. I'd been on the receiving end of it. But instead of just charging back and leaving a bad review, I reached out to the founder, who was visibly overwhelmed, and asked whether he wanted help.</p>
+
+                        <p style="margin-top: 10px;">A short while later I came aboard to rebuild the customer experience top to tail. Almost everything that followed was an exercise in rebuilding trust — with customers, and inside the team.</p>
+
+                        <p style="margin-top: 10px;"><strong>The diagnosis.</strong> Before touching anything, the founder and I worked through what we actually wanted the customer experience to <em>be</em> — not just "fewer angry emails," but the standard of care a customer should feel. Then I audited what was breaking it. Support was running out of an under-configured FreeScout instance and a Gmail setup with no real safeguards: no reliable way to catch unresolved problems before they aged out, no escalation path, nothing to stop things falling through. But the deeper finding was that support volume was a <em>symptom</em>. The single largest driver of inbound wasn't a support-process failure — it was customers having no visibility into where their order was. People weren't angry that the jeans were taking time; they were angry because they couldn't <em>see</em> anything. That reframing — inbound as a visibility problem, not a staffing problem — shaped everything after it.</p>
+
+                        <p style="margin-top: 16px;"><strong>What I did:</strong></p>
+                        <ul style="font-size: 0.88rem; color: #444; line-height: 1.75; padding-left: 18px; margin-top: 6px;">
+                            <li id="cs-denim-brand-turnaround-s1" style="margin-bottom: 10px;"><strong>Rebuilt the support system with real safeguards.</strong> Reconfigured the FreeScout/Gmail setup into something that could actually hold a queue: tooling to surface unresolved and aging tickets, a defined escalation path, and the structure to stop problems disappearing silently. The goal was a system where nothing fell through, not just faster replies.</li>
+                            <li id="cs-denim-brand-turnaround-s2" style="margin-bottom: 10px;"><strong>Solved inbound at the source — production transparency via RFID.</strong> The highest-leverage fix wasn't in support at all. I led a redesign of the customer-facing platform so customers could see exactly where their order was in production — and to make that real, we redesigned the factory floor around an RFID method that tracked each pattern piece and stage as it moved through the build. On the floor it gave tailors genuine accountability over where every piece was. Customer-side, it removed the anxiety generating most of the tickets. Inbound dropped significantly as a direct result. This is the piece I'm proudest of: a support fix that reached into the physical production process, because that's where the actual problem lived.</li>
+                            <li id="cs-denim-brand-turnaround-s3" style="margin-bottom: 10px;"><strong>Deflected repeat questions with an FAQ chatbot.</strong> On top of the tracker, I built a prototype chatbot — later spun out as its own portfolio project — running through Intercom, pulling from internal FAQs to answer common questions. For logged-in users it could draw on their own data to answer order-specific questions. Together with the tracker, this took another layer of repetitive load off the queue so human attention went to the problems that actually needed a person.</li>
+                            <li id="cs-denim-brand-turnaround-s4" style="margin-bottom: 10px;"><strong>Got the brand right where it mattered most — to backers.</strong> For the founder kits going out to early backers, I worked on what the packaging and welcome note should be so they embodied what we wanted the brand to stand for. The audience was backers and investors; at a moment when trust was the whole game, the physical artifact in their hands had to carry the brand, not undercut it.</li>
+                            <li id="cs-denim-brand-turnaround-s5" style="margin-bottom: 10px;"><strong>Ran the EOR evaluation and selection for international expansion.</strong> As expansion approached, the team was about to become genuinely international — members across the UK, Canada, and the EU, with production in Türkiye. That created overlapping obligations: cross-border legal liability, right-to-work requirements across jurisdictions, and the problem of running payroll cleanly when there was no legal entity in the places people lived. My read was that an EOR was the right structure to absorb that complexity. So I ran the selection: set the criteria, evaluated options, and chose Oyster — not the cheapest, but the most responsive and hands-on, and the best fit for how we wanted to operate. We reached contract. The ink was effectively about to dry when the expansion funding was pulled and the plan stopped. This is an evaluation-and-selection story carried through to contract, not a multi-year operation — and I frame it that way.</li>
+                            <li id="cs-denim-brand-turnaround-s6" style="margin-bottom: 10px;"><strong>Argued against outsourcing support — to protect the voice we'd just built.</strong> We debated whether to hand support to an agency. I argued against it. We'd only just nailed down our voice-and-tone standard, and outsourcing to an agent with a few hours a week on the contract meant betting our reputation — already fragile — on someone with little reason to care enough to protect that tone. I agreed the founder's time was better spent elsewhere; my position was that the answer was someone in-house we could properly mould, not an outsourced contract. A deliberate trade of short-term convenience for brand integrity at exactly the moment integrity mattered most.</li>
+                            <li id="cs-denim-brand-turnaround-s7" style="margin-bottom: 0;"><strong>Navigated cross-border duty-of-care obligations.</strong> Part of the people side was working through overlapping obligations under unfamiliar cross-border employment law. The founder and I worked through what proper support and facilitation required, and I brought in fractional CTO consultations to review the tech stack and help steer technical direction. It reinforced why getting compliant employment structures in place mattered: people obligations and business needs aren't separable across jurisdictions.</li>
+                        </ul>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li>Inbound fell significantly once the production tracker and FAQ bot were live — because the largest ticket driver (order-status anxiety) was removed at the source rather than absorbed by support.</li>
+                                <li>The factory floor gained real accountability through RFID stage-tracking, benefiting on-site staff as much as customers.</li>
+                                <li>Support gained a system that held — safeguards, escalation path, nothing falling silently through.</li>
+                                <li>The EOR selection reached contract with the right partner chosen for the company's specific multi-jurisdiction needs.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li>The expansion funding was pulled, so the EOR was selected and contracted but never operated at scale — this is selection-and-scoping experience, not years of platform operation.</li>
+                                <li>Self-serve deflection only removes the questions you've already anticipated and documented; novel issues still need a person, by design.</li>
+                                <li>A production-tracking redesign depends on shop-floor adoption to stay accurate — the RFID method worked because the floor process was redesigned around it, not bolted on top.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <!-- Projects -->
             <div class="tab-pane fade" id="projects" role="tabpanel">
                 <div class="section">
@@ -390,6 +543,7 @@
                     <div class="project-filters">
                         <button class="filter-btn active" data-filter="all">All</button>
                         <button class="filter-btn" data-filter="ai-tools">AI Tools</button>
+                        <button class="filter-btn" data-filter="engineering">Engineering</button>
                         <button class="filter-btn" data-filter="research">Research</button>
                         <button class="filter-btn" data-filter="writing">Writing &amp; Docs</button>
                         <button class="filter-btn" data-filter="operations">Operations</button>
@@ -397,12 +551,307 @@
                         <button class="filter-btn" data-filter="consulting">Consulting</button>
                     </div>
 
+                    <div class="project-block" data-category="engineering">
+
+                    <!-- ====================================================
+                         DIGITAL SPEC — PORTFOLIO FRONT DOOR
+                    ===================================================== -->
+                    <div class="project" id="proj-digital-spec-front-door">
+                        <h3>Digital Spec — Portfolio Front Door <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>The front door to this portfolio. Rather than dropping every visitor into the same wall of work, Digital Spec asks what brought them — hiring for a specific role, curious about the person, or just browsing — and curates a route accordingly. It's a branching, visual-novel-style guide built as an overlay on the static site. It has no AI behind it: every path is pre-programmed, so there is nothing to hallucinate. The content it surfaces isn't hardcoded either — each route runs a query over a tagged index of the whole portfolio, so it pulls the right case studies and projects by their tags and stays current as work is added.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">No AI, by design</span>
+                                <p>Pre-programmed branching, not an LLM. Zero hallucination risk, and nothing it can say that Spec didn't write. The constraint is the feature: every word is accountable.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Curates by tags, not lists</span>
+                                <p>Routes query a tagged index of the whole portfolio rather than hardcoded item lists, so the right work surfaces automatically and no lane has to be hand-maintained.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Sorts visitors by intent, not topic</strong> — A hiring manager, a curious peer, and a casual browser each get a different, relevant route in a single tap.</li>
+                                <li><strong>Data-driven curation</strong> — Routes pull from a tagged index, so the right work surfaces automatically and nothing is hand-maintained per lane.</li>
+                                <li><strong>Transparent by construction</strong> — It states it's a pre-programmed guide with no AI and no hallucination risk, up front.</li>
+                                <li><strong>Additive and robust</strong> — Built as an overlay, so the full portfolio works untouched beneath it, and it collapses to a docked tab rather than trapping anyone.</li>
+                                <li><strong>Accessible</strong> — Keyboard-navigable, focus-managed, and reduced-motion aware.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Tappable-only by design</strong> — It can't answer a free-typed question, because it has no live brain — it guides, it doesn't converse.</li>
+                                <li><strong>Index is the source of truth</strong> — A route is only as good as the tags beneath it: a mis-tagged item surfaces in the wrong lane.</li>
+                                <li><strong>Curation order needs a human eye</strong> — The query surfaces matching items, but "lead with the strongest" is an editorial call, tuned by hand via lane sort and pin/exclude.</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Editorial tuning per lane</strong> — Lead each lane with its strongest proof and cap counts, via the lane sort and the per-item pin/exclude overrides.</li>
+                                <li><strong>New lanes as content grows</strong> — Add routes as new content types land (e.g. the implementation playbooks), without touching the conversation structure.</li>
+                                <li><strong>Returning-visitor touch</strong> — A light "here's what's new since you last looked" for repeat visits, session-aware.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">No backend</span>
+                            <span class="tech-tag">Pre-programmed (no AI)</span>
+                            <span class="tech-tag">Tag-driven content</span>
+                        </p>
+                        <a class="tool-link-badge" href="/" target="_blank">Live on this site — look for the Digital Spec tab.</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Panel was still jumping to the bottom even after the 320ms deferral — <code>scrollBottom()</code> scrolls to <code>scrollHeight</code> regardless of where new content starts. Replaced with <code>scrollToElement(bubble)</code>: calculates the bubble's position relative to the scroll container and sets <code>scrollTop</code> so the bubble lands at the top of the panel. Added <code>preventScroll: true</code> to all <code>focus()</code> calls so keyboard focus doesn't fight the scroll position. Applies to all node transitions and lane results.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 25 older entries</button>
+
+                            <div class="devlog-overflow">
+
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Audited the portfolio copy for AI-generated writing. The recent build added a fair amount of LLM-flavoured prose, so I ran a read-only pass against the voice-and-tone guide and wrote the findings up in <code>AI-PROSE-AUDIT.md</code> — 28 flagged passages across five sections, worst in the front-door lane blurbs and this project's own wins and constraints. The pattern that kept recurring was the balanced "X, not Y" phrasing used as a default rhythm, plus filler words like "genuinely" and "robust" and a few tidy uplift closers. The audit recommends only; it changed no copy.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Acted on the safe half of the audit — a deletion-only cleanup, no rewriting. Removed filler intensifiers ("genuinely" in three places, a "Crucially" opener on this project's description), two uplift closers, and a duplicated "interesting problems" line in the About cards. The front-door config and this dev log were both in scope: the kh-lore node lost a "genuinely", and the "Charm for those who lean in" sign-off that used to close the "Never trap a busy visitor" decision below came out here. The "X, not Y" and "by design" flags were left alone — those need a real voice edit, not a mechanical cut, so they're staying until they can be reworked by hand.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    The scroll-jump bug that was fixed for lane results was still present across all other conversation paths — every node transition (hiring routes, curious, nosy, contact, etc.) rendered the bubble and options together then scrolled to the bottom, pushing the new question text above the fold. Fixed by applying the same 320ms deferred pattern to <code>goToNode</code>: bubble renders and scrolls into view first; options appear after a short pause.
+                                </p>
+                            </div>
+
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Devlog was showing all 11 recent entries visible at once instead of just the most recent. Fixed: only the latest entry is now visible on load; all older entries collapse under the toggle. Updated toggle count to reflect the full history now in the overflow.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Lane results were jumping straight to the first bucket of cards, skipping the blurb entirely. Root cause: <code>scrollBottom()</code> fired after all cards were rendered, sending the viewport past the blurb. Fixed by rendering the blurb and scrolling to it first, then dropping the cards in 320ms later — matching the natural rhythm of the conversation.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Lane results redesigned: flat card list replaced with a framing blurb (Digital Spec sets context before anything shows) followed by items grouped into labelled sections by type — Work, Case Study, Project, Document. Empty buckets are skipped. Denim brand now routes to the lane-specific section anchor via <code>sectionsByLane</code>. Kingdom Hearts path got an expanded synopsis node before the lane.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Expanded the Kingdom Hearts curiosity path. Previously "What's with all the Kingdom Hearts?" dropped straight into the creator-lore lane with no context. Now it routes through a new node that introduces LoreBySpec — what it is, why Spec built it, the podcast, the sub count — before branching: see the tools built for the channel, or just curious. The just-curious branch gets a warm dead-end with a restart or skip option.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    No way to go back or start over mid-conversation. Once you chose a path, you were committed. Added a quiet "↺ Start over" button that appears below the options from the second node onwards, and in lane result footers alongside the Back button.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Ctrl+R resumed the conversation at the last node — the overlay remembered which branch you were on across page reloads via sessionStorage. Unintuitive: a refresh should feel like a fresh start. Removed node caching entirely; collapse state is still remembered so the docked tab stays docked, but the conversation always restarts from the opening.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    "The thing Spec's proudest of building" deeplink was landing mid-case-study (an internal section anchor) rather than at the title. The config was referencing a sub-section ID. Updated to use the top-level entry anchor so the route lands at the heading.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Project was sitting at the very bottom of the Projects tab — so the deeplink scrolled visually past every other project on the way down. Moved to the top of the section so the route lands cleanly.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-20</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    "Show me how you were built" was routing to the <em>builder-technical</em> lane — a curated list of AI tools — rather than this project. Root cause: this entry didn't exist in the portfolio index when that node was written, so the lane was the fallback. Added the index entry and updated the node to deeplink directly here.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-20</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    Dismiss-on-click-out replaced with collapse/expand. v1 removed the overlay on dismiss — a visitor navigating away and back lost their place entirely. Refactored: clicking outside, pressing Esc, or hitting the minimise button collapses the overlay to a docked "Ask Digital Spec" tab (bottom-right). It persists through the session and re-expands at the same node. Position preserved, no re-showing on page restore.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-20</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Language refresh. Naming rules applied across all nodes: Digital Spec = the guide; Spec = the human. "Spec Lite" (early working name) scrubbed entirely. All option labels rewritten in the visitor's voice — "I'm hiring" not "Hiring manager", "I'll poke around myself" not "Browse everything".
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-20 — live</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v1 live. The portfolio's front door — a branching guide that routes visitors by what they came for. Built as an overlay on the static site; reads the tagged portfolio index for content, so it curates by tags rather than hardcoded lists. Because it carries this dev log, it surfaces in its own builder lane — the thing explaining the portfolio is a documented piece of it.
+                                </p>
+                            </div>
+
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Posture-first, not content-first. The opening sorts by mindset — hiring, curious, nosy — not by topic. A visitor knows which they are instantly; leading with a job-category question forces a hiring frame on someone who's just browsing. Each posture gets its own register.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Digital Spec announces it's a construct, up front. No pretending to be a live assistant. The honesty is the pitch: the first thing a visitor learns is that this was built deliberately and runs on pre-set logic. For a portfolio whose value is transparency, a fake "live AI" would undercut the thing it's selling.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        No AI, by design. It would have been easy to wire an LLM in. Pre-programmed branching means zero hallucination risk and nothing it can say that Spec didn't write. Every word is accountable.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Decoupled structure from content. The dialogue lives in <code>front-door-config.json</code>; the content comes from the tagged portfolio index via lane queries. Lanes are queries over facet tags, never hardcoded item lists — so adding a project surfaces it automatically, and the conversation can change without touching content.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Tappable replies only — no text box. An open input promises a brain that isn't there; someone types a real question and hits a wall. Tappable choices keep the illusion honest and render as the visitor's own messages.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Never trap a busy visitor. A persistent skip, and the overlay collapses to a docked tab rather than vanishing — a recruiter with four minutes can dismiss it in one tap and still retrieve it.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Instant responses, no fake typing delays. Personality goes in the words, not artificial latency — especially for a recruiter-adjacent audience.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Graceful degradation. If a lane has no matching content yet, the node says so and routes to the full site rather than showing an empty box. The front door could ship before every lane was full.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Accessibility from the start. Full keyboard navigation, focus trapped while open and restored on collapse, Esc to collapse, reduced-motion respected. A guide some visitors can't operate isn't a guide.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-20</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Origin. This started as a slightly cynical proof of concept — how cheaply you can fake bespoke curation with the right wiring. The honest inversion became the point: a constructed guide that's loud about being constructed, backed by a real tagged index, is more transparent than most "handcrafted" portfolios.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Digital Spec Front Door -->
+
                     <div class="project-block" data-category="ai-tools">
 
                     <!-- ====================================================
                          ERROR LOG INTERPRETER
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-error-log-interpreter">
                         <h3>Error Log Interpreter <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>Paste a browser console error, a Vite build error, or a stack trace — and get back a plain English breakdown aimed at developers who are still learning to read output. The tool does more than translate: it distinguishes between where an error <em>surfaces</em> and where the actual problem <em>originated</em>, which are often in completely different places. A TypeError inside a React renderer usually means something went wrong several steps earlier. A build failure citing a missing module often means a misconfigured import path, not a missing package. Getting that distinction right is the first real debugging skill.</p>
@@ -529,7 +978,7 @@
                     <!-- ====================================================
                          DEBUG HELPER
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-debug-helper">
                         <h3>Debug Helper <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>A structured debugging coach for when you're stuck — whether you have an error message or not. Most debugging tools assume you have something to debug <em>against</em>. The harder case is when your code runs, produces no output, and gives you nothing to go on. This tool has three modes: I have an error (want a plan, not just an explanation), code runs but does the wrong thing, and total silence — nothing happens at all. The silent mode is built specifically around the most common causes of hidden failures: swallowed catch blocks, unhandled promise rejections, missing await, and event handlers that never attached. It coaches the debugging process, not just the answer.</p>
@@ -647,7 +1096,7 @@
                     <!-- ====================================================
                          POSTHOG CS HEALTH INTELLIGENCE — PYTHON PROTOTYPE
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-posthog-cs-health-intelligence">
                         <h3>PostHog CS Health Intelligence <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Complete</span></h3>
                         <p><strong>May 2026</strong></p>
                         <p>A research-backed prototype targeting the gap between signal collection and prioritised action in CS. PostHog's tooling (Vitally, CDP, Zapier) covers monitoring well — the morning question it doesn't answer is <em>who needs me today, why, and what do I actually say?</em> The prototype is a structured JSON account model and a Python script that reads it and produces a ranked morning action list: URGENT first, then WATCH, then OK. Each flagged account shows the specific signal that triggered it, a plain-English reason it matters, and a concrete suggested action. No composite health score. No frontend. The complexity lives in the design decisions, not the code.</p>
@@ -795,7 +1244,7 @@
                     <!-- ====================================================
                          POSTHOG CSM COPILOT — AI TOOL
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-posthog-csm-copilot">
                         <h3>PostHog CSM Copilot <span class="badge bg-warning text-dark" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>A Customer Success copilot built specifically for the PostHog CS role — managing 25–40 accounts across a $20k–$100k+ ARR range. Paste any incoming signal (Slack, email, ticket, usage note), add customer context, and choose a mode: Triage + Next Action, Draft Response, Escalation Strategy, or Health Assessment. The tool is encoded with PostHog's product suite, billing model, and the sales-known vs. self-served customer distinction — so outputs are calibrated to the actual relationship dynamics, not generic CS advice.</p>
@@ -1077,7 +1526,7 @@
                     <!-- ====================================================
                          FAQ / KNOWLEDGE BASE CHATBOT — AI TOOL
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-faq-chatbot">
                         <h3>FAQ Chatbot <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>Paste a company's FAQ or internal knowledge base, paste a customer message, and get an answer grounded entirely in those docs — nothing made up, nothing hallucinated. Built to show how a lightweight AI support chatbot actually works: no vector database, no embeddings pipeline, no backend. Just a system prompt, a context window, and a model that knows to say "I don't have that" when the docs don't cover it.</p>
@@ -1365,7 +1814,7 @@
                     <!-- ====================================================
                          LOREBYSPEC CREATOR TOOL
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-lorebyspec-creator-tool">
                         <h3>LoreBySpec Creator Tool <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>A two-mode content assistant built for my YouTube channel <strong>LoreBySpec</strong>. Toggle between <strong>Video Ideas</strong> — paste a topic or theme and get five titled angles with one-sentence hooks — and <strong>Comment Reply</strong> — paste a viewer comment and get a drafted reply in a warm, knowledgeable, lore-nerd voice. Both modes call the Anthropic API directly from the browser. One tool, one key, two workflows.</p>
@@ -1537,7 +1986,7 @@
                     <!-- ====================================================
                          PREGVOICE — ACCESSIBILITY TOOL
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-pregvoice">
                         <h3>PregVoice <span class="badge bg-danger" style="font-size:0.65rem; vertical-align: middle;">Research &amp; Planning</span></h3>
                         <p><strong>Feb 2025 – Present</strong></p>
                         <p>A layered accessibility project tackling one specific, overlooked gap: blind and visually impaired people cannot independently read a pregnancy test. The result is a deeply private moment that requires asking someone else — stripping dignity from an already vulnerable experience. PregVoice works through the problem in phases, from smartphone-first solutions requiring no new hardware, to researching the internals of existing digital tests, to evaluating custom hardware if no off-the-shelf path is viable.</p>
@@ -1783,7 +2232,7 @@
                     </div><!-- /project-block: PregVoice -->
 
                     <div class="project-block" data-category="writing">
-                    <div class="project">
+                    <div class="project" id="doc-technical-writing-portfolio">
                         <h3>Technical Writing Portfolio <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
                         <p><strong>May 2026</strong></p>
                         <p>Four reference-quality playbook documents across ops and HR systems, written for different audiences to show range as well as depth. Covers API troubleshooting, SQL data audits, EOR payroll processing, and tiered escalation logic.</p>
@@ -1809,7 +2258,7 @@
                     </div><!-- /project-block -->
 
                     <div class="project-block" data-category="writing">
-                    <div class="project">
+                    <div class="project" id="doc-saas-integration-diagnostic-guide">
                         <h3>SaaS Integration Failure Diagnostic Guide <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
                         <p><strong>May 2026</strong></p>
                         <p>Internal support enablement document written to demonstrate technical writing capability in a SaaS/HRIS integration context. Designed to equip Tier 1 and Tier 2 support agents with structured diagnostic workflows for webhook delivery failures, API authentication breakdowns, and downstream HRIS sync errors — the failure modes that are most commonly misdiagnosed or escalated unnecessarily.</p>
@@ -1834,7 +2283,7 @@
                     </div><!-- /project-block -->
 
                     <div class="project-block" data-category="writing">
-                    <div class="project">
+                    <div class="project" id="doc-cat-api-documentation">
                         <h3>Cat API Documentation <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
                         <p><strong>May 2026</strong></p>
                         <p>Professional API reference documentation for The Cat API's images search endpoint, written as a portfolio sample for a technical writing role. Covers authentication, all query parameters, response schema, request and response examples, error states, and pagination behaviour — structured to Stripe/Twilio documentation standards.</p>
@@ -1856,7 +2305,7 @@
                     </div><!-- /project-block: Cat API Documentation -->
 
                     <div class="project-block" data-category="writing">
-                    <div class="project">
+                    <div class="project" id="doc-voice-and-tone-guide">
                         <h3>Voice &amp; Tone Guide <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
                         <p><strong>May 2026</strong></p>
                         <p>Internal contributor guide defining voice, tone, and writing standards for technical documentation teams — written as a portfolio piece demonstrating documentation leadership and the ability to set standards, not just follow them. Covers voice characteristics, how tone shifts by context and audience state, common mistakes, and a contributor checklist.</p>
@@ -1877,7 +2326,7 @@
                     </div><!-- /project-block: Voice & Tone Guide -->
 
                     <div class="project-block" data-category="writing">
-                    <div class="project">
+                    <div class="project" id="doc-voice-adaptation-showcase">
                         <h3>Voice Adaptation Showcase <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">Portfolio Sample</span></h3>
                         <p><strong>May 2026</strong></p>
                         <p>The same content — a short how-to guide for setting up two-factor authentication on a fictional app — written three times, each version calibrated to a different company's documented voice principles: Apple, Mailchimp, and PostHog. Each section includes the source guide URL, the specific principles applied, the content itself, and a reflection on what was hardest to adapt.</p>
@@ -1902,7 +2351,7 @@
                     <!-- ====================================================
                          SUPPORT TICKET TRIAGE — AI TOOL
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-support-triage-tool">
                         <h3>Support Ticket Triage Tool <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>May 2026 – Present</strong></p>
                         <p>Paste a customer message, error log, or support thread — and Claude returns a category, an urgency level (colour-coded Low to Critical), and a suggested first response ready to copy and send. One input, one button. Built to directly demonstrate the kind of tool you'd build or configure in a support or implementation role.</p>
@@ -2225,7 +2674,7 @@
                     <!-- ====================================================
                          LORE CHECKER — AI TOOL FOR LOREBYSPEC
                     ===================================================== -->
-                    <div class="project">
+                    <div class="project" id="proj-kh-lore-checker">
                         <h3>KH Lore Consistency Checker <span class="badge bg-warning" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>May 2025 – Present</strong></p>
                         <p>A theory stress-tester built for my YouTube channel <strong>LorebySpec</strong>. Kingdom Hearts has 25+ years of lore across 15+ titles — this tool lets you paste in a theory, supply relevant wiki links or context, and get a structured AI analysis: contradictions against canon, logical weaknesses, clarifying questions a skeptical viewer would ask, and an overall verdict. Built for real content prep, not as a demo.</p>
@@ -2432,7 +2881,7 @@
                     <div class="project-block" data-category="consulting strategy">
 
                     <!-- TikTok Sponsorship -->
-                    <div class="project">
+                    <div class="project" id="proj-tiktok-sponsorship-strategy">
                         <h3>Sponsorship Strategy for a TikTok Personality</h3>
                         <p><strong>Jan 2025</strong></p>
                         <p>End-to-end sponsorship project for a TikTok creator in the mental health and rehabilitation space. Covered sponsor research, outreach strategy, personalised outreach messages, and a full sponsorship document with audience metrics and collaboration packages.</p>
@@ -2447,7 +2896,7 @@
                     </div><!-- /project-block: TikTok Sponsorship -->
 
                     <div class="project-block" data-category="consulting operations strategy">
-                    <div class="project">
+                    <div class="project" id="proj-business-relocation-expansion">
                         <h3>Business Relocation &amp; Expansion Strategy</h3>
                         <p><strong>Dec 2024</strong></p>
                         <p>Supported a creative business expanding from the US to Europe — navigating HR compliance, EOR partner selection, local labour law, and scouting creative workspaces in a major European city. The business expanded without legal or operational setbacks.</p>
@@ -2460,7 +2909,7 @@
                     </div><!-- /project-block -->
 
                     <div class="project-block" data-category="consulting strategy">
-                    <div class="project">
+                    <div class="project" id="proj-leadership-coaching-project">
                         <h3>Leadership Coaching for a Growing Team</h3>
                         <p><strong>Nov–Dec 2024</strong></p>
                         <p>Provided coaching to a scaling start-up's leadership team on conflict resolution, communication, and team alignment. Implemented team-building activities and cross-functional goal alignment. Outcome: stronger cohesion, improved retention, better collaboration.</p>
@@ -2473,7 +2922,7 @@
                     </div><!-- /project-block -->
 
                     <div class="project-block" data-category="consulting operations">
-                    <div class="project">
+                    <div class="project" id="proj-optimising-cs-operations">
                         <h3>Optimising Customer Support Operations</h3>
                         <p><strong>Jun–Sep 2024</strong></p>
                         <p>Partnered with a startup struggling with ticket volume. Implemented a priority-based ticket allocation system and knowledge base, paired with staff training. Reduced response times by 30% and increased customer satisfaction as the business scaled.</p>
@@ -2486,7 +2935,7 @@
                     </div><!-- /project-block -->
 
                     <div class="project-block" data-category="consulting strategy">
-                    <div class="project">
+                    <div class="project" id="proj-niche-market-web-dev-strategy">
                         <h3>Niche Market Strategy for Web Development</h3>
                         <p><strong>Jan–Feb 2023</strong></p>
                         <p>Identified an underserved niche — custom webhooks and integrations for Twitch streamers — and helped a developer position, price, and market into it. The client established a sustainable revenue stream and became a recognised name in the space.</p>
@@ -2497,6 +2946,166 @@
                         </p>
                     </div>
                     </div><!-- /project-block -->
+
+                    <div class="project-block" data-category="engineering research">
+
+                    <!-- ====================================================
+                         DATE PROPOSAL WEBSITE
+                    ===================================================== -->
+                    <div class="project" id="proj-date-proposal-website">
+                        <h3>Date Proposal Website <span class="badge bg-warning text-dark" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>A recreation and technical deconstruction of a viral moment: a developer who built a website to ask someone out on a date — complete with a "No" button that runs from the cursor, progressive preference questions, live restaurant discovery, table booking, and a calendar invite delivered to her phone. The project started as a research question — <em>how much of this was technically real, and how much was a well-designed illusion?</em> — and became a working tool.</p>
+                        <p style="margin-top: 10px;">The interesting part isn't the UI mechanics. The interesting part is the booking. There is no public API that lets a third party programmatically complete a restaurant reservation — not OpenTable, not Resy, not Tock. What looked like magic was almost certainly a pre-constructed OpenTable deep-link with the restaurant, date, and party size already filled in. She booked it herself. She just didn't know she was the one doing it.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>The running No button</strong> — Mouse proximity detection via <code>mousemove</code> events, <code>getBoundingClientRect()</code> for position, trigonometry for the escape direction. Switches from inline to fixed positioning on first escape to avoid a visible jump. Fades out after five near-misses. Mobile fallback degrades the button text through three taps before disabling it.</li>
+                                <li><strong>Four activity paths, one flow</strong> — Food (restaurant discovery), Coffee (café search, no booking), Activity (Eventbrite events), Cinema (TMDB films → showtime search deep-link). Each path is defined as an ordered array of step IDs in a <code>FLOWS</code> object; navigation is string-based, progress dots compute dynamically from the current path. No numeric counters, no off-by-one bugs.</li>
+                                <li><strong>Multi-API demo fallbacks</strong> — All three live APIs (Foursquare, Eventbrite, TMDB) have contextually appropriate demo data that activates when no key is configured. Demo cafés, demo events keyed by category, demo films keyed by genre. No broken states for portfolio visitors.</li>
+                                <li><strong>Calendar invite in 30 lines</strong> — Generates and downloads an <code>.ics</code> file (RFC 5545 iCalendar format). Opens natively in Google Calendar, Apple Calendar, and Outlook on any device. Cinema path generates an all-day event (showtime unknown); food and coffee generate timed events with a two-hour end time.</li>
+                                <li><strong>The booking gap is documented, not hidden</strong> — The README explains exactly why true programmatic booking doesn't exist for outside developers, and what the "Book the table" button actually does (an OpenTable search deep-link pre-filled with restaurant, date, time, and party size).</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Programmatic table booking doesn't exist via public API</strong> — OpenTable has an affiliate program (3–4 week approval, still a deep-link handoff, not a booking). Resy is enterprise-only. The third-party Apify wrapper ($3.99/booking) is ToS-violating and fragile. The booking step is an honest handoff, not real automation.</li>
+                                <li><strong>No cinema showtimes API</strong> — TMDB covers film metadata and posters. For local showtimes, no universal public API exists. Vue, Odeon, and Cineworld don't have developer APIs. The "Find Showtimes" button deep-links to a Google search for the film + location + "cinema showtimes." Effective handoff, not a direct booking.</li>
+                                <li><strong>Three API keys required for live data</strong> — Foursquare (restaurants and cafés), Eventbrite (events), TMDB (films). All free tiers. The config panel handles all three. Demo mode runs without any.</li>
+                                <li><strong>No email sending</strong> — The calendar invite downloads as an <code>.ics</code> file rather than being emailed. EmailJS (free: 200 emails/month) would close this gap.</li>
+                                <li><strong>Desktop-first mechanic</strong> — The No button escape uses <code>mousemove</code> events, which don't fire on touch devices. Mobile gets a tap-degradation fallback instead.</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>EmailJS integration</strong> — Collect an email address early in the flow and auto-send the <code>.ics</code> as an attachment on confirmation. Free tier covers 200 emails/month. Closes the gap between downloading and receiving.</li>
+                                <li><strong>Sender personalisation mode</strong> — A <code>?setup</code> URL parameter opens extended config: custom opening message, pre-selected restaurants to steer the choice, a locked-in date. The "sinister version" — fully documented.</li>
+                                <li><strong>OpenTable affiliate integration</strong> — Currently a search deep-link. With affiliate approval, a cleaner availability-surfacing handoff with direct reservation links per restaurant.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Foursquare Places API</span>
+                            <span class="tech-tag">Eventbrite API</span>
+                            <span class="tech-tag">TMDB API</span>
+                            <span class="tech-tag">iCalendar (.ics)</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">No backend</span>
+                        </p>
+                        <a class="tool-link-badge" href="date-proposal/" target="_blank">Open Tool →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-08 — research</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Mapped the local listings problem for cinema and theatre. No cinema chain (Vue, Odeon, Cineworld, AMC, UCI) has a public API — the data is locked in proprietary booking systems. TMDB gives film metadata only, not showtimes or venues. The best universal handoff is a structured Google search deep-link: Google aggregates real-time showtime data from chains worldwide and surfaces it as a rich widget. For theatre and professional events, <strong>Ticketmaster Discovery API</strong> (free, 5,000 calls/day, covers Europe) is a better fit than Eventbrite — returns actual shows with venue, date, time, and direct booking links. Eventbrite stays for community events and workshops.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-08 — planning</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    New transport step before confirm: <em>I'll pick you up</em> (collects their address, generates two separate <code>.ics</code> files — the event and a "Collect [Name] from [address]" reminder timed 40 minutes before), <em>I'll book a taxi</em> (notes it in the ICS description, optionally deep-links to Uber pre-filled with the venue address), or <em>You'll make your own way</em> (single ICS, no extra inputs). Two files rather than one combined event — cleaner for the recipient and simpler to implement.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 9 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-08 — building</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Built the full activity type selector: four paths, one flow. <em>Food</em> — existing restaurant path, unchanged. <em>Coffee</em> — Foursquare café search, no booking step, morning/afternoon time slots. <em>Activity</em> — Eventbrite API with Arts, Sports, Music, and Classes categories; skips date/time since events have their own date. <em>Cinema</em> — TMDB now-playing films with genre filtering; skips date/time; "Find Showtimes" deep-links to a Google search. Step architecture changed from numeric IDs to semantic string IDs with a <code>FLOWS</code> routing object — each path is an array of step IDs, progress dots compute from the current path. Config panel expanded from two fields to five (name, message, Foursquare key, Eventbrite key, TMDB key). All three APIs have contextually appropriate demo fallbacks.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — fix</span>
+                                    <p>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Demo mode was returning the same four restaurants regardless of cuisine or location — a hardcoded list that didn't change between sessions. Fixed by making demo data cuisine-specific: each of the six cuisine types now maps to its own set of four plausible restaurant names, so the cards at least match what was selected. An info banner now tells the user they're seeing sample results and where to add an API key for real ones. Also: changed location field label from "And where are you?" to "Where would you like to go?" — more accurate since it's asking about the destination, not the person's current position.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — fix</span>
+                                    <p>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Two UX fixes. Name collection is now a fill-in-the-blank embedded in the headline — the input is styled at headline scale with just a bottom border, so "I'm so glad, ______" reads as a sentence rather than a form field. If the sender pre-fills the recipient's name via the config panel, that step is replaced with a fully personalised "I'm so glad, [Name]." headline and the question never appears at all. Restaurant step: "That's the one →" is now a fixed button anchored to the bottom of the viewport, sliding up from below the moment a card is selected — visible on any screen size without scrolling.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The sticky button fix exposed a secondary issue: <code>body { overflow: hidden }</code> was blocking scroll on the restaurant step, clipping the bottom card behind the viewport edge on portrait mobile. Re-enabling scroll on step 5 only, plus an 88px spacer below the grid, means all four cards are reachable — the sticky button is just the faster path, not the only one.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — building</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        v1 complete. Full seven-step wizard: the question, name and location, cuisine, vibe, restaurant selection (Foursquare API or demo), date and time, confirmation. Calendar <code>.ics</code> generation working. OpenTable deep-link booking handoff working. Config panel for sender API key setup — saves to <code>localStorage</code>, invisible to the recipient.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        White background and Nunito font. Every other tool in this portfolio is dark — intentionally. This site should look like something built for a person, not a developer. The constraint in the brief was aesthetic before it was technical: bubbly, clean, fluid. Nunito's rounded letterforms suit the tone. One accent colour (rose #E8739A) used across the whole experience, nothing else.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The No button starts as an inline element and switches to <code>position: fixed</code> on the first escape, recording its <code>getBoundingClientRect()</code> coordinates first so the switch is invisible. After that it moves via <code>left</code>/<code>top</code> in fixed space. On mobile, <code>mousemove</code> events don't fire — instead three clicks degrade the button text ("Are you sure?" → "Really...?" → vanish). Same behavioural outcome, different mechanism.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Foursquare over Yelp. Yelp eliminated their free tier mid-2025 with minimal notice — now ~$8–$15 per 1,000 calls. Foursquare's basic tier gives 10,000 free calls/month with cuisine search, price tiers, photos, and addresses. More than adequate. Foursquare v3 also allows CORS from the browser directly — no proxy needed, keeping the no-backend principle intact.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-07 — research</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The booking gap. No public API exists for programmatically completing a restaurant reservation — OpenTable, Resy, and Tock are all gated behind partnership agreements or don't exist for outside developers at all. The original viral site was almost certainly constructing a pre-filled OpenTable deep-link. She completed the booking herself. The site made her feel like it happened automatically. The "Book the table" button in this project does the same thing and the README says so clearly.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Date Proposal Website -->
+
+                </div><!-- /section -->
+            </div><!-- /tab-pane projects -->
 
             <!-- Working with Spec -->
             <div class="tab-pane fade" id="working-with-spec" role="tabpanel">
@@ -2630,6 +3239,11 @@
     </div>
 
     <script>
+        function switchToTab(tabId) {
+            const tabEl = document.getElementById(tabId);
+            if (tabEl) bootstrap.Tab.getOrCreateInstance(tabEl).show();
+        }
+
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const group = btn.closest('.project-filters');

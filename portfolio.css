@@ -398,6 +398,23 @@ body { background-color: #f8f9fa; }
     line-height: 1.6;
 }
 
+/* ── Case Studies ── */
+.case-study-link {
+    font-size: 0.75rem;
+    color: #7b5ea7;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px dotted #c4b8e0;
+    padding-bottom: 1px;
+    margin-left: 4px;
+}
+
+.case-study-link:hover {
+    color: #a07fd4;
+    border-bottom-color: #a07fd4;
+}
+
 .principle-callout {
     background: #f7f5fc;
     border-left: 4px solid #7b5ea7;

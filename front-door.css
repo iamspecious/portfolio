@@ -1,0 +1,549 @@
+/* ══════════════════════════════════════════════════════
+   Front Door Overlay — Digital Spec
+   Additive only; no existing styles overridden.
+══════════════════════════════════════════════════════ */
+
+/* ── Overlay shell ── */
+#fd-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1060;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  /* pointer-events blocked while collapsed */
+}
+
+#fd-overlay.fd-collapsed {
+  pointer-events: none;
+}
+
+/* ── Backdrop ── */
+#fd-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 4, 9, 0.82);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  transition: opacity 0.25s ease;
+}
+
+#fd-overlay.fd-collapsed #fd-backdrop {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Panel ── */
+#fd-panel {
+  position: relative;
+  z-index: 1;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: min(90vh, 720px);
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 0 0 1px rgba(110, 64, 201, 0.18),
+    0 24px 64px rgba(0, 0, 0, 0.65);
+  /* Transition drives both open and collapse */
+  transition:
+    opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#fd-overlay.fd-collapsed #fd-panel {
+  opacity: 0;
+  transform: translateY(14px) scale(0.97);
+  pointer-events: none;
+}
+
+/* Suppress transitions during the instant-collapse on page restore */
+#fd-overlay.fd-no-transition #fd-panel,
+#fd-overlay.fd-no-transition #fd-backdrop { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  #fd-panel,
+  #fd-backdrop,
+  #fd-tab { transition: none !important; }
+}
+
+/* ── Header ── */
+#fd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #010409;
+  border-bottom: 1px solid #30363d;
+  border-radius: 12px 12px 0 0;
+  flex-shrink: 0;
+}
+
+#fd-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+#fd-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e40c9 0%, #b392f0 100%);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+#fd-speaker-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e6edf3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Persistent header controls ── */
+#fd-persistent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.fd-persistent-btn {
+  padding: 5px 11px;
+  border-radius: 20px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.fd-skip-btn {
+  background: transparent;
+  border: 1px solid #30363d;
+  color: #8b949e;
+}
+
+.fd-skip-btn:hover,
+.fd-skip-btn:focus-visible {
+  border-color: #6e40c9;
+  color: #c9d1d9;
+  outline: 2px solid #6e40c9;
+  outline-offset: 2px;
+}
+
+.fd-contact-btn {
+  background: #6e40c9;
+  border: 1px solid #6e40c9;
+  color: #fff;
+}
+
+.fd-contact-btn:hover,
+.fd-contact-btn:focus-visible {
+  background: #9b7fd4;
+  border-color: #9b7fd4;
+  outline: 2px solid #b392f0;
+  outline-offset: 2px;
+}
+
+/* ── Minimise button ── */
+.fd-minimize-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid #30363d;
+  color: #8b949e;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  font-family: inherit;
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  padding: 0;
+}
+
+.fd-minimize-btn:hover,
+.fd-minimize-btn:focus-visible {
+  border-color: #6e40c9;
+  color: #c9d1d9;
+  background: #161b22;
+  outline: 2px solid #6e40c9;
+  outline-offset: 2px;
+}
+
+/* ── Scroll container ── */
+#fd-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #30363d transparent;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #fd-scroll { scroll-behavior: auto; }
+}
+
+/* ── Dialogue area ── */
+#fd-dialogue {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.fd-bubble {
+  max-width: 86%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.fd-bubble-spec {
+  background: #161b22;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+
+.fd-bubble-user {
+  background: #21122e;
+  border: 1px solid #6e40c9;
+  color: #d2b3ff;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+  font-style: italic;
+}
+
+/* ── Option buttons ── */
+#fd-interaction {
+  flex-shrink: 0;
+}
+
+.fd-options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.fd-option {
+  background: #161b22;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.45;
+  transition: border-color 0.13s, background 0.13s, color 0.13s;
+}
+
+.fd-option:hover,
+.fd-option:focus-visible {
+  border-color: #6e40c9;
+  background: #1a1330;
+  color: #e6edf3;
+  outline: none;
+}
+
+.fd-option:focus-visible {
+  outline: 2px solid #6e40c9;
+  outline-offset: 2px;
+}
+
+.fd-option:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── Lane result cards ── */
+.fd-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.fd-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-left: 3px solid #6e40c9;
+  border-radius: 0 8px 8px 0;
+  padding: 13px 15px;
+  cursor: pointer;
+  transition: border-color 0.13s, background 0.13s;
+}
+
+.fd-card:hover,
+.fd-card:focus-visible {
+  border-color: #9b7fd4;
+  border-left-color: #b392f0;
+  background: #1a1330;
+  outline: none;
+}
+
+.fd-card:focus-visible {
+  outline: 2px solid #6e40c9;
+  outline-offset: 2px;
+}
+
+.fd-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fd-card-type {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b392f0;
+}
+
+.fd-card-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #e6edf3;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.fd-card-summary {
+  font-size: 0.79rem;
+  color: #8b949e;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.fd-card-lens {
+  font-size: 0.77rem;
+  color: #b392f0;
+  font-style: italic;
+  margin: 3px 0 0;
+  line-height: 1.4;
+}
+
+/* ── Lane buckets ── */
+.fd-bucket {
+  margin-bottom: 18px;
+}
+
+.fd-bucket + .fd-bucket {
+  border-top: 1px solid #21262d;
+  padding-top: 14px;
+}
+
+.fd-bucket-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6e40c9;
+  margin: 0 0 3px;
+}
+
+.fd-bucket-frame {
+  font-size: 0.75rem;
+  color: #484f58;
+  font-style: italic;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+/* ── Restart ── */
+.fd-restart {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.fd-restart-btn {
+  background: transparent;
+  border: none;
+  color: #484f58;
+  font-size: 0.72rem;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.13s;
+}
+
+.fd-restart-btn:hover,
+.fd-restart-btn:focus-visible {
+  color: #8b949e;
+  outline: 2px solid #30363d;
+  outline-offset: 2px;
+}
+
+/* ── Lane footer controls ── */
+.fd-lane-controls {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.fd-back-btn {
+  background: transparent;
+  border: 1px solid #30363d;
+  color: #8b949e;
+  padding: 6px 13px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.13s, color 0.13s;
+}
+
+.fd-back-btn:hover,
+.fd-back-btn:focus-visible {
+  border-color: #6e40c9;
+  color: #c9d1d9;
+  outline: 2px solid #6e40c9;
+  outline-offset: 2px;
+}
+
+/* ── Docked tab (shown when overlay is collapsed) ── */
+#fd-tab {
+  position: fixed;
+  right: 20px;
+  bottom: 28px;
+  z-index: 1059;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px 9px 10px;
+  background: #010409;
+  border: 1px solid #6e40c9;
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1px rgba(110, 64, 201, 0.25),
+    0 8px 24px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  font-family: inherit;
+  /* Hidden by default (overlay is open) */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.15s, box-shadow 0.15s;
+}
+
+#fd-tab.fd-tab-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+#fd-tab.fd-no-transition {
+  transition: none;
+}
+
+#fd-tab:hover,
+#fd-tab:focus-visible {
+  border-color: #b392f0;
+  box-shadow:
+    0 0 0 1px rgba(179, 146, 240, 0.4),
+    0 8px 28px rgba(0, 0, 0, 0.6);
+  outline: none;
+}
+
+#fd-tab:focus-visible {
+  outline: 2px solid #b392f0;
+  outline-offset: 3px;
+}
+
+#fd-tab-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6e40c9 0%, #b392f0 100%);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+#fd-tab-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #e6edf3;
+  white-space: nowrap;
+}
+
+/* ── Mobile ── */
+@media (max-width: 520px) {
+  #fd-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  #fd-panel {
+    max-width: 100%;
+    max-height: 88vh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  #fd-header {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .fd-persistent-btn {
+    font-size: 0.68rem;
+    padding: 4px 9px;
+  }
+
+  .fd-bubble {
+    max-width: 92%;
+    font-size: 0.84rem;
+  }
+
+  #fd-tab {
+    right: 12px;
+    bottom: 16px;
+    padding: 8px 12px 8px 9px;
+  }
+
+  #fd-tab-label {
+    font-size: 0.73rem;
+  }
+}

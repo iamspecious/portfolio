@@ -1,0 +1,125 @@
+{
+  "startNode": "opening",
+  "contacts": {
+    "email": "work.specious@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/speciouscodabishop"
+  },
+  "laneIntros": {
+    "ops-strategy":      { "blurb": "Good pick — this is Spec at their broadest. They're best in the cross-functional, no-clear-owner problems where the real issue turns out to be structural: systems thinking, alignment without authority, and the discipline to know what not to build." },
+    "cs-support":        { "blurb": "This is where Spec cut their teeth, and it runs deep — not just answering tickets well, but building the systems that stop the tickets happening at all." },
+    "implementation":    { "blurb": "The hands-on, make-it-work-for-the-customer side — migrations, integrations, and getting a product live in someone else's messy real-world setup." },
+    "people-hr":         { "blurb": "Standing up the people side of a company — hiring across borders, EOR and compliance, and the onboarding scaffolding that holds it all together." },
+    "creator-lore":      { "blurb": "Ah, a person of taste. Outside the day job Spec makes long-form Kingdom Hearts analysis — and it's not a hobby bolted on, it's the same pattern-tracing brain pointed at narrative." },
+    "builder-technical": { "blurb": "The wiring, then. Spec builds small, sharp tools and — the part most people skip — documents the decisions as they go. The dev logs are the real artefact." }
+  },
+  "buckets": {
+    "work":       { "label": "Where Spec's done this directly",   "frame": "Roles where this was the day-to-day." },
+    "case-study": { "label": "The full story, start to finish",   "frame": "Specific problems, diagnosed and solved end to end." },
+    "project":    { "label": "Things Spec has built",             "frame": "Tools and projects, with the decisions behind them." },
+    "document":   { "label": "If you want to see how they write", "frame": "Documentation and writing samples." }
+  },
+  "bucketOrder": ["work", "case-study", "project", "document"],
+  "nodes": {
+    "opening": {
+      "text": "Hi there! Nice to meet you and thanks for visiting today. I'm Digital Spec and I'll be guiding you through the portfolio today should you need the help. So, what brings you here?",
+      "options": [
+        { "label": "I'm hiring",                        "target": "hiring" },
+        { "label": "I'm curious about Spec",            "target": "curious" },
+        { "label": "I'm just being nosy",               "target": "nosy" },
+        { "label": "No time — just show me everything", "action": "skip" }
+      ]
+    },
+    "hiring": {
+      "text": "Great! So you're looking to hire for a role — what role is it? My job here is to pull from all of Spec's experience to give you a curated rundown of just what they can do!",
+      "options": [
+        { "label": "Ops / Strategy",           "lane": "ops-strategy" },
+        { "label": "Technical Support",        "lane": "cs-support" },
+        { "label": "Technical Implementation", "lane": "implementation" },
+        { "label": "People-Ops / EOR",         "lane": "people-hr" },
+        { "label": "Something else",           "target": "hiring-else" }
+      ]
+    },
+    "hiring-else": {
+      "text": "Oh? Interesting! What would you like to see examples of — what's the shape of it?",
+      "options": [
+        { "label": "More strategy & systems",  "lane": "ops-strategy" },
+        { "label": "More customers & support", "lane": "cs-support" },
+        { "label": "More building & tooling",  "lane": "builder-technical" },
+        { "label": "More people & compliance", "lane": "people-hr" },
+        { "label": "Just show me everything",  "action": "skip" }
+      ]
+    },
+    "curious": {
+      "text": "That's ok! What are you curious about?",
+      "options": [
+        { "label": "Who are you, the digital one?",      "target": "whoareyou" },
+        { "label": "Who is Spec, the actual person?",    "target": "whoisspec" },
+        { "label": "What's with all the Kingdom Hearts?","target": "kh-lore" },
+        { "label": "Where can I talk to Spec?",          "target": "contact" }
+      ]
+    },
+    "whoareyou": {
+      "text": "I'm Digital Spec. The real Spec built me using Claude, based on how real-life Spec would handle different challenges. Spec's portfolio is quite broad, so it made sense to build a chatbot of sorts to help guide people through their work. After all, they can't be around 24/7 to answer questions — but I can! I've no brain per se; all of this has been pre-programmed by Spec, so no AI hallucinations here.",
+      "options": [
+        { "label": "Show me how you were built",          "action": "deeplink", "tab": "projects-tab", "anchor": "#proj-digital-spec-front-door" },
+        { "label": "Where can I talk to the real Spec?",  "target": "contact" }
+      ]
+    },
+    "whoisspec": {
+      "text": "Happy to introduce them properly. Spec's a generalist by design — a decade across people ops, support, and systems, with a creative streak running through all of it. The short version: they're drawn to wherever something isn't quite working, and they find the structural reason why.",
+      "options": [
+        { "label": "Show me the range",        "action": "goto-about" },
+        { "label": "Where can I talk to them?","target": "contact" }
+      ]
+    },
+    "contact": {
+      "text": "No problem — while I'm always free, there's no substitute for the real thing. Email or a LinkedIn DM works best; so which would you prefer?",
+      "options": [
+        { "label": "Email",       "action": "contact-email" },
+        { "label": "LinkedIn DM", "action": "contact-linkedin" }
+      ]
+    },
+    "kh-lore": {
+      "text": "LoreBySpec is Spec's Kingdom Hearts and video game lore channel on YouTube. Every week they produce a video untangling the mysteries surrounding the Kingdom Hearts franchise — and once a month they dive into other video games too. There's also a pre-production podcast called Thinking Through the Darkness, where Spec chats through theories before they become videos. It's a fairly new venture — the one-year anniversary is coming up soon — and they've already grown to over 580 subscribers. For an ultra-niche audience, that's impressive. So what brought you down this path?",
+      "options": [
+        { "label": "Show me the tools Spec built for the channel", "lane": "creator-lore" },
+        { "label": "Honestly I was just curious about the Kingdom Hearts thing", "target": "kh-just-curious" }
+      ]
+    },
+    "kh-just-curious": {
+      "text": "Ha — fair enough, it is a bit of a curveball on a portfolio site! Shall I take you back to the beginning, or are you happy to poke around yourself?",
+      "options": [
+        { "label": "Take me back to the beginning", "action": "restart" },
+        { "label": "I'll poke around, thanks",       "action": "skip" }
+      ]
+    },
+    "nosy": {
+      "text": "No issues with being nosy here! Is there anything specific you're looking for, or are you happy to poke around yourself?",
+      "options": [
+        { "label": "Show me something specific", "target": "nosy-specific" },
+        { "label": "I'll poke around myself",    "action": "skip" }
+      ]
+    },
+    "nosy-specific": {
+      "text": "Then here's what I'd point you to first:",
+      "options": [
+        {
+          "label": "The thing Spec's proudest of building",
+          "action": "deeplink",
+          "anchor": "#cs-denim-brand-turnaround",
+          "tab": "case-studies-tab"
+        },
+        {
+          "label": "The messiest, most honest dev logs",
+          "lane": "builder-technical"
+        },
+        {
+          "label": "The one case study that shows how Spec thinks",
+          "action": "deeplink",
+          "anchor": "#cs-denim-brand-turnaround",
+          "tab": "case-studies-tab"
+        }
+      ]
+    }
+  }
+}
