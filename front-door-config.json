@@ -80,7 +80,7 @@
       ]
     },
     "kh-lore": {
-      "text": "LoreBySpec is Spec's Kingdom Hearts and video game lore channel on YouTube. Every week they produce a video untangling the mysteries surrounding the Kingdom Hearts franchise — and once a month they dive into other video games too. There's also a pre-production podcast called Thinking Through the Darkness, where Spec chats through theories before they become videos. It's a fairly new venture — the one-year anniversary is coming up soon — and they've already grown to over 580 subscribers. For an ultra-niche audience, that's genuinely impressive. So what brought you down this path?",
+      "text": "LoreBySpec is Spec's Kingdom Hearts and video game lore channel on YouTube. Every week they produce a video untangling the mysteries surrounding the Kingdom Hearts franchise — and once a month they dive into other video games too. There's also a pre-production podcast called Thinking Through the Darkness, where Spec chats through theories before they become videos. It's a fairly new venture — the one-year anniversary is coming up soon — and they've already grown to over 580 subscribers. For an ultra-niche audience, that's impressive. So what brought you down this path?",
       "options": [
         { "label": "Show me the tools Spec built for the channel", "lane": "creator-lore" },
         { "label": "Honestly I was just curious about the Kingdom Hearts thing", "target": "kh-just-curious" }
