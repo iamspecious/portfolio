@@ -177,8 +177,12 @@
     currentNodeId = nodeId;
     nodeStack.push(nodeId);
     appendSpecBubble(node.text);
-    renderOptions(node.options);
     scrollBottom();
+    // Render options after a short pause so the bubble is readable before choices appear
+    setTimeout(function () {
+      renderOptions(node.options);
+      scrollBottom();
+    }, 320);
   }
 
   function appendSpecBubble(text) {
