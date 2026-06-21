@@ -432,30 +432,77 @@
 
   // ─── Lane query ───────────────────────────────────────────────────────
   function queryLane(laneId) {
-    var lane          = lanesData[laneId];
+    var lane           = lanesData[laneId];
     var includeDomains = lane.include.domains;
     var boostEvidence  = lane.boost.evidence;
-    var max            = lane.maxItems || 8;
+    var overallCap     = lane.maxItems || null;   // optional safety ceiling only
 
-    var items = portfolioIndex.filter(function (item) {
+    // Per-bucket caps: merge global defaults with any lane-level overrides
+    var BUCKET_ORDER  = ['work', 'case-study', 'project', 'document'];
+    var globalDefaults = lanesData._bucketCaps || { 'work': 6, 'case-study': 4, 'project': 4, 'document': 2 };
+    var bucketCaps    = {};
+    BUCKET_ORDER.forEach(function (t) {
+      bucketCaps[t] = (lane.bucketCaps && lane.bucketCaps[t] !== undefined)
+        ? lane.bucketCaps[t]
+        : (globalDefaults[t] !== undefined ? globalDefaults[t] : 4);
+    });
+
+    // 1. Domain filter
+    var matched = portfolioIndex.filter(function (item) {
       return item.domains.some(function (d) { return includeDomains.indexOf(d) >= 0; });
     });
 
-    items = items.map(function (item) {
-      var score = item.evidence.filter(function (e) {
-        return boostEvidence.indexOf(e) >= 0;
-      }).length;
-      return { item: item, score: score };
+    // 2. audienceExclude — drop items that explicitly opt out of this lane
+    matched = matched.filter(function (item) {
+      return !item.audienceExclude || item.audienceExclude.indexOf(laneId) < 0;
     });
 
-    items.sort(function (a, b) {
-      if (b.score !== a.score) return b.score - a.score;
-      var toKey = function (s) { return s === 'present' ? '9999-99' : (s || '0000-00'); };
-      var ka = toKey(a.item.dateEnd), kb = toKey(b.item.dateEnd);
-      return kb < ka ? -1 : kb > ka ? 1 : 0;
+    // 3. Score each item + flag pins
+    function dateKey(s) { return s === 'present' ? '9999-99' : (s || '0000-00'); }
+
+    matched = matched.map(function (item) {
+      var score  = item.evidence.filter(function (e) { return boostEvidence.indexOf(e) >= 0; }).length;
+      var pinned = !!(item.audiencePin && item.audiencePin.indexOf(laneId) >= 0);
+      return { item: item, score: score, pinned: pinned };
     });
 
-    return items.slice(0, max).map(function (x) { return x.item; });
+    // 4. Group by type
+    var buckets = {};
+    BUCKET_ORDER.forEach(function (t) { buckets[t] = []; });
+    matched.forEach(function (x) {
+      var t = x.item.type;
+      if (buckets[t]) buckets[t].push(x); else buckets[t] = [x];
+    });
+
+    // 5. Sort within each bucket: pinned first, then score desc, then dateEnd desc
+    BUCKET_ORDER.forEach(function (t) {
+      buckets[t].sort(function (a, b) {
+        if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+        if (b.score !== a.score)   return b.score - a.score;
+        var ka = dateKey(a.item.dateEnd), kb = dateKey(b.item.dateEnd);
+        return kb < ka ? -1 : kb > ka ? 1 : 0;
+      });
+    });
+
+    // 6. Apply per-bucket cap (pinned items guaranteed; cap limits unpinned remainder)
+    var results   = [];
+    var totalCount = 0;
+    BUCKET_ORDER.forEach(function (t) {
+      var cap      = bucketCaps[t];
+      var bucket   = buckets[t] || [];
+      var pinned   = bucket.filter(function (x) { return x.pinned; });
+      var unpinned = bucket.filter(function (x) { return !x.pinned; });
+      var remain   = Math.max(0, cap - pinned.length);
+      var kept     = pinned.concat(unpinned.slice(0, remain));
+      kept.forEach(function (x) {
+        if (overallCap === null || totalCount < overallCap) {
+          results.push(x.item);
+          totalCount++;
+        }
+      });
+    });
+
+    return results;
   }
 
   // ─── Routing ──────────────────────────────────────────────────────────

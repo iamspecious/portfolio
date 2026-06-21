@@ -1,4 +1,10 @@
 {
+  "_bucketCaps": {
+    "work": 6,
+    "case-study": 4,
+    "project": 4,
+    "document": 2
+  },
   "cs-support": {
     "label": "Customer Support / CS Operations",
     "description": "For hiring managers and teams looking for customer support, technical support, or support operations expertise.",
@@ -63,6 +69,6 @@
     "include": { "domains": ["technical-writing"] },
     "boost": { "evidence": ["writing-range", "technical-depth", "process-design"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
-    "maxItems": 6
+    "bucketCaps": { "work": 6, "case-study": 4, "project": 4, "document": 6 }
   }
 }
