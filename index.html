@@ -619,6 +619,23 @@
                             <div class="devlog-entry">
                                 <span class="timestamp">2026-06-21</span>
                                 <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Lane results were jumping straight to the first bucket of cards, skipping the blurb entirely. Root cause: <code>scrollBottom()</code> fired after all cards were rendered, sending the viewport past the blurb. Fixed by rendering the blurb and scrolling to it first, then dropping the cards in 320ms later — matching the natural rhythm of the conversation.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Lane results redesigned: flat card list replaced with a framing blurb (Digital Spec sets context before anything shows) followed by items grouped into labelled sections by type — Work, Case Study, Project, Document. Empty buckets are skipped. Denim brand now routes to the lane-specific section anchor via <code>sectionsByLane</code>. Kingdom Hearts path got an expanded synopsis node before the lane.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
                                     <span class="tag tag-done">Done</span>
                                     Expanded the Kingdom Hearts curiosity path. Previously "What's with all the Kingdom Hearts?" dropped straight into the creator-lore lane with no context. Now it routes through a new node that introduces LoreBySpec — what it is, why Spec built it, the podcast, the sub count — before branching: see the tools built for the channel, or just curious. The just-curious branch gets a warm dead-end with a restart or skip option.
                                 </p>
