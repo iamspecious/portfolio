@@ -176,12 +176,11 @@
     }
     currentNodeId = nodeId;
     nodeStack.push(nodeId);
-    appendSpecBubble(node.text);
-    scrollBottom();
+    var bubble = appendSpecBubble(node.text);
+    scrollToElement(bubble);
     // Render options after a short pause so the bubble is readable before choices appear
     setTimeout(function () {
       renderOptions(node.options);
-      scrollBottom();
     }, 320);
   }
 
@@ -190,6 +189,7 @@
     bubble.className = 'fd-bubble fd-bubble-spec';
     bubble.textContent = text;
     document.getElementById('fd-dialogue').appendChild(bubble);
+    return bubble;
   }
 
   function appendUserBubble(text) {
@@ -239,7 +239,7 @@
     }
 
     var first = group.querySelector('button');
-    if (first) first.focus();
+    if (first) first.focus({ preventScroll: true });
   }
 
   // ─── Option dispatch ──────────────────────────────────────────────────
@@ -281,7 +281,7 @@
     var fromNodeId = nodeStack[nodeStack.length - 1];
 
     if (items.length === 0) {
-      appendSpecBubble('Still being curated — but everything\'s here. Have a look around.');
+      var emptyBubble = appendSpecBubble('Still being curated — but everything\'s here. Have a look around.');
       var zone = document.getElementById('fd-interaction');
       zone.innerHTML = '';
       var fb = document.createElement('button');
@@ -290,14 +290,14 @@
       fb.textContent = 'Show me everything';
       fb.addEventListener('click', collapse);
       zone.appendChild(fb);
-      fb.focus();
-      scrollBottom();
+      fb.focus({ preventScroll: true });
+      scrollToElement(emptyBubble);
       return;
     }
 
     var intro = config.laneIntros && config.laneIntros[laneId];
-    appendSpecBubble(intro ? intro.blurb : 'Here\'s what\'s most relevant:');
-    scrollBottom();
+    var introBubble = appendSpecBubble(intro ? intro.blurb : 'Here\'s what\'s most relevant:');
+    scrollToElement(introBubble);
 
     // Render cards after a short pause so the blurb is readable first
     setTimeout(function () {
@@ -359,8 +359,7 @@
 
       zone.appendChild(controls);
 
-      if (firstCard) firstCard.focus();
-      scrollBottom();
+      if (firstCard) firstCard.focus({ preventScroll: true });
     }, 320);
   }
 
@@ -516,9 +515,16 @@
   }
 
   // ─── Scroll ───────────────────────────────────────────────────────────
-  function scrollBottom() {
+  function scrollToElement(el) {
     var scroll = document.getElementById('fd-scroll');
-    if (scroll) requestAnimationFrame(function () { scroll.scrollTop = scroll.scrollHeight; });
+    if (!scroll || !el) return;
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    requestAnimationFrame(function () {
+      var elRect     = el.getBoundingClientRect();
+      var scrollRect = scroll.getBoundingClientRect();
+      var newTop     = scroll.scrollTop + elRect.top - scrollRect.top - 8;
+      scroll.scrollTo({ top: Math.max(0, newTop), behavior: reduced ? 'auto' : 'smooth' });
+    });
   }
 
 })();

@@ -619,6 +619,20 @@
                             <div class="devlog-entry">
                                 <span class="timestamp">2026-06-21</span>
                                 <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Panel was still jumping to the bottom even after the 320ms deferral — <code>scrollBottom()</code> scrolls to <code>scrollHeight</code> regardless of where new content starts. Replaced with <code>scrollToElement(bubble)</code>: calculates the bubble's position relative to the scroll container and sets <code>scrollTop</code> so the bubble lands at the top of the panel. Added <code>preventScroll: true</code> to all <code>focus()</code> calls so keyboard focus doesn't fight the scroll position. Applies to all node transitions and lane results.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 25 older entries</button>
+
+                            <div class="devlog-overflow">
+
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-21</span>
+                                <p>
                                     <span class="tag tag-note">Note</span>
                                     Audited the portfolio copy for AI-generated writing. The recent build added a fair amount of LLM-flavoured prose, so I ran a read-only pass against the voice-and-tone guide and wrote the findings up in <code>AI-PROSE-AUDIT.md</code> — 28 flagged passages across five sections, worst in the front-door lane blurbs and this project's own wins and constraints. The pattern that kept recurring was the balanced "X, not Y" phrasing used as a default rhythm, plus filler words like "genuinely" and "robust" and a few tidy uplift closers. The audit recommends only; it changed no copy.
                                 </p>
@@ -641,9 +655,6 @@
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 22 older entries</button>
-
-                            <div class="devlog-overflow">
 
                             <div class="devlog-entry">
                                 <span class="timestamp">2026-06-21</span>
