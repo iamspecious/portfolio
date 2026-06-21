@@ -8,9 +8,10 @@
     "ops-strategy":      { "blurb": "Good pick — this is Spec at their broadest. They're best in the cross-functional, no-clear-owner problems where the real issue turns out to be structural: systems thinking, alignment without authority, and the discipline to know what not to build." },
     "cs-support":        { "blurb": "This is where Spec cut their teeth, and it runs deep — not just answering tickets well, but building the systems that stop the tickets happening at all." },
     "implementation":    { "blurb": "The hands-on, make-it-work-for-the-customer side — migrations, integrations, and getting a product live in someone else's messy real-world setup." },
-    "people-hr":         { "blurb": "Standing up the people side of a company — hiring across borders, EOR and compliance, and the onboarding scaffolding that holds it all together." },
+    "people-hr":         { "blurb": "Spec holds a CIPD Level 3 in HR Practice — the foundation underneath everything else here. Standing up the people side of a company — hiring across borders, EOR and compliance, and the onboarding scaffolding that holds it all together." },
     "creator-lore":      { "blurb": "Ah, a person of taste. Outside the day job Spec makes long-form Kingdom Hearts analysis — and it's not a hobby bolted on, it's the same pattern-tracing brain pointed at narrative." },
-    "builder-technical": { "blurb": "The wiring, then. Spec builds small, sharp tools and — the part most people skip — documents the decisions as they go. The dev logs are the real artefact." }
+    "builder-technical": { "blurb": "The wiring, then. Spec builds small, sharp tools and — the part most people skip — documents the decisions as they go. The dev logs are the real artefact." },
+    "community-devrel": { "blurb": "Community work shows up across Spec's timeline — from scaling a tech Slack community 250% and founding a jobs board, to developer advocacy and running their own Discord. The throughline is the same: understanding what holds a group together and building the structures that let it grow." }
   },
   "buckets": {
     "work":       { "label": "Where Spec's done this directly",   "frame": "Roles where this was the day-to-day." },
@@ -46,6 +47,7 @@
         { "label": "More customers & support", "lane": "cs-support" },
         { "label": "More building & tooling",  "lane": "builder-technical" },
         { "label": "More people & compliance", "lane": "people-hr" },
+        { "label": "More community / DevRel",  "lane": "community-devrel" },
         { "label": "Just show me everything",  "action": "skip" }
       ]
     },

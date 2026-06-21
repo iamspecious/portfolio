@@ -60,6 +60,15 @@
     "sort": ["evidenceBoost", "dateEnd-desc"],
     "maxItems": 6
   },
+  "community-devrel": {
+    "label": "Community & Developer Relations",
+    "description": "For community management, developer advocacy, and DevRel roles.",
+    "tier": "secondary",
+    "include": { "domains": ["community"] },
+    "boost": { "evidence": ["scaling", "cross-functional-influence", "customer-facing"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6
+  },
   "documentation": {
     "label": "Technical Writing & Documentation",
     "description": "For technical writing, documentation, and content strategy roles.",
