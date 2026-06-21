@@ -293,67 +293,71 @@
 
     var intro = config.laneIntros && config.laneIntros[laneId];
     appendSpecBubble(intro ? intro.blurb : 'Here\'s what\'s most relevant:');
-
-    var zone = document.getElementById('fd-interaction');
-    zone.innerHTML = '';
-
-    var bucketDefs  = config.buckets    || {};
-    var bucketOrder = config.bucketOrder || ['work', 'case-study', 'project', 'document'];
-    var firstCard   = null;
-
-    bucketOrder.forEach(function (bucketType) {
-      var def = bucketDefs[bucketType];
-      if (!def) return;
-
-      var bucketItems = items.filter(function (item) { return item.type === bucketType; });
-      if (bucketItems.length === 0) return;
-
-      var section = document.createElement('div');
-      section.className = 'fd-bucket';
-
-      var heading = document.createElement('h4');
-      heading.className = 'fd-bucket-label';
-      heading.textContent = def.label;
-
-      var frame = document.createElement('p');
-      frame.className = 'fd-bucket-frame';
-      frame.textContent = def.frame;
-
-      section.appendChild(heading);
-      section.appendChild(frame);
-
-      var grid = document.createElement('div');
-      grid.className = 'fd-cards';
-      bucketItems.forEach(function (item) {
-        grid.appendChild(buildCard(item, laneId));
-      });
-      section.appendChild(grid);
-      zone.appendChild(section);
-
-      if (!firstCard) firstCard = grid.querySelector('[tabindex="0"]');
-    });
-
-    var controls = document.createElement('div');
-    controls.className = 'fd-lane-controls';
-
-    var back = document.createElement('button');
-    back.type = 'button';
-    back.className = 'fd-back-btn';
-    back.textContent = '← Back';
-    back.addEventListener('click', function () { goBackToNode(fromNodeId); });
-    controls.appendChild(back);
-
-    var restart = document.createElement('button');
-    restart.type = 'button';
-    restart.className = 'fd-restart-btn';
-    restart.textContent = '↺ Start over';
-    restart.addEventListener('click', restartConversation);
-    controls.appendChild(restart);
-
-    zone.appendChild(controls);
-
-    if (firstCard) firstCard.focus();
     scrollBottom();
+
+    // Render cards after a short pause so the blurb is readable first
+    setTimeout(function () {
+      var zone = document.getElementById('fd-interaction');
+      zone.innerHTML = '';
+
+      var bucketDefs  = config.buckets    || {};
+      var bucketOrder = config.bucketOrder || ['work', 'case-study', 'project', 'document'];
+      var firstCard   = null;
+
+      bucketOrder.forEach(function (bucketType) {
+        var def = bucketDefs[bucketType];
+        if (!def) return;
+
+        var bucketItems = items.filter(function (item) { return item.type === bucketType; });
+        if (bucketItems.length === 0) return;
+
+        var section = document.createElement('div');
+        section.className = 'fd-bucket';
+
+        var heading = document.createElement('h4');
+        heading.className = 'fd-bucket-label';
+        heading.textContent = def.label;
+
+        var frame = document.createElement('p');
+        frame.className = 'fd-bucket-frame';
+        frame.textContent = def.frame;
+
+        section.appendChild(heading);
+        section.appendChild(frame);
+
+        var grid = document.createElement('div');
+        grid.className = 'fd-cards';
+        bucketItems.forEach(function (item) {
+          grid.appendChild(buildCard(item, laneId));
+        });
+        section.appendChild(grid);
+        zone.appendChild(section);
+
+        if (!firstCard) firstCard = grid.querySelector('[tabindex="0"]');
+      });
+
+      var controls = document.createElement('div');
+      controls.className = 'fd-lane-controls';
+
+      var back = document.createElement('button');
+      back.type = 'button';
+      back.className = 'fd-back-btn';
+      back.textContent = '← Back';
+      back.addEventListener('click', function () { goBackToNode(fromNodeId); });
+      controls.appendChild(back);
+
+      var restart = document.createElement('button');
+      restart.type = 'button';
+      restart.className = 'fd-restart-btn';
+      restart.textContent = '↺ Start over';
+      restart.addEventListener('click', restartConversation);
+      controls.appendChild(restart);
+
+      zone.appendChild(controls);
+
+      if (firstCard) firstCard.focus();
+      scrollBottom();
+    }, 320);
   }
 
   function goBackToNode(nodeId) {
