@@ -10,10 +10,11 @@ Operations professional with over a decade across people operations, strategic H
 
 The live site organises projects by category (AI Tools, Writing & Docs, Research, Consulting) with filter buttons in the Projects tab.
 
-### AI Tools
+### AI Tools & Engineering
 
 | Project | What it does | Status |
 |---|---|---|
+| [Digital Spec — Portfolio Front Door](https://iamspecious.github.io/portfolio) | Branching, visual-novel-style visitor guide built as an overlay on the static portfolio — routes visitors by what brought them (hiring, curious, browsing) and curates content via a tagged portfolio index. No AI: every path is pre-programmed. Collapses to a docked tab, never traps anyone | Live |
 | [Error Log Interpreter](https://iamspecious.github.io/portfolio/error-interpreter.html) | Paste a browser console error, build failure, or stack trace — get a plain-English breakdown that separates where the error surfaces from where it actually originated, with concrete steps and error-handling coaching | Live |
 | [Debug Helper](https://iamspecious.github.io/portfolio/debug-helper.html) | Structured debugging coach for three modes: you have an error, code runs but does the wrong thing, or total silence — specifically addresses hidden failure cases like swallowed catch blocks and missing await | Live |
 | [LoreBySpec Creator Tool](https://iamspecious.github.io/portfolio/creator-tool.html) | Two-mode content assistant for the YouTube channel: Video Ideas (paste a topic, get five titled angles with hooks) and Comment Reply (paste a viewer comment, get a drafted reply in a lore-nerd voice) | Live |
@@ -41,6 +42,17 @@ Portfolio samples demonstrating technical writing across different audiences, do
 | Project | What it does | Status |
 |---|---|---|
 | [PregVoice](https://iamspecious.github.io/portfolio/pregvoice.html) | Accessibility project: independent pregnancy test result reading for blind and visually impaired users via on-device ML, audio, and haptics | Research & Planning |
+
+### Case Studies
+
+Four narrative case studies in their own tab — each one shows the actual diagnostic thinking behind a real engagement, not just the outcome.
+
+| Case Study | Context |
+|---|---|
+| Diagnosing a Widget That Failed Four Different Ways | Stamped.io · Technical Support · 2020 |
+| Turning a Gmail Inbox Into an Actual Support System | Spec Solutions · Customer Support Operations |
+| Keeping a €3M Project Aligned Across Borders, Without Authority | Learnovate Centre, Trinity College Dublin · Project Management · 2016–2017 |
+| Rebuilding a Denim Brand, Top to Tail | Customer Experience & Operations · client anonymised |
 
 ### Consulting
 
