@@ -4,6 +4,21 @@
     "email": "work.specious@gmail.com",
     "linkedin": "https://www.linkedin.com/in/speciouscodabishop"
   },
+  "laneIntros": {
+    "ops-strategy":      { "blurb": "Good pick — this is Spec at their broadest. They're best in the cross-functional, no-clear-owner problems where the real issue turns out to be structural: systems thinking, alignment without authority, and the discipline to know what not to build." },
+    "cs-support":        { "blurb": "This is where Spec cut their teeth, and it runs deep — not just answering tickets well, but building the systems that stop the tickets happening at all." },
+    "implementation":    { "blurb": "The hands-on, make-it-work-for-the-customer side — migrations, integrations, and getting a product live in someone else's messy real-world setup." },
+    "people-hr":         { "blurb": "Standing up the people side of a company — hiring across borders, EOR and compliance, and the onboarding scaffolding that holds it all together." },
+    "creator-lore":      { "blurb": "Ah, a person of taste. Outside the day job Spec makes long-form Kingdom Hearts analysis — and it's not a hobby bolted on, it's the same pattern-tracing brain pointed at narrative." },
+    "builder-technical": { "blurb": "The wiring, then. Spec builds small, sharp tools and — the part most people skip — documents the decisions as they go. The dev logs are the real artefact." }
+  },
+  "buckets": {
+    "work":       { "label": "Where Spec's done this directly",   "frame": "Roles where this was the day-to-day." },
+    "case-study": { "label": "The full story, start to finish",   "frame": "Specific problems, diagnosed and solved end to end." },
+    "project":    { "label": "Things Spec has built",             "frame": "Tools and projects, with the decisions behind them." },
+    "document":   { "label": "If you want to see how they write", "frame": "Documentation and writing samples." }
+  },
+  "bucketOrder": ["work", "case-study", "project", "document"],
   "nodes": {
     "opening": {
       "text": "Hi there! Nice to meet you and thanks for visiting today. I'm Digital Spec and I'll be guiding you through the portfolio today should you need the help. So, what brings you here?",
