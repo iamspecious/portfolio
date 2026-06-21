@@ -354,6 +354,33 @@
   line-height: 1.4;
 }
 
+/* ── Lane buckets ── */
+.fd-bucket {
+  margin-bottom: 18px;
+}
+
+.fd-bucket + .fd-bucket {
+  border-top: 1px solid #21262d;
+  padding-top: 14px;
+}
+
+.fd-bucket-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6e40c9;
+  margin: 0 0 3px;
+}
+
+.fd-bucket-frame {
+  font-size: 0.75rem;
+  color: #484f58;
+  font-style: italic;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
 /* ── Restart ── */
 .fd-restart {
   margin-top: 10px;

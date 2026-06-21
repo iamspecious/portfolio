@@ -291,20 +291,51 @@
       return;
     }
 
-    appendSpecBubble('Here\'s what\'s most relevant for ' + lane.label + ':');
+    var intro = config.laneIntros && config.laneIntros[laneId];
+    appendSpecBubble(intro ? intro.blurb : 'Here\'s what\'s most relevant:');
 
     var zone = document.getElementById('fd-interaction');
     zone.innerHTML = '';
 
-    var grid = document.createElement('div');
-    grid.className = 'fd-cards';
-    items.forEach(function (item) {
-      grid.appendChild(buildCard(item, laneId));
+    var bucketDefs  = config.buckets    || {};
+    var bucketOrder = config.bucketOrder || ['work', 'case-study', 'project', 'document'];
+    var firstCard   = null;
+
+    bucketOrder.forEach(function (bucketType) {
+      var def = bucketDefs[bucketType];
+      if (!def) return;
+
+      var bucketItems = items.filter(function (item) { return item.type === bucketType; });
+      if (bucketItems.length === 0) return;
+
+      var section = document.createElement('div');
+      section.className = 'fd-bucket';
+
+      var heading = document.createElement('h4');
+      heading.className = 'fd-bucket-label';
+      heading.textContent = def.label;
+
+      var frame = document.createElement('p');
+      frame.className = 'fd-bucket-frame';
+      frame.textContent = def.frame;
+
+      section.appendChild(heading);
+      section.appendChild(frame);
+
+      var grid = document.createElement('div');
+      grid.className = 'fd-cards';
+      bucketItems.forEach(function (item) {
+        grid.appendChild(buildCard(item, laneId));
+      });
+      section.appendChild(grid);
+      zone.appendChild(section);
+
+      if (!firstCard) firstCard = grid.querySelector('[tabindex="0"]');
     });
-    zone.appendChild(grid);
 
     var controls = document.createElement('div');
     controls.className = 'fd-lane-controls';
+
     var back = document.createElement('button');
     back.type = 'button';
     back.className = 'fd-back-btn';
@@ -321,7 +352,6 @@
 
     zone.appendChild(controls);
 
-    var firstCard = grid.querySelector('[tabindex="0"]');
     if (firstCard) firstCard.focus();
     scrollBottom();
   }
@@ -341,7 +371,7 @@
       'document':   'Document'
     };
 
-    var routing = getRouting(item);
+    var routing = getRouting(item, laneId);
     var card = document.createElement('div');
     card.className = 'fd-card';
 
@@ -422,9 +452,15 @@
   }
 
   // ─── Routing ──────────────────────────────────────────────────────────
-  function getRouting(item) {
+  function getRouting(item, laneId) {
     var anchor = item.anchor;
     if (!anchor) return null;
+
+    // Route to lane-specific section when sectionsByLane data exists
+    if (laneId && item.sectionsByLane && item.sectionsByLane[laneId]) {
+      var sections = item.sectionsByLane[laneId];
+      if (sections.length > 0) anchor = anchor + '-s' + sections[0];
+    }
 
     if (anchor.charAt(0) !== '#') {
       var pa = item.pageAnchor;
