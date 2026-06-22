@@ -24,7 +24,7 @@
     "opening": {
       "text": "Hi there! Nice to meet you and thanks for visiting today. I'm Digital Spec and I'll be guiding you through the portfolio today should you need the help. So, what brings you here?",
       "options": [
-        { "label": "I'm hiring",                        "target": "hiring" },
+        { "label": "I'm hiring! Show me what Spec can do",                        "target": "hiring" },
         { "label": "I'm curious about Spec",            "target": "curious" },
         { "label": "I'm just being nosy",               "target": "nosy" },
         { "label": "No time — just show me everything", "action": "skip" }
