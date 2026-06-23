@@ -987,6 +987,144 @@
                     </div><!-- /project -->
                     </div><!-- /project-block: Role Fit Watcher -->
 
+                    <div class="project-block" data-category="operations">
+
+                    <!-- ====================================================
+                         ROLE-FIT EVALUATOR — APPLICATION DECISION MATRIX
+                         index tags: strategy, career, decision-matrix, ai-assisted, internal-tool
+                    ===================================================== -->
+                    <div class="project" id="proj-role-fit-evaluator">
+                        <h3>Role-Fit Evaluator — Application Decision Matrix <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Internal Tool</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>A decision system for one question: when a role catches my eye but didn't surface through the job-matching tool, is it worth the hours of curating a CV for it? It scores any job description against a fixed profile across seven weighted dimensions, sitting behind a dealbreaker gate that can veto a high score outright. The output is a verdict — Strong, Stretch, Weak, or No-go — with the transferable bridges to lead with, the real gaps, and an effort estimate for the CV. Built as a five-tab spreadsheet engine plus a profile baseline and a runbook, so the same job is judged the same way every time.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Gate before score</span>
+                                <p>The dealbreaker check runs first. Work authorisation, location, salary floor, seniority: any fail caps the result at No-go however well the role scores. Eligibility is a precondition, handled as a gate rather than a weighted factor a strong average could dilute.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Honesty by construction</span>
+                                <p>The verdict logic cannot return a yes when a mandatory requirement is missing. A must-have score of zero caps the verdict at Weak even at an 85% match, so a strong transferable case never papers over a hard screen-out.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Seven weighted dimensions</strong> — must-have coverage, core overlap, transferable bridge, domain fit, seniority, motivation, portfolio evidence — each weighted and scored 0–3 against published anchors, so the same role scored twice lands in the same place.</li>
+                                <li><strong>Dealbreaker gate with override</strong> — eligibility is checked before any scoring and overrides the band. A 90% role I can't legally take still reads No-go.</li>
+                                <li><strong>The transferable bridge is earned</strong> — that dimension only scores high when the link between an adjacent strength and a job requirement can be stated in one sentence. A vague "it's all transferable" scores 0–1.</li>
+                                <li><strong>Profile as single source</strong> — skills, tools, domains, and a project-to-evidence map live in one baseline file every assessment reads from, so results stay consistent as roles vary.</li>
+                                <li><strong>Running tracker</strong> — each assessed role logs to a tracker tab with score, verdict, and outcome, so patterns across applications surface over time.</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Inputs are self-reported</strong> — the dealbreakers (salary floor, work authorisation, seniority range) are filled by hand. The gate is only as honest as those entries.</li>
+                                <li><strong>Scoring needs a reader</strong> — a human, or Claude, still reads the posting and assigns the 0–3 scores. The engine calculates and enforces the logic; it does not parse the job description on its own.</li>
+                                <li><strong>The profile drifts</strong> — as skills grow, the baseline has to be updated by hand or assessments lag behind reality.</li>
+                                <li><strong>Not hosted</strong> — an internal toolkit (a spreadsheet and two documents), run in conversation, rather than a public web tool.</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Auto-scoring pass</strong> — hand the posting and the profile to Claude and have it propose the seven scores with a one-line justification each, leaving me to adjust rather than score from a blank sheet.</li>
+                                <li><strong>JD parsing</strong> — separate must-haves from preferred-haves out of a pasted posting automatically, so the must-have gate is populated rather than read by eye.</li>
+                                <li><strong>CV-tailoring handoff</strong> — on a Strong or Stretch verdict, generate the tailored summary and the gap-framing line straight from the matched strengths and bridges.</li>
+                                <li><strong>Weight tuning from outcomes</strong> — once the tracker holds enough logged results, revisit the dimension weights against which applications actually converted.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">Excel / openpyxl</span>
+                            <span class="tech-tag">Weighted scoring matrix</span>
+                            <span class="tech-tag">Dealbreaker gate</span>
+                            <span class="tech-tag">Profile-driven</span>
+                            <span class="tech-tag">AI-assisted scoring</span>
+                            <span class="tech-tag">Internal tool</span>
+                        </p>
+                        <p style="font-size: 0.78rem; color: #999; margin: 14px 0 0;"><em>Internal toolkit — not hosted. Spreadsheet engine + profile baseline + runbook.</em></p>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-24 — live test against a real CSE posting</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Live test against a real Customer Success Engineer posting. Scored 88.7% → Strong. Must-have coverage and seniority both came in at 2, not 3 — the missing formal CSM/TAM title and the lack of in-production tenure pulled them down — which is the signal that the matrix discriminates rather than rubber-stamping a target-company role.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 6 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-24 — kept must-have=0 as a hard cap</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Decision: kept the must-have=0 rule as a hard cap rather than a heavy weight. A weight alone let a strong transferable case float a screen-out role up into Stretch, which misrepresents how an ATS reads it. The cap holds the verdict at Weak regardless of the rest of the score.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — verdict logic tested across eight scenarios</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Verdict logic tested across eight scenarios — gate fail, must-have=0 at high fit, and each band boundary at 0.72 / 0.55 / 0.40. The first pass treated must-have=0 like any other low score and let an 85% role read Strong. Rewrote the verdict formula with two overrides (gate fail → No-go, must-have=0 → capped at Weak) and re-ran: all eight resolved correctly.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — built the five-tab engine</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Built the five-tab engine — Scorecard, Tracker, Profile, Rubric, and the gate. The weighted total recalculates clean with zero formula errors. Input cells are colour-coded so the ones to change on each run are obvious.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — chose a weighted scorecard with a gate</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Chose a weighted scorecard with a dealbreaker gate over a flat yes/no or a single relevance percentage. The established approach for "is this worth applying to" is a decision matrix with anchored scoring; the separate gate carries eligibility, which a weighted average would otherwise wash out.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — built the profile baseline from the README</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Built the profile baseline from the portfolio repo README — skills, tools, domains, and a project-to-evidence map. Left salary, work authorisation, and seniority as confirm-me placeholders, since those drive the gate and only I can fill them honestly.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — couldn't delete the scratch build files</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Couldn't delete the scratch build and test files from the working folder — sandbox permissions blocked the removal. Minor: they sit outside the three deliverables and don't affect the toolkit.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Role-Fit Evaluator -->
+
                     <div class="project-block" data-category="ai-tools">
 
                     <!-- ====================================================

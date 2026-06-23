@@ -798,5 +798,25 @@
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "New tools added to vocabulary: scheduled-agent, ats-api, web-fetch, grep-parsing. Status 'live' but private — no public demo; runs as a personal daily automation, documented on the card. Domains ai-engineering + operations per the brief's filter tags (AI Tools, Engineering, Operations); people-hr deliberately NOT applied despite the job-search/EOR subject, honouring the people-hr<->ai-engineering anti-rule (TAXONOMY section 3)."
+  },
+  {
+    "id": "role-fit-evaluator",
+    "schemaVersion": 1,
+    "type": "project",
+    "title": "Role-Fit Evaluator — Application Decision Matrix",
+    "dateStart": "2026-06",
+    "dateEnd": "present",
+    "status": "complete",
+    "domains": ["operations", "strategy"],
+    "evidence": ["process-design", "judgment-restraint", "diagnostic-reasoning", "build-in-public"],
+    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
+    "tools": ["excel-openpyxl", "weighted-scoring-matrix", "dealbreaker-gate", "ai-assisted-scoring", "prompt-engineering"],
+    "summary": "A decision matrix for whether a role is worth the hours of curating a CV: scores any job description against a fixed profile across seven weighted dimensions, behind a dealbreaker gate that vetoes a high score outright, and returns a verdict (Strong / Stretch / Weak / No-go) with the transferable bridges to lead with, the real gaps, and a CV-effort estimate. Built as a five-tab spreadsheet engine plus a profile baseline and a runbook.",
+    "anchor": "#proj-role-fit-evaluator",
+    "relatedIds": ["role-fit-watcher"],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Internal tool, not hosted — badge reads 'Internal Tool' on the card; status mapped to 'complete' since the vocabulary has no internal-tool value. Supplementary index tags from the brief (strategy, career, decision-matrix, ai-assisted, internal-tool): strategy applied as a domain; decision-matrix + ai-assisted-scoring as tools; career + internal-tool captured here and in an HTML comment on the card (no free-tag field in the schema). New tools added to vocabulary: excel-openpyxl, weighted-scoring-matrix, dealbreaker-gate, ai-assisted-scoring. Primary lane operations per the brief; sibling of role-fit-watcher."
   }
 ]
