@@ -24,6 +24,7 @@ The live site organises projects by category (AI Tools, Writing & Docs, Research
 | [Support Ticket Triage Tool](https://iamspecious.github.io/portfolio/support-triage.html) | Paste a customer message or error log, get a category, colour-coded urgency level, and a ready-to-send draft reply | Live |
 | [KH Lore Consistency Checker](https://iamspecious.github.io/portfolio/lore-checker.html) | AI theory stress-tester for Kingdom Hearts canon — paste a theory, supply wiki links, get structured contradictions, weaknesses, and a verdict | In Progress |
 | [Date Proposal Website](https://iamspecious.github.io/portfolio/date-proposal/) | Recreation and technical deconstruction of a viral date-proposal website — running No button, progressive preference questions, live restaurant/event/cinema discovery via three APIs, and a downloadable calendar invite | In Progress |
+| Role Fit Watcher | Scheduled morning agent that pulls ~24 companies' public ATS feeds (Ashby, Greenhouse, Workable, Teamtailor), filters every posting on company/role/location gates, judges the survivors against a written fit matrix, dedups against a state file, and posts a reasoned digest of only the new, remote-from-Germany roles worth acting on. No scraping, no backend | Live (private) |
 
 ### Writing & Docs
 
