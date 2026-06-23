@@ -134,8 +134,12 @@ Items surfaced per lane (domain match, before evidence boost):
 | `ats-api` | `role-fit-watcher` |
 | `web-fetch` | `role-fit-watcher` |
 | `grep-parsing` | `role-fit-watcher` |
+| `excel-openpyxl` | `role-fit-evaluator` |
+| `weighted-scoring-matrix` | `role-fit-evaluator` |
+| `dealbreaker-gate` | `role-fit-evaluator` |
+| `ai-assisted-scoring` | `role-fit-evaluator` |
 
-All nine are now listed in TAXONOMY.md §6.
+All are now listed in TAXONOMY.md §6.
 
 ---
 
