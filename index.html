@@ -846,6 +846,147 @@
                     </div><!-- /project -->
                     </div><!-- /project-block: Digital Spec Front Door -->
 
+                    <div class="project-block" data-category="ai-tools engineering operations">
+
+                    <!-- ====================================================
+                         ROLE FIT WATCHER
+                    ===================================================== -->
+                    <div class="project" id="proj-role-fit-watcher">
+                        <h3>Role Fit Watcher <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live (private)</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>A scheduled agent that checks ~24 companies' job boards every morning and tells me only the roles worth my time: at a company I've already vetted, a fit against my own role criteria, and remote-eligible from Germany. It started as a tracker spreadsheet I was checking by hand and turning into a daily chore. The build replaced the chore.</p>
+                        <p style="margin-top: 10px;">Each morning at 09:00 CET it pulls each company's hiring feed straight from the source (Ashby, Greenhouse, Workable, Teamtailor), filters every open posting on three gates — company, role, location — judges the survivors against my fit matrix, drops anything I've already seen, and posts a short digest. The point of difference is that the morning run applies judgment, so a posting isn't matched on keywords alone — it's read against criteria like "clean handoff", "no sales pressure", and "async load", and tagged accordingly.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Read the source, don't scrape</span>
+                                <p>Every company feed is a public ATS endpoint that returns structured JSON or a readable careers page. No screen-scraping, no aggregator. The data is the same data the company publishes, which means titles, locations and salary come through clean and the tool doesn't break when a page restyles.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Judgment at the edge, not keyword match</span>
+                                <p>The deterministic half (fetch, filter, dedup) is cheap and runs first. The judgment half — does this role actually fit, and is it ✅ or 🟡 — is done by the model against a written matrix. A title like "Customer Success Manager" passes the keyword gate but gets tagged 🟡 with the reason stated: post-sale CS can carry revenue pressure. The reasoning is part of the output, not hidden.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Three-gate filter</strong> — Every posting clears company (green/yellow only, never a ruled-out red), role (matched to my fit matrix), and location (must be reachable remote from Germany) before it reaches me. Most postings die at the location gate, which is the point.</li>
+                                <li><strong>Reasoned fit tags</strong> — Each surfaced role is tagged ✅ Strong or 🟡 Interesting, and the 🟡 ones state why they're 🟡 and not ✅ — which specific criterion is partial or at-risk. That's the difference between a list and a recommendation.</li>
+                                <li><strong>Only shows what's new</strong> — A state file remembers every role already reported, so the digest is changes-since-yesterday, not the same roles re-listed daily.</li>
+                                <li><strong>Catches stale tracker data</strong> — On the first run it surfaced a Germany-based Implementation role at Remote that my hand-kept tracker had missed, and showed that two roles the tracker still listed at another company were already gone. Live source beats a spreadsheet last touched in May.</li>
+                                <li><strong>Honest coverage</strong> — Companies without a clean public feed aren't silently dropped. They appear in a "manual check" list with a link, so I know exactly what the automation does and doesn't cover.</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Not every company has a feed</strong> — ~24 of the watchlist run on a queryable ATS. The rest (Comeet, custom careers pages, JavaScript-only boards) can't be polled cleanly and stay on the manual-check list. Coverage is good, not total, and the tool says so.</li>
+                                <li><strong>"Remote" lies</strong> — Job posts routinely say "Remote" and mean "Remote, US". The location filter is deliberately strict: anything that doesn't explicitly allow Germany/EU/EMEA gets held in a "verify" bucket rather than waved through. That occasionally parks a real role for a manual glance — the trade chosen on purpose to keep false positives down.</li>
+                                <li><strong>Runs while the app is open</strong> — It's a scheduled agent inside Claude/Cowork, not a hosted service. If the app is closed at 09:00 it runs on next launch. Fine for a personal tool; a server cron would remove the dependency.</li>
+                                <li><strong>Judgment costs a run</strong> — The fit reasoning is done by the model each morning, which is what makes it accurate but also means the quality of a tag is the quality of that run's read, not a fixed rule.</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Browser-rendered boards</strong> — Add Claude-in-Chrome for the JavaScript-only and login-gated boards (Workable apply pages, HiBob's Comeet) so the manual-check list shrinks toward zero.</li>
+                                <li><strong>Salary + seniority gating</strong> — Several feeds expose compensation and a seniority signal already. Add a floor and an "entry/mid only" hard filter so over-senior roles never reach the digest.</li>
+                                <li><strong>Apply-state writeback</strong> — Push "applied / rejected / interviewing" back into the tracker from the digest, so the watcher and the outreach log stay one system instead of two.</li>
+                                <li><strong>Self-healing tokens</strong> — When a feed goes empty for N days, auto-recheck the company's careers page for a moved ATS, rather than quietly monitoring a dead endpoint.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">Scheduled agent (Claude / Cowork)</span>
+                            <span class="tech-tag">Public ATS APIs — Ashby · Greenhouse · Workable · Teamtailor</span>
+                            <span class="tech-tag">web_fetch + Grep parsing</span>
+                            <span class="tech-tag">Markdown / CSV / JSON state</span>
+                            <span class="tech-tag">No backend</span>
+                            <span class="tech-tag">No scraping</span>
+                        </p>
+                        <p style="font-size: 0.78rem; color: #999; margin: 14px 0 0;"><em>No public demo — runs as a private daily automation. Build files, config, and this devlog available on request.</em></p>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-23 — expanded to the yellow tier</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Added the full yellow watchlist. Probed ATS tokens in batches: 13 confirmed on Greenhouse (Mercury, GitLab, Datadog, Cloudflare, Dropbox, Airtable, Discord, Figma, Intercom, Wikimedia, HubSpot, Bitwarden, Customer.io) plus Tyk on Workable. Ten more (GitHub, Atlassian, 1Password, Headspace, Circle, Basecamp, DuckDuckGo, Whereby, Cronofy, Spotted Zebra) have no clean public feed and went to the manual list. Scanning the new feeds, the filter immediately did its job: the yellow boards are mostly US-remote, engineering, and sales — all correctly dropped — but it caught one real fit, Bitwarden's Customer Success Specialist (EMEA), tagged 🟡 for reactive-volume risk. Logged so it won't repeat.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06-23 — added fit reasoning to the output</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Every role now carries a one-line reason, and 🟡 tags must say why they're 🟡 and not ✅. This was a deliberate move away from a bare match list. The morning run pulls the relevant matrix note when it helps explain the call.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — first live test run</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Ran the whole procedure end to end against today's feeds. Result was more current than my own tracker: Ashby's IC/IS roles weren't in the live feed (the tracker still listed them), and Remote surfaced a Germany-based Payroll Implementation Country Lead plus an EMEA Implementation Specialist — both ✅. Confirmed dedup works: the three roles already reported were skipped on the second pass.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — resolved the ATS tokens</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Mapped each company to its hiring platform. Blind Greenhouse token guesses mostly failed; the pattern is that modern remote-first startups sit on Ashby (Deel, Zapier, n8n, Oyster, Improbable, Help Scout all resolved there). Used web search to identify the non-Ashby ones: Tyk and Adaptavist on Workable, Puzzel on Teamtailor, HiBob on Comeet, Peak PEO on no ATS at all (≈18 people).
+                                    </p>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Workable fought back. Its public API timed out repeatedly through the fetch tool, and its apply page is JavaScript-rendered, so a plain fetch returns an empty shell. Decision: try the Workable API once, and on timeout fall the company through to manual-check rather than hang the run. Teamtailor, by contrast, renders its careers page as clean readable text — Puzzel reads fine with no API needed.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — the parsing problem, and the fix</span>
+                                    <p>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Two constraints nearly sank the approach. First, the sandbox has no outbound network, so the obvious "write a Python script that curls the feeds" doesn't run there. Second, the fetch tool overflows large feed responses to a file instead of returning them inline, and those files are single JSON lines too long to read normally. Fix: parse the saved file with Grep (<code>-o</code>), which handles arbitrarily long lines and pulls title / location / jobUrl straight out. That turned a blocker into the standard parse path — fetch overflows to a file, Grep extracts the fields, the run filters from there.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — feasibility proven</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Confirmed the core question before building anything: can I get clean machine-readable role data from these specific companies? Yes. Ashby (<code>/posting-api/job-board/&lt;token&gt;</code>) and Greenhouse (<code>/v1/boards/&lt;token&gt;/jobs</code>) both return structured JSON with exactly the fields the filter needs — including locations like "Remote - European Union", which is what the Germany gate keys on. Empty responses correctly mean "no open roles" (matched a tracker note that said as much). No scraping required.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — started from the spreadsheet</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Began with my existing Role Matrix (fit criteria per role type) and Company Tracker (green/yellow/red, with culture and remote-policy notes already done by hand). The watcher is built to sit on top of that work, not replace it: the matrix defines what a fit is, the tracker defines which companies count, and the agent does the daily checking I was doing manually.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Role Fit Watcher -->
+
                     <div class="project-block" data-category="ai-tools">
 
                     <!-- ====================================================

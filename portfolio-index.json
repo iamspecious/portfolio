@@ -778,5 +778,25 @@
       "builder-technical": "The portfolio's own front door — a tag-driven guide built as an overlay, no AI, fully documented."
     },
     "notes": ""
+  },
+  {
+    "id": "role-fit-watcher",
+    "schemaVersion": 1,
+    "type": "project",
+    "title": "Role Fit Watcher",
+    "dateStart": "2026-06",
+    "dateEnd": "present",
+    "status": "live",
+    "domains": ["ai-engineering", "operations"],
+    "evidence": ["technical-depth", "build-in-public", "judgment-restraint", "diagnostic-reasoning"],
+    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
+    "tools": ["scheduled-agent", "ats-api", "web-fetch", "grep-parsing", "prompt-engineering"],
+    "summary": "A scheduled morning agent that pulls ~24 companies' public ATS feeds (Ashby, Greenhouse, Workable, Teamtailor), filters every posting on company/role/location gates, judges the survivors against a written fit matrix, dedups against a state file, and posts a reasoned digest of only the new, remote-from-Germany roles worth acting on.",
+    "anchor": "#proj-role-fit-watcher",
+    "relatedIds": [],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "New tools added to vocabulary: scheduled-agent, ats-api, web-fetch, grep-parsing. Status 'live' but private — no public demo; runs as a personal daily automation, documented on the card. Domains ai-engineering + operations per the brief's filter tags (AI Tools, Engineering, Operations); people-hr deliberately NOT applied despite the job-search/EOR subject, honouring the people-hr<->ai-engineering anti-rule (TAXONOMY section 3)."
   }
 ]
