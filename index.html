@@ -919,44 +919,64 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06-24 — feeds unreachable: web_fetch provenance + no sandbox network</span>
+                                <span class="timestamp">2026-06-24 — run failed: feeds unreachable, 0 roles</span>
                                 <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    0 roles gathered — but this was a tooling block, not an empty market. State advanced (<code>last_run</code> → 2026-06-24); nothing written to <code>Seen.json</code> or <code>Matches Log.csv</code>. The day is logged as "unknown", not "nothing out there".
-                                </p>
-                                <p>
-                                    Root cause: three independent paths to live role data were each closed for a different reason. <code>web_fetch</code> enforces a provenance allowlist — it only retrieves a URL that has already appeared in a message or a prior fetch result, so the watcher can't introduce its own feed URLs from <code>Config.md</code> (the exact thing a poller must do). The sandbox shell can't compensate: no outbound network by design (even <code>example.com</code> returned HTTP 000). And the hosted Ashby boards can't compensate either — they're JavaScript shells and <code>web_fetch</code> doesn't execute JS, so only the raw JSON API carries the data, and that's the blocked path. Proof the data is reachable in principle: once a Greenhouse URL happened to be in the provenance set, <code>web_fetch</code> returned the full live JSON. The API and parser are fine; the only gap is getting our own URLs admitted.
-                                </p>
-                                <p>
-                                    Search snippets were deliberately <em>not</em> used as a fallback. The governing rule is "a missed role is cheaper than a wrong one" — cached snippets are stale and partial (they surfaced Ashby <em>Americas</em> roles the location filter would drop anyway) and risk false positives and re-reporting closed roles. Skipping them was a choice, not an oversight.
-                                </p>
-                                <p>
-                                    Fix path, easiest first: (1) grant the sandbox shell network access to the ATS hosts so the watcher <code>curl</code>s the JSON directly — most robust, bypasses both blockers; (2) a per-domain provenance allowlist for <code>web_fetch</code>; (3) a dedicated Ashby/Greenhouse jobs connector — cleanest long-term, structured output; (4) a headless render only for the JS-only boards if still needed. Recommendation: #1 now to restore coverage, #3 as the durable solution.
-                                </p>
-                                <p>
-                                    Prevention, going in: a pre-flight canary feed at run start — if a known-good feed fails, abort and post a "feeds unreachable" digest instead of a silent "nothing new"; treat only HTTP 200 + parsed JSON as "checked" so a fetch error never advances a feed's seen-state; add a per-feed <code>last_success</code> to <code>Seen.json</code> and surface anything not polled in N days under "manual check needed"; and stop trusting <code>last_run</code> as proof of coverage.
+                                    <span class="tag tag-issue">Failure</span>
+                                    The morning run gathered 0 roles — a tooling block, not an empty market, so the day is logged as "unknown", not "nothing out there". A guardrail held: <code>last_run</code> advanced but nothing was written to <code>Seen.json</code> or <code>Matches Log.csv</code>, so a failed fetch was never recorded as a clean empty result.
                                 </p>
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06-23 — expanded to the yellow tier</span>
+                                <span class="timestamp">2026-06-24 — constraint: no unattended path from config to the feeds</span>
                                 <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Added the full yellow watchlist. Probed ATS tokens in batches: 13 confirmed on Greenhouse (Mercury, GitLab, Datadog, Cloudflare, Dropbox, Airtable, Discord, Figma, Intercom, Wikimedia, HubSpot, Bitwarden, Customer.io) plus Tyk on Workable. Ten more (GitHub, Atlassian, 1Password, Headspace, Circle, Basecamp, DuckDuckGo, Whereby, Cronofy, Spotted Zebra) have no clean public feed and went to the manual list. Scanning the new feeds, the filter immediately did its job: the yellow boards are mostly US-remote, engineering, and sales — all correctly dropped — but it caught one real fit, Bitwarden's Customer Success Specialist (EMEA), tagged 🟡 for reactive-volume risk. Logged so it won't repeat.
+                                    <span class="tag tag-issue">Constraint</span>
+                                    This is structural, not a flaky feed. Three independent paths to live role data are each closed for a different reason. <code>web_fetch</code> enforces a provenance allowlist — it only retrieves a URL that has already appeared in a message or a prior fetch result, so the agent can't introduce its own feed URLs from <code>Config.md</code> (the one thing a poller must do). The sandbox shell can't compensate: no outbound network by design (even <code>example.com</code> returned HTTP 000). The hosted ATS boards can't compensate either — they're JavaScript shells and <code>web_fetch</code> doesn't execute JS, so only the raw JSON API carries the data, and that's the blocked path. The watcher's own logic is fine: once a Greenhouse URL happened to be in the provenance set, <code>web_fetch</code> returned full live JSON and the parser handled it. The gap is structural — getting our own URLs admitted — which is why it disables the core premise rather than dropping one company.
                                 </p>
                             </div>
 
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-06-23 — added fit reasoning to the output</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Every role now carries a one-line reason, and 🟡 tags must say why they're 🟡 and not ✅. This was a deliberate move away from a bare match list. The morning run pulls the relevant matrix note when it helps explain the call.
-                                </p>
-                            </div>
-
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 12 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-24 — decision: no search-snippet fallback</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Search snippets were deliberately <em>not</em> used to fill the gap. The governing rule is "a missed role is cheaper than a wrong one" — cached snippets are stale and partial (they surfaced Ashby <em>Americas</em> roles the location filter would drop anyway) and risk false positives and re-reporting closed roles. Skipping them was a choice, not an oversight.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-24 — fix path chosen (not yet applied)</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Ranked, easiest first: (1) grant the sandbox shell network access to the ATS hosts so the watcher <code>curl</code>s the JSON directly — most robust, bypasses both blockers; (2) a per-domain provenance allowlist for <code>web_fetch</code>; (3) a dedicated Ashby/Greenhouse jobs connector — cleanest long-term, structured output; (4) a headless render for the JS-only boards, only if still needed. Plan: do #1 now to restore coverage, build toward #3 as the durable solution. Tagged a decision, not a fix — none of this is applied yet.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-24 — decision: guardrails so a blocked run fails loudly</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Going in: a pre-flight canary feed at run start — if a known-good feed fails, abort and post a "feeds unreachable" digest instead of a silent "nothing new"; count only HTTP 200 + parsed JSON as "checked" so a fetch error never advances a feed's seen-state; add a per-feed <code>last_success</code> to <code>Seen.json</code> and surface anything not polled in N days under "manual check needed"; and stop trusting <code>last_run</code> as proof of coverage.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — expanded to the yellow tier</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Added the full yellow watchlist. Probed ATS tokens in batches: 13 confirmed on Greenhouse (Mercury, GitLab, Datadog, Cloudflare, Dropbox, Airtable, Discord, Figma, Intercom, Wikimedia, HubSpot, Bitwarden, Customer.io) plus Tyk on Workable. Ten more (GitHub, Atlassian, 1Password, Headspace, Circle, Basecamp, DuckDuckGo, Whereby, Cronofy, Spotted Zebra) have no clean public feed and went to the manual list. Scanning the new feeds, the filter immediately did its job: the yellow boards are mostly US-remote, engineering, and sales — all correctly dropped — but it caught one real fit, Bitwarden's Customer Success Specialist (EMEA), tagged 🟡 for reactive-volume risk. Logged so it won't repeat.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — added fit reasoning to the output</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Every role now carries a one-line reason, and 🟡 tags must say why they're 🟡 and not ✅. This was a deliberate move away from a bare match list. The morning run pulls the relevant matrix note when it helps explain the call.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-06-23 — first live test run</span>
@@ -972,17 +992,33 @@
                                         <span class="tag tag-done">Done</span>
                                         Mapped each company to its hiring platform. Blind Greenhouse token guesses mostly failed; the pattern is that modern remote-first startups sit on Ashby (Deel, Zapier, n8n, Oyster, Improbable, Help Scout all resolved there). Used web search to identify the non-Ashby ones: Tyk and Adaptavist on Workable, Puzzel on Teamtailor, HiBob on Comeet, Peak PEO on no ATS at all (≈18 people).
                                     </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — Workable fought back</span>
                                     <p>
                                         <span class="tag tag-issue">Issue</span>
-                                        Workable fought back. Its public API timed out repeatedly through the fetch tool, and its apply page is JavaScript-rendered, so a plain fetch returns an empty shell. Decision: try the Workable API once, and on timeout fall the company through to manual-check rather than hang the run. Teamtailor, by contrast, renders its careers page as clean readable text — Puzzel reads fine with no API needed.
+                                        Workable's public API timed out repeatedly through the fetch tool, and its apply page is JavaScript-rendered, so a plain fetch returns an empty shell. Teamtailor, by contrast, renders its careers page as clean readable text — Puzzel reads fine with no API needed.
+                                    </p>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Try the Workable API once, and on timeout fall the company through to manual-check rather than hang the run. One slow ATS shouldn't stall the whole morning.
                                     </p>
                                 </div>
 
                                 <div class="devlog-entry">
-                                    <span class="timestamp">2026-06-23 — the parsing problem, and the fix</span>
+                                    <span class="timestamp">2026-06-23 — the parsing problem</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Two constraints nearly sank the approach. First, the sandbox has no outbound network, so the obvious "write a Python script that curls the feeds" doesn't run there. Second, the fetch tool overflows large feed responses to a file instead of returning them inline, and those files are single JSON lines too long to read normally.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-23 — the parsing fix</span>
                                     <p>
                                         <span class="tag tag-done">Fixed</span>
-                                        Two constraints nearly sank the approach. First, the sandbox has no outbound network, so the obvious "write a Python script that curls the feeds" doesn't run there. Second, the fetch tool overflows large feed responses to a file instead of returning them inline, and those files are single JSON lines too long to read normally. Fix: parse the saved file with Grep (<code>-o</code>), which handles arbitrarily long lines and pulls title / location / jobUrl straight out. That turned a blocker into the standard parse path — fetch overflows to a file, Grep extracts the fields, the run filters from there.
+                                        Parse the saved overflow file with Grep (<code>-o</code>), which handles arbitrarily long lines and pulls title / location / jobUrl straight out. That turned a blocker into the standard parse path — fetch overflows to a file, Grep extracts the fields, the run filters from there.
                                     </p>
                                 </div>
 
