@@ -918,6 +918,26 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-06-24 — feeds unreachable: web_fetch provenance + no sandbox network</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    0 roles gathered — but this was a tooling block, not an empty market. State advanced (<code>last_run</code> → 2026-06-24); nothing written to <code>Seen.json</code> or <code>Matches Log.csv</code>. The day is logged as "unknown", not "nothing out there".
+                                </p>
+                                <p>
+                                    Root cause: three independent paths to live role data were each closed for a different reason. <code>web_fetch</code> enforces a provenance allowlist — it only retrieves a URL that has already appeared in a message or a prior fetch result, so the watcher can't introduce its own feed URLs from <code>Config.md</code> (the exact thing a poller must do). The sandbox shell can't compensate: no outbound network by design (even <code>example.com</code> returned HTTP 000). And the hosted Ashby boards can't compensate either — they're JavaScript shells and <code>web_fetch</code> doesn't execute JS, so only the raw JSON API carries the data, and that's the blocked path. Proof the data is reachable in principle: once a Greenhouse URL happened to be in the provenance set, <code>web_fetch</code> returned the full live JSON. The API and parser are fine; the only gap is getting our own URLs admitted.
+                                </p>
+                                <p>
+                                    Search snippets were deliberately <em>not</em> used as a fallback. The governing rule is "a missed role is cheaper than a wrong one" — cached snippets are stale and partial (they surfaced Ashby <em>Americas</em> roles the location filter would drop anyway) and risk false positives and re-reporting closed roles. Skipping them was a choice, not an oversight.
+                                </p>
+                                <p>
+                                    Fix path, easiest first: (1) grant the sandbox shell network access to the ATS hosts so the watcher <code>curl</code>s the JSON directly — most robust, bypasses both blockers; (2) a per-domain provenance allowlist for <code>web_fetch</code>; (3) a dedicated Ashby/Greenhouse jobs connector — cleanest long-term, structured output; (4) a headless render only for the JS-only boards if still needed. Recommendation: #1 now to restore coverage, #3 as the durable solution.
+                                </p>
+                                <p>
+                                    Prevention, going in: a pre-flight canary feed at run start — if a known-good feed fails, abort and post a "feeds unreachable" digest instead of a silent "nothing new"; treat only HTTP 200 + parsed JSON as "checked" so a fetch error never advances a feed's seen-state; add a per-feed <code>last_success</code> to <code>Seen.json</code> and surface anything not polled in N days under "manual check needed"; and stop trusting <code>last_run</code> as proof of coverage.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-06-23 — expanded to the yellow tier</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>
