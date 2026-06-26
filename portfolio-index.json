@@ -66,7 +66,9 @@
       "lorebyspec-creator-tool"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "creator-lore"
+    ],
     "lensByAudience": {},
     "notes": ""
   },
@@ -195,7 +197,9 @@
     "anchor": "#work-can-i-play-that-editor",
     "relatedIds": [],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "creator-lore"
+    ],
     "lensByAudience": {},
     "notes": ""
   },
@@ -926,7 +930,9 @@
       "spec-solutions-fractional-cos"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "creator-lore"
+    ],
     "lensByAudience": {},
     "notes": "Retyped from 'project' to 'case-study' per Decision 1: consulting narrative output, not a built artifact."
   },
@@ -1098,7 +1104,9 @@
       "spec-solutions-fractional-cos"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "creator-lore"
+    ],
     "lensByAudience": {
       "cs-support": "Cut inbound at the source by fixing the cause, not the queue.",
       "implementation": "Redesigned a customer-facing platform and built a deflection tool that changed how the system behaved.",
