@@ -108,7 +108,7 @@ Audience lanes are defined as **queries over those facets** in `lanes.json`. A l
 ## 6. Facet: `tools` (controlled; log additions in the audit)
 
 Current approved values:
-`zendesk` · `intercom` · `freescout` · `postman` · `api-debugging` · `har-analysis` · `sql` · `python` · `github-actions` · `claude-api` · `prompt-engineering` · `jina-reader` · `cloudflare-workers` · `tensorflow-js` · `html-css-js` · `coda` · `foursquare-api` · `eventbrite-api` · `tmdb-api` · `icalendar` · `scheduled-agent` · `ats-api` · `web-fetch` · `grep-parsing` · `excel-openpyxl` · `weighted-scoring-matrix` · `dealbreaker-gate` · `ai-assisted-scoring`
+`zendesk` · `intercom` · `freescout` · `postman` · `api-debugging` · `har-analysis` · `sql` · `python` · `github-actions` · `claude-api` · `prompt-engineering` · `jina-reader` · `cloudflare-workers` · `tensorflow-js` · `html-css-js` · `coda` · `foursquare-api` · `eventbrite-api` · `tmdb-api` · `icalendar` · `scheduled-agent` · `ats-api` · `web-fetch` · `grep-parsing` · `excel-openpyxl` · `weighted-scoring-matrix` · `dealbreaker-gate` · `ai-assisted-scoring` · `cowork-artifact`
 
 To add a new tool: add it here first, then use it in the index. Document in TAGGING-AUDIT.md under "New tools added."
 

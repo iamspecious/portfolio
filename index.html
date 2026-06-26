@@ -3214,6 +3214,331 @@
 
                     </div><!-- /project-block: KH Lore Checker -->
 
+                    <div class="project-block" data-category="ai-tools">
+
+                    <!-- ====================================================
+                         KH DESCRIPTION OPTIMIZER
+                    ===================================================== -->
+                    <div class="project" id="proj-kh-description-optimizer">
+                        <h3>KH Description Optimizer <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>A description optimizer built for my YouTube channel <strong>LoreBySpec</strong>. Feed it an old video's description and it produces three things in one pass: a rewritten description, 3–5 lore-aware hashtags, and a backend tags string trimmed to YouTube's 500-character budget. The rewrite front-loads the keyword in the first ~125 characters — the section YouTube's algorithm weights most — and builds in real KH context without inventing anything the source description doesn't support. Ships as a live Cowork artifact, so the AI rewrite runs on open.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Three outputs, one pass</strong> — description rewrite, hashtags, and backend tags from a single input with no copy-paste between steps.</li>
+                                <li><strong>Built-in KH lore dictionary</strong> — characters, worlds, terms, and games drive hashtag and tag generation automatically; no manual labelling needed.</li>
+                                <li><strong>Respects YouTube's limits automatically</strong> — backend tags trimmed to the 500-character budget and confirmed at 492/500.</li>
+                                <li><strong>Keyword above the fold</strong> — rewrite logic places the primary keyword in the first ~125 characters, where YouTube's ranking algorithm gives it most weight.</li>
+                                <li><strong>Live feedback in the UI</strong> — char count, hashtag count, and above-the-fold check update as you edit; per-output copy buttons and a "Try a sample" button for first-time use.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>AI rewrite requires Cowork</strong> — the rewrite only runs inside Cowork; hashtags and backend tags work anywhere.</li>
+                                <li><strong>Placeholders need a human pass</strong> — output uses <code>[bracketed]</code> placeholders for real timestamps and links that must be swapped in by hand before posting.</li>
+                                <li><strong>Won't invent lore</strong> — it elaborates sparse descriptions only as far as the source material supports; it won't fill gaps with guesswork.</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">Cowork Artifact</span>
+                            <span class="tech-tag">On-device Claude inference</span>
+                            <span class="tech-tag">KH Lore Dictionary</span>
+                            <span class="tech-tag">YouTube SEO</span>
+                            <span class="tech-tag">Hashtag generation</span>
+                        </p>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Shipped as a live Cowork artifact. Added per-output copy buttons, live meter (char count, hashtag count, above-the-fold check), and a "Try a sample" button. Open next step, not built: batch mode — feed a spreadsheet of old videos and optimize them all in one pass.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 6 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Verification pass in a sandbox: entity detection fired correctly, 3–5 hashtags returned, backend tags landed at 492/500. Zero errors.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Backend tag generation: auto-generated from the same lore dictionary pass, then trimmed to YouTube's 500-char budget. No user input needed for this step.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Hashtag logic: scan the input text against the lore dictionary, return 3–5. Always anchored by #KingdomHearts and #KingdomHeartsLore; user can add or remove chips before copying.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Rewrite logic: keyword hook in first ~125 chars, 200–300 words of real context, chapter timestamps section, links section, CTA. <code>[bracketed]</code> placeholders for anything that needs a real URL or timestamp swapped in manually.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Built the KH lore dictionary first — characters, worlds, terms, games — as the backbone for both hashtag detection and tag generation. Getting this right before writing rewrite logic meant the entity detection was grounded in actual KH vocabulary, not a generic gaming taxonomy.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06 — initial scoping</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Pinned down scope before building: how the tool needs to fit the actual posting workflow, what YouTube's current description structure rewards, and where the lore constraint kicks in. Researched 2026 YouTube SEO best practice — description length, above-the-fold keyword placement, hashtag count, and the tags-vs-hashtags distinction.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    </div><!-- /project-block: KH Description Optimizer -->
+
+                    <div class="project-block" data-category="ai-tools">
+
+                    <!-- ====================================================
+                         KH A/B TESTING TOOL
+                    ===================================================== -->
+                    <div class="project" id="proj-kh-ab-testing-tool">
+                        <h3>YouTube A/B Testing Tool <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>June 2026 – Present</strong></p>
+                        <p>A title and thumbnail generator for LoreBySpec videos. Paste a script, pick which angles to test, and it produces three variants — each built around a different lever — plus thumbnail concept briefs with ready-to-paste image prompts. Each variant is tuned for YouTube's algorithm and for the KH lore audience. It went through three formats before landing as a live Cowork tool.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Three differentiated angles by default</strong> — Curiosity, Bold Claim, and List/Authority, so an A/B/C test produces actual signal rather than comparing near-duplicates.</li>
+                                <li><strong>Over-promise flag</strong> — bakes in the key best-practice nuance: YouTube's native Test &amp; Compare picks winners by watch-time share, not raw clicks. Any variant likely to over-promise and tank retention gets flagged before you test it.</li>
+                                <li><strong>KH-tuned rules</strong> — lore-search patterns ("Explained," "Theory," "Timeline"), character keywords (Xehanort, Roxas, Keyblade War), and the franchise's visual identity built in.</li>
+                                <li><strong>Readable output</strong> — each title carries a char count and a "why it works" note; each thumbnail brief carries a copyable image prompt, a test plan, and a per-video tip.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Offline HTML couldn't generate titles</strong> — a plain HTML file can't call an AI without an API key, so the v2 standalone builder could construct the prompt but not run it. This is what drove the move to Cowork.</li>
+                                <li><strong>Fast model, thin batches</strong> — the live version generates with a fast model; a thin batch sometimes needs a regenerate or an angle toggle to get a usable variant.</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">Cowork Artifact</span>
+                            <span class="tech-tag">On-device Claude inference</span>
+                            <span class="tech-tag">A/B testing</span>
+                            <span class="tech-tag">YouTube title optimisation</span>
+                            <span class="tech-tag">Thumbnail concept briefs</span>
+                        </p>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06 — v3</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Rebuilt as a live Cowork artifact, light-mode themed to match. Same options as v2 (Curiosity/Bold Claim/List-Authority default; Emotional and Contrarian optional), but Generate produces the titles and thumbnail briefs in-page rather than building a prompt to paste elsewhere. Persists, so it reopens with state. Open next steps offered but not built: "regenerate just this variant" button and a saved history of past titles.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-pivot">Pivot</span>
+                                        User's reaction to v2: if you have to paste the built prompt back into Claude anyway, the copy-paste step is wasted. Agreed and cut it. The standalone HTML builder was a good intermediary but the friction it introduced negated the convenience. Moved to a live tool.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06 — v2</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Built a single-file offline HTML prompt-builder: paste script, choose variant count and angles, Build prompt, Copy to clipboard. Caught and fixed two stray CSS typos during testing. Limitation stated up front: builds the prompt but can't generate titles itself without an API key.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06 — v2 intent</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        User asked for an actual interactive tool — v1 was a paste-in template, not something you could use repeatedly without going back into a chat. Built the offline HTML version as a self-contained prompt-builder.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06 — v1</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        v1: a reusable paste-in template. Drop script into a fresh chat, get 3 A/B/C variants each with a title, thumbnail brief, and image prompt. Each variant locked to a different lever: Curiosity, Bold Claim, List-Authority.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06 — initial scoping</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Clarified scope: KH lore channel, reusable template, thumbnails handled by the user's own image tool (tool outputs briefs and image prompts, not images). Researched YouTube title/thumbnail best practice — key discovery that shaped the over-promise flag: Test &amp; Compare picks winners by watch-time share, not CTR, so a high-CTR/low-retention title can lose even with a higher click rate.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    </div><!-- /project-block: KH A/B Testing Tool -->
+
+                    <div class="project-block" data-category="ai-tools">
+
+                    <!-- ====================================================
+                         KH TITLE & THUMBNAIL AUDIT
+                    ===================================================== -->
+                    <div class="project" id="proj-kh-title-thumbnail-audit">
+                        <h3>KH Title &amp; Thumbnail Audit <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Complete</span></h3>
+                        <p><strong>June 2026</strong></p>
+                        <p>A full-channel audit and prioritisation tool for LoreBySpec thumbnails. It visually reviewed all 69 videos against a 22-point rubric, scored them, and turned the results into an impact-ranked redo list. "Impact-ranked" means weakness × views — so the list favours fixing things that will actually move the numbers, not just things that look bad. It also produced finished reference thumbnails for the priority videos.</p>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Full channel coverage</strong> — all 69 videos audited, no sampling. Average score 10.9/22; split 30 High (needs work), 34 Medium, 5 Low/keep.</li>
+                                <li><strong>Impact-ranked redo list</strong> — "redo rank" = weakness × views, so the list surfaces non-obvious priorities. "We Already Know What's In The Box" and "She Already Knew" led; "The Maleficent Problem" (926 views, score 9) landed in the top tier.</li>
+                                <li><strong>Dead-simple to-do flag</strong> — "Worth redoing? (top 20)" column removes the eyeballing: ★ Yes (20 highest-impact), Keep ✓ (already strong), — (not worth it now). Auto-recalculates on re-score or view-count update.</li>
+                                <li><strong>Named two systemic problems and one strength</strong> — ~14 low-view videos reuse a generic purple podcast template (no KH face, no hook); many mid-tier videos use raw screenshots with in-game subtitle captions instead of designed text. Strength: a good number already carry designed text — the gap is consistency across fonts, wordmark, and palette.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Views-weighted by design</strong> — the scoring deliberately avoids flagging low-view videos for a redo; lifting a 40-view video isn't worth the time.</li>
+                                <li><strong>New uploads are a different case</strong> — for brand-new videos, ignore the views math and start from the strong template. You can't weight by views when there are none yet.</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">22-point scoring rubric</span>
+                            <span class="tech-tag">Impact-weighted ranking</span>
+                            <span class="tech-tag">Visual audit (69 videos)</span>
+                            <span class="tech-tag">Reference thumbnail generation</span>
+                        </p>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-06</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Produced finished reference thumbnails for the next batch. Offered a monthly scheduled re-pull so the sheet can refresh its view counts automatically.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 6 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Logic check: a few already-strong "Low/keep" videos (e.g. "The Box Held the Answer") slipped into the top 20 on views alone. Flagging those as ★ Yes to redo contradicted their own band score. Changed the flag to mark them "Keep" instead. Flag now self-updates on re-score or re-pull.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Added "Worth redoing? (top 20)" column on user feedback — removes the eyeballing step of working out which high-ranked videos are actually worth the time.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Added "redo rank" = weakness × views after building the initial scoring. Pure rubric rank was surfacing low-view videos that happened to score badly. The views multiplier corrects for this: a video with 5 views and a weak thumbnail is still lower priority than one with 900 views and a weak thumbnail.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Built 22-point scoring rubric and banding: High ≤10, Medium 11–15, Low/keep 16–22. Scored all 69 videos and verified the ranking.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Caught a mis-read from an earlier pass: "The Mechanics That Make Kairi Impossible" was logged as a dark atmospheric shot. Wrong — it has a Kairi face and "THE KAIRI PROBLEM" title text. Corrected before final scoring.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06 — full visual audit</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Reviewed all 69 thumbnails directly in the browser, batched — no sampling. Wanted eyes on every one before scoring. Logged three patterns during the pass: the recurring purple "Thinking Through the Darkness" podcast template on low-view videos; raw-screenshot-plus-subtitle thumbnails on mid-tier theory videos; and the already-designed-text thumbnails that just need consistent fonts, wordmark, and a fixed palette.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    </div><!-- /project-block: KH Title & Thumbnail Audit -->
+
                     <div class="project-block" data-category="consulting strategy">
 
                     <!-- TikTok Sponsorship -->
