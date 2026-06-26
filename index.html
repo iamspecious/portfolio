@@ -887,7 +887,7 @@
                                 <li><strong>Not every company has a feed</strong> — ~24 of the watchlist run on a queryable ATS. The rest (Comeet, custom careers pages, JavaScript-only boards) can't be polled cleanly and stay on the manual-check list. Coverage is good, not total, and the tool says so.</li>
                                 <li><strong>"Remote" lies</strong> — Job posts routinely say "Remote" and mean "Remote, US". The location filter is deliberately strict: anything that doesn't explicitly allow Germany/EU/EMEA gets held in a "verify" bucket rather than waved through. That occasionally parks a real role for a manual glance — the trade chosen on purpose to keep false positives down.</li>
                                 <li><strong>Runs while the app is open</strong> — It's a scheduled agent inside Claude/Cowork, not a hosted service. If the app is closed at 09:00 it runs on next launch. Fine for a personal tool; a server cron would remove the dependency.</li>
-                                <li><strong>No fully unattended fetch path yet</strong> — A run can stall before it reaches the feeds: <code>web_fetch</code> only accepts URLs it has already seen, so the agent can't introduce its own from config, and the sandbox shell has no outbound network. Runs can be driven by hand in the meantime; the durable fix is shell network access to the ATS hosts or a dedicated connector (see devlog, 2026-06-24).</li>
+                                <li><strong>No fully unattended fetch path yet</strong> — Scheduled runs abort before reaching the feeds: <code>web_fetch</code> only accepts URLs that appeared <em>literally</em> in a message, but the scheduler passes templated ones (<code>…/&lt;token&gt;</code>), so they never gain provenance. Pasting the literal URLs into chat unblocks a session by hand. Shell/curl is ruled out by the content-fetch policy, so the durable fix is either the scheduler injecting expanded (de-templated) URLs or a dedicated ATS connector (see devlog, 2026-06-24 and 2026-06-26).</li>
                                 <li><strong>Judgment costs a run</strong> — The fit reasoning is done by the model each morning, which is what makes it accurate but also means the quality of a tag is the quality of that run's read, not a fixed rule.</li>
                             </ul>
                         </div>
@@ -919,24 +919,72 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06-24 — run failed: feeds unreachable, 0 roles</span>
+                                <span class="timestamp">2026-06-26 — completed run: 8 new roles surfaced</span>
                                 <p>
-                                    <span class="tag tag-issue">Failure</span>
-                                    The morning run gathered 0 roles — a tooling block, not an empty market, so the day is logged as "unknown", not "nothing out there". A guardrail held: <code>last_run</code> advanced but nothing was written to <code>Seen.json</code> or <code>Matches Log.csv</code>, so a failed fetch was never recorded as a clean empty result.
+                                    <span class="tag tag-done">Done</span>
+                                    First full end-to-end pass since the block. Location-paired keyword greps over the saved payloads (Greenhouse puts <code>location</code> before <code>title</code> with a metadata gap — pair within ~500 chars), then role/location/language filters, dedup vs <code>Seen.json</code>, fit tags, and persistence to <code>Matches Log.csv</code> / <code>Seen.json</code> / <code>Run Log.csv</code>. <strong>8 new roles</strong> (1 ✅ strong, 6 🟡 stretch, 1 🔎 verify): Remote's HR Process &amp; System Specialist (✅, EMEA); four Remote lifecycle/onboarding/care roles (🟡); PostHog Technical Account Manager (🟡, warm contact); GitLab Senior CSM DACH (🟡, carries quota, Germany); Figma Customer Enablement Manager (🔎, Paris — verify remote). Feed health: 16 read full, 6 partial, 3 skipped — no feed silently returned "nothing".
                                 </p>
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06-24 — constraint: no unattended path from config to the feeds</span>
+                                <span class="timestamp">2026-06-26 — new limitation: Ashby feeds truncate on save</span>
                                 <p>
-                                    <span class="tag tag-issue">Constraint</span>
-                                    This is structural, not a flaky feed. Three independent paths to live role data are each closed for a different reason. <code>web_fetch</code> enforces a provenance allowlist — it only retrieves a URL that has already appeared in a message or a prior fetch result, so the agent can't introduce its own feed URLs from <code>Config.md</code> (the one thing a poller must do). The sandbox shell can't compensate: no outbound network by design (even <code>example.com</code> returned HTTP 000). The hosted ATS boards can't compensate either — they're JavaScript shells and <code>web_fetch</code> doesn't execute JS, so only the raw JSON API carries the data, and that's the blocked path. The watcher's own logic is fine: once a Greenhouse URL happened to be in the provenance set, <code>web_fetch</code> returned full live JSON and the parser handled it. The gap is structural — getting our own URLs admitted — which is why it disables the core premise rather than dropping one company.
+                                    <span class="tag tag-issue">Issue</span>
+                                    Ashby's posting API always embeds full job descriptions, so each response is 100 KB+ and gets truncated when saved to the overflow file — only the first ~5–6 postings per feed survive. Greenhouse (<code>content=false</code>) is compact and reads completely. Net: 6 Ashby feeds (ashby, posthog, deel, oyster, zapier, n8n) came back <em>partial</em> this run, including the flagship <code>ashby</code> board (warm contact). The fix is a parser that pages the response or strips descriptions before saving; until then they're treated as partial and glanced manually.
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 12 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 18 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26 — manual unblock (workaround, not a fix)</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Spec pasted the literal Ashby + Greenhouse feed URLs into chat. Provenance is conferred per-conversation, so every subsequent <code>web_fetch</code> in the session then worked — which is what made today's pass possible. It's a manual workaround that has to be repeated each session, not a durable fix.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26 — shell-curl fix marked CLOSED</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The 06-24 plan's option #1 (curl the feeds from the sandbox shell behind a domain allowlist) is <strong>closed</strong>: the content-fetch policy forbids retrieving URLs via shell/<code>curl</code>/python whenever <code>web_fetch</code> is blocked — allowlist or not. Re-confirmed there's no off-the-shelf Ashby/Greenhouse public-board connector in the registry either. The durable fix narrows to two routes: have the scheduler inject the <em>expanded</em> (de-templated) feed URLs so they enter provenance, or build a dedicated connector.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26 — root cause pinned: templated URLs never gain provenance</span>
+                                    <p>
+                                        <span class="tag tag-issue">Constraint</span>
+                                        The exact mechanism is now nailed down. The scheduled task passes <em>templated</em> URLs (<code>…/job-board/&lt;token&gt;</code>), but <code>web_fetch</code> only accepts URLs that appeared <em>literally</em> in a user message — so a templated URL never lands in the provenance set during an unattended run, and every feed is unreachable. The 06-24 constraint wasn't transient; it's structural and will recur every scheduled run until a durable route lands.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26 — scheduled run aborted at canary (3rd identical block)</span>
+                                    <p>
+                                        <span class="tag tag-issue">Failure</span>
+                                        Pre-flight fetch of the Remote (<code>remotecom</code>) canary failed with <code>URL not in provenance set</code>; confirmed on a second (Ashby) feed. Per the canary rule, the run aborted rather than grinding all feeds, and posted a "feeds unreachable" digest. No state advanced. Third identical abort (06-24, earlier 06-26, scheduled 06-26).
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-24 — run failed: feeds unreachable, 0 roles</span>
+                                    <p>
+                                        <span class="tag tag-issue">Failure</span>
+                                        The morning run gathered 0 roles — a tooling block, not an empty market, so the day is logged as "unknown", not "nothing out there". A guardrail held: <code>last_run</code> advanced but nothing was written to <code>Seen.json</code> or <code>Matches Log.csv</code>, so a failed fetch was never recorded as a clean empty result.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-24 — constraint: no unattended path from config to the feeds</span>
+                                    <p>
+                                        <span class="tag tag-issue">Constraint</span>
+                                        This is structural, not a flaky feed. Three independent paths to live role data are each closed for a different reason. <code>web_fetch</code> enforces a provenance allowlist — it only retrieves a URL that has already appeared in a message or a prior fetch result, so the agent can't introduce its own feed URLs from <code>Config.md</code> (the one thing a poller must do). The sandbox shell can't compensate: no outbound network by design (even <code>example.com</code> returned HTTP 000). The hosted ATS boards can't compensate either — they're JavaScript shells and <code>web_fetch</code> doesn't execute JS, so only the raw JSON API carries the data, and that's the blocked path. The watcher's own logic is fine: once a Greenhouse URL happened to be in the provenance set, <code>web_fetch</code> returned full live JSON and the parser handled it. The gap is structural — getting our own URLs admitted — which is why it disables the core premise rather than dropping one company.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-06-24 — decision: no search-snippet fallback</span>
