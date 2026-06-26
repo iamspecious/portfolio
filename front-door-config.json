@@ -63,7 +63,7 @@
     "whoareyou": {
       "text": "I'm Digital Spec. The real Spec built me using Claude, based on how real-life Spec would handle different challenges. Spec's portfolio is quite broad, so it made sense to build a chatbot of sorts to help guide people through their work. After all, they can't be around 24/7 to answer questions — but I can! I've no brain per se; all of this has been pre-programmed by Spec, so no AI hallucinations here.",
       "options": [
-        { "label": "Show me how you were built",          "action": "deeplink", "tab": "projects-tab", "anchor": "#proj-digital-spec-front-door" },
+        { "label": "Show me how you were built",          "action": "find-project", "itemId": "proj-digital-spec-front-door" },
         { "label": "Where can I talk to the real Spec?",  "target": "contact" }
       ]
     },

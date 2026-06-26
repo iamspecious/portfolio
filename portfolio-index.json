@@ -7,13 +7,33 @@
     "dateStart": "2023-01",
     "dateEnd": "present",
     "status": null,
-    "domains": ["support-ops", "people-hr", "operations"],
-    "evidence": ["process-design", "cross-functional-influence", "self-serve-deflection", "cost-discipline", "diagnostic-reasoning"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
-    "tools": ["freescout", "intercom"],
+    "domains": [
+      "support-ops",
+      "people-hr",
+      "operations"
+    ],
+    "evidence": [
+      "process-design",
+      "cross-functional-influence",
+      "self-serve-deflection",
+      "cost-discipline",
+      "diagnostic-reasoning"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
+    "tools": [
+      "freescout",
+      "intercom"
+    ],
     "summary": "Built and optimised customer support operations for a startup; led international expansion, HR compliance, and EOR projects; provided leadership coaching and community engagement programmes.",
     "anchor": "#work-spec-solutions-fractional-cos",
-    "relatedIds": ["spec-solutions-support-ops", "optimising-cs-operations"],
+    "relatedIds": [
+      "spec-solutions-support-ops",
+      "optimising-cs-operations"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -27,13 +47,24 @@
     "dateStart": "2018-01",
     "dateEnd": "present",
     "status": null,
-    "domains": ["content-creation"],
-    "evidence": ["writing-range", "scaling"],
-    "context": { "stage": "scaleup", "level": "ic", "engagement": "employment" },
+    "domains": [
+      "content-creation"
+    ],
+    "evidence": [
+      "writing-range",
+      "scaling"
+    ],
+    "context": {
+      "stage": "scaleup",
+      "level": "ic",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Spearheaded content strategy and execution for a leading Android/consumer tech publication, driving audience growth through feature articles, reviews, and SEO-optimised editorial.",
     "anchor": "#work-phandroid-tech-writer",
-    "relatedIds": ["lorebyspec-creator-tool"],
+    "relatedIds": [
+      "lorebyspec-creator-tool"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -47,10 +78,23 @@
     "dateStart": "2025-05",
     "dateEnd": "2025-07",
     "status": null,
-    "domains": ["project-management", "community", "operations"],
-    "evidence": ["process-design", "cross-functional-influence"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "employment" },
-    "tools": ["coda"],
+    "domains": [
+      "project-management",
+      "community",
+      "operations"
+    ],
+    "evidence": [
+      "process-design",
+      "cross-functional-influence"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "employment"
+    },
+    "tools": [
+      "coda"
+    ],
     "summary": "Served as organisational glue for the Mission Circle — scheduling, project tracking in Coda, community beta support, and CRM/workflow administration across a 30/30/30/10 split.",
     "anchor": "#work-connection-engine-cos",
     "relatedIds": [],
@@ -67,9 +111,18 @@
     "dateStart": "2020-10",
     "dateEnd": "2024-12",
     "status": null,
-    "domains": ["community"],
-    "evidence": ["scaling", "customer-facing"],
-    "context": { "stage": "personal-project", "level": "lead", "engagement": "personal" },
+    "domains": [
+      "community"
+    ],
+    "evidence": [
+      "scaling",
+      "customer-facing"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
     "tools": [],
     "summary": "Owner and operator of The Nook, a Discord community supporting Twitch streamers through their affiliate journey; helped over 10 streamers reach affiliate status across 100+ members.",
     "anchor": "#work-the-nook-community-manager",
@@ -87,13 +140,30 @@
     "dateStart": "2020-05",
     "dateEnd": "2020-07",
     "status": null,
-    "domains": ["customer-support", "support-ops", "implementation-onboarding"],
-    "evidence": ["diagnostic-reasoning", "technical-depth", "customer-facing"],
-    "context": { "stage": "startup", "level": "ic", "engagement": "employment" },
-    "tools": ["postman", "api-debugging"],
+    "domains": [
+      "customer-support",
+      "support-ops",
+      "implementation-onboarding"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "technical-depth",
+      "customer-facing"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "ic",
+      "engagement": "employment"
+    },
+    "tools": [
+      "postman",
+      "api-debugging"
+    ],
     "summary": "Led technical support for enterprise clients at a reviews platform, resolving complex API and widget integration issues, partnering with dev teams, and improving resolution processes.",
     "anchor": "#work-stamped-support-hero",
-    "relatedIds": ["stamped-widget-diagnostic"],
+    "relatedIds": [
+      "stamped-widget-diagnostic"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -107,9 +177,19 @@
     "dateStart": "2018-08",
     "dateEnd": "2020-02",
     "status": null,
-    "domains": ["operations", "content-creation"],
-    "evidence": ["cross-functional-influence", "scaling"],
-    "context": { "stage": "nonprofit-academic", "level": "lead", "engagement": "employment" },
+    "domains": [
+      "operations",
+      "content-creation"
+    ],
+    "evidence": [
+      "cross-functional-influence",
+      "scaling"
+    ],
+    "context": {
+      "stage": "nonprofit-academic",
+      "level": "lead",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Provided executive support to the CEO of a gaming accessibility platform — managing content pipeline, strategic partnerships, the 2019/2020 awards programme, Patreon, and audience growth (30% over two years).",
     "anchor": "#work-can-i-play-that-editor",
@@ -127,9 +207,20 @@
     "dateStart": "2016-08",
     "dateEnd": "2018-09",
     "status": null,
-    "domains": ["community", "operations"],
-    "evidence": ["scaling", "process-design", "cross-functional-influence"],
-    "context": { "stage": "nonprofit-academic", "level": "lead", "engagement": "employment" },
+    "domains": [
+      "community",
+      "operations"
+    ],
+    "evidence": [
+      "scaling",
+      "process-design",
+      "cross-functional-influence"
+    ],
+    "context": {
+      "stage": "nonprofit-academic",
+      "level": "lead",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Redesigned and scaled ITC's Slack community structure; founded the ITC Jobs Board (300% job posting growth, acquisition interest); grew Slack membership 250% in two years.",
     "anchor": "#work-itc-community-manager",
@@ -147,9 +238,19 @@
     "dateStart": "2017-07",
     "dateEnd": "2017-09",
     "status": null,
-    "domains": ["customer-support", "community"],
-    "evidence": ["technical-depth", "customer-facing"],
-    "context": { "stage": "startup", "level": "ic", "engagement": "employment" },
+    "domains": [
+      "customer-support",
+      "community"
+    ],
+    "evidence": [
+      "technical-depth",
+      "customer-facing"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "ic",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Bridged the product team and developer community — guidance on debugging and issue resolution, workshops and webinars, feedback collection, and direct platform support.",
     "anchor": "#work-samebug-developer-advocate",
@@ -167,13 +268,26 @@
     "dateStart": "2016-04",
     "dateEnd": "2017-04",
     "status": null,
-    "domains": ["project-management", "research"],
-    "evidence": ["cross-functional-influence", "influence-without-authority", "process-design"],
-    "context": { "stage": "nonprofit-academic", "level": "lead", "engagement": "employment" },
+    "domains": [
+      "project-management",
+      "research"
+    ],
+    "evidence": [
+      "cross-functional-influence",
+      "influence-without-authority",
+      "process-design"
+    ],
+    "context": {
+      "stage": "nonprofit-academic",
+      "level": "lead",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Led the €3M EU-funded DEVELOP project across international partners — Agile methodologies, cross-border stakeholder communication, bottleneck removal, and onboarding/culture work.",
     "anchor": "#work-learnovate-pm-research",
-    "relatedIds": ["learnovate-develop-project"],
+    "relatedIds": [
+      "learnovate-develop-project"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -187,10 +301,22 @@
     "dateStart": "2015-09",
     "dateEnd": "2016-01",
     "status": null,
-    "domains": ["customer-support", "community"],
-    "evidence": ["customer-facing", "process-design"],
-    "context": { "stage": "nonprofit-academic", "level": "ic", "engagement": "employment" },
-    "tools": ["zendesk"],
+    "domains": [
+      "customer-support",
+      "community"
+    ],
+    "evidence": [
+      "customer-facing",
+      "process-design"
+    ],
+    "context": {
+      "stage": "nonprofit-academic",
+      "level": "ic",
+      "engagement": "employment"
+    },
+    "tools": [
+      "zendesk"
+    ],
     "summary": "Front-line support to CoderDojo community members via Zendesk — ticket categorisation, escalation, knowledge base contribution, trend analysis, and onboarding new dojo organisers.",
     "anchor": "#work-coderdojo-support-specialist",
     "relatedIds": [],
@@ -207,10 +333,21 @@
     "dateStart": "2015-01",
     "dateEnd": "2015-04",
     "status": null,
-    "domains": ["data-analysis"],
-    "evidence": ["diagnostic-reasoning", "cost-discipline"],
-    "context": { "stage": "startup", "level": "ic", "engagement": "employment" },
-    "tools": ["sql"],
+    "domains": [
+      "data-analysis"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "cost-discipline"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "ic",
+      "engagement": "employment"
+    },
+    "tools": [
+      "sql"
+    ],
     "summary": "Analysed consumer demographics and behaviour data using SQL — churn, LTV, retention metrics — to support data-driven decisions for Meez's freemium model; reported to senior stakeholders.",
     "anchor": "#work-donnerwood-product-analyst",
     "relatedIds": [],
@@ -227,9 +364,20 @@
     "dateStart": "2012-01",
     "dateEnd": "2014-12",
     "status": null,
-    "domains": ["people-hr", "operations"],
-    "evidence": ["scaling", "process-design", "cross-functional-influence"],
-    "context": { "stage": "startup", "level": "strategic", "engagement": "employment" },
+    "domains": [
+      "people-hr",
+      "operations"
+    ],
+    "evidence": [
+      "scaling",
+      "process-design",
+      "cross-functional-influence"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "strategic",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Supported CEO in scaling Leaguepedia from a small group to a 100+ member organisation — end-to-end hiring frameworks, SOPs, operational workflows, onboarding programmes, and cross-functional collaboration.",
     "anchor": "#work-leaguepedia-chief-of-people",
@@ -247,9 +395,17 @@
     "dateStart": "2011-06",
     "dateEnd": "2011-09",
     "status": null,
-    "domains": ["customer-support"],
-    "evidence": ["customer-facing"],
-    "context": { "stage": "enterprise", "level": "ic", "engagement": "employment" },
+    "domains": [
+      "customer-support"
+    ],
+    "evidence": [
+      "customer-facing"
+    ],
+    "context": {
+      "stage": "enterprise",
+      "level": "ic",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Customer service across multiple South Dublin Vodafone stores — sales, technical troubleshooting, high satisfaction ratings, and training/mentoring new team members.",
     "anchor": "#work-vodafone-support-specialist",
@@ -267,13 +423,29 @@
     "dateStart": "2020-05",
     "dateEnd": "2020-07",
     "status": null,
-    "domains": ["customer-support", "support-ops"],
-    "evidence": ["diagnostic-reasoning", "technical-depth", "customer-facing"],
-    "context": { "stage": "startup", "level": "ic", "engagement": "employment" },
-    "tools": ["postman", "api-debugging"],
+    "domains": [
+      "customer-support",
+      "support-ops"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "technical-depth",
+      "customer-facing"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "ic",
+      "engagement": "employment"
+    },
+    "tools": [
+      "postman",
+      "api-debugging"
+    ],
     "summary": "Worked through a reviews widget that presented four different visible failure modes — reduced an ambiguous, frequently-escalated issue to a four-branch diagnostic without engineering involvement.",
     "anchor": "#cs-stamped-widget-diagnostic",
-    "relatedIds": ["stamped-support-hero"],
+    "relatedIds": [
+      "stamped-support-hero"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -287,13 +459,33 @@
     "dateStart": "2023-01",
     "dateEnd": "present",
     "status": null,
-    "domains": ["support-ops", "customer-support", "implementation-onboarding"],
-    "evidence": ["process-design", "self-serve-deflection", "diagnostic-reasoning", "cost-discipline"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
-    "tools": ["freescout", "intercom"],
+    "domains": [
+      "support-ops",
+      "customer-support",
+      "implementation-onboarding"
+    ],
+    "evidence": [
+      "process-design",
+      "self-serve-deflection",
+      "diagnostic-reasoning",
+      "cost-discipline"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
+    "tools": [
+      "freescout",
+      "intercom"
+    ],
     "summary": "Transformed a Gmail + unconfigured FreeScout inbox into a structured support operation; built a documentation-trained chatbot; eliminated a whole ticket category via self-serve status tracking.",
     "anchor": "#cs-spec-solutions-support-ops",
-    "relatedIds": ["spec-solutions-fractional-cos", "faq-chatbot", "support-triage-tool"],
+    "relatedIds": [
+      "spec-solutions-fractional-cos",
+      "faq-chatbot",
+      "support-triage-tool"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -307,13 +499,25 @@
     "dateStart": "2016-04",
     "dateEnd": "2017-04",
     "status": null,
-    "domains": ["project-management"],
-    "evidence": ["influence-without-authority", "cross-functional-influence", "process-design"],
-    "context": { "stage": "nonprofit-academic", "level": "lead", "engagement": "employment" },
+    "domains": [
+      "project-management"
+    ],
+    "evidence": [
+      "influence-without-authority",
+      "cross-functional-influence",
+      "process-design"
+    ],
+    "context": {
+      "stage": "nonprofit-academic",
+      "level": "lead",
+      "engagement": "employment"
+    },
     "tools": [],
     "summary": "Kept a stalled EU-funded research project on track across international partner organisations using visibility rhythms and direct intervention — with no formal authority over any partner.",
     "anchor": "#cs-learnovate-develop-project",
-    "relatedIds": ["learnovate-pm-research"],
+    "relatedIds": [
+      "learnovate-pm-research"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -327,13 +531,30 @@
     "dateStart": "2026-05",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "frontend-dev"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js"],
+    "domains": [
+      "ai-engineering",
+      "frontend-dev"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js"
+    ],
     "summary": "Paste a browser console error or stack trace and get a plain-English breakdown with five structured sections — distinguishing where an error surfaces from where it originated.",
     "anchor": "#proj-error-log-interpreter",
-    "relatedIds": ["debug-helper"],
+    "relatedIds": [
+      "debug-helper"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -347,13 +568,30 @@
     "dateStart": "2026-05",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "frontend-dev"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js"],
+    "domains": [
+      "ai-engineering",
+      "frontend-dev"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js"
+    ],
     "summary": "A structured debugging coach for three modes: have an error (want a plan), code does the wrong thing, and total silence. Coaches process, not just answers; covers silent failure patterns explicitly.",
     "anchor": "#proj-debug-helper",
-    "relatedIds": ["error-log-interpreter"],
+    "relatedIds": [
+      "error-log-interpreter"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -367,13 +605,30 @@
     "dateStart": "2026-05",
     "dateEnd": "2026-05",
     "status": "complete",
-    "domains": ["support-ops", "data-analysis"],
-    "evidence": ["diagnostic-reasoning", "process-design", "judgment-restraint", "build-in-public", "cost-discipline"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["python"],
+    "domains": [
+      "support-ops",
+      "data-analysis"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "judgment-restraint",
+      "build-in-public",
+      "cost-discipline"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "python"
+    ],
     "summary": "Research-backed prototype — structured JSON account model and Python script that produces a ranked morning action list for a CSM: URGENT / WATCH / OK, each with signal, reason, and suggested action.",
     "anchor": "#proj-posthog-cs-health-intelligence",
-    "relatedIds": ["posthog-csm-copilot"],
+    "relatedIds": [
+      "posthog-csm-copilot"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -387,13 +642,32 @@
     "dateStart": "2026-05",
     "dateEnd": "present",
     "status": "in-progress",
-    "domains": ["ai-engineering", "support-ops"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint", "diagnostic-reasoning"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js"],
+    "domains": [
+      "ai-engineering",
+      "support-ops"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint",
+      "diagnostic-reasoning"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js"
+    ],
     "summary": "Customer Success copilot for a PostHog CSM role — paste any incoming signal, add customer context, and choose a mode: Triage + Next Action, Draft Response, Escalation Strategy, or Health Assessment.",
     "anchor": "#proj-posthog-csm-copilot",
-    "relatedIds": ["posthog-cs-health-intelligence", "support-triage-tool"],
+    "relatedIds": [
+      "posthog-cs-health-intelligence",
+      "support-triage-tool"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -407,13 +681,32 @@
     "dateStart": "2026-05",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "support-ops"],
-    "evidence": ["technical-depth", "build-in-public", "self-serve-deflection", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js"],
+    "domains": [
+      "ai-engineering",
+      "support-ops"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "self-serve-deflection",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js"
+    ],
     "summary": "Paste a company FAQ or knowledge base and a customer message; Claude returns an answer grounded entirely in the docs — no vector database, no backend, no hallucination.",
     "anchor": "#proj-faq-chatbot",
-    "relatedIds": ["spec-solutions-support-ops", "support-triage-tool"],
+    "relatedIds": [
+      "spec-solutions-support-ops",
+      "support-triage-tool"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -427,13 +720,30 @@
     "dateStart": "2026-05",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "content-creation"],
-    "evidence": ["technical-depth", "build-in-public"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js", "jina-reader"],
+    "domains": [
+      "ai-engineering",
+      "content-creation"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js",
+      "jina-reader"
+    ],
     "summary": "Two-mode content assistant for LoreBySpec YouTube channel: Video Ideas (five titled angles with hooks from a topic) and Comment Reply (drafted reply in a warm lore-nerd voice).",
     "anchor": "#proj-lorebyspec-creator-tool",
-    "relatedIds": ["kh-lore-checker"],
+    "relatedIds": [
+      "kh-lore-checker"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -447,10 +757,23 @@
     "dateStart": "2025-02",
     "dateEnd": "present",
     "status": "research",
-    "domains": ["research"],
-    "evidence": ["accessibility", "diagnostic-reasoning", "build-in-public", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["tensorflow-js"],
+    "domains": [
+      "research"
+    ],
+    "evidence": [
+      "accessibility",
+      "diagnostic-reasoning",
+      "build-in-public",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "tensorflow-js"
+    ],
     "summary": "Layered accessibility project tackling one specific gap: blind and visually impaired people cannot independently read a pregnancy test. Works in phases from smartphone-first to hardware teardown research.",
     "anchor": "#proj-pregvoice",
     "relatedIds": [],
@@ -467,13 +790,33 @@
     "dateStart": "2026-05",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "support-ops"],
-    "evidence": ["technical-depth", "build-in-public", "self-serve-deflection", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js", "cloudflare-workers"],
+    "domains": [
+      "ai-engineering",
+      "support-ops"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "self-serve-deflection",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js",
+      "cloudflare-workers"
+    ],
     "summary": "Paste a customer message or error log; Claude returns a category, colour-coded urgency (Low to Critical), and a suggested first response ready to copy. Built on Haiku at ~0.2¢ per triage.",
     "anchor": "#proj-support-triage-tool",
-    "relatedIds": ["spec-solutions-support-ops", "faq-chatbot"],
+    "relatedIds": [
+      "spec-solutions-support-ops",
+      "faq-chatbot"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -487,13 +830,32 @@
     "dateStart": "2025-05",
     "dateEnd": "present",
     "status": "in-progress",
-    "domains": ["ai-engineering", "content-creation"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js", "jina-reader", "cloudflare-workers"],
+    "domains": [
+      "ai-engineering",
+      "content-creation"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js",
+      "jina-reader",
+      "cloudflare-workers"
+    ],
     "summary": "Theory stress-tester for Kingdom Hearts lore: paste a theory and relevant wiki links, get a structured AI analysis — contradictions, weaknesses, clarifying questions, and an overall verdict.",
     "anchor": "#proj-kh-lore-checker",
-    "relatedIds": ["lorebyspec-creator-tool"],
+    "relatedIds": [
+      "lorebyspec-creator-tool"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -507,10 +869,28 @@
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "in-progress",
-    "domains": ["frontend-dev", "research"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint", "diagnostic-reasoning"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["html-css-js", "foursquare-api", "eventbrite-api", "tmdb-api", "icalendar"],
+    "domains": [
+      "frontend-dev",
+      "research"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint",
+      "diagnostic-reasoning"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "html-css-js",
+      "foursquare-api",
+      "eventbrite-api",
+      "tmdb-api",
+      "icalendar"
+    ],
     "summary": "Recreation and technical deconstruction of a viral 'date proposal' website — running No button, four date-type paths (food/coffee/activity/cinema), live API discovery, and calendar invite generation.",
     "anchor": "#proj-date-proposal-website",
     "relatedIds": [],
@@ -527,13 +907,24 @@
     "dateStart": "2025-01",
     "dateEnd": "2025-01",
     "status": null,
-    "domains": ["content-creation", "strategy"],
-    "evidence": ["cross-functional-influence"],
-    "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "content-creation",
+      "strategy"
+    ],
+    "evidence": [
+      "cross-functional-influence"
+    ],
+    "context": {
+      "stage": "agency-consulting",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
     "summary": "End-to-end sponsorship project for a TikTok creator in mental health and rehabilitation — sponsor research, outreach strategy, personalised outreach messages, and a full sponsorship document with audience metrics and packages.",
     "anchor": "#proj-tiktok-sponsorship-strategy",
-    "relatedIds": ["spec-solutions-fractional-cos"],
+    "relatedIds": [
+      "spec-solutions-fractional-cos"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -547,13 +938,25 @@
     "dateStart": "2024-12",
     "dateEnd": "2024-12",
     "status": null,
-    "domains": ["people-hr", "strategy"],
-    "evidence": ["cross-functional-influence", "process-design"],
-    "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "cross-functional-influence",
+      "process-design"
+    ],
+    "context": {
+      "stage": "agency-consulting",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
     "summary": "Supported a creative business expanding from US to Europe — HR compliance, EOR partner selection, local labour law navigation, and creative workspace scouting in a major European city.",
     "anchor": "#proj-business-relocation-expansion",
-    "relatedIds": ["spec-solutions-fractional-cos"],
+    "relatedIds": [
+      "spec-solutions-fractional-cos"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -567,13 +970,23 @@
     "dateStart": "2024-11",
     "dateEnd": "2024-12",
     "status": null,
-    "domains": ["people-hr"],
-    "evidence": ["cross-functional-influence"],
-    "context": { "stage": "agency-consulting", "level": "strategic", "engagement": "consulting" },
+    "domains": [
+      "people-hr"
+    ],
+    "evidence": [
+      "cross-functional-influence"
+    ],
+    "context": {
+      "stage": "agency-consulting",
+      "level": "strategic",
+      "engagement": "consulting"
+    },
     "tools": [],
     "summary": "Provided coaching to a scaling startup's leadership team on conflict resolution, communication, and team alignment; implemented team-building and cross-functional goal alignment.",
     "anchor": "#proj-leadership-coaching-project",
-    "relatedIds": ["spec-solutions-fractional-cos"],
+    "relatedIds": [
+      "spec-solutions-fractional-cos"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -587,13 +1000,26 @@
     "dateStart": "2024-06",
     "dateEnd": "2024-09",
     "status": null,
-    "domains": ["support-ops"],
-    "evidence": ["process-design", "self-serve-deflection", "cost-discipline"],
-    "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "support-ops"
+    ],
+    "evidence": [
+      "process-design",
+      "self-serve-deflection",
+      "cost-discipline"
+    ],
+    "context": {
+      "stage": "agency-consulting",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
     "summary": "Partnered with a startup on ticket volume — implemented priority-based ticket allocation, knowledge base, and staff training; reduced response times 30% and increased CSAT.",
     "anchor": "#proj-optimising-cs-operations",
-    "relatedIds": ["spec-solutions-fractional-cos", "spec-solutions-support-ops"],
+    "relatedIds": [
+      "spec-solutions-fractional-cos",
+      "spec-solutions-support-ops"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -607,13 +1033,24 @@
     "dateStart": "2023-01",
     "dateEnd": "2023-02",
     "status": null,
-    "domains": ["strategy"],
-    "evidence": ["diagnostic-reasoning", "cross-functional-influence"],
-    "context": { "stage": "agency-consulting", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "strategy"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "cross-functional-influence"
+    ],
+    "context": {
+      "stage": "agency-consulting",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
     "summary": "Identified an underserved niche — custom webhooks and integrations for Twitch streamers — and helped a developer position, price, and market into it; client established a sustainable revenue stream.",
     "anchor": "#proj-niche-market-web-dev-strategy",
-    "relatedIds": ["spec-solutions-fractional-cos"],
+    "relatedIds": [
+      "spec-solutions-fractional-cos"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -627,13 +1064,39 @@
     "dateStart": "2024-01",
     "dateEnd": "2024-12",
     "status": null,
-    "domains": ["support-ops", "customer-support", "operations", "implementation-onboarding", "ai-engineering", "content-creation", "people-hr", "strategy"],
-    "evidence": ["process-design", "diagnostic-reasoning", "self-serve-deflection", "technical-depth", "build-in-public", "customer-facing", "cost-discipline", "cross-functional-influence", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "ic", "engagement": "consulting" },
+    "domains": [
+      "support-ops",
+      "customer-support",
+      "operations",
+      "implementation-onboarding",
+      "ai-engineering",
+      "content-creation",
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "process-design",
+      "diagnostic-reasoning",
+      "self-serve-deflection",
+      "technical-depth",
+      "build-in-public",
+      "customer-facing",
+      "cost-discipline",
+      "cross-functional-influence",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "ic",
+      "engagement": "consulting"
+    },
     "tools": [],
     "summary": "An early-stage made-to-order denim brand in a trust hole, rebuilt from the customer experience inward.",
     "anchor": "#cs-denim-brand-turnaround",
-    "relatedIds": ["faq-chatbot", "spec-solutions-fractional-cos"],
+    "relatedIds": [
+      "faq-chatbot",
+      "spec-solutions-fractional-cos"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {
@@ -643,12 +1106,31 @@
       "ops-strategy": "A full turnaround: brand, build-vs-buy judgment, and the operational structure a scaling team needs."
     },
     "sectionsByLane": {
-      "cs-support": [1, 2, 3],
-      "implementation": [2, 3],
-      "people-hr": [5, 7],
-      "ops-strategy": [4, 5, 6, 7],
-      "builder-technical": [3],
-      "creator-lore": [4]
+      "cs-support": [
+        1,
+        2,
+        3
+      ],
+      "implementation": [
+        2,
+        3
+      ],
+      "people-hr": [
+        5,
+        7
+      ],
+      "ops-strategy": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "builder-technical": [
+        3
+      ],
+      "creator-lore": [
+        4
+      ]
     },
     "notes": "Dates approximate — engagement ran across 2024 but precise months unavailable. EOR selection reached contract with Oyster; expansion funding was pulled before operation at scale."
   },
@@ -660,16 +1142,37 @@
     "dateStart": "2026-05",
     "dateEnd": "2026-05",
     "status": "sample",
-    "domains": ["technical-writing", "support-ops", "people-hr"],
-    "evidence": ["writing-range", "technical-depth", "process-design", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "lead", "engagement": "personal" },
-    "tools": ["zendesk", "sql"],
+    "domains": [
+      "technical-writing",
+      "support-ops",
+      "people-hr"
+    ],
+    "evidence": [
+      "writing-range",
+      "technical-depth",
+      "process-design",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "tools": [
+      "zendesk",
+      "sql"
+    ],
     "summary": "Four reference-quality playbook documents across ops and HR systems, written for different audiences to show range: API troubleshooting, SQL data audit, EOR payroll explainer, and tiered escalation logic.",
     "anchor": "technical-writing-portfolio.html",
     "pageAnchor": "#doc-technical-writing-portfolio",
-    "relatedIds": ["saas-integration-diagnostic-guide", "spec-solutions-support-ops"],
+    "relatedIds": [
+      "saas-integration-diagnostic-guide",
+      "spec-solutions-support-ops"
+    ],
     "audiencePin": [],
-    "audienceExclude": ["ops-strategy"],
+    "audienceExclude": [
+      "ops-strategy"
+    ],
     "lensByAudience": {},
     "notes": "audienceExclude[ops-strategy]: item ranks deceptively high in that lane due to support-ops and people-hr domains; it is documentation evidence, not strategy output. Contains 4 sub-documents: API Troubleshooting Playbook (Zendesk→Slack), SQL Missing Data Audit Guide, EOR Payroll Processing Explainer, Support Escalation Playbook. Indexed as one item; deep-link anchors for sub-docs are within the page."
   },
@@ -681,14 +1184,30 @@
     "dateStart": "2026-05",
     "dateEnd": "2026-05",
     "status": "sample",
-    "domains": ["technical-writing", "support-ops"],
-    "evidence": ["writing-range", "technical-depth", "process-design"],
-    "context": { "stage": "personal-project", "level": "lead", "engagement": "personal" },
-    "tools": ["zendesk"],
+    "domains": [
+      "technical-writing",
+      "support-ops"
+    ],
+    "evidence": [
+      "writing-range",
+      "technical-depth",
+      "process-design"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "tools": [
+      "zendesk"
+    ],
     "summary": "Internal support enablement document for Tier 1 and 2 agents covering webhook delivery failures, API authentication breakdowns, and HRIS sync errors — structured to reduce unnecessary escalation.",
     "anchor": "support-guide.html",
     "pageAnchor": "#doc-saas-integration-diagnostic-guide",
-    "relatedIds": ["technical-writing-portfolio", "stamped-widget-diagnostic"],
+    "relatedIds": [
+      "technical-writing-portfolio",
+      "stamped-widget-diagnostic"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -702,14 +1221,25 @@
     "dateStart": "2026-05",
     "dateEnd": "2026-05",
     "status": "sample",
-    "domains": ["technical-writing"],
-    "evidence": ["writing-range", "technical-depth"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
+    "domains": [
+      "technical-writing"
+    ],
+    "evidence": [
+      "writing-range",
+      "technical-depth"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
     "tools": [],
     "summary": "Professional API reference documentation for The Cat API's images search endpoint — authentication, all query parameters, response schema, request/response examples, error states, and pagination.",
     "anchor": "cat-api-documentation.html",
     "pageAnchor": "#doc-cat-api-documentation",
-    "relatedIds": ["technical-writing-portfolio"],
+    "relatedIds": [
+      "technical-writing-portfolio"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -723,14 +1253,26 @@
     "dateStart": "2026-05",
     "dateEnd": "2026-05",
     "status": "sample",
-    "domains": ["technical-writing"],
-    "evidence": ["writing-range", "process-design"],
-    "context": { "stage": "personal-project", "level": "lead", "engagement": "personal" },
+    "domains": [
+      "technical-writing"
+    ],
+    "evidence": [
+      "writing-range",
+      "process-design"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
     "tools": [],
     "summary": "Internal contributor guide defining voice, tone, and writing standards for technical documentation teams — voice characteristics, tone shifts by context, common mistakes, and a contributor checklist.",
     "anchor": "voice-and-tone-guide.html",
     "pageAnchor": "#doc-voice-and-tone-guide",
-    "relatedIds": ["technical-writing-portfolio", "voice-adaptation-showcase"],
+    "relatedIds": [
+      "technical-writing-portfolio",
+      "voice-adaptation-showcase"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -744,14 +1286,25 @@
     "dateStart": "2026-05",
     "dateEnd": "2026-05",
     "status": "sample",
-    "domains": ["technical-writing"],
-    "evidence": ["writing-range", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
+    "domains": [
+      "technical-writing"
+    ],
+    "evidence": [
+      "writing-range",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
     "tools": [],
     "summary": "The same 2FA how-to guide written three times — in Apple, Mailchimp, and PostHog voice — with source guide citations, applied principles, and reflection on what was hardest to adapt.",
     "anchor": "voice-adaptation-showcase.html",
     "pageAnchor": "#doc-voice-adaptation-showcase",
-    "relatedIds": ["voice-and-tone-guide"],
+    "relatedIds": [
+      "voice-and-tone-guide"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -765,14 +1318,31 @@
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["frontend-dev"],
-    "evidence": ["build-in-public", "technical-depth", "process-design", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["html-css-js"],
+    "domains": [
+      "frontend-dev"
+    ],
+    "evidence": [
+      "build-in-public",
+      "technical-depth",
+      "process-design",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "html-css-js"
+    ],
     "summary": "The portfolio's branching front-door guide — tag-driven curation, built as an overlay, no AI.",
     "anchor": "#proj-digital-spec-front-door",
-    "relatedIds": ["faq-chatbot"],
-    "audiencePin": [],
+    "relatedIds": [
+      "faq-chatbot"
+    ],
+    "audiencePin": [
+      "builder-technical"
+    ],
     "audienceExclude": [],
     "lensByAudience": {
       "builder-technical": "The portfolio's own front door — a tag-driven guide built as an overlay, no AI, fully documented."
@@ -787,10 +1357,28 @@
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "operations"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint", "diagnostic-reasoning"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["scheduled-agent", "ats-api", "web-fetch", "grep-parsing", "prompt-engineering"],
+    "domains": [
+      "ai-engineering",
+      "operations"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint",
+      "diagnostic-reasoning"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "scheduled-agent",
+      "ats-api",
+      "web-fetch",
+      "grep-parsing",
+      "prompt-engineering"
+    ],
     "summary": "A scheduled morning agent that pulls ~24 companies' public ATS feeds (Ashby, Greenhouse, Workable, Teamtailor), filters every posting on company/role/location gates, judges the survivors against a written fit matrix, dedups against a state file, and posts a reasoned digest of only the new, remote-from-Germany roles worth acting on.",
     "anchor": "#proj-role-fit-watcher",
     "relatedIds": [],
@@ -807,13 +1395,33 @@
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "complete",
-    "domains": ["operations", "strategy"],
-    "evidence": ["process-design", "judgment-restraint", "diagnostic-reasoning", "build-in-public"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["excel-openpyxl", "weighted-scoring-matrix", "dealbreaker-gate", "ai-assisted-scoring", "prompt-engineering"],
+    "domains": [
+      "operations",
+      "strategy"
+    ],
+    "evidence": [
+      "process-design",
+      "judgment-restraint",
+      "diagnostic-reasoning",
+      "build-in-public"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "excel-openpyxl",
+      "weighted-scoring-matrix",
+      "dealbreaker-gate",
+      "ai-assisted-scoring",
+      "prompt-engineering"
+    ],
     "summary": "A decision matrix for whether a role is worth the hours of curating a CV: scores any job description against a fixed profile across seven weighted dimensions, behind a dealbreaker gate that vetoes a high score outright, and returns a verdict (Strong / Stretch / Weak / No-go) with the transferable bridges to lead with, the real gaps, and a CV-effort estimate. Built as a five-tab spreadsheet engine plus a profile baseline and a runbook.",
     "anchor": "#proj-role-fit-evaluator",
-    "relatedIds": ["role-fit-watcher"],
+    "relatedIds": [
+      "role-fit-watcher"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -827,13 +1435,34 @@
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "content-creation"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint", "process-design"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js", "cowork-artifact"],
+    "domains": [
+      "ai-engineering",
+      "content-creation"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint",
+      "process-design"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js",
+      "cowork-artifact"
+    ],
     "summary": "Rewrites old LoreBySpec YouTube video descriptions for SEO in a single pass, returning a rewritten description, 3–5 lore-aware hashtags, and backend tags trimmed to YouTube's 500-character limit — with a built-in KH lore dictionary driving entity detection automatically.",
     "anchor": "#proj-kh-description-optimizer",
-    "relatedIds": ["kh-lore-checker", "lorebyspec-creator-tool", "kh-ab-testing-tool"],
+    "relatedIds": [
+      "kh-lore-checker",
+      "lorebyspec-creator-tool",
+      "kh-ab-testing-tool"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -847,13 +1476,34 @@
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "live",
-    "domains": ["ai-engineering", "content-creation"],
-    "evidence": ["technical-depth", "build-in-public", "judgment-restraint", "process-design"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["claude-api", "prompt-engineering", "html-css-js", "cowork-artifact"],
+    "domains": [
+      "ai-engineering",
+      "content-creation"
+    ],
+    "evidence": [
+      "technical-depth",
+      "build-in-public",
+      "judgment-restraint",
+      "process-design"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "claude-api",
+      "prompt-engineering",
+      "html-css-js",
+      "cowork-artifact"
+    ],
     "summary": "Generates three differentiated title and thumbnail concept variants from a video script — Curiosity, Bold Claim, List/Authority — tuned for the KH lore audience, with an over-promise flag based on YouTube's watch-time share ranking logic.",
     "anchor": "#proj-kh-ab-testing-tool",
-    "relatedIds": ["lorebyspec-creator-tool", "kh-description-optimizer", "kh-title-thumbnail-audit"],
+    "relatedIds": [
+      "lorebyspec-creator-tool",
+      "kh-description-optimizer",
+      "kh-title-thumbnail-audit"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
@@ -867,13 +1517,31 @@
     "dateStart": "2026-06",
     "dateEnd": "2026-06",
     "status": "complete",
-    "domains": ["content-creation", "data-analysis"],
-    "evidence": ["diagnostic-reasoning", "process-design", "build-in-public", "judgment-restraint"],
-    "context": { "stage": "personal-project", "level": "ic", "engagement": "personal" },
-    "tools": ["weighted-scoring-matrix", "prompt-engineering"],
+    "domains": [
+      "content-creation",
+      "data-analysis"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "build-in-public",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "weighted-scoring-matrix",
+      "prompt-engineering"
+    ],
     "summary": "Visually audited all 69 videos on the LoreBySpec channel against a 22-point rubric, built an impact-ranked redo list (weakness × views), and produced finished reference thumbnails for priority videos.",
     "anchor": "#proj-kh-title-thumbnail-audit",
-    "relatedIds": ["kh-ab-testing-tool", "lorebyspec-creator-tool"],
+    "relatedIds": [
+      "kh-ab-testing-tool",
+      "lorebyspec-creator-tool"
+    ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},

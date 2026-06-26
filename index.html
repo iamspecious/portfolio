@@ -617,6 +617,20 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-06-26</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    "Show me how you were built" was using a hardcoded anchor string — fragile as the portfolio grows. Separately, Digital Spec sat at slot 8 of 8 in the builder-technical lane; any new project at the same score tier pushes it off the list. Fixed both: the deeplink now uses a new <code>find-project</code> action that looks up by item id in the portfolio index at runtime. Digital Spec is now pinned to builder-technical via <code>audiencePin</code> in the index so it always appears regardless of how many other projects score the same.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 26 older entries</button>
+
+                            <div class="devlog-overflow">
+
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-06-21</span>
                                 <p>
                                     <span class="tag tag-issue">Issue</span>
@@ -625,9 +639,6 @@
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 25 older entries</button>
-
-                            <div class="devlog-overflow">
 
 
                             <div class="devlog-entry">
