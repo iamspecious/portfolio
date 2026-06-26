@@ -3334,7 +3334,7 @@
                     <div class="project" id="proj-kh-ab-testing-tool">
                         <h3>YouTube A/B Testing Tool <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
                         <p><strong>June 2026 – Present</strong></p>
-                        <p>A title and thumbnail generator for LoreBySpec videos. Paste a script, pick which angles to test, and it produces three variants — each built around a different lever — plus thumbnail concept briefs with ready-to-paste image prompts. Each variant is tuned for YouTube's algorithm and for the KH lore audience. It went through three formats before landing as a live Cowork tool.</p>
+                        <p>A title and thumbnail generator for LoreBySpec videos. Paste a script, pick which angles to test, and it produces three variants — each built around a different lever — plus thumbnail concept briefs with ready-to-paste image prompts. Tuned for YouTube's watch-time share logic and the KH lore audience. It went through three formats: prompt template, standalone HTML prompt-builder, and finally a Cowork artifact. The Cowork version assembles the full prompt in-page and copies it in one click — zero-paste live generation is parked pending a runtime update (see dev log).</p>
 
                         <div class="project-wins">
                             <strong>Wins</strong>
@@ -3343,19 +3343,21 @@
                                 <li><strong>Over-promise flag</strong> — bakes in the key best-practice nuance: YouTube's native Test &amp; Compare picks winners by watch-time share, not raw clicks. Any variant likely to over-promise and tank retention gets flagged before you test it.</li>
                                 <li><strong>KH-tuned rules</strong> — lore-search patterns ("Explained," "Theory," "Timeline"), character keywords (Xehanort, Roxas, Keyblade War), and the franchise's visual identity built in.</li>
                                 <li><strong>Readable output</strong> — each title carries a char count and a "why it works" note; each thumbnail brief carries a copyable image prompt, a test plan, and a per-video tip.</li>
+                                <li><strong>Niche-agnostic</strong> — the <code>niche</code> field drives the persona and adapts visual-identity guidance per franchise. Verified on a Dragon Age script; KH is the default, not a hard-coded assumption.</li>
+                                <li><strong>Fails soft</strong> — prompt-assembly is decoupled from who runs it. When the live generation path isn't available, the same logic builds the prompt and copies it in one click. No dead ends.</li>
                             </ul>
                         </div>
                         <div class="project-constraints">
                             <strong>Constraints</strong>
                             <ul>
                                 <li><strong>Offline HTML couldn't generate titles</strong> — a plain HTML file can't call an AI without an API key, so the v2 standalone builder could construct the prompt but not run it. This is what drove the move to Cowork.</li>
-                                <li><strong>Fast model, thin batches</strong> — the live version generates with a fast model; a thin batch sometimes needs a regenerate or an angle toggle to get a usable variant.</li>
+                                <li><strong>Live generation parked</strong> — the Cowork artifact runtime documents a <code>window.cowork.askClaude</code> bridge, but the sandboxed <code>cowork-file://preview/</code> render doesn't inject it. The supported path is build + one-click copy; the <code>getCowork()</code> poller will pick the bridge up automatically if it's ever mounted in this view.</li>
                             </ul>
                         </div>
 
                         <p style="margin-top: 10px;">
                             <span class="tech-tag">Cowork Artifact</span>
-                            <span class="tech-tag">On-device Claude inference</span>
+                            <span class="tech-tag">Build + copy fallback</span>
                             <span class="tech-tag">A/B testing</span>
                             <span class="tech-tag">YouTube title optimisation</span>
                             <span class="tech-tag">Thumbnail concept briefs</span>
@@ -3368,27 +3370,83 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-06 — v3</span>
+                                <span class="timestamp">2026-06-26</span>
                                 <p>
-                                    <span class="tag tag-done">Done</span>
-                                    Rebuilt as a live Cowork artifact, light-mode themed to match. Same options as v2 (Curiosity/Bold Claim/List-Authority default; Emotional and Contrarian optional), but Generate produces the titles and thumbnail briefs in-page rather than building a prompt to paste elsewhere. Persists, so it reopens with state. Open next steps offered but not built: "regenerate just this variant" button and a saved history of past titles.
+                                    <span class="tag tag-note">Note</span>
+                                    Confirmed niche-agnostic: ran a Dragon Age: Inquisition vs Veilguard essay script through the fallback path — produced 3 full variants (titles, thumbnail briefs, image prompts) plus a test plan and per-video tip. All best-practice rules present in the output. KH is the default, not a hard-coded assumption.
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 11 older entries</button>
 
                             <div class="devlog-overflow">
 
                                 <div class="devlog-entry">
-                                    <span class="timestamp">2026-06</span>
+                                    <span class="timestamp">2026-06-26 — root cause</span>
                                     <p>
-                                        <span class="tag tag-pivot">Pivot</span>
-                                        User's reaction to v2: if you have to paste the built prompt back into Claude anyway, the copy-paste step is wasted. Agreed and cut it. The standalone HTML builder was a good intermediary but the friction it introduced negated the convenience. Moved to a live tool.
+                                        <span class="tag tag-note">Note</span>
+                                        Root cause confirmed. Diagnostics log: <code>location.href: cowork-file://preview/kh_live_tool.html</code>, <code>iframed: false</code>, <code>typeof window.cowork: undefined</code>, no globals matching <code>cowork/claude/anthropic/mcp</code> (only match was our own <code>getCowork</code> function). The sandboxed preview render doesn't inject the bridge — not a timing race, not a cross-origin frame, not an alternate global name. Zero-paste live generation parked; fallback is the supported path. Poller will pick the bridge up automatically if it's ever mounted.
                                     </p>
                                 </div>
 
                                 <div class="devlog-entry">
-                                    <span class="timestamp">2026-06 — v2</span>
+                                    <span class="timestamp">2026-06-26</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Added a Run diagnostics panel: logs <code>typeof window.cowork</code> and its keys, whether the view is iframed, cross-origin reachability of parent/top, any window globals matching <code>cowork|claude|anthropic|bridge|mcp</code>, <code>location.href</code>, referrer, and userAgent. Output is copyable. Ran it — captured the data that closed the investigation.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Shipped graceful fallback before root cause was known: when the bridge is unavailable, Generate builds the finished prompt in-page and renders it with a one-click Copy button. Flow degrades from 0 pastes to 1 paste. Tool is usable end-to-end regardless of what the runtime investigation finds.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        H2 attempt — hypothesis: cross-origin iframe hides the bridge. If the artifact renders in a cross-origin iframe, <code>window.parent.cowork</code> throws a <code>SecurityError</code> before returning. Fix: wrapped parent/top access in <code>try/catch</code> inside the poller. ❌ Still not found — no SecurityError thrown, meaning <code>window.cowork</code> is genuinely undefined in the frame, not obscured by an error.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        H1 attempt — hypothesis: bridge injected late (timing race). Wrapped the <code>askClaude</code> call in a <code>getCowork()</code> poller: checks <code>window.cowork</code>, <code>window.parent.cowork</code>, and <code>window.top.cowork</code> every 100ms for up to ~6s. ❌ Poller exhausted and returned <code>null</code> — bridge isn't late, it's absent for the full polling window.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        v3 first run threw: <em>"Cannot read properties of undefined (reading 'askClaude')"</em>. <code>window.cowork</code> is <code>undefined</code> at call time — the LLM call never fires.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26 — v3</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Rebuilt as a live Cowork artifact, light-mode themed to match. Same options as v2 (Curiosity/Bold Claim/List-Authority default; Emotional and Contrarian optional), but Generate was intended to produce titles and briefs in-page via <code>window.cowork.askClaude</code>. Persists, so it reopens with state.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26</span>
+                                    <p>
+                                        <span class="tag tag-pivot">Pivot</span>
+                                        User's reaction to v2: if you have to paste the built prompt back into Claude anyway, the copy-paste step is wasted. Agreed and cut it. The standalone HTML builder was a good intermediary but the friction it introduced negated the convenience. Moved to a live Cowork artifact.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-06-26 — v2</span>
                                     <p>
                                         <span class="tag tag-done">Done</span>
                                         Built a single-file offline HTML prompt-builder: paste script, choose variant count and angles, Build prompt, Copy to clipboard. Caught and fixed two stray CSS typos during testing. Limitation stated up front: builds the prompt but can't generate titles itself without an API key.
@@ -3396,26 +3454,18 @@
                                 </div>
 
                                 <div class="devlog-entry">
-                                    <span class="timestamp">2026-06 — v2 intent</span>
+                                    <span class="timestamp">2026-06-26 — v2 intent</span>
                                     <p>
                                         <span class="tag tag-decision">Decision</span>
-                                        User asked for an actual interactive tool — v1 was a paste-in template, not something you could use repeatedly without going back into a chat. Built the offline HTML version as a self-contained prompt-builder.
+                                        Needed an actual interactive tool — v1 was a paste-in template, not something you could use repeatedly without opening a fresh chat. Built the offline HTML version as a self-contained prompt-builder.
                                     </p>
                                 </div>
 
                                 <div class="devlog-entry">
-                                    <span class="timestamp">2026-06 — v1</span>
+                                    <span class="timestamp">2026-06-26 — v1 + initial scoping</span>
                                     <p>
                                         <span class="tag tag-done">Done</span>
-                                        v1: a reusable paste-in template. Drop script into a fresh chat, get 3 A/B/C variants each with a title, thumbnail brief, and image prompt. Each variant locked to a different lever: Curiosity, Bold Claim, List-Authority.
-                                    </p>
-                                </div>
-
-                                <div class="devlog-entry">
-                                    <span class="timestamp">2026-06 — initial scoping</span>
-                                    <p>
-                                        <span class="tag tag-decision">Decision</span>
-                                        Clarified scope: KH lore channel, reusable template, thumbnails handled by the user's own image tool (tool outputs briefs and image prompts, not images). Researched YouTube title/thumbnail best practice — key discovery that shaped the over-promise flag: Test &amp; Compare picks winners by watch-time share, not CTR, so a high-CTR/low-retention title can lose even with a higher click rate.
+                                        Clarified scope: KH lore channel, reusable template, thumbnails handled by the user's own image tool (outputs briefs and image prompts, not images). Researched YouTube title/thumbnail best practice — key finding: Test &amp; Compare picks winners by watch-time share, not CTR, so a high-CTR/low-retention title can lose. Built the over-promise flag around this. v1 shipped as a paste-in prompt template: drop script into a fresh chat, get 3 A/B/C variants each with title, thumbnail brief, and image prompt.
                                     </p>
                                 </div>
 
