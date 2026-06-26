@@ -269,6 +269,16 @@
     } else if (opt.action === 'deeplink') {
       collapse();
       doDeepLink(opt.tab, opt.anchor);
+    } else if (opt.action === 'find-project') {
+      // Look up by id in the portfolio index — resilient to anchor/tab changes
+      var found = null;
+      for (var fi = 0; fi < portfolioIndex.length; fi++) {
+        if (portfolioIndex[fi].id === opt.itemId) { found = portfolioIndex[fi]; break; }
+      }
+      if (found) {
+        var routing = getRouting(found, null);
+        if (routing) { collapse(); doDeepLink(routing.tab, routing.anchor); }
+      }
     }
   }
 
