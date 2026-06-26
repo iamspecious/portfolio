@@ -6,13 +6,13 @@ Generated against `portfolio-index.json` v1, `lanes.json` v2, `TAXONOMY.md` v2.
 
 ## Coverage
 
-**Total items indexed: 39**
+**Total items indexed: 42**
 
 | Type | Count |
 |---|---|
 | `work` | 13 |
 | `case-study` | 9 |
-| `project` | 12 |
+| `project` | 15 |
 | `document` | 5 |
 
 All items present in `index.html` (or linked standalone files) have a corresponding entry. Zero orphans.
@@ -57,6 +57,9 @@ All items present in `index.html` (or linked standalone files) have a correspond
 | `date-proposal-website` | project | `#proj-date-proposal-website` | ✓ |
 | `proj-digital-spec-front-door` | project | `#proj-digital-spec-front-door` | ✓ |
 | `role-fit-watcher` | project | `#proj-role-fit-watcher` | ✓ |
+| `kh-description-optimizer` | project | `#proj-kh-description-optimizer` | ✓ |
+| `kh-ab-testing-tool` | project | `#proj-kh-ab-testing-tool` | ✓ |
+| `kh-title-thumbnail-audit` | project | `#proj-kh-title-thumbnail-audit` | ✓ |
 | `technical-writing-portfolio` | document | `technical-writing-portfolio.html` + pageAnchor `#doc-technical-writing-portfolio` | ✓ |
 | `saas-integration-diagnostic-guide` | document | `support-guide.html` + pageAnchor `#doc-saas-integration-diagnostic-guide` | ✓ |
 | `cat-api-documentation` | document | `cat-api-documentation.html` + pageAnchor `#doc-cat-api-documentation` | ✓ |
@@ -102,8 +105,8 @@ Items surfaced per lane (domain match, before evidence boost):
 | `implementation` | denim-brand-turnaround |
 | `ops-strategy` | spec-solutions-fractional-cos, connection-engine-cos, can-i-play-that-editor, itc-community-manager, leaguepedia-chief-of-people, learnovate-pm-research, learnovate-develop-project, business-relocation-expansion, leadership-coaching-project, niche-market-web-dev-strategy, tiktok-sponsorship-strategy, denim-brand-turnaround, technical-writing-portfolio, role-fit-watcher |
 | `people-hr` | spec-solutions-fractional-cos, leaguepedia-chief-of-people, business-relocation-expansion, leadership-coaching-project, denim-brand-turnaround, technical-writing-portfolio |
-| `builder-technical` | error-log-interpreter, debug-helper, posthog-cs-health-intelligence, posthog-csm-copilot, faq-chatbot, lorebyspec-creator-tool, support-triage-tool, kh-lore-checker, date-proposal-website, proj-digital-spec-front-door, role-fit-watcher |
-| `creator-lore` | phandroid-tech-writer, lorebyspec-creator-tool, kh-lore-checker, tiktok-sponsorship-strategy |
+| `builder-technical` | error-log-interpreter, debug-helper, posthog-cs-health-intelligence, posthog-csm-copilot, faq-chatbot, lorebyspec-creator-tool, support-triage-tool, kh-lore-checker, date-proposal-website, proj-digital-spec-front-door, role-fit-watcher, kh-description-optimizer, kh-ab-testing-tool |
+| `creator-lore` | phandroid-tech-writer, lorebyspec-creator-tool, kh-lore-checker, tiktok-sponsorship-strategy, kh-description-optimizer, kh-ab-testing-tool, kh-title-thumbnail-audit |
 | `documentation` (secondary) | technical-writing-portfolio, saas-integration-diagnostic-guide, cat-api-documentation, voice-and-tone-guide, voice-adaptation-showcase |
 
 ---
@@ -138,6 +141,7 @@ Items surfaced per lane (domain match, before evidence boost):
 | `weighted-scoring-matrix` | `role-fit-evaluator` |
 | `dealbreaker-gate` | `role-fit-evaluator` |
 | `ai-assisted-scoring` | `role-fit-evaluator` |
+| `cowork-artifact` | `kh-description-optimizer` |
 
 All are now listed in TAXONOMY.md §6.
 
