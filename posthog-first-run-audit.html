@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostHog First-Run Audit — Specious Coda Bishop</title>
+    <meta name="description" content="A live, first-time install of PostHog on a static site — seven findings, four issues filed, one docs PR.">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.75;
+            font-size: 15px;
+        }
+
+        .doc-container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .back-link {
+            color: #b392f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 40px;
+        }
+        .back-link:hover { color: #d2b3ff; }
+
+        .doc-header {
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 28px;
+            margin-bottom: 36px;
+        }
+
+        .doc-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #b392f0;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .doc-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #e6edf3;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .doc-subtitle {
+            font-size: 0.94rem;
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .doc-byline {
+            font-size: 0.8rem;
+            color: #6e7681;
+        }
+
+        article p {
+            font-size: 0.92rem;
+            color: #c9d1d9;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        article h2 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin: 44px 0 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        article h2:first-of-type { margin-top: 8px; }
+
+        article strong { color: #e6edf3; }
+
+        article a { color: #b392f0; }
+        article a:hover { color: #d2b3ff; }
+
+        .quote-strip {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0;
+            padding: 16px 20px;
+            margin: 18px 0 20px;
+        }
+        .quote-strip p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #d2c7ea;
+        }
+
+        .issue-refs {
+            margin: 14px 0 4px;
+            padding-left: 0;
+            list-style: none;
+        }
+        .issue-refs li {
+            font-size: 0.82rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #8b949e;
+            padding: 3px 0;
+        }
+        .issue-refs a {
+            color: #79c0ff;
+            text-decoration: none;
+        }
+        .issue-refs a:hover { text-decoration: underline; }
+
+        .evidence {
+            margin-top: 56px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 24px 26px;
+        }
+
+        .evidence-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .evidence-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .evidence-list li {
+            font-size: 0.85rem;
+            line-height: 1.55;
+        }
+
+        .evidence-list a {
+            color: #79c0ff;
+            text-decoration: none;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.83rem;
+        }
+        .evidence-list a:hover { text-decoration: underline; }
+
+        .evidence-list .ev-title {
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .evidence-note {
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid #21262d;
+            font-size: 0.82rem;
+            color: #8b949e;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #3fb950;
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="doc-container">
+        <a class="back-link" href="index.html">← Back to portfolio</a>
+
+        <div class="doc-header">
+            <span class="doc-label">Field Report · PostHog</span>
+            <h1 class="doc-title">You Can't Presume Context: A First Run of PostHog, Documented Live</h1>
+            <p class="doc-subtitle">Installed PostHog cold on this site, documented seven findings live, filed four issues and a docs PR — the write-up.</p>
+            <p class="doc-byline">Specious Coda Bishop · July 2026</p>
+        </div>
+
+        <article>
+            <p>I installed PostHog on my portfolio site this week — a plain HTML static site on GitHub Pages. I went in as a genuine first-time user, and I wrote down everything that happened while it happened. By the end I'd filed four issues and a docs PR. This is the story of that first hour, and what it taught me about first-contact design.</p>
+
+            <h2>The wizard assumed things about me</h2>
+            <p>The docs routed me to the install wizard. What's interesting is that it doesn't state it needed to be run in terminal to begin with. And once you're in, the terminal thing itself doesn't allow you to back out — it wants you to pick a framework. My site doesn't have a framework. The picker had no option for that, and no exit.</p>
+            <p>"Oh well, our users should know to open terminal." No — they're not going to. This is your first time using the platform; you can't presume knowledge. Or more precisely: you can't presume <em>context</em>. A senior engineer doesn't know your wizard's conventions on first contact either. The sin isn't assuming technical skill — it's assuming familiarity nobody has yet.</p>
+            <ul class="issue-refs">
+                <li>Filed: <a href="https://github.com/PostHog/wizard/issues/869" target="_blank">PostHog/wizard#869</a> — no exit from the picker</li>
+                <li>Filed: <a href="https://github.com/PostHog/wizard/issues/870" target="_blank">PostHog/wizard#870</a> — no path for static sites</li>
+            </ul>
+
+            <h2>"Web" doesn't mean what you think it means</h2>
+            <p>My correct path turned out to be the JS snippet — a single paste into the head. It technically lives behind the "Web" tile in the SDK grid. But if I see "Web" I think React, JavaScript, Java — something more technical — not "here's the JS snippet you need for your HTML." Every option in that grid is the web. The label only makes sense once you already know the SDK taxonomy, which is exactly the person who doesn't need the signpost.</p>
+            <p>And "set up manually" is ambiguous depending on where you are on the technical ladder. For some people it means running and configuring in a terminal; for others it means manually placing a snippet into existing HTML. Same words, different users, different meanings.</p>
+            <ul class="issue-refs">
+                <li>Filed: <a href="https://github.com/PostHog/posthog.com/pull/18390" target="_blank">PostHog/posthog.com#18390</a> — a docs PR routing static sites to the snippet at the exact moment they've scanned the frameworks list and found nothing.</li>
+            </ul>
+
+            <h2>A funnel drop-off inside the funnel company</h2>
+            <p>Connecting GitHub as a data source: I authorized on GitHub's side and got redirected... back to the connection screen I started on. No indication whether it worked or not. And the task was abandoned midway — if you're already in the process of connecting GitHub, why would you be redirected somewhere that isn't GitHub? Surely you'd want to select your repos, then be prompted to connect other things.</p>
+            <p>PostHog's core product detects funnel drop-off. This is a textbook funnel break — a step where the user exits an in-progress task with no completion state — inside the onboarding of the funnel-analytics company. The exact pattern their own product exists to catch.</p>
+            <ul class="issue-refs">
+                <li>Filed: <a href="https://github.com/PostHog/posthog/issues/70206" target="_blank">PostHog/posthog#70206</a> — OAuth redirect drops the task with no success state</li>
+            </ul>
+            <p>To be fair — and this matters — once you're back inside the GitHub connection the second time, the webhook setup and the explainers of where to go and what to do were great. The capability for good guidance clearly exists. These are gaps in coverage, not competence.</p>
+
+            <h2>The theme: silent states</h2>
+            <p>The same defect kept recurring in different clothes. The OAuth redirect gave no success state. The Quick start checklist tracks progress fine, but the button vanishes from the top bar mid-flow — if you save on the page you're configuring and it doesn't populate, and you're mid-flow, it breaks that flow.</p>
+            <ul class="issue-refs">
+                <li>Filed: <a href="https://github.com/PostHog/posthog/issues/70204" target="_blank">PostHog/posthog#70204</a> — Quick start button disappears mid-flow</li>
+            </ul>
+            <p>And at the very end, with the snippet deployed and events flowing, my honest reaction was "from what I can tell, it works?" — success inferred from seeing myself in the data, never announced.</p>
+            <div class="quote-strip">
+                <p>Every action a user takes should return a legible state change. Silence after an action is indistinguishable from failure — so users retry, duplicate, or leave.</p>
+            </div>
+
+            <h2>The choices I made on my side</h2>
+            <p>I put PostHog on the EU cloud and set <code>person_profiles: 'identified_only'</code> — anonymous visitors are tracked without a full person profile being created, and a profile only forms once someone takes an identifying action. For a portfolio site serving EU visitors, that felt like the right starting default: less identity data captured by default, not more.</p>
+            <p>And the reason I wanted analytics at all: I'm job hunting, and I want to know whether application reviewers actually open the portfolio, which pages they read, and how long they stay. This isn't vanity instrumentation — it's my own funnel.</p>
+
+            <h2>What I took from it</h2>
+            <p>Deliver the right information at the moment of need, rather than making people hunt for it. Regardless of your literacy or technical level, these first touch points matter. Most people will dig through the docs — but can't we make it easier? Give it to them up front?</p>
+            <p>That's the whole thesis. It's also, I'd argue, the whole job of docs, onboarding, and context engineering: knowledge moved to the point of first contact, for humans and agents alike — because neither reads the manual before acting.</p>
+        </article>
+
+        <div class="evidence">
+            <span class="evidence-label">Evidence</span>
+            <ul class="evidence-list">
+                <li><span class="status-dot"></span><a href="https://github.com/PostHog/wizard/issues/869" target="_blank">PostHog/wizard#869</a> — <span class="ev-title">Framework picker has no exit</span></li>
+                <li><span class="status-dot"></span><a href="https://github.com/PostHog/wizard/issues/870" target="_blank">PostHog/wizard#870</a> — <span class="ev-title">No path for plain HTML / static sites</span></li>
+                <li><span class="status-dot"></span><a href="https://github.com/PostHog/posthog/issues/70206" target="_blank">PostHog/posthog#70206</a> — <span class="ev-title">GitHub OAuth redirect drops the task with no success state</span></li>
+                <li><span class="status-dot"></span><a href="https://github.com/PostHog/posthog/issues/70204" target="_blank">PostHog/posthog#70204</a> — <span class="ev-title">Quick start button disappears from the top bar mid-flow</span></li>
+                <li><span class="status-dot"></span><a href="https://github.com/PostHog/posthog.com/pull/18390" target="_blank">PostHog/posthog.com#18390</a> — <span class="ev-title">docs: route static sites to the JS snippet from the wizard docs</span></li>
+            </ul>
+            <p class="evidence-note">Live analytics running on this site — EU cloud, <code>person_profiles: 'identified_only'</code>. All five links open in the PostHog repos, filed under my own account during this run-through.</p>
+        </div>
+    </div>
+</body>
+</html>
