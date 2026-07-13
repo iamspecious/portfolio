@@ -631,7 +631,8 @@
     "summary": "Research-backed prototype — structured JSON account model and Python script that produces a ranked morning action list for a CSM: URGENT / WATCH / OK, each with signal, reason, and suggested action.",
     "anchor": "#proj-posthog-cs-health-intelligence",
     "relatedIds": [
-      "posthog-csm-copilot"
+      "posthog-csm-copilot",
+      "posthog-first-run-audit"
     ],
     "audiencePin": [],
     "audienceExclude": [],
@@ -670,7 +671,8 @@
     "anchor": "#proj-posthog-csm-copilot",
     "relatedIds": [
       "posthog-cs-health-intelligence",
-      "support-triage-tool"
+      "support-triage-tool",
+      "posthog-first-run-audit"
     ],
     "audiencePin": [],
     "audienceExclude": [],
@@ -1220,6 +1222,43 @@
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": ""
+  },
+  {
+    "id": "posthog-first-run-audit",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "PostHog First-Run Audit",
+    "dateStart": "2026-07",
+    "dateEnd": "2026-07",
+    "status": "complete",
+    "domains": [
+      "technical-writing",
+      "implementation-onboarding",
+      "support-ops"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "writing-range",
+      "judgment-restraint",
+      "build-in-public"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [],
+    "summary": "Installed PostHog cold on this site as a genuine first-time user and documented the first hour live — a wizard with no exit, an ambiguous SDK label, and an OAuth redirect with no success state. Filed four issues and a docs PR against PostHog's own repos.",
+    "anchor": "posthog-first-run-audit.html",
+    "pageAnchor": "#doc-posthog-first-run-audit",
+    "relatedIds": [
+      "posthog-csm-copilot",
+      "posthog-cs-health-intelligence"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Evidence is externally verifiable: PostHog/wizard#869, PostHog/wizard#870, PostHog/posthog#70206, PostHog/posthog#70204 (all open), PostHog/posthog.com#18390 (open PR). Not a portfolio sample — filed under Spec's own GitHub account during the run-through."
   },
   {
     "id": "cat-api-documentation",
