@@ -1,0 +1,32 @@
+# Self-hosted n8n for the workflow layer. The exported workflow JSON in
+# n8n/workflows/ imports into this instance.
+#
+# Run:  docker compose up -d
+# UI:   http://localhost:5678
+#
+# n8n's own webhook URLs (used to register with Remote/Ashby/HiBob during
+# development) need to be reachable from outside this machine — that's
+# what ngrok is for locally. See README.md for the "free ngrok is fine for
+# dev, not for anything real" note.
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - GENERIC_TIMEZONE=Europe/Berlin
+      - TZ=Europe/Berlin
+      # n8n encrypts stored credentials with this key. Generate a real one
+      # locally (e.g. `openssl rand -hex 32`) — do not commit it.
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY:?set N8N_ENCRYPTION_KEY in your shell or .env}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/workflows:ro
+
+volumes:
+  n8n_data:

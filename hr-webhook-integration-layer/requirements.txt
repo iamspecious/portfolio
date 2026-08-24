@@ -1,0 +1,7 @@
+# The receiver and platform wrappers are written against the Python
+# standard library only — http.server, hmac, hashlib, sqlite3, urllib —
+# on purpose, the same "no external dependencies" choice made in
+# posthog-cs-health-intelligence/. There is nothing to install here.
+#
+# n8n itself is not a Python dependency — it runs separately via Docker.
+# See docker-compose.yml and README.md.

@@ -1,0 +1,62 @@
+{
+  "name": "Simulated Hire — Manual End-to-End Run",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b2f7e3b1-2b22-4f3b-8c1b-000000000001",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [260, 300],
+      "notes": "Manual trigger for demoing component 5 (the end-to-end flow) on demand, without waiting for a real Ashby candidateHire event."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c1", "name": "event_id", "type": "string",
+              "value": "={{ 'demo-' + $now.toMillis() }}"
+            },
+            {
+              "id": "c2", "name": "hire_payload", "type": "object",
+              "value": "={{ { country_code: 'DEU', full_name: 'Jordan Ellery', personal_email: 'jordan.ellery@example-personal.test', job_title: 'Senior Backend Engineer', type: 'employee', provisional_start_date: '2026-07-01' } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b2f7e3b1-2b22-4f3b-8c1b-000000000002",
+      "name": "Build Synthetic Hire Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 300],
+      "notes": "Synthetic data only. No real employee is represented anywhere in this workflow."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://receiver:8787/internal/hire-flow",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ event_id: $json.event_id, hire_payload: $json.hire_payload }) }}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "b2f7e3b1-2b22-4f3b-8c1b-000000000003",
+      "name": "Run Hire Flow (dry-run by default)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [740, 300],
+      "notes": "Fetches the live Remote country JSON schema, validates the synthetic payload against it, and — only if DRY_RUN=false in the receiver's environment — creates the employment in the Remote sandbox. Defaults to dry-run: logs the intended call and makes no write. See receiver/flows/hire_flow.py."
+    }
+  ],
+  "connections": {
+    "Manual Trigger": { "main": [[{ "node": "Build Synthetic Hire Payload", "type": "main", "index": 0 }]] },
+    "Build Synthetic Hire Payload": { "main": [[{ "node": "Run Hire Flow (dry-run by default)", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "note": "Importable workflow definition, not executed against a live n8n instance in this repo. See hr-webhook-intake.json's meta note and README.md."
+  }
+}

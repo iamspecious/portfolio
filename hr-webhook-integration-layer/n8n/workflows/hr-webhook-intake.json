@@ -1,0 +1,159 @@
+{
+  "name": "HR Webhook Intake — Verified Event Router",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "hr-event-intake",
+        "httpMethod": "POST",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "a1e6f2a0-1a11-4e2a-9b0a-000000000001",
+      "name": "Verified Event In",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "notes": "Receives already-verified, already-deduped events forwarded by the Python receiver's queue worker (receiver/queue.py -> next_queued()). This node deliberately does NOT re-verify a platform signature — signature verification happens exactly once, in receiver/signatures.py, because three copies of crypto-comparison code drifting apart is worse than one copy called from two runtimes."
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.platform}}",
+                    "rightValue": "ashby",
+                    "operator": { "type": "string", "operation": "equals" }
+                  },
+                  {
+                    "leftValue": "={{$json.event_type}}",
+                    "rightValue": "candidateHire",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "ashby_candidate_hire"
+            },
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.platform}}",
+                    "rightValue": "hibob",
+                    "operator": { "type": "string", "operation": "equals" }
+                  },
+                  {
+                    "leftValue": "={{$json.event_type}}",
+                    "rightValue": "employee.hired",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "hibob_employee_hired"
+            },
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.platform}}",
+                    "rightValue": "remote",
+                    "operator": { "type": "string", "operation": "equals" }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "remote_event"
+            }
+          ]
+        },
+        "options": { "fallbackOutput": "extra" }
+      },
+      "id": "a1e6f2a0-1a11-4e2a-9b0a-000000000002",
+      "name": "Route by Platform + Event Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://receiver:8787/internal/hire-flow",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ event_id: $json.event_id, hire_payload: $json.payload }) }}",
+        "options": { "timeout": 30000 }
+      },
+      "id": "a1e6f2a0-1a11-4e2a-9b0a-000000000003",
+      "name": "Trigger Hire Flow",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [780, 180],
+      "notes": "Ashby candidateHire is the trigger for the end-to-end hire flow (receiver/flows/hire_flow.py): fetch the live Remote country schema, validate, create the employment (dry-run gated). This node calls back into the Python service rather than reimplementing schema validation in n8n — the validation logic is unit-tested in Python; duplicating it here would mean two implementations that can silently disagree."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://receiver:8787/internal/person-mapping/upsert",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ source: 'hibob', hibob_employee_id: $json.payload.employee.id, work_email: $json.payload.employee.email, start_date: $json.payload.employee.startDate }) }}",
+        "options": { "timeout": 15000 }
+      },
+      "id": "a1e6f2a0-1a11-4e2a-9b0a-000000000004",
+      "name": "Upsert Person Mapping (HiBob)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [780, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://receiver:8787/internal/person-mapping/upsert",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ source: 'remote', remote_employment_id: $json.payload.data.employment.id }) }}",
+        "options": { "timeout": 15000 }
+      },
+      "id": "a1e6f2a0-1a11-4e2a-9b0a-000000000005",
+      "name": "Upsert Person Mapping (Remote)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [780, 420]
+    },
+    {
+      "parameters": { "respondWith": "json", "responseBody": "={{ { \"routed\": true } }}" },
+      "id": "a1e6f2a0-1a11-4e2a-9b0a-000000000006",
+      "name": "Ack",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1040, 300]
+    }
+  ],
+  "connections": {
+    "Verified Event In": {
+      "main": [[{ "node": "Route by Platform + Event Type", "type": "main", "index": 0 }]]
+    },
+    "Route by Platform + Event Type": {
+      "main": [
+        [{ "node": "Trigger Hire Flow", "type": "main", "index": 0 }],
+        [{ "node": "Upsert Person Mapping (HiBob)", "type": "main", "index": 0 }],
+        [{ "node": "Upsert Person Mapping (Remote)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Trigger Hire Flow": { "main": [[{ "node": "Ack", "type": "main", "index": 0 }]] },
+    "Upsert Person Mapping (HiBob)": { "main": [[{ "node": "Ack", "type": "main", "index": 0 }]] },
+    "Upsert Person Mapping (Remote)": { "main": [[{ "node": "Ack", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "note": "Committed as a workflow definition, importable into a local n8n instance via docker-compose.yml. It has not been executed against a live n8n instance in this repo — the signature verification, dedup, person-mapping, hire-flow, and failure-philosophy logic it orchestrates is implemented and tested in the Python receiver (receiver/), which is what actually needed to be provably correct for this project. See README.md."
+  }
+}
