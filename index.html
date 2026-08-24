@@ -1131,6 +1131,152 @@
                     </div><!-- /project -->
                     </div><!-- /project-block: Role Fit Watcher -->
 
+                    <div class="project-block" data-category="engineering operations">
+
+                    <!-- ====================================================
+                         HR WEBHOOK INTEGRATION LAYER
+                    ===================================================== -->
+                    <div class="project" id="proj-hr-webhook-integration-layer">
+                        <h3>HR Webhook Integration Layer <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Complete</span></h3>
+                        <p><strong>August 2026</strong></p>
+                        <p>A webhook receiver and integration layer across three HR platforms — HiBob, Ashby, and Remote — built around one fact: the three platforms disagree about what a failed delivery means. Send each of them the same HTTP 500 and Remote marks the event delivered and quietly drops it, Ashby disables the whole webhook subscription, and HiBob retries for three days and emails an admin. A receiver built against any one of those models is wrong for the other two.</p>
+                        <p style="margin-top: 10px;">Only Remote has a public sandbox, so it's the only platform this project actually calls — OAuth2 auth, a live country-schema fetch, and a dry-run-gated employment creation against <code>gateway.remote-sandbox.com</code>. HiBob and Ashby have no sandbox at all; their wrappers are real, tested code exercised against payloads built from each platform's own published documentation, never presented as live calls. That split is stated everywhere in this project that could otherwise blur it.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Three signature schemes, not one helper</span>
+                                <p>Remote signs <code>raw_body + ":" + timestamp</code>; Ashby signs raw bytes with an algorithm prefix to strip; HiBob signs raw bytes with no prefix at all, over SHA-512 instead of SHA-256. A shared <code>verify_signature(algorithm, ...)</code> function was the obvious first instinct and was deliberately not built — collapsing three different signed constructions into one function hides exactly the detail an integration engineer needs to see.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Auth errors halt. They never retry.</span>
+                                <p>HiBob's WAF blocks the source IP for five minutes after enough 401/403 responses arrive from it in a short window — a number that comes from the project brief, not from HiBob's public docs, and is stated as unverified rather than dressed up as confirmed. The defensive response is correct either way: neither platform wrapper retries an auth failure, because a retry loop against a WAF-fronted API doesn't just fail again, it can lock out every other automation sharing that IP.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>The Ashby fan-out is handled and tested, not just described</strong> — <code>candidateHire</code> also fires <code>applicationUpdate</code> and <code>candidateStageChange</code> for the same hire. A unit test sends all three real event shapes through the actual queue and asserts exactly one comes out ready to process; the other two are recorded for audit, not dropped.</li>
+                                <li><strong>Ashby's <code>success: false</code>-inside-a-200 is checked on every single call</strong> — Ashby can return HTTP 200 with a failure body. The wrapper's request method checks the body unconditionally, because there was no way to know in advance which endpoint would be the exception.</li>
+                                <li><strong>The failure-philosophy demo does something real</strong> — it starts an actual local server, sends it real signed requests per platform, and shows the real HTTP 500 that comes back, before explaining — clearly labelled OBSERVED vs. DOCUMENTED — what each platform's real infrastructure does next.</li>
+                                <li><strong>Identity resolution goes through one table, never by email</strong> — canonical ID, every platform ID hanging off it, with a <code>merged_into</code> chain for the case where two records turn out to be the same person. Emails change; the canonical ID doesn't.</li>
+                                <li><strong>16 unit tests, standard library only</strong> — signature verification, queue dedup, and person-mapping lookups including the merge-chain case. <code>python -m unittest discover -s tests</code>, no install step, matches the "no external dependencies" choice already made elsewhere in this portfolio.</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>HiBob's exact WAF lockout number is asserted, not verified</strong> — the specific threshold comes from the project brief, not from HiBob's public docs, which don't publish it. Said plainly in <code>RESEARCH.md</code> rather than presented as confirmed.</li>
+                                <li><strong>The n8n workflow JSON is committed, not continuously run</strong> — real, importable workflow definitions describing the intended orchestration (the receiver as trust boundary, n8n downstream of an already-verified event), but not executed against a live n8n instance as part of this repo. The logic that needed to be provably correct is implemented and tested in Python instead.</li>
+                                <li><strong>The JSON Schema validator is a deliberate subset</strong> — checks required fields and top-level types, no <code>$ref</code>, no nested composition. A full implementation is a solved problem; reimplementing it badly would be worse than reimplementing a known-partial version and saying so.</li>
+                                <li><strong>No live demo for Ashby or HiBob, by design</strong> — neither offers a public sandbox, so there's nothing to point a browser at for either. Stated once in the README rather than left to be discovered.</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>A queue worker</strong> — the queue's <code>next_queued()</code> is ready to be polled; there's no long-running process consuming it yet, only direct calls from the demos.</li>
+                                <li><strong>The Remote pre-invite guard</strong> — check person-mapping status before attempting any post-creation update, rather than relying on Remote's error text to explain why a post-invite change was rejected.</li>
+                                <li><strong>Run the n8n workflows against a live local instance</strong> and record the actual execution, closing the gap named in Constraints.</li>
+                                <li><strong>A <code>jsonschema</code>-backed validator</strong>, flagged rather than added quietly — it would be the first external dependency in the receiver.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">Python — standard library only</span>
+                            <span class="tech-tag">SQLite</span>
+                            <span class="tech-tag">n8n (self-hosted, Docker)</span>
+                            <span class="tech-tag">Remote sandbox — live</span>
+                            <span class="tech-tag">HiBob / Ashby — documented-payload simulators</span>
+                            <span class="tech-tag">ngrok (dev only)</span>
+                        </p>
+                        <a class="tool-link-badge" href="https://github.com/iamspecious/portfolio/tree/main/hr-webhook-integration-layer" target="_blank">View on GitHub →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-24 — what's still not built</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Three things left out on purpose, named rather than left implicit: no long-running queue worker yet (<code>next_queued()</code> is ready and tested, nothing polls it continuously); no pre-invite guard for Remote's write-window close, since this build's hire flow never reaches the post-invite state; and the n8n workflows are committed but not run against a live instance — real, importable JSON describing the intended orchestration, not something with a recorded live execution behind it yet.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-24 — what the failure demo can and can't show live</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Fully demonstrating Ashby's or HiBob's failure behaviour live would mean driving a real webhook subscription on a real account into a disabled or deactivated state — not something a portfolio demo should do even if an account existed. So the failure-philosophy script does what's genuinely demonstrable — a real local server returning a real 500 to a real signed request, for all three platforms' shapes — and labels the rest DOCUMENTED, sourced and printed inline rather than hidden in a comment.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-24 — first full smoke test, and a nuance I hadn't planned for</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Ran the receiver as a real subprocess, sent it real signed requests for all three platforms including the full Ashby fan-out, and inspected the resulting SQLite state — passed cleanly on the first full run. Testing the hire flow's dry-run/idempotency interaction surfaced something I hadn't fully thought through: running the same event twice in dry-run mode logs "would send" both times, not "already done" the second time, because the idempotency ledger is only written on an actual create call. Correct behaviour on reflection — dry-run has nothing to duplicate — but worth naming rather than letting the README claim idempotency "just works" without saying which mode it applies to.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-24 — auth errors halt, and that cost more to write down than to code</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The most consequential line in this codebase is arguably the line that isn't there: no retry-with-backoff wraps any call in the Ashby or HiBob clients. Every other failure mode here gets resilience thinking — the queue is durable, writes are idempotent — auth failures get none of it, on purpose. A bad credential doesn't get fixed by trying again, and for HiBob specifically, enough retried 401/403s in a short window trips a WAF block that takes down every automation on that source IP, not just this one. Remote's client is the deliberate exception — it retries exactly once on a 401, because an expiring OAuth2 bearer token is routine, self-healing behaviour, not a credential problem. Same status code, opposite correct response.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 4 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-08-24 — the fan-out test came before trusting the fan-out logic</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The queue's two-level dedup was straightforward to write; trusting it was different, because the failure mode if it's wrong is quiet — three events queue instead of one, and nothing about the code looks broken. Wrote the fan-out test against the real three-event Ashby payloads before wiring the receiver's HTTP layer to the queue at all, so a bug would show up as a named failing assertion, not a mystery triple-run three files later.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-08-24 — the shared-signature-helper instinct, and why it didn't get built</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The natural shape to reach for is one <code>verify_signature(algorithm, ...)</code> function dispatching on a platform argument — maybe 15 lines shorter. Didn't build it: the three schemes don't just use different algorithms, they sign different things entirely (Remote concatenates a timestamp into the signed string; the other two don't). A shared function ends up either full of platform branches, which is the three functions with extra indirection, or with a generic parameter that quietly assumes every scheme signs some derivable transform of the same inputs — which is the exact assumption that makes it easy to plug in the wrong construction for the wrong platform and not notice until a real signature fails to verify.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-08-24 — research first, and where the docs went dark</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Direct fetches against Remote, Ashby, and HiBob's developer doc domains were all blocked by this environment's egress proxy. Fell back to search, which worked and pulled exact header names and behaviours out of long doc pages. One thing search couldn't confirm at all: HiBob's specific WAF lockout numbers from the brief — general WAF/rate-limit behaviour is documented, that exact threshold isn't, at least not anywhere search surfaced. Flagged rather than presented as confirmed.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-08-24 — reading the brief, and what "real" would actually mean here</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Before writing anything: what does "real" mean when only one of three platforms has a public sandbox? Decided here and not revisited — Remote gets real API calls because it's the only one that can receive them; Ashby and HiBob get wrappers that are real code, exercised against payloads built from their own published docs. A demo built for a People Ops audience is exactly the audience that would notice a blurred line, and exactly the audience where getting caught overstating it costs more than the demo is worth.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: HR Webhook Integration Layer -->
+
                     <div class="project-block" data-category="operations">
 
                     <!-- ====================================================

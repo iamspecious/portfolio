@@ -1593,5 +1593,48 @@
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": ""
+  },
+  {
+    "id": "hr-webhook-integration-layer",
+    "schemaVersion": 1,
+    "type": "project",
+    "title": "HR Webhook Integration Layer",
+    "dateStart": "2026-08",
+    "dateEnd": "2026-08",
+    "status": "complete",
+    "domains": [
+      "people-hr",
+      "operations"
+    ],
+    "evidence": [
+      "technical-depth",
+      "diagnostic-reasoning",
+      "process-design",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "python",
+      "sqlite",
+      "n8n",
+      "docker",
+      "ngrok",
+      "webhook-signature-verification",
+      "api-debugging"
+    ],
+    "summary": "A webhook receiver and integration layer across HiBob, Ashby, and Remote, built around the fact that the three platforms disagree about what a failed delivery means. Real API calls against the Remote sandbox; documented-payload simulators for HiBob and Ashby, stated plainly throughout.",
+    "anchor": "#proj-hr-webhook-integration-layer",
+    "relatedIds": [
+      "role-fit-watcher",
+      "saas-integration-diagnostic-guide"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "New tools added to vocabulary: n8n, docker, sqlite, ngrok, webhook-signature-verification (see TAXONOMY.md §6 and TAGGING-AUDIT.md). Domains deliberately exclude ai-engineering — no model/prompt integration in this project, and the anti-rule in TAXONOMY.md §3 forbids people-hr + ai-engineering together regardless. Status complete but with an explicit split: the Remote integration is genuinely live (sandbox); HiBob and Ashby are documented-payload simulators, since neither offers a public sandbox — stated in README.md and RESEARCH.md, not softened."
   }
 ]
