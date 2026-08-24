@@ -60,6 +60,7 @@ All items present in `index.html` (or linked standalone files) have a correspond
 | `kh-description-optimizer` | project | `#proj-kh-description-optimizer` | ✓ |
 | `kh-ab-testing-tool` | project | `#proj-kh-ab-testing-tool` | ✓ |
 | `kh-title-thumbnail-audit` | project | `#proj-kh-title-thumbnail-audit` | ✓ |
+| `hr-webhook-integration-layer` | project | `#proj-hr-webhook-integration-layer` | ✓ |
 | `technical-writing-portfolio` | document | `technical-writing-portfolio.html` + pageAnchor `#doc-technical-writing-portfolio` | ✓ |
 | `saas-integration-diagnostic-guide` | document | `support-guide.html` + pageAnchor `#doc-saas-integration-diagnostic-guide` | ✓ |
 | `cat-api-documentation` | document | `cat-api-documentation.html` + pageAnchor `#doc-cat-api-documentation` | ✓ |
@@ -142,8 +143,15 @@ Items surfaced per lane (domain match, before evidence boost):
 | `dealbreaker-gate` | `role-fit-evaluator` |
 | `ai-assisted-scoring` | `role-fit-evaluator` |
 | `cowork-artifact` | `kh-description-optimizer` |
+| `n8n` | `hr-webhook-integration-layer` |
+| `docker` | `hr-webhook-integration-layer` |
+| `sqlite` | `hr-webhook-integration-layer` |
+| `ngrok` | `hr-webhook-integration-layer` |
+| `webhook-signature-verification` | `hr-webhook-integration-layer` |
 
 All are now listed in TAXONOMY.md §6.
+
+**Note on this audit's currency:** this document's "Total items indexed" and per-lane tables above were generated against a snapshot of `portfolio-index.json` that predates `posthog-first-run-audit` and `hr-webhook-integration-layer`. Both are correctly present in `portfolio-index.json` and `index.html`; this file's summary counts have not been regenerated against the current index. Re-running this audit end-to-end is a separate task from adding one item.
 
 ---
 
