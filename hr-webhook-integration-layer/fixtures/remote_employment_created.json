@@ -1,0 +1,16 @@
+{
+  "id": "evt_fixture_employment_0001",
+  "type": "employment.created",
+  "created_at": "2026-07-01T09:00:00Z",
+  "data": {
+    "employment": {
+      "id": "remote_emp_88231",
+      "full_name": "Jordan Ellery",
+      "personal_email": "jordan.ellery@example-personal.test",
+      "country_code": "DEU",
+      "type": "employee",
+      "status": "created",
+      "provisional_start_date": "2026-07-01"
+    }
+  }
+}

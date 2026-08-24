@@ -1,0 +1,7 @@
+{
+  "type": "webhook.ping",
+  "uuid": "fixture-hibob-ping-0001",
+  "companyId": "demo-co",
+  "timestamp": "2026-06-01T08:00:00.000000Z",
+  "payload": { "message": "HiBob webhook test delivery" }
+}

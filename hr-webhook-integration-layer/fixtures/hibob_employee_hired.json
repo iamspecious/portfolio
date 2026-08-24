@@ -1,0 +1,16 @@
+{
+  "type": "employee.hired",
+  "uuid": "fixture-hibob-hired-0001",
+  "companyId": "demo-co",
+  "timestamp": "2026-07-01T07:30:00.000000Z",
+  "payload": {
+    "employee": {
+      "id": "hibob_emp_00417",
+      "displayName": "Jordan Ellery",
+      "email": "jordan.ellery@examplecorp.test",
+      "startDate": "2026-07-01",
+      "employmentType": "Full-time",
+      "site": "Remote - Germany"
+    }
+  }
+}

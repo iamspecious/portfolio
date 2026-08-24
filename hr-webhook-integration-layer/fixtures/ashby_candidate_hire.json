@@ -1,0 +1,20 @@
+{
+  "action": "candidateHire",
+  "webhookId": "wh_fixture0003",
+  "createdAt": "2026-06-02T10:00:05.000000Z",
+  "data": {
+    "application": {
+      "id": "app_9f2a1c7e4b3d",
+      "candidate": { "id": "cand_5b7e21a0f114" },
+      "job": { "id": "job_2c14e8a9", "title": "Senior Backend Engineer" },
+      "status": "Hired"
+    },
+    "candidate": {
+      "id": "cand_5b7e21a0f114",
+      "name": "Jordan Ellery",
+      "email": "jordan.ellery@example-candidate.test",
+      "createdAt": "2026-06-02T09:14:00.000000Z"
+    },
+    "hiredAt": "2026-06-02T10:00:05.000000Z"
+  }
+}

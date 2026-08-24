@@ -1,0 +1,6 @@
+{
+  "id": "evt_fixture_ping_0001",
+  "type": "ping",
+  "created_at": "2026-06-01T08:05:00Z",
+  "data": { "message": "Remote webhook test delivery" }
+}
