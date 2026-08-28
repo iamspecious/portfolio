@@ -159,10 +159,43 @@
 }
 
 .pfs-empty {
+    padding: 14px 10px;
+}
+
+.pfs-empty-msg {
     font-size: 0.8rem;
     color: #8b949e;
-    padding: 14px 10px;
     line-height: 1.5;
+    margin: 0 0 8px;
+}
+
+.pfs-empty-hint {
+    font-size: 0.78rem;
+    color: #8b949e;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.pfs-suggest {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #c9d1d9;
+    font-size: 0.8rem;
+    font-family: inherit;
+    border-radius: 8px;
+    padding: 7px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.pfs-suggest strong { color: #b392f0; }
+
+.pfs-suggest:hover {
+    border-color: #6e40c9;
+    background: #262b33;
 }
 
 /* Flash applied to the destination element after a jump.

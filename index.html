@@ -918,6 +918,7 @@
                                 <li><strong>Zero-maintenance coverage</strong> — New content becomes searchable the moment it's tagged in the index; nothing to wire up per item.</li>
                                 <li><strong>Gets you there, not just to a list</strong> — Picking a result switches to the right tab (or opens the right document), scrolls to the exact card, and flashes it briefly so the jump is unmistakable.</li>
                                 <li><strong>Keyboard-first</strong> — <code>/</code> focuses the search bar from anywhere on the page, arrow keys move through results, Enter jumps, Esc closes.</li>
+                                <li><strong>Typos don't dead-end</strong> — A query with no real match checks itself against the portfolio's own vocabulary; close enough ("postgoh," "pothog," "zendsk") gets a one-click "Did you mean…" instead of a flat no-results screen.</li>
                             </ul>
                         </div>
                         <div class="project-constraints">
@@ -925,7 +926,8 @@
                             <ul>
                                 <li><strong>Only as good as the tagging</strong> — Same dependency as Digital Spec's routes: an under-tagged or mis-tagged item is under-findable, no matter how the search logic is tuned.</li>
                                 <li><strong>Substring plus a short synonym list, not full semantic search</strong> — A hand-maintained map covers the common cases ("docs" → <code>technical-writing</code>, "AI" → <code>ai-engineering</code>, "HR" → <code>people-hr</code>, and a few more); anything outside that list still needs to appear in the title, summary, or a tag itself.</li>
-                                <li><strong>No typo tolerance</strong> — "posthgo" returns nothing. A deliberate trade-off for a small, curated index where speed and predictability matter more than forgiving fuzzy input.</li>
+                                <li><strong>Suggestion, not silent correction</strong> — A close-but-not-exact query never auto-widens the results; it offers one specific "Did you mean" the visitor has to click. Predictable over clever — the same reasoning as the rest of the tool.</li>
+                                <li><strong>Query capped at 80 characters</strong> — A deliberate ceiling, not a bug: it keeps the fuzzy-match fallback cheap against a pasted wall of text rather than something a visitor would ever legitimately hit.</li>
                             </ul>
                         </div>
                         <div class="roadmap">
@@ -950,6 +952,25 @@
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-30 — "did you mean," scoped so it stays a suggestion</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    A typo shouldn't dead-end at a blank "no results" screen — "postgoh" and "pothog" are one and two edits away from "PostHog" respectively, and a person who misspells it still deserves the match. Built a classic Levenshtein edit-distance check that only runs after a real search has already come back empty, and only against a vocabulary built from the portfolio's own content (title, summary, and tag words — never from anything a visitor types). Tolerance scales with word length rather than using one fixed number: ≤4 characters allows 1 edit, ≤8 allows 2, longer allows 3 — a flat threshold either misses "pothog" (6 characters, 1 edit) or starts "correcting" real short words into unrelated ones. Deliberately a <em>suggestion</em>, not a silent correction: it surfaces one "Did you mean <strong>posthog</strong>?" the visitor has to click, rather than quietly substituting a guess into their results. If nothing in range is found, it falls through to the plain no-results message — exactly the criteria asked for.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-30 — security pass: what actually applies here, and what got hardened</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Went through this feature specifically for injection and malicious-query risk. The honest first finding: classic prompt injection needs a prompt — a system message or instruction text an LLM reads and can be talked out of following — and Portfolio Search has no LLM anywhere in it. It's the same substring/tag matching against a local JSON file this card has documented since day one. Claiming to have "added prompt-injection protection" to a feature with no prompt to inject into would be describing a defense against something that isn't there, so this entry says plainly that it doesn't apply, rather than manufacturing a check for it.
+                                </p>
+                                <p>
+                                    What does apply, and what got verified or added: every user-facing string (result titles and summaries, the highlighted-match <code>&lt;mark&gt;</code> wrapper, the "Did you mean" suggestion) is HTML-escaped before it reaches <code>innerHTML</code> — confirmed no code path skips this. The highlight regex is built only from the visitor's own words after they're regex-escaped, and it's a flat alternation with no nested quantifiers, so there's no catastrophic-backtracking (ReDoS) shape to exploit. Query input is capped at 80 characters, enforced both as an HTML <code>maxlength</code> and again in the input handler, specifically so a pasted wall of text can't turn the "did you mean" fallback's vocabulary scan into a tab-freezing loop — the realistic "malicious query" against a tool like this is a denial-of-service against the visitor's own browser tab, not data exfiltration, since nothing here is stored or shared with anyone else. Last check: navigation targets (the CSS selector passed to <code>querySelector</code>, the tab id, the redirect for a standalone document) are always read from <code>portfolio-index.json</code>, never built from the typed query — so there's no way a search string can redirect a visitor anywhere or run as a selector.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">

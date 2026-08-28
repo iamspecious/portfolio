@@ -1,11 +1,13 @@
 /* portfolio-search.js — Portfolio Search
    Additive / progressive enhancement. Client-side full-text search over
    portfolio-index.json — the same tagged index Digital Spec queries for
-   its routes. No backend, no AI, no fuzzy/semantic matching: a query
-   either matches a title, tag (including a short hand-maintained
-   synonym list), or summary substring, or it doesn't. If this script
-   errors or is removed, the underlying portfolio is unaffected — the
-   search bar just doesn't render.
+   its routes. A query matches a title, tag (including a short
+   hand-maintained synonym list), or summary substring, or it doesn't —
+   still no AI, no semantic matching. The one fuzzy step is a plain
+   edit-distance "did you mean" offered only after a real search comes
+   back empty, and only against our own content (see suggestCorrection).
+   If this script errors or is removed, the underlying portfolio is
+   unaffected — the search bar just doesn't render.
 */
 (function () {
     'use strict';
@@ -18,6 +20,17 @@
     };
     var GROUP_ORDER = ['project', 'document', 'case-study', 'work'];
     var DEBOUNCE_MS = 120;
+
+    // Hard cap on query length. This is defensive, not functional: nothing
+    // legitimate anyone types needs 80+ characters, and it bounds the cost
+    // of the fuzzy-match fallback below against a pasted wall of text.
+    // See the security devlog entries for the full reasoning.
+    var MAX_QUERY_LEN = 80;
+    // Fuzzy correction only runs on words in this length range — long
+    // enough that a couple of typos are unambiguous, short enough that the
+    // Levenshtein pass against the vocabulary stays cheap.
+    var MIN_FUZZY_LEN = 4;
+    var MAX_FUZZY_LEN = 24;
 
     // A query word that names a facet informally maps onto the tag values
     // that actually carry it, so "docs" finds items tagged
@@ -38,6 +51,7 @@
     };
 
     var searchableItems = [];
+    var vocabulary = [];
     var wrapper, input, panel;
     var resultEls = [];
     var activeIndex = -1;
@@ -49,6 +63,7 @@
         .then(function (r) { return r.json(); })
         .then(function (data) {
             searchableItems = data.map(buildSearchable);
+            vocabulary = buildVocabulary(searchableItems);
             boot();
         })
         .catch(function (err) {
@@ -80,6 +95,21 @@
         };
     }
 
+    // Real words drawn from our own content only (titles, summaries, and
+    // tags with their hyphens opened up) — never from anything a visitor
+    // types. This is what "did you mean" corrections are drawn from.
+    function buildVocabulary(entries) {
+        var seen = {};
+        entries.forEach(function (e) {
+            var text = e.titleLc + ' ' + e.summaryLc + ' ' + e.tagsLc.replace(/-/g, ' ');
+            var words = text.match(/[a-z0-9]+/g) || [];
+            words.forEach(function (w) {
+                if (w.length >= MIN_FUZZY_LEN) seen[w] = true;
+            });
+        });
+        return Object.keys(seen);
+    }
+
     // ─── Boot: build the DOM, wire up events ───────────────────────────
     function boot() {
         var root = document.getElementById('pfs-root');
@@ -103,6 +133,7 @@
         input.setAttribute('aria-autocomplete', 'list');
         input.setAttribute('aria-expanded', 'false');
         input.setAttribute('aria-controls', 'pfs-panel');
+        input.maxLength = MAX_QUERY_LEN;
 
         var kbd = document.createElement('kbd');
         kbd.className = 'pfs-kbd';
@@ -123,6 +154,14 @@
         root.appendChild(wrapper);
 
         input.addEventListener('input', function () {
+            // Belt and braces alongside the maxlength attribute: maxlength
+            // covers typing and most paste paths, but not a value set
+            // programmatically or dropped in via IME/autofill in a way a
+            // given browser doesn't clip. Truncate here too so nothing
+            // downstream ever sees more than MAX_QUERY_LEN characters.
+            if (input.value.length > MAX_QUERY_LEN) {
+                input.value = input.value.slice(0, MAX_QUERY_LEN);
+            }
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(function () { runSearch(input.value); }, DEBOUNCE_MS);
         });
@@ -192,13 +231,89 @@
     }
 
     function runSearch(rawQuery) {
-        lastQuery = rawQuery.trim();
+        lastQuery = String(rawQuery).slice(0, MAX_QUERY_LEN).trim();
         if (!lastQuery) {
             closePanel();
             return;
         }
         var words = lastQuery.toLowerCase().split(/\s+/).filter(Boolean);
         renderResults(search(lastQuery), words);
+    }
+
+    // ─── "Did you mean" — plain edit-distance, no AI ───────────────────
+    // Classic Levenshtein distance (insert/delete/substitute), single-row
+    // dynamic programming. Only ever called against our own vocabulary
+    // words, and only after a real search has already come back empty.
+    function levenshtein(a, b) {
+        var m = a.length, n = b.length;
+        if (m === 0) return n;
+        if (n === 0) return m;
+
+        var prev = new Array(n + 1);
+        var curr = new Array(n + 1);
+        var i, j;
+        for (j = 0; j <= n; j++) prev[j] = j;
+
+        for (i = 1; i <= m; i++) {
+            curr[0] = i;
+            for (j = 1; j <= n; j++) {
+                var cost = a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1;
+                curr[j] = Math.min(
+                    prev[j] + 1,        // deletion
+                    curr[j - 1] + 1,    // insertion
+                    prev[j - 1] + cost  // substitution
+                );
+            }
+            var tmp = prev; prev = curr; curr = tmp;
+        }
+        return prev[n];
+    }
+
+    // Tolerance scales with word length: a one-character slip in a short
+    // word changes it more than the same slip in a long one, so a fixed
+    // threshold either misses "pothog" or wrongly "corrects" real short
+    // words. Matches the "a few characters of difference" the tolerance
+    // was scoped to.
+    function maxEditDistance(len) {
+        if (len <= 4) return 1;
+        if (len <= 8) return 2;
+        return 3;
+    }
+
+    // Tries to correct each word of a failed query against the vocabulary.
+    // Returns a corrected query string, or null if nothing in range was
+    // found (which is the case that falls through to a plain "no results").
+    function suggestCorrection(query) {
+        var words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
+        var corrected = [];
+        var changed = false;
+
+        words.forEach(function (w) {
+            if (w.length < MIN_FUZZY_LEN || w.length > MAX_FUZZY_LEN) {
+                corrected.push(w);
+                return;
+            }
+            var maxD = maxEditDistance(w.length);
+            var bestWord = null;
+            var bestDist = Infinity;
+
+            for (var i = 0; i < vocabulary.length; i++) {
+                var candidate = vocabulary[i];
+                if (candidate === w) { bestWord = null; bestDist = 0; break; }
+                if (Math.abs(candidate.length - w.length) > maxD) continue;
+                var d = levenshtein(w, candidate);
+                if (d < bestDist) { bestDist = d; bestWord = candidate; }
+            }
+
+            if (bestWord && bestDist > 0 && bestDist <= maxD) {
+                corrected.push(bestWord);
+                changed = true;
+            } else {
+                corrected.push(w);
+            }
+        });
+
+        return changed ? corrected.join(' ') : null;
     }
 
     // ─── Rendering ──────────────────────────────────────────────────────
@@ -208,10 +323,7 @@
         activeIndex = -1;
 
         if (!results.length) {
-            var empty = document.createElement('div');
-            empty.className = 'pfs-empty';
-            empty.textContent = 'No matches for “' + lastQuery + '”. Try a tool (PostHog, Zendesk), a discipline (writing, HR, ops), or a project name.';
-            panel.appendChild(empty);
+            renderEmptyState();
             openPanel();
             return;
         }
@@ -243,6 +355,37 @@
         });
 
         openPanel();
+    }
+
+    function renderEmptyState() {
+        var empty = document.createElement('div');
+        empty.className = 'pfs-empty';
+
+        var msg = document.createElement('p');
+        msg.className = 'pfs-empty-msg';
+        msg.textContent = 'No matches for “' + lastQuery + '”.';
+        empty.appendChild(msg);
+
+        var suggestion = suggestCorrection(lastQuery);
+
+        if (suggestion && suggestion !== lastQuery.toLowerCase()) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'pfs-suggest';
+            btn.innerHTML = 'Did you mean <strong>' + escapeHtml(suggestion) + '</strong>?';
+            btn.addEventListener('click', function () {
+                input.value = suggestion;
+                runSearch(suggestion);
+            });
+            empty.appendChild(btn);
+        } else {
+            var hint = document.createElement('p');
+            hint.className = 'pfs-empty-hint';
+            hint.textContent = 'Try a tool (PostHog, Zendesk), a discipline (writing, HR, ops), or a project name.';
+            empty.appendChild(hint);
+        }
+
+        panel.appendChild(empty);
     }
 
     function buildResultRow(item, words) {
