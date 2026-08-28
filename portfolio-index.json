@@ -1385,7 +1385,8 @@
     "summary": "The portfolio's branching front-door guide — tag-driven curation, built as an overlay, no AI.",
     "anchor": "#proj-digital-spec-front-door",
     "relatedIds": [
-      "faq-chatbot"
+      "faq-chatbot",
+      "portfolio-search"
     ],
     "audiencePin": [
       "builder-technical"
@@ -1394,6 +1395,41 @@
     "lensByAudience": {
       "builder-technical": "The portfolio's own front door — a tag-driven guide built as an overlay, no AI, fully documented."
     },
+    "notes": ""
+  },
+  {
+    "id": "portfolio-search",
+    "schemaVersion": 1,
+    "type": "project",
+    "title": "Portfolio Search",
+    "dateStart": "2026-08",
+    "dateEnd": "present",
+    "status": "live",
+    "domains": [
+      "frontend-dev"
+    ],
+    "evidence": [
+      "technical-depth",
+      "process-design",
+      "build-in-public",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "html-css-js"
+    ],
+    "summary": "A header search bar that queries the same tagged portfolio index Digital Spec routes visitors through — type a tool, discipline, or project name and jump straight to every matching work role, case study, project, and document, with no backend and no AI.",
+    "anchor": "#proj-portfolio-search",
+    "relatedIds": [
+      "proj-digital-spec-front-door"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
     "notes": ""
   },
   {

@@ -7,7 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="portfolio.css">
     <link rel="stylesheet" href="front-door.css">
+    <link rel="stylesheet" href="portfolio-search.css">
     <script src="front-door.js" defer></script>
+    <script src="portfolio-search.js" defer></script>
     <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="ki Ci init qi Hi pr Bi zi Di capture calculateEventProperties Qi register register_once register_for_session unregister unregister_for_session Ki getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Xi identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Ji Gi createPersonProfile setInternalOrTestUser Yi Ai rn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Vi debug mr it getPageViewId captureTraceFeedback captureTraceMetric Oi".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_qhAeWRuc8U2zS9E9SAvVktQo5YEcWvBuDt6vdY9j2ZSu', {
@@ -24,6 +26,7 @@
         <h1>Specious Coda Bishop</h1>
         <p>Customer Success · Implementation · People Ops · Operations</p>
         <p>Drawn to where things aren't working  and I find the structural reason why.</p>
+        <div id="pfs-root"></div>
     </header>
 
     <div class="container mt-4">
@@ -883,6 +886,116 @@
 
                     </div><!-- /project -->
                     </div><!-- /project-block: Digital Spec Front Door -->
+
+                    <div class="project-block" data-category="engineering">
+
+                    <!-- ====================================================
+                         PORTFOLIO SEARCH
+                    ===================================================== -->
+                    <div class="project" id="proj-portfolio-search">
+                        <h3>Portfolio Search <span class="badge bg-success" style="font-size:0.65rem; vertical-align: middle;">Live</span></h3>
+                        <p><strong>August 2026 – Present</strong></p>
+                        <p>A search bar in the header, on every tab. Type a tool ("PostHog," "Zendesk"), a discipline ("writing," "HR," "consulting"), or a project name, and it returns every work role, case study, project, and document that actually matches — grouped by type, ranked by where the match landed, and one click from wherever it lives on the site. It queries the same tagged <code>portfolio-index.json</code> Digital Spec routes visitors through, so a newly tagged item is searchable the moment it's indexed — no separate search config to maintain.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Queries the index, not the page</span>
+                                <p>Search runs over the same tagged <code>portfolio-index.json</code> Digital Spec's routes query — title, summary, domains, evidence, tools, and context — rather than scraping rendered page text. One index, two consumers.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">No AI, no fuzzy matching</span>
+                                <p>Deterministic substring scoring, weighted by field: title beats a tag, a tag beats the summary. Same reasoning as Digital Spec — nothing to hallucinate, and results are instant.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>One word, every match</strong> — "PostHog" surfaces the CSM copilot, the health-intelligence prototype, the first-run audit document, and the voice-adaptation showcase in one list, grouped by type.</li>
+                                <li><strong>Self-serve instead of asking</strong> — Rather than a recruiter emailing "have you worked with X," they type it and see the answer themselves, with the receipts attached.</li>
+                                <li><strong>Zero-maintenance coverage</strong> — New content becomes searchable the moment it's tagged in the index; nothing to wire up per item.</li>
+                                <li><strong>Gets you there, not just to a list</strong> — Picking a result switches to the right tab (or opens the right document), scrolls to the exact card, and flashes it briefly so the jump is unmistakable.</li>
+                                <li><strong>Keyboard-first</strong> — <code>/</code> focuses the search bar from anywhere on the page, arrow keys move through results, Enter jumps, Esc closes.</li>
+                            </ul>
+                        </div>
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>Only as good as the tagging</strong> — Same dependency as Digital Spec's routes: an under-tagged or mis-tagged item is under-findable, no matter how the search logic is tuned.</li>
+                                <li><strong>Substring, not semantic</strong> — Typing "docs" won't surface items tagged <code>technical-writing</code> unless "docs" or a close variant appears in the title or summary text; there's no synonym layer.</li>
+                                <li><strong>No typo tolerance</strong> — "posthgo" returns nothing. A deliberate trade-off for a small, curated index where speed and predictability matter more than forgiving fuzzy input.</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Lightweight synonym map</strong> — A small hand-maintained list ("docs" → <code>technical-writing</code>, "AI" → <code>ai-engineering</code>) to close the biggest gaps without reaching for fuzzy matching.</li>
+                                <li><strong>Recent-searches memory</strong> — Session-scoped, so a visitor who searches, browses, and comes back mid-visit doesn't retype the same query.</li>
+                                <li><strong>Result count badge on the search icon</strong> — A quiet visual cue that search exists and works, for visitors who never think to look for one.</li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">HTML/CSS/JS</span>
+                            <span class="tech-tag">Client-side only</span>
+                            <span class="tech-tag">No backend</span>
+                            <span class="tech-tag">No AI</span>
+                            <span class="tech-tag">Index-driven</span>
+                        </p>
+                        <a class="tool-link-badge" href="/" target="_blank">Live on this site — press <code>/</code> or use the search bar in the header.</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-28 — indexed, cross-linked, documented</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Tagged in <code>portfolio-index.json</code> per the TAXONOMY.md §12 checklist — domain <code>frontend-dev</code>; evidence <code>technical-depth</code>, <code>process-design</code>, <code>build-in-public</code>, <code>judgment-restraint</code>; tool <code>html-css-js</code>. No new vocabulary needed anywhere, so no TAXONOMY.md edit. Cross-linked both directions with <code>proj-digital-spec-front-door</code> via <code>relatedIds</code>, since it's the closest sibling in the index. README's project table got a matching row, and TAGGING-AUDIT.md got a short addendum logging the single-item addition — a full audit re-run is explicitly called out elsewhere in that file as separate work, not something a one-item add should trigger.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-28 — reusing the index instead of building a second one</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The obvious naive approach was scraping visible page text per tab and matching against that. Rejected it before writing it: the portfolio already has a structured, tagged index built for exactly this kind of query — <code>portfolio-index.json</code>, the same file Digital Spec's routes run against. Scraping page text would have meant two sources of truth for "what does this item mean" drifting apart over time. Search fetches the index directly and builds its searchable blob from <code>title</code>, <code>summary</code>, <code>domains</code>, <code>evidence</code>, <code>tools</code>, and <code>context</code> — the same facets TAXONOMY.md already governs.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-28 — no AI, on purpose</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    A semantic or embedding-based search would handle a query like "docs" matching "technical-writing" more gracefully. Didn't build it: it would mean a runtime dependency (an API call, a vector store) for a portfolio whose whole pitch is client-side-only, zero-cost, zero-backend. Went with weighted substring scoring instead — a title hit outranks a tag hit, which outranks a summary hit, and matching every word in a multi-word query outranks matching some of them. Predictable, instant, and nothing to hallucinate — consistent with the same no-AI reasoning behind Digital Spec.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-28 — getting the visitor to the result, not just showing it</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Results live in three different shapes: an anchor inside a Bootstrap tab-pane that may not be the active tab, an anchor already on the visible tab, and a standalone page like <code>technical-writing-portfolio.html</code>. Clicking a result checks which shape it is — switches tabs via Bootstrap's <code>Tab</code> API when needed, then scrolls the target into view and adds a two-second highlight flash so the jump is obvious rather than something you have to hunt for after the click. A plain page navigation handles the standalone-document case.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-28 — accessibility bar matched to Digital Spec's</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Built with the same bar as the front door: combobox/listbox ARIA roles, full keyboard operation (<code>/</code> to focus from anywhere, arrow keys to move through results, Enter to jump, Esc to close), and a reduced-motion fallback that swaps the highlight flash for a static outline. A search feature that only a mouse can drive isn't one everyone can use.
+                                </p>
+                            </div>
+
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Portfolio Search -->
 
                     <div class="project-block" data-category="ai-tools engineering operations">
 

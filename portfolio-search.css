@@ -1,0 +1,189 @@
+/* portfolio-search.css — Portfolio Search
+   Styles for the site-wide search bar and results panel injected into
+   #pfs-root by portfolio-search.js. Scoped to .pfs- / #pfs- so it can't
+   collide with anything else on the page.
+*/
+
+.pfs-search {
+    position: relative;
+    max-width: 480px;
+    margin: 16px auto 0;
+    text-align: left;
+}
+
+.pfs-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.pfs-input-wrap::before {
+    content: "⌕";
+    position: absolute;
+    left: 13px;
+    color: #8b949e;
+    font-size: 1rem;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.pfs-input {
+    width: 100%;
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #e6edf3;
+    border-radius: 20px;
+    padding: 9px 40px 9px 34px;
+    font-size: 0.86rem;
+    font-family: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.pfs-input::placeholder { color: #8b949e; }
+
+.pfs-input:focus {
+    outline: none;
+    border-color: #6e40c9;
+    box-shadow: 0 0 0 3px rgba(110, 64, 201, 0.25);
+}
+
+.pfs-input::-webkit-search-cancel-button { display: none; }
+
+.pfs-kbd {
+    position: absolute;
+    right: 12px;
+    font-size: 0.68rem;
+    color: #8b949e;
+    background: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: inherit;
+    pointer-events: none;
+}
+
+.pfs-input:focus ~ .pfs-kbd,
+.pfs-input:not(:placeholder-shown) ~ .pfs-kbd { display: none; }
+
+.pfs-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    max-height: 420px;
+    overflow-y: auto;
+    z-index: 1050;
+    padding: 6px;
+    text-align: left;
+}
+
+.pfs-count {
+    font-size: 0.7rem;
+    color: #8b949e;
+    padding: 6px 10px 8px;
+}
+
+.pfs-group-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #b392f0;
+    padding: 8px 10px 4px;
+}
+
+.pfs-result {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.pfs-result:hover,
+.pfs-result.pfs-active {
+    background: #21262d;
+}
+
+.pfs-type-badge {
+    flex: 0 0 auto;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+.pfs-type-project    { background: #1a4731; color: #3fb950; }
+.pfs-type-document   { background: #1f1500; color: #e3b341; }
+.pfs-type-case-study { background: #1a2f4a; color: #79c0ff; }
+.pfs-type-work       { background: #2a1a3a; color: #cba6f7; }
+
+.pfs-result-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.pfs-result-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e6edf3;
+}
+
+.pfs-result-summary {
+    font-size: 0.76rem;
+    color: #8b949e;
+    line-height: 1.4;
+}
+
+.pfs-mark {
+    background: rgba(110, 64, 201, 0.35);
+    color: #e6edf3;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+.pfs-empty {
+    font-size: 0.8rem;
+    color: #8b949e;
+    padding: 14px 10px;
+    line-height: 1.5;
+}
+
+/* Flash applied to the destination element after a jump */
+.pfs-highlight {
+    animation: pfs-flash 2.2s ease-out;
+    border-radius: 6px;
+}
+
+@keyframes pfs-flash {
+    0%   { box-shadow: 0 0 0 3px rgba(110, 64, 201, 0.55); background-color: rgba(110, 64, 201, 0.12); }
+    100% { box-shadow: 0 0 0 3px rgba(110, 64, 201, 0); background-color: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pfs-highlight {
+        animation: none;
+        outline: 2px solid #6e40c9;
+        outline-offset: 2px;
+    }
+}
+
+@media (max-width: 560px) {
+    .pfs-search { max-width: 92%; }
+}
