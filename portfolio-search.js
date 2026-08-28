@@ -2,9 +2,10 @@
    Additive / progressive enhancement. Client-side full-text search over
    portfolio-index.json — the same tagged index Digital Spec queries for
    its routes. No backend, no AI, no fuzzy/semantic matching: a query
-   either matches a title, summary, or tag substring, or it doesn't.
-   If this script errors or is removed, the underlying portfolio is
-   unaffected — the search bar just doesn't render.
+   either matches a title, tag (including a short hand-maintained
+   synonym list), or summary substring, or it doesn't. If this script
+   errors or is removed, the underlying portfolio is unaffected — the
+   search bar just doesn't render.
 */
 (function () {
     'use strict';
@@ -16,9 +17,25 @@
         document: 'Document'
     };
     var GROUP_ORDER = ['project', 'document', 'case-study', 'work'];
-    var MAX_RESULTS = 30;
-    var MAX_PER_GROUP = 6;
     var DEBOUNCE_MS = 120;
+
+    // A query word that names a facet informally maps onto the tag values
+    // that actually carry it, so "docs" finds items tagged
+    // technical-writing even though the word "docs" never appears in a
+    // title or summary. Substring matching still runs underneath — this
+    // only widens which tags count as a hit.
+    var TAG_SYNONYMS = {
+        'doc': ['technical-writing'],
+        'docs': ['technical-writing'],
+        'documentation': ['technical-writing'],
+        'ai': ['ai-engineering'],
+        'hr': ['people-hr'],
+        'frontend': ['frontend-dev'],
+        'dev': ['frontend-dev', 'ai-engineering'],
+        'pm': ['project-management'],
+        'cs': ['customer-support'],
+        'csm': ['customer-support', 'support-ops']
+    };
 
     var searchableItems = [];
     var wrapper, input, panel;
@@ -146,6 +163,10 @@
                 var found = false;
                 if (entry.titleLc.indexOf(w) !== -1) { score += 10; found = true; }
                 if (entry.tagsLc.indexOf(w) !== -1) { score += 6; found = true; }
+                var synonyms = TAG_SYNONYMS[w];
+                if (synonyms && synonyms.some(function (t) { return entry.tagsLc.indexOf(t) !== -1; })) {
+                    score += 5; found = true;
+                }
                 if (entry.summaryLc.indexOf(w) !== -1) { score += 4; found = true; }
                 if (!found && entry.haystack.indexOf(w) !== -1) { score += 1; found = true; }
                 if (found) matched++;
@@ -163,7 +184,11 @@
             return a.item.title.localeCompare(b.item.title);
         });
 
-        return scored.slice(0, MAX_RESULTS);
+        // No cap: a broad tag (e.g. "engineering") can legitimately match a
+        // dozen-plus items, and the point of the fix that added this
+        // comment is that the dropdown shows all of them, not a subset
+        // that forces a trip back to the tab's own filter buttons.
+        return scored;
     }
 
     function runSearch(rawQuery) {
@@ -210,7 +235,7 @@
             label.textContent = (TYPE_LABELS[type] || type) + ' (' + group.length + ')';
             panel.appendChild(label);
 
-            group.slice(0, MAX_PER_GROUP).forEach(function (r) {
+            group.forEach(function (r) {
                 var row = buildResultRow(r.item, words);
                 panel.appendChild(row);
                 resultEls.push(row);
@@ -363,8 +388,12 @@
         }
 
         setTimeout(function () {
-            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Class goes on before scrollIntoView, not after: pfs-highlight
+            // carries the scroll-margin-top that keeps the heading clear of
+            // the viewport edge, and that only takes effect if it's already
+            // applied when the scroll is calculated.
             target.classList.add('pfs-highlight');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(function () { target.classList.remove('pfs-highlight'); }, 2200);
         }, needsTabSwitch ? 80 : 0);
 

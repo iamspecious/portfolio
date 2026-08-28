@@ -924,14 +924,14 @@
                             <strong>Constraints</strong>
                             <ul>
                                 <li><strong>Only as good as the tagging</strong> — Same dependency as Digital Spec's routes: an under-tagged or mis-tagged item is under-findable, no matter how the search logic is tuned.</li>
-                                <li><strong>Substring, not semantic</strong> — Typing "docs" won't surface items tagged <code>technical-writing</code> unless "docs" or a close variant appears in the title or summary text; there's no synonym layer.</li>
+                                <li><strong>Substring plus a short synonym list, not full semantic search</strong> — A hand-maintained map covers the common cases ("docs" → <code>technical-writing</code>, "AI" → <code>ai-engineering</code>, "HR" → <code>people-hr</code>, and a few more); anything outside that list still needs to appear in the title, summary, or a tag itself.</li>
                                 <li><strong>No typo tolerance</strong> — "posthgo" returns nothing. A deliberate trade-off for a small, curated index where speed and predictability matter more than forgiving fuzzy input.</li>
                             </ul>
                         </div>
                         <div class="roadmap">
                             <strong class="roadmap-heading">// roadmap</strong>
                             <ol>
-                                <li><strong>Lightweight synonym map</strong> — A small hand-maintained list ("docs" → <code>technical-writing</code>, "AI" → <code>ai-engineering</code>) to close the biggest gaps without reaching for fuzzy matching.</li>
+                                <li><strong>Grow the synonym map as gaps surface</strong> — The current list ("docs", "ai", "hr", "frontend", "dev", "pm", "cs", "csm") covers what testing surfaced first; more entries get added as real queries turn up more misses.</li>
                                 <li><strong>Recent-searches memory</strong> — Session-scoped, so a visitor who searches, browses, and comes back mid-visit doesn't retype the same query.</li>
                                 <li><strong>Result count badge on the search icon</strong> — A quiet visual cue that search exists and works, for visitors who never think to look for one.</li>
                             </ol>
@@ -950,6 +950,32 @@
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-29 — jump landed mid-card instead of at the top</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    First real use: picking a result scrolled to somewhere in the middle of the project card rather than its start. Cause was <code>scrollIntoView({ block: 'center' })</code> — it centers the whole element in the viewport, and a project card with a wins list, a constraints list, and a roadmap is taller than most screens, so centering it put the heading above the fold and the middle of the card in view. Switched to <code>block: 'start'</code>, and added <code>scroll-margin-top</code> to the highlighted element (applied before the scroll call, not after, so it's actually in effect when the browser calculates the target position) so the heading lands just clear of the viewport edge instead of flush against it.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-29 — dropdown was capping results instead of showing everything</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Each type group in the results panel was capped at 6 rows, with the whole list capped at 30. That's invisible on a narrow query but wrong on a broad one — <code>ai-engineering</code> tags 11 items and <code>support-ops</code> tags 13, so searching either only surfaced a partial, seemingly arbitrary subset, and seeing the rest meant leaving the dropdown for the tab's own filter buttons. That's exactly the back-and-forth the search bar exists to remove. Removed both caps — the panel already scrolls (<code>max-height</code> + <code>overflow-y: auto</code>), so every matching item now renders in one pass, full stop.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-08-29 — "docs" now finds technical-writing</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Confirmed the gap this card's constraints section had already flagged: a query only matched a title, summary, or tag verbatim, so "docs" missed every item tagged <code>technical-writing</code> even though that's obviously what someone typing "docs" is after. Pulled the "lightweight synonym map" roadmap item forward instead of leaving it for later — a small hand-maintained list (<code>TAG_SYNONYMS</code> in <code>portfolio-search.js</code>) mapping informal words to the tag values that actually carry them: "docs"/"documentation" → <code>technical-writing</code>, "ai" → <code>ai-engineering</code>, "hr" → <code>people-hr</code>, "frontend" → <code>frontend-dev</code>, "pm" → <code>project-management</code>, "cs"/"csm" → <code>customer-support</code>/<code>support-ops</code>. Still substring matching underneath, still no fuzzy/semantic layer — this just widens which tags count as a hit for a handful of common words. More entries get added as real searches turn up more misses.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
