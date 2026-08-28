@@ -214,6 +214,18 @@ The five consulting deliverables live in the Projects tab in the HTML and carry 
 
 ---
 
+## Addendum — 2026-08-28: `portfolio-search` added
+
+One new item added to `portfolio-index.json` following the §12 checklist, outside of a full audit re-run (per the currency note above, that's a separate task):
+
+| id | type | anchor | domains | evidence | tools | status |
+|---|---|---|---|---|---|---|
+| `portfolio-search` | project | `#proj-portfolio-search` | `frontend-dev` | `technical-depth`, `process-design`, `build-in-public`, `judgment-restraint` | `html-css-js` | `live` |
+
+No new tools or domains required — reuses the same vocabulary as `proj-digital-spec-front-door`, its closest sibling in the index (`relatedIds` set both ways). `anchor` verified present in `index.html` as `id="proj-portfolio-search"`.
+
+---
+
 ## Idempotency Contract
 
 Re-running this audit must:
