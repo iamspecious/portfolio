@@ -165,10 +165,13 @@
     line-height: 1.5;
 }
 
-/* Flash applied to the destination element after a jump */
+/* Flash applied to the destination element after a jump.
+   scroll-margin-top keeps the heading clear of the viewport edge when
+   scrollIntoView({block:'start'}) lands on it — see portfolio-search.js. */
 .pfs-highlight {
     animation: pfs-flash 2.2s ease-out;
     border-radius: 6px;
+    scroll-margin-top: 20px;
 }
 
 @keyframes pfs-flash {
