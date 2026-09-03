@@ -3082,6 +3082,215 @@
                     </div>
                     </div><!-- /project-block: Voice Adaptation Showcase -->
 
+                    <div class="project-block" data-category="writing">
+                    <div class="project" id="doc-crisis-management-playbook">
+                        <h3>The Small Studio Crisis Playbook <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">CC BY 4.0</span></h3>
+                        <p><strong>September 2026</strong></p>
+                        <p>An openly licensed crisis communications and moderation kit for studios, open-source projects, and community teams under about twenty-five people — the ones who discover they have no crisis procedure on the day they need one. Built action-first: a one-page card for the first sixty minutes, then six incident classes that route to the module you need, then the reasoning underneath — grounded in the CDC's Crisis and Emergency Risk Communication framework, Coombs' Situational Crisis Communication Theory, NIST SP 800-61r3, ISO/IEC 29147, and the human-factors research on how procedural documents actually get used under stress. Free to use, adapt, and rebuild on — internal credit is fine, and cost is never a blocker.</p>
+                        <p><strong>What it demonstrates:</strong></p>
+                        <ul style="margin-top:0.25rem;">
+                            <li>Evidence-based technical writing — every structural choice (four short checklists instead of one, action before reasoning, named roles instead of "the team") traced to a cited source, not house style</li>
+                            <li>Audience-aware scoping — deliberately generalised away from the live situation that prompted it, and scoped to communications, coordination and moderation only, so a nervous team can adopt it without accepting a verdict on their legal position or their staffing</li>
+                            <li>Structural range in one project — a ~7,500-word reference document and a 568-word printable companion card, each edited for what its reader is actually doing when they reach for it</li>
+                            <li>A six-class triage taxonomy built for what differs between crises (who can speak, what's legally sayable, whether the decision is reversible), not for how severe they are</li>
+                        </ul>
+                        <div class="project-constraints">
+                            <strong>Deliberate scope &amp; exclusions</strong>
+                            <ul>
+                                <li>No severity matrix — incident response guidance recommends starting simple; this document deliberately stops at "is this an incident" and says so</li>
+                                <li>No jurisdiction-specific legal detail — consumer and employment law questions are flagged, not answered; wrong advice across multiple jurisdictions is worse than none</li>
+                                <li>No individuals named in any case file beyond what's already public and organisational</li>
+                                <li>No advice on the employment decision itself — only on how to communicate around one</li>
+                                <li>Licensed CC BY (not CC BY-NC) as a deliberate reach-over-control trade-off — a consultancy could build paid work on this and satisfy the licence with a back-matter credit; the alternative would stop some unfunded communities from touching it at all</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>UK/EU consumer law split</strong> for the refunds module — materially more useful and materially more of a liability; needs a decision on whether the document should carry it.</li>
+                                <li><strong>Print-ready PDF of the one-pager</strong> — print is the format that survives the exact conditions the card exists for.</li>
+                                <li><strong>Author credentials note</strong> — the playbook carries a byline with no establishing context; if it's functioning as a credibility piece, that's worth two lines.</li>
+                                <li><strong>Short memorable URL for the card</strong>, so it survives being pasted into a Discord with no surrounding context.</li>
+                            </ol>
+                        </div>
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">Crisis Communications</span>
+                            <span class="tech-tag">Community Management</span>
+                            <span class="tech-tag">Moderation</span>
+                            <span class="tech-tag">Incident Response</span>
+                            <span class="tech-tag">Technical Writing</span>
+                            <span class="tech-tag">CC BY 4.0</span>
+                        </p>
+                        <p><a href="crisis-management-playbook.html" style="color:#b392f0;font-weight:600;">Read the playbook →</a></p>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-03</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    Pulled the URL out of the one-page card's footer. It originally linked back to the full playbook; changed to "see the accompanying playbook" because a team that rewrites the playbook into their own internal doc and keeps the card would otherwise have a hard link pointing at something that's no longer their source of truth. Also dropped the licence blurb from the card entirely — the "cost is never a blocker" framing belongs where someone is deciding whether to adopt the thing, not on the card they're reading while their community is on fire. Attribution stays in the byline; space on a one-pager is the scarcest resource in the whole project. Standing rule going forward: every future addition to the card costs it the property that makes it work — new material goes in the playbook, not the card.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-03</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Built the one-page card as a separate 568-word artefact rather than trusting people to find Part 0 inside a ~7,500-word document. Part 0 was already designed to be self-sufficient, so extracting it cost nothing and produces the thing people actually reach for — something printable, pinnable, and survivable when Discord itself is unusable. Contents: first 60 minutes, classification table, statement order, do-not list, hours 1–24, roles card — nothing requiring the full playbook first.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 17 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-03</span>
+                                <p>
+                                    <span class="tag tag-tried">Tried</span>
+                                    Three licensing iterations. First: CC BY 4.0 for the document, CC0 for the templates, so people could paste templates without an attribution obligation mid-crisis. Second: moved to uniform CC BY 4.0 — a split licence creates exactly the kind of small inconsistency that gets a cautious lawyer to tell a team not to use the document at all, and a credit or link-back is a reasonable minimum ask. Third: expanded into a full "using this" section on licensing, then trimmed it back off the one-pager, where it doesn't earn its space.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-03</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Made four things explicit in the final licence terms, because CC BY alone doesn't answer them and the ambiguity is what causes hesitation: internal credit is fine and doesn't have to be public; never put a licence notice in a live crisis post — credit belongs in the internal document the template was pasted into; attribution can wait until things calm down; cost is never the blocker, so unfunded communities should use it and not think about it again. Plus a stated norm, not a requirement: if you adapt it, keep a link to the original.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-02</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Cut the "handing this to a team mid-crisis" note and its accompanying covering-note template from v2. Both were artefacts of an earlier framing where the document was something you'd hand over personally; once it became a published open resource they were dead weight on the most valuable real estate in the file.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-02</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    v1 → v2 was a full restructure, not an edit. v1 ordered triage → modules → failure modes → cases → templates → after, reasoning-first with action distributed throughout — correct as an argument, wrong as a tool, because a reader in crisis had to understand the framework before they could act on it. v2 reorders to Part 0 (pure action) → Part 1 (modules, checklist-then-why) → Part 2 (templates) → Parts 3–6 (evidence, failure modes, cases, review), with 3–6 explicitly labelled as not needed to act. Every module now opens with a tickable Do block and puts the Why underneath — the single change that most improves usability, and the one most likely to get undone by a well-meaning editor who thinks the reasoning should come first.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-02</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Two principles pulled from PagerDuty's incident-response documentation and adjacent runbook practice: a runbook nobody can find during an incident may as well not exist, and conflicting documents breed hesitation, so each procedure needs one definitive source — applied to the playbook itself (one file, no chased cross-references) and to the guidance it gives (single source-of-truth channel). And: start without severity tiers, establish whether something is an incident, get roles and triggers working, add sophistication later — which is why the playbook deliberately ships with no severity matrix, and says so.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-02</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    The finding that actually caused the v2 restructure: Degani &amp; Wiener's foundational human-factors research on flight-deck checklists (Human Factors, 1993, plus the earlier NASA report) — limited working memory is the binding constraint on human performance, and the mitigation is chunking: grouping items into defined units around a common factor so a long procedure becomes a small number of retrievable groups rather than one undifferentiated list. Part 0 became four short checklists instead of one list of thirty items; the modules became discrete instead of continuous. Added a section stating this openly — without it, the first thing an editor does to a document like this is merge the checklists back into prose.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-02</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    Research pass two, prompted by a structural question rather than a substance one: what does best-in-class crisis documentation actually look like, structurally? This is the pass that changed the document most. CDC's Crisis and Emergency Risk Communication (CERC) model — six principles: be first, be right, be credible, express empathy, promote action, show respect. "Be right" (facts in increments) validated the "what we know / what we don't know" structure already in the first-statement template; "be credible" (uncertainty is worse than bad news, because rumour does more damage than hard truth) is the sharpest available argument against staying quiet until you have a complete picture; "promote action" supplied the evidential basis for something v1 asserted without support — that instructing information outranks the apology because it restores a sense of control.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-02</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Wrote the "same outcome, different route" section — a direct requirement to be honest that different incidents need different handling even when the visible outcome looks identical. Built around five axes the classes genuinely diverge on: speech constraints, timelines, reversibility, evidentiary bar, who can credibly speak. Sharpest version, worth keeping if the section ever gets cut for length: applying security-incident transparency instincts to a conduct incident prejudices the process and creates liability; applying conduct-incident caution to a security incident looks like a cover-up. Same instinct, opposite outcomes, depending only on the class.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-02</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Classified incidents by class, not severity. Most incident-response frameworks sort by severity (SEV1/SEV2, P0/P1) — correct for operational incidents, wrong here, because severity tells you how hard to run but not what you're allowed to say, and speech constraints are what actually differs. Landed on six classes — Product, Security, Commercial, Conduct, Governance, Community — cut for this domain specifically rather than mapped directly onto SCCT's clusters, because "accidental vs intentional" doesn't distinguish a pricing backlash from code sabotage even though the required responses are nearly opposite. Attached three compounding rules: silence turns Security into Governance in about seventy-two hours; if leadership knew, it's already Governance regardless of origin; two classes running at once get split publicly.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Chose Helldivers 2 / PSN account linking (2024) as the flagship case because it does three jobs at once: demonstrates what happens with no comms discipline (staff publicly directing players to review-bomb), quantifies the commercial damage (369,000+ negative reviews at peak), and demonstrates recovery (reversal within days, 200,000+ positive reviews in one day, the CEO accepting the criticism as warranted). The most useful and least obvious part: the formal acknowledgement failed and the named person accepting blame worked — a clean, evidenced argument for why the principal has to speak on governance failures.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Chose node-ipc/peacenotwar (2022) as the primary supply-chain case because it isolates exactly the mechanism that matters: the ecosystem judged the act, not the stated motive, and the trust consequence attached to the maintainer's future access rather than the specific package. That's the transferable lesson for any modding or plugin ecosystem, and it directly undercuts the "it only targeted bad actors" defence that surfaces in nearly every incident of this type.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    ISO/IEC 29147:2018's seven-day acknowledgement standard, left unqualified, would give a panicking team permission to sit on a live incident for a week — it's the floor for an inbound private vulnerability report, not a benchmark for a public incident already in progress. Flagged the distinction explicitly in the first-statement module rather than just citing the number.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Checked and confirmed NIST SP 800-61 Revision 3 (April 2025) supersedes r2 entirely and reorganises around the CSF 2.0 functions. Used lightly in the security module — the playbook doesn't ask anyone to implement a NIST profile mid-crisis — but it gives that module defensible structure and a citation that isn't invented on the spot. Its shift to treating improvement as continuous rather than post-incident got reused in the post-incident review.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Research pass one, for substance rather than structure. Coombs' Situational Crisis Communication Theory (2007, plus the later Handbook chapter) — the most replicated framework in the field — did two jobs: its finding that preventable crises damage reputation more than any other type, with rebuild strategies (apology, compensation) producing the strongest recovery for them, is why the playbook pushes hard against deny/diminish; and Coombs' own note that a common misapplication of SCCT is skipping the "ethical base response" (instructing and adjusting information) in favour of reputational strategy became the load-bearing justification for the first-statement ordering.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-note">Note</span>
+                                    Target audience: teams of roughly five to twenty-five with no prepared crisis procedure — studios, open-source maintainers, community teams, volunteer moderator groups. The framing line in the intro — that having no crisis procedure isn't a moral failing, because crisis response is a specialist competency that costs money and produces nothing until the day it saves you — was deliberate. Documents that open by implying the reader has already failed don't get read by people who just have.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Scoped the whole document to communications, coordination, and moderation only — stated on the first page and repeated in the footer. No legal strategy, no technical remediation, no employment decisions; only how to talk about those things and who should own them. This was the single most important structural choice: a scoped document can be accepted by a nervous team without them feeling they're accepting a verdict on their legal position or their staffing. An unscoped one asks them to swallow everything at once, which they won't.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-09-01</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Started from a practitioner discussion about a community crisis in a games modding ecosystem — the kind of situation where a technical incident, an employment question, and a community trust collapse all arrive at once and land on whoever happens to run the Discord. Decided to generalise completely: nothing in the playbook references any live or identifiable situation. Practical reason — a document that reads as a diagnosis of a specific team's failure gets defensive-read and binned; generic guidance that happens to arrive on a useful day gets used. Ethical reason — writing about a live incident involving identifiable individuals turns a resource into commentary, which is a different artefact with different obligations.
+                                </p>
+                            </div>
+
+                            </div><!-- /devlog-overflow -->
+                        </div><!-- /devlog -->
+                    </div>
+                    </div><!-- /project-block: The Small Studio Crisis Playbook -->
+
                     <div class="project-block" data-category="ai-tools operations">
 
                     <!-- ====================================================

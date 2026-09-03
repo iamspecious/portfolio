@@ -1358,6 +1358,43 @@
     "notes": ""
   },
   {
+    "id": "crisis-management-playbook",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "The Small Studio Crisis Playbook",
+    "dateStart": "2026-09",
+    "dateEnd": "2026-09",
+    "status": "complete",
+    "domains": [
+      "technical-writing",
+      "community",
+      "support-ops"
+    ],
+    "evidence": [
+      "writing-range",
+      "process-design",
+      "diagnostic-reasoning"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "tools": [],
+    "summary": "Openly licensed (CC BY 4.0) crisis communications and moderation playbook for small studios, open-source projects, and community teams — a six-class incident taxonomy, a five-role command structure, eight response templates, and a standalone one-page quick-reference card, each choice traced to a cited source (CDC CERC, Coombs' SCCT, NIST SP 800-61r3, aviation checklist human-factors research).",
+    "anchor": "crisis-management-playbook.html",
+    "pageAnchor": "#doc-crisis-management-playbook",
+    "relatedIds": [
+      "technical-writing-portfolio",
+      "voice-and-tone-guide",
+      "saas-integration-diagnostic-guide"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Bundled companion asset crisis-response-one-page.html (a standalone printable quick-reference card extracted from Part 0) is linked from within the document and is not separately indexed."
+  },
+  {
     "id": "proj-digital-spec-front-door",
     "schemaVersion": 1,
     "type": "project",

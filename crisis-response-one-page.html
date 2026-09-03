@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crisis Response — One Page · Spec Coda-Bishop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .page-chrome {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 24px 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .back-link {
+            color: #b392f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+        }
+        .back-link:hover { color: #d2b3ff; }
+
+        .print-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .print-btn:hover { background: #30363d; color: #e6edf3; }
+
+        .card {
+            max-width: 720px;
+            margin: 20px auto 60px;
+            padding: 32px 30px 26px;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            background: #161b22;
+        }
+
+        .card-header {
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 16px;
+            margin-bottom: 22px;
+        }
+
+        .print-note {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #f85149;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin-bottom: 6px;
+        }
+
+        .card-byline {
+            font-size: 0.82rem;
+            color: #8b949e;
+        }
+        .card-byline em { color: #8b949e; }
+
+        h2.block-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #b392f0;
+            margin: 26px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #21262d;
+        }
+        h2.block-title:first-of-type { margin-top: 0; }
+
+        ol.checklist, ul.checklist {
+            list-style: none;
+            margin: 0 0 4px;
+        }
+
+        .checklist li {
+            display: flex;
+            gap: 10px;
+            font-size: 0.86rem;
+            color: #c9d1d9;
+            line-height: 1.55;
+            padding: 6px 0;
+            border-bottom: 1px solid #1c2128;
+        }
+        .checklist li:last-child { border-bottom: none; }
+
+        .box {
+            flex-shrink: 0;
+            width: 15px;
+            height: 15px;
+            margin-top: 2px;
+            border: 1.5px solid #6e7681;
+            border-radius: 2px;
+        }
+        .box.x { border-color: #f85149; position: relative; }
+        .box.x::before, .box.x::after {
+            content: '';
+            position: absolute;
+            top: 6px; left: 1px;
+            width: 11px;
+            height: 1.5px;
+            background: #f85149;
+        }
+        .box.x::before { transform: rotate(45deg); }
+        .box.x::after { transform: rotate(-45deg); }
+
+        .doc-table-wrap { overflow-x: auto; margin: 4px 0 4px; border: 1px solid #30363d; border-radius: 6px; }
+        table.doc-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+        table.doc-table th {
+            background: #0f1318; color: #e6edf3; font-weight: 700; font-size: 0.66rem;
+            text-transform: uppercase; letter-spacing: 0.05em; padding: 7px 10px; text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+        table.doc-table td { padding: 7px 10px; border-bottom: 1px solid #1c2128; color: #c9d1d9; vertical-align: top; line-height: 1.45; }
+        table.doc-table tr:last-child td { border-bottom: none; }
+
+        .cls-badge {
+            display: inline-block; font-family: 'Consolas', monospace; font-weight: 700;
+            font-size: 0.66rem; padding: 1px 6px; border-radius: 4px; white-space: nowrap;
+        }
+        .cls-a { background: #0d1b2e; color: #79c0ff; border: 1px solid #388bfd; }
+        .cls-b { background: #1a0e0e; color: #ff8080; border: 1px solid #f85149; }
+        .cls-c { background: #1f1500; color: #e3b341; border: 1px solid #d29922; }
+        .cls-d { background: #1a0d24; color: #d2b3ff; border: 1px solid #b392f0; }
+        .cls-e { background: #240d16; color: #ff9bc4; border: 1px solid #db61a2; }
+        .cls-f { background: #0d2818; color: #7ee787; border: 1px solid #3fb950; }
+
+        .rule-note {
+            font-size: 0.78rem;
+            font-style: italic;
+            color: #8b949e;
+            margin: 8px 0 2px;
+        }
+
+        ol.order-list {
+            padding-left: 20px;
+            margin: 2px 0 4px;
+        }
+        ol.order-list li {
+            font-size: 0.86rem;
+            color: #c9d1d9;
+            line-height: 1.6;
+            padding: 3px 0;
+        }
+
+        .card-footer {
+            margin-top: 26px;
+            padding-top: 16px;
+            border-top: 2px solid #30363d;
+            font-size: 0.78rem;
+            color: #8b949e;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            .card { padding: 24px 18px 20px; margin: 14px 12px 40px; }
+            .card-title { font-size: 1.25rem; }
+        }
+
+        /* ── Print ── */
+        @media print {
+            body { background: #fff; color: #111; font-size: 11.5px; }
+            .page-chrome { display: none; }
+            .card {
+                border: none; margin: 0; padding: 0; max-width: 100%;
+                background: #fff;
+            }
+            .card-header { border-bottom-color: #999; }
+            .print-note { display: none; }
+            .card-title, h2.block-title { color: #111; }
+            h2.block-title { border-bottom-color: #ccc; color: #333; }
+            .card-byline { color: #444; }
+            .checklist li { color: #111; border-bottom-color: #ddd; }
+            .box { border-color: #444; }
+            .box.x { border-color: #a00; }
+            .box.x::before, .box.x::after { background: #a00; }
+            table.doc-table th { background: #eee; color: #111; border-bottom-color: #999; }
+            table.doc-table td { color: #111; border-bottom-color: #ddd; }
+            .cls-a, .cls-b, .cls-c, .cls-d, .cls-e, .cls-f { background: #fff !important; color: #111 !important; }
+            .rule-note, .card-footer { color: #333; }
+            ol.order-list li { color: #111; }
+            a { color: #111; text-decoration: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-chrome">
+    <a class="back-link" href="crisis-management-playbook.html">← Full playbook</a>
+    <button class="print-btn" onclick="window.print()">🖨 Print this page</button>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="print-note">Print this. Pin it. Use it before you read anything else.</div>
+        <div class="card-title">Crisis Response — One Page</div>
+        <p class="card-byline">From <em>The Small Studio Crisis Playbook</em> — Specious Coda-Bishop · CC BY 4.0</p>
+    </div>
+
+    <h2 class="block-title">First 60 minutes</h2>
+    <ol class="checklist">
+        <li><span class="box"></span><span><strong>Name a Decision Maker and a Comms Owner.</strong> Two people. Comms Owner does nothing else.</span></li>
+        <li><span class="box"></span><span><strong>Open a decision log.</strong> Timestamp, decision, who, basis. Start now.</span></li>
+        <li><span class="box"></span><span><strong>Classify</strong> using the table below. Write it in the log.</span></li>
+        <li><span class="box"></span><span><strong>Must users do anything to protect themselves?</strong> If yes it goes first in your statement. If no, say so.</span></li>
+        <li><span class="box"></span><span><strong>What can't you legally say?</strong> Ask before you promise.</span></li>
+        <li><span class="box"></span><span><strong>Contain</strong> if it's code or access. Suspend, pull, revoke. Precautionary, not punitive.</span></li>
+        <li><span class="box"></span><span><strong>Post the first acknowledgement.</strong> You don't need answers, you need to show someone is awake.</span></li>
+        <li><span class="box"></span><span><strong>One channel is the source of truth.</strong> Everything else links to it.</span></li>
+        <li><span class="box"></span><span><strong>Tell staff and mods not to comment publicly</strong> — give them the line to use instead.</span></li>
+        <li><span class="box"></span><span><strong>Set the next update time.</strong> Exact. With timezone. In the post.</span></li>
+    </ol>
+
+    <h2 class="block-title">Classify</h2>
+    <div class="doc-table-wrap">
+        <table class="doc-table">
+            <thead><tr><th>Situation</th><th>Class</th><th>Who speaks</th></tr></thead>
+            <tbody>
+                <tr><td>Outage, bad patch, data loss</td><td><span class="cls-badge cls-a">A Product</span></td><td>Engineering lead</td></tr>
+                <tr><td>Malicious or compromised code</td><td><span class="cls-badge cls-b">B Security</span></td><td>Senior engineer</td></tr>
+                <tr><td>Pricing, terms, DRM, account rules</td><td><span class="cls-badge cls-c">C Commercial</span></td><td>Principal</td></tr>
+                <tr><td>Staff or contributor conduct</td><td><span class="cls-badge cls-d">D Conduct</span></td><td>Principal + HR</td></tr>
+                <tr><td>Leadership knew, concealed, misled</td><td><span class="cls-badge cls-e">E Governance</span></td><td><strong>Principal only</strong></td></tr>
+                <tr><td>Factional fighting, harassment</td><td><span class="cls-badge cls-f">F Community</span></td><td>Community lead</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="rule-note">Silence turns B into E in 72 hours. If leadership knew, it's already E.</p>
+
+    <h2 class="block-title">The first statement — in this order</h2>
+    <ol class="order-list">
+        <li><strong>What to do right now</strong> (or: "no action needed")</li>
+        <li><strong>Acknowledge the effect</strong> on people — effect, not intent</li>
+        <li><strong>What you know</strong> — verified only</li>
+        <li><strong>What you don't know</strong> — be specific</li>
+        <li><strong>Next update time</strong> — exact</li>
+        <li><strong>Who owns this</strong> — name and role</li>
+    </ol>
+
+    <h2 class="block-title">Do not</h2>
+    <ul class="checklist">
+        <li><span class="box x"></span><span>Go silent</span></li>
+        <li><span class="box x"></span><span>Lock or purge channels</span></li>
+        <li><span class="box x"></span><span>Lead with intent</span></li>
+        <li><span class="box x"></span><span>Let anyone freelance a response</span></li>
+        <li><span class="box x"></span><span>Put junior staff in front</span></li>
+        <li><span class="box x"></span><span>Miss a deadline you set yourself</span></li>
+        <li><span class="box x"></span><span>Call a deliberate act a bug</span></li>
+        <li><span class="box x"></span><span>Promise transparency you can't legally deliver</span></li>
+    </ul>
+
+    <h2 class="block-title">Hours 1–24</h2>
+    <ol class="checklist">
+        <li><span class="box"></span><span>Assign Technical Lead, Moderation Lead, Scribe</span></li>
+        <li><span class="box"></span><span>Publish moderation rules <strong>before</strong> enforcing them</span></li>
+        <li><span class="box"></span><span>Brief volunteer mods privately — lines, and permission to step back</span></li>
+        <li><span class="box"></span><span>Publish refund routing</span></li>
+        <li><span class="box"></span><span>Consolidate into one pinned thread. Don't lock.</span></li>
+        <li><span class="box"></span><span><strong>Hit your update time</strong> — post even with nothing new</span></li>
+        <li><span class="box"></span><span>Set and publish the ongoing cadence (12h security / 24–48h other)</span></li>
+        <li><span class="box"></span><span>Track refund volume daily — it beats Discord temperature</span></li>
+        <li><span class="box"></span><span>Rotate anyone in the mentions every 4 hours</span></li>
+    </ol>
+
+    <h2 class="block-title">Roles</h2>
+    <div class="doc-table-wrap">
+        <table class="doc-table">
+            <thead><tr><th>Role</th><th>Owns</th><th>Can't also be</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Decision Maker</strong></td><td>Final call</td><td>Comms Owner</td></tr>
+                <tr><td><strong>Comms Owner</strong></td><td>Every outbound word. Full-time.</td><td>Decision Maker / Tech Lead</td></tr>
+                <tr><td><strong>Technical Lead</strong></td><td>Facts and remediation</td><td>Comms Owner</td></tr>
+                <tr><td><strong>Moderation Lead</strong></td><td>Channels and mod briefing</td><td>Anyone speaking publicly</td></tr>
+                <tr><td><strong>Scribe</strong></td><td>The decision log</td><td>—</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card-footer">
+        <p>Templates, modules and the reasoning behind all of this: see the accompanying playbook.</p>
+    </div>
+</div>
+
+</body>
+</html>
