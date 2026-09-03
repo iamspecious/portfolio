@@ -540,13 +540,33 @@
   }
 
   function doDeepLink(tabId, anchor) {
-    if (tabId && typeof switchToTab === 'function') switchToTab(tabId);
-    if (anchor) {
-      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      setTimeout(function () {
-        var el = document.querySelector(anchor);
-        if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-      }, 80);
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function scrollToAnchor() {
+      if (!anchor) return;
+      var el = document.querySelector(anchor);
+      if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    }
+
+    if (!tabId || typeof switchToTab !== 'function') {
+      if (anchor) setTimeout(scrollToAnchor, 80);
+      return;
+    }
+
+    var tabEl = document.getElementById(tabId);
+    var isActive = tabEl && tabEl.classList.contains('active');
+
+    if (anchor && !isActive && tabEl) {
+      // Tab transition takes ~150ms; scroll only after it fully completes
+      tabEl.addEventListener('shown.bs.tab', function onShown() {
+        tabEl.removeEventListener('shown.bs.tab', onShown);
+        scrollToAnchor();
+      });
+    }
+
+    switchToTab(tabId);
+
+    if (anchor && isActive) {
+      setTimeout(scrollToAnchor, 80);
     }
   }
 
