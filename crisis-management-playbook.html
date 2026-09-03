@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Small Studio Crisis Playbook — Crisis Communications &amp; Moderation Framework · Spec Coda-Bishop</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .doc-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* Nav */
+        .back-link {
+            color: #b392f0;
+            text-decoration: none;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 40px;
+        }
+        .back-link:hover { color: #d2b3ff; }
+
+        /* Document header */
+        .doc-header {
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 28px;
+            margin-bottom: 28px;
+        }
+
+        .doc-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #b392f0;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .doc-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #e6edf3;
+            line-height: 1.3;
+            margin-bottom: 6px;
+        }
+
+        .doc-subtitle {
+            font-size: 0.92rem;
+            color: #8b949e;
+            margin-bottom: 14px;
+        }
+
+        .doc-intro {
+            font-size: 0.88rem;
+            color: #8b949e;
+            line-height: 1.65;
+            margin-top: 14px;
+        }
+
+        .doc-byline {
+            font-size: 0.82rem;
+            color: #8b949e;
+            margin-top: 12px;
+        }
+        .doc-byline a { color: #b392f0; text-decoration: none; }
+        .doc-byline a:hover { color: #d2b3ff; }
+
+        /* "If it's happening right now" banner */
+        .urgent-banner {
+            background: #1a0e0e;
+            border: 1px solid #f85149;
+            border-left: 4px solid #f85149;
+            border-radius: 0 6px 6px 0;
+            padding: 18px 22px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .urgent-banner p {
+            font-size: 0.88rem;
+            color: #ffa198;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .urgent-banner strong { color: #ff8080; }
+
+        .urgent-banner a.urgent-cta {
+            flex-shrink: 0;
+            display: inline-block;
+            background: #f85149;
+            color: #1a0e0e;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-decoration: none;
+            padding: 9px 16px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+        .urgent-banner a.urgent-cta:hover { background: #ff7a72; }
+
+        /* Framing note */
+        .framing-note {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+
+        .framing-note .note-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #b392f0;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .framing-note p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .framing-note p:last-child { margin-bottom: 0; }
+
+        /* Capabilities grid */
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 52px;
+        }
+
+        .capability-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-top: 3px solid #7b5ea7;
+            border-radius: 6px;
+            padding: 16px 18px;
+        }
+
+        .cap-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #b392f0;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .cap-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .cap-body {
+            font-size: 0.8rem;
+            color: #8b949e;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 52px;
+        }
+
+        .toc-label {
+            font-size: 0.63rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .toc-table a { color: #e6edf3; text-decoration: none; font-weight: 700; }
+        .toc-table a:hover { color: #b392f0; }
+
+        /* Sections */
+        .doc-section { margin-bottom: 64px; scroll-margin-top: 20px; }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 18px;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 12px;
+            margin-bottom: 28px;
+        }
+
+        .section-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #b392f0;
+            font-family: 'Consolas', monospace;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e6edf3;
+            display: block;
+        }
+
+        .section-tagline {
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        /* Context block */
+        .context-block {
+            background: #0f1318;
+            border-left: 3px solid #30363d;
+            padding: 14px 18px;
+            margin-bottom: 28px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .context-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8b949e;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .context-block p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Subsection */
+        .subsection { margin-bottom: 40px; scroll-margin-top: 20px; }
+
+        .subsection-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #b392f0;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subsection-title::before {
+            content: '▸';
+            font-size: 0.65rem;
+        }
+
+        .subsection-divider {
+            border: none;
+            border-top: 1px solid #21262d;
+            margin: 36px 0;
+        }
+
+        /* Content headings */
+        .content-heading {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8b949e;
+            margin: 22px 0 10px;
+        }
+        .content-heading:first-child { margin-top: 0; }
+
+        /* Body text */
+        .doc-body p {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 14px;
+        }
+
+        .doc-body p:last-child { margin-bottom: 0; }
+
+        /* Inline code */
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: #161b22;
+            color: #79c0ff;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.88em;
+            border: 1px solid #21262d;
+        }
+
+        /* Tables */
+        .doc-table-wrap {
+            overflow-x: auto;
+            margin: 14px 0 24px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.83rem;
+        }
+
+        .doc-table th {
+            background: #161b22;
+            color: #e6edf3;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .doc-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #21262d;
+            color: #c9d1d9;
+            vertical-align: top;
+            line-height: 1.6;
+            font-size: 0.86rem;
+        }
+
+        .doc-table tr:last-child td { border-bottom: none; }
+        .doc-table tr:nth-child(even) td { background: #0f1318; }
+        .doc-table .cell-mono { font-family: 'Consolas', monospace; color: #79c0ff; font-size: 0.82rem; }
+
+        /* Class badges (A–F) */
+        .cls-badge {
+            display: inline-block;
+            font-family: 'Consolas', monospace;
+            font-weight: 700;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .cls-a { background: #0d1b2e; color: #79c0ff; border: 1px solid #388bfd; }
+        .cls-b { background: #1a0e0e; color: #ff8080; border: 1px solid #f85149; }
+        .cls-c { background: #1f1500; color: #e3b341; border: 1px solid #d29922; }
+        .cls-d { background: #1a0d24; color: #d2b3ff; border: 1px solid #b392f0; }
+        .cls-e { background: #240d16; color: #ff9bc4; border: 1px solid #db61a2; }
+        .cls-f { background: #0d2818; color: #7ee787; border: 1px solid #3fb950; }
+
+        /* Bullet list */
+        .doc-list {
+            list-style: disc;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .doc-list li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+
+        /* Ordered / sequence list — order matters, no reordering */
+        .triage-steps {
+            list-style: decimal;
+            padding-left: 22px;
+            margin: 10px 0 20px;
+        }
+
+        .triage-steps li {
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 20px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            line-height: 1.65;
+            padding: 12px 16px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li:nth-child(even) { background: #0f1318; }
+
+        .check-icon {
+            color: #b392f0;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+            font-family: 'Consolas', monospace;
+        }
+
+        /* Do-not list — same shape, red, X icon */
+        .do-not-list { border-color: #4a1515; }
+        .do-not-list li { color: #ffa198; }
+        .do-not-list li:nth-child(even) { background: #1a0e0e; }
+        .do-not-icon {
+            color: #f85149;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+            font-family: 'Consolas', monospace;
+            font-weight: 700;
+        }
+
+        /* Callout boxes */
+        .callout {
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 14px 0 24px;
+        }
+
+        .callout-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .callout p {
+            font-size: 0.86rem;
+            line-height: 1.65;
+            margin: 0 0 8px;
+        }
+        .callout p:last-child { margin-bottom: 0; }
+
+        .callout.note { background: #161b22; border-left: 4px solid #388bfd; }
+        .callout.note .callout-label { color: #388bfd; }
+        .callout.note p { color: #b0c4f0; }
+
+        .callout.key-point { background: #0d2818; border-left: 4px solid #3fb950; }
+        .callout.key-point .callout-label { color: #3fb950; }
+        .callout.key-point p { color: #7ee787; }
+
+        .callout.warning { background: #1f1500; border-left: 4px solid #d29922; }
+        .callout.warning .callout-label { color: #d29922; }
+        .callout.warning p { color: #e3b341; }
+
+        .callout.danger { background: #1a0e0e; border-left: 4px solid #f85149; }
+        .callout.danger .callout-label { color: #f85149; }
+        .callout.danger p { color: #ffa198; }
+
+        /* Template blocks — Part 2 */
+        .template-block {
+            background: #0f1318;
+            border: 1px solid #30363d;
+            border-left: 4px solid #388bfd;
+            border-radius: 0 6px 6px 0;
+            padding: 20px 24px;
+            margin: 14px 0 28px;
+        }
+
+        .template-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #79c0ff;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .template-block p {
+            font-size: 0.85rem;
+            color: #c9d1d9;
+            line-height: 1.75;
+            margin-bottom: 10px;
+        }
+        .template-block p:last-child { margin-bottom: 0; }
+        .template-block em { color: #e3b341; font-style: italic; }
+        .template-block strong { color: #e6edf3; }
+
+        /* Case files — Part 5 */
+        .case-file {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+        }
+
+        .case-file-title {
+            font-size: 0.94rem;
+            font-weight: 700;
+            color: #e6edf3;
+            margin-bottom: 4px;
+        }
+
+        .case-file-meta { margin-bottom: 12px; }
+
+        .case-file p {
+            font-size: 0.86rem;
+            color: #c9d1d9;
+            line-height: 1.72;
+            margin-bottom: 10px;
+        }
+
+        .case-file p.mechanism {
+            color: #d2b3ff;
+            margin-bottom: 0;
+        }
+        .case-file p.mechanism strong { color: #b392f0; }
+
+        /* Licence box */
+        .licence-box {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 24px 26px;
+            margin-bottom: 20px;
+        }
+
+        .licence-box h3 {
+            font-size: 0.94rem;
+            color: #e6edf3;
+            margin-bottom: 12px;
+        }
+
+        .licence-box a { color: #b392f0; }
+
+        /* Scope note */
+        .scope-note {
+            font-size: 0.8rem;
+            color: #6e7681;
+            font-style: italic;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 64px;
+            padding-top: 24px;
+            border-top: 1px solid #30363d;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #8b949e;
+        }
+
+        .doc-footer a { color: #b392f0; text-decoration: none; }
+        .doc-footer a:hover { color: #d2b3ff; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .capabilities { grid-template-columns: 1fr; }
+            .doc-title { font-size: 1.35rem; }
+            .section-num { font-size: 1.2rem; }
+            .urgent-banner { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-container">
+
+    <a class="back-link" href="index.html">← Back to Portfolio</a>
+
+    <div class="doc-header">
+        <span class="doc-label">Crisis Communications · Community &amp; Incident Response · CC BY 4.0</span>
+        <h1 class="doc-title">The Small Studio Crisis Playbook</h1>
+        <p class="doc-subtitle">Specious Coda-Bishop · Version 2.0 · Communications and moderation response kit for studios, open-source projects, and community teams</p>
+        <p class="doc-intro">A structural framework for the first 24 hours of a public crisis and everything that follows — written as a genuinely usable, freely licensed resource, not a portfolio pastiche. Covers six incident classes (product failure, security, commercial, conduct, governance, community), the role separation that keeps a small team from freelancing a response, eight copy-paste templates, and the published research each recommendation is built on.</p>
+        <p class="doc-byline">Spec Coda-Bishop &nbsp;·&nbsp; <a href="https://linkedin.com/in/speciouscodabishop">linkedin.com/in/speciouscodabishop</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+    <div class="urgent-banner">
+        <p>▶ <strong>If something is happening right now</strong> — skip straight to Part 0. It's four checklists and one table. The reasoning underneath (Parts 3–5) will still be here at 3am next Tuesday.</p>
+        <a class="urgent-cta" href="#part-0">Go to Part 0 →</a>
+    </div>
+
+    <div class="framing-note">
+        <span class="note-label">About This Document</span>
+        <p>Small studios, open-source maintainers, and volunteer-run communities absorb the same crises large organisations do — a bad patch, a compromised dependency, a moderation dispute that spills outward — with none of the incident-response infrastructure. There's usually no comms team, no legal on retainer, no precedent to fall back on. Just whoever's awake when it starts.</p>
+        <p>This playbook exists to be that precedent. Part 0 is action only — checklists you can execute without reading anything else. Part 1 is the modules underneath, each opening with a checklist and putting the reasoning below it. Part 2 is copy-paste templates. Parts 3–6 are the evidence base, the failure modes, three sourced case files, and a post-incident review. Nothing in Parts 3–6 is needed to act — they're there for whoever wants to know <em>why</em> before they trust it, or needs to defend the approach internally.</p>
+        <p>There's also a standalone, printable <a href="crisis-response-one-page.html">one-page version of Part 0</a> — designed to be pinned somewhere visible before you need it, not found by searching for it mid-incident.</p>
+    </div>
+
+    <div class="capabilities">
+        <div class="capability-card">
+            <span class="cap-label">Structure</span>
+            <span class="cap-title">Four checklists, not one list of forty items</span>
+            <p class="cap-body">Chunked around the aviation-checklist research on working memory under stress — a long procedure becomes a small number of retrievable groups.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Triage</span>
+            <span class="cap-title">Six-class classification table</span>
+            <p class="cap-body">Two minutes to classify a situation from Product to Governance — each class routes to a different module, a different speaker, and a different legal exposure.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Templates</span>
+            <span class="cap-title">Eight ready-to-use response templates</span>
+            <p class="cap-body">First acknowledgement, holding update, technical findings, constrained silence, moderation policy, moderator brief, refund routing, decision log.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Roles</span>
+            <span class="cap-title">Five-role command structure</span>
+            <p class="cap-body">Decision Maker, Comms Owner, Technical Lead, Moderation Lead, Scribe — with explicit rules for which two can never be the same person.</p>
+        </div>
+        <div class="capability-card">
+            <span class="cap-label">Evidence</span>
+            <span class="cap-title">Built on published frameworks, not vibes</span>
+            <p class="cap-body">CDC's CERC model, Coombs' Situational Crisis Communication Theory, NIST SP 800-61 Rev. 3, and the aviation human-factors research behind checklist design.</p>
+        </div>
+    </div>
+
+    <div class="toc">
+        <span class="toc-label">What this playbook covers</span>
+        <div class="toc-table">
+        <div class="doc-table-wrap" style="border: none; margin: 0;">
+            <table class="doc-table">
+                <thead>
+                    <tr><th>Part</th><th>Covers</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="cell-mono"><a href="#part-0">00</a></td><td><a href="#part-0">Act</a> — first 60 minutes, classification, hours 1–24, do-not list, roles card</td></tr>
+                    <tr><td class="cell-mono"><a href="#part-1">01</a></td><td><a href="#part-1">Modules</a> — command structure, first statement, cadence, moderation, and one module per incident class</td></tr>
+                    <tr><td class="cell-mono"><a href="#part-2">02</a></td><td><a href="#part-2">Templates</a> — eight copy-paste, rewrite-in-your-own-voice response templates</td></tr>
+                    <tr><td class="cell-mono"><a href="#part-3">03</a></td><td><a href="#part-3">Why this works</a> — the communication and crisis-response research underneath</td></tr>
+                    <tr><td class="cell-mono"><a href="#part-4">04</a></td><td><a href="#part-4">Failure modes</a> — the moves that reliably make it worse</td></tr>
+                    <tr><td class="cell-mono"><a href="#part-5">05</a></td><td><a href="#part-5">Case files</a> — three sourced, single-mechanism incidents</td></tr>
+                    <tr><td class="cell-mono"><a href="#part-6">06</a></td><td><a href="#part-6">After</a> — the post-incident review, run within two weeks</td></tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PART 0 — ACT
+    ========================================================== -->
+    <div class="doc-section" id="part-0">
+        <div class="section-header">
+            <span class="section-num">00</span>
+            <div>
+                <span class="section-title">Act</span>
+                <span class="section-tagline">Do these in order. Do not skip 1 or 2. Nothing here requires reading Parts 1–6 first.</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">0.1 First 60 minutes</span>
+            <ol class="checklist" style="list-style:none;">
+                <li><span class="check-icon">1</span><strong style="color:#e6edf3;">Name a Decision Maker and a Comms Owner.</strong>&nbsp;Two different people. The Comms Owner does nothing else until this is over.</li>
+                <li><span class="check-icon">2</span><strong style="color:#e6edf3;">Open a decision log.</strong>&nbsp;One document. Every decision gets a timestamp, a name, and a basis. Start now, not later.</li>
+                <li><span class="check-icon">3</span><strong style="color:#e6edf3;">Classify the incident</strong>&nbsp;using the table in 0.2. Two minutes. Write the class in the log.</li>
+                <li><span class="check-icon">4</span><strong style="color:#e6edf3;">Answer:</strong>&nbsp;is there anything a user must do right now to protect themselves? If yes, that goes at the top of your first message. If no, say so explicitly.</li>
+                <li><span class="check-icon">5</span><strong style="color:#e6edf3;">Identify what you cannot legally say.</strong>&nbsp;Ask before you promise, not after.</li>
+                <li><span class="check-icon">6</span><strong style="color:#e6edf3;">Take precautionary containment action</strong>&nbsp;if this is a code or access incident. Suspend access, pull the artefact, revoke the key. Frame it as precautionary, not as a verdict.</li>
+                <li><span class="check-icon">7</span><strong style="color:#e6edf3;">Post the first acknowledgement.</strong>&nbsp;Template 2.1. You don't need answers. You need to show someone competent is awake.</li>
+                <li><span class="check-icon">8</span><strong style="color:#e6edf3;">Pick one channel as the source of truth.</strong>&nbsp;Everything else links to it. Nothing gets restated.</li>
+                <li><span class="check-icon">9</span><strong style="color:#e6edf3;">Tell staff and moderators not to discuss it publicly</strong>&nbsp;and give them the line to use instead. Template 2.6.</li>
+                <li><span class="check-icon">10</span><strong style="color:#e6edf3;">Set the next update time and put it in the first post.</strong>&nbsp;Specific time. Timezone included.</li>
+            </ol>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">0.2 Classify — two minutes</span>
+            <div class="doc-body"><p>Find the row that matches. It tells you which module to open and who has to speak.</p></div>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr><th>If the situation is…</th><th>Class</th><th>The question people are really asking</th><th>Module</th><th>Who speaks</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Broken build, outage, data loss, bad patch</td><td><span class="cls-badge cls-a">A · Product</span></td><td>"Will it be fixed, and did I lose anything?"</td><td class="cell-mono"><a href="#module-1-2">1.2</a>, <a href="#module-1-3">1.3</a></td><td>Engineering lead</td></tr>
+                        <tr><td>Malicious, compromised, or covertly harmful code</td><td><span class="cls-badge cls-b">B · Security</span></td><td>"Is my machine safe right now?"</td><td class="cell-mono"><a href="#module-1-5">1.5</a> first</td><td>Senior engineer</td></tr>
+                        <tr><td>Pricing, terms, DRM, account requirements, licence change</td><td><span class="cls-badge cls-c">C · Commercial</span></td><td>"Do you see us as players or as revenue?"</td><td class="cell-mono"><a href="#module-1-8">1.8</a></td><td>Studio principal</td></tr>
+                        <tr><td>Conduct by staff, a contractor, or a prominent community figure</td><td><span class="cls-badge cls-d">D · Conduct</span></td><td>"Is this person a danger, and do you agree it was wrong?"</td><td class="cell-mono"><a href="#module-1-6">1.6</a></td><td>Principal + HR</td></tr>
+                        <tr><td>Leadership knew, concealed, misled, or hid the call</td><td><span class="cls-badge cls-e">E · Governance</span></td><td>"Can we trust anything you tell us?"</td><td class="cell-mono"><a href="#module-1-7">1.7</a></td><td><strong>Principal only</strong></td></tr>
+                        <tr><td>Factional fighting, moderation dispute, harassment spilling outward</td><td><span class="cls-badge cls-f">F · Community</span></td><td>"Is this space safe and are the rules real?"</td><td class="cell-mono"><a href="#module-1-4">1.4</a></td><td>Community lead</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <ol class="triage-steps">
+                <li><strong>Classes compound.</strong> A Class B handled with silence becomes a Class E within seventy-two hours. Assume compounding is the default.</li>
+                <li><strong>If leadership knew, it is already Class E</strong> — run it as one regardless of what it started as.</li>
+                <li><strong>When two classes are live at once, run both tracks separately and say publicly that you're doing so.</strong> Their timelines conflict, and mixing them makes the fast track look like stonewalling on the slow one.</li>
+            </ol>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">0.3 Hours 1 to 24</span>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Assign the remaining roles: Technical Lead, Moderation Lead, Scribe (see 0.5)</li>
+                <li><span class="check-icon">☐</span>Publish the moderation rules for this incident <strong style="color:#e6edf3;">before</strong> enforcing them — Template 2.5</li>
+                <li><span class="check-icon">☐</span>Brief volunteer moderators privately, with permitted lines and permission to step back — Template 2.6</li>
+                <li><span class="check-icon">☐</span>Publish the refund routing notice — Template 2.7</li>
+                <li><span class="check-icon">☐</span>Consolidate discussion into one pinned thread per topic; do not lock anything</li>
+                <li><span class="check-icon">☐</span>Begin the fact-finding the second update will need</li>
+                <li><span class="check-icon">☐</span><strong style="color:#e6edf3;">Hit your stated update time.</strong> Post even if nothing has changed — Template 2.2</li>
+                <li><span class="check-icon">☐</span>Set the ongoing cadence and publish it (12h for active security, 24–48h for slower matters)</li>
+                <li><span class="check-icon">☐</span>Start tracking refund volume daily as your real sentiment metric</li>
+                <li><span class="check-icon">☐</span>Rotate anyone who's been reading the firehose for more than four hours</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">0.4 Do not</span>
+            <div class="doc-body"><p>Short list. These are the moves that reliably make it worse.</p></div>
+            <ul class="checklist do-not-list">
+                <li><span class="do-not-icon">✕</span><strong>Do not go silent.</strong>&nbsp;Silence is filled by the least charitable available theory, which then frames everything you say afterwards.</li>
+                <li><span class="do-not-icon">✕</span><strong>Do not lock or purge channels.</strong>&nbsp;It reads as concealment and relocates the conversation somewhere you have no voice.</li>
+                <li><span class="do-not-icon">✕</span><strong>Do not lead with intent.</strong>&nbsp;People have already judged the act. Intent arguments read as excuses.</li>
+                <li><span class="do-not-icon">✕</span><strong>Do not let anyone freelance.</strong>&nbsp;One message, every channel, or silence until the message exists.</li>
+                <li><span class="do-not-icon">✕</span><strong>Do not put junior staff in front.</strong>&nbsp;If it needs a face, it needs the most senior available person.</li>
+                <li><span class="do-not-icon">✕</span><strong>Do not miss a deadline you set yourself.</strong>&nbsp;It is the only thing you are actually building.</li>
+                <li><span class="do-not-icon">✕</span><strong>Do not use euphemism for a deliberate act.</strong>&nbsp;It will be treated as a second deception.</li>
+                <li><span class="do-not-icon">✕</span><strong>Do not promise transparency you're legally unable to deliver.</strong></li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">0.5 Roles card</span>
+            <div class="doc-table-wrap">
+                <table class="doc-table">
+                    <thead>
+                        <tr><th>Role</th><th>Owns</th><th>Cannot also be</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Decision Maker</strong></td><td>Final call on what is said and done</td><td>Comms Owner</td></tr>
+                        <tr><td><strong>Comms Owner</strong></td><td>Every outbound word. Drafts, approves, sequences. Full-time.</td><td>Decision Maker or Technical Lead</td></tr>
+                        <tr><td><strong>Technical Lead</strong></td><td>Establishing facts. Remediation. Feeds verified findings to Comms.</td><td>Comms Owner</td></tr>
+                        <tr><td><strong>Moderation Lead</strong></td><td>Channel policy, moderator briefing, escalations</td><td>Anyone with a public voice on this</td></tr>
+                        <tr><td><strong>Scribe</strong></td><td>The decision log</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout note"><p>In a small team, one person can hold two roles. Never those two pairings.</p></div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PART 1 — MODULES
+    ========================================================== -->
+    <div class="doc-section" id="part-1">
+        <div class="section-header">
+            <span class="section-num">01</span>
+            <div>
+                <span class="section-title">Modules</span>
+                <span class="section-tagline">Each module: what to do, then why. Take only what applies.</span>
+            </div>
+        </div>
+
+        <!-- 1.1 -->
+        <div class="subsection" id="module-1-1">
+            <span class="subsection-title">1.1 Command structure</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Name the five roles in 0.5 and tell the team who holds what</li>
+                <li><span class="check-icon">☐</span>Free the Comms Owner from all other duties for the duration</li>
+                <li><span class="check-icon">☐</span>Start the decision log — Template 2.8</li>
+                <li><span class="check-icon">☐</span>Designate one channel as the source of truth</li>
+                <li><span class="check-icon">☐</span>Send the staff line: <em style="color:#e3b341;">"During this incident, don't discuss it publicly. Point people to [channel]. This isn't about trust — inconsistency is what hurts us."</em></li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>The Comms Owner role is the one that gets skipped and it's the one that matters most. It can't be bolted onto someone who already has a full-time crisis job, because the moment their primary job demands attention, communication stops — and communication stopping is what turns a bad week into a bad quarter. If you genuinely cannot spare a person, the Decision Maker takes comms and delegates their operational work, not the reverse.</p>
+                <p>This role separation is the standard structure in mature incident response practice. Established incident response documentation consistently separates command, technical work, communication, and record-keeping into distinct roles, precisely because one person cannot hold both the technical picture and the external narrative under load.</p>
+                <p>The decision log exists for three reasons: it prevents contradictory statements across channels, it makes the post-incident review possible, and — if any of this becomes a legal matter — it's the difference between a defensible process and a reconstruction from memory.</p>
+            </div>
+        </div>
+
+        <!-- 1.2 -->
+        <div class="subsection" id="module-1-2">
+            <span class="subsection-title">1.2 The first statement</span>
+            <div class="content-heading">Do — in this order, no reordering</div>
+            <ol class="triage-steps">
+                <li><strong>Instructing information.</strong> What should a user do right now? If nothing, say so explicitly.</li>
+                <li><strong>Adjusting information.</strong> Acknowledge the effect on people. Not intent — effect.</li>
+                <li><strong>What you know</strong>, stated as verified fact. Short.</li>
+                <li><strong>What you don't know</strong>, stated as open. Be specific.</li>
+                <li><strong>Next update time.</strong> Exact, with timezone.</li>
+                <li><strong>Who owns this.</strong> A name and a role.</li>
+            </ol>
+            <div class="doc-body"><p>Use Template 2.1. Do not include: intent, defensiveness, comparisons to other companies, or any promise about an outcome you don't control.</p></div>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>The order is not stylistic. The gold-standard framework in emergency communication is the CDC's Crisis and Emergency Risk Communication (CERC) model, which sets out six principles: be first, be right, be credible, express empathy, promote action, show respect. Two of those bear directly on the order above. On being right, the guidance is to give facts in increments — tell people what you know when you know it, tell them what you don't know, and tell them if you expect to know more later. On credibility, the guidance is blunt: tell the truth, don't withhold to avoid embarrassment, and recognise that uncertainty is worse than bad news, because rumour does more damage than hard truth.</p>
+                <p>The action-first ordering has the same evidential basis. Giving people something specific to do restores a sense of control in circumstances that feel out of control — which is why instructing information outranks everything, including the apology.</p>
+                <p>The same conclusion arrives from the crisis communications literature by a different route. Coombs' Situational Crisis Communication Theory (SCCT) is the most replicated framework in the field, and one of the most common misapplications of it is skipping what he calls the <em style="color:#e3b341;">ethical base response</em> — instructing and adjusting information — and jumping straight to reputational strategy. That base response comes first in any crisis regardless of type.</p>
+            </div>
+            <div class="callout key-point">
+                <span class="callout-label">Translated</span>
+                <p>Tell people what to do and acknowledge the harm before you say anything about yourselves. Any response that opens with an explanation of the company's intentions has already lost.</p>
+            </div>
+            <div class="callout note">
+                <span class="callout-label">On timing</span>
+                <p>For an inbound vulnerability report, the international standard sets meaningful acknowledgement at within seven calendar days. That's the floor for a private report, not a benchmark for a public incident already in progress. For a live incident, your window is measured in hours.</p>
+            </div>
+        </div>
+
+        <!-- 1.3 -->
+        <div class="subsection" id="module-1-3">
+            <span class="subsection-title">1.3 Cadence and channel discipline</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Publish a cadence — 12 hours for active security, 24–48 for slower matters</li>
+                <li><span class="check-icon">☐</span>Hold it without exception, including when there's nothing to report</li>
+                <li><span class="check-icon">☐</span>One channel is the source of truth; everywhere else links, never restates</li>
+                <li><span class="check-icon">☐</span>No staff member comments independently, including in DMs and side channels</li>
+                <li><span class="check-icon">☐</span>Every channel carries the identical message or stays silent until the message exists</li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>A published "no change, next update Thursday 18:00" costs nothing and buys real credibility, because it proves the channel is alive. Missing a self-set deadline destroys the only asset you're building.</p>
+                <p>The restatement rule matters more than it sounds. The moment the same information exists in three slightly different forms, the differences become the story. A well-meaning developer answering honestly in a side channel — with detail the official statement doesn't contain — will be screenshotted within four minutes and reframed as a leak or a contradiction.</p>
+            </div>
+            <div class="callout danger">
+                <span class="callout-label">Case in point — Helldivers 2 / PSN account linking (2024)</span>
+                <p>The clearest recent demonstration of what happens without this discipline: the game's own community-facing staff publicly encouraged players to leave negative reviews and file refund requests to pressure the publisher. The commercial consequence was severe — the title accumulated over 369,000 negative reviews at peak and briefly became the most negatively reviewed paid game on the platform. That's not a story about a bad community manager. It's a story about a team with no comms owner, no agreed message, and a staff member left to improvise a position on a decision they disagreed with and did not control. Give people a script and they don't have to invent one.</p>
+            </div>
+        </div>
+
+        <!-- 1.4 -->
+        <div class="subsection" id="module-1-4">
+            <span class="subsection-title">1.4 Moderation under load — Class F</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Keep channels open. Consolidate into one pinned thread per topic instead.</li>
+                <li><span class="check-icon">☐</span>Publish the moderation rules for this incident before enforcing them — Template 2.5</li>
+                <li><span class="check-icon">☐</span>Remove only: personal information, threats and incitement, content targeting family or uninvolved third parties</li>
+                <li><span class="check-icon">☐</span>Log every removal with the rule invoked</li>
+                <li><span class="check-icon">☐</span>Never remove a post a reasonable observer would call fair criticism</li>
+                <li><span class="check-icon">☐</span>Name and defend the second-order victims explicitly and early</li>
+                <li><span class="check-icon">☐</span>Protect the individual at the centre from pile-on, whatever they did</li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>Locking is the most common instinct and the most reliably damaging one. It doesn't stop the conversation — it moves it somewhere you have no presence, no context, and no right of reply, and it confirms the concealment theory for everyone watching.</p>
+                <p>Consolidation achieves the volume control that locking was meant to achieve, is visibly not censorship, and is easy to defend. The removal log is your answer when you're accused of censorship anyway, which you will be. The credibility of the entire response rests on never removing fair criticism — one wrongly deleted post, screenshotted, undoes a week of good handling.</p>
+            </div>
+            <div class="callout note">
+                <span class="callout-label">Second-order victims</span>
+                <p>The people this playbook exists to protect and the ones teams routinely forget: the third party falsely blamed, the uninvolved contributor caught in a boycott, the moderator accused of complicity. Naming and defending them is cheap, correct, and one of the very few actions in a crisis that generates goodwill rather than merely limiting loss.</p>
+            </div>
+            <div class="callout warning">
+                <span class="callout-label">Protecting the person at the centre is not tension with accountability</span>
+                <p>Doxxing, threats, contacting family or employers, and harassment of uninvolved people who share a name all get removed and logged — regardless of how justified the underlying grievance is. State it as policy, not as a defence of the person.</p>
+            </div>
+        </div>
+
+        <!-- 1.5 -->
+        <div class="subsection" id="module-1-5">
+            <span class="subsection-title">1.5 Security and supply chain — Class B</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Contain first: suspend access, pull the artefact, revoke keys. Precautionary, not punitive.</li>
+                <li><span class="check-icon">☐</span>Establish and publish, in this order:
+                    <ul class="doc-list" style="margin-top:8px;margin-bottom:0;">
+                        <li>Affected artefacts and exact version ranges, with availability dates</li>
+                        <li>Observed behaviour and trigger conditions</li>
+                        <li><strong style="color:#e6edf3;">Scope of impact</strong> — explicitly state whether anything beyond the observed behaviour occurred: files, network calls, credentials, persistence. If nothing, say so. If unknown, give a date for when you'll know.</li>
+                        <li>Detection and timeline: introduced, first observable, reported, confirmed, contained</li>
+                        <li>Remediation done and user action required</li>
+                        <li>Audit scope, reviewer, and publication date</li>
+                    </ul>
+                </li>
+                <li><span class="check-icon">☐</span>Commit to publishing the audit result before you know what it says</li>
+                <li><span class="check-icon">☐</span>Use third-party review if you can afford it</li>
+                <li><span class="check-icon">☐</span>Never call a deliberate act a bug, an oversight, or a compatibility issue</li>
+            </ul>
+            <div class="doc-body"><p>Use Template 2.3.</p></div>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>The community's real question is not who did this or whether they'll be punished. It's <strong style="color:#e6edf3;">"is the code on my machine safe right now."</strong> Answer that and you buy the time to handle everything else properly.</p>
+            </div>
+            <div class="callout key-point">
+                <span class="callout-label">The single most consequential thing you will publish</span>
+                <p>Crash-only versus data-touching. Users cannot assess their own risk until you state it, and until they can, every other message you send is noise.</p>
+            </div>
+            <div class="doc-body">
+                <p>Run it as an incident, not as PR. The current baseline reference is NIST SP 800-61 Revision 3 (April 2025), which superseded the long-standing Revision 2 handling guide entirely and reorganised incident response around the six functions of the Cybersecurity Framework 2.0. You're not going to implement a NIST profile mid-crisis, but it gives you defensible structure that wasn't invented on the spot. One of its useful shifts is treating improvement as continuous throughout the incident rather than as an end-of-incident retrospective — if you can fix something now, fix it now.</p>
+                <p><strong style="color:#e6edf3;">Self-attestation is worth very little</strong> to an audience that has just discovered it was deceived by someone inside the tent. External review with published scope converts "trust us" into "trust the method."</p>
+            </div>
+            <div class="callout danger">
+                <span class="callout-label">On the "it only targeted bad actors" defence</span>
+                <p>This surfaces in essentially every incident of this kind, and it survives neither ethical nor technical scrutiny. The clearest documented parallel is the 2022 <code>node-ipc</code> case, where a maintainer of a widely-depended-upon package shipped code that damaged files on machines geolocated to particular countries, framed by its author as protest rather than malware. Security analysts described it as destructive corruption of files by a maintainer, along with attempts to conceal and restate the sabotage in different forms, and treated the protest motivation as irrelevant to the classification. It followed the <code>colors</code> and <code>faker</code> sabotage weeks earlier and prompted direct questions about whether that maintainer should retain publishing rights at all.</p>
+                <p>The transferable point: <strong>the ecosystem judged the act, not the intent, and the trust consequence attached to the person's future access rather than to the specific artefact.</strong> Any statement leading with intent is arguing a case the audience has already closed.</p>
+            </div>
+        </div>
+
+        <!-- 1.6 -->
+        <div class="subsection" id="module-1-6">
+            <span class="subsection-title">1.6 Individual conduct — Class D</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Say plainly that you cannot discuss an individual's employment, <strong style="color:#e6edf3;">and explain why</strong> — Template 2.4</li>
+                <li><span class="check-icon">☐</span>Move every commitment you can onto the non-personnel track: access controls, review requirements, audit scope and date, policy change, vetting change</li>
+                <li><span class="check-icon">☐</span>Separate historic conduct (for investigation) from present conduct (cooperation, remediation, honesty — observable now)</li>
+                <li><span class="check-icon">☐</span>Run a proper process: investigate, put the allegations, hear them, decide, document</li>
+                <li><span class="check-icon">☐</span>Decide internally, early: if the outcome is that they stay, can you defend it publicly with reasons, and will they say something themselves?</li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>This is the module where good instincts do the most damage, because the transparency reflex that serves you in Class B is actively harmful here. You cannot discuss an individual's employment status or process publicly while it's running. That's not corporate evasiveness — it's a constraint that exists in most jurisdictions partly to protect the accused's right to a fair process, which is worth defending even when it's inconvenient.</p>
+            </div>
+            <div class="callout key-point">
+                <span class="callout-label">The move that costs nothing and changes everything</span>
+                <p>Explaining the silence. "We're not commenting" reads as protection. "We can't discuss any individual's employment while a process is running, that applies whatever the outcome turns out to be, and it exists to make the process fair — here's what we can talk about" reads as procedure.</p>
+            </div>
+            <div class="doc-body">
+                <p>Then convert "trust this person" into "you don't have to trust any individual, including us." A community demanding someone's removal is usually, underneath, demanding a guarantee. Removal is one way to provide it. Structural control is a better one, because it survives the next person and it doesn't depend on an outcome you can't promise.</p>
+                <p>If the honest answer to the last checkbox is no, the outcome is already decided and the only remaining variable is how many weeks you spend discovering it. Negotiated exits exist for exactly this configuration and are almost always reached later than they should be.</p>
+            </div>
+        </div>
+
+        <!-- 1.7 -->
+        <div class="subsection" id="module-1-7">
+            <span class="subsection-title">1.7 Governance failure — Class E</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Disclose it yourselves, first, in full, before anyone else finds it</li>
+                <li><span class="check-icon">☐</span>All four parts: what was known, when and by whom; what the reasoning was; why it was wrong; what has structurally changed</li>
+                <li><span class="check-icon">☐</span>The principal speaks, in their own voice, by name</li>
+                <li><span class="check-icon">☐</span>Do not moderate the rumour — answer it with dated specifics or accept that it becomes permanent</li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>This is the most damaging class and it has the fewest options. A self-disclosed governance failure is a serious problem. An exposed one is a terminal credibility event, because every prior statement you made retroactively becomes a lie.</p>
+            </div>
+            <div class="callout danger">
+                <span class="callout-label">Three parts out of four reads as spin</span>
+                <p>All four or don't bother.</p>
+            </div>
+            <div class="doc-body">
+                <p><strong style="color:#e6edf3;">Unfalsifiable rumours are a governance problem, not a moderation problem.</strong> When a community starts theorising that leadership knew, silence cannot disprove it and moderating it away confirms it. The only thing that touches it is a direct, dated, specific factual statement from the principal. If you can't make that statement, understand clearly that the theory is now permanent.</p>
+            </div>
+            <div class="callout note">
+                <span class="callout-label">The named-human effect — Helldivers 2</span>
+                <p>An earlier formal acknowledgement that simply redirected players to publisher support failed to slow the reviews at all. What began the recovery was the studio CEO publicly accepting that the backlash was warranted and apologising for how it had unfolded. The formal redirect failed. The named person accepting the criticism as legitimate worked.</p>
+            </div>
+        </div>
+
+        <!-- 1.8 -->
+        <div class="subsection" id="module-1-8">
+            <span class="subsection-title">1.8 Commercial decision backlash — Class C</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Decide within 24 hours, honestly: would you reverse this under enough pressure?</li>
+                <li><span class="check-icon">☐</span>If yes — <strong style="color:#e6edf3;">reverse now</strong>, not in week four</li>
+                <li><span class="check-icon">☐</span>If genuinely no — name the actual constraint and stop defending the decision on its merits</li>
+                <li><span class="check-icon">☐</span>Do not argue that the change was in the terms</li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>Class C is the only class where reversal is on the table, which changes the entire calculus. The most common error is treating a reversible decision as a matter of principle.</p>
+                <p>A reversal in week one is a company listening to its players. The identical reversal in week four is a company that had to be forced — you pay the full reputational price for a decision you ended up unmaking anyway.</p>
+            </div>
+            <div class="callout key-point">
+                <span class="callout-label">The evidence that reversal works is strong — Helldivers 2</span>
+                <p>The publisher dropped the account-linking requirement within days of the peak. Players then reversed their own reviews at scale — over 200,000 positive reviews in a single day — and the title moved off the most-negatively-reviewed position it had briefly held. The damage was almost entirely recoverable because the underlying decision was.</p>
+            </div>
+            <div class="doc-body"><p>"We are legally entitled to do this" is true and irrelevant. The community is not making a legal claim. "We don't have a choice and here's why" is survivable. "This is actually good for you" is not.</p></div>
+        </div>
+
+        <!-- 1.9 -->
+        <div class="subsection" id="module-1-9">
+            <span class="subsection-title">1.9 Refunds and commerce</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Publish refund routing on day one — Template 2.7</li>
+                <li><span class="check-icon">☐</span>Honour your own published policy at its most generous reading</li>
+                <li><span class="check-icon">☐</span>Process fast, no case-by-case argument</li>
+                <li><span class="check-icon">☐</span>Track daily volume as your primary sentiment metric</li>
+                <li><span class="check-icon">☐</span>Get legal advice on your specific policy wording — do not resolve it yourself under pressure</li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>The refund exposure is almost always small. The reputational cost of appearing to renege is not. A refusal becomes the story; a refund is a transaction.</p>
+                <p><strong style="color:#e6edf3;">Routing is the cheap win.</strong> If most sales run through third-party storefronts, those platforms' policies govern those purchases, and a large slice of your inbound anger will be from people who believe they're being stonewalled when they're actually in the wrong queue. One paragraph removes a whole category of grievance.</p>
+                <p><strong style="color:#e6edf3;">Discretionary language is still a representation.</strong> Wording along the lines of <em style="color:#e3b341;">you can ask outside the normal limits and we'll take a look</em> is a promise to consider, not an unconditional guarantee — but it creates an expectation, and the gap between the expectation and your behaviour is what gets screenshotted. Departing from your own published commitments once customers have relied on them also raises unfair-practice questions under UK and EU consumer regimes.</p>
+                <p><strong style="color:#e6edf3;">You do not control the refund perimeter.</strong> In sufficiently visible incidents, storefronts have extended eligibility well beyond their normal windows independently of the developer — Valve did exactly that during the Helldivers episode.</p>
+            </div>
+            <div class="callout note"><p>Refunds beat vibes as a metric. Discord temperature measures the loudest twenty people. Refunds measure decisions.</p></div>
+        </div>
+
+        <!-- 1.10 -->
+        <div class="subsection" id="module-1-10">
+            <span class="subsection-title">1.10 Your people</span>
+            <div class="content-heading">Do</div>
+            <ul class="checklist">
+                <li><span class="check-icon">☐</span>Brief volunteer moderators before the public statement — Template 2.6</li>
+                <li><span class="check-icon">☐</span>Give them permitted lines and explicit permission to say "I don't have that information"</li>
+                <li><span class="check-icon">☐</span>Tell them they can step back at any point with no consequence</li>
+                <li><span class="check-icon">☐</span>Give them a private channel to a named staff member</li>
+                <li><span class="check-icon">☐</span>Rotate anyone in the mentions every four hours</li>
+                <li><span class="check-icon">☐</span>Keep junior staff off the front line</li>
+            </ul>
+            <div class="content-heading">Why</div>
+            <div class="doc-body">
+                <p>Volunteer moderators are the most exposed and least supported people in the entire event. They're unpaid, publicly identified, and absorbing abuse for decisions they didn't make and often weren't told about.</p>
+                <p>Rotation is a welfare measure and also a quality measure — judgement degrades fast under sustained hostility. Putting a community manager in front of a decision they didn't make is both a welfare failure and a strategic one, because the audience knows they lack authority and reads the substitution as evasion.</p>
+                <p>Your duty of care to the individual at the centre does not lapse either. A serious harassment outcome becomes its own crisis on top of the one you already have.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PART 2 — TEMPLATES
+    ========================================================== -->
+    <div class="doc-section" id="part-2">
+        <div class="section-header">
+            <span class="section-num">02</span>
+            <div>
+                <span class="section-title">Templates</span>
+                <span class="section-tagline">Copy, edit, rewrite in your own voice. Credit belongs in whatever internal document you paste them into, not in the message you publish.</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.1 First acknowledgement (0–3 hours)</span>
+            <div class="template-block">
+                <span class="template-label">Template</span>
+                <p><strong>[Plain description of the issue. No marketing language.]</strong></p>
+                <p><strong>What you should do right now:</strong> <em>[Specific action — or: "No action is needed on your side. If that changes we will say so here first."]</em></p>
+                <p><em>[One or two sentences acknowledging the effect on people. Effect, not intent.]</em></p>
+                <p><strong>What we know:</strong> <em>[Two to four verified facts. Nothing unverified.]</em></p>
+                <p><strong>What we don't know yet:</strong> <em>[Two or three specific open questions. Specificity here builds more credibility than reassurance does.]</em></p>
+                <p><strong>What happens next:</strong> <em>[Name, role]</em> is coordinating our response. The next update will be posted here by <strong><em>[exact date, time, timezone]</em></strong>, whether or not we have new information by then.</p>
+                <p>Updates are posted in this thread first and linked everywhere else.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.2 Holding update</span>
+            <div class="template-block">
+                <span class="template-label">Template</span>
+                <p><strong>Update — <em>[date, time]</em></strong></p>
+                <p>No substantive change since the last update. <em>[One sentence on what is actively being worked on.]</em></p>
+                <p>Next update by <strong><em>[exact date and time]</em></strong>.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.3 Technical findings — Class B</span>
+            <div class="template-block">
+                <span class="template-label">Template</span>
+                <p><strong>Technical findings — <em>[date]</em></strong></p>
+                <p><strong>Affected:</strong> <em>[Exact artefact names and version ranges]</em></p>
+                <p><strong>Available between:</strong> <em>[dates]</em></p>
+                <p><strong>Observed behaviour:</strong> <em>[What it did, under what conditions]</em></p>
+                <p><strong>Scope of impact:</strong> <em>[State explicitly whether anything beyond the observed behaviour occurred — file access, network activity, credentials, persistence. If nothing, say so plainly. If unknown, say so and give a date.]</em></p>
+                <p><strong>How this was found:</strong> <em>[Detection path; credit the finder if they consent]</em></p>
+                <p><strong>Timeline:</strong> <em>[Introduced / first observable / reported / confirmed by us / contained]</em></p>
+                <p><strong>What we have done:</strong> <em>[Removal, revocation, patching, access changes]</em></p>
+                <p><strong>What you should do:</strong> <em>[Specific user action, or explicit "none required"]</em></p>
+                <p><strong>Audit:</strong> <em>[Scope — what is being reviewed and by whom.]</em> Findings will be published by <strong><em>[date]</em></strong> regardless of what they contain.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.4 Constrained silence — Class D</span>
+            <div class="template-block">
+                <span class="template-label">Template</span>
+                <p>We know people want to know what's happening with the individual involved, and we understand why.</p>
+                <p>We can't discuss any individual's employment or any process relating to it. That restriction applies to us whatever the outcome turns out to be, and it exists to make sure the process is fair. That isn't a satisfying answer, but we'd rather tell you the constraint than go quiet.</p>
+                <p>Here's what we can commit to, and none of it depends on the outcome:</p>
+                <p>— <em>[Access control change — specific]</em><br>— <em>[Review requirement — specific]</em><br>— <em>[Audit scope and publication date]</em><br>— <em>[Policy or process change]</em></p>
+                <p>The point of these is that they don't require you to trust any individual, including us.</p>
+                <p>Next update by <strong><em>[date and time]</em></strong>.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.5 Moderation policy statement</span>
+            <div class="template-block">
+                <span class="template-label">Template</span>
+                <p><strong>How we're moderating this discussion</strong></p>
+                <p>This thread stays open. For the duration of this incident we are removing only:</p>
+                <p>— Personal information about any individual<br>— Threats, incitement, or calls to contact people privately<br>— Content targeting family members or uninvolved third parties</p>
+                <p>We are not removing criticism of us, however harsh, and we are not removing posts for tone.</p>
+                <p>Every removal is logged with the rule it was removed under. If you think we've got one wrong: <em>[contact route]</em>.</p>
+                <p><em>[Name]</em> is responsible for moderation decisions during this incident.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.6 Moderator brief — internal, send before the public statement</span>
+            <div class="template-block">
+                <span class="template-label">Template · Internal</span>
+                <p><strong>For our moderators — <em>[date]</em></strong></p>
+                <p><strong>What's happening:</strong> <em>[Two or three sentences, plainly.]</em></p>
+                <p><strong>What's being published and when:</strong> <em>[Link and time.]</em></p>
+                <p><strong>What you can say:</strong> <em>[Three or four approved lines.]</em></p>
+                <p><strong>What not to discuss:</strong> <em>[Specific constrained topics.]</em> If asked, use: <em>"I don't have that information and I'm not the right person to ask — [link] is where updates go."</em> Using that line is the correct answer, not a failure.</p>
+                <p><strong>Escalate to <em>[name]</em> immediately for:</strong> threats, personal information posted, press contact, anything involving a minor.</p>
+                <p><strong>You can step back at any point, for any reason.</strong> Tell <em>[name]</em> and we'll cover it.</p>
+                <p><strong>Private channel:</strong> <em>[link]</em>. <em>[Name]</em> is monitoring it.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.7 Refund routing notice</span>
+            <div class="template-block">
+                <span class="template-label">Template</span>
+                <p><strong>On refunds</strong></p>
+                <p>If you bought through <em>[Platform A / B / C]</em>, those purchases are handled under that platform's process: <em>[links]</em>. We don't control those and can't process them for you.</p>
+                <p>If you bought directly from us: <em>[process, contact route, turnaround]</em>.</p>
+                <p>We're not going to argue with anyone about this.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">2.8 Decision log entry</span>
+            <div class="code-block-wrap" style="margin:14px 0 4px;">
+                <div class="template-block" style="border-left-color:#30363d;">
+                    <span class="template-label" style="color:#8b949e;">Log entry format</span>
+                    <p style="font-family:'Consolas','Courier New',monospace;font-size:0.82rem;line-height:1.9;color:#c9d1d9;white-space:pre-wrap;margin:0;">TIMESTAMP    : <em>[ISO 8601 with timezone]</em>
+DECISION     : <em>[One sentence]</em>
+DECIDED BY   : <em>[Name, role]</em>
+PRESENT      : <em>[Names]</em>
+BASIS        : <em>[Information this rested on, and its source]</em>
+ALTERNATIVES : <em>[Briefly]</em>
+ACTION OWNER : <em>[Name]</em> — due <em>[date/time]</em>
+PUBLISHED?   : <em>[Yes/No — where and when]</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PART 3 — WHY THIS WORKS
+    ========================================================== -->
+    <div class="doc-section" id="part-3">
+        <div class="section-header">
+            <span class="section-num">03</span>
+            <div>
+                <span class="section-title">Why this works</span>
+                <span class="section-tagline">Not needed to act. Useful when deciding whether to trust it, adapting it, or arguing for it internally.</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">3.1 The communication principles underneath</span>
+            <div class="doc-body">
+                <p>The gold-standard framework in emergency communication is the CDC's Crisis and Emergency Risk Communication model, developed for public health emergencies and widely adopted well beyond them. It sets out six principles: <strong style="color:#e6edf3;">be first, be right, be credible, express empathy, promote action, show respect.</strong></p>
+                <p>The specific guidance behind three of those directly shapes Part 0 and module 1.2:</p>
+            </div>
+            <ul class="doc-list">
+                <li><strong style="color:#e6edf3;">Be first</strong> — if the information is yours to give, give it as soon as possible; if you can't, explain how you're working to get it. First sources become the standard everything else is measured against.</li>
+                <li><strong style="color:#e6edf3;">Be right</strong> — give facts in increments. Say what you know when you know it, say what you don't know, and say when you expect to know more.</li>
+                <li><strong style="color:#e6edf3;">Be credible</strong> — tell the truth, don't withhold to avoid embarrassment, and understand that uncertainty is worse than bad news because rumour does more damage than hard truth.</li>
+            </ul>
+            <div class="callout note">
+                <span class="callout-label">Promote action</span>
+                <p>Why instructing information sits above the apology: giving people something specific to do restores a sense of control in circumstances that feel out of control.</p>
+            </div>
+            <div class="doc-body"><p>CERC also defines five lifecycle stages — pre-crisis, initial, maintenance, resolution, evaluation. Part 0 covers initial, Part 1 covers maintenance, Part 6 covers evaluation, and the last instruction in Part 6 is to build your own pre-crisis stage.</p></div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">3.2 Why the class matters more than the severity</span>
+            <div class="doc-body">
+                <p>Coombs' Situational Crisis Communication Theory is the most heavily replicated framework in crisis communications. Its core claim is that stakeholders assign <em style="color:#e3b341;">responsibility</em> before they assign anger, and that response strategy must be matched to the level of attributed responsibility. It groups crises into victim, accidental, and intentional clusters, and responses into deny, diminish, and rebuild families, with crisis type, crisis history, and prior reputation together predicting how audiences will attribute blame.</p>
+                <p>Two findings are load-bearing for this playbook:</p>
+            </div>
+            <div class="callout key-point">
+                <span class="callout-label">Preventable crises damage reputation more than any other type</span>
+                <p>Rebuild strategies — apology and compensation — produce the strongest recovery for them. Almost everything in classes C, D, and E is a preventable crisis. Deny and diminish are the wrong tools and will read as contempt.</p>
+            </div>
+            <div class="callout key-point">
+                <span class="callout-label">The ethical base response comes first regardless of type</span>
+                <p>Skipping instructing and adjusting information in favour of reputational strategy is one of the most common misapplications of the framework.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">3.3 Same outcome, different route</span>
+            <div class="doc-body">
+                <p>Several classes end in the same visible outcome — a statement, an audit, a policy change, sometimes a departure. They cannot be run the same way, and pretending otherwise is how teams make promises in week one they have to break in week three.</p>
+                <p><strong style="color:#e6edf3;">Speech constraints differ.</strong> Class B: publish facts as fast as you can verify them. Class D: you are legally constrained and will remain so for the whole process. Applying Class B instincts to Class D prejudices the process and creates liability. Applying Class D caution to Class B looks like a cover-up.</p>
+                <p><strong style="color:#e6edf3;">Timelines differ and conflict.</strong> Security remediation runs in hours. Employment process runs in weeks and cannot be compressed without exposure. Community patience runs to about forty-eight hours. Split them publicly and explain that you're splitting them, or the slow track poisons the fast one.</p>
+                <p><strong style="color:#e6edf3;">Reversibility differs.</strong> Class C decisions can be reversed and often should be. Class B and D facts can only be remediated. Teams frequently try to reverse their way out of a Class B by shipping a fix and saying nothing, which fails because the trust question was never about the code.</p>
+                <p><strong style="color:#e6edf3;">The evidentiary bar differs.</strong> An unverified technical claim costs you a correction. An unverified claim about a named individual costs you a defamation exposure.</p>
+                <p><strong style="color:#e6edf3;">Who can credibly speak differs.</strong> Class C and E require the principal. No community manager can carry a governance failure, and asking them to is unfair and ineffective in equal measure.</p>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">3.4 Why this document is shaped the way it is</span>
+            <div class="doc-body">
+                <p>The structure is not arbitrary. It follows what the human factors literature established about procedural documents used under stress — most of it developed for aviation checklists, and explicitly intended by its authors to transfer to other high-risk domains.</p>
+            </div>
+            <div class="callout note">
+                <span class="callout-label">Short-term memory is the binding constraint</span>
+                <p>Degani and Wiener's foundational work on flight-deck checklists identifies limited working memory as one of the greatest constraints on human performance, and notes that many procedural documents place unrealistic demands on it. The mitigation they describe is <em style="color:#e3b341;">chunking</em> — grouping items into defined units around a common factor, so a long procedure becomes a small number of retrievable groups rather than one undifferentiated list. That's why Part 0 is four short checklists rather than one list of thirty items, and why the modules are separate rather than continuous.</p>
+            </div>
+            <div class="doc-body">
+                <p>Their other design recommendations that this document tries to honour: restricted vocabulary, frequently used words, sequential ordering that matches the order of actual operation, and clear allocation of duties between people rather than to "the team."</p>
+                <p><strong style="color:#e6edf3;">Findability beats completeness.</strong> The prevailing view in incident response practice is that a runbook nobody can find during an incident may as well not exist, and that conflicting documents breed hesitation — each procedure needs one definitive source so responders know which document to trust under pressure. Hence: one file, action at the front, no cross-referencing you have to chase, and a single source-of-truth rule applied to your own channels as well.</p>
+                <p><strong style="color:#e6edf3;">Start simple and add granularity later.</strong> Mature incident response guidance recommends not worrying about severity tiers at the beginning — just establish whether something is an incident, get the roles and the trigger working, and add sophistication once the basic process runs. This playbook deliberately has no severity matrix for the same reason. If you get to the point of needing one, you've outgrown this document, which is the correct outcome.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PART 4 — FAILURE MODES
+    ========================================================== -->
+    <div class="doc-section" id="part-4">
+        <div class="section-header">
+            <span class="section-num">04</span>
+            <div>
+                <span class="section-title">Failure modes</span>
+                <span class="section-tagline">The moves that reliably make it worse.</span>
+            </div>
+        </div>
+        <div class="doc-table-wrap">
+            <table class="doc-table">
+                <thead><tr><th>Failure mode</th><th>Why it fails</th></tr></thead>
+                <tbody>
+                    <tr><td>Silence in the first 24 hours</td><td>Vacuum fills with the least charitable theory, which frames everything after</td></tr>
+                    <tr><td>"We take X seriously" with no facts</td><td>Reads as a template; signals you have nothing or are hiding something</td></tr>
+                    <tr><td>Locking or purging channels</td><td>Confirms concealment; relocates the conversation beyond your reach</td></tr>
+                    <tr><td>Mass-banning critics</td><td>Converts a product story into a censorship story, which travels further</td></tr>
+                    <tr><td>Leading with intent</td><td>The act has already been judged; intent reads as excuse-making</td></tr>
+                    <tr><td>Missing a self-set deadline</td><td>Destroys the one thing you were building</td></tr>
+                    <tr><td>Different messages on different channels</td><td>The discrepancy becomes the story within hours</td></tr>
+                    <tr><td>Junior staff carrying senior decisions</td><td>Audience knows they lack authority; reads as evasion; harms the staff member</td></tr>
+                    <tr><td>Euphemism for a deliberate act</td><td>Treated as a second deception, because it is one</td></tr>
+                    <tr><td>Promising transparency you can't legally deliver</td><td>Guarantees a visible broken promise in week three</td></tr>
+                    <tr><td>Reversing in week four what you could have reversed in week one</td><td>Full price, no credit</td></tr>
+                    <tr><td>Treating the loudest voices as the whole community</td><td>Distorts severity in both directions; use refunds and churn</td></tr>
+                    <tr><td>No decision log</td><td>No review is possible and no defensible account exists</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PART 5 — CASE FILES
+    ========================================================== -->
+    <div class="doc-section" id="part-5">
+        <div class="section-header">
+            <span class="section-num">05</span>
+            <div>
+                <span class="section-title">Case files</span>
+                <span class="section-tagline">Short, sourced, each isolating one transferable mechanism.</span>
+            </div>
+        </div>
+
+        <div class="case-file">
+            <div class="case-file-title">Helldivers 2 / PSN account linking (2024)</div>
+            <div class="case-file-meta"><span class="cls-badge cls-c">C · Commercial</span></div>
+            <p>A publisher-mandated account-linking requirement triggered one of the largest review-bombing events in the platform's history, peaking above 369,000 negative reviews, with community staff publicly directing players toward reviews and refunds, and the title pulled from sale in a large number of territories where the required accounts weren't available. The publisher reversed within days, the studio CEO publicly accepted the criticism as warranted and apologised, and players reversed their reviews at scale — over 200,000 positive reviews in a single day.</p>
+            <p class="mechanism"><strong>Mechanism:</strong> reversal works, and works fast, when the decision is reversible. Absence of comms discipline turns internal disagreement into public escalation.</p>
+        </div>
+
+        <div class="case-file">
+            <div class="case-file-title">node-ipc / peacenotwar (2022)</div>
+            <div class="case-file-meta"><span class="cls-badge cls-b">B · Security</span></div>
+            <p>A maintainer of a widely-depended-upon package shipped code causing file damage on machines in particular locations, framed by its author as protest. Security analysis described it as destructive corruption of files by a maintainer with attempts to conceal and restate the sabotage in different forms, treating the protest motivation as irrelevant to classification. It followed the <code>colors</code> and <code>faker</code> sabotage weeks earlier and prompted direct questions about whether the maintainer should retain publishing privileges.</p>
+            <p class="mechanism"><strong>Mechanism:</strong> ecosystems judge the act, not the stated target or motive, and the trust consequence attaches to the person's future access rather than to the artefact.</p>
+        </div>
+
+        <div class="case-file">
+            <div class="case-file-title">Package registry incidents, generally</div>
+            <div class="case-file-meta"><span class="cls-badge cls-b">B · Security</span></div>
+            <p>The pattern is consistent: a maintainer account or artefact is compromised or sabotaged, a version ships, and the damage is done before flagging because automated systems pull dependencies continuously. Dormant or lightly maintained packages retain broad ecosystem reach long after active development stops, so a recovered or hijacked maintainer identity can reach a large dependency graph without ever touching source control.</p>
+            <p class="mechanism"><strong>Mechanism:</strong> in a modding or plugin ecosystem your exposure is not your own code. It's every widely-installed community artefact and every account that can publish one. Ecosystem-level controls are the durable fix; individual accountability is not.</p>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         PART 6 — AFTER
+    ========================================================== -->
+    <div class="doc-section" id="part-6">
+        <div class="section-header">
+            <span class="section-num">06</span>
+            <div>
+                <span class="section-title">After</span>
+                <span class="section-tagline">Run this within two weeks of the incident closing, while people still remember.</span>
+            </div>
+        </div>
+        <ul class="checklist">
+            <li><span class="check-icon">☐</span>When could we first have known, and when did we actually know? The gap is your detection problem.</li>
+            <li><span class="check-icon">☐</span>What did we say that we later had to correct? Why did we say it?</li>
+            <li><span class="check-icon">☐</span>Which commitments did we hit, and which did we miss? Missed ones are the durable damage.</li>
+            <li><span class="check-icon">☐</span>Where did approval bottleneck?</li>
+            <li><span class="check-icon">☐</span>Who absorbed the worst of it, and what did we do for them?</li>
+            <li><span class="check-icon">☐</span>What structural control would have prevented this — and is it now in place, with a named owner and a date?</li>
+        </ul>
+        <div class="callout key-point">
+            <span class="callout-label">Then write your own two-page version of this</span>
+            <p>Your product, your channels, your team, names filled in. Store it somewhere findable at 2am. Review it every six months. It takes an afternoon and it's the highest-return preparation available to a small team.</p>
+        </div>
+        <div class="doc-body"><p>The current NIST guidance makes this point structurally: improvement is continuous through the incident lifecycle, not reserved for a retrospective at the end. If there's something you can fix now, fix it now.</p></div>
+    </div>
+
+    <!-- =========================================================
+         REFERENCES
+    ========================================================== -->
+    <div class="doc-section" id="references">
+        <div class="section-header">
+            <span class="section-num">§</span>
+            <div>
+                <span class="section-title">References</span>
+                <span class="section-tagline">Every framework and case cited above, sourced.</span>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">Communication frameworks</span>
+            <ul class="doc-list">
+                <li>CDC, <em>Crisis and Emergency Risk Communication (CERC)</em> manual and tools — <a href="https://emergency.cdc.gov/cerc/index.asp" style="color:#b392f0;">emergency.cdc.gov/cerc</a></li>
+                <li>Coombs, W.T. (2007), <em>Protecting Organization Reputations During a Crisis: The Development and Application of Situational Crisis Communication Theory</em>, Corporate Reputation Review — <a href="https://link.springer.com/article/10.1057/palgrave.crr.1550049" style="color:#b392f0;">link.springer.com</a></li>
+                <li>Coombs, W.T., <em>Situational Crisis Communication Theory (SCCT)</em>, in The Handbook of Crisis Communication — <a href="https://onlinelibrary.wiley.com/doi/10.1002/9781119678953.ch14" style="color:#b392f0;">onlinelibrary.wiley.com</a></li>
+                <li>Claeys, Cauberghe &amp; Vyncke (2010), <em>Restoring reputations in times of crisis</em>, Public Relations Review</li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">Incident response and disclosure</span>
+            <ul class="doc-list">
+                <li>NIST SP 800-61 Revision 3, <em>Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile</em> (April 2025) — <a href="https://csrc.nist.gov/projects/incident-response" style="color:#b392f0;">csrc.nist.gov</a></li>
+                <li>ISO/IEC 29147:2018, <em>Vulnerability disclosure</em> — <a href="https://www.iso.org/standard/72311.html" style="color:#b392f0;">iso.org</a></li>
+                <li>ISO/IEC 30111, <em>Vulnerability handling processes</em></li>
+                <li>CERT/CC, <em>The CERT Guide to Coordinated Vulnerability Disclosure</em> — <a href="https://certcc.github.io/CERT-Guide-to-CVD/" style="color:#b392f0;">certcc.github.io</a></li>
+                <li>PagerDuty, <em>Incident Response Documentation</em> — <a href="https://response.pagerduty.com/" style="color:#b392f0;">response.pagerduty.com</a></li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">Document design under stress</span>
+            <ul class="doc-list">
+                <li>Degani, A. &amp; Wiener, E.L. (1993), <em>Cockpit Checklists: Concepts, Design, and Use</em>, Human Factors 35(2) — <a href="https://journals.sagepub.com/doi/10.1177/001872089303500209" style="color:#b392f0;">journals.sagepub.com</a></li>
+                <li>Degani, A. &amp; Wiener, E.L. (1990), <em>Human Factors of Flight-Deck Checklists: The Normal Checklist</em>, NASA Contractor Report 177549</li>
+                <li>Flight Safety Foundation, <em>Making a List</em> — <a href="https://flightsafety.org/asw-article/making-a-list/" style="color:#b392f0;">flightsafety.org</a></li>
+            </ul>
+        </div>
+
+        <div class="subsection">
+            <span class="subsection-title">Case material</span>
+            <ul class="doc-list">
+                <li>Snyk (2022), <em>Alert: peacenotwar module sabotages npm developers in the node-ipc package</em> — <a href="https://snyk.io/blog/peacenotwar-malicious-npm-node-ipc-package-vulnerability/" style="color:#b392f0;">snyk.io</a></li>
+                <li>CSO Online (2022), <em>Developer sabotages own npm module</em> — <a href="https://www.csoonline.com/article/572327/" style="color:#b392f0;">csoonline.com</a></li>
+                <li>Kotaku (2024), Helldivers 2 review-bombing response and platform refunds — <a href="https://kotaku.com/helldivers-2-steam-reviews-apology-psn-login-1851455150" style="color:#b392f0;">kotaku.com</a></li>
+                <li>Game World Observer (2024), PSN linking reversal — <a href="https://gameworldobserver.com/2024/05/06/helldivers-2-psn-linking-removed-review-bombing-positive" style="color:#b392f0;">gameworldobserver.com</a></li>
+                <li>VideoGamer (2024), review reversal volumes — <a href="https://www.videogamer.com/news/helldivers-2-is-no-longer-the-most-negatively-reviewed-game-as-players-undo-the-mass-review-bombing/" style="color:#b392f0;">videogamer.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         LICENCE
+    ========================================================== -->
+    <div class="doc-section" id="licence" style="margin-bottom:40px;">
+        <div class="section-header">
+            <span class="section-num">§</span>
+            <div>
+                <span class="section-title">Licence and use</span>
+                <span class="section-tagline">CC BY 4.0 — take it, adapt it, use it.</span>
+            </div>
+        </div>
+        <div class="licence-box">
+            <h3>CC BY 4.0 — <a href="https://creativecommons.org/licenses/by/4.0/">creativecommons.org/licenses/by/4.0</a></h3>
+            <div class="doc-body"><p>Take it, adapt it, rewrite it in your own voice, build your own version on top of it. That's the point of publishing it.</p></div>
+            <div class="doc-body"><p>The only ask is attribution, and it's deliberately easy:</p></div>
+            <ul class="doc-list">
+                <li><strong style="color:#e6edf3;">Internal credit is fine.</strong> A line in your process doc, a note on the wiki page, a comment at the top of the file. It does not have to be public.</li>
+                <li><strong style="color:#e6edf3;">Never in a crisis post.</strong> If you're using a template in a live statement, credit belongs in the document it came from, not the message going to users.</li>
+                <li><strong style="color:#e6edf3;">It can wait.</strong> Nobody handles attribution at hour three.</li>
+                <li><strong style="color:#e6edf3;">Cost is never the blocker.</strong> This is free and stays free. Small team, volunteer project, solo developer, community with no budget — use it and don't think about it again.</li>
+                <li><strong style="color:#e6edf3;">If you adapt it, keep a link in the adapted version</strong> so the next person can find the original.</li>
+            </ul>
+            <div class="doc-body"><p>Commercial use is permitted, including paid work built on it.</p></div>
+        </div>
+        <p class="scope-note">Scope: communications, coordination and moderation only. Not legal advice. Employment and consumer law questions raised here are jurisdictional and need a qualified local practitioner.</p>
+    </div>
+
+    <div class="doc-footer">
+        <p>Spec Coda-Bishop &nbsp;·&nbsp; <a href="crisis-response-one-page.html">One-page quick reference</a> &nbsp;·&nbsp; <a href="index.html">Back to portfolio</a> &nbsp;·&nbsp; <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a></p>
+    </div>
+
+</div>
+</body>
+</html>

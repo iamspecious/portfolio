@@ -34,7 +34,11 @@
         'dev': ['frontend-dev', 'ai-engineering'],
         'pm': ['project-management'],
         'cs': ['customer-support'],
-        'csm': ['customer-support', 'support-ops']
+        'csm': ['customer-support', 'support-ops'],
+        'mod': ['community'],
+        'mods': ['community'],
+        'moderator': ['community'],
+        'moderators': ['community']
     };
 
     var searchableItems = [];

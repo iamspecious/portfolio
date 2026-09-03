@@ -38,6 +38,7 @@ Portfolio samples demonstrating technical writing across different audiences, do
 | [Cat API Documentation](https://iamspecious.github.io/portfolio/cat-api-documentation.html) | Professional API reference documentation covering authentication, parameters, response schema, error states, and pagination — structured to Stripe/Twilio standards | Complete |
 | [Voice & Tone Guide](https://iamspecious.github.io/portfolio/voice-and-tone-guide.html) | Internal contributor guide defining voice, tone, and writing standards for technical documentation teams — principled definitions, tone-by-context frameworks, and a contributor checklist | Complete |
 | [Voice Adaptation Showcase](https://iamspecious.github.io/portfolio/voice-adaptation-showcase) | The same how-to content written three times — calibrated to Apple, Mailchimp, and PostHog's documented voice principles — with reflections on what required the most deliberate adjustment in each | Complete |
+| [The Small Studio Crisis Playbook](https://iamspecious.github.io/portfolio/crisis-management-playbook.html) | Openly licensed (CC BY 4.0) crisis communications and moderation kit for studios, open-source projects, and community teams — a six-class incident taxonomy, a five-role command structure, eight response templates, and a standalone printable [one-page quick reference](https://iamspecious.github.io/portfolio/crisis-response-one-page.html). Every structural choice traced to a cited source (CDC CERC, Coombs' SCCT, NIST SP 800-61r3, aviation checklist human-factors research) | Complete |
 
 ### Research
 
