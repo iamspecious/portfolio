@@ -66,9 +66,7 @@
       "lorebyspec-creator-tool"
     ],
     "audiencePin": [],
-    "audienceExclude": [
-      "creator-lore"
-    ],
+    "audienceExclude": [],
     "lensByAudience": {},
     "notes": ""
   },
