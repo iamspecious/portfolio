@@ -12,7 +12,8 @@
     "include": { "domains": ["customer-support", "support-ops"] },
     "boost": { "evidence": ["diagnostic-reasoning", "self-serve-deflection", "customer-facing"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
-    "maxItems": 8
+    "maxItems": 10,
+    "bucketCaps": { "work": 4 }
   },
   "implementation": {
     "label": "Implementation & Onboarding",
