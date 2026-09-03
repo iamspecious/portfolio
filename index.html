@@ -628,6 +628,23 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-09-03</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Full cross-reference audit of all portfolio items against lane routing. Three structural fixes applied: (1) <code>cs-support</code> maxItems raised to 10, work bucket capped at 4 — Vodafone 2011 drops from this lane, and the four PostHog/support projects are now visible to a support hiring manager. (2) <code>documentation</code> lane was unreachable from the conversation tree entirely — added a "More writing &amp; docs" option in the <code>hiring-else</code> node and a matching <code>laneIntro</code> blurb; three previously invisible writing samples now surface. (3) Removed <code>audienceExclude: ["creator-lore"]</code> from <code>phandroid-tech-writer</code> — the role is tech journalism and the lane explicitly covers that; the exclude was orphaning the item from all routes. With these fixes, no portfolio item is genuinely unreachable via the front door.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-07-13</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    "Show me how you were built" was routing to a PostHog section instead of the Digital Spec card. Root cause: <code>doDeepLink</code> fired <code>scrollIntoView</code> after a hardcoded 80ms delay, but Bootstrap's tab fade transition takes ~150ms. The scroll ran mid-transition — technically targeting the right element, but the tab hadn't fully rendered so the page landed on whatever was previously visible (the PostHog audit document). Fixed by replacing the fixed timeout with a <code>shown.bs.tab</code> event listener: the scroll now fires only after Bootstrap signals the transition is complete. The 80ms fallback is kept for same-tab scrolls where no transition occurs.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-06-26</span>
                                 <p>
                                     <span class="tag tag-issue">Issue</span>

@@ -11,7 +11,8 @@
     "people-hr":         { "blurb": "Spec holds a CIPD Level 3 in HR Practice — the foundation underneath everything else here. Standing up the people side of a company — hiring across borders, EOR and compliance, and the onboarding scaffolding that holds it all together." },
     "creator-lore":      { "blurb": "Ah, a person of taste. Outside the day job Spec makes long-form Kingdom Hearts analysis — and it's not a hobby bolted on, it's the same pattern-tracing brain pointed at narrative." },
     "builder-technical": { "blurb": "The wiring, then. Spec builds small, sharp tools and — the part most people skip — documents the decisions as they go. The dev logs are the real artefact." },
-    "community-devrel": { "blurb": "Thanks for thinking of Spec for a community role. Fair warning: they're not currently looking at solo community or DevRel positions. Community work is something Spec cares about deeply — and because they care about it, they've learned it only works with real team and resource investment behind it. A community of one, under-resourced, helps no one. So they're holding out for the kind of role that takes that seriously. That said — if you want to see the work, here it is." }
+    "community-devrel": { "blurb": "Thanks for thinking of Spec for a community role. Fair warning: they're not currently looking at solo community or DevRel positions. Community work is something Spec cares about deeply — and because they care about it, they've learned it only works with real team and resource investment behind it. A community of one, under-resourced, helps no one. So they're holding out for the kind of role that takes that seriously. That said — if you want to see the work, here it is." },
+    "documentation":    { "blurb": "Good instinct — documentation is the invisible infrastructure of every product and team. Spec writes for both technical and non-technical audiences, builds the standards that keep teams consistent, and treats a well-structured reference doc as a support ticket that was never filed." }
   },
   "buckets": {
     "work":       { "label": "Where Spec's done this directly",   "frame": "Roles where this was the day-to-day." },
@@ -48,6 +49,7 @@
         { "label": "More building & tooling",  "lane": "builder-technical" },
         { "label": "More people & compliance", "lane": "people-hr" },
         { "label": "More community / DevRel",  "lane": "community-devrel" },
+        { "label": "More writing & docs",       "lane": "documentation" },
         { "label": "Just show me everything",  "action": "skip" }
       ]
     },

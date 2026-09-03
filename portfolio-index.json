@@ -66,9 +66,7 @@
       "lorebyspec-creator-tool"
     ],
     "audiencePin": [],
-    "audienceExclude": [
-      "creator-lore"
-    ],
+    "audienceExclude": [],
     "lensByAudience": {},
     "notes": ""
   },
@@ -338,7 +336,8 @@
     "dateEnd": "2015-04",
     "status": null,
     "domains": [
-      "data-analysis"
+      "data-analysis",
+      "operations"
     ],
     "evidence": [
       "diagnostic-reasoning",
@@ -764,7 +763,8 @@
     "dateEnd": "present",
     "status": "research",
     "domains": [
-      "research"
+      "research",
+      "frontend-dev"
     ],
     "evidence": [
       "accessibility",
@@ -1464,7 +1464,7 @@
     "relatedIds": [
       "proj-digital-spec-front-door"
     ],
-    "audiencePin": [],
+    "audiencePin": ["builder-technical"],
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": ""
@@ -1502,7 +1502,7 @@
     "summary": "A scheduled morning agent that pulls ~24 companies' public ATS feeds (Ashby, Greenhouse, Workable, Teamtailor), filters every posting on company/role/location gates, judges the survivors against a written fit matrix, dedups against a state file, and posts a reasoned digest of only the new, remote-from-Germany roles worth acting on.",
     "anchor": "#proj-role-fit-watcher",
     "relatedIds": [],
-    "audiencePin": [],
+    "audiencePin": ["builder-technical"],
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "New tools added to vocabulary: scheduled-agent, ats-api, web-fetch, grep-parsing. Status 'live' but private — no public demo; runs as a personal daily automation, documented on the card. Domains ai-engineering + operations per the brief's filter tags (AI Tools, Engineering, Operations); people-hr deliberately NOT applied despite the job-search/EOR subject, honouring the people-hr<->ai-engineering anti-rule (TAXONOMY section 3)."
