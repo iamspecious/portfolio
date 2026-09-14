@@ -357,6 +357,12 @@ body { background-color: #f8f9fa; }
 
 .cert-list li:last-child { border-bottom: none; }
 
+.cert-meta {
+    font-size: 0.78rem;
+    color: #7b5ea7;
+    font-weight: 600;
+}
+
 /* ── How I Work ── */
 .layer-grid {
     display: grid;
