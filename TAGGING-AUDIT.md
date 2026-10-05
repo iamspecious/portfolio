@@ -234,7 +234,7 @@ One new item added to `portfolio-index.json` following the §12 checklist, outsi
 |---|---|---|---|---|---|---|
 | `sql-90` | project | `#proj-sql-90` | `data-analysis` | `build-in-public` | `sql` | `in-progress` |
 
-No new tools or domains required. `audiencePin: ["cs-support"]` set and documented in the item's `notes`: the project exists to prepare for Support Engineer roles, but `data-analysis` matches no lane. `customer-support`/`support-ops` deliberately not applied until support-style debugging work is actually committed. `anchor` verified present in `index.html` as `id="proj-sql-90"`.
+No new tools or domains required. Not routed to any Digital Spec lane yet: `data-analysis` matches no lane, and `queryLane()` admits items by domain only, so an `audiencePin` would not pull it in (pins only reorder within a lane) and forcing it into `cs-support` would push an existing support project past that lane's 10-item cap. `customer-support`/`support-ops` deliberately not applied until support-style debugging work is actually committed (week 11), at which point it routes to `cs-support` without overrides. Portfolio Search gained `postgres`, `postgresql`, `database`, `databases`, `db` → `sql` synonyms so it surfaces there. `anchor` verified present in `index.html` as `id="proj-sql-90"`.
 
 ---
 

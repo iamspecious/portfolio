@@ -38,7 +38,12 @@
         'mod': ['community'],
         'mods': ['community'],
         'moderator': ['community'],
-        'moderators': ['community']
+        'moderators': ['community'],
+        'postgres': ['sql'],
+        'postgresql': ['sql'],
+        'database': ['sql'],
+        'databases': ['sql'],
+        'db': ['sql']
     };
 
     var searchableItems = [];

@@ -1732,17 +1732,15 @@
     "tools": [
       "sql"
     ],
-    "summary": "A public 90-day SQL challenge (Oct 2026 to Jan 2027) taking foundational SQL to complex Postgres queries for Support Engineer roles, with every query, wrong attempt, weekly devlog entry and mistake-log row committed as written.",
+    "summary": "A public 90-day SQL challenge (Oct 2026 to Jan 2027) taking foundational SQL to complex Postgres queries for Support Engineer roles at Postgres companies like Supabase, with every query, wrong attempt, weekly devlog entry and mistake-log row committed as written.",
     "anchor": "#proj-sql-90",
     "relatedIds": [
       "technical-writing-portfolio",
       "donnerwood-product-analyst"
     ],
-    "audiencePin": [
-      "cs-support"
-    ],
+    "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Pinned to cs-support: the stated goal is Support Engineer roles at Postgres companies, but data-analysis matches no lane, so without the pin it would only surface through search. customer-support/support-ops not applied because no support work is demonstrated yet; revisit when the 'Debugging like support' phase (week 11) lands. Evidence limited to build-in-public for now; technical-depth to be considered once the later phases are committed. Links to the external public repo iamspecious/sql-90."
+    "notes": "Not routed by Digital Spec yet: data-analysis matches no lane, and queryLane() only admits items by domain (audiencePin reorders within a lane, it does not pull items in). customer-support/support-ops deliberately not applied because no support work is demonstrated yet; revisit when the 'Debugging like support' phase (week 11) lands, which would route it to cs-support naturally. Evidence limited to build-in-public for now; technical-depth to be considered once the later phases are committed. Reachable through the Projects tab and Portfolio Search (postgres/postgresql/database/db synonyms map to the sql tool). Links to the external public repo iamspecious/sql-90."
   }
 ]
