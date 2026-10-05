@@ -1709,5 +1709,40 @@
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "New tools added to vocabulary: n8n, docker, sqlite, ngrok, webhook-signature-verification (see TAXONOMY.md §6 and TAGGING-AUDIT.md). Domains deliberately exclude ai-engineering — no model/prompt integration in this project, and the anti-rule in TAXONOMY.md §3 forbids people-hr + ai-engineering together regardless. Status complete but with an explicit split: the Remote integration is genuinely live (sandbox); HiBob and Ashby are documented-payload simulators, since neither offers a public sandbox — stated in README.md and RESEARCH.md, not softened."
+  },
+  {
+    "id": "sql-90",
+    "schemaVersion": 1,
+    "type": "project",
+    "title": "SQL 90: learning Postgres in public",
+    "dateStart": "2026-10",
+    "dateEnd": "present",
+    "status": "in-progress",
+    "domains": [
+      "data-analysis"
+    ],
+    "evidence": [
+      "build-in-public"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "sql"
+    ],
+    "summary": "A public 90-day SQL challenge (Oct 2026 to Jan 2027) taking foundational SQL to complex Postgres queries for Support Engineer roles, with every query, wrong attempt, weekly devlog entry and mistake-log row committed as written.",
+    "anchor": "#proj-sql-90",
+    "relatedIds": [
+      "technical-writing-portfolio",
+      "donnerwood-product-analyst"
+    ],
+    "audiencePin": [
+      "cs-support"
+    ],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Pinned to cs-support: the stated goal is Support Engineer roles at Postgres companies, but data-analysis matches no lane, so without the pin it would only surface through search. customer-support/support-ops not applied because no support work is demonstrated yet; revisit when the 'Debugging like support' phase (week 11) lands. Evidence limited to build-in-public for now; technical-depth to be considered once the later phases are committed. Links to the external public repo iamspecious/sql-90."
   }
 ]

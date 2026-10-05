@@ -226,6 +226,18 @@ No new tools or domains required — reuses the same vocabulary as `proj-digital
 
 ---
 
+## Addendum — 2026-10-05: `sql-90` added
+
+One new item added to `portfolio-index.json` following the §12 checklist, outside of a full audit re-run:
+
+| id | type | anchor | domains | evidence | tools | status |
+|---|---|---|---|---|---|---|
+| `sql-90` | project | `#proj-sql-90` | `data-analysis` | `build-in-public` | `sql` | `in-progress` |
+
+No new tools or domains required. `audiencePin: ["cs-support"]` set and documented in the item's `notes`: the project exists to prepare for Support Engineer roles, but `data-analysis` matches no lane. `customer-support`/`support-ops` deliberately not applied until support-style debugging work is actually committed. `anchor` verified present in `index.html` as `id="proj-sql-90"`.
+
+---
+
 ## Idempotency Contract
 
 Re-running this audit must:
