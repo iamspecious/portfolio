@@ -569,6 +569,12 @@
                         <button class="filter-btn" data-filter="consulting">Consulting</button>
                     </div>
 
+                    <div class="project-sort" role="group" aria-label="Sort projects by start date">
+                        <span class="project-sort-label">Sort by start date:</span>
+                        <button class="filter-btn active" data-sort="newest" aria-pressed="true">Newest first</button>
+                        <button class="filter-btn" data-sort="oldest" aria-pressed="false">Oldest first</button>
+                    </div>
+
                     <div class="project-block" data-date="2026-10-06" data-category="engineering hardware">
 
                     <!-- ====================================================
@@ -4766,17 +4772,30 @@
             if (tabEl) bootstrap.Tab.getOrCreateInstance(tabEl).show();
         }
 
-        // Projects tab: newest first, by each block's data-date (YYYY-MM-DD start date).
-        // A block with no data-date is treated as newest so a fresh addition lands on top.
-        (() => {
+        // Projects tab: sorted by each block's data-date, the project's start date (YYYY-MM-DD),
+        // never its latest dev log entry. Newest first by default. A block with no data-date
+        // is treated as newest so a fresh addition lands on top.
+        function sortProjects(order) {
             const section = document.querySelector('#projects .section');
             const blocks = [...section.querySelectorAll(':scope > .project-block')];
+            const dir = order === 'oldest' ? 1 : -1;
             blocks
-                .sort((a, b) => (b.dataset.date || '9999').localeCompare(a.dataset.date || '9999'))
+                .sort((a, b) => dir * (a.dataset.date || '9999').localeCompare(b.dataset.date || '9999'))
                 .forEach(block => section.appendChild(block));
-        })();
+        }
+        sortProjects('newest');
 
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        document.querySelectorAll('.project-sort .filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.toggle('active', b === btn);
+                    b.setAttribute('aria-pressed', b === btn);
+                });
+                sortProjects(btn.dataset.sort);
+            });
+        });
+
+        document.querySelectorAll('.project-filters .filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const group = btn.closest('.project-filters');
                 group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
