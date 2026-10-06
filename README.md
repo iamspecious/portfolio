@@ -8,7 +8,7 @@ Operations professional with over a decade across people operations, strategic H
 
 ## Projects
 
-The live site organises projects by category (AI Tools, Writing & Docs, Research, Consulting) with filter buttons in the Projects tab.
+The live site organises projects by category (AI Tools, Writing & Docs, Research, Consulting) with filter buttons in the Projects tab. Projects are listed newest first, with a toggle to flip to oldest first. Sorting uses each project's start date, never its latest dev log entry: every `project-block` in `index.html` carries a `data-date="YYYY-MM-DD"` for when the project began, and the page sorts by it (a block without one counts as newest). Give every new project a `data-date`, and don't change it when the project gets new work.
 
 ### AI Tools & Engineering
 

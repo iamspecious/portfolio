@@ -555,6 +555,19 @@ body { background-color: #f8f9fa; }
     margin-bottom: 28px;
 }
 
+.project-sort {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: -16px 0 28px;
+}
+
+.project-sort-label {
+    color: #8b949e;
+    font-size: 0.82rem;
+}
+
 .filter-btn {
     background: #21262d;
     border: 1px solid #30363d;
