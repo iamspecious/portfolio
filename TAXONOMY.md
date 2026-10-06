@@ -43,6 +43,7 @@ Audience lanes are defined as **queries over those facets** in `lanes.json`. A l
 | `content-creation` | Creating audience-facing content: articles, videos, scripts, editorial strategy. |
 | `data-analysis` | Analysing data to generate insight — SQL, metrics, reporting, visualisation. |
 | `research` | Structured research producing outputs (reports, designs, findings, literature reviews). |
+| `hardware` | Building or programming a physical device: microcontrollers, embedded firmware, electronics. |
 | `security` | Substantive security work — threat modelling, incident response, pentesting. **Do not apply.** |
 | `vendor-management` | *(proposed — not yet applied)* Negotiating, selecting, or managing third-party vendors or partners across multiple stakeholders; includes contract negotiation, supplier evaluation, and ongoing vendor relationships. |
 | `events` | *(proposed — not yet applied)* Planning, coordinating, or executing events — in-person or virtual; includes logistics, venue, speaker/sponsor management, and attendee experience. |
@@ -108,7 +109,7 @@ Audience lanes are defined as **queries over those facets** in `lanes.json`. A l
 ## 6. Facet: `tools` (controlled; log additions in the audit)
 
 Current approved values:
-`zendesk` · `intercom` · `freescout` · `postman` · `api-debugging` · `har-analysis` · `sql` · `python` · `github-actions` · `claude-api` · `prompt-engineering` · `jina-reader` · `cloudflare-workers` · `tensorflow-js` · `html-css-js` · `coda` · `foursquare-api` · `eventbrite-api` · `tmdb-api` · `icalendar` · `scheduled-agent` · `ats-api` · `web-fetch` · `grep-parsing` · `excel-openpyxl` · `weighted-scoring-matrix` · `dealbreaker-gate` · `ai-assisted-scoring` · `cowork-artifact` · `n8n` · `docker` · `sqlite` · `ngrok` · `webhook-signature-verification`
+`zendesk` · `intercom` · `freescout` · `postman` · `api-debugging` · `har-analysis` · `sql` · `python` · `github-actions` · `claude-api` · `prompt-engineering` · `jina-reader` · `cloudflare-workers` · `tensorflow-js` · `html-css-js` · `coda` · `foursquare-api` · `eventbrite-api` · `tmdb-api` · `icalendar` · `scheduled-agent` · `ats-api` · `web-fetch` · `grep-parsing` · `excel-openpyxl` · `weighted-scoring-matrix` · `dealbreaker-gate` · `ai-assisted-scoring` · `cowork-artifact` · `n8n` · `docker` · `sqlite` · `ngrok` · `webhook-signature-verification` · `arduino` · `esp32`
 
 To add a new tool: add it here first, then use it in the index. Document in TAGGING-AUDIT.md under "New tools added."
 

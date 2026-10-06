@@ -238,6 +238,22 @@ No new tools or domains required. Not routed to any Digital Spec lane yet: `data
 
 ---
 
+## Addendum — 2026-10-06: `tarot-machine` added
+
+One new item added to `portfolio-index.json` following the §12 checklist, outside of a full audit re-run:
+
+| id | type | anchor | domains | evidence | tools | status |
+|---|---|---|---|---|---|---|
+| `tarot-machine` | project | `#proj-tarot-machine` | `hardware` | `build-in-public`, `judgment-restraint` | `arduino`, `esp32` | `in-progress` |
+
+**New domain added:** `hardware` (TAXONOMY.md §3). First hardware project in the portfolio; no existing domain fit without stretching (`frontend-dev` and `ai-engineering` don't apply). It matches no lane in `lanes.json`, so the item isn't routed by Digital Spec. Reachable through the Projects tab and Portfolio Search.
+
+**New tools added:** `arduino`, `esp32` (TAXONOMY.md §6). Only tools actually set up are tagged. LittleFS and `python` are planned and get added when they're used.
+
+Status `in-progress` at setup stage (hardware ordered, environment set up, no code on the device), same as `sql-90` at day 0. "Tarot Machine" is a working title; the id, anchor and `tarot-machine/` folder change together if renamed. `anchor` verified present in `index.html` as `id="proj-tarot-machine"`.
+
+---
+
 ## Idempotency Contract
 
 Re-running this audit must:

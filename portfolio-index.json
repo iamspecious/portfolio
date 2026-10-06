@@ -1742,5 +1742,37 @@
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "Not routed by Digital Spec yet: data-analysis matches no lane, and queryLane() only admits items by domain (audiencePin reorders within a lane, it does not pull items in). customer-support/support-ops deliberately not applied because no support work is demonstrated yet; revisit when the 'Debugging like support' phase (week 11) lands, which would route it to cs-support naturally. Evidence limited to build-in-public for now; technical-depth to be considered once the later phases are committed. Reachable through the Projects tab and Portfolio Search (postgres/postgresql/database/db synonyms map to the sql tool). Links to the external public repo iamspecious/sql-90."
+  },
+  {
+    "id": "tarot-machine",
+    "schemaVersion": 1,
+    "type": "project",
+    "title": "Tarot Machine",
+    "dateStart": "2026-10",
+    "dateEnd": "present",
+    "status": "in-progress",
+    "domains": [
+      "hardware"
+    ],
+    "evidence": [
+      "build-in-public",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "ic",
+      "engagement": "personal"
+    },
+    "tools": [
+      "arduino",
+      "esp32"
+    ],
+    "summary": "A first hardware build in progress: a pocket tarot-draw gadget on an M5StickS3 (ESP32-S3) that draws a random Rider-Waite-Smith card and shows its meaning, inspired by Finbarre Snarey's TAROTRON 2000. Hardware ordered and dev environment set up; no code on the device yet.",
+    "anchor": "#proj-tarot-machine",
+    "relatedIds": [],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Not routed by Digital Spec: hardware matches no lane, and queryLane() admits items by domain only. Reachable through the Projects tab and Portfolio Search. Status in-progress at setup stage, same as sql-90 at day 0; planned tools (LittleFS, python) not tagged until used. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
   }
 ]
