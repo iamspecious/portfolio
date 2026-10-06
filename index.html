@@ -1498,6 +1498,125 @@
                     </div><!-- /project -->
                     </div><!-- /project-block: SQL 90 -->
 
+                    <div class="project-block" data-category="engineering">
+
+                    <!-- ====================================================
+                         TAROT MACHINE (working title)
+                    ===================================================== -->
+                    <div class="project" id="proj-tarot-machine">
+                        <h3>Tarot Machine <span class="badge bg-warning" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
+                        <p><strong>October 2026 – Present</strong></p>
+                        <p>A pocket tarot-draw gadget built on an M5StickS3: an ESP32-S3 board with a 1.14" screen, a speaker, buttons and a motion sensor. Press a button and it draws a random Rider-Waite-Smith card, shows the card and its meaning, and eventually speaks. The inspiration is Finbarre Snarey's TAROTRON 2000. That build and its design are his. This is my own version.</p>
+                        <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. So far the hardware is ordered and the development environment is set up. No code is running on the device yet. "Tarot Machine" is a working title.</p>
+
+                        <div class="layer-grid">
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">StickS3 over the StickC Plus2</span>
+                                <p>The StickS3 has a real audio codec and speaker instead of a buzzer, plus more memory for card images. Parts are kept to the stick and a USB-C data cable. No soldering, sensors or add-on kits.</p>
+                            </div>
+                            <div class="layer-card">
+                                <span class="layer-label">Design decision</span>
+                                <span class="layer-title">Short sessions, each with a visible result</span>
+                                <p>Each session ends with something I can see on the device. Feature ideas go into an ideas file so they don't derail the current step. Each version gets its own sketch folder, so there's always a working one to fall back to.</p>
+                            </div>
+                        </div>
+
+                        <div class="project-constraints">
+                            <strong>Constraints</strong>
+                            <ul>
+                                <li><strong>No code on the device yet</strong> — the hardware is ordered and the tools are installed. Features get described here once they work, not before.</li>
+                                <li><strong>First hardware build</strong> — I'm learning the board, the libraries and the Arduino workflow as I go.</li>
+                                <li><strong>Stick and cable only</strong> — everything planned has to work with what the StickS3 already has.</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Get the device talking to the computer</strong> — "hello" on screen.</li>
+                                <li><strong>First draw</strong> — button press gives a random card name, with reversals.</li>
+                                <li><strong>Meanings on screen.</strong></li>
+                                <li><strong>Sound effects.</strong></li>
+                                <li><strong>Card images.</strong></li>
+                                <li><strong>Voice, shake-to-draw, modes, case.</strong></li>
+                            </ol>
+                        </div>
+
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">M5Stack StickS3</span>
+                            <span class="tech-tag">ESP32-S3</span>
+                            <span class="tech-tag">Arduino IDE 2</span>
+                            <span class="tech-tag">M5Unified / M5GFX</span>
+                            <span class="tech-tag">Planned: LittleFS, Python</span>
+                        </p>
+                        <a class="tool-link-badge" href="https://github.com/iamspecious/portfolio/tree/main/tarot-machine" target="_blank">View on GitHub →</a>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-06 — one sketch folder per version</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The Arduino sketchbook has one project folder, with a separate sketch folder for each version: <code>tarot_v1</code>, <code>tarot_v2</code>, and so on. If something breaks, there's always a working version to fall back to.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-06 — writing the card meanings myself</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    I wrote all 78 card meanings myself, upright and reversed. They're in a pipe-delimited <code>cards.txt</code>, so they can be converted into code automatically rather than by hand.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-06 — short sessions and an ideas file</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The build is split into short sessions. Each one ends with something I can see on the device. Feature ideas go into an ideas file so they don't derail the current step.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-06 — parts kept to the stick and a cable</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    No soldering, no sensors, no add-on kits. The StickS3 already has a screen, speaker, buttons and a motion sensor.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 2 older entries</button>
+
+                            <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-06 — buying from a German retailer</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        Bought from OpenELAB, which ships from a warehouse in Munich. That avoids customs and long shipping. The kit ships with no cable, so I sourced a USB-C data cable separately.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-06 — StickS3 over the StickC Plus2</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The older StickC Plus2 was the other option. I picked the StickS3 because it has a real audio codec and speaker instead of a buzzer. Voice is on the roadmap, and a buzzer can't do it. The StickS3 also has more memory, which matters once card images go on the device.
+                                    </p>
+                                </div>
+
+                            </div><!-- /devlog-overflow -->
+
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: Tarot Machine -->
+
                     <div class="project-block" data-category="operations">
 
                     <!-- ====================================================

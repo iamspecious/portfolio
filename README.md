@@ -27,6 +27,7 @@ The live site organises projects by category (AI Tools, Writing & Docs, Research
 | [Date Proposal Website](https://iamspecious.github.io/portfolio/date-proposal/) | Recreation and technical deconstruction of a viral date-proposal website — running No button, progressive preference questions, live restaurant/event/cinema discovery via three APIs, and a downloadable calendar invite | In Progress |
 | Role Fit Watcher | Scheduled morning agent that pulls ~24 companies' public ATS feeds (Ashby, Greenhouse, Workable, Teamtailor), filters every posting on company/role/location gates, judges the survivors against a written fit matrix, dedups against a state file, and posts a reasoned digest of only the new, remote-from-Germany roles worth acting on. No scraping, no backend | Live (private) |
 | [SQL 90: learning Postgres in public](https://github.com/iamspecious/sql-90) | 90-day SQL challenge (Oct 2026 to Jan 2027) going from foundational SQL to complex Postgres queries for Support Engineer roles. Every query is my own, wrong attempts stay as written, with a weekly devlog, a mistake log, and a day-0 baseline | In Progress |
+| [Tarot Machine](./tarot-machine/) | First hardware build: a pocket tarot-draw gadget on an M5StickS3 (ESP32-S3). Press a button, it draws a random Rider-Waite-Smith card and shows its meaning. Inspired by Finbarre Snarey's TAROTRON 2000. Hardware ordered and dev environment set up, no code on the device yet | In Progress |
 
 ### Writing & Docs
 
