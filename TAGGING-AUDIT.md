@@ -252,6 +252,8 @@ One new item added to `portfolio-index.json` following the §12 checklist, outsi
 
 Status `in-progress` at setup stage (hardware ordered, environment set up, no code on the device), same as `sql-90` at day 0. "Tarot Machine" is a working title; the id, anchor and `tarot-machine/` folder change together if renamed. `anchor` verified present in `index.html` as `id="proj-tarot-machine"`.
 
+**2026-10-07:** `python` (already approved) added to the item's `tools` for `convert.py`, which generates `cards.h` from `cards.txt`. No new vocabulary.
+
 ---
 
 ## Idempotency Contract

@@ -1765,7 +1765,8 @@
     },
     "tools": [
       "arduino",
-      "esp32"
+      "esp32",
+      "python"
     ],
     "summary": "A first hardware build in progress: a pocket tarot-draw gadget on an M5StickS3 (ESP32-S3) that draws a random Rider-Waite-Smith card and shows its meaning, inspired by Finbarre Snarey's TAROTRON 2000. Hardware ordered and dev environment set up; no code on the device yet.",
     "anchor": "#proj-tarot-machine",
@@ -1773,6 +1774,6 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Not routed by Digital Spec: hardware matches no lane, and queryLane() admits items by domain only. Reachable through the Projects tab and Portfolio Search. Status in-progress at setup stage, same as sql-90 at day 0; planned tools (LittleFS, python) not tagged until used. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
+    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Not routed by Digital Spec: hardware matches no lane, and queryLane() admits items by domain only. Reachable through the Projects tab and Portfolio Search. Status in-progress at setup stage, same as sql-90 at day 0; LittleFS not tagged until used; python added 2026-10-07 for convert.py, which generates cards.h from cards.txt. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
   }
 ]
