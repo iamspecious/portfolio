@@ -584,7 +584,7 @@
                         <h3>Tarot Machine <span class="badge bg-warning" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>October 2026 – Present</strong></p>
                         <p>A pocket tarot-draw gadget built on an M5StickS3: an ESP32-S3 board with a 1.14" screen, a speaker, buttons and a motion sensor. Press a button and it draws a random Rider-Waite-Smith card, shows the card and its meaning, and eventually speaks. The inspiration is Finbarre Snarey's TAROTRON 2000. That build and its design are his. This is my own version.</p>
-                        <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. So far the hardware is ordered and the development environment is set up. No code is running on the device yet. "Tarot Machine" is a working title.</p>
+                        <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. So far the hardware is ordered, the development environment is set up, and the card meanings have been converted into a C++ file with a Python script. No code is running on the device yet. "Tarot Machine" is a working title.</p>
 
                         <div class="layer-grid">
                             <div class="layer-card">
@@ -602,7 +602,7 @@
                         <div class="project-constraints">
                             <strong>Constraints</strong>
                             <ul>
-                                <li><strong>No code on the device yet</strong> — the hardware is ordered and the tools are installed. Features get described here once they work, not before.</li>
+                                <li><strong>No code on the device yet</strong> — the hardware is still in the post. The card data is ready in <code>cards.h</code>, but nothing has run on the stick. Features get described here once they work, not before.</li>
                                 <li><strong>First hardware build</strong> — I'm learning the board, the libraries and the Arduino workflow as I go.</li>
                                 <li><strong>Stick and cable only</strong> — everything planned has to work with what the StickS3 already has.</li>
                             </ul>
@@ -625,7 +625,8 @@
                             <span class="tech-tag">ESP32-S3</span>
                             <span class="tech-tag">Arduino IDE 2</span>
                             <span class="tech-tag">M5Unified / M5GFX</span>
-                            <span class="tech-tag">Planned: LittleFS, Python</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Planned: LittleFS</span>
                         </p>
                         <a class="tool-link-badge" href="https://github.com/iamspecious/portfolio/tree/main/tarot-machine" target="_blank">View on GitHub →</a>
 
@@ -636,6 +637,30 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-10-07 — converting the card list into code</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Wrote <code>convert.py</code>, a Python script that reads <code>cards.txt</code>, splits each line at the <code>|</code>, trims the spaces, and writes every card as a line of C++. The output is <code>cards.h</code>: a <code>Card</code> struct, an array of all 78 cards, and a <code>CARD_COUNT</code> that works out the total itself. I converted three cards by hand first, to understand the target format. A missing comma between two cards was the first bug, and the clearest argument for writing a script. Then I built the script in small pieces and ran it after every change. Before converting, I proofread <code>cards.txt</code> and standardised on Irish/British spelling and consistent hyphenation.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-07 — cards.txt is the only file I edit</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    <code>cards.txt</code> is the single source of truth. I only ever edit that file and rerun the script. <code>cards.h</code> is generated, never edited by hand, because any hand edits would be overwritten on the next run. The C++ header and footer are built as separate lists and joined at write time, so the card count printed by the script stays accurate.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-07 — what tripped me up</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Python counts from 0, so <code>lines[70]</code> returned the 71st card. Rule: position = line number − 1. An <code>IndentationError</code> after adding the loop: read the error, found the line, fixed it. The terminal opened in my home folder instead of the project folder, fixed with <code>cd</code>. And f-strings use <code>{ }</code> to insert values, so printing a real brace needs <code>{{ }}</code>. Known limitation: the script assumes every line in <code>cards.txt</code> is well formed. A blank line, a missing <code>|</code>, or a <code>"</code> inside a meaning would break it. Fine for now because the file is clean. Hardening it is on the ideas list.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-10-06 — one sketch folder per version</span>
                                 <p>
                                     <span class="tag tag-decision">Decision</span>
@@ -643,33 +668,33 @@
                                 </p>
                             </div>
 
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-10-06 — writing the card meanings myself</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    I wrote all 78 card meanings myself, upright and reversed. They're in a pipe-delimited <code>cards.txt</code>, so they can be converted into code automatically rather than by hand.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-10-06 — short sessions and an ideas file</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    The build is split into short sessions. Each one ends with something I can see on the device. Feature ideas go into an ideas file so they don't derail the current step.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-10-06 — parts kept to the stick and a cable</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    No soldering, no sensors, no add-on kits. The StickS3 already has a screen, speaker, buttons and a motion sensor.
-                                </p>
-                            </div>
-
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 2 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-06 — writing the card meanings myself</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        I wrote all 78 card meanings myself, upright and reversed. They're in a pipe-delimited <code>cards.txt</code>, so they can be converted into code automatically rather than by hand.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-06 — short sessions and an ideas file</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The build is split into short sessions. Each one ends with something I can see on the device. Feature ideas go into an ideas file so they don't derail the current step.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-06 — parts kept to the stick and a cable</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        No soldering, no sensors, no add-on kits. The StickS3 already has a screen, speaker, buttons and a motion sensor.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-10-06 — buying from a German retailer</span>
