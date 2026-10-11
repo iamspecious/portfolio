@@ -748,7 +748,7 @@
                             <ul>
                                 <li><strong>A practice dataset, not production</strong> — the queries run against a small seed dataset, not a live system with real load, real locks, or real customers waiting. The performance and debugging phases can teach the method, but not the pressure.</li>
                                 <li><strong>Self-rated confidence</strong> — the weekly 1-5 confidence score in the progress table is my own judgment. The day-0 baseline and the mock rounds in week 13 are the outside checks on it.</li>
-                                <li><strong>No results yet</strong> — this card is at day 0. Wins get added here as the phases land, not before.</li>
+                                <li><strong>Early days</strong> — one week of thirteen done, all on the basics. Wins get added here as the bigger phases land, not before.</li>
                             </ul>
                         </div>
 
@@ -763,6 +763,30 @@
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>weekly notes: what I covered, what broke, what clicked, what changed</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-11 — week 1 done: read before you write</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    5 of 5 sessions, 3 of 4 on the Sunday review, confidence 3 out of 5. Set up a real Postgres database in Supabase with my own practice data, then the basics I'd got rusty on: <code>SELECT</code>, <code>WHERE</code>, <code>IN</code>, <code>BETWEEN</code>, NULL, <code>COALESCE</code>, <code>ORDER BY</code>, <code>LIMIT</code> and tiebreakers. On day 0 I couldn't explain why two accounts with no invoices came out on top of my diagnostic query. By Friday I could, and I knew the fix.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-11 — what broke</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    Double quotes around text, which Postgres reads as a column name. Reading <code>&lt;&gt;</code> as "equal". <code>= NULL</code>, which never matches and never errors. Assuming <code>AND</code> and <code>OR</code> run left to right. Expecting the biggest number on top of a <code>DESC</code> sort when Postgres puts NULL there. And in the review, a correct filter with the sort the question asked for missing.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-11 — what clicked, and what changed</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    <code>WHERE</code> walks the table one row at a time and keeps only a definite yes, which is also why NULL rows quietly vanish: unknown isn't yes. The biggest change was how I work: one step per message instead of a whole day's material at once, the data shown next to every question, predicting before I hit Run, and stopping when I'm tired. Next week is joins, where the diagnostic tripped me up most.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
