@@ -2,7 +2,7 @@
 
 A pocket tarot-draw gadget built on an M5StickS3. Press a button and it draws a random Rider-Waite-Smith card, shows the card and its meaning, and eventually speaks. "Tarot Machine" is a working title.
 
-**Status: in progress.** Hardware ordered, development environment set up, card meanings converted into C++. No code running on the device yet.
+**Status: in progress.** First sketch running on the device ("hello Spec" on screen). Card meanings converted into C++. No card draws yet.
 
 ---
 
@@ -21,6 +21,8 @@ What's done so far:
 - Wrote all 78 card meanings myself, upright and reversed, in a pipe-delimited `cards.txt`.
 - Set up the sketchbook so each version of the build gets its own sketch folder.
 - Wrote `convert.py`, a Python script that turns `cards.txt` into `cards.h`, a C++ file the sketch can use. `cards.txt` is the only file I edit. `cards.h` is generated and never edited by hand.
+- Researched card art: public-domain decks, pixel-art packs and drawing my own. No choice made yet.
+- Got my first sketch running on the stick: "hello Spec" on the screen. Session 1 complete.
 
 The decisions behind each of these are in [DEVLOG.md](./DEVLOG.md).
 
@@ -28,11 +30,11 @@ The decisions behind each of these are in [DEVLOG.md](./DEVLOG.md).
 
 ## Constraints
 
-**No code on the device yet.**  
-The hardware is still in the post. The card data is ready in `cards.h`, but nothing has run on the stick so far. This page will only describe features once they work.
+**No card draws yet.**  
+The device runs a minimal "hello" sketch. The card data is ready in `cards.h`. Drawing a card is the next session. This page will only describe features once they work.
 
 **The converter trusts its input.**  
-`convert.py` assumes every line in `cards.txt` is well formed. A blank line, a missing `|`, or a `"` inside a meaning would break it. The file is clean for now. Hardening the script is on the ideas list.
+`convert.py` assumes every line in `cards.txt` is well formed. A blank line, a missing `|`, or a `"` inside a meaning would break it. The file is clean for now. After an outside review, I'm adding escaping so a quote inside a meaning can't close the text early. Wider hardening is on the ideas list.
 
 **First hardware build.**  
 I'm learning the board, the libraries and the Arduino workflow as I go. The build is split into short sessions so each step is small enough to finish.
@@ -41,13 +43,13 @@ I'm learning the board, the libraries and the Arduino workflow as I go. The buil
 No soldering, no extra sensors, no add-on kits. Everything planned has to work with what the StickS3 already has.
 
 **No images yet.**  
-Card images are planned for a later session. Until then there's nothing to show.
+Card art is researched but not chosen. The screen is 135×240, so the next step is testing a few candidates at real size.
 
 ---
 
 ## Roadmap
 
-1. **Get the device talking to the computer** — "hello" on screen.
+1. **Get the device talking to the computer** — "hello" on screen. Done 2026-10-14.
 2. **First draw** — button press gives a random card name, with reversals.
 3. **Meanings on screen.**
 4. **Sound effects.**
