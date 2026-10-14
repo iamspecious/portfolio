@@ -584,7 +584,7 @@
                         <h3>Tarot Machine <span class="badge bg-warning" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>October 2026 – Present</strong></p>
                         <p>A pocket tarot-draw gadget built on an M5StickS3: an ESP32-S3 board with a 1.14" screen, a speaker, buttons and a motion sensor. Press a button and it draws a random Rider-Waite-Smith card, shows the card and its meaning, and eventually speaks. The inspiration is Finbarre Snarey's TAROTRON 2000. That build and its design are his. This is my own version.</p>
-                        <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. So far the hardware is ordered, the development environment is set up, and the card meanings have been converted into a C++ file with a Python script. No code is running on the device yet. "Tarot Machine" is a working title.</p>
+                        <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. The stick has arrived and my first sketch runs on it: "hello Spec" on the screen. The card meanings have been converted into a C++ file with a Python script. It doesn't draw cards yet. "Tarot Machine" is a working title.</p>
 
                         <div class="layer-grid">
                             <div class="layer-card">
@@ -602,7 +602,8 @@
                         <div class="project-constraints">
                             <strong>Constraints</strong>
                             <ul>
-                                <li><strong>No code on the device yet</strong> — the hardware is still in the post. The card data is ready in <code>cards.h</code>, but nothing has run on the stick. Features get described here once they work, not before.</li>
+                                <li><strong>No card draws yet</strong> — the device runs a minimal "hello" sketch. The card data is ready in <code>cards.h</code>. Drawing a card is the next session. Features get described here once they work, not before.</li>
+                                <li><strong>No card art chosen yet</strong> — options are researched, but nothing is picked. The next step is testing a few candidates at the screen's real size, 135×240.</li>
                                 <li><strong>First hardware build</strong> — I'm learning the board, the libraries and the Arduino workflow as I go.</li>
                                 <li><strong>Stick and cable only</strong> — everything planned has to work with what the StickS3 already has.</li>
                             </ul>
@@ -611,7 +612,7 @@
                         <div class="roadmap">
                             <strong class="roadmap-heading">// roadmap</strong>
                             <ol>
-                                <li><strong>Get the device talking to the computer</strong> — "hello" on screen.</li>
+                                <li><strong>Get the device talking to the computer</strong> — "hello" on screen. Done 2026-10-14.</li>
                                 <li><strong>First draw</strong> — button press gives a random card name, with reversals.</li>
                                 <li><strong>Meanings on screen.</strong></li>
                                 <li><strong>Sound effects.</strong></li>
@@ -637,40 +638,72 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-10-07 — converting the card list into code</span>
+                                <span class="timestamp">2026-10-14 — first code on the device: "hello Spec"</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>
-                                    Wrote <code>convert.py</code>, a Python script that reads <code>cards.txt</code>, splits each line at the <code>|</code>, trims the spaces, and writes every card as a line of C++. The output is <code>cards.h</code>: a <code>Card</code> struct, an array of all 78 cards, and a <code>CARD_COUNT</code> that works out the total itself. I converted three cards by hand first, to understand the target format. A missing comma between two cards was the first bug, and the clearest argument for writing a script. Then I built the script in small pieces and ran it after every change. Before converting, I proofread <code>cards.txt</code> and standardised on Irish/British spelling and consistent hyphenation.
+                                    The stick arrived running UiFlow2, M5Stack's factory block-coding software. My first upload replaced it, and it can be restored with M5Burner if I ever want it back. Entered download mode by holding the side button until the green LED blinked. Found the right port by unplugging the device and seeing which entry disappeared. The port number changes depending on which USB socket is used. Uploaded a minimal M5Unified sketch: start the hardware, rotate to landscape, print text. It compiled at 16% of program storage and 7% of dynamic memory, so there's plenty of room for the card data. Result: "hello Spec" on the device screen. Session 1 complete.
                                 </p>
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-10-07 — cards.txt is the only file I edit</span>
-                                <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    <code>cards.txt</code> is the single source of truth. I only ever edit that file and rerun the script. <code>cards.h</code> is generated, never edited by hand, because any hand edits would be overwritten on the next run. The C++ header and footer are built as separate lists and joined at write time, so the card count printed by the script stays accurate.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-10-07 — what tripped me up</span>
+                                <span class="timestamp">2026-10-14 — bad CPU type in executable</span>
                                 <p>
                                     <span class="tag tag-issue">Issue</span>
-                                    Python counts from 0, so <code>lines[70]</code> returned the 71st card. Rule: position = line number − 1. An <code>IndentationError</code> after adding the loop: read the error, found the line, fixed it. The terminal opened in my home folder instead of the project folder, fixed with <code>cd</code>. And f-strings use <code>{ }</code> to insert values, so printing a real brace needs <code>{{ }}</code>. Known limitation: the script assumes every line in <code>cards.txt</code> is well formed. A blank line, a missing <code>|</code>, or a <code>"</code> inside a meaning would break it. Fine for now because the file is clean. Hardening it is on the ideas list.
+                                    The first compile failed with <code>bad CPU type in executable</code>. Arduino's <code>ctags</code> tool is Intel-only, and my Mac has Apple Silicon. Fixed by installing Rosetta: <code>softwareupdate --install-rosetta --agree-to-license</code>.
                                 </p>
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-10-06 — one sketch folder per version</span>
+                                <span class="timestamp">2026-10-13 — researching card art</span>
                                 <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    The Arduino sketchbook has one project folder, with a separate sketch folder for each version: <code>tarot_v1</code>, <code>tarot_v2</code>, and so on. If something breaks, there's always a working version to fall back to.
+                                    <span class="tag tag-note">Note</span>
+                                    Looked for card images that are legal to use, look good on a 1.14" screen, and can appear in portfolio photos. The 1909 Pamela Colman Smith deck (Wikimedia Commons scans) is public domain and the deck my meanings were written for. The 1971 recoloured edition is still under copyright, so that's out. "Rider-Waite" is a trademark, so it stays out of the project name. Also looked at Sola Busca (1491, public domain, a candidate for a hidden "archive mode"), the Tarot de Marseille (bold colours, but no illustrated minors), pixel-art packs on itch.io licensed for use with credit, and drawing my own. The screen shows full-colour images. The limit is resolution (135×240), not the type of image. Bold art survives the shrink, fine linework doesn't. No decision yet. The code works the same whichever art I choose. Next step is to shrink a few candidates to 135×240 and check them at real size.
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 5 older entries</button>
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-07 — outside review: why convert on the laptop</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    An outside review asked why I convert the text on my computer instead of having the device read <code>cards.txt</code> directly, and whether generating code from a text file is a security risk. I kept the approach. Parsing text in C++ on a microcontroller is harder than in Python on a laptop, and it means uploading the text file separately. Converting first keeps the device code simple, and a typo can't crash it at runtime. The trade-off: changing a meaning means rerunning the script and re-uploading the sketch. The injection point is valid, though. A stray <code>"</code> in a meaning could close the text early and let code slip into <code>cards.h</code>. The risk is low here, my own file on my own machine, but the habit matters. I'm adding escaping to <code>convert.py</code> so quotes inside meanings are neutralised.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 9 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-07 — converting the card list into code</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Wrote <code>convert.py</code>, a Python script that reads <code>cards.txt</code>, splits each line at the <code>|</code>, trims the spaces, and writes every card as a line of C++. The output is <code>cards.h</code>: a <code>Card</code> struct, an array of all 78 cards, and a <code>CARD_COUNT</code> that works out the total itself. I converted three cards by hand first, to understand the target format. A missing comma between two cards was the first bug, and the clearest argument for writing a script. Then I built the script in small pieces and ran it after every change. Before converting, I proofread <code>cards.txt</code> and standardised on Irish/British spelling and consistent hyphenation.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-07 — cards.txt is the only file I edit</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        <code>cards.txt</code> is the single source of truth. I only ever edit that file and rerun the script. <code>cards.h</code> is generated, never edited by hand, because any hand edits would be overwritten on the next run. The C++ header and footer are built as separate lists and joined at write time, so the card count printed by the script stays accurate.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-07 — what tripped me up</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Python counts from 0, so <code>lines[70]</code> returned the 71st card. Rule: position = line number − 1. An <code>IndentationError</code> after adding the loop: read the error, found the line, fixed it. The terminal opened in my home folder instead of the project folder, fixed with <code>cd</code>. And f-strings use <code>{ }</code> to insert values, so printing a real brace needs <code>{{ }}</code>. Known limitation: the script assumes every line in <code>cards.txt</code> is well formed. A blank line, a missing <code>|</code>, or a <code>"</code> inside a meaning would break it. Fine for now because the file is clean. Hardening it is on the ideas list.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-06 — one sketch folder per version</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The Arduino sketchbook has one project folder, with a separate sketch folder for each version: <code>tarot_v1</code>, <code>tarot_v2</code>, and so on. If something breaks, there's always a working version to fall back to.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-10-06 — writing the card meanings myself</span>

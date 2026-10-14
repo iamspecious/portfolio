@@ -76,4 +76,70 @@ The Arduino sketchbook has one project folder, with a separate sketch folder for
 
 ---
 
+## Entry 003 — Outside review of the converter
+
+**Date:** 2026-10-07 (addendum)  
+**Status:** Review
+
+**What came up:** an outside review questioned the approach. Why convert the text on my computer instead of having the device read `cards.txt` directly? And isn't generating code from a text file a security risk?
+
+### Why I kept the approach
+
+- Reading and parsing text in C++ on a microcontroller is harder than doing it in Python on a laptop, and it means uploading the text file to the device's storage separately.
+- Converting first means the device code stays simple and a typo can't crash it at runtime. Any problem shows up on my computer instead.
+- The trade-off: changing a meaning means rerunning the script and re-uploading the sketch.
+
+### What I'm changing
+
+The injection point is valid. A stray `"` in a meaning could close the text early and let code slip into `cards.h`. The risk is low here (my own file, my own machine, output I read before uploading), but the habit matters. I'm adding escaping to `convert.py` so quotes inside meanings are neutralised.
+
+---
+
+## Entry 004 — Researching card art
+
+**Date:** 2026-10-11 to 2026-10-13  
+**Status:** Research
+
+**Goal:** find card images that are legal to use, look good on a 1.14" screen, and can appear in portfolio photos.
+
+### What I looked at
+
+- **1909 Pamela Colman Smith deck (Wikimedia Commons scans).** Public domain, and the deck my meanings were written for. Avoid the 1971 recoloured edition, which is still under copyright. "Rider-Waite" is a trademark, so it stays out of the project name.
+- **Sola Busca (1491).** The earliest fully illustrated 78-card deck, and the one that inspired Waite to illustrate the minor arcana. Public domain, but its majors don't map to standard meanings. A candidate for a hidden "archive mode".
+- **Tarot de Marseille.** Bold, flat colours that would read well on a tiny screen, but no illustrated minors.
+- **Pixel-art packs on itch.io.** Several full 78-card decks at around 48×80 to 57×79 pixels, licensed for use with credit. Pixel art scales up 2× cleanly, which leaves room for text under the card.
+- **Drawing my own.** Possible in pixel art. Only the 22 majors and court cards would need unique art. Number cards could use suit symbols, either drawn by hand or drawn by the code.
+
+### What I learned
+
+The screen shows full-colour JPEG/PNG images. The limit is resolution (135×240), not the type of image. Bold art survives the shrink, fine linework doesn't.
+
+### Decision
+
+Not made yet. The code works the same whichever art I choose, so this doesn't hold up the build. Next step is a test: shrink a few candidate cards to 135×240 and check them at real size.
+
+---
+
+## Entry 005 — First code on the device
+
+**Date:** 2026-10-14  
+**Status:** Built
+
+**Goal:** get my own code running on the stick.
+
+### What happened
+
+- The stick arrived running UiFlow2 (M5Stack's factory block-coding software). My first upload replaced it, and it can be restored with M5Burner if I ever want it back.
+- Entered download mode by holding the side button until the green LED blinked.
+- Found the right port by unplugging the device and seeing which entry disappeared. The port number changes depending on which USB socket is used (1401 through an adapter, 101 direct).
+- The first compile failed with `bad CPU type in executable`. Arduino's `ctags` tool is Intel-only, and my Mac has Apple Silicon. Fixed by installing Rosetta: `softwareupdate --install-rosetta --agree-to-license`.
+- Compiled at 16% of program storage and 7% of dynamic memory, so there's plenty of room for the card data.
+- Uploaded a minimal M5Unified sketch: start the hardware, rotate to landscape, print text.
+
+**Result:** "hello Spec" on the device screen. Session 1 complete.
+
+**Next:** Session 2 Part B. Add `cards.h` to the sketch and draw a random card with button A.
+
+---
+
 *Entries are written at the time of the decision, not after.*
