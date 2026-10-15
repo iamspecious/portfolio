@@ -254,6 +254,8 @@ Status `in-progress` at setup stage (hardware ordered, environment set up, no co
 
 **2026-10-07:** `python` (already approved) added to the item's `tools` for `convert.py`, which generates `cards.h` from `cards.txt`. No new vocabulary.
 
+**2026-10-15:** Summary now says "a standard tarot deck" instead of naming Rider-Waite-Smith. `tarot-machine/contact-sheet.webp` is the first image asset in the portfolio. No tag changes.
+
 ---
 
 ## Idempotency Contract
