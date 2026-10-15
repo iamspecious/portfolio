@@ -1768,12 +1768,12 @@
       "esp32",
       "python"
     ],
-    "summary": "A first hardware build in progress: a pocket tarot-draw gadget on an M5StickS3 (ESP32-S3) that draws a random Rider-Waite-Smith card and shows its meaning, inspired by Finbarre Snarey's TAROTRON 2000. First sketch running on the device and card data converted to C++; no card draws yet.",
+    "summary": "A first hardware build in progress: a pocket tarot-draw gadget on an M5StickS3 (ESP32-S3) that draws a random card from a standard tarot deck and shows its meaning, inspired by Finbarre Snarey's TAROTRON 2000. Draws a random card from my own meanings, shows 1-bit card art tinted by suit, and flips to the meaning; sound and voice next.",
     "anchor": "#proj-tarot-machine",
     "relatedIds": [],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Not routed by Digital Spec: hardware matches no lane, and queryLane() admits items by domain only. Reachable through the Projects tab and Portfolio Search. Status in-progress (first sketch on the device 2026-10-14); LittleFS not tagged until used; python added 2026-10-07 for convert.py, which generates cards.h from cards.txt. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
+    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Not routed by Digital Spec: hardware matches no lane, and queryLane() admits items by domain only. Reachable through the Projects tab and Portfolio Search. Status in-progress (card draws, art and flip working on the device 2026-10-14; Wands order bug fixed and version 4 on 2026-10-15); LittleFS not tagged until used; python added 2026-10-07 for convert.py, which generates cards.h from cards.txt. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
   }
 ]

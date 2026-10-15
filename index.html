@@ -583,8 +583,13 @@
                     <div class="project" id="proj-tarot-machine">
                         <h3>Tarot Machine <span class="badge bg-warning" style="font-size:0.65rem; vertical-align: middle;">In Progress</span></h3>
                         <p><strong>October 2026 – Present</strong></p>
-                        <p>A pocket tarot-draw gadget built on an M5StickS3: an ESP32-S3 board with a 1.14" screen, a speaker, buttons and a motion sensor. Press a button and it draws a random Rider-Waite-Smith card, shows the card and its meaning, and eventually speaks. The inspiration is Finbarre Snarey's TAROTRON 2000. That build and its design are his. This is my own version.</p>
-                        <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. The stick has arrived and my first sketch runs on it: "hello Spec" on the screen. The card meanings have been converted into a C++ file with a Python script. It doesn't draw cards yet. "Tarot Machine" is a working title.</p>
+                        <p>A pocket tarot-draw gadget built on an M5StickS3: an ESP32-S3 board with a 1.14" screen, a speaker, buttons and a motion sensor. Press a button and it draws a random card from a standard tarot deck, shows the card and its meaning, and eventually speaks. The inspiration is Finbarre Snarey's TAROTRON 2000. That build and its design are his. This is my own version.</p>
+                        <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. It now draws a random card from my own 78 meanings, shows the card art tinted by suit, and flips to the meaning. Sound and voice come next. "Tarot Machine" is a working title.</p>
+
+                        <figure style="margin: 14px 0; text-align: center;">
+                            <img src="tarot-machine/contact-sheet.webp" alt="Contact sheet of all 78 cards: Major Arcana in teal, Wands in orange, Cups in blue, Swords in silver, Pentacles in gold" loading="lazy" style="width: 100%; max-width: 240px; height: auto; border-radius: 6px;">
+                            <figcaption style="font-size: 0.78rem; color: #999; margin-top: 6px;"><em>The full deck. Each card is a coded border, some text and a freely available symbol, put together with Claude. More on that in the devlog.</em></figcaption>
+                        </figure>
 
                         <div class="layer-grid">
                             <div class="layer-card">
@@ -599,11 +604,23 @@
                             </div>
                         </div>
 
+                        <div class="project-wins">
+                            <strong>Wins</strong>
+                            <ul>
+                                <li><strong>Draws from my own meanings</strong> — a hold on the button draws a random card from the 78 meanings I wrote, upright or reversed.</li>
+                                <li><strong>Card art for the whole deck</strong> — 78 one-bit images, converted to C arrays myself and tinted by suit at draw time. The full deck uses 26% of program storage.</li>
+                                <li><strong>Tap to flip, hold to draw</strong> — a flip animation turns the card to show its name and meaning. The side button goes back to the opening screen from anywhere.</li>
+                                <li><strong>Meanings sized to fit</strong> — each meaning picks the largest font size that fits the screen.</li>
+                                <li><strong>Screen sleep and a battery indicator</strong> — the screen turns off after 60 seconds and wakes where it left off. The opening screen shows the battery level, with a "+" while charging and red below 20%.</li>
+                                <li><strong>A converter that checks itself</strong> — <code>convert.py</code> escapes quotes, checks the card order, and stops before writing <code>cards.h</code> if anything is wrong. It writes straight into the newest sketch folder, so there's no manual copy step to forget.</li>
+                            </ul>
+                        </div>
+
                         <div class="project-constraints">
                             <strong>Constraints</strong>
                             <ul>
-                                <li><strong>No card draws yet</strong> — the device runs a minimal "hello" sketch. The card data is ready in <code>cards.h</code>. Drawing a card is the next session. Features get described here once they work, not before.</li>
-                                <li><strong>No card art chosen yet</strong> — options are researched, but nothing is picked. The next step is testing a few candidates at the screen's real size, 135×240.</li>
+                                                                <li><strong>Not hardware-random</strong> — <code>esp_random()</code> is only true hardware randomness while the radio is on. Without it, draws come from a formula. Fair for a tarot draw, but not hardware-random.</li>
+                                <li><strong>Screen sleep only</strong> — true deep sleep with button wake-up is parked until I can test it properly.</li>
                                 <li><strong>First hardware build</strong> — I'm learning the board, the libraries and the Arduino workflow as I go.</li>
                                 <li><strong>Stick and cable only</strong> — everything planned has to work with what the StickS3 already has.</li>
                             </ul>
@@ -613,10 +630,10 @@
                             <strong class="roadmap-heading">// roadmap</strong>
                             <ol>
                                 <li><strong>Get the device talking to the computer</strong> — "hello" on screen. Done 2026-10-14.</li>
-                                <li><strong>First draw</strong> — button press gives a random card name, with reversals.</li>
-                                <li><strong>Meanings on screen.</strong></li>
+                                <li><strong>First draw</strong> — button press gives a random card name, with reversals. Done 2026-10-14.</li>
+                                <li><strong>Meanings on screen.</strong> Done 2026-10-14. Wands order bug fixed 2026-10-15.</li>
                                 <li><strong>Sound effects.</strong></li>
-                                <li><strong>Card images.</strong></li>
+                                <li><strong>Card images.</strong> Done 2026-10-14.</li>
                                 <li><strong>Voice, shake-to-draw, modes, case.</strong></li>
                             </ol>
                         </div>
@@ -627,7 +644,7 @@
                             <span class="tech-tag">Arduino IDE 2</span>
                             <span class="tech-tag">M5Unified / M5GFX</span>
                             <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Planned: LittleFS</span>
+                            <span class="tech-tag">image2cpp</span>
                         </p>
                         <a class="tool-link-badge" href="https://github.com/iamspecious/portfolio/tree/main/tarot-machine" target="_blank">View on GitHub →</a>
 
@@ -638,40 +655,168 @@
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-10-14 — first code on the device: "hello Spec"</span>
-                                <p>
-                                    <span class="tag tag-done">Done</span>
-                                    The stick arrived running UiFlow2, M5Stack's factory block-coding software. My first upload replaced it, and it can be restored with M5Burner if I ever want it back. Entered download mode by holding the side button until the green LED blinked. Found the right port by unplugging the device and seeing which entry disappeared. The port number changes depending on which USB socket is used. Uploaded a minimal M5Unified sketch: start the hardware, rotate to landscape, print text. It compiled at 16% of program storage and 7% of dynamic memory, so there's plenty of room for the card data. Result: "hello Spec" on the device screen. Session 1 complete.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-10-14 — bad CPU type in executable</span>
-                                <p>
-                                    <span class="tag tag-issue">Issue</span>
-                                    The first compile failed with <code>bad CPU type in executable</code>. Arduino's <code>ctags</code> tool is Intel-only, and my Mac has Apple Silicon. Fixed by installing Rosetta: <code>softwareupdate --install-rosetta --agree-to-license</code>.
-                                </p>
-                            </div>
-
-                            <div class="devlog-entry">
-                                <span class="timestamp">2026-10-13 — researching card art</span>
+                                <span class="timestamp">2026-10-15 — where the card art came from</span>
                                 <p>
                                     <span class="tag tag-note">Note</span>
-                                    Looked for card images that are legal to use, look good on a 1.14" screen, and can appear in portfolio photos. The 1909 Pamela Colman Smith deck (Wikimedia Commons scans) is public domain and the deck my meanings were written for. The 1971 recoloured edition is still under copyright, so that's out. "Rider-Waite" is a trademark, so it stays out of the project name. Also looked at Sola Busca (1491, public domain, a candidate for a hidden "archive mode"), the Tarot de Marseille (bold colours, but no illustrated minors), pixel-art packs on itch.io licensed for use with credit, and drawing my own. The screen shows full-colour images. The limit is resolution (135×240), not the type of image. Bold art survives the shrink, fine linework doesn't. No decision yet. The code works the same whichever art I choose. Next step is to shrink a few candidates to 135×240 and check them at real size.
+                                    I think AI-generated art is bad. I'm less sure whether this counts as it. Each card is a border coded around the display, some text, and a common symbol: five cups for the 5 of Cups, the astrological sign for Leo on Strength. Symbols like these are freely available UI icons. I put the set together with Claude, but nothing here is an illustration, and I'm not making art. I'm placing an icon. I'm honestly unsure where that sits, so I'm writing down exactly how it was made and letting people judge for themselves.
                                 </p>
                             </div>
 
                             <div class="devlog-entry">
-                                <span class="timestamp">2026-10-07 — outside review: why convert on the laptop</span>
+                                <span class="timestamp">2026-10-15 — version 4: battery, home button, version display</span>
                                 <p>
-                                    <span class="tag tag-decision">Decision</span>
-                                    An outside review asked why I convert the text on my computer instead of having the device read <code>cards.txt</code> directly, and whether generating code from a text file is a security risk. I kept the approach. Parsing text in C++ on a microcontroller is harder than in Python on a laptop, and it means uploading the text file separately. Converting first keeps the device code simple, and a typo can't crash it at runtime. The trade-off: changing a meaning means rerunning the script and re-uploading the sketch. The injection point is valid, though. A stray <code>"</code> in a meaning could close the text early and let code slip into <code>cards.h</code>. The risk is low here, my own file on my own machine, but the habit matters. I'm adding escaping to <code>convert.py</code> so quotes inside meanings are neutralised.
+                                    <span class="tag tag-done">Done</span>
+                                    A battery indicator on the opening screen: an icon drawn from three shapes, a percentage, a "+" while charging, and red below 20%. It uses <code>M5.Power.getBatteryLevel()</code> and <code>isCharging()</code> from M5Stack's StickS3 example. The side button (B) now returns to the opening screen from anywhere, which also refreshes the battery reading. The opening screen shows the version from <code>cards.h</code>, so I never type it by hand. Final controls: front tap flips, front hold draws, side button goes home.
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 9 older entries</button>
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-15 — side button for home, not a double-tap</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    The first plan for home was a double-tap, which would have made every single tap wait slightly. I pointed out the stick has a second programmable button, which was the better solution.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-15 — convert.py hardened</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Backed up the working script first. A <code>clean()</code> function now puts a <code>\</code> in front of any quote or backslash in a meaning, so it can't end a C++ string early. That closes the injection risk from the outside review. The script also checks the order: 78 cards, card 0 is The Fool, and each suit starts with its Ace at positions 22, 36, 50 and 64. If anything is wrong, it stops before writing <code>cards.h</code>. It finds the newest <code>tarot_vN</code> folder by version number, so v10 sorts after v9, and writes <code>cards.h</code> straight into it. That removed the manual copy that caused two bugs. It also writes <code>SKETCH_VERSION</code> into <code>cards.h</code>. New routine: edit <code>cards.txt</code>, run the script, reopen the sketch, upload.
+                                </p>
+                            </div>
+
+<button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 25 older entries</button>
 
                             <div class="devlog-overflow">
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-15 — Wands bug fixed</span>
+                                    <p>
+                                        <span class="tag tag-done">Fixed</span>
+                                        Cause: <code>convert.py</code> never ran on the reordered <code>cards.txt</code>. The old <code>cards.h</code> stayed in the project folder and was copied into every later sketch. Found it by checking each stage in turn, the source file, the generated file, then the sketch's copy, with <code>sed -n 23p</code> and <code>grep -m1 Wands</code>. The source was right and the generated file wasn't, which pointed to the conversion step. Reran it, confirmed it with <code>grep</code>, copied it in, and reopened the sketch so the IDE couldn't save its old copy back over the new file. Lesson: "78 cards converted" only counted lines and never checked the order. A message only proves what it checks.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-15 — unexpected indent</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        <code>unexpected indent</code> in Python from code copied with leading spaces. Lines must start at the left edge unless they're inside a block or a list.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — open bug: Wands show the wrong meaning</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        The 4 of Wands shows the Page of Wands. The art is in the new order, but the sketch's <code>cards.h</code> is still in the old order. <code>convert.py</code> reported "78 cards converted" either way, because it only checks the count, not the order. Next session: trace which step didn't apply, the download, the conversion, or the copy into the sketch. Ideas logged: have <code>convert.py</code> write <code>cards.h</code> straight into the sketch folder, print the first card of each suit after converting, and add the quote escaping back in.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — what tripped me up (evening)</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        <code>#include "cards_art.h"</code> when the file was <code>card_art.h</code>: a one-letter typo the compiler pinpointed by line and column. New functions pasted in twice, which gave "redefinition" errors. Replaced the file with one clean copy, and now search for each function name after pasting. And the upload port disappeared because the stick wasn't in download mode.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — screen sleep, deep sleep parked</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The screen sleeps after 60 seconds without a press and wakes on the next press, back where it was. The waking press only wakes the screen. It doesn't flip or draw. M5Stack's docs only show sleep with timer wake-up, not button wake-up, so true deep sleep is parked until I can test it properly.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — auto-sized meanings</span>
+                                    <p>
+                                        <span class="tag tag-done">Fixed</span>
+                                        <code>wrapText()</code> gained a measuring mode, so it can work out how tall a meaning would be without drawing it. <code>printFitted()</code> tries font sizes from largest to smallest and uses the first one that fits. In the first version, any single word wider than the frame forced a drop to a much smaller, different font, so some cards looked random. Long words like <em>misinterpretation</em> and <em>self-awareness</em> were the trigger. Fixed by scaling the same font to 90% and then 80% instead of switching font.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — flip animation and tap/hold controls</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        A framed opening screen and a "Drawing…" screen with animated dots, drawn in code with rounded rectangles and centred text. A flip animation: the card outline narrows to a sliver and widens again, like a card turning edge-on, revealing the back with the card name, a divider, and the meaning in the suit colour. Tap flips between the art and the meaning. Hold (800 ms) draws a new card from any screen. This replaced an earlier version where every press drew a new card, with no way back to the art. A <code>screen</code> variable tracks three states (opener, card, meaning), and <code>pick</code> and <code>isReversed</code> became global so the card is remembered between presses.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — reordered cards.txt to match the art</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        The art's README said its order matched my <code>cards.txt</code>. It didn't: my Wands were in a different order. Reordered <code>cards.txt</code> to match the art rather than renaming 14 images.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — card art: 78 1-bit cards, tinted by suit</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Got a 1-bit card set: 78 PNGs at 135×240, white on black, with a README specifying the colour per suit and that reversed cards reuse the same art rotated 180°. Converted all 78 to C arrays myself in image2cpp, 1 bit per pixel. Each card is 4,080 bytes, and the whole deck took program storage from 16% to 26%. Each card is drawn with <code>drawBitmap()</code> and tinted by suit at draw time: Majors teal, Wands orange, Cups blue, Swords silver, Pentacles gold. A <code>cardColour()</code> function picks the colour from the card's position in the deck.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — are the draws really random?</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        After a run of three reversals and then three uprights, I questioned whether the draws were random. In six coin flips, about 59% of sequences contain a streak of three, so a streak is normal. I also learned that <code>esp_random()</code> is only true hardware randomness while the radio is on. Without it, the numbers come from a formula. Still fair for a tarot draw, just not hardware-random.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — Save As produced a blank sketch</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        Save As gave me a blank sketch instead of a copy of my code. I now check the new version has my code in it before moving on.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — drawing cards on the device</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        Added <code>cards.h</code> to the sketch and confirmed all 78 cards loaded by printing <code>CARD_COUNT</code> on screen first. Button A draws a random card with <code>esp_random() % CARD_COUNT</code>, and <code>esp_random() % 2</code> picks upright or reversed. Wrote <code>printWrapped()</code>, my first C++ function: it measures each word with <code>textWidth()</code> and starts a new line before a word would run off the screen. Replaced the "hello" text with a start screen showing the machine name and how many cards are ready, and reused <code>printWrapped()</code> when it had the same wrapping problem.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — first code on the device: "hello Spec"</span>
+                                    <p>
+                                        <span class="tag tag-done">Done</span>
+                                        The stick arrived running UiFlow2, M5Stack's factory block-coding software. My first upload replaced it, and it can be restored with M5Burner if I ever want it back. Entered download mode by holding the side button until the green LED blinked. Found the right port by unplugging the device and seeing which entry disappeared. The port number changes depending on which USB socket is used. Uploaded a minimal M5Unified sketch: start the hardware, rotate to landscape, print text. It compiled at 16% of program storage and 7% of dynamic memory, so there's plenty of room for the card data. Result: "hello Spec" on the device screen. Session 1 complete.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-14 — bad CPU type in executable</span>
+                                    <p>
+                                        <span class="tag tag-issue">Issue</span>
+                                        The first compile failed with <code>bad CPU type in executable</code>. Arduino's <code>ctags</code> tool is Intel-only, and my Mac has Apple Silicon. Fixed by installing Rosetta: <code>softwareupdate --install-rosetta --agree-to-license</code>.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-13 — researching card art</span>
+                                    <p>
+                                        <span class="tag tag-note">Note</span>
+                                        Looked for card images that are legal to use, look good on a 1.14" screen, and can appear in portfolio photos. The 1909 Pamela Colman Smith deck (Wikimedia Commons scans) is public domain and the deck my meanings were written for. The 1971 recoloured edition is still under copyright, so that's out. "Rider-Waite" is a trademark, so it stays out of the project name. Also looked at Sola Busca (1491, public domain, a candidate for a hidden "archive mode"), the Tarot de Marseille (bold colours, but no illustrated minors), pixel-art packs on itch.io licensed for use with credit, and drawing my own. The screen shows full-colour images. The limit is resolution (135×240), not the type of image. Bold art survives the shrink, fine linework doesn't. No decision yet. The code works the same whichever art I choose. Next step is to shrink a few candidates to 135×240 and check them at real size.
+                                    </p>
+                                </div>
+
+                                <div class="devlog-entry">
+                                    <span class="timestamp">2026-10-07 — outside review: why convert on the laptop</span>
+                                    <p>
+                                        <span class="tag tag-decision">Decision</span>
+                                        An outside review asked why I convert the text on my computer instead of having the device read <code>cards.txt</code> directly, and whether generating code from a text file is a security risk. I kept the approach. Parsing text in C++ on a microcontroller is harder than in Python on a laptop, and it means uploading the text file separately. Converting first keeps the device code simple, and a typo can't crash it at runtime. The trade-off: changing a meaning means rerunning the script and re-uploading the sketch. The injection point is valid, though. A stray <code>"</code> in a meaning could close the text early and let code slip into <code>cards.h</code>. The risk is low here, my own file on my own machine, but the habit matters. I'm adding escaping to <code>convert.py</code> so quotes inside meanings are neutralised.
+                                    </p>
+                                </div>
 
                                 <div class="devlog-entry">
                                     <span class="timestamp">2026-10-07 — converting the card list into code</span>
