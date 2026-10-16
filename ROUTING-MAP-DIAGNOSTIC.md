@@ -1,5 +1,7 @@
 # Routing Map & Missing-Role Diagnostic
 
+> **Historical (June 2026).** This describes a 38-item index and an older `front-door.js`. `audienceExclude`/`audiencePin` and per-bucket caps have been implemented since (2026-06-21), and the lane caps changed on 2026-09-03. For current routing, run `python3 tools/audit.py` (§5) and see the latest report in [`audits/`](./audits/).
+
 Generated against `portfolio-index.json` (38 items), `lanes.json` v2, `front-door.js` current.
 Read-only — no files modified.
 

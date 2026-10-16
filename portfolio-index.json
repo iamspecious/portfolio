@@ -1432,7 +1432,7 @@
     "lensByAudience": {
       "builder-technical": "The portfolio's own front door — a tag-driven guide built as an overlay, no AI, fully documented."
     },
-    "notes": ""
+    "notes": "audiencePin builder-technical: the front door is the portfolio's own system and the item the \"Show me how you were built\" option points to, so it is kept inside the lane's project cap (added in the 2026-09-03 routing audit, #42)."
   },
   {
     "id": "portfolio-search",
@@ -1467,7 +1467,7 @@
     "audiencePin": ["builder-technical"],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": ""
+    "notes": "audiencePin builder-technical: the portfolio's own search is direct evidence for a builder audience, and pinning keeps it inside the lane's project cap ahead of older tools (added in the 2026-09-03 routing audit, #42)."
   },
   {
     "id": "role-fit-watcher",

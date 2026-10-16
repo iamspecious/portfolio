@@ -2,8 +2,8 @@
    Additive / progressive enhancement. Client-side full-text search over
    portfolio-index.json — the same tagged index Digital Spec queries for
    its routes. No backend, no AI, no fuzzy/semantic matching: a query
-   either matches a title, tag (including a short hand-maintained
-   synonym list), or summary substring, or it doesn't. If this script
+   word either starts a word in a title, tag (including a short
+   hand-maintained synonym list), or summary, or it doesn't. If this script
    errors or is removed, the underlying portfolio is unaffected — the
    search bar just doesn't render.
 */
@@ -84,8 +84,7 @@
             item: item,
             titleLc: titleLc,
             summaryLc: summaryLc,
-            tagsLc: tags,
-            haystack: [titleLc, summaryLc, tags].join(' ')
+            tagsLc: tags
         };
     }
 
@@ -156,37 +155,46 @@
     }
 
     // ─── Search + scoring ───────────────────────────────────────────────
-    // Every query word must hit somewhere for an item to qualify at all;
-    // where a word hits is what decides the score — title beats a tag,
-    // a tag beats the summary, and matching every word beats matching some.
+    // A query word hits where some word in the text starts with it, so
+    // "post" finds PostHog but "eor" doesn't find "theory". Every query
+    // word must hit somewhere for an item to qualify; only if nothing
+    // matches every word do partial matches show, so a typo or an extra
+    // word still returns something. Where a word hits decides the score:
+    // title beats a tag, a tag beats the summary.
+    function wordStart(w) {
+        return new RegExp('(^|[^a-z0-9])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    }
+
     function search(query) {
         var words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
         if (!words.length) return [];
+        var patterns = words.map(wordStart);
 
-        var scored = [];
+        var full = [];
+        var partial = [];
         searchableItems.forEach(function (entry) {
             var score = 0;
             var matched = 0;
 
-            words.forEach(function (w) {
+            words.forEach(function (w, i) {
+                var re = patterns[i];
                 var found = false;
-                if (entry.titleLc.indexOf(w) !== -1) { score += 10; found = true; }
-                if (entry.tagsLc.indexOf(w) !== -1) { score += 6; found = true; }
+                if (re.test(entry.titleLc)) { score += 10; found = true; }
+                if (re.test(entry.tagsLc)) { score += 6; found = true; }
                 var synonyms = TAG_SYNONYMS[w];
                 if (synonyms && synonyms.some(function (t) { return entry.tagsLc.indexOf(t) !== -1; })) {
                     score += 5; found = true;
                 }
-                if (entry.summaryLc.indexOf(w) !== -1) { score += 4; found = true; }
-                if (!found && entry.haystack.indexOf(w) !== -1) { score += 1; found = true; }
+                if (re.test(entry.summaryLc)) { score += 4; found = true; }
                 if (found) matched++;
             });
 
-            if (matched > 0) {
-                if (matched === words.length) score += 5 * words.length;
-                scored.push({ item: entry.item, score: score, matched: matched });
-            }
+            if (!matched) return;
+            var hit = { item: entry.item, score: score, matched: matched };
+            (matched === words.length ? full : partial).push(hit);
         });
 
+        var scored = full.length ? full : partial;
         scored.sort(function (a, b) {
             if (b.score !== a.score) return b.score - a.score;
             if (b.matched !== a.matched) return b.matched - a.matched;
@@ -235,7 +243,16 @@
         count.textContent = results.length + (results.length === 1 ? ' result' : ' results') + ' for “' + lastQuery + '”';
         panel.appendChild(count);
 
-        GROUP_ORDER.forEach(function (type) {
+        // Groups appear in order of their best match, so a search for a
+        // job title shows the Work group first rather than below every
+        // project that happens to share a word. GROUP_ORDER breaks ties.
+        var groupOrder = GROUP_ORDER.slice().sort(function (a, b) {
+            var sa = byType[a] ? byType[a][0].score : -1;
+            var sb = byType[b] ? byType[b][0].score : -1;
+            return sb - sa;
+        });
+
+        groupOrder.forEach(function (type) {
             var group = byType[type];
             if (!group || !group.length) return;
 
@@ -295,16 +312,28 @@
         });
     }
 
+    // Matches are found in the raw text and each piece escaped on its own,
+    // so a query like "&" can't land inside an escaped entity ("&amp;").
     function highlight(text, words) {
-        var escaped = escapeHtml(text || '');
-        if (!words.length) return escaped;
+        text = text || '';
+        if (!words.length) return escapeHtml(text);
         var pattern = words
             .slice()
             .sort(function (a, b) { return b.length - a.length; })
             .map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); })
             .join('|');
-        if (!pattern) return escaped;
-        return escaped.replace(new RegExp('(' + pattern + ')', 'ig'), '<mark class="pfs-mark">$1</mark>');
+        if (!pattern) return escapeHtml(text);
+        var re = new RegExp('(' + pattern + ')', 'ig');
+        var out = '';
+        var last = 0;
+        var m;
+        while ((m = re.exec(text)) !== null) {
+            if (!m[0].length) { re.lastIndex++; continue; }
+            out += escapeHtml(text.slice(last, m.index)) +
+                '<mark class="pfs-mark">' + escapeHtml(m[0]) + '</mark>';
+            last = m.index + m[0].length;
+        }
+        return out + escapeHtml(text.slice(last));
     }
 
     // ─── Panel + keyboard state ─────────────────────────────────────────

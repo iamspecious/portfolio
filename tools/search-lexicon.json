@@ -1,0 +1,32 @@
+{
+  "_about": "Expected Portfolio Search queries per item: words a visitor would plausibly type to find it. tools/audit.py checks each one still finds its item (every word must hit the title, summary, tags or a synonym). A miss means either add the word to the item's summary/tags, add a synonym in portfolio-search.js, or drop the query if it no longer fits. Extend this whenever an item is added.",
+
+  "error-log-interpreter": ["error", "stack trace", "debugging", "console error", "claude", "anthropic", "prompt engineering"],
+  "debug-helper": ["debug", "debugging", "silent failure", "claude", "javascript"],
+  "posthog-cs-health-intelligence": ["posthog", "customer success", "health score", "churn", "python", "csm"],
+  "posthog-csm-copilot": ["posthog", "customer success", "csm", "escalation", "account management"],
+  "faq-chatbot": ["faq", "chatbot", "knowledge base", "hallucination", "self-serve", "deflection"],
+  "lorebyspec-creator-tool": ["lorebyspec", "youtube", "kingdom hearts", "content", "comment reply"],
+  "pregvoice": ["accessibility", "blind", "visually impaired", "pregnancy", "machine learning", "haptics", "assistive"],
+  "support-triage-tool": ["triage", "ticket", "support", "urgency", "cloudflare", "haiku"],
+  "kh-lore-checker": ["kingdom hearts", "lore", "theory", "kh", "wiki"],
+  "date-proposal-website": ["date proposal", "foursquare", "eventbrite", "tmdb", "calendar", "api"],
+  "proj-digital-spec-front-door": ["digital spec", "front door", "guide", "visual novel", "chatbot", "accessibility"],
+  "portfolio-search": ["search", "search bar", "index"],
+  "role-fit-watcher": ["job search", "ats", "greenhouse", "ashby", "agent", "automation"],
+  "role-fit-evaluator": ["job search", "decision matrix", "excel", "scoring", "cv"],
+  "kh-description-optimizer": ["youtube", "seo", "hashtags", "kingdom hearts", "lorebyspec"],
+  "kh-ab-testing-tool": ["a/b testing", "ab test", "youtube", "thumbnail", "title", "kingdom hearts"],
+  "kh-title-thumbnail-audit": ["thumbnail", "youtube", "audit", "rubric", "lorebyspec"],
+  "hr-webhook-integration-layer": ["webhook", "hibob", "ashby", "remote", "n8n", "integration", "hris", "python", "docker", "idempotency"],
+  "sql-90": ["sql", "postgres", "database", "supabase", "learning in public"],
+  "tarot-machine": ["hardware", "esp32", "arduino", "tarot", "m5stack", "embedded", "microcontroller", "firmware"],
+
+  "technical-writing-portfolio": ["technical writing", "playbook", "eor", "payroll", "escalation", "zendesk", "slack", "sql"],
+  "saas-integration-diagnostic-guide": ["webhook", "api authentication", "hris", "support guide", "escalation", "jira", "zendesk"],
+  "posthog-first-run-audit": ["posthog", "onboarding", "first-run", "github issues", "docs pr", "ux"],
+  "cat-api-documentation": ["api documentation", "api reference", "rest api", "docs"],
+  "voice-and-tone-guide": ["voice", "tone", "style guide", "docs"],
+  "voice-adaptation-showcase": ["voice", "tone", "mailchimp", "apple", "posthog", "style guide"],
+  "crisis-management-playbook": ["crisis", "moderation", "incident response", "community", "creative commons", "cc by"]
+}

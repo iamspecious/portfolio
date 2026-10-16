@@ -258,6 +258,12 @@ Status `in-progress` at setup stage (hardware ordered, environment set up, no co
 
 ---
 
+## Addendum — 2026-10-16: full audit re-run
+
+The coverage counts and lane tables at the top of this file are from an earlier snapshot. The current index has 49 items (13 work, 9 case studies, 20 projects, 7 documents). Coverage, vocabulary, anti-rule and lane checks now run as `python3 tools/audit.py`, and the full results and open decisions are in [`audits/2026-10-16.md`](./audits/2026-10-16.md). Tag changes from that audit: none applied. `notes` rationale was added to the two `audiencePin` overrides on `portfolio-search` and `proj-digital-spec-front-door`.
+
+---
+
 ## Idempotency Contract
 
 Re-running this audit must:

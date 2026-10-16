@@ -587,7 +587,7 @@
                         <p style="margin-top: 10px;">It's my first hardware build. I learn by doing, and I wanted a project interesting enough to actually finish. It now draws a random card from my own 78 meanings, shows the card art tinted by suit, and flips to the meaning. Sound and voice come next. "Tarot Machine" is a working title.</p>
 
                         <figure style="margin: 14px 0; text-align: center;">
-                            <img src="tarot-machine/contact-sheet.webp" alt="Contact sheet of all 78 cards: Major Arcana in teal, Wands in orange, Cups in blue, Swords in silver, Pentacles in gold" loading="lazy" style="width: 100%; max-width: 240px; height: auto; border-radius: 6px;">
+                            <img src="tarot-machine/contact-sheet.webp" width="666" height="2000" alt="Contact sheet of all 78 cards: Major Arcana in teal, Wands in orange, Cups in blue, Swords in silver, Pentacles in gold" loading="lazy" style="width: 100%; max-width: 240px; height: auto; border-radius: 6px;">
                             <figcaption style="font-size: 0.78rem; color: #999; margin-top: 6px;"><em>The full deck. Each card is a coded border, some text and a freely available symbol, put together with Claude. More on that in the devlog.</em></figcaption>
                         </figure>
 
@@ -1246,12 +1246,21 @@
                             <span class="tech-tag">No AI</span>
                             <span class="tech-tag">Index-driven</span>
                         </p>
-                        <a class="tool-link-badge" href="/" target="_blank">Live on this site — press <code>/</code> or use the search bar in the header.</a>
+                        <a class="tool-link-badge" href="#pfs-root">Live on this site — press <code>/</code> or use the search bar in the header.</a>
 
                         <div class="devlog">
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-16 — results matched any word, and the best match could sit at the bottom</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Found in a portfolio audit. The code comment said every query word had to match, but the code kept any item that matched one word. Results were also always grouped Projects, Documents, Case Studies, Work, so "chief of staff" returned 14 results with both Chief of Staff roles last, and "Spec Solutions" put LoreBySpec first. Matching was by substring too, so "EOR" found the KH Lore Checker through "th<em>eor</em>y". Now a word has to start a word in the title, tags or summary, every word has to match (partial matches only show when nothing matches them all), and groups are ordered by their best result. Also fixed: searching "&amp;" broke the highlighting and showed a literal <code>&amp;amp;</code> in titles.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
@@ -2316,12 +2325,21 @@
                             <span class="tech-tag">Pre-programmed (no AI)</span>
                             <span class="tech-tag">Tag-driven content</span>
                         </p>
-                        <a class="tool-link-badge" href="/" target="_blank">Live on this site — look for the Digital Spec tab.</a>
+                        <a class="tool-link-badge" href="#fd-root">Live on this site — look for the Digital Spec tab.</a>
 
                         <div class="devlog">
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-10-16</span>
+                                <p>
+                                    <span class="tag tag-issue">Issue</span>
+                                    <span class="tag tag-done">Fixed</span>
+                                    Cards for anything in the Projects tab landed about 700px short of their target. The Tarot Machine contact sheet is a lazy-loaded image with no width or height, and Tarot sorts first in the tab, so the image loaded during the scroll and pushed everything below it down. Giving the image its real dimensions lets the browser reserve the space up front. Found by a headless-browser test that clicks every card in every lane (<code>tools/smoke-test.js</code>).
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
