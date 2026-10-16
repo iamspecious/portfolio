@@ -181,7 +181,44 @@ async function targetInView(page, sel) {
   }
   page.errors.forEach((e) => fail('page: ' + e));
 
-  // ── 5. Phone width: overlay fits, no horizontal scroll ──
+  // ── 5. Shareable links: index.html#<id> opens the tab and the item ──
+  const shareTargets = ['projects', 'proj-tarot-machine', 'proj-hr-webhook-integration-layer',
+    'doc-voice-adaptation-showcase', 'work-phandroid-tech-writer', 'cs-denim-brand-turnaround-s5'];
+  for (const id of shareTargets) {
+    const ctx = await browser.newContext();
+    const pg = await ctx.newPage();
+    await pg.route(/posthog\.com/, (r) => r.abort());
+    if (process.env.BOOTSTRAP_JS) await pg.route(/bootstrap\.bundle\.min\.js/, (r) => r.fulfill({ path: process.env.BOOTSTRAP_JS }));
+    if (process.env.BOOTSTRAP_CSS) await pg.route(/bootstrap\.min\.css/, (r) => r.fulfill({ path: process.env.BOOTSTRAP_CSS }));
+    await pg.goto(BASE + '#' + id, { waitUntil: 'networkidle' });
+    await pg.waitForTimeout(1000);
+    const covered = await pg.evaluate(() => {
+      const o = document.getElementById('fd-overlay');
+      return o && !o.classList.contains('fd-collapsed');
+    });
+    if (covered) fail(`shared link #${id}: Digital Spec covers the page`);
+    const res = id === 'projects'
+      ? await pg.evaluate(() => document.getElementById('projects').classList.contains('active') ? 'ok' : 'tab not active')
+      : await targetInView(pg, '#' + id);
+    if (res !== 'ok') fail(`shared link #${id}: ${res}`); else ok(`shared link #${id}`);
+    await ctx.close();
+  }
+
+  // Search updates the address bar so the result can be shared
+  {
+    const pg = await freshPage(browser);
+    await pg.evaluate(() => sessionStorage.setItem('fd-state', 'collapsed'));
+    await pg.reload({ waitUntil: 'networkidle' });
+    await pg.fill('.pfs-input', 'tarot');
+    await pg.waitForTimeout(250);
+    await pg.locator('.pfs-result').first().click();
+    await pg.waitForTimeout(1300);
+    const hash = await pg.evaluate(() => location.hash);
+    if (hash !== '#proj-tarot-machine') fail(`search result left address bar at "${hash}"`); else ok('search result updates the address bar');
+    await pg.context().close();
+  }
+
+  // ── 6. Phone width: overlay fits, no horizontal scroll ──
   const phone = await freshPage(browser, { viewport: { width: 375, height: 740 } });
   await phone.waitForTimeout(800);
   const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);

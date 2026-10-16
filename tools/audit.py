@@ -165,6 +165,9 @@ for it in index:
             fail('overrides', f'{iid}: override names unknown lane `{lane}`')
     if not it.get('summary'):
         fail('schema', f'{iid}: empty summary')
+    kw = it.get('keywords', [])
+    if not isinstance(kw, list) or not all(isinstance(k, str) and k == k.lower() for k in kw):
+        fail('schema', f'{iid}: keywords must be a list of lowercase strings')
 
 used_tools = {tl for it in index for tl in it.get('tools', [])}
 for tl in sorted(VOCAB['tools'] - used_tools):
@@ -352,7 +355,7 @@ def search_ids(q):
     words = q.lower().split()
     out = []
     for it in index:
-        tags = ' '.join(it['domains'] + it['evidence'] + it['tools'] + [it['type']] +
+        tags = ' '.join(it['domains'] + it['evidence'] + it['tools'] + it.get('keywords', []) + [it['type']] +
                         [it['context'][k] for k in ('stage', 'level', 'engagement')]).lower()
         hay = ' '.join([it['title'].lower(), it['summary'].lower(), tags])
         hit = 0
@@ -405,6 +408,20 @@ for el in soup.find_all('img'):
 for el in soup.find_all('a', target='_blank'):
     if 'noopener' not in (el.get('rel') or []) and 'noreferrer' not in (el.get('rel') or []):
         warn('links', f'target=_blank without rel=noopener: {el.get("href")}')
+# Link previews: every page except the date-proposal experience (its title
+# is part of the reveal) carries a description and Open Graph tags.
+import glob
+for page in sorted(glob.glob('*.html')):
+    ps = BeautifulSoup(open(page).read(), 'html.parser')
+    if not ps.find('meta', attrs={'name': 'description'}):
+        warn('previews', f'{page}: no <meta name="description">')
+    for prop in ('og:title', 'og:description', 'og:url'):
+        if not ps.find('meta', attrs={'property': prop}):
+            warn('previews', f'{page}: no {prop}')
+    for a in ps.find_all('a', href=True):
+        m = re.match(r'^index\.html#(.+)$', a['href'])
+        if m and m.group(1) not in html_ids:
+            fail('links', f'{page}: back link {a["href"]} has no target')
 ext = sorted({el['href'] for el in soup.find_all('a', href=True) if el['href'].startswith('http')})
 print(f'{len(ext)} external links (not fetched; check manually or with --external)')
 if '--external' in sys.argv:

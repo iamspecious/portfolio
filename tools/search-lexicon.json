@@ -11,7 +11,7 @@
   "support-triage-tool": ["triage", "ticket", "support", "urgency", "cloudflare", "haiku"],
   "kh-lore-checker": ["kingdom hearts", "lore", "theory", "kh", "wiki"],
   "date-proposal-website": ["date proposal", "foursquare", "eventbrite", "tmdb", "calendar", "api"],
-  "proj-digital-spec-front-door": ["digital spec", "front door", "guide", "visual novel", "chatbot", "accessibility"],
+  "proj-digital-spec-front-door": ["digital spec", "front door", "guide", "visual novel", "chatbot"],
   "portfolio-search": ["search", "search bar", "index"],
   "role-fit-watcher": ["job search", "ats", "greenhouse", "ashby", "agent", "automation"],
   "role-fit-evaluator": ["job search", "decision matrix", "excel", "scoring", "cv"],

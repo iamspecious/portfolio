@@ -67,11 +67,15 @@
         });
 
     // ─── Index prep ─────────────────────────────────────────────────────
+    // `keywords` is a search-only list of extra words per item (tools named
+    // on the card, common phrasings like "Kingdom Hearts"). It scores like a
+    // tag but is never used for Digital Spec routing. See TAXONOMY.md §13.
     function buildSearchable(item) {
         var tags = []
             .concat(item.domains || [])
             .concat(item.evidence || [])
             .concat(item.tools || [])
+            .concat(item.keywords || [])
             .concat([item.type])
             .concat(item.context ? [item.context.stage, item.context.level, item.context.engagement] : [])
             .join(' ')
@@ -430,6 +434,7 @@
             // carries the scroll-margin-top that keeps the heading clear of
             // the viewport edge, and that only takes effect if it's already
             // applied when the scroll is calculated.
+            history.replaceState(null, '', anchor);
             target.classList.add('pfs-highlight');
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(function () { target.classList.remove('pfs-highlight'); }, 2200);

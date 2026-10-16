@@ -37,7 +37,7 @@ body { background-color: #f8f9fa; }
 }
 
 .devlog-header small {
-    color: #555577;
+    color: #8b8bb0;
     font-family: monospace;
     font-size: 0.72rem;
 }
@@ -76,7 +76,7 @@ body { background-color: #f8f9fa; }
 .tag-pivot    { background: #3a2a1a; color: #d59b5b; }
 .tag-done     { background: #1a3a1a; color: #5dbb5d; }
 .tag-note     { background: #2a1a3a; color: #a07fd4; }
-.tag-issue    { background: #3a1a1a; color: #d55b5b; }
+.tag-issue    { background: #3a1a1a; color: #f07878; }
 
 .devlog-entry p { margin: 0; }
 
@@ -90,7 +90,7 @@ body { background-color: #f8f9fa; }
     background: transparent;
     border: none;
     border-top: 1px solid #2a2a4a;
-    color: #6b5a8a;
+    color: #a08ccc;
     font-family: monospace;
     font-size: 0.72rem;
     text-align: left;
@@ -359,7 +359,7 @@ body { background-color: #f8f9fa; }
 
 .cert-meta {
     font-size: 0.78rem;
-    color: #7b5ea7;
+    color: #b392f0;
     font-weight: 600;
 }
 
@@ -647,7 +647,7 @@ hr {
 
 .badge.bg-success {
     background-color: #1a4731 !important;
-    color: #3fb950 !important;
+    color: #56d364 !important;
 }
 
 .badge.bg-warning {
@@ -786,3 +786,6 @@ hr {
 .edu-qual { color: #e6edf3; }
 .edu-org { color: #b392f0; }
 .cert-list li { color: #c9d1d9; border-bottom-color: #21262d; }
+
+/* Inline code: Bootstrap's default pink is under 4.5:1 on the dark cards */
+code { color: #f383b5; }

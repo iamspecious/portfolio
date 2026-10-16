@@ -102,7 +102,9 @@ The exceptions run outside the browser on purpose: the HR Webhook Integration La
 - **`lanes.json`** defines Digital Spec's audience lanes as queries over those tags; **`front-door-config.json`** holds the dialogue that leads to them.
 - **`portfolio-search.js`** searches titles, tags and summaries in the same index, plus a short synonym list.
 
-Adding a project means: a block in `index.html` with an `id`, `data-date` and `data-category`; an entry in `portfolio-index.json` following the checklist in `TAXONOMY.md` §12; a row in this README; and expected search words in `tools/search-lexicon.json`.
+Adding a project means: a block in `index.html` with an `id`, `data-date` and `data-category`; an entry in `portfolio-index.json` following the checklist in `TAXONOMY.md` §12; `keywords` for words a visitor might search that aren't in the title or summary (TAXONOMY.md §13); a row in this README; expected search words in `tools/search-lexicon.json`; and, for a standalone page, a description and Open Graph tags plus a back link to `index.html#<its card id>`.
+
+Every tab and item has a shareable link: `iamspecious.github.io/portfolio/#projects` opens the Projects tab, and `…/#proj-tarot-machine` opens the Tarot Machine card. The address bar updates as you browse, so you can copy a link from whatever is on screen.
 
 ## Auditing
 

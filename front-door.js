@@ -36,7 +36,14 @@
 
     buildDOM();
 
-    if (savedState === 'collapsed') {
+    // A shared link to a tab or item (index.html#proj-tarot-machine) means
+    // the visitor already knows where they're going: dock instead of
+    // covering it.
+    var hashId = decodeURIComponent(location.hash.slice(1));
+    var hashTarget = hashId && document.getElementById(hashId);
+    var arrivedOnItem = !!(hashTarget && (hashTarget.classList.contains('tab-pane') || hashTarget.closest('.tab-pane')));
+
+    if (savedState === 'collapsed' || arrivedOnItem) {
       // Stay collapsed — show docked tab only
       collapseInstant();
     } else {
@@ -543,6 +550,7 @@
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function scrollToAnchor() {
       if (!anchor) return;
+      history.replaceState(null, '', anchor);
       var el = document.querySelector(anchor);
       if (el) el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     }
