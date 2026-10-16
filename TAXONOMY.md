@@ -148,6 +148,7 @@ Defined in `lanes.json`. Summary:
 | `builder-technical` | primary | `ai-engineering`, `frontend-dev` |
 | `creator-lore` | primary | `content-creation` |
 | `documentation` | secondary / cross-cutting | `technical-writing` |
+| `side-projects` | secondary (nosy path only, projects only) | `hardware`, `research` |
 
 `documentation` is cross-cutting: every primary lane should surface its top 1–2 `technical-writing` items as supporting evidence without those items leaving their home lane.
 

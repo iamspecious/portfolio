@@ -149,7 +149,7 @@ for it in index:
         fail('dates', f'{iid}: dateEnd `{de}` not YYYY-MM or "present"')
     if ds and de and de != 'present' and de < ds:
         fail('dates', f'{iid}: dateEnd before dateStart')
-    if st == 'complete' and de == 'present':
+    if st == 'complete' and de == 'present' and 'is intended alongside status complete' not in it.get('notes', ''):
         warn('dates', f'{iid}: status complete but dateEnd "present"')
     if st in ('in-progress', 'live') and de not in ('present', None) and t == 'project':
         warn('dates', f'{iid}: status {st} but dateEnd {de}')

@@ -1562,7 +1562,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Internal tool, not hosted — badge reads 'Internal Tool' on the card; status mapped to 'complete' since the vocabulary has no internal-tool value. Supplementary index tags from the brief (strategy, career, decision-matrix, ai-assisted, internal-tool): strategy applied as a domain; decision-matrix + ai-assisted-scoring as tools; career + internal-tool captured here and in an HTML comment on the card (no free-tag field in the schema). New tools added to vocabulary: excel-openpyxl, weighted-scoring-matrix, dealbreaker-gate, ai-assisted-scoring. Primary lane operations per the brief; sibling of role-fit-watcher."
+    "notes": "Internal tool, not hosted — badge reads 'Internal Tool' on the card; status mapped to 'complete' since the vocabulary has no internal-tool value. Supplementary index tags from the brief (strategy, career, decision-matrix, ai-assisted, internal-tool): strategy applied as a domain; decision-matrix + ai-assisted-scoring as tools; career + internal-tool captured here and in an HTML comment on the card (no free-tag field in the schema). New tools added to vocabulary: excel-openpyxl, weighted-scoring-matrix, dealbreaker-gate, ai-assisted-scoring. Primary lane operations per the brief; sibling of role-fit-watcher. dateEnd \"present\" is intended alongside status complete: the build is finished and the tool is in active use (confirmed 2026-10-16)."
   },
   {
     "id": "kh-description-optimizer",
@@ -1796,6 +1796,6 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Not routed by Digital Spec: hardware matches no lane, and queryLane() admits items by domain only. Reachable through the Projects tab and Portfolio Search. Status in-progress (card draws, art and flip working on the device 2026-10-14; Wands order bug fixed and version 4 on 2026-10-15); LittleFS not tagged until used; python added 2026-10-07 for convert.py, which generates cards.h from cards.txt. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
+    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Routed by Digital Spec only through the side-projects lane (the 'nosy' path, \"The random stuff Spec builds for fun\"); deliberately no hiring route for hardware (2026-10-16). Also reachable through the Projects tab and Portfolio Search. Status in-progress (card draws, art and flip working on the device 2026-10-14; Wands order bug fixed and version 4 on 2026-10-15); LittleFS not tagged until used; python added 2026-10-07 for convert.py, which generates cards.h from cards.txt. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
   }
 ]

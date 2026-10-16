@@ -73,6 +73,17 @@
     "sort": ["evidenceBoost", "dateEnd-desc"],
     "maxItems": 6
   },
+  "side-projects": {
+    "label": "Side Projects",
+    "description": "The things Spec builds out of curiosity: hardware, research, and one-off experiments. Reached from the 'nosy' path, not a hiring route.",
+    "tier": "secondary",
+    "include": { "domains": ["hardware", "research"] },
+    "_includeNote": "Projects only (work and case-study caps are 0), so a role that carries the research domain, like Learnovate, doesn't land here.",
+    "boost": { "evidence": ["build-in-public", "judgment-restraint"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6,
+    "bucketCaps": { "work": 0, "case-study": 0, "project": 6, "document": 0 }
+  },
   "documentation": {
     "label": "Technical Writing & Documentation",
     "description": "For technical writing, documentation, and content strategy roles.",
