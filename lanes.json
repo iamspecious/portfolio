@@ -12,7 +12,7 @@
     "include": { "domains": ["customer-support", "support-ops"] },
     "boost": { "evidence": ["diagnostic-reasoning", "self-serve-deflection", "customer-facing"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
-    "maxItems": 10,
+    "maxItems": 12,
     "bucketCaps": { "work": 4 }
   },
   "implementation": {
@@ -51,8 +51,8 @@
     "include": { "domains": ["ai-engineering", "frontend-dev"] },
     "boost": { "evidence": ["technical-depth", "build-in-public", "judgment-restraint"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
-    "maxItems": 8,
-    "bucketCaps": { "project": 6 }
+    "maxItems": 12,
+    "bucketCaps": { "project": 10 }
   },
   "creator-lore": {
     "label": "Creator / Content",
@@ -61,7 +61,7 @@
     "include": { "domains": ["content-creation"] },
     "boost": { "evidence": ["writing-range", "scaling", "build-in-public"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
-    "maxItems": 6,
+    "maxItems": 7,
     "bucketCaps": { "project": 5 }
   },
   "community-devrel": {
@@ -73,6 +73,17 @@
     "sort": ["evidenceBoost", "dateEnd-desc"],
     "maxItems": 6
   },
+  "side-projects": {
+    "label": "Side Projects",
+    "description": "The things Spec builds out of curiosity: hardware, research, and one-off experiments. Reached from the 'nosy' path, not a hiring route.",
+    "tier": "secondary",
+    "include": { "domains": ["hardware", "research"] },
+    "_includeNote": "Projects only (work and case-study caps are 0), so a role that carries the research domain, like Learnovate, doesn't land here.",
+    "boost": { "evidence": ["build-in-public", "judgment-restraint"] },
+    "sort": ["evidenceBoost", "dateEnd-desc"],
+    "maxItems": 6,
+    "bucketCaps": { "work": 0, "case-study": 0, "project": 6, "document": 0 }
+  },
   "documentation": {
     "label": "Technical Writing & Documentation",
     "description": "For technical writing, documentation, and content strategy roles.",
@@ -82,6 +93,6 @@
     "include": { "domains": ["technical-writing"] },
     "boost": { "evidence": ["writing-range", "technical-depth", "process-design"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
-    "bucketCaps": { "work": 6, "case-study": 4, "project": 4, "document": 6 }
+    "bucketCaps": { "work": 6, "case-study": 4, "project": 4, "document": 7 }
   }
 }

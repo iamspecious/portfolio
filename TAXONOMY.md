@@ -148,6 +148,7 @@ Defined in `lanes.json`. Summary:
 | `builder-technical` | primary | `ai-engineering`, `frontend-dev` |
 | `creator-lore` | primary | `content-creation` |
 | `documentation` | secondary / cross-cutting | `technical-writing` |
+| `side-projects` | secondary (nosy path only, projects only) | `hardware`, `research` |
 
 `documentation` is cross-cutting: every primary lane should surface its top 1–2 `technical-writing` items as supporting evidence without those items leaving their home lane.
 
@@ -186,4 +187,15 @@ Both fields are idempotent — re-running must extend, never overwrite, values a
 10. Set `anchor`: `#id-attr` for page items; filename for standalone documents (use `pageAnchor` as secondary for the in-page entry).
 11. Set `relatedIds`: other items in the index that substantiate or extend this one.
 12. Leave `lensByAudience`, `sectionsByLane`, `audiencePin`, `audienceExclude` as empty defaults unless there's a specific reason to populate them.
-13. Cross-check every tag against this document. If something doesn't fit, flag it in TAGGING-AUDIT.md — never invent a new tag mid-pass.
+13. Add `keywords` (§13): the words a visitor would search for that aren't already in the title, summary or tags. Add the same words to `tools/search-lexicon.json` so the audit keeps checking them.
+14. Cross-check every tag against this document. If something doesn't fit, flag it in TAGGING-AUDIT.md — never invent a new tag mid-pass.
+
+---
+
+## 13. `keywords` (search only, free text)
+
+`keywords` is an optional array of lowercase words or short phrases that Portfolio Search matches like a tag. Use it for words a visitor would type that the controlled facets can't carry: products and platforms named on the card ("jira", "hibob", "m5stack"), common phrasings ("kingdom hearts", "customer success", "job search"), and plain-language versions of a jargon title.
+
+- It is **not** a facet. Digital Spec ignores it, and it never decides lane routing.
+- It doesn't need a vocabulary entry here, but every word must be true of the item. Don't add a word for a skill the item doesn't show.
+- Don't repeat words already in the title, summary or tags.
