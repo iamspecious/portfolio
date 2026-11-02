@@ -457,8 +457,8 @@
     "schemaVersion": 1,
     "type": "case-study",
     "title": "Turning a Gmail Inbox Into an Actual Support System",
-    "dateStart": "2023-01",
-    "dateEnd": "present",
+    "dateStart": "2025-01",
+    "dateEnd": "2025-12",
     "status": null,
     "domains": [
       "support-ops",
@@ -1077,7 +1077,7 @@
     "type": "case-study",
     "title": "Rebuilding a Denim Brand, Top to Tail",
     "dateStart": "2024-01",
-    "dateEnd": "2024-12",
+    "dateEnd": "2025-12",
     "status": null,
     "domains": [
       "support-ops",
