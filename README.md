@@ -65,6 +65,21 @@ Four narrative case studies in their own tab — each one shows the actual diagn
 | Keeping a €3M Project Aligned Across Borders, Without Authority | Learnovate Centre, Trinity College Dublin · Project Management · 2016–2017 |
 | Rebuilding a Denim Brand, Top to Tail | Customer Experience & Operations · client anonymised |
 
+Ten shorter advisory cases also live in the Case Studies tab, drawn from consulting, HR, and operations work:
+
+| Advisory Case | Domain |
+|---|---|
+| The ladder question that wasn't about ladders | Career development / HR |
+| Cross-border employment: the question behind the question | EOR / international HR |
+| Remote-first contracts and the flexibility that isn't there | Employment contracts |
+| The evidence gap at Director level | Career progression |
+| Pre-employment conduct and the limits of the contract | HR compliance |
+| The metric that measures the wrong thing | Operations / people analytics |
+| Assessment design: format decided before the goal | Hiring / L&D |
+| Making AI usable in a function that handles personal data | HR / AI governance |
+| Correcting a circulating misconception | ATS / recruitment |
+| Scoping an onboarding deck that didn't need a nationality | Onboarding / DEI |
+
 ### Consulting
 
 Five consulting engagements covering sponsorship strategy, business relocation, leadership coaching, support ops optimisation, and niche market development — visible in the Projects tab on the live site.
