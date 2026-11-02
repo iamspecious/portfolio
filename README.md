@@ -56,14 +56,29 @@ Portfolio samples demonstrating technical writing across different audiences, do
 
 ### Case Studies
 
-Four narrative case studies in their own tab — each one shows the actual diagnostic thinking behind a real engagement, not just the outcome.
+Fourteen case studies in their own tab, sortable newest or oldest first. Four are narrative deep-dives into real engagements; ten are advisory cases, shorter write-ups of a question someone brought and the diagnosis behind the answer. Each one shows the diagnostic thinking, not just the outcome.
 
 | Case Study | Context |
 |---|---|
+| Turning a Gmail Inbox Into an Actual Support System | Spec Solutions · Customer Support Operations · 2025 |
+| Rebuilding a Denim Brand, Top to Tail | Customer Experience & Operations · Early-stage made-to-order denim brand · 2024–2025 |
 | Diagnosing a Widget That Failed Four Different Ways | Stamped.io · Technical Support · 2020 |
-| Turning a Gmail Inbox Into an Actual Support System | Spec Solutions · Customer Support Operations |
 | Keeping a €3M Project Aligned Across Borders, Without Authority | Learnovate Centre, Trinity College Dublin · Project Management · 2016–2017 |
-| Rebuilding a Denim Brand, Top to Tail | Customer Experience & Operations · client anonymised |
+
+**Advisory cases**
+
+| Case Study | Context |
+|---|---|
+| The ladder question that wasn't about ladders | People Operations · Job Architecture · Oct–Nov 2026 |
+| The metric that measures the wrong thing | People Operations · Metrics · Oct–Nov 2026 |
+| Making AI usable in a function that handles personal data | People Operations · Data Privacy · AI Governance · Oct–Nov 2026 |
+| Scoping an onboarding deck that didn't need a nationality | People Operations · Onboarding · Accessibility · Remote Work · Oct–Nov 2026 |
+| Cross-border employment: the question behind the question | People Operations · Employment Law · Cross-border · Sep–Oct 2026 |
+| Remote-first contracts and the flexibility that isn't there | Employment Law · Remote Work · Accessibility · Cross-border · Q3 2026 |
+| The evidence gap at Director level | People Operations · Job Architecture · Career · Q3 2026 |
+| Pre-employment conduct and the limits of the contract | Hiring · Employment Law · Q3 2026 |
+| Assessment design: format decided before the goal | Hiring · Assessment Design · Q3 2026 |
+| Correcting a circulating misconception | Hiring · Assessment Design · Q3 2026 |
 
 ### Consulting
 
@@ -88,6 +103,7 @@ The site and its browser tools are static and client-side: no backend of my own,
 - **Claude calls from the browser:** a small Cloudflare Worker ([`proxy/worker.js`](./proxy/worker.js)) that only adds CORS headers; visitors supply their own API key
 - **External APIs:** Foursquare (venues), Eventbrite (events), TMDB (films)
 - **URL fetching:** Jina Reader (`r.jina.ai`) for client-side page fetching
+- **Styling:** a 14 KB subset of Bootstrap 5.3's CSS ([`vendor/bootstrap-subset.css`](./vendor/bootstrap-subset.css)), cut down from 220 KB to the rules the page uses. Tabs are a few lines of the page's own JavaScript, so no framework JS loads
 - **Analytics:** PostHog on the portfolio page
 - **Hosting:** GitHub Pages (free, static)
 

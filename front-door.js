@@ -14,7 +14,9 @@
 
   Promise.all([
     fetch('front-door-config.json').then(function (r) { return r.json(); }),
-    fetch('portfolio-index.json').then(function (r) { return r.json(); }),
+    // Shared with portfolio-search.js so the index downloads once per visit.
+    window.portfolioIndexRequest = window.portfolioIndexRequest ||
+      fetch('portfolio-index.json').then(function (r) { return r.json(); }),
     fetch('lanes.json').then(function (r) { return r.json(); })
   ]).then(function (results) {
     config        = results[0];
@@ -533,17 +535,15 @@
       if (sections.length > 0) anchor = anchor + '-s' + sections[0];
     }
 
-    if (anchor.charAt(0) !== '#') {
-      var pa = item.pageAnchor;
-      return pa ? { tab: 'projects-tab', anchor: pa } : null;
-    }
+    if (anchor.charAt(0) !== '#') anchor = item.pageAnchor;
+    if (!anchor) return null;
 
-    var tab;
-    if (anchor.indexOf('#work-') === 0)    tab = 'work-tab';
-    else if (anchor.indexOf('#cs-') === 0) tab = 'case-studies-tab';
-    else                                   tab = 'projects-tab';
-
-    return { tab: tab, anchor: anchor };
+    // The tab is whichever pane holds the anchor, so a new id prefix
+    // (advisory-, doc-, …) routes correctly without a rule here.
+    var el = document.getElementById(anchor.slice(1));
+    var pane = el && el.closest('.tab-pane');
+    var tab = pane && document.querySelector('#myTab a[href="#' + pane.id + '"]');
+    return tab ? { tab: tab.id, anchor: anchor } : null;
   }
 
   function doDeepLink(tabId, anchor) {
@@ -565,8 +565,8 @@
 
     if (anchor && !isActive && tabEl) {
       // Tab transition takes ~150ms; scroll only after it fully completes
-      tabEl.addEventListener('shown.bs.tab', function onShown() {
-        tabEl.removeEventListener('shown.bs.tab', onShown);
+      tabEl.addEventListener('tabshown', function onShown() {
+        tabEl.removeEventListener('tabshown', onShown);
         scrollToAnchor();
       });
     }

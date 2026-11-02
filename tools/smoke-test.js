@@ -1,6 +1,8 @@
 // Portfolio smoke test — drives the real page in headless Chromium.
 //
 //   python3 -m http.server 8765 &        (from the repo root)
+//   (needs Playwright; the page has no third-party files besides analytics,
+//   which the test blocks)
 //   node tools/smoke-test.js [http://localhost:8765/]
 //
 // Checks: console/page errors, failed local requests, every Digital Spec
@@ -52,15 +54,8 @@ async function freshPage(browser, opts = {}) {
   page.on('response', (r) => {
     if (r.url().startsWith(BASE) && r.status() >= 400) page.errors.push(`HTTP ${r.status()}: ${r.url()}`);
   });
-  // Analytics is never loaded in tests. Bootstrap can be served from a local
-  // copy (BOOTSTRAP_JS / BOOTSTRAP_CSS) when the CDN is unreachable.
+  // Analytics is never loaded in tests.
   await page.route(/posthog\.com/, (route) => route.abort());
-  if (process.env.BOOTSTRAP_JS) {
-    await page.route(/bootstrap\.bundle\.min\.js/, (r) => r.fulfill({ path: process.env.BOOTSTRAP_JS }));
-  }
-  if (process.env.BOOTSTRAP_CSS) {
-    await page.route(/bootstrap\.min\.css/, (r) => r.fulfill({ path: process.env.BOOTSTRAP_CSS }));
-  }
   await page.goto(BASE, { waitUntil: 'networkidle' });
   return page;
 }
@@ -172,24 +167,27 @@ async function targetInView(page, sel) {
     const n = await page.$$eval('#projects .project-block', (bs) => bs.filter((b) => b.style.display !== 'none').length);
     if (!n) fail(`filter ${f} shows 0 blocks`); else ok(`filter ${f}: ${n} blocks`);
   }
-  for (const order of ['oldest', 'newest']) {
-    await page.click(`.project-sort .filter-btn[data-sort="${order}"]`);
-    const dates = await page.$$eval('#projects .section > .project-block', (bs) => bs.map((b) => b.dataset.date || '9999'));
-    const sorted = [...dates].sort();
-    if (order === 'newest') sorted.reverse();
-    if (dates.join() !== sorted.join()) fail(`sort ${order} out of order`); else ok(`sort ${order}`);
+  for (const [tab, block] of [['projects', 'project-block'], ['case-studies', 'case-study-block']]) {
+    await page.click(`#${tab}-tab`);
+    await page.waitForTimeout(200);
+    for (const order of ['oldest', 'newest']) {
+      await page.click(`#${tab} .project-sort .filter-btn[data-sort="${order}"]`);
+      const dates = await page.$$eval(`#${tab} .section > .${block}`, (bs) => bs.map((b) => b.dataset.date || '9999'));
+      const sorted = [...dates].sort();
+      if (order === 'newest') sorted.reverse();
+      if (dates.join() !== sorted.join()) fail(`${tab} sort ${order} out of order`); else ok(`${tab} sort ${order}`);
+    }
   }
   page.errors.forEach((e) => fail('page: ' + e));
 
   // ── 5. Shareable links: index.html#<id> opens the tab and the item ──
   const shareTargets = ['projects', 'proj-tarot-machine', 'proj-hr-webhook-integration-layer',
-    'doc-voice-adaptation-showcase', 'work-phandroid-tech-writer', 'cs-denim-brand-turnaround-s5'];
+    'doc-voice-adaptation-showcase', 'work-phandroid-tech-writer', 'cs-denim-brand-turnaround-s5',
+    'advisory-cross-border-eor'];
   for (const id of shareTargets) {
     const ctx = await browser.newContext();
     const pg = await ctx.newPage();
     await pg.route(/posthog\.com/, (r) => r.abort());
-    if (process.env.BOOTSTRAP_JS) await pg.route(/bootstrap\.bundle\.min\.js/, (r) => r.fulfill({ path: process.env.BOOTSTRAP_JS }));
-    if (process.env.BOOTSTRAP_CSS) await pg.route(/bootstrap\.min\.css/, (r) => r.fulfill({ path: process.env.BOOTSTRAP_CSS }));
     await pg.goto(BASE + '#' + id, { waitUntil: 'networkidle' });
     await pg.waitForTimeout(1000);
     const covered = await pg.evaluate(() => {
@@ -215,6 +213,24 @@ async function targetInView(page, sel) {
     await pg.waitForTimeout(1300);
     const hash = await pg.evaluate(() => location.hash);
     if (hash !== '#proj-tarot-machine') fail(`search result left address bar at "${hash}"`); else ok('search result updates the address bar');
+    await pg.context().close();
+  }
+
+  // Tabs: arrow keys move between tabs and keep aria-selected in step
+  {
+    const pg = await freshPage(browser);
+    await pg.evaluate(() => sessionStorage.setItem('fd-state', 'collapsed'));
+    await pg.reload({ waitUntil: 'networkidle' });
+    await pg.focus('#about-tab');
+    await pg.keyboard.press('ArrowRight');
+    await pg.waitForTimeout(200);
+    const st = await pg.evaluate(() => ({
+      focused: document.activeElement.id,
+      selected: document.getElementById('work-tab').getAttribute('aria-selected'),
+      pane: document.getElementById('work').classList.contains('active'),
+    }));
+    if (st.focused !== 'work-tab' || st.selected !== 'true' || !st.pane) fail('tab keyboard navigation: ' + JSON.stringify(st));
+    else ok('tab keyboard navigation');
     await pg.context().close();
   }
 

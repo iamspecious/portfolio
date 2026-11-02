@@ -54,8 +54,11 @@
     var lastQuery = '';
     var debounceTimer = null;
 
-    fetch('portfolio-index.json')
-        .then(function (r) { return r.json(); })
+    // Shared with front-door.js so the index downloads once per visit.
+    window.portfolioIndexRequest = window.portfolioIndexRequest ||
+        fetch('portfolio-index.json').then(function (r) { return r.json(); });
+
+    window.portfolioIndexRequest
         .then(function (data) {
             searchableItems = data.map(buildSearchable);
             boot();
@@ -420,13 +423,7 @@
 
         if (needsTabSwitch) {
             var trigger = document.querySelector('#myTab a[href="#' + pane.id + '"]');
-            if (trigger) {
-                if (window.bootstrap && window.bootstrap.Tab) {
-                    new window.bootstrap.Tab(trigger).show();
-                } else {
-                    trigger.click();
-                }
-            }
+            if (trigger) trigger.click();
         }
 
         setTimeout(function () {

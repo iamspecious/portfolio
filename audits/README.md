@@ -17,7 +17,7 @@ python3 -m http.server 8765 &              # serve the site
 node tools/smoke-test.js                   # drive the real page in headless Chromium
 ```
 
-`audit.py` exits 1 on any FAIL. Warnings are judgment calls: carry each one into the report as a finding, a known exception, or a decision for the owner. `smoke-test.js` needs Playwright. If the Bootstrap CDN is unreachable, point `BOOTSTRAP_JS` / `BOOTSTRAP_CSS` at local copies (`npm pack bootstrap@<version>`).
+`audit.py` exits 1 on any FAIL. Warnings are judgment calls: carry each one into the report as a finding, a known exception, or a decision for the owner. `smoke-test.js` needs Playwright.
 
 What they cover:
 
@@ -32,6 +32,8 @@ What they cover:
 | Links | Local links, images and scripts resolve; external links with `--external` | audit.py §7 |
 | README | Every Projects-tab item has a README row and vice versa | audit.py §8 |
 | Phone width | No sideways scroll at 375px | smoke-test |
+| Page weight | Gzip size of each file against a budget, third-party files, the index downloaded once, element count | audit.py §9 |
+| Tabs | Arrow-key navigation and `aria-selected` | smoke-test |
 
 ## 2. Manual review, per project and document
 
@@ -48,6 +50,20 @@ For each item, record what it has and what it lacks:
 - Accessibility: run axe-core against each tab with Digital Spec open and closed; check keyboard use of the overlay and search.
 - Standalone pages: title, back link, no broken local links.
 - Stale docs: older audit files that no longer describe the code get a banner pointing to the current report.
+- Performance: load the page with the CPU slowed 4× (Chrome DevTools, Performance panel) and look for layout shift, long tasks, and anything downloaded twice. `audit.py` §9 tracks file sizes between audits.
+
+## Bootstrap subset
+
+`vendor/bootstrap-subset.css` holds only the Bootstrap rules the page uses. If you add a Bootstrap class that wasn't on the page before (say `text-muted` or `row`), regenerate it:
+
+```sh
+npm pack bootstrap@5.3.0-alpha1 && tar xzf bootstrap-5.3.0-alpha1.tgz
+npx purgecss@6.0.0 --css package/dist/css/bootstrap.min.css \
+  --content index.html front-door.js portfolio-search.js \
+  --safelist active show fade --variables --keyframes --output /tmp/bs/
+```
+
+Then copy the result over the file below its two-line header. Check the change by comparing screenshots of each tab before and after.
 
 ## 4. Report and fixes
 

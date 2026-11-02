@@ -166,8 +166,8 @@ for it in index:
     if not it.get('summary'):
         fail('schema', f'{iid}: empty summary')
     kw = it.get('keywords', [])
-    if not isinstance(kw, list) or not all(isinstance(k, str) and k == k.lower() for k in kw):
-        fail('schema', f'{iid}: keywords must be a list of lowercase strings')
+    if not isinstance(kw, list) or not all(isinstance(k, str) and k.strip() for k in kw):
+        fail('schema', f'{iid}: keywords must be a list of non-empty strings')
 
 used_tools = {tl for it in index for tl in it.get('tools', [])}
 for tl in sorted(VOCAB['tools'] - used_tools):
@@ -241,6 +241,22 @@ for f in sorted(filters):
     if not cat_count[f]:
         fail('projects-tab', f'filter `{f}` matches no block')
 print('filter counts:', dict(sorted(cat_count.items())))
+
+# Case Studies tab: sorted by each block's data-date, the case study's end date.
+for blk in soup.select('#case-studies .case-study-block'):
+    inner = blk.find(class_='project')
+    pid = inner.get('id') if inner else None
+    date = blk.get('data-date')
+    if not date:
+        fail('case-studies-tab', f'{pid}: no data-date (sorts as newest)')
+        continue
+    it = next((i for i in index if i['anchor'] == '#' + (pid or '')), None)
+    end = it and it.get('dateEnd')
+    if end and end != 'present' and date[:7] != end:
+        warn('case-studies-tab', f'{pid}: data-date {date} vs index dateEnd {end}')
+for el in soup.select('#case-studies .project'):
+    if not el.find_parent(class_='case-study-block'):
+        fail('case-studies-tab', f'{el.get("id")}: not inside a .case-study-block (sort skips it)')
 
 # ─── 4. Digital Spec config ─────────────────────────────────────────────
 heading('4. Digital Spec (front door) config')
@@ -463,10 +479,47 @@ for pid, title, date, cats in proj_rows:
 for t in readme_rows:
     if not any(same(t, p) for p in page_titles):
         warn('readme', f'README row "{t}" matches nothing on the page')
-n_cs = len(soup.select('#case-studies .project'))
-m = re.search(r'(\w+) narrative case studies', readme)
-if m and m.group(1).lower() not in ('one two three four five six seven eight nine ten'.split()[n_cs - 1:n_cs]):
-    fail('readme', f'README says "{m.group(1)} narrative case studies"; page has {n_cs}')
+cs_titles = [h.get_text(' ', strip=True) for h in soup.select('#case-studies .project h3')]
+for t in cs_titles:
+    t = re.sub(r'\s*Advisory$', '', t)
+    if not any(same(t, r) for r in readme_rows):
+        fail('readme', f'Case study "{t}" is not in README')
+NUM = 'one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen ' \
+      'sixteen seventeen eighteen nineteen twenty'.split()
+m = re.search(r'^(\w+) case studies', readme, re.M | re.I)
+if m and m.group(1).lower() != (NUM[len(cs_titles) - 1] if len(cs_titles) <= 20 else str(len(cs_titles))):
+    fail('readme', f'README says "{m.group(1)} case studies"; page has {len(cs_titles)}')
+
+# ─── 9. Page weight ─────────────────────────────────────────────────────
+# Budgets, so growth is noticed in each audit rather than all at once.
+# Sizes are gzip, which is what GitHub Pages sends.
+heading('9. Page weight')
+import gzip
+BUDGET_KB = {'index.html': 160, 'portfolio-index.json': 25}
+local = [el.get('href') or el.get('src') for el in soup.select('link[rel=stylesheet], script[src]')]
+local = [u for u in local if not re.match(r'^https?:', u)]
+total = 0
+for f in ['index.html', 'portfolio-index.json', 'lanes.json', 'front-door-config.json'] + local:
+    raw = open(f, 'rb').read()
+    kb = len(gzip.compress(raw, 9)) / 1024
+    total += kb
+    print(f'  {f:32} {len(raw) / 1024:7.1f} KB raw {kb:6.1f} KB gzip')
+    if f in BUDGET_KB and kb > BUDGET_KB[f]:
+        warn('weight', f'{f} is {kb:.0f} KB gzip, over its {BUDGET_KB[f]} KB budget')
+print(f'  {"total (own files)":32} {"":15} {total:6.1f} KB gzip')
+ALLOWED_HOSTS = {'eu.i.posthog.com', 'eu-assets.i.posthog.com'}
+for el in soup.select('link[rel=stylesheet][href^=http], script[src^=http]'):
+    host = re.match(r'https?://([^/]+)', el.get('href') or el.get('src')).group(1)
+    if host not in ALLOWED_HOSTS:
+        warn('weight', f'third-party file on index.html from {host}')
+for js in ('front-door.js', 'portfolio-search.js'):
+    src = open(js).read()
+    if re.search(r"fetch\('portfolio-index\.json'\)", src) and 'portfolioIndexRequest' not in src:
+        warn('weight', f'{js} fetches portfolio-index.json without the shared request')
+n_el = len(soup.find_all(True))
+print(f'  {n_el} elements in index.html')
+if n_el > 6000:
+    warn('weight', f'index.html has {n_el} elements; over 6000 slows tab switching on phones')
 
 # ─── Report ─────────────────────────────────────────────────────────────
 heading(f'RESULT: {len(fails)} FAIL, {len(warns)} WARN')
