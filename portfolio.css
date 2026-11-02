@@ -421,6 +421,65 @@ body { background-color: #f8f9fa; }
     border-bottom-color: #a07fd4;
 }
 
+/* ── Advisory Cases ── */
+.advisory-divider {
+    margin: 48px 0 28px;
+    padding-top: 36px;
+    border-top: 2px solid #e8e2f5;
+}
+
+.advisory-heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2d2d3a;
+    margin-bottom: 10px;
+}
+
+.advisory-intro {
+    font-size: 0.86rem;
+    color: #666;
+    line-height: 1.7;
+    max-width: 680px;
+}
+
+.advisory-case h3 {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: #2d2d3a;
+    margin-bottom: 2px;
+}
+
+.advisory-meta {
+    font-size: 0.75rem;
+    color: #7b5ea7;
+    font-weight: 600;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.advisory-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #7b5ea7;
+    margin: 14px 0 3px;
+}
+
+.advisory-case p {
+    font-size: 0.88rem;
+    color: #444;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.advisory-hr {
+    border: none;
+    border-top: 1px solid #f0eef8;
+    margin: 24px 0;
+}
+
 .principle-callout {
     background: #f7f5fc;
     border-left: 4px solid #7b5ea7;
