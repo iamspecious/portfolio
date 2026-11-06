@@ -28,5 +28,6 @@
   "cat-api-documentation": ["api documentation", "api reference", "rest api", "docs"],
   "voice-and-tone-guide": ["voice", "tone", "style guide", "docs"],
   "voice-adaptation-showcase": ["voice", "tone", "mailchimp", "apple", "posthog", "style guide"],
+  "people-practice-playbook": ["levelling", "job levels", "career ladder", "playbook", "creative commons"],
   "crisis-management-playbook": ["crisis", "moderation", "incident response", "community", "creative commons", "cc by"]
 }
