@@ -1585,7 +1585,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/people-practice-playbook-v0.1.md by people-practice-playbook/build.py; the markdown is offered as a download and is not separately indexed."
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/people-practice-playbook-v0.1.1.md by people-practice-playbook/build.py; the markdown is offered as a download (the v0.1 file is kept so older links still work) and is not separately indexed."
   },
   {
     "id": "crisis-management-playbook",
