@@ -29,5 +29,16 @@
   "voice-and-tone-guide": ["voice", "tone", "style guide", "docs"],
   "voice-adaptation-showcase": ["voice", "tone", "mailchimp", "apple", "posthog", "style guide"],
   "people-practice-playbook": ["levelling", "job levels", "career ladder", "playbook", "creative commons"],
-  "crisis-management-playbook": ["crisis", "moderation", "incident response", "community", "creative commons", "cc by"]
+  "crisis-management-playbook": ["crisis", "moderation", "incident response", "community", "creative commons", "cc by"],
+
+  "advisory-job-ladders": ["career ladder", "job architecture"],
+  "advisory-cross-border-eor": ["eor", "employer of record"],
+  "advisory-remote-contracts": ["remote work", "tupe"],
+  "advisory-director-evidence-gap": ["promotion", "director"],
+  "advisory-pre-employment-conduct": ["social media", "employment law"],
+  "advisory-metrics-wrong-thing": ["dora", "attrition"],
+  "advisory-assessment-design": ["take-home", "work trial"],
+  "advisory-ai-employee-data": ["gdpr", "ai governance"],
+  "advisory-ats-misconception": ["ats", "cv parsing"],
+  "advisory-onboarding-culture-deck": ["onboarding", "culture deck"]
 }

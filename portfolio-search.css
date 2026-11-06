@@ -4,6 +4,13 @@
    collide with anything else on the page.
 */
 
+/* Reserve the bar's height before the script fills it, so the page doesn't
+   jump down when the search bar appears. The bar's 16px top margin overlaps
+   the tagline's bottom margin either way, so only the height is reserved. */
+#pfs-root {
+    min-height: 40.625px;
+}
+
 .pfs-search {
     position: relative;
     max-width: 480px;

@@ -11,7 +11,7 @@
     <meta property="og:description" content="Customer success, implementation, people ops and operations. Case studies, AI tools, writing samples and build logs from a decade of fixing what isn't working.">
     <meta property="og:url" content="https://iamspecious.github.io/portfolio/">
     <meta name="twitter:card" content="summary">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/bootstrap-subset.css">
     <link rel="stylesheet" href="portfolio.css">
     <link rel="stylesheet" href="front-door.css">
     <link rel="stylesheet" href="portfolio-search.css">
@@ -39,19 +39,19 @@
     <div class="container mt-4">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="about-tab" data-bs-toggle="tab" href="#about" role="tab">About Me</a>
+                <a class="nav-link active" id="about-tab" href="#about" role="tab">About Me</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="work-tab" data-bs-toggle="tab" href="#work" role="tab">Work Experience</a>
+                <a class="nav-link" id="work-tab" href="#work" role="tab">Work Experience</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="case-studies-tab" data-bs-toggle="tab" href="#case-studies" role="tab">Case Studies</a>
+                <a class="nav-link" id="case-studies-tab" href="#case-studies" role="tab">Case Studies</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="projects-tab" data-bs-toggle="tab" href="#projects" role="tab">Projects</a>
+                <a class="nav-link" id="projects-tab" href="#projects" role="tab">Projects</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="working-with-spec-tab" data-bs-toggle="tab" href="#working-with-spec" role="tab">Working with Spec</a>
+                <a class="nav-link" id="working-with-spec-tab" href="#working-with-spec" role="tab">Working with Spec</a>
             </li>
         </ul>
 
@@ -421,8 +421,8 @@
 
                     <div class="project-sort" role="group" aria-label="Sort case studies by date">
                         <span class="project-sort-label">Sort by date:</span>
-                        <button class="filter-btn active cs-sort-btn" data-sort="newest" aria-pressed="true">Newest first</button>
-                        <button class="filter-btn cs-sort-btn" data-sort="oldest" aria-pressed="false">Oldest first</button>
+                        <button class="filter-btn active" data-sort="newest" aria-pressed="true">Newest first</button>
+                        <button class="filter-btn" data-sort="oldest" aria-pressed="false">Oldest first</button>
                     </div>
 
                     <div class="case-study-block" data-date="2025-12">
@@ -503,7 +503,7 @@
                     </div>
                     </div><!-- /case-study-block: Denim -->
 
-                    <div class="case-study-block" data-date="2020-12">
+                    <div class="case-study-block" data-date="2020-07">
                     <!-- ====================================================
                          CASE STUDY: Stamped widget diagnostic
                     ===================================================== -->
@@ -534,7 +534,7 @@
                     </div>
                     </div><!-- /case-study-block: Stamped -->
 
-                    <div class="case-study-block" data-date="2017-12">
+                    <div class="case-study-block" data-date="2017-04">
                     <!-- ====================================================
                          CASE STUDY: Learnovate DEVELOP project
                     ===================================================== -->
@@ -2663,6 +2663,14 @@
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes — decisions, pivots, wins, and constraints</small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-11-02 — dropped Bootstrap's JavaScript, and most of its CSS</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    A performance pass in the November audit. The page used about 4% of Bootstrap's 220 KB stylesheet, and its only use of Bootstrap's script was switching tabs. Tabs are now a few lines of the page's own JavaScript, with the same arrow-key navigation and screen-reader labels, and the stylesheet is cut to the 14 KB the page uses. That's about 50 KB less to download from a third-party server, and screenshots of every tab came out pixel-identical. The same pass found <code>portfolio-index.json</code> downloading twice (once for Digital Spec, once for search; it's now shared) and a 41px jump when the search bar appeared, now reserved in advance. Digital Spec also finds each card's tab from the page now, so the new <code>advisory-</code> case studies route correctly.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
@@ -5352,51 +5360,71 @@
     </div>
 
     <script>
+        // Tabs. Bootstrap's script was loaded only for this, so it's done here
+        // instead. A tab shows its pane, marks itself selected, and fires a
+        // 'tabshown' event once the pane is laid out; front-door.js and the
+        // shareable-link handler below wait on that event before scrolling.
+        const tabs = [...document.querySelectorAll('#myTab [role="tab"]')];
+
         function switchToTab(tabId) {
-            const tabEl = document.getElementById(tabId);
-            if (tabEl) bootstrap.Tab.getOrCreateInstance(tabEl).show();
+            const tab = document.getElementById(tabId);
+            if (!tab || tab.classList.contains('active')) return;
+            tabs.forEach(t => {
+                const on = t === tab;
+                const pane = document.querySelector(t.getAttribute('href'));
+                t.classList.toggle('active', on);
+                t.setAttribute('aria-selected', on);
+                t.tabIndex = on ? 0 : -1;
+                pane.classList.toggle('active', on);
+                pane.classList.remove('show');
+            });
+            const pane = document.querySelector(tab.getAttribute('href'));
+            requestAnimationFrame(() => {
+                pane.classList.add('show');
+                tab.dispatchEvent(new Event('tabshown'));
+            });
         }
 
-        function sortCaseStudies(order) {
-            const section = document.querySelector('#case-studies .section');
-            const blocks = [...section.querySelectorAll(':scope > .case-study-block')];
-            const dir = order === 'oldest' ? 1 : -1;
-            blocks
-                .sort((a, b) => dir * (a.dataset.date || '9999').localeCompare(b.dataset.date || '9999'))
-                .forEach(block => section.appendChild(block));
-        }
-        sortCaseStudies('newest');
-
-        document.querySelectorAll('.cs-sort-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.toggle('active', b === btn);
-                    b.setAttribute('aria-pressed', b === btn);
-                });
-                sortCaseStudies(btn.dataset.sort);
+        tabs.forEach((tab, i) => {
+            const pane = document.querySelector(tab.getAttribute('href'));
+            tab.setAttribute('aria-controls', pane.id);
+            tab.setAttribute('aria-selected', tab.classList.contains('active'));
+            tab.tabIndex = tab.classList.contains('active') ? 0 : -1;
+            pane.setAttribute('aria-labelledby', tab.id);
+            tab.addEventListener('click', e => { e.preventDefault(); switchToTab(tab.id); });
+            tab.addEventListener('keydown', e => {
+                const next = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+                if (next === undefined) return;
+                e.preventDefault();
+                const target = tabs[(next + tabs.length) % tabs.length];
+                switchToTab(target.id);
+                target.focus();
             });
         });
 
-        // Projects tab: sorted by each block's data-date, the project's start date (YYYY-MM-DD),
-        // never its latest dev log entry. Newest first by default. A block with no data-date
-        // is treated as newest so a fresh addition lands on top.
-        function sortProjects(order) {
-            const section = document.querySelector('#projects .section');
-            const blocks = [...section.querySelectorAll(':scope > .project-block')];
+        // Projects and Case Studies sort the same way, by each block's data-date:
+        // a project's start date (never its latest dev log entry), a case study's
+        // date. Newest first by default. A block with no data-date counts as newest
+        // so a fresh addition lands on top. Each sort control sorts its own tab.
+        function sortBlocks(section, order) {
+            const blocks = [...section.querySelectorAll(':scope > .project-block, :scope > .case-study-block')];
             const dir = order === 'oldest' ? 1 : -1;
             blocks
                 .sort((a, b) => dir * (a.dataset.date || '9999').localeCompare(b.dataset.date || '9999'))
                 .forEach(block => section.appendChild(block));
         }
-        sortProjects('newest');
 
-        document.querySelectorAll('.project-sort .filter-btn:not(.cs-sort-btn)').forEach(btn => {
-            btn.addEventListener('click', () => {
-                btn.parentElement.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.toggle('active', b === btn);
-                    b.setAttribute('aria-pressed', b === btn);
+        document.querySelectorAll('.project-sort').forEach(group => {
+            const section = group.closest('.section');
+            sortBlocks(section, 'newest');
+            group.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    group.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.toggle('active', b === btn);
+                        b.setAttribute('aria-pressed', b === btn);
+                    });
+                    sortBlocks(section, btn.dataset.sort);
                 });
-                sortProjects(btn.dataset.sort);
             });
         });
 
@@ -5450,8 +5478,8 @@
             };
             const trigger = document.querySelector('#myTab a[href="#' + pane.id + '"]');
             if (trigger && !pane.classList.contains('active')) {
-                trigger.addEventListener('shown.bs.tab', function onShown() {
-                    trigger.removeEventListener('shown.bs.tab', onShown);
+                trigger.addEventListener('tabshown', function onShown() {
+                    trigger.removeEventListener('tabshown', onShown);
                     scroll();
                 });
                 switchToTab(trigger.id);
@@ -5461,8 +5489,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('#myTab a[data-bs-toggle="tab"]').forEach(tab => {
-                tab.addEventListener('shown.bs.tab', () => {
+            tabs.forEach(tab => {
+                tab.addEventListener('tabshown', () => {
                     history.replaceState(null, '', tab.getAttribute('href'));
                 });
             });
@@ -5470,6 +5498,5 @@
         });
         window.addEventListener('hashchange', openFromHash);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
