@@ -9,9 +9,12 @@
   inset: 0;
   z-index: 1060;
   display: flex;
-  align-items: center;
+  /* Pinned near the top rather than centred: the panel grows as each
+     message's buttons appear, and a centred panel would move up each time. */
+  align-items: flex-start;
   justify-content: center;
   padding: 16px;
+  padding-top: 8vh;
   /* pointer-events blocked while collapsed */
 }
 
@@ -43,7 +46,7 @@
   border-radius: 12px;
   width: 100%;
   max-width: 600px;
-  max-height: min(90vh, 720px);
+  max-height: min(calc(92vh - 16px), 720px);
   display: flex;
   flex-direction: column;
   box-shadow:
