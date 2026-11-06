@@ -103,3 +103,36 @@ From the "Open items" list in section 10:
 2. Read the original 1986 Allen and Katz paper on dual ladders, rather than relying on course notes and a later working paper.
 3. Check whether the UK government framework has moved to a new address.
 4. Collect more accounts from the people being levelled, not just the people building ladders.
+
+---
+
+## Entry 007: People Practice Playbook v0.1.1, link fixes
+
+**Date:** 6 November 2026
+**Status:** Patch
+
+### What and why
+
+Readers would hit dead ends checking sources: links that went nowhere, came back forbidden, timed out, or only showed an abstract. A playbook that asks people to check its evidence has to let them actually reach it.
+
+### What changed
+
+- Eleven sources now link by DOI. A DOI is a permanent address that always finds the paper, even when sites move.
+- Two sources also link a legal free copy: the authors' NBER working paper for Guiso, Sapienza and Zingales, and the accepted manuscript in the Universidad Carlos III repository for Trullen et al.
+- The technician rating scales study is now named properly (Gomez-Mejia, 1988) instead of being linked as "abstract".
+- The HR system strength line was reworded. The old version cited a conference summary that no longer exists and said the idea was "under-tested". It now cites the original paper and the authors' 2016 follow-up, and says what that follow-up actually says.
+- Version moved to 0.1.1: fixes only, no recommendations changed.
+
+### Key decisions
+
+- Free where it's legal. Where a paper is behind a paywall and no legal free copy exists, it links by DOI only. Free copies on random third-party sites were left out. They're often unofficial and tend to disappear.
+- DOI first, free copy second. The DOI always identifies the exact published paper. The free copy can be an earlier or pre-publication version.
+
+### Evidence standard
+
+Every new DOI was checked against the publisher's record or an indexing service that lists it. No citation was swapped for a different paper.
+
+### Open items
+
+- These stay paywalled with no legal free copy found: Kluger and DeNisi 1996, Gomez-Mejia 1988, Roch et al. 2012, Bowen and Ostroff 2004, Ostroff and Bowen 2016, Howell et al. 2012. Check again at the six-month review.
+- The other non-DOI links (university repositories, practitioner sites, frameworks) weren't flagged this pass. Do a full link check at the next review.
