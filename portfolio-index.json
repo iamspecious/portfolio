@@ -1551,6 +1551,43 @@
     "notes": ""
   },
   {
+    "id": "people-practice-playbook",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "People Practice Playbook, Vol. 1: Job Architecture and Levelling",
+    "dateStart": "2026-11",
+    "dateEnd": "2026-11",
+    "status": "live",
+    "domains": [
+      "people-hr",
+      "technical-writing",
+      "research"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "writing-range"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "keywords": ["job levels", "career ladder", "levelling", "creative commons"],
+    "tools": [],
+    "summary": "An open, living playbook for anyone stuck on job levels at a 50 to 500 person company. It starts with working out which problem you actually have, and leans on research where it exists and says so where it doesn't.",
+    "anchor": "people-practice-playbook/",
+    "pageAnchor": "#doc-people-practice-playbook",
+    "relatedIds": [
+      "crisis-management-playbook",
+      "technical-writing-portfolio"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/people-practice-playbook-v0.1.md by people-practice-playbook/build.py; the markdown is offered as a download and is not separately indexed."
+  },
+  {
     "id": "crisis-management-playbook",
     "schemaVersion": 1,
     "type": "document",
