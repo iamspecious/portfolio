@@ -136,3 +136,30 @@ Every new DOI was checked against the publisher's record or an indexing service 
 
 - These stay paywalled with no legal free copy found: Kluger and DeNisi 1996, Gomez-Mejia 1988, Roch et al. 2012, Bowen and Ostroff 2004, Ostroff and Bowen 2016, Howell et al. 2012. Check again at the six-month review.
 - The other non-DOI links (university repositories, practitioner sites, frameworks) weren't flagged this pass. Do a full link check at the next review.
+
+---
+
+## Entry 008: People Practice Playbook v0.1.2, review schedule removed
+
+**Date:** 8 November 2026
+**Status:** Patch
+
+### What and why
+
+The playbook promised a full review every six months. I don't want a fixed date written into the playbook itself. Reviews will happen, but how and when is my call, and I may automate auditing across all my playbooks later. A promise in the text that I might change how I keep is worse than no promise.
+
+### What changed
+
+- Removed "I go through the whole thing every six months" from section 1.
+- Version moved to 0.1.2: a small fix, no recommendations changed.
+
+### Key decisions
+
+- Kept the per-section "last reviewed" dates. They tell readers how fresh each part is without committing to a schedule.
+- Kept the changelog, version numbers and the "what would change my mind" notes. The playbook is still a living document. It just doesn't name a review date.
+- Earlier DEVLOG entries that mention a six-month review were left as written. They record the decision at the time, and this entry replaces it.
+
+### Open items
+
+- Decide how playbooks get audited: an agent or bot that checks each playbook for new research, changed standards and dead links. Not for now.
+- Any open item from earlier entries that says "at the six-month review" now means "at the next review".

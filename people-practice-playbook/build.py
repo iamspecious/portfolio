@@ -18,9 +18,9 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SOURCE = 'people-practice-playbook-v0.1.1.md'
-VERSION = '0.1.1'
-DATE = '6 November 2026'
+SOURCE = 'people-practice-playbook-v0.1.2.md'
+VERSION = '0.1.2'
+DATE = '8 November 2026'
 LICENCE_URL = 'https://creativecommons.org/licenses/by-sa/4.0/'
 CREDIT = 'Specious Coda-Bishop'
 REPO_URL = 'https://github.com/iamspecious/portfolio'
