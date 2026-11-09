@@ -1579,6 +1579,7 @@
     "anchor": "people-practice-playbook/",
     "pageAnchor": "#doc-people-practice-playbook",
     "relatedIds": [
+      "people-practice-playbook-vol-2",
       "crisis-management-playbook",
       "technical-writing-portfolio"
     ],
@@ -1586,6 +1587,43 @@
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/people-practice-playbook-v0.1.2.md by people-practice-playbook/build.py; the markdown is offered as a download (the v0.1 and v0.1.1 files are kept so older links still work) and is not separately indexed."
+  },
+  {
+    "id": "people-practice-playbook-vol-2",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "People Practice Playbook, Vol. 2: Onboarding New Hires",
+    "dateStart": "2026-11",
+    "dateEnd": "2026-11",
+    "status": "live",
+    "domains": [
+      "people-hr",
+      "technical-writing",
+      "research"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "writing-range"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "keywords": ["onboarding", "new hire", "buddy", "probation", "templates", "creative commons"],
+    "tools": [],
+    "summary": "An open, living playbook for building onboarding from offer accepted to six months in. It covers what the research says, where it runs out, and what I'd do, with templates you can copy.",
+    "anchor": "people-practice-playbook/vol-2/",
+    "pageAnchor": "#doc-people-practice-playbook-vol-2",
+    "relatedIds": [
+      "people-practice-playbook",
+      "crisis-management-playbook"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-2/people-practice-playbook-vol2-v0.1.1.md by people-practice-playbook/vol-2/build.py; that markdown is offered as a download. The v0.1 draft and the working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
   {
     "id": "crisis-management-playbook",

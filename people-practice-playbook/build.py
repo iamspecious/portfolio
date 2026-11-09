@@ -265,7 +265,7 @@ TEMPLATE = '''<!DOCTYPE html>
         <span class="doc-label">People Practice · Job Architecture · CC BY-SA 4.0</span>
         <h1 class="doc-title">{title}</h1>
         <p class="doc-subtitle">{byline}</p>
-        <p class="doc-version"><a href="#{changelog_id}">Changelog and version history</a> in section 10</p>
+        <p class="doc-version"><a href="#{changelog_id}">Changelog and version history</a> in section 10 · Next volume: <a href="vol-2/">Vol. 2: Onboarding New Hires</a></p>
     </header>
 
     <div class="licence-box">
@@ -291,7 +291,7 @@ TEMPLATE = '''<!DOCTYPE html>
             <p>{licence_line}</p>
             <p><a class="download" href="{source}" download>Download the markdown (v{version})</a></p>
         </div>
-        <p class="links">{credit} · <a href="{repo_url}">Suggest a correction on GitHub</a> · <a href="mailto:{email}">{email}</a> · <a href="../index.html#doc-people-practice-playbook">Back to portfolio</a></p>
+        <p class="links">{credit} · <a href="{repo_url}">Suggest a correction on GitHub</a> · <a href="mailto:{email}">{email}</a> · <a href="vol-2/">Next volume</a> · <a href="../index.html#doc-people-practice-playbook">Back to portfolio</a></p>
     </footer>
 </div>
 </body>
