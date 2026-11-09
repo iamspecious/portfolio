@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+  <title id="t">The five pillars of onboarding</title>
+  <desc id="d">A roof labelled "The goal: a settled new hire" rests on five pillars: Business, Operations, The role, People and culture, and Growth. All five stand on a foundation labelled "Where to take a problem", which runs underneath every pillar.</desc>
+  <style>
+    .line{fill:none;stroke:currentColor;stroke-width:2}
+    .fill{fill:currentColor;fill-opacity:.08;stroke:currentColor;stroke-width:2}
+    .lab{fill:currentColor;font-size:15px;text-anchor:middle}
+    .big{fill:currentColor;font-size:17px;font-weight:600;text-anchor:middle}
+  </style>
+  <polygon class="fill" points="40,90 340,20 640,90"/>
+  <text class="big" x="340" y="78">The goal: a settled new hire</text>
+  <rect class="fill" x="40" y="90" width="600" height="14"/>
+  <g>
+    <rect class="fill" x="60" y="104" width="100" height="150"/>
+    <rect class="fill" x="180" y="104" width="100" height="150"/>
+    <rect class="fill" x="300" y="104" width="100" height="150"/>
+    <rect class="fill" x="420" y="104" width="100" height="150"/>
+    <rect class="fill" x="540" y="104" width="100" height="150"/>
+  </g>
+  <text class="lab" x="110" y="184">Business</text>
+  <text class="lab" x="230" y="184">Operations</text>
+  <text class="lab" x="350" y="184">The role</text>
+  <text class="lab" x="470" y="175">People and</text>
+  <text class="lab" x="470" y="194">culture</text>
+  <text class="lab" x="590" y="184">Growth</text>
+  <rect class="fill" x="30" y="254" width="620" height="56"/>
+  <text class="big" x="340" y="288">Underneath all five: where to take a problem</text>
+</svg>
