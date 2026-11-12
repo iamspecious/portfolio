@@ -2851,6 +2851,14 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp">2026-11-12 — Playbooks tab routing + Vol. 3 lane decisions</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Added the Playbooks routing: two new conversation tree nodes (<code>playbooks-intro</code>, <code>playbooks-people-practice</code>) with entry points from both <code>hiring-else</code> and <code>nosy-specific</code>. <code>playbooks-people-practice</code> routes to all three volumes by anchor and has a "show me all three" fallback that opens the tab at the top. Three Vol. 3 open decisions resolved: (1) <code>audienceExclude: ["documentation"]</code> added to Vol. 3 — it shows in builder-technical and people-hr, and the documentation lane keeps <code>voice-and-tone-guide</code> which is a better fit for a technical writing hire; (2) people-hr document cap raised from 2 to 3 so all three volumes are visible there; (3) two-way <code>relatedIds</code> — Vols. 1 and 2 now point back to Vol. 3.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp">2026-11-02 — dropped Bootstrap's JavaScript, and most of its CSS</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>

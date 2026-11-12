@@ -43,7 +43,7 @@
     "boost": { "evidence": ["cross-functional-influence", "process-design"] },
     "sort": ["evidenceBoost", "dateEnd-desc"],
     "maxItems": 10,
-    "bucketCaps": { "case-study": 6 }
+    "bucketCaps": { "case-study": 6, "document": 3 }
   },
   "builder-technical": {
     "label": "Builder / Technical",
