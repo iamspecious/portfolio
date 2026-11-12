@@ -1636,7 +1636,7 @@
     "domains": [
       "people-hr",
       "technical-writing",
-      "research"
+      "ai-engineering"
     ],
     "evidence": [
       "diagnostic-reasoning",
@@ -1660,7 +1660,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Domains people-hr + ai-engineering is a documented exception to the TAXONOMY §3 anti-rule: the volume's subject is building with AI (including prompting, section 9), so it routes to builder-technical as well as the People lanes; research dropped to stay within three domains."
   },
   {
     "id": "crisis-management-playbook",

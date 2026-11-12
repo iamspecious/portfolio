@@ -50,6 +50,7 @@ Audience lanes are defined as **queries over those facets** in `lanes.json`. A l
 
 ### Anti-rules (enforced; violations are audit failures)
 - `people-hr` is never `ai-engineering` or `frontend-dev`, even if a tool is named.
+  - Exception: openly licensed guidance whose subject is building with AI may carry `people-hr` and `ai-engineering` together, so it reaches the Builder / Technical lane. Currently only `people-practice-playbook-vol-3`. Accepted in `tools/audit.py` (`KNOWN_EXCEPTIONS`), where it shows as a warning rather than a failure, and explained in the item's `notes`.
 - `community` is not `strategy` by default — strategy requires documented advisory output.
 - `customer-support` (doing support) ≠ `support-ops` (building the support system).
 - A passing mention of a tool or skill earns no domain tag.

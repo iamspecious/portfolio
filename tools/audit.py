@@ -92,6 +92,8 @@ DO_NOT_APPLY = {'security'}
 KNOWN_EXCEPTIONS = {
     ('anti-rule', 'denim-brand-turnaround'):
         'TAGGING-AUDIT.md crossover audit: eight work streams, each domain earned by a named section (s1–s7)',
+    ('anti-rule', 'people-practice-playbook-vol-3'):
+        'TAXONOMY §3 exception: openly licensed guidance whose subject is building with AI',
 }
 
 # ─── 1. Schema + vocabulary ─────────────────────────────────────────────
