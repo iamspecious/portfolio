@@ -29,6 +29,12 @@ Spec's earlier community post on safety plans: definition, who they're for, a si
 - **Stanley and colleagues (2018, JAMA Psychiatry)**, safety planning with follow-up vs usual care. Included in Nuij's meta-analysis; not opened separately.
 - **Labouliere, Stanley, Lake and Gould (2020)**, safety planning on crisis lines. Cited by 9-8-8 as the basis for its template; not opened.
 
+## Leads from the integrity audit (not yet opened)
+
+- **Children and adolescents:** a 2025 JAMA Pediatrics systematic review and meta-analysis of safety planning for young people (doi:10.1001/jamapediatrics.2025.1012) reportedly found no significant effect on suicide outcomes. Search results only; jamanetwork.com returned 403. Section 3 already says the Nuij results can't be assumed to hold for young people. Check before the next version.
+- **Domestic violence leave:** the audit suspects "some offer protected leave" understates how many provinces and territories now have it. canada.ca didn't respond. Legal detail, so flag only.
+- **Nunavut 9-1-1:** confirm current status from a Government of Nunavut source.
+
 ## Legal points flagged to Spec, kept out of the text
 
 - Criminal Code s. 264 was amended in 2026 (c. 19, s. 27); the current text includes monitoring a person's location and says safety includes psychological safety. The playbook links the section and says nothing about what it covers.
