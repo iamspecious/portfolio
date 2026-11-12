@@ -165,7 +165,9 @@
       "stamped-widget-diagnostic"
     ],
     "audiencePin": [],
-    "audienceExclude": ["people-hr"],
+    "audienceExclude": [
+      "people-hr"
+    ],
     "lensByAudience": {},
     "notes": "audienceExclude people-hr: implementation-onboarding (API and widget integrations) pulls this role into the People-Ops / EOR lane, where a technical support role isn't relevant evidence. It stays in cs-support and implementation (2026-10-16 audit, D2)."
   },
@@ -546,7 +548,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["debugging", "javascript", "anthropic"],
+    "keywords": [
+      "debugging",
+      "javascript",
+      "anthropic"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -584,7 +590,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["debugging", "javascript", "anthropic"],
+    "keywords": [
+      "debugging",
+      "javascript",
+      "anthropic"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -624,7 +634,12 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["customer success", "health score", "churn", "account prioritisation"],
+    "keywords": [
+      "customer success",
+      "health score",
+      "churn",
+      "account prioritisation"
+    ],
     "tools": [
       "python"
     ],
@@ -662,7 +677,12 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["customer success", "account management", "churn", "anthropic"],
+    "keywords": [
+      "customer success",
+      "account management",
+      "churn",
+      "anthropic"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -703,7 +723,10 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["help center", "anthropic"],
+    "keywords": [
+      "help center",
+      "anthropic"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -741,7 +764,10 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["kingdom hearts", "anthropic"],
+    "keywords": [
+      "kingdom hearts",
+      "anthropic"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -781,7 +807,14 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["assistive technology", "haptics", "machine learning", "computer vision", "web speech api", "low vision"],
+    "keywords": [
+      "assistive technology",
+      "haptics",
+      "machine learning",
+      "computer vision",
+      "web speech api",
+      "low vision"
+    ],
     "tools": [
       "tensorflow-js"
     ],
@@ -816,7 +849,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["helpdesk", "ticketing", "anthropic"],
+    "keywords": [
+      "helpdesk",
+      "ticketing",
+      "anthropic"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -856,7 +893,9 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["anthropic"],
+    "keywords": [
+      "anthropic"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -1159,15 +1198,33 @@
     "dateStart": "2026-10",
     "dateEnd": "2026-11",
     "status": null,
-    "domains": ["people-hr", "strategy"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["job architecture", "career ladder", "levelling", "compensation"],
+    "keywords": [
+      "job architecture",
+      "career ladder",
+      "levelling",
+      "compensation"
+    ],
     "summary": "Reframed a job architecture question as a compensation and career clarity problem — the ladder wasn't the issue, the missing criteria were.",
     "anchor": "#advisory-job-ladders",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-cross-border-eor",
@@ -1177,15 +1234,34 @@
     "dateStart": "2026-09",
     "dateEnd": "2026-10",
     "status": null,
-    "domains": ["people-hr", "operations"],
-    "evidence": ["diagnostic-reasoning", "cost-discipline"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "operations"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "cost-discipline"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["EOR", "employer of record", "cross-border hiring", "misclassification", "contractor"],
+    "keywords": [
+      "EOR",
+      "employer of record",
+      "cross-border hiring",
+      "misclassification",
+      "contractor"
+    ],
     "summary": "Surfaced the real question behind an EOR enquiry — contractor misclassification risk — before the expensive solution was purchased.",
     "anchor": "#advisory-cross-border-eor",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-remote-contracts",
@@ -1195,15 +1271,34 @@
     "dateStart": "2026-07",
     "dateEnd": "2026-09",
     "status": null,
-    "domains": ["people-hr", "operations"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "operations"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["custom and practice", "TUPE", "remote work", "contract variation", "employment law"],
+    "keywords": [
+      "custom and practice",
+      "TUPE",
+      "remote work",
+      "contract variation",
+      "employment law"
+    ],
     "summary": "Explained why 'remote-first' contracts can inadvertently create custom and practice obligations — and what to do before changing the terms.",
     "anchor": "#advisory-remote-contracts",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-director-evidence-gap",
@@ -1213,15 +1308,35 @@
     "dateStart": "2026-07",
     "dateEnd": "2026-09",
     "status": null,
-    "domains": ["people-hr", "strategy"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["Director", "promotion", "levelling", "career ladder", "evidence gap", "job architecture"],
+    "keywords": [
+      "Director",
+      "promotion",
+      "levelling",
+      "career ladder",
+      "evidence gap",
+      "job architecture"
+    ],
     "summary": "Diagnosed why a strong IC kept missing Director promotion — the work was there but the visibility of strategic influence wasn't.",
     "anchor": "#advisory-director-evidence-gap",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-pre-employment-conduct",
@@ -1231,15 +1346,34 @@
     "dateStart": "2026-07",
     "dateEnd": "2026-09",
     "status": null,
-    "domains": ["people-hr", "strategy"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["pre-employment", "conduct", "social media", "hiring", "employment law"],
+    "keywords": [
+      "pre-employment",
+      "conduct",
+      "social media",
+      "hiring",
+      "employment law"
+    ],
     "summary": "Clarified what employers can and cannot act on regarding pre-employment conduct discovered after an offer is made.",
     "anchor": "#advisory-pre-employment-conduct",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-metrics-wrong-thing",
@@ -1249,15 +1383,34 @@
     "dateStart": "2026-10",
     "dateEnd": "2026-11",
     "status": null,
-    "domains": ["people-hr", "strategy"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["DORA", "engineering metrics", "retention", "attrition", "measurement"],
+    "keywords": [
+      "DORA",
+      "engineering metrics",
+      "retention",
+      "attrition",
+      "measurement"
+    ],
     "summary": "Identified that a team's chosen metric was measuring output rather than the health signal they actually needed — and suggested an alternative.",
     "anchor": "#advisory-metrics-wrong-thing",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-assessment-design",
@@ -1267,15 +1420,34 @@
     "dateStart": "2026-07",
     "dateEnd": "2026-09",
     "status": null,
-    "domains": ["people-hr", "operations"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "operations"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["work trial", "take-home", "hiring process", "assessment", "candidate experience"],
+    "keywords": [
+      "work trial",
+      "take-home",
+      "hiring process",
+      "assessment",
+      "candidate experience"
+    ],
     "summary": "Reoriented an assessment process that had built a format without first establishing what it was trying to evaluate.",
     "anchor": "#advisory-assessment-design",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-ai-employee-data",
@@ -1285,15 +1457,36 @@
     "dateStart": "2026-10",
     "dateEnd": "2026-11",
     "status": null,
-    "domains": ["people-hr", "strategy"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["GDPR", "PIPEDA", "CCPA", "DPIA", "AI governance", "data privacy", "HR tech"],
+    "keywords": [
+      "GDPR",
+      "PIPEDA",
+      "CCPA",
+      "DPIA",
+      "AI governance",
+      "data privacy",
+      "HR tech"
+    ],
     "summary": "Helped a people team navigate which AI use cases were viable under GDPR and equivalent frameworks, without blocking experimentation entirely.",
     "anchor": "#advisory-ai-employee-data",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-ats-misconception",
@@ -1303,15 +1496,33 @@
     "dateStart": "2026-07",
     "dateEnd": "2026-09",
     "status": null,
-    "domains": ["people-hr", "strategy"],
-    "evidence": ["diagnostic-reasoning"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "strategy"
+    ],
+    "evidence": [
+      "diagnostic-reasoning"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["ATS", "applicant tracking", "CV parsing", "keyword optimisation", "scavenger"],
+    "keywords": [
+      "ATS",
+      "applicant tracking",
+      "CV parsing",
+      "keyword optimisation",
+      "scavenger"
+    ],
     "summary": "Corrected a widely-repeated but incorrect belief about how ATS systems work, and explained what they actually do.",
     "anchor": "#advisory-ats-misconception",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "advisory-onboarding-culture-deck",
@@ -1321,15 +1532,34 @@
     "dateStart": "2026-10",
     "dateEnd": "2026-11",
     "status": null,
-    "domains": ["people-hr", "operations"],
-    "evidence": ["diagnostic-reasoning", "judgment-restraint"],
-    "context": { "stage": "startup", "level": "lead", "engagement": "consulting" },
+    "domains": [
+      "people-hr",
+      "operations"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "judgment-restraint"
+    ],
+    "context": {
+      "stage": "startup",
+      "level": "lead",
+      "engagement": "consulting"
+    },
     "tools": [],
-    "keywords": ["onboarding", "national culture", "discrimination", "culture deck", "remote onboarding"],
+    "keywords": [
+      "onboarding",
+      "national culture",
+      "discrimination",
+      "culture deck",
+      "remote onboarding"
+    ],
     "summary": "Helped scope an onboarding deck to avoid organising culture guidance around national stereotypes — and found a more useful frame.",
     "anchor": "#advisory-onboarding-culture-deck",
     "relatedIds": [],
-    "audiencePin": [], "audienceExclude": [], "lensByAudience": {}, "notes": ""
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": ""
   },
   {
     "id": "technical-writing-portfolio",
@@ -1355,7 +1585,10 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["slack", "playbooks"],
+    "keywords": [
+      "slack",
+      "playbooks"
+    ],
     "tools": [
       "zendesk",
       "sql"
@@ -1396,7 +1629,11 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["jira", "webhooks", "troubleshooting"],
+    "keywords": [
+      "jira",
+      "webhooks",
+      "troubleshooting"
+    ],
     "tools": [
       "zendesk"
     ],
@@ -1436,7 +1673,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["github issues", "ux", "product feedback"],
+    "keywords": [
+      "github issues",
+      "ux",
+      "product feedback"
+    ],
     "tools": [],
     "summary": "Installed PostHog cold on this site as a genuine first-time user and documented the first hour live — a wizard with no exit, an ambiguous SDK label, and an OAuth redirect with no success state. Filed four issues and a docs PR against PostHog's own repos.",
     "anchor": "posthog-first-run-audit.html",
@@ -1470,7 +1711,10 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["rest api", "api reference"],
+    "keywords": [
+      "rest api",
+      "api reference"
+    ],
     "tools": [],
     "summary": "Professional API reference documentation for The Cat API's images search endpoint — authentication, all query parameters, response schema, request/response examples, error states, and pagination.",
     "anchor": "cat-api-documentation.html",
@@ -1503,7 +1747,10 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["style guide", "voice and tone"],
+    "keywords": [
+      "style guide",
+      "voice and tone"
+    ],
     "tools": [],
     "summary": "Internal contributor guide defining voice, tone, and writing standards for technical documentation teams — voice characteristics, tone shifts by context, common mistakes, and a contributor checklist.",
     "anchor": "voice-and-tone-guide.html",
@@ -1537,7 +1784,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["style guide", "voice and tone", "2fa"],
+    "keywords": [
+      "style guide",
+      "voice and tone",
+      "2fa"
+    ],
     "tools": [],
     "summary": "The same 2FA how-to guide written three times — in Apple, Mailchimp, and PostHog voice — with source guide citations, applied principles, and reflection on what was hardest to adapt.",
     "anchor": "voice-adaptation-showcase.html",
@@ -1573,14 +1824,19 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["job levels", "career ladder", "levelling", "creative commons"],
+    "keywords": [
+      "job levels",
+      "career ladder",
+      "levelling",
+      "creative commons"
+    ],
     "tools": [],
     "summary": "An open, living playbook for anyone stuck on job levels at a 50 to 500 person company. It starts with working out which problem you actually have, and leans on research where it exists and says so where it doesn't.",
     "anchor": "people-practice-playbook/",
     "pageAnchor": "#doc-people-practice-playbook",
     "relatedIds": [
+      "crisis-playbook",
       "people-practice-playbook-vol-2",
-      "crisis-management-playbook",
       "technical-writing-portfolio"
     ],
     "audiencePin": [],
@@ -1611,14 +1867,21 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["onboarding", "new hire", "buddy", "probation", "templates", "creative commons"],
+    "keywords": [
+      "onboarding",
+      "new hire",
+      "buddy",
+      "probation",
+      "templates",
+      "creative commons"
+    ],
     "tools": [],
     "summary": "An open, living playbook for building onboarding from offer accepted to six months in. It covers what the research says, where it runs out, and what I'd do, with templates you can copy.",
     "anchor": "people-practice-playbook/vol-2/",
     "pageAnchor": "#doc-people-practice-playbook-vol-2",
     "relatedIds": [
-      "people-practice-playbook",
-      "crisis-management-playbook"
+      "crisis-playbook",
+      "people-practice-playbook"
     ],
     "audiencePin": [],
     "audienceExclude": [],
@@ -1648,7 +1911,15 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["hris", "vibe coding", "build vs buy", "guardrails", "tokens", "prompts", "creative commons"],
+    "keywords": [
+      "hris",
+      "vibe coding",
+      "build vs buy",
+      "guardrails",
+      "tokens",
+      "prompts",
+      "creative commons"
+    ],
     "tools": [],
     "summary": "An open, living playbook for anyone being asked to approve, fund or build an HR tool with AI. It explains vibe coding versus AI-assisted engineering, what building really costs, and the guardrails to put in place if you go ahead anyway.",
     "anchor": "people-practice-playbook/vol-3/",
@@ -1663,12 +1934,12 @@
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Domains people-hr + ai-engineering is a documented exception to the TAXONOMY §3 anti-rule: the volume's subject is building with AI (including prompting, section 9), so it routes to builder-technical as well as the People lanes; research dropped to stay within three domains."
   },
   {
-    "id": "crisis-management-playbook",
+    "id": "crisis-playbook",
     "schemaVersion": 1,
     "type": "document",
-    "title": "The Small Studio Crisis Playbook",
+    "title": "Surviving Cancellation: A Crisis Playbook",
     "dateStart": "2026-09",
-    "dateEnd": "2026-09",
+    "dateEnd": "2026-11",
     "status": "complete",
     "domains": [
       "technical-writing",
@@ -1685,20 +1956,29 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["creative commons", "open source", "trust and safety"],
+    "keywords": [
+      "creative commons",
+      "open source",
+      "trust and safety",
+      "the small studio crisis playbook",
+      "cancellation",
+      "review bombing"
+    ],
     "tools": [],
-    "summary": "Openly licensed (CC BY 4.0) crisis communications and moderation playbook for small studios, open-source projects, and community teams — a six-class incident taxonomy, a five-role command structure, eight response templates, and a standalone one-page quick-reference card, each choice traced to a cited source (CDC CERC, Coombs' SCCT, NIST SP 800-61r3, aviation checklist human-factors research).",
-    "anchor": "crisis-management-playbook.html",
-    "pageAnchor": "#doc-crisis-management-playbook",
+    "summary": "Openly licensed (CC BY 4.0) crisis communications and moderation playbook for studios, open-source projects and community teams: a six-class incident taxonomy, a five-role command structure, eight response templates, and a standalone one-page quick reference, each choice traced to a cited source (CDC CERC, Coombs' SCCT, NIST SP 800-61r3, aviation checklist human-factors research).",
+    "anchor": "crisis-playbook/",
+    "pageAnchor": "#doc-crisis-playbook",
     "relatedIds": [
+      "people-practice-playbook",
+      "people-practice-playbook-vol-2",
+      "saas-integration-diagnostic-guide",
       "technical-writing-portfolio",
-      "voice-and-tone-guide",
-      "saas-integration-diagnostic-guide"
+      "voice-and-tone-guide"
     ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Bundled companion asset crisis-response-one-page.html (a standalone printable quick-reference card extracted from Part 0) is linked from within the document and is not separately indexed."
+    "notes": "v1.0, 12 Nov 2026: renamed from \"The Small Studio Crisis Playbook\", moved to markdown-as-source-of-truth with a build.py matching the People Practice Playbook series, full dev log in crisis-playbook/DEVLOG.md. Bundled companion asset crisis-playbook/one-page.html (a standalone printable quick-reference card extracted from section 2) is linked from within the document and is not separately indexed."
   },
   {
     "id": "proj-digital-spec-front-door",
@@ -1722,7 +2002,10 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["chatbot", "visual novel"],
+    "keywords": [
+      "chatbot",
+      "visual novel"
+    ],
     "tools": [
       "html-css-js"
     ],
@@ -1771,7 +2054,9 @@
     "relatedIds": [
       "proj-digital-spec-front-door"
     ],
-    "audiencePin": ["builder-technical"],
+    "audiencePin": [
+      "builder-technical"
+    ],
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "audiencePin builder-technical: the portfolio's own search is direct evidence for a builder audience, and pinning keeps it inside the lane's project cap ahead of older tools (added in the 2026-09-03 routing audit, #42)."
@@ -1799,7 +2084,12 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["job search", "automation", "workable", "teamtailor"],
+    "keywords": [
+      "job search",
+      "automation",
+      "workable",
+      "teamtailor"
+    ],
     "tools": [
       "scheduled-agent",
       "ats-api",
@@ -1810,7 +2100,9 @@
     "summary": "A scheduled morning agent that pulls ~24 companies' public ATS feeds (Ashby, Greenhouse, Workable, Teamtailor), filters every posting on company/role/location gates, judges the survivors against a written fit matrix, dedups against a state file, and posts a reasoned digest of only the new, remote-from-Germany roles worth acting on.",
     "anchor": "#proj-role-fit-watcher",
     "relatedIds": [],
-    "audiencePin": ["builder-technical"],
+    "audiencePin": [
+      "builder-technical"
+    ],
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "New tools added to vocabulary: scheduled-agent, ats-api, web-fetch, grep-parsing. Status 'live' but private — no public demo; runs as a personal daily automation, documented on the card. Domains ai-engineering + operations per the brief's filter tags (AI Tools, Engineering, Operations); people-hr deliberately NOT applied despite the job-search/EOR subject, honouring the people-hr<->ai-engineering anti-rule (TAXONOMY section 3)."
@@ -1838,7 +2130,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["job search", "cv", "spreadsheet"],
+    "keywords": [
+      "job search",
+      "cv",
+      "spreadsheet"
+    ],
     "tools": [
       "excel-openpyxl",
       "weighted-scoring-matrix",
@@ -1879,7 +2175,10 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["kingdom hearts", "youtube seo"],
+    "keywords": [
+      "kingdom hearts",
+      "youtube seo"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -1921,7 +2220,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["kingdom hearts", "ab test", "thumbnails"],
+    "keywords": [
+      "kingdom hearts",
+      "ab test",
+      "thumbnails"
+    ],
     "tools": [
       "claude-api",
       "prompt-engineering",
@@ -1963,7 +2266,11 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["youtube", "kingdom hearts", "thumbnails"],
+    "keywords": [
+      "youtube",
+      "kingdom hearts",
+      "thumbnails"
+    ],
     "tools": [
       "weighted-scoring-matrix",
       "prompt-engineering"
@@ -2002,7 +2309,12 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["hris", "idempotency", "retries", "integration"],
+    "keywords": [
+      "hris",
+      "idempotency",
+      "retries",
+      "integration"
+    ],
     "tools": [
       "python",
       "sqlite",
@@ -2076,7 +2388,12 @@
       "level": "ic",
       "engagement": "personal"
     },
-    "keywords": ["m5stack", "microcontroller", "embedded", "firmware"],
+    "keywords": [
+      "m5stack",
+      "microcontroller",
+      "embedded",
+      "firmware"
+    ],
     "tools": [
       "arduino",
       "esp32",
