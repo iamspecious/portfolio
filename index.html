@@ -830,6 +830,13 @@
                                 Published People Practice Playbook, Vol. 3: Building HR Tools with AI (v0.1.1), after Vol. 2 in the series. Built the same way as Vols. 1 and 2, in people-practice-playbook/vol-3/. Reused Vol. 2's index tags (people-hr, technical-writing, research) and existing card tags, including Prompt engineering; no new tags or taxonomy terms. New for this volume: section 9's example prompts show as preformatted blocks, and section 10's checklists as read-only boxes. Vols. 1 and 2 are unchanged; Vol. 3 links back to Vol. 2.
                             </p>
                         </div>
+                        <div class="devlog-entry">
+                            <span class="timestamp">2026-11-12</span>
+                            <p>
+                                <span class="tag tag-done">Done</span>
+                                Digital Spec now routes to this tab. Two entry points from the conversation tree: "Playbooks &amp; reference docs" in the hiring-else node and "The openly-licensed playbooks Spec published" in nosy-specific. On arrival a <code>playbooks-intro</code> node branches to the People Practice series or the crisis playbook directly. A <code>playbooks-people-practice</code> node gives each volume its own deeplink (Vols. 1, 2, and 3) with a "show me all three" fallback that opens the tab at the top.
+                            </p>
+                        </div>
                     </div>
 
                     <div class="project-block" data-date="2026-11-06" data-category="writing research">
@@ -1029,6 +1036,14 @@
                             <div class="devlog-header">
                                 <span>// devlog</span>
                                 <small>running build notes: decisions, pivots, wins, and constraints. Full log in <a href="https://github.com/iamspecious/portfolio/blob/main/people-practice-playbook/vol-3/DEVLOG.md">DEVLOG.md</a></small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-11-12</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Lane routing settled. <code>audienceExclude: ["documentation"]</code> added — Vol. 3 shows in builder-technical (ai-engineering domain) and people-hr; the documentation lane keeps <code>voice-and-tone-guide</code>, which is a stronger signal for a technical writing hire. The people-hr document cap was raised from 2 to 3 so all three volumes are visible there. Two-way relatedIds: Vols. 1 and 2 now point back to Vol. 3.
+                                </p>
                             </div>
 
                             <div class="devlog-entry">
