@@ -1934,6 +1934,42 @@
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Domains people-hr + ai-engineering is a documented exception to the TAXONOMY §3 anti-rule: the volume's subject is building with AI (including prompting, section 9), so it routes to builder-technical as well as the People lanes; research dropped to stay within three domains."
   },
   {
+    "id": "people-practice-playbook-vol-4",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "People Practice Playbook, Vol. 4: Safety Plans",
+    "dateStart": "2026-11",
+    "dateEnd": "2026-11",
+    "status": "live",
+    "domains": [
+      "people-hr",
+      "research"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "writing-range"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "keywords": ["safety plan", "crisis", "domestic violence", "coming out", "2slgbtqi", "creative commons"],
+    "tools": [],
+    "summary": "An open, living playbook on safety plans: what they are, why everyone should have one, what goes in one, and what HR should do when someone comes to them. Every Canadian crisis and support service listed was checked on its own website.",
+    "anchor": "people-practice-playbook/vol-4/",
+    "pageAnchor": "#doc-people-practice-playbook-vol-4",
+    "relatedIds": [
+      "people-practice-playbook-vol-3",
+      "people-practice-playbook"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-4/people-practice-playbook-vol4-v0.1.1.md by people-practice-playbook/vol-4/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
+  },
+  {
     "id": "crisis-playbook",
     "schemaVersion": 1,
     "type": "document",
