@@ -18,8 +18,8 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SOURCE = 'people-practice-playbook-vol4-v0.1.1.md'
-VERSION = '0.1.1'
+SOURCE = 'people-practice-playbook-vol4-v0.2.md'
+VERSION = '0.2'
 DATE = '12 November 2026'
 LICENCE_URL = 'https://creativecommons.org/licenses/by-sa/4.0/'
 CREDIT = 'Specious Coda-Bishop'
@@ -29,7 +29,8 @@ PAGE_URL = 'https://iamspecious.github.io/portfolio/people-practice-playbook/vol
 TITLE = 'People Practice Playbook, Vol. 4: Safety Plans'
 DESCRIPTION = ('An open, living playbook on safety plans: what they are, why everyone '
                'should have one, what goes in one, and what HR should do when someone '
-               'comes to them. Includes a checked list of Canadian crisis and support services.')
+               'comes to them, scaled from no HR to multi-country. Includes checked crisis and support services for Canada, '
+               'the US, the UK, Ireland, Germany and Australia.')
 # Working files live in the repo, not on the site
 # (_config.yml excludes them from the GitHub Pages build).
 REPO_DIR = REPO_URL + '/blob/main/people-practice-playbook/vol-4/'
