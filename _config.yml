@@ -3,7 +3,7 @@ plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 
 # Kept in the repo, not built into pages: Vol. 2's earlier version and
-# Vols. 2 and 3's working files, and the crisis playbook's build script and
+# Vols. 2 to 4's working files, and the crisis playbook's build script and
 # dev log. Linked from each page footer to GitHub instead.
 exclude:
 - people-practice-playbook/vol-2/people-practice-playbook-vol2-v0.1.md
@@ -19,3 +19,8 @@ exclude:
 - people-practice-playbook/vol-3/build.py
 - crisis-playbook/DEVLOG.md
 - crisis-playbook/build.py
+- people-practice-playbook/vol-4/CHANGELOG.md
+- people-practice-playbook/vol-4/DEVLOG.md
+- people-practice-playbook/vol-4/RESEARCH.md
+- people-practice-playbook/vol-4/SOURCES.md
+- people-practice-playbook/vol-4/build.py
