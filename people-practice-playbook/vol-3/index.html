@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Practice Playbook, Vol. 3: Building HR Tools with AI · Specious Coda-Bishop</title>
+    <meta name="description" content="An open, living playbook for anyone being asked to approve, fund or build an HR tool with AI. It explains vibe coding versus AI-assisted engineering, what building really costs, and the guardrails to put in place if you go ahead anyway.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Specious Coda Bishop, Portfolio">
+    <meta property="og:title" content="People Practice Playbook, Vol. 3: Building HR Tools with AI">
+    <meta property="og:description" content="An open, living playbook for anyone being asked to approve, fund or build an HR tool with AI. It explains vibe coding versus AI-assisted engineering, what building really costs, and the guardrails to put in place if you go ahead anyway.">
+    <meta property="og:url" content="https://iamspecious.github.io/portfolio/people-practice-playbook/vol-3/">
+    <meta name="twitter:card" content="summary">
+    <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+    <!-- Built from people-practice-playbook-vol3-v0.1.1.md by build.py. Edit the markdown, then rebuild. -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        a { color: #b392f0; }
+        a:hover { color: #d2b3ff; }
+        .doc-container { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+
+        .back-link {
+            color: #b392f0; text-decoration: none; font-size: 0.82rem;
+            display: inline-flex; align-items: center; gap: 6px; margin-bottom: 40px;
+        }
+
+        .doc-header { border-bottom: 2px solid #30363d; padding-bottom: 28px; margin-bottom: 28px; }
+        .doc-label {
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.12em; color: #b392f0; margin-bottom: 10px; display: block;
+        }
+        .doc-title { font-size: 1.75rem; font-weight: 700; color: #e6edf3; line-height: 1.3; margin-bottom: 6px; }
+        .doc-subtitle { font-size: 0.92rem; color: #8b949e; margin-bottom: 4px; }
+        .doc-version { font-size: 0.82rem; color: #8b949e; }
+        .doc-version a { text-decoration: none; }
+
+        .licence-box {
+            background: #161b22; border: 1px solid #30363d; border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0; padding: 18px 22px; margin-bottom: 32px;
+        }
+        .licence-box .note-label {
+            font-size: 0.63rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: #b392f0; margin-bottom: 8px; display: block;
+        }
+        .licence-box p { font-size: 0.88rem; line-height: 1.7; margin-bottom: 10px; }
+        .licence-box p:last-child { margin-bottom: 0; }
+        .download {
+            display: inline-block; background: #6e40c9; color: #fff; font-weight: 700;
+            font-size: 0.82rem; text-decoration: none; padding: 8px 14px; border-radius: 5px;
+        }
+        .download:hover { background: #8957e5; color: #fff; }
+
+        .toc {
+            background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+            padding: 20px 24px; margin-bottom: 52px;
+        }
+        .toc-label {
+            font-size: 0.63rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: #8b949e; margin-bottom: 12px; display: block;
+        }
+        .toc ol { list-style: none; }
+        .toc li { border-bottom: 1px solid #21262d; }
+        .toc li:last-child { border-bottom: none; }
+        .toc a { display: flex; gap: 14px; padding: 8px 0; color: #e6edf3; text-decoration: none; font-size: 0.9rem; }
+        .toc a:hover { color: #b392f0; }
+        .toc-num { font-family: 'Consolas', monospace; color: #b392f0; font-weight: 700; flex-shrink: 0; }
+
+        .doc-body h2 {
+            font-size: 1.2rem; font-weight: 700; color: #e6edf3; line-height: 1.35;
+            border-bottom: 2px solid #30363d; padding-bottom: 10px;
+            margin: 64px 0 20px; scroll-margin-top: 20px;
+        }
+        .doc-body h2:first-child { margin-top: 0; }
+        .doc-body h3 {
+            font-size: 0.82rem; font-weight: 700; color: #b392f0; text-transform: uppercase;
+            letter-spacing: 0.08em; margin: 36px 0 14px; scroll-margin-top: 20px;
+        }
+        .doc-body .anchor {
+            margin-left: 8px; color: #484f58; text-decoration: none; font-weight: 400;
+            opacity: 0; transition: opacity 0.15s;
+        }
+        .doc-body h2:hover .anchor, .doc-body h3:hover .anchor,
+        .doc-body .anchor:focus { opacity: 1; }
+        .doc-body p, .doc-body li { font-size: 0.92rem; color: #c9d1d9; line-height: 1.75; }
+        .doc-body p { margin-bottom: 14px; }
+        .doc-body ul, .doc-body ol { padding-left: 22px; margin: 10px 0 20px; }
+        .doc-body li { margin-bottom: 8px; padding-left: 4px; }
+        .doc-body strong { color: #e6edf3; }
+        .doc-body em { color: #8b949e; }
+        .doc-body a { overflow-wrap: anywhere; }
+        .doc-body img { display: block; max-width: 100%; height: auto; margin: 20px auto 24px; }
+        .doc-body .diagram { margin: 20px 0 24px; color: #c9d1d9; }
+        .doc-body .diagram svg { display: block; width: 100%; max-width: 680px; height: auto; margin: 0 auto; }
+
+        .doc-body pre {
+            background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+            padding: 14px 16px; margin: 10px 0 20px; overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .doc-body pre code {
+            font-family: 'Consolas', 'SFMono-Regular', Menlo, monospace;
+            font-size: 0.82rem; line-height: 1.6; color: #e6edf3; white-space: pre;
+        }
+        .doc-body ul.task-list { list-style: none; padding-left: 4px; }
+        .doc-body .task-list label { display: flex; gap: 10px; align-items: baseline; }
+        .doc-body .task-list input {
+            flex-shrink: 0; width: 15px; height: 15px; margin: 0; position: relative; top: 2px;
+            accent-color: #b392f0; opacity: 1;
+        }
+
+        .table-wrap {
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+            margin: 14px 0 24px; border: 1px solid #30363d; border-radius: 6px;
+        }
+        .table-wrap:focus { outline: 2px solid #b392f0; outline-offset: 2px; }
+        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .table-wrap th {
+            background: #161b22; color: #e6edf3; font-weight: 700; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 14px;
+            text-align: left; border-bottom: 1px solid #30363d; vertical-align: bottom;
+        }
+        .table-wrap td {
+            padding: 10px 14px; border-bottom: 1px solid #21262d; color: #c9d1d9;
+            vertical-align: top; line-height: 1.6;
+        }
+        .table-wrap tr:last-child td { border-bottom: none; }
+        .table-wrap tbody tr:nth-child(even) td { background: #0f1318; }
+        .table-wrap td a { overflow-wrap: normal; }
+
+        .doc-footer {
+            border-top: 1px solid #30363d; margin-top: 64px; padding-top: 28px;
+        }
+        .doc-footer .links { font-size: 0.82rem; color: #8b949e; margin-top: 18px; }
+        .doc-footer .links a { text-decoration: none; }
+        .doc-footer .history { font-size: 0.82rem; color: #8b949e; margin-top: 18px; }
+
+        @media (max-width: 600px) {
+            .doc-container { padding: 28px 16px 64px; }
+            .doc-title { font-size: 1.35rem; }
+            /* Columns keep a readable width; the wrapper scrolls instead. */
+            .table-wrap table { min-width: 560px; }
+            .table-wrap th, .table-wrap td { min-width: 160px; }
+            .doc-body .anchor { opacity: 1; }
+            .doc-body pre code { font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-container">
+    <a class="back-link" href="../../index.html#doc-people-practice-playbook-vol-3">&larr; Back to Portfolio</a>
+
+    <header class="doc-header">
+        <span class="doc-label">People Practice · Building HR Tools with AI · CC BY-SA 4.0</span>
+        <h1 class="doc-title">People Practice Playbook, Vol. 3: Building HR Tools with AI</h1>
+        <p class="doc-subtitle">Version 0.1.1 · 12 November 2026 · By Specious Coda-Bishop · Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+        <p class="doc-version"><a href="#section-13-changelog">Changelog and version history</a> in section 13 · Previous volume: <a href="../vol-2/">Vol. 2: Onboarding New Hires</a></p>
+    </header>
+
+    <div class="licence-box">
+        <span class="note-label">Licence</span>
+        <p><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Credit: Specious Coda-Bishop. Take it, change it and share it. Credit it and keep your version open on the same terms.</p>
+        <p><a class="download" href="people-practice-playbook-vol3-v0.1.1.md" download>Download the markdown (v0.1.1)</a></p>
+    </div>
+
+    <nav class="toc" aria-label="Contents">
+        <span class="toc-label">Contents</span>
+        <ol>
+            <li><a href="#section-1"><span class="toc-num">01</span>Who this is for, and what it isn&#x27;t</a></li>
+            <li><a href="#section-2"><span class="toc-num">02</span>Four ways people use AI</a></li>
+            <li><a href="#section-3"><span class="toc-num">03</span>The sandcastle</a></li>
+            <li><a href="#section-4"><span class="toc-num">04</span>Tokens: what you&#x27;re actually paying for</a></li>
+            <li><a href="#section-5"><span class="toc-num">05</span>Why &quot;we already pay for AI&quot; doesn&#x27;t make it free</a></li>
+            <li><a href="#section-6"><span class="toc-num">06</span>Why an HR system is a risky place to start</a></li>
+            <li><a href="#section-7"><span class="toc-num">07</span>Fairness, privacy and access</a></li>
+            <li><a href="#section-8"><span class="toc-num">08</span>Try it: plan one module before building anything</a></li>
+            <li><a href="#section-9"><span class="toc-num">09</span>Asking like an engineer, not making a wish</a></li>
+            <li><a href="#section-10"><span class="toc-num">10</span>If you&#x27;re building it anyway: the guardrails</a></li>
+            <li><a href="#section-11"><span class="toc-num">11</span>Which approach fits?</a></li>
+            <li><a href="#section-12"><span class="toc-num">12</span>Glossary</a></li>
+            <li><a href="#section-13"><span class="toc-num">13</span>Sources and changelog</a></li>
+        </ol>
+    </nav>
+
+    <main class="doc-body">
+<h2 id="section-1">1. Who this is for, and what it isn't<a class="anchor" href="#section-1" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>AI can help build software well, but only when someone who understands the system is steering and checking the work. Handing an AI a wish list and shipping whatever comes back is a different thing, and it isn't free.</p>
+<p>This volume is for people who are new to AI and are being asked to approve, fund or build an internal tool with it: People and HR teams, founders, operations leads, and anyone sitting in the meeting where someone says "we could just build it ourselves". It uses an HR system (an HRIS) as the running example, because that's where the stakes are clearest.</p>
+<p><strong>The short version:</strong></p>
+<ul>
+<li><strong>Vibe coding</strong> (describe it, accept what comes back, never read the code) is fine for throwaway experiments. It isn't fine for a system that holds employee data and that other people rely on.</li>
+<li><strong>AI-assisted engineering</strong> (a person plans, checks and owns every change, with AI doing much of the typing) is how AI builds real software well.</li>
+<li><strong>"We already pay for AI, so building is free" doesn't hold up.</strong> A seat price is the minimum spend, not the real bill.</li>
+<li><strong>If your organisation builds anyway,</strong> section 10 lists the steps that make it much less risky.</li>
+</ul>
+<p><strong>What it isn't.</strong> It isn't legal advice: laws on employee data and on AI vary by country and state, so check what applies to you locally. It isn't a coding tutorial. And it isn't anti-AI. I use AI heavily, including to research and draft this volume.</p>
+<p><strong>About the numbers.</strong> Every cost here is an example, there to show the kinds of things you'd need to estimate for your own project. None of it is a quote. Pricing examples use Claude, the tool this volume was researched with; other providers also bill by usage, with their own rates. Prices change often, so check the live pages linked in section 4.</p>
+<h3 id="section-1-this-will-change">This will change<a class="anchor" href="#section-1-this-will-change" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Versions.</strong> A big version bump means a recommendation has changed. A small one means new sections or examples. The smallest means fixes.</li>
+<li><strong>Changelog.</strong> Every change is listed in section 13, newest first.</li>
+<li><strong>Review dates.</strong> Each section shows when it was last reviewed.</li>
+<li><strong>Changing my mind.</strong> Where a call is genuinely arguable, there's a short note on what would change it.</li>
+<li><strong>Licence.</strong> CC BY-SA 4.0. Share and adapt it, with credit to Specious Coda-Bishop, under the same licence.</li>
+<li><strong>Corrections.</strong> By pull request on the <a href="https://github.com/iamspecious/portfolio">GitHub repository</a> or by email to <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a>. Corrections that change a recommendation are credited in the changelog.</li>
+</ul>
+<h2 id="section-2">2. Four ways people use AI<a class="anchor" href="#section-2" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>These often get called the same thing, but they carry very different levels of risk. The difference is who decides, who checks, and who fixes it when it breaks.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>What it looks like</th>
+<th>Who checks the result</th>
+<th>When it breaks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AI as an assistant</td>
+<td>Asking questions, drafting emails, summarising documents</td>
+<td>You, by reading it</td>
+<td>You redo one answer</td>
+</tr>
+<tr class="even">
+<td>Automation with AI</td>
+<td>AI as one step in a fixed workflow, such as reading expense receipts and filing them by category</td>
+<td>Whoever set up the workflow</td>
+<td>One step can fail quietly, but the rest of the process is known and can be checked</td>
+</tr>
+<tr class="odd">
+<td>Vibe coding</td>
+<td>Describing an app and accepting the code the AI writes, without reading or testing it</td>
+<td>Nobody, really. If it seems to work, it ships</td>
+<td>Nobody knows why, so the AI is asked to guess at a fix</td>
+</tr>
+<tr class="even">
+<td>AI-assisted engineering</td>
+<td>A person who understands software plans the work, has AI write parts of it, then reviews and tests every change</td>
+<td>A skilled person, before anything goes live</td>
+<td>Someone can trace the cause, fix it and explain it</td>
+</tr>
+</tbody>
+</table></div>
+<p>Programmer Andrej Karpathy coined "vibe coding" in February 2025 for a way of building where you <a href="https://martinfowler.com/bliki/VibeCoding.html">"forget that the code even exists"</a>. Software writer Martin Fowler draws the same line this volume does: ignoring the code is vibe coding, while using AI and still reviewing the code is a different practice, which he calls agentic engineering. He notes the two get mixed up because "vibe coding" caught on as a catch-all.</p>
+<p>Programmer and writer Simon Willison defends vibe coding for personal tools, where a bug only hurts the person who built it. For software other people rely on, he calls it <a href="https://simonwillison.net/2026/may/6/vibe-coding-and-agentic-engineering">"grossly irresponsible"</a>, because it's other people's information, and other people get hurt by the bugs. He also points out that the AI has no professional reputation. A person is accountable for what gets shipped.</p>
+<h2 id="section-3">3. The sandcastle<a class="anchor" href="#section-3" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>Ask an AI to "build me a sandcastle" and it will. It scoops up whatever is on the beach, packs it into the bucket and flips it over. For a moment it looks like a castle.</p>
+<p>But the bucket held dry sand, shells and bits of plastic. Nobody checked the mix. The castle slumps the moment the bucket lifts, or it stands until the first wave, or until someone leans on a wall.</p>
+<p>Build it the other way and you decide the sand-to-water ratio first. You lay a solid base. You build one tower, check it holds, then build the next. It takes more thought up front, and it stands.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>On the beach</th>
+<th>In software</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Build me a sandcastle"</td>
+<td>A vague request with no requirements</td>
+</tr>
+<tr class="even">
+<td>The full bucket</td>
+<td>The AI's first draft, which looks finished</td>
+</tr>
+<tr class="odd">
+<td>Shells and plastic in the mix</td>
+<td>Hidden junk: unused code, unsafe shortcuts, outside components nobody chose</td>
+</tr>
+<tr class="even">
+<td>Sand-to-water ratio</td>
+<td>The plan: requirements, rules and limits written down before building</td>
+</tr>
+<tr class="odd">
+<td>Checking each tower before the next</td>
+<td>Testing each change before adding more</td>
+</tr>
+<tr class="even">
+<td>The first wave</td>
+<td>Real staff, real data, an attacker, or a change in the rules</td>
+</tr>
+</tbody>
+</table></div>
+<p>The catch for non-engineers: with a sandcastle, you can see it fall. With software, many failures are invisible. A security hole or a wrong calculation can look fine for months until someone finds it.</p>
+<h2 id="section-4">4. Tokens: what you're actually paying for<a class="anchor" href="#section-4" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>Every AI model reads and writes in tokens, and usage is measured in them. That's true for Claude, ChatGPT, Gemini and the rest, even though each counts tokens slightly differently.</p>
+<blockquote>
+<p><strong>Check current prices:</strong> <a href="https://claude.com/pricing">Claude pricing</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing">Claude API pricing</a>. The figures below were correct in November 2026 and are here as examples.</p>
+</blockquote>
+<ul>
+<li><strong>A token</strong> is a small chunk of text: a short word, or part of a longer one. The same text can produce different counts on different models. Anthropic notes its newer models produce <a href="https://platform.claude.com/docs/en/about-claude/pricing">about 30% more tokens for the same text</a> than older ones.</li>
+<li><strong>Input tokens</strong> are everything the AI reads: your request, the instructions, the conversation so far, and any files or code it looks at.</li>
+<li><strong>Output tokens</strong> are everything it writes back. On Claude's current models, output costs five times as much as input.</li>
+<li><strong>The context window</strong> is how much the AI can hold in view at once. Bigger projects fill more of it, on every request.</li>
+</ul>
+<h3 id="section-4-two-ways-organisations-pay">Two ways organisations pay<a class="anchor" href="#section-4-two-ways-organisations-pay" aria-label="Link to this section">#</a></h3>
+<p><strong>Pay per token (the API).</strong> Prices in November 2026, in US dollars per million tokens (<a href="https://platform.claude.com/docs/en/about-claude/pricing">source</a>):</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Claude Opus 5.5</td>
+<td>$4</td>
+<td>$20</td>
+</tr>
+<tr class="even">
+<td>Claude Sonnet 5.5</td>
+<td>$2</td>
+<td>$10</td>
+</tr>
+<tr class="odd">
+<td>Claude Haiku 5.5 (requests up to 100,000 tokens; higher above that)</td>
+<td>$0.10</td>
+<td>$0.50</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Pay per seat (subscriptions).</strong> On Claude's Team plan, a Standard seat is <span class="math inline">20<em>a</em><em>m</em><em>o</em><em>n</em><em>t</em><em>h</em><em>b</em><em>i</em><em>l</em><em>l</em><em>e</em><em>d</em><em>a</em><em>n</em><em>n</em><em>u</em><em>a</em><em>l</em><em>l</em><em>y</em>(</span>25 monthly) and a Premium seat, meant for heavier use, is <span class="math inline">100(</span>125 monthly) (<a href="https://support.claude.com/en/articles/9266767-what-is-the-team-plan">source</a>). Each seat has its own usage limits per session and per week. Limits are per person and can't be pooled. When someone hits theirs, they wait for the reset or the organisation pays for extra usage.</p>
+<h3 id="section-4-a-worked-example-illustrative">A worked example (illustrative)<a class="anchor" href="#section-4-a-worked-example-illustrative" aria-label="Link to this section">#</a></h3>
+<p>Coding tools don't just read your request. They re-read large parts of the project each time, to understand what they're changing. Say a mid-sized internal app means each request reads 150,000 tokens and writes 5,000, on Opus 5.5 at API prices:</p>
+<ul>
+<li>Input: 150,000 × $4 ÷ 1,000,000 = $0.60</li>
+<li>Output: 5,000 × $20 ÷ 1,000,000 = $0.10</li>
+<li><strong>About $0.70 per request.</strong> A hundred requests in a working day is about $70, or roughly $1,400 over 20 working days.</li>
+</ul>
+<p>Caching (reusing text the AI has already read) cuts this a lot. If 140,000 of those input tokens are cached, a request drops to about $0.17, or roughly $340 over the same month. The project size is made up and the sums leave out caching set-up costs, but the shape holds: <strong>the bigger the project, the more every request costs.</strong></p>
+<h2 id="section-5">5. Why "we already pay for AI" doesn't make it free<a class="anchor" href="#section-5" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>The AI bill is the visible part of the cost, and usually not the biggest part. Building with AI swaps one known subscription for many smaller costs, most of which nobody has added up.</p>
+<h3 id="section-5-why-vibe-coding-burns-through-usage">Why vibe coding burns through usage<a class="anchor" href="#section-5-why-vibe-coding-burns-through-usage" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Each change costs more than the last.</strong> As the app grows, the AI reads more of it on each request.</li>
+<li><strong>Bug loops.</strong> When nobody understands the code, the fix for a bug is to ask the AI again, and again. Each attempt is paid for, and a fix can break something else.</li>
+<li><strong>Vague requests mean rework.</strong> "Make it better" produces a guess. Wrong guesses get thrown away, but the usage is still spent.</li>
+<li><strong>Seat limits run out.</strong> Our take: a full HR system that other people log into is very unlikely to get built within the normal limits of a few seats. When limits are hit, the organisation pays for extra usage or bigger seats, or the work stalls until the reset. A stalled build costs staff time.</li>
+<li><strong>AI features inside the app cost per use.</strong> If the finished system uses AI itself, for example to screen CVs or answer staff questions, that usage is usually billed by the token, on top of any seats.</li>
+</ul>
+<h3 id="section-5-the-all-in-comparison-illustrative">The all-in comparison (illustrative)<a class="anchor" href="#section-5-the-all-in-comparison-illustrative" aria-label="Link to this section">#</a></h3>
+<p>This is the comparison to put in front of decision-makers. The example subscription is $300 a month, or $3,600 a year.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Cost</th>
+<th>Buying an HRIS</th>
+<th>Building one with AI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Software</td>
+<td>Subscription, e.g. $3,600 a year</td>
+<td>AI seats, plus extra usage when limits run out</td>
+</tr>
+<tr class="even">
+<td>Hosting, logins, backups</td>
+<td>Usually included</td>
+<td>Paid separately, and someone has to set them up</td>
+</tr>
+<tr class="odd">
+<td>E-signatures</td>
+<td>Usually included or integrated</td>
+<td>Usually another paid service, so signatures hold up</td>
+</tr>
+<tr class="even">
+<td>Security testing and audits</td>
+<td>Usually done by the vendor (check their security page)</td>
+<td>Your cost, if it happens at all</td>
+</tr>
+<tr class="odd">
+<td>Rule changes</td>
+<td>Usually handled in vendor updates</td>
+<td>Someone has to notice, then rebuild</td>
+</tr>
+<tr class="even">
+<td>Fixing bugs</td>
+<td>Vendor support</td>
+<td>Your staff time, plus usage</td>
+</tr>
+<tr class="odd">
+<td>When the builder leaves</td>
+<td>The product carries on</td>
+<td>Nobody may understand the system</td>
+</tr>
+<tr class="even">
+<td>A data breach</td>
+<td>The vendor handles the technical response; your own duties to staff and regulators stay with you</td>
+<td>All yours: investigation, fixing it, your duties to staff and regulators, legal costs, higher insurance premiums</td>
+</tr>
+<tr class="odd">
+<td>HR's own time</td>
+<td>Routine tasks are a click</td>
+<td>Time spent testing, reporting bugs and working around gaps</td>
+</tr>
+</tbody>
+</table></div>
+<p>For a sense of scale on the breach line: IBM's 2026 Cost of a Data Breach report puts the global average cost of a breach at $4.99 million, and breaches took 247 days on average to find and contain (<a href="https://www.ibm.com/reports/data-breach">IBM report</a>, via <a href="https://www.esecurityplanet.com/cybersecurity/ibm-2026-cost-of-a-data-breach-report-key-findings/">eSecurity Planet's summary</a>). These are averages across the organisations IBM studied, not a prediction for yours. Even a breach costing a small fraction of that would outweigh years of subscription fees.</p>
+<p>The question to ask whoever is proposing the build: <strong>what is the full yearly cost, including people's time, and who owns each line?</strong> If nobody can answer, the "free" option hasn't been costed.</p>
+<p><em>What would change my mind:</em> real cost records from a comparable organisation that built and ran its own HR system, including staff time, for less than a subscription over two or more years.</p>
+<h3 id="section-5-feeling-faster-isnt-the-same-as-being-faster">Feeling faster isn't the same as being faster<a class="anchor" href="#section-5-feeling-faster-isnt-the-same-as-being-faster" aria-label="Link to this section">#</a></h3>
+<p>In a 2025 randomised trial by the research group METR, 16 experienced developers worked on 246 real tasks. With AI tools they <a href="https://arxiv.org/abs/2507.09089">took about 19% longer</a>, yet afterwards believed AI had made them about 20% faster. METR's <a href="https://metr.org/blog/2026-02-24-uplift-update/">2026 follow-up</a> with newer tools found signs that AI now speeds people up, but called its own data "only very weak evidence", partly because some developers declined to take part, or held back tasks, rather than work without AI. The lesson isn't that AI is slow. It's that how fast AI <em>feels</em> is a poor guide to how fast it <em>is</em>. Measure the time actually spent, including fixing and checking.</p>
+<h2 id="section-6">6. Why an HR system is a risky place to start<a class="anchor" href="#section-6" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>An HRIS is a system of record. It holds some of the most sensitive data an organisation has, and people's pay, leave and rights depend on it being right.</p>
+<ul>
+<li><strong>Sensitive data:</strong> home addresses, bank details, ID documents, salaries, absence and health notes, disciplinary records, right-to-work checks.</li>
+<li><strong>Rules on data:</strong> most places have rules on how employee data is stored, who can see it, how long it's kept and what happens after a breach. They vary by location and they change.</li>
+<li><strong>Many users:</strong> employees, managers and HR each need different access. Getting permissions wrong means someone sees a colleague's salary or medical note.</li>
+<li><strong>Audit trails:</strong> you may need to show who changed what and when, for example in a dispute.</li>
+<li><strong>Links to other systems:</strong> payroll, benefits, e-signatures, rota tools. Each link is another thing that can break or leak.</li>
+</ul>
+<h3 id="section-6-ai-written-code-is-often-insecure-by-default">AI-written code is often insecure by default<a class="anchor" href="#section-6-ai-written-code-is-often-insecure-by-default" aria-label="Link to this section">#</a></h3>
+<p>Security firm Veracode has tested code from more than 100 AI models since it began this research. In its July 2026 report, the code was almost always valid, but it <a href="https://sdtimes.com/agentic-security/veracode-finds-ai-generated-code-security-has-barely-improved-since-last-year/">failed about 44% of security tests</a> when nobody asked for security specifically. Models built for coding did no better than general ones. Veracode sells security tools, so weigh that. Fowler makes a similar point: vibe-coded apps <a href="https://martinfowler.com/bliki/VibeCoding.html">can expose sensitive data or credentials</a>, and a change in one place can quietly break another.</p>
+<h3 id="section-6-a-real-example">A real example<a class="anchor" href="#section-6-a-real-example" aria-label="Link to this section">#</a></h3>
+<p>Thoughtworks <a href="https://martinfowler.com/articles/vibesec-reckoning.html">published a case</a> from its own marketing team in May 2026. A non-technical colleague built a prototype video tool with AI. When the team's engineers then worked with AI to scale it up, the AI recommended storing files so that anyone with a link could open them, and when challenged, said every company does this. A service account was also given far more access than the task needed, which the team caught before running the code. Both problems were caught because a person asked a question, and the tool then went out to 150 users. The team's lesson: telling an AI to be secure doesn't make it secure. Note that the AI pushed these defaults on professional engineers, not just a beginner.</p>
+<h3 id="section-6-describing-a-standard-isnt-the-same-as-meeting-it">Describing a standard isn't the same as meeting it<a class="anchor" href="#section-6-describing-a-standard-isnt-the-same-as-meeting-it" aria-label="Link to this section">#</a></h3>
+<p>Our take: a common suggestion is to give the AI a vendor's security and compliance pages and ask it to match them. It won't do what people hope. Those pages describe results: outside audits passed, encryption in place, penetration tests done, a breach response team on call. Each one stands for months of work, staff to run it and an independent firm checking it.</p>
+<p>An AI that reads those pages can produce code that looks secure: a login screen, a setting labelled "encryption". Whether it protects anything is something only a skilled reviewer can tell. If nobody in the room could check the result, the AI hasn't replaced the expertise. It has hidden that the expertise is missing.</p>
+<h2 id="section-7">7. Fairness, privacy and access<a class="anchor" href="#section-7" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>Whatever you build, plan for these three things from day one. This section sticks to practice. Where the law comes into it, the rules vary by country and state and are changing quickly, so check what applies to you locally with an adviser.</p>
+<h3 id="section-7-fairness">Fairness<a class="anchor" href="#section-7-fairness" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Unfair outcomes are your problem, whoever wrote the code.</strong> If the system screens, ranks, scores or flags people, someone in your organisation needs to own checking its results for bias. Using a vendor's tool doesn't hand that job away.</li>
+<li><strong>Rules on AI in hiring and employment are still being written and rewritten.</strong> Check what applies to you before the system touches any decision about people.</li>
+<li><strong>A vibe-coded system can bake in bias without anyone choosing it,</strong> for example through default categories, required fields or filtering rules nobody reviewed. Ask who might be treated differently, and test for it.</li>
+</ul>
+<h3 id="section-7-privacy-by-design">Privacy by design<a class="anchor" href="#section-7-privacy-by-design" aria-label="Link to this section">#</a></h3>
+<p>Build data protection in from the start rather than adding it later. In my view that means at least: collecting only what you need, making the most private setting the default, limiting access by role, and assessing the risks before going live. AI tools tend to default to convenience instead, as the example in section 6 shows.</p>
+<h3 id="section-7-accessibility">Accessibility<a class="anchor" href="#section-7-accessibility" aria-label="Link to this section">#</a></h3>
+<p>Everyone on staff has to be able to use the system, including people who use screen readers, keyboard-only navigation or magnification. The W3C's <a href="https://www.w3.org/TR/WCAG22/">WCAG 2.2</a> is the current version of its accessibility guidelines. You can ask the AI to build to it, but checking that it did means testing with real assistive technology, and with disabled colleagues who are willing to try it.</p>
+<h2 id="section-8">8. Try it: plan one module before building anything<a class="anchor" href="#section-8" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>The best way to see what building an HRIS involves is to plan one small part of it properly. It takes an afternoon, costs only time, and is useful whatever you decide. If you build, it's your spec. If you buy, it's your checklist for comparing vendors.</p>
+<p>Take leave requests. On the surface it's one sentence: <em>staff request leave and their manager approves it.</em> Underneath, these are the questions someone has to answer before the code can be right.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Area</th>
+<th>Questions you'll need to answer</th>
+<th>Who usually answers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Policy rules</td>
+<td>Is leave given yearly or built up monthly? How is it worked out for part-timers and people who join or leave mid-year? Can it carry over, and does it expire? Half days or hours? Can a balance go negative?</td>
+<td>HR</td>
+</tr>
+<tr class="even">
+<td>Leave types</td>
+<td>Holiday, sick, parental, bereavement, unpaid, time off in lieu. Does each have its own rules and balance?</td>
+<td>HR, with legal advice</td>
+</tr>
+<tr class="odd">
+<td>Public holidays</td>
+<td>Do they differ by location? Who updates them each year?</td>
+<td>HR</td>
+</tr>
+<tr class="even">
+<td>Approvals</td>
+<td>Who approves when the manager is off? Can HR override? What happens if approved leave is cancelled?</td>
+<td>HR and an engineer</td>
+</tr>
+<tr class="odd">
+<td>Who sees what</td>
+<td>Can staff see colleagues' leave? Who can see the reason for sick leave?</td>
+<td>HR, legal adviser, engineer</td>
+</tr>
+<tr class="even">
+<td>Records</td>
+<td>Where is the data stored? How long is it kept? Is every change logged? What's deleted when someone leaves?</td>
+<td>Legal adviser and engineer</td>
+</tr>
+<tr class="odd">
+<td>Links to other systems</td>
+<td>Does unpaid leave or holiday pay on leaving go to payroll? Do approvals send emails or appear in calendars?</td>
+<td>Engineer</td>
+</tr>
+<tr class="even">
+<td>Awkward cases</td>
+<td>Overlapping requests, policy changes mid-year, fixing a past mistake, time zones for remote staff</td>
+<td>HR and engineer, then tests</td>
+</tr>
+<tr class="odd">
+<td>Running it</td>
+<td>Logins and password resets, backups, what happens if it's down on payroll day, who fixes bugs</td>
+<td>Engineer or IT</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-8-how-to-use-the-exercise">How to use the exercise<a class="anchor" href="#section-8-how-to-use-the-exercise" aria-label="Link to this section">#</a></h3>
+<ol type="1">
+<li><strong>Answer everything you can.</strong> Most of the policy questions are yours, and writing them down is valuable on its own.</li>
+<li><strong>Mark what you can't answer.</strong> Be honest. Those gaps are where the risk is.</li>
+<li><strong>Look at the "engineer" column.</strong> If nobody in your organisation can answer those, an AI can't answer them for you either. It will guess, and the guesses will look finished.</li>
+<li><strong>Multiply.</strong> Leave is one module. A basic HRIS also covers employee records, onboarding and leaving, documents and e-signatures, reporting, and often recruitment. Each has a table like this one.</li>
+</ol>
+<p>This isn't meant to put anyone off trying. Trying is often the fastest way to learn. Planning one module properly usually shows what a vendor has already done for you, and where AI-assisted engineering, with people who know how to build software, has to come in.</p>
+<h2 id="section-9">9. Asking like an engineer, not making a wish<a class="anchor" href="#section-9" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>What an AI builds depends heavily on what you tell it. A good request is a small plan: what it's for, who uses it, what data it touches, what must never happen, and how you'll know it works.</p>
+<h3 id="section-9-the-same-feature-asked-two-ways">The same feature, asked two ways<a class="anchor" href="#section-9-the-same-feature-asked-two-ways" aria-label="Link to this section">#</a></h3>
+<p><strong>The wish:</strong></p>
+<pre><code>Build a time-off request system for our staff.</code></pre>
+<p>The AI has to guess who can approve, what happens to balances, who can see what, and how data is stored. It will guess, and it will look finished.</p>
+<p><strong>The plan:</strong></p>
+<pre><code>I want to build ONE small piece: a form where an employee requests annual leave.
+Don&#39;t write any code yet. First, reply with a plan and a list of risks.
+
+Users:
+- Employees can request leave and see only their own requests.
+- Their direct manager can approve or reject. Nobody else can.
+
+Rules:
+- A request can&#39;t be longer than the employee&#39;s remaining balance.
+- Approved requests reduce the balance. Rejected ones don&#39;t.
+- Every approval or rejection is logged with who did it and when.
+
+Must never happen:
+- One employee seeing another employee&#39;s requests or balance.
+- Real employee data being used while we test. Use made-up test people.
+
+Done means:
+- Write tests that check each rule above, and show me them passing.
+- Explain in plain English what you built, and anything you&#39;re unsure about.</code></pre>
+<h3 id="section-9-habits-that-make-the-biggest-difference">Habits that make the biggest difference<a class="anchor" href="#section-9-habits-that-make-the-biggest-difference" aria-label="Link to this section">#</a></h3>
+<ol type="1">
+<li><strong>Plan before code.</strong> Ask for a plan and a risk list first, and read it.</li>
+<li><strong>One small piece at a time.</strong> One form, one rule, one screen. Check it works before moving on.</li>
+<li><strong>Say what must never happen.</strong> AI often leaves security out unless asked (section 6).</li>
+<li><strong>Ask for tests.</strong> Tests are small checks that a rule works, and they keep checking it after later changes.</li>
+<li><strong>Ask it to explain.</strong> If the explanation doesn't make sense to you, nobody on the team understands the system yet.</li>
+<li><strong>Ask what could go wrong.</strong> Ask "what are the risks in what you just built?" and take the answer seriously.</li>
+</ol>
+<h3 id="section-9-not-sure-what-you-want-yet-let-the-ai-interview-you">Not sure what you want yet? Let the AI interview you<a class="anchor" href="#section-9-not-sure-what-you-want-yet-let-the-ai-interview-you" aria-label="Link to this section">#</a></h3>
+<p>Anthropic's own guidance suggests asking the AI to <a href="https://code.claude.com/docs/en/best-practices">interview you until it could write the spec</a>, then building from that written spec in a fresh session. This suits non-engineers, because the AI asks about the parts you hadn't thought of:</p>
+<pre><code>I want to build a leave request form for a 30-person company. I haven&#39;t
+thought it through yet. Interview me, one question at a time, until you
+could write a full spec. Include questions about who can see what, what
+must never happen, and how we&#39;ll test it. Then write the spec. No code.</code></pre>
+<h3 id="section-9-what-the-ai-companies-themselves-say">What the AI companies themselves say<a class="anchor" href="#section-9-what-the-ai-companies-themselves-say" aria-label="Link to this section">#</a></h3>
+<p>The companies selling these tools give much the same advice:</p>
+<ul>
+<li><strong>Plan before code.</strong> <a href="https://learn.chatgpt.com/guides/best-practices">OpenAI's Codex guide</a> says to plan first when a task is complex or unclear, and suggests having the AI interview you. Anthropic's guide suggests the same interview step.</li>
+<li><strong>Give it a way to check its work.</strong> <a href="https://code.claude.com/docs/en/best-practices">Anthropic notes</a> that without a pass-or-fail check, the AI stops when the work <em>looks</em> done, and you become the test.</li>
+<li><strong>Ask for evidence.</strong> Not "all tests pass", but the command it ran and the result.</li>
+<li><strong>A prompt is a request, not a guarantee.</strong> Anthropic is explicit that a model usually follows an instruction but isn't guaranteed to. Anything that must <em>never</em> happen needs enforcing through settings or automated checks, which someone technical has to set up.</li>
+<li><strong>Start fresh rather than arguing.</strong> If two corrections haven't fixed it, start a new session with a better request.</li>
+</ul>
+<p>Google's Cloud developer team <a href="https://cloud.google.com/blog/topics/developers-practitioners/five-best-practices-for-using-ai-coding-assistants">reached similar conclusions</a> after using its Gemini tools on complex projects: save a step-by-step plan and approve it before anything is built, give the AI the details you'd give a new teammate, and keep a running notes file so each session picks up where the last one left off. GitHub has turned the plan-first approach into a free toolkit, <a href="https://github.github.com/spec-kit/">Spec Kit</a>, where a written spec feeds a plan, the plan feeds a task list, and only then does the AI write code.</p>
+<p>A better request makes vibe coding safer, but it doesn't turn it into engineering. Someone still has to be able to check the answer.</p>
+<h2 id="section-10">10. If you're building it anyway: the guardrails<a class="anchor" href="#section-10" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>Nobody can stop every organisation from vibe coding. These steps don't make it safe, but they make it far less risky. Each one is something a non-engineer can do or insist on.</p>
+<h3 id="section-10-before-you-start">Before you start<a class="anchor" href="#section-10-before-you-start" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />Write down the one problem it solves, in a sentence. If you can't, stop here.</label></li>
+<li><label><input type="checkbox" disabled="" />Name an owner who is responsible for it after launch, and a backup person.</label></li>
+<li><label><input type="checkbox" disabled="" />Set a budget and turn on spending caps and usage alerts in the AI tool.</label></li>
+<li><label><input type="checkbox" disabled="" />Agree what data it will hold, and leave out anything you don't strictly need.</label></li>
+<li><label><input type="checkbox" disabled="" />Check which data rules apply to you, with a qualified adviser.</label></li>
+</ul>
+<h3 id="section-10-while-building">While building<a class="anchor" href="#section-10-while-building" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />Don't use real employee data. Test with made-up people.</label></li>
+<li><label><input type="checkbox" disabled="" />Use version control from day one. It keeps every past version, so a bad change can be undone. Ask the AI to set it up.</label></li>
+<li><label><input type="checkbox" disabled="" />Build one small piece at a time, from a written plan (section 9).</label></li>
+<li><label><input type="checkbox" disabled="" />Ask for tests for every rule, and run them after every change.</label></li>
+<li><label><input type="checkbox" disabled="" />Keep a short decision log: what was built, why, and what's still unsure.</label></li>
+<li><label><input type="checkbox" disabled="" />Don't paste passwords, keys or real records into the AI chat.</label></li>
+<li><label><input type="checkbox" disabled="" />Question every permission the AI suggests. Be wary of anything public, "anyone with the link", or broad access to company systems.</label></li>
+<li><label><input type="checkbox" disabled="" />Don't accept "everyone does it this way" from an AI. Ask for the most secure option and the trade-off.</label></li>
+</ul>
+<h3 id="section-10-before-anyone-else-uses-it">Before anyone else uses it<a class="anchor" href="#section-10-before-anyone-else-uses-it" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />Have a qualified engineer review the code and the security. This is the one step not to skip.</label></li>
+<li><label><input type="checkbox" disabled="" />Check every role's access: can an employee see anything they shouldn't?</label></li>
+<li><label><input type="checkbox" disabled="" />Run an attacker review: ask the AI, in a fresh session, to act as someone trying to break in or see data they shouldn't, and list what it finds. Treat it as a first pass, not a substitute for the engineer review.</label></li>
+<li><label><input type="checkbox" disabled="" />Confirm backups exist, and test restoring one.</label></li>
+<li><label><input type="checkbox" disabled="" />Write down what happens if it breaks: who gets called, and how people keep working in the meantime.</label></li>
+<li><label><input type="checkbox" disabled="" />Plan your exit: how you'd move the data into a bought system if this doesn't work out.</label></li>
+</ul>
+<p>The permission and attacker-review steps are adapted from <a href="https://martinfowler.com/articles/vibesec-reckoning.html">Thoughtworks' VibeSec Reckoning</a>.</p>
+<h2 id="section-11">11. Which approach fits?<a class="anchor" href="#section-11" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>Match the approach to what's at stake. The more people who rely on it, and the more sensitive the data, the further down this table you are.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>What you're making</th>
+<th>Example</th>
+<th>Approach</th>
+<th>Who needs to be involved</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A throwaway experiment</td>
+<td>A mock-up to show what a leave form could look like</td>
+<td>Vibe coding is fine</td>
+<td>Just you</td>
+</tr>
+<tr class="even">
+<td>A personal helper</td>
+<td>A spreadsheet formula, a script that renames your files</td>
+<td>Vibe coding, with care and no sensitive data</td>
+<td>You, checking the results</td>
+</tr>
+<tr class="odd">
+<td>A team workflow</td>
+<td>Filing expense receipts, drafting standard letters from a template</td>
+<td>Automation or AI-assisted engineering</td>
+<td>Someone who can check it, and an owner</td>
+</tr>
+<tr class="even">
+<td>A system of record</td>
+<td>HRIS, payroll, applicant tracking, anything with employee data</td>
+<td>Buy a proven product; build only with real engineering</td>
+<td>Engineers, security review, legal advice, a named owner</td>
+</tr>
+</tbody>
+</table></div>
+<p>Our take: for most small and mid-sized organisations, the honest answer for an HRIS is to buy one, and use AI around it for the tedious parts that don't involve sensitive data.</p>
+<p><em>What would change my mind:</em> an organisation with its own engineers and security staff, or a need no product on the market meets. Both shift the answer towards building, with AI-assisted engineering.</p>
+<h2 id="section-12">12. Glossary<a class="anchor" href="#section-12" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Agent</td>
+<td>An AI tool that takes several steps on its own, such as reading files, writing code and running it</td>
+</tr>
+<tr class="even">
+<td>Context window</td>
+<td>How much text the AI can hold in view at once</td>
+</tr>
+<tr class="odd">
+<td>Hallucination</td>
+<td>When an AI states something false with confidence, or writes code that seems right but isn't</td>
+</tr>
+<tr class="even">
+<td>Model</td>
+<td>The AI itself, such as Claude Sonnet or GPT. Different models cost different amounts</td>
+</tr>
+<tr class="odd">
+<td>Production</td>
+<td>The live version real people use, as opposed to a test version</td>
+</tr>
+<tr class="even">
+<td>Prompt</td>
+<td>The instructions you give the AI</td>
+</tr>
+<tr class="odd">
+<td>Spec</td>
+<td>A written plan of what to build and the rules it must follow</td>
+</tr>
+<tr class="even">
+<td>System of record</td>
+<td>The official source of truth for something, such as who works here and what they're paid</td>
+</tr>
+<tr class="odd">
+<td>Technical debt</td>
+<td>Shortcuts that make a system harder and costlier to change later</td>
+</tr>
+<tr class="even">
+<td>Test</td>
+<td>A small automated check that a rule works</td>
+</tr>
+<tr class="odd">
+<td>Token</td>
+<td>A small chunk of text. AI usage is measured and billed in tokens</td>
+</tr>
+<tr class="even">
+<td>Version control</td>
+<td>A record of every change to the code, so mistakes can be undone</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-13">13. Sources and changelog<a class="anchor" href="#section-13" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<h3 id="section-13-sources">Sources<a class="anchor" href="#section-13-sources" aria-label="Link to this section">#</a></h3>
+<p>Free to read, as far as we could check. IBM's full report may ask you to sign up.</p>
+<ul>
+<li><a href="https://claude.com/pricing">Anthropic: Claude pricing</a> and <a href="https://platform.claude.com/docs/en/about-claude/pricing">Claude API pricing</a>. Vendor documentation. Model prices, tokenizer note.</li>
+<li><a href="https://support.claude.com/en/articles/9266767-what-is-the-team-plan">Claude Help Center: What is the Team plan?</a> Vendor documentation. Seat prices, usage limits.</li>
+<li><a href="https://code.claude.com/docs/en/best-practices">Anthropic: Best practices for Claude Code</a>. Vendor documentation. Checks, evidence, enforcement, interviews.</li>
+<li><a href="https://learn.chatgpt.com/guides/best-practices">OpenAI: Codex best practices</a>. Vendor documentation. Plan first, tests and review.</li>
+<li><a href="https://cloud.google.com/blog/topics/developers-practitioners/five-best-practices-for-using-ai-coding-assistants">Loftesness and Davenport: Five best practices for using AI coding assistants</a> (Google Cloud, October 2025). Vendor blog. Plans, context, prompting.</li>
+<li><a href="https://github.github.com/spec-kit/">GitHub Spec Kit</a>. Open-source project site. Spec, plan, tasks, implement.</li>
+<li><a href="https://martinfowler.com/bliki/VibeCoding.html">Martin Fowler: Vibe Coding</a> (May 2026). Practitioner essay. Definition, origin of the term, limitations.</li>
+<li><a href="https://simonwillison.net/2026/may/6/vibe-coding-and-agentic-engineering">Simon Willison: Vibe coding and agentic engineering are getting closer than I'd like</a> (May 2026). Practitioner blog. Accountability, software for others.</li>
+<li><a href="https://martinfowler.com/articles/vibesec-reckoning.html">Koul, Moss, Drew-Lopez and Edeokoh: The VibeSec Reckoning</a> (Thoughtworks, May 2026). Practitioner case study. Real-world case, guardrails.</li>
+<li><a href="https://arxiv.org/abs/2507.09089">Becker, Rush, Barnes and Rein: Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity</a> (METR, 2025). Randomised controlled trial, preprint. And <a href="https://metr.org/blog/2026-02-24-uplift-update/">METR's February 2026 update</a>.</li>
+<li><a href="https://sdtimes.com/agentic-security/veracode-finds-ai-generated-code-security-has-barely-improved-since-last-year/">SD Times on Veracode's 2026 GenAI Code Security Report</a> (July 2026). Veracode press release, published via SD Times. Veracode sells security tools.</li>
+<li><a href="https://www.ibm.com/reports/data-breach">IBM: Cost of a Data Breach Report 2026</a>, figures taken from <a href="https://www.esecurityplanet.com/cybersecurity/ibm-2026-cost-of-a-data-breach-report-key-findings/">eSecurity Planet's summary</a>. Vendor research, reported by trade press.</li>
+<li><a href="https://www.w3.org/TR/WCAG22/">W3C: Web Content Accessibility Guidelines (WCAG) 2.2</a>. Standards body.</li>
+</ul>
+<p>Prices, research and rules in this area change quickly. If you spot something wrong or out of date, corrections are welcome.</p>
+<h3 id="section-13-changelog">Changelog<a class="anchor" href="#section-13-changelog" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Version</th>
+<th>Date</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.1.1</td>
+<td>12 November 2026</td>
+<td>Fixes from the first integrity audit. Section 7 reworded to practice only, with legal detail left to local advice. Thoughtworks example corrected to match the source. Expense receipts replace CV sorting as the low-stakes automation example. Buy-vs-build table softened where it overstated what vendors do, and breach row corrected. Smaller wording fixes (Willison paraphrase, METR follow-up, Veracode scope, Haiku pricing tier, "tests check" not "prove"). Corrections links added.</td>
+</tr>
+<tr class="even">
+<td>0.1</td>
+<td>12 November 2026</td>
+<td>First version.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p>People Practice Playbook, Vol. 3 · Specious Coda-Bishop · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+
+    </main>
+
+    <footer class="doc-footer">
+        <div class="licence-box">
+            <span class="note-label">Licence</span>
+            <p><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Credit: Specious Coda-Bishop. Take it, change it and share it. Credit it and keep your version open on the same terms.</p>
+            <p><a class="download" href="people-practice-playbook-vol3-v0.1.1.md" download>Download the markdown (v0.1.1)</a></p>
+        </div>
+        <p class="history">Version history: <a href="#section-13-changelog">changelog in section 13</a> · <a href="https://github.com/iamspecious/portfolio/blob/main/people-practice-playbook/vol-3/DEVLOG.md">dev log on GitHub</a></p>
+        <p class="links">Specious Coda-Bishop · <a href="https://github.com/iamspecious/portfolio">Suggest a correction on GitHub</a> · <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a> · <a href="../vol-2/">Previous volume</a> · <a href="../../index.html#doc-people-practice-playbook-vol-3">Back to portfolio</a></p>
+    </footer>
+</div>
+</body>
+</html>
