@@ -823,6 +823,13 @@
                                 Three documents moved in: People Practice Vol. 1 (Job Architecture and Levelling), Vol. 2 (Onboarding New Hires), and The Small Studio Crisis Playbook. All three are openly licensed, all three are built for real use rather than demonstration, and all three have devlogs tracking decisions as they happened. The crisis playbook is a different domain and audience from the People Practice series, but the “built to be used” framing holds for all three and that’s what the tab is for.
                             </p>
                         </div>
+                        <div class="devlog-entry">
+                            <span class="timestamp">2026-11-12: Vol. 3 published</span>
+                            <p>
+                                <span class="tag tag-done">Done</span>
+                                Published People Practice Playbook, Vol. 3: Building HR Tools with AI (v0.1.1), after Vol. 2 in the series. Built the same way as Vols. 1 and 2, in people-practice-playbook/vol-3/. Reused Vol. 2's index tags (people-hr, technical-writing, research) and existing card tags, including Prompt engineering; no new tags or taxonomy terms. New for this volume: section 9's example prompts show as preformatted blocks, and section 10's checklists as read-only boxes. Vols. 1 and 2 are unchanged; Vol. 3 links back to Vol. 2.
+                            </p>
+                        </div>
                     </div>
 
                     <div class="project-block" data-date="2026-11-06" data-category="writing research">
@@ -979,6 +986,85 @@
 
                     </div><!-- /project -->
                     </div><!-- /project-block: People Practice Playbook, Vol. 2 -->
+
+                    <div class="project-block" data-date="2026-11-12" data-category="writing research">
+                    <div class="project" id="doc-people-practice-playbook-vol-3">
+                        <h3>People Practice Playbook, Vol. 3: Building HR Tools with AI <span class="badge" style="background:#21262d;color:#b392f0;border:1px solid #6e40c9;font-size:0.7rem;vertical-align:middle;padding:2px 8px;border-radius:4px;">CC BY-SA 4.0</span></h3>
+                        <p><strong>November 2026</strong> · Version 0.1.1 · Follows <a href="#doc-people-practice-playbook-vol-2" style="color:#b392f0;">Vol. 2: Onboarding New Hires</a></p>
+                        <p>An open, living playbook for anyone being asked to approve, fund or build an HR tool with AI. It explains vibe coding versus AI-assisted engineering, what building really costs, and the guardrails to put in place if you go ahead anyway.</p>
+                        <p><strong>What it demonstrates:</strong></p>
+                        <ul style="margin-top:0.25rem;">
+                            <li>Four ways people use AI, told apart by who decides, who checks the result and who fixes it when it breaks</li>
+                            <li>Tokens as the way in, widened to the all-in cost of building, because on flat-rate seats the token bill alone can look small</li>
+                            <li>A planning exercise for one module (leave requests) that shows the hidden decisions under a "simple" feature without putting anyone off trying</li>
+                            <li>Three checklists in section 10 for organisations that build anyway, each step something a non-engineer can do or insist on</li>
+                        </ul>
+                        <div class="project-constraints">
+                            <strong>Deliberate scope &amp; exclusions</strong>
+                            <ul>
+                                <li>Legal detail cut back to principles plus a "check locally" pointer, in line with the series. Researched-but-excluded law is logged in the research notes.</li>
+                                <li>Every cost is labelled as an example, with links to live pricing</li>
+                                <li>Researched and drafted with AI, and says so, which is also why the pricing examples use Claude</li>
+                            </ul>
+                        </div>
+                        <div class="roadmap">
+                            <strong class="roadmap-heading">// roadmap</strong>
+                            <ol>
+                                <li><strong>Hand spot-checks</strong> from the audit: the Opus 5.5 price, METR's 19% figure, Veracode's ~44% figure, and the Thoughtworks passage behind the section 6 example.</li>
+                                <li><strong>IBM report</strong>: confirm whether it is free to read without a sign-up.</li>
+                                <li><strong>Karpathy's original post</strong>: link it alongside Fowler's page, if it can be reached.</li>
+                                <li><strong>Pricing in section 4</strong>: re-check before any new version, as it goes stale fastest.</li>
+                            </ol>
+                        </div>
+                        <p style="margin-top: 10px;">
+                            <span class="tech-tag">People Practice</span>
+                            <span class="tech-tag">Evidence-Based HR</span>
+                            <span class="tech-tag">Prompt engineering</span>
+                            <span class="tech-tag">Technical Writing</span>
+                            <span class="tech-tag">CC BY-SA 4.0</span>
+                        </p>
+                        <p><a href="people-practice-playbook/vol-3/" style="color:#b392f0;font-weight:600;">Read the playbook →</a> · <a href="people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md" download style="color:#b392f0;">Download the markdown</a></p>
+
+                        <div class="devlog">
+                            <div class="devlog-header">
+                                <span>// devlog</span>
+                                <small>running build notes: decisions, pivots, wins, and constraints. Full log in <a href="https://github.com/iamspecious/portfolio/blob/main/people-practice-playbook/vol-3/DEVLOG.md">DEVLOG.md</a></small>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-11-12</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    v0.1.1, integrity audit fixes. An independent audit by a separate agent that saw only the playbook passed it with fixes: 78 claims, none fabricated. Section 7 rewritten to practice only, the Thoughtworks example corrected to match the source, and expense receipts replace CV sorting as the low-stakes example. v0.1 was never published, so only v0.1.1 goes live.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-11-12</span>
+                                <p>
+                                    <span class="tag tag-pivot">Pivot</span>
+                                    The METR follow-up changed the story. The guide no longer implies AI makes people slower; it says how fast AI feels is a poor guide to how fast it is.
+                                </p>
+                            </div>
+
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 1 older entry</button>
+
+                            <div class="devlog-overflow">
+
+                            <div class="devlog-entry">
+                                <span class="timestamp">2026-11-11</span>
+                                <p>
+                                    <span class="tag tag-decision">Decision</span>
+                                    Started from a conversation in a People Ops community about an organisation wanting to vibe code its whole HRIS instead of paying for one. Written for anyone in that position, naming no one. Tokens are the way in, but the argument widens to total cost of ownership.
+                                </p>
+                            </div>
+
+                            </div><!-- /devlog-overflow -->
+
+                        </div><!-- /devlog -->
+
+                    </div><!-- /project -->
+                    </div><!-- /project-block: People Practice Playbook, Vol. 3 -->
 
                     <div class="project-block" data-date="2026-09-01" data-category="writing">
                     <div class="project" id="doc-crisis-management-playbook">

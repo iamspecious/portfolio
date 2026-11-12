@@ -1626,6 +1626,43 @@
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-2/people-practice-playbook-vol2-v0.1.1.md by people-practice-playbook/vol-2/build.py; that markdown is offered as a download. The v0.1 draft and the working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
   {
+    "id": "people-practice-playbook-vol-3",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "People Practice Playbook, Vol. 3: Building HR Tools with AI",
+    "dateStart": "2026-11",
+    "dateEnd": "2026-11",
+    "status": "live",
+    "domains": [
+      "people-hr",
+      "technical-writing",
+      "research"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "writing-range"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "keywords": ["hris", "vibe coding", "build vs buy", "guardrails", "tokens", "prompts", "creative commons"],
+    "tools": [],
+    "summary": "An open, living playbook for anyone being asked to approve, fund or build an HR tool with AI. It explains vibe coding versus AI-assisted engineering, what building really costs, and the guardrails to put in place if you go ahead anyway.",
+    "anchor": "people-practice-playbook/vol-3/",
+    "pageAnchor": "#doc-people-practice-playbook-vol-3",
+    "relatedIds": [
+      "people-practice-playbook-vol-2",
+      "people-practice-playbook"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
+  },
+  {
     "id": "crisis-management-playbook",
     "schemaVersion": 1,
     "type": "document",
