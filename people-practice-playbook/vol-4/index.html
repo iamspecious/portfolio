@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Practice Playbook, Vol. 4: Safety Plans · Specious Coda-Bishop</title>
+    <meta name="description" content="An open, living playbook on safety plans: what they are, why everyone should have one, what goes in one, and what HR should do when someone comes to them. Includes a checked list of Canadian crisis and support services.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Specious Coda Bishop, Portfolio">
+    <meta property="og:title" content="People Practice Playbook, Vol. 4: Safety Plans">
+    <meta property="og:description" content="An open, living playbook on safety plans: what they are, why everyone should have one, what goes in one, and what HR should do when someone comes to them. Includes a checked list of Canadian crisis and support services.">
+    <meta property="og:url" content="https://iamspecious.github.io/portfolio/people-practice-playbook/vol-4/">
+    <meta name="twitter:card" content="summary">
+    <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+    <!-- Built from people-practice-playbook-vol4-v0.1.1.md by build.py. Edit the markdown, then rebuild. -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        a { color: #b392f0; }
+        a:hover { color: #d2b3ff; }
+        .doc-container { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+
+        .back-link {
+            color: #b392f0; text-decoration: none; font-size: 0.82rem;
+            display: inline-flex; align-items: center; gap: 6px; margin-bottom: 40px;
+        }
+
+        .doc-header { border-bottom: 2px solid #30363d; padding-bottom: 28px; margin-bottom: 28px; }
+        .doc-label {
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.12em; color: #b392f0; margin-bottom: 10px; display: block;
+        }
+        .doc-title { font-size: 1.75rem; font-weight: 700; color: #e6edf3; line-height: 1.3; margin-bottom: 6px; }
+        .doc-subtitle { font-size: 0.92rem; color: #8b949e; margin-bottom: 4px; }
+        .doc-version { font-size: 0.82rem; color: #8b949e; }
+        .doc-version a { text-decoration: none; }
+
+        .licence-box {
+            background: #161b22; border: 1px solid #30363d; border-left: 4px solid #b392f0;
+            border-radius: 0 6px 6px 0; padding: 18px 22px; margin-bottom: 32px;
+        }
+        .licence-box .note-label {
+            font-size: 0.63rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: #b392f0; margin-bottom: 8px; display: block;
+        }
+        .licence-box p { font-size: 0.88rem; line-height: 1.7; margin-bottom: 10px; }
+        .licence-box p:last-child { margin-bottom: 0; }
+        .download {
+            display: inline-block; background: #6e40c9; color: #fff; font-weight: 700;
+            font-size: 0.82rem; text-decoration: none; padding: 8px 14px; border-radius: 5px;
+        }
+        .download:hover { background: #8957e5; color: #fff; }
+
+        .toc {
+            background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+            padding: 20px 24px; margin-bottom: 52px;
+        }
+        .toc-label {
+            font-size: 0.63rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: #8b949e; margin-bottom: 12px; display: block;
+        }
+        .toc ol { list-style: none; }
+        .toc li { border-bottom: 1px solid #21262d; }
+        .toc li:last-child { border-bottom: none; }
+        .toc a { display: flex; gap: 14px; padding: 8px 0; color: #e6edf3; text-decoration: none; font-size: 0.9rem; }
+        .toc a:hover { color: #b392f0; }
+        .toc-num { font-family: 'Consolas', monospace; color: #b392f0; font-weight: 700; flex-shrink: 0; }
+
+        .doc-body h2 {
+            font-size: 1.2rem; font-weight: 700; color: #e6edf3; line-height: 1.35;
+            border-bottom: 2px solid #30363d; padding-bottom: 10px;
+            margin: 64px 0 20px; scroll-margin-top: 20px;
+        }
+        .doc-body h2:first-child { margin-top: 0; }
+        .doc-body h3 {
+            font-size: 0.82rem; font-weight: 700; color: #b392f0; text-transform: uppercase;
+            letter-spacing: 0.08em; margin: 36px 0 14px; scroll-margin-top: 20px;
+        }
+        .doc-body .anchor {
+            margin-left: 8px; color: #484f58; text-decoration: none; font-weight: 400;
+            opacity: 0; transition: opacity 0.15s;
+        }
+        .doc-body h2:hover .anchor, .doc-body h3:hover .anchor,
+        .doc-body .anchor:focus { opacity: 1; }
+        .doc-body p, .doc-body li { font-size: 0.92rem; color: #c9d1d9; line-height: 1.75; }
+        .doc-body p { margin-bottom: 14px; }
+        .doc-body ul, .doc-body ol { padding-left: 22px; margin: 10px 0 20px; }
+        .doc-body li { margin-bottom: 8px; padding-left: 4px; }
+        .doc-body strong { color: #e6edf3; }
+        .doc-body em { color: #8b949e; }
+        .doc-body a { overflow-wrap: anywhere; }
+        .doc-body img { display: block; max-width: 100%; height: auto; margin: 20px auto 24px; }
+        .doc-body .diagram { margin: 20px 0 24px; color: #c9d1d9; }
+        .doc-body .diagram svg { display: block; width: 100%; max-width: 680px; height: auto; margin: 0 auto; }
+
+        /* Callouts, such as the "help right now" box at the top of section 1. */
+        .doc-body blockquote {
+            background: #161b22; border: 1px solid #30363d; border-left: 4px solid #f0883e;
+            border-radius: 0 6px 6px 0; padding: 14px 18px; margin: 10px 0 24px;
+        }
+        .doc-body blockquote p:last-child { margin-bottom: 0; }
+
+        .doc-body pre {
+            background: #161b22; border: 1px solid #30363d; border-radius: 6px;
+            padding: 14px 16px; margin: 10px 0 20px; overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .doc-body pre code {
+            font-family: 'Consolas', 'SFMono-Regular', Menlo, monospace;
+            font-size: 0.82rem; line-height: 1.6; color: #e6edf3; white-space: pre;
+        }
+        .doc-body ul.task-list { list-style: none; padding-left: 4px; }
+        .doc-body .task-list label { display: flex; gap: 10px; align-items: baseline; }
+        .doc-body .task-list input {
+            flex-shrink: 0; width: 15px; height: 15px; margin: 0; position: relative; top: 2px;
+            accent-color: #b392f0; opacity: 1;
+        }
+
+        .table-wrap {
+            overflow-x: auto; -webkit-overflow-scrolling: touch;
+            margin: 14px 0 24px; border: 1px solid #30363d; border-radius: 6px;
+        }
+        .table-wrap:focus { outline: 2px solid #b392f0; outline-offset: 2px; }
+        .table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .table-wrap th {
+            background: #161b22; color: #e6edf3; font-weight: 700; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.06em; padding: 10px 14px;
+            text-align: left; border-bottom: 1px solid #30363d; vertical-align: bottom;
+        }
+        .table-wrap td {
+            padding: 10px 14px; border-bottom: 1px solid #21262d; color: #c9d1d9;
+            vertical-align: top; line-height: 1.6;
+        }
+        .table-wrap tr:last-child td { border-bottom: none; }
+        .table-wrap tbody tr:nth-child(even) td { background: #0f1318; }
+        .table-wrap td a { overflow-wrap: normal; }
+
+        .doc-footer {
+            border-top: 1px solid #30363d; margin-top: 64px; padding-top: 28px;
+        }
+        .doc-footer .links { font-size: 0.82rem; color: #8b949e; margin-top: 18px; }
+        .doc-footer .links a { text-decoration: none; }
+        .doc-footer .history { font-size: 0.82rem; color: #8b949e; margin-top: 18px; }
+
+        @media (max-width: 600px) {
+            .doc-container { padding: 28px 16px 64px; }
+            .doc-title { font-size: 1.35rem; }
+            /* Columns keep a readable width; the wrapper scrolls instead. */
+            .table-wrap table { min-width: 560px; }
+            .table-wrap th, .table-wrap td { min-width: 160px; }
+            .doc-body .anchor { opacity: 1; }
+            .doc-body pre code { font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="doc-container">
+    <a class="back-link" href="../../index.html#doc-people-practice-playbook-vol-4">&larr; Back to Portfolio</a>
+
+    <header class="doc-header">
+        <span class="doc-label">People Practice · Safety Plans · CC BY-SA 4.0</span>
+        <h1 class="doc-title">People Practice Playbook, Vol. 4: Safety Plans</h1>
+        <p class="doc-subtitle">Version 0.1.1 · 12 November 2026 · By Specious Coda-Bishop · Licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+        <p class="doc-version"><a href="#section-10-changelog">Changelog and version history</a> in section 10 · Previous volume: <a href="../vol-3/">Vol. 3: Building HR Tools with AI</a></p>
+    </header>
+
+    <div class="licence-box">
+        <span class="note-label">Licence</span>
+        <p><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Credit: Specious Coda-Bishop. Take it, change it and share it. Credit it and keep your version open on the same terms.</p>
+        <p><a class="download" href="people-practice-playbook-vol4-v0.1.1.md" download>Download the markdown (v0.1.1)</a></p>
+    </div>
+
+    <nav class="toc" aria-label="Contents">
+        <span class="toc-label">Contents</span>
+        <ol>
+            <li><a href="#section-1"><span class="toc-num">01</span>Who this is for, and what it isn&#x27;t</a></li>
+            <li><a href="#section-2"><span class="toc-num">02</span>What a safety plan is</a></li>
+            <li><a href="#section-3"><span class="toc-num">03</span>What the evidence says, and where it runs out</a></li>
+            <li><a href="#section-4"><span class="toc-num">04</span>What goes in a plan</a></li>
+            <li><a href="#section-5"><span class="toc-num">05</span>When a plan is about your mental health</a></li>
+            <li><a href="#section-6"><span class="toc-num">06</span>Coming out</a></li>
+            <li><a href="#section-7"><span class="toc-num">07</span>For HR: when someone comes to you</a></li>
+            <li><a href="#section-8"><span class="toc-num">08</span>Canadian resources</a></li>
+            <li><a href="#section-9"><span class="toc-num">09</span>A blank plan you can copy</a></li>
+            <li><a href="#section-10"><span class="toc-num">10</span>Sources and changelog</a></li>
+        </ol>
+    </nav>
+
+    <main class="doc-body">
+<h2 id="section-1">1. Who this is for, and what it isn't<a class="anchor" href="#section-1" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<blockquote>
+<p><strong>If you need help right now:</strong> call or text <strong>9-8-8</strong> (Canada, 24/7) for the <a href="https://988.ca/">Suicide Crisis Helpline</a>. If you or someone else is in immediate danger, call <strong>9-1-1</strong> or your local emergency number (9-1-1 isn't available everywhere in Canada; see section 8). Deaf and hard-of-hearing people can reach 9-8-8 through Canada VRS, TTY (dial 7-1-1) or IP Relay. More services are listed in section 8.</p>
+</blockquote>
+<p>A safety plan is something you put together <em>before</em> you need it, so that when something goes wrong you aren't trying to think clearly in the middle of a crisis. Most people link safety plans with suicide prevention or leaving an abusive relationship, and they matter there. But they're useful in far more situations than people realise.</p>
+<p>This volume is for two groups:</p>
+<ul>
+<li><strong>Anyone who wants to make a plan,</strong> for themselves or with someone they support. Section 4 is a checklist and section 9 is a blank plan you can copy.</li>
+<li><strong>HR and People teams.</strong> You may not build anyone's safety plan, but you may be one of the people someone tells. Section 7 covers what to do, and what not to.</li>
+</ul>
+<p>It started with a break-room conversation about supports for 2SLGBTQI+ staff, where it turned out that not many people knew what a safety plan was. Section 6 covers coming out, because that's where the question came from.</p>
+<p><strong>The short version:</strong></p>
+<ul>
+<li><strong>A safety plan is a short, personal, practical document:</strong> who to contact, where to go, what to take, and how to signal for help.</li>
+<li><strong>Anyone can need one.</strong> Abuse, harassment, stalking and crisis are not limited by gender, sexual orientation or stage of life.</li>
+<li><strong>Some safety steps can raise the risk.</strong> Changing passwords or switching off location sharing can alert the person you're worried about. Section 4 explains how to plan those steps safely.</li>
+<li><strong>HR's job is to listen, believe and connect,</strong> not to investigate or to take over. Any plan is made with the person's consent and at their direction.</li>
+</ul>
+<p><strong>What it isn't.</strong> It isn't legal advice, and it isn't a substitute for a crisis worker, shelter worker, counsellor or the police. Where the law comes into it (reporting duties, protected leave, criminal harassment), the rules vary by province and territory, so check what applies to you with someone qualified. The resource list is Canadian. If you're elsewhere, the checklist still applies, but look up your local services.</p>
+<p><strong>About the research.</strong> This volume was researched and drafted with AI, and every source was opened and checked before it went in. Phone numbers and hours were checked on each service's own website on 12 November 2026, except where section 8 says otherwise. Services change, so check before you rely on one.</p>
+<h3 id="section-1-this-will-change">This will change<a class="anchor" href="#section-1-this-will-change" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Versions.</strong> A big version bump means a recommendation has changed. A small one means new sections or examples. The smallest means fixes.</li>
+<li><strong>Changelog.</strong> Every change is listed in section 10, newest first.</li>
+<li><strong>Review dates.</strong> Each section shows when it was last reviewed. Section 8 (resources) goes stale fastest.</li>
+<li><strong>Licence.</strong> CC BY-SA 4.0. Share and adapt it, with credit to Specious Coda-Bishop, under the same licence.</li>
+<li><strong>Corrections.</strong> By pull request on the <a href="https://github.com/iamspecious/portfolio">GitHub repository</a> or by email to <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a>. A wrong phone number is the most important kind of correction, and it will be fixed first.</li>
+</ul>
+<h2 id="section-2">2. What a safety plan is<a class="anchor" href="#section-2" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>A safety plan is a personalised, practical document that sets out the steps you can take to keep yourself safe when there's a risk to your physical, emotional or psychological wellbeing. It's a set of actions, contacts, resources and strategies you put together in advance.</p>
+<p>That definition is close to how <a href="https://sheltersafe.ca/about/safety-planning/">Shelter Safe</a>, run by Women's Shelters Canada, describes a safety plan for domestic violence: "a personalized, practical plan for ways to stay safe while in a relationship, planning to leave, or even after you leave." Shelter Safe also makes a point worth repeating: "A safety plan isn't an escape plan." It covers staying, leaving and afterwards.</p>
+<p>Different fields use different versions:</p>
+<ul>
+<li><strong>Suicide prevention.</strong> Canada's 9-8-8 helpline uses the Stanley-Brown Safety Plan, and offers a <a href="https://988.ca/wp-content/uploads/2025/11/9-8-8-Safety-Plan-Template-English.pdf">free template</a> with six steps: your warning signs; things you can do on your own to take your mind off things; people and places that give you a distraction; people you can ask for help; professionals and services you can contact; and making your surroundings safer.</li>
+<li><strong>Abuse and violence.</strong> Shelter workers help people plan around the danger they face. Shelter Safe says each shelter's process differs but they all cover identifying danger, assessing risk and planning for safety, and that staff will encourage you to rehearse the plan: "This way it's easier to implement if you ever need to use it."</li>
+<li><strong>Technology abuse.</strong> <a href="https://techsafety.ca/resources/toolkits/tech-safety-planning-toolkit">Tech Safety Canada</a>, also run by Women's Shelters Canada, has a toolkit for planning around someone misusing phones, accounts or devices to monitor, harass or stalk.</li>
+<li><strong>At work.</strong> The Canadian Centre for Occupational Health and Safety (CCOHS) recommends workplaces <a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_domestic.html">help create individual personal and workplace safety plans</a> when intimate partner or family violence follows someone to work.</li>
+</ul>
+<p>The checklist in section 4 combines these into one general-purpose plan. If you're dealing with one of the situations above, the specialist version and the people behind it will go further.</p>
+<h2 id="section-3">3. What the evidence says, and where it runs out<a class="anchor" href="#section-3" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<h3 id="section-3-suicide-prevention-the-strongest-evidence">Suicide prevention: the strongest evidence<a class="anchor" href="#section-3-suicide-prevention-the-strongest-evidence" aria-label="Link to this section">#</a></h3>
+<p>A 2021 meta-analysis in the <em>British Journal of Psychiatry</em> pooled six studies of brief safety planning interventions, covering 3,536 adults (<a href="https://eprints.gla.ac.uk/238354/">Nuij and colleagues, 2021</a>, free copy). People who made a safety plan were less likely to go on to suicidal behaviour than people who didn't: a relative risk of 0.57, meaning about 16 people would need to make a plan to prevent one case of suicidal behaviour. The analysis found no significant effect on suicidal <em>thoughts</em>.</p>
+<p>The authors are clear about the limits. Only six studies qualified. Four were judged at high risk of bias, partly because two weren't randomised. There were signs of publication bias, and after adjusting for it the effect was smaller (a relative risk of 0.71) but still significant. All the participants were adults, so the results can't be assumed to hold for young people. In every study, the plan was made with a clinician.</p>
+<p><strong>What that means here:</strong> there is peer-reviewed evidence that safety planning helps prevent suicidal behaviour, when a clinician helps make the plan. It's less clear how much a plan you make on your own helps, and the evidence doesn't show that it makes difficult thoughts go away. A plan is a tool for getting through a crisis safely.</p>
+<h3 id="section-3-abuse-harassment-and-other-situations">Abuse, harassment and other situations<a class="anchor" href="#section-3-abuse-harassment-and-other-situations" aria-label="Link to this section">#</a></h3>
+<p>Shelters, crisis lines and workplace safety bodies all recommend safety planning for abuse and violence (section 2). I haven't yet checked the research on whether it changes outcomes there, so this volume doesn't make that claim. That's listed as an open item for the next version.</p>
+<p>For the other situations in section 4 (coming out, workplace bullying, custody disputes, relocating), I found no research testing safety plans directly. Recommending one there is my judgement, not a research finding: the reasons that make planning ahead useful in a crisis apply just as much there.</p>
+<h3 id="section-3-why-hr-should-care-who-people-tell">Why HR should care: who people tell<a class="anchor" href="#section-3-why-hr-should-care-who-people-tell" aria-label="Link to this section">#</a></h3>
+<p>In a 2014 pan-Canadian survey of 8,429 people by researchers at Western University and the Canadian Labour Congress (<a href="https://www.uwo.ca/projects/heritage/heritage3/img/survey-report.pdf">Wathen, MacGregor and MacQuarrie</a>), a third (33.6%) of respondents said they had experienced domestic violence. Of those, 81.9% said it hurt their work performance, 38% said it affected their ability to get to work, and 8.5% said they had lost a job because of it. Respondents who were Indigenous, disabled, or other than heterosexual were particularly likely to report it.</p>
+<p>Of those who had experienced it, 43.2% had talked about it with someone at work. Those people talked most often to <strong>co-workers (81.6%) and supervisors or managers (44.7%)</strong>. Only 10.7% of those who talked to someone at work talked to HR. Where a workplace had someone designated to handle domestic violence, that person most often helped by developing a safety plan.</p>
+<p>Two caveats. The survey was recruited mostly through union networks, so most respondents were unionised (81.4%) and most were women (78.4%). It isn't a random sample of Canadian workers. And it's from 2014.</p>
+<p><strong>What that means for HR:</strong> you're often not the first person someone tells. Managers and co-workers are. So the most useful thing HR can do may be making sure managers know what a safety plan is and where to send people.</p>
+<h2 id="section-4">4. What goes in a plan<a class="anchor" href="#section-4" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>Every situation is different, so take what fits and leave the rest. A crisis worker, shelter worker or counsellor can help you tailor it.</p>
+<h3 id="section-4-who-safety-plans-are-for">Who safety plans are for<a class="anchor" href="#section-4-who-safety-plans-are-for" aria-label="Link to this section">#</a></h3>
+<p>My take: everyone. But they're especially relevant if you are:</p>
+<ul>
+<li>Coming out, and worried about how family, a partner, housemates or your workplace might react</li>
+<li>In, or leaving, an abusive relationship (emotional, physical, sexual, financial or through technology)</li>
+<li>Experiencing stalking or criminal harassment</li>
+<li>Experiencing harassment or bullying at work</li>
+<li>Going through a mental health crisis, or have been through one before</li>
+<li>In a custody dispute</li>
+<li>Relocating for safety reasons</li>
+<li>In any situation where conflict, confrontation or a hard conversation could escalate in a way that threatens your safety</li>
+</ul>
+<p>None of these are limited by gender, sexual orientation or circumstance. CCOHS puts it directly: anyone can be a target of violence, "regardless of gender, age, race, culture, religion, sexual orientation, socioeconomic status, or educational background" (<a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_domestic.html">CCOHS</a>).</p>
+<h3 id="section-4-before-you-change-anything-plan-the-risky-steps">Before you change anything: plan the risky steps<a class="anchor" href="#section-4-before-you-change-anything-plan-the-risky-steps" aria-label="Link to this section">#</a></h3>
+<p>Some of the steps below can alert the person you're worried about. Tech Safety Canada warns that changing passwords, location settings or account access "will often alert the other person," who "might become more abusive," and that changes can also erase evidence (<a href="https://techsafety.ca/resources/toolkits/survivors-guide-to-phones-increasing-privacy-and-responding-to-abuse/">Survivors' Guide to Phones</a>; <a href="https://techsafety.ca/resources/toolkits/a-survivors-guide-to-location-tracking/">Location Tracking guide</a>). Its advice:</p>
+<ul>
+<li><strong>Document first.</strong> Screenshot and log what's happening before you change anything.</li>
+<li><strong>Use a safer device</strong> to research and plan: one the person can't get into and hasn't had access to in the past, such as a library computer or a friend's phone (<a href="https://techsafety.ca/resources/toolkits/tech-safety-planning-toolkit">Tech Safety Planning Toolkit</a>).</li>
+<li><strong>Decide on timing.</strong> Some people keep a monitored phone or location sharing as it is for a while, so nothing looks different, and make the changes when it's safe to.</li>
+<li><strong>Talk it through with an advocate.</strong> Shelter workers do this planning every day, whether or not you ever stay in a shelter, and <a href="https://sheltersafe.ca/">Shelter Safe</a> can connect you. Its network is women's shelters, so if that isn't the right fit for you, victim services and the other routes in section 8 can help.</li>
+</ul>
+<p>If none of that applies to you, go ahead with the steps as written.</p>
+<h3 id="section-4-people">People<a class="anchor" href="#section-4-people" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />A trusted contact who knows your situation and can be reached at any time</label></li>
+<li><label><input type="checkbox" disabled="" />A backup contact, in case the first isn't available</label></li>
+<li><label><input type="checkbox" disabled="" />An out-of-area contact: someone outside your immediate surroundings who can coordinate if needed</label></li>
+<li><label><input type="checkbox" disabled="" />Professional contacts, if you have them: a therapist, doctor, lawyer, social worker or advocate</label></li>
+<li><label><input type="checkbox" disabled="" />Crisis lines saved in your phone under names that won't draw attention, if that matters for you (section 8)</label></li>
+</ul>
+<h3 id="section-4-places">Places<a class="anchor" href="#section-4-places" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />A safe place you can go if you need to leave home quickly</label></li>
+<li><label><input type="checkbox" disabled="" />A backup place</label></li>
+<li><label><input type="checkbox" disabled="" />Where your nearest shelter, crisis centre, hospital and police station are</label></li>
+</ul>
+<h3 id="section-4-documents-and-essentials">Documents and essentials<a class="anchor" href="#section-4-documents-and-essentials" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />Copies of important documents kept somewhere safe, away from home: ID, passport, health card, insurance, medical records, legal papers, lease or mortgage, immigration papers</label></li>
+<li><label><input type="checkbox" disabled="" />Emergency money: even a small amount of cash, or an account that isn't held jointly</label></li>
+<li><label><input type="checkbox" disabled="" />A packed bag, or a written list of what you'd grab</label></li>
+<li><label><input type="checkbox" disabled="" />Medications, prescriptions and anything you need daily (glasses, mobility aids, chargers)</label></li>
+<li><label><input type="checkbox" disabled="" />A plan for children, pets and anyone who depends on you</label></li>
+</ul>
+<h3 id="section-4-digital-safety">Digital safety<a class="anchor" href="#section-4-digital-safety" aria-label="Link to this section">#</a></h3>
+<p>Read "Before you change anything" above first.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />Know who has access to your devices, accounts and location</label></li>
+<li><label><input type="checkbox" disabled="" />Know how to turn location sharing on and off on your phone</label></li>
+<li><label><input type="checkbox" disabled="" />A separate email address that isn't linked to shared accounts or devices. Tech Safety Canada notes a second email or secure phone number also lets you <a href="https://techsafety.ca/resources/toolkits/tips-for-a-secure-email-account/">set up two-step verification</a></label></li>
+<li><label><input type="checkbox" disabled="" />Change passwords and PINs if they may have been compromised, at a time that's safe</label></li>
+<li><label><input type="checkbox" disabled="" />If someone else holds or can get into your phone account, know that they may be able to <a href="https://techsafety.ca/resources/toolkits/survivors-guide-to-phones-increasing-privacy-and-responding-to-abuse/">see call logs and billing records and turn on location features</a></label></li>
+<li><label><input type="checkbox" disabled="" />Use private browsing when researching help. Shelter Safe notes that <a href="https://sheltersafe.ca/about/staysafe/">clearing <em>all</em> your history may itself look suspicious</a> to someone who checks. Private browsing won't hide anything from spyware, so if that's a possibility, use a safer device (see above)</label></li>
+</ul>
+<h3 id="section-4-communication">Communication<a class="anchor" href="#section-4-communication" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />A code word or phrase with trusted contacts that means "I need help" without saying it, and an agreed action for when they hear it</label></li>
+<li><label><input type="checkbox" disabled="" />A check-in arrangement: "if you don't hear from me by this time, do this"</label></li>
+<li><label><input type="checkbox" disabled="" />Know the <a href="https://canadianwomen.org/signal-for-help/">Signal for Help</a>, a one-handed gesture from the Canadian Women's Foundation that asks someone to check in on you safely without leaving a digital trace</label></li>
+<li><label><input type="checkbox" disabled="" />Know how to reach emergency services where you are, and what you'd say. In most of Canada that's 9-1-1, though <a href="https://sheltersafe.ca/">Shelter Safe notes it isn't available in Nunavut</a>, so check local numbers if you're there</label></li>
+</ul>
+<h3 id="section-4-documentation">Documentation<a class="anchor" href="#section-4-documentation" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />A log of incidents: dates, times, what happened, who was involved, any witnesses</label></li>
+<li><label><input type="checkbox" disabled="" />Saved messages, emails, voicemails and screenshots</label></li>
+<li><label><input type="checkbox" disabled="" />Kept somewhere the person can't reach. Tech Safety Canada has a free <a href="https://techsafety.ca/resources/toolkits/stalking-and-technology-facilitated-abuse-log/">stalking and technology abuse log</a> you can use</label></li>
+</ul>
+<h3 id="section-4-keep-it-alive">Keep it alive<a class="anchor" href="#section-4-keep-it-alive" aria-label="Link to this section">#</a></h3>
+<ul class="task-list">
+<li><label><input type="checkbox" disabled="" />Rehearse it, as Shelter Safe recommends, so you're not reading it for the first time in a crisis</label></li>
+<li><label><input type="checkbox" disabled="" />Tell the people in your plan that they're in it, and what you'd need from them</label></li>
+<li><label><input type="checkbox" disabled="" />Review it when something changes: a move, a new job, a new relationship, a court date</label></li>
+</ul>
+<h2 id="section-5">5. When a plan is about your mental health<a class="anchor" href="#section-5" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>If the risk you're planning for is a mental health crisis, start from the Stanley-Brown template on the <a href="https://988.ca/get-help/help-right-now">9-8-8 website</a>. It's free, and it covers the core of the plans tested in the research in section 3: coping strategies, people to contact and, in most of those studies, warning signs. Its six steps sit alongside the checklist above:</p>
+<ol type="1">
+<li><strong>Warning signs:</strong> the thoughts, feelings or situations that tell you a crisis may be coming.</li>
+<li><strong>Things you can do on your own</strong> to take your mind off it.</li>
+<li><strong>People and places</strong> that give you a distraction.</li>
+<li><strong>People you can ask for help.</strong></li>
+<li><strong>Professionals and services</strong> you can contact, including 9-8-8.</li>
+<li><strong>Making your surroundings safer.</strong></li>
+</ol>
+<p>9-8-8 says that if you've made a safety plan, follow it, and if you haven't, you can contact them for support. The research in section 3 was on plans made with a clinician, so if you can, make yours with a counsellor, doctor or crisis responder.</p>
+<p>Some people hold back from calling a crisis line because they're worried about police turning up. Section 8 notes what each service says about this, so you can choose knowing what to expect.</p>
+<h2 id="section-6">6. Coming out<a class="anchor" href="#section-6" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>This is where the conversation started, so it gets its own section. My take: plenty of coming-out conversations go fine, or better than feared, and this section isn't meant to suggest otherwise. But if you're unsure how family, a partner, housemates, your community or your workplace will react, planning ahead costs nothing.</p>
+<p>It's also a real risk, not just a worry. In the Wathen survey (section 3), respondents who weren't heterosexual were particularly likely to report experiencing domestic violence, and CCOHS lists 2SLGBTQI+ people among the groups at higher risk of intimate partner violence (<a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_domestic.html">CCOHS</a>).</p>
+<p>My take on what to add to the general checklist:</p>
+<ul>
+<li><strong>Pick the timing and the place.</strong> Somewhere you can leave easily, at a time you're not dependent on a lift home, and not right before a holiday you have to spend together.</li>
+<li><strong>Line up a support person first.</strong> Someone who already knows, who expects to hear from you afterwards, and who'll act if they don't.</li>
+<li><strong>If you live with the people you're telling,</strong> have a place you could stay for a few nights, and essentials you could take. If you're financially dependent on them, think through what happens if that support were withdrawn.</li>
+<li><strong>Check your digital trail.</strong> Shared devices, family phone plans and shared streaming or cloud accounts can reveal searches, messages and contacts before you're ready.</li>
+<li><strong>At work,</strong> you decide who knows. You can ask HR or a manager what they'll do with the information, and who they'd have to tell, before you share it (section 7 explains why they may not be able to keep everything confidential).</li>
+<li><strong>Have 2SLGBTQI+-specific support saved</strong> (section 8), for peer support afterwards, whatever happens.</li>
+</ul>
+<h2 id="section-7">7. For HR: when someone comes to you<a class="anchor" href="#section-7" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>You may never build anyone's safety plan. But you may be one of the people someone tells, or a manager may bring it to you. A few principles:</p>
+<ul>
+<li><strong>Listen, believe and connect.</strong> Your role isn't to investigate the person's home life or judge their choices. It's to make sure they're safe at work and know where to get specialist help.</li>
+<li><strong>They lead.</strong> CCOHS says workplace safety plans "must be developed with the consent and at the direction of the person experiencing the violence," updated as things change, and shared only with people who need to know (<a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_domestic.html">CCOHS</a>).</li>
+<li><strong>Don't promise confidentiality you can't keep.</strong> Be honest at the start about what you're required to pass on and to whom, so they can choose what to share. Duties to report, especially where a child may be at risk, vary by province or territory. Know yours before you need it.</li>
+<li><strong>Know your legal duties.</strong> Every province and territory has workplace violence law, some name domestic violence directly, and some offer protected leave. <a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_legislation.html">CCOHS's legislation page</a> is a starting point. Check the detail with an adviser.</li>
+<li><strong>It's fine to be out of your depth.</strong> Your job is to get them to someone who can help, not to be that person yourself. Shelters, victim services, your Employee Assistance Program (EAP) and the services in section 8 do this every day.</li>
+<li><strong>Train managers.</strong> People tell co-workers and managers far more often than HR (section 3). Make sure managers know what a safety plan is, what to say, and to bring it to you with the person's agreement.</li>
+</ul>
+<h3 id="section-7-what-the-workplace-can-offer">What the workplace can offer<a class="anchor" href="#section-7-what-the-workplace-can-offer" aria-label="Link to this section">#</a></h3>
+<p>CCOHS lists workplace measures that can form part of a plan, with the person's agreement. The table adapts that list and adds a few from practice (remote work, paid time off), marked *.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Area</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Schedule</td>
+<td>Flexible hours; changing shifts or start times; avoiding scheduling the person and the abuser together if both work there</td>
+</tr>
+<tr class="even">
+<td>Location</td>
+<td>Moving their desk out of sight of windows or the entrance; remote work*, if it's safer (it isn't always, if the risk is at home)</td>
+</tr>
+<tr class="odd">
+<td>Contact details</td>
+<td>Removing them from public directories and websites; a new work number; someone screening calls; blocking the abuser's calls and emails</td>
+</tr>
+<tr class="even">
+<td>Security</td>
+<td>Telling security or reception who to watch for, with a photo or description if the person agrees; a well-lit parking spot near the door; an escort to the car or transit</td>
+</tr>
+<tr class="odd">
+<td>Alarms</td>
+<td>9-1-1 saved on work phones; a panic button or personal alarm</td>
+</tr>
+<tr class="even">
+<td>Legal orders</td>
+<td>Asking whether there's a protection or restraining order, and helping make sure its conditions are followed at work</td>
+</tr>
+<tr class="odd">
+<td>Leave and time</td>
+<td>Paid time off* for appointments, court and finding housing; check whether your province or territory requires protected leave</td>
+</tr>
+</tbody>
+</table></div>
+<p>If the abuser also works for you, CCOHS says to use your disciplinary procedures to hold them accountable for behaviour at work. Get advice before acting.</p>
+<h3 id="section-7-what-not-to-do">What not to do<a class="anchor" href="#section-7-what-not-to-do" aria-label="Link to this section">#</a></h3>
+<p>My take:</p>
+<ul>
+<li>Don't contact the abuser, or confront them for the person.</li>
+<li>Don't make decisions for the person, such as moving them, telling their team or calling police, unless there's immediate danger. CCOHS does list calling the police if the abuser shows criminal behaviour such as stalking at work; agree that step with the person wherever you can.</li>
+<li>Don't treat this as a performance problem. If their work has slipped, deal with safety first.</li>
+<li>Don't write the details into files more people can see than need to.</li>
+</ul>
+<h2 id="section-8">8. Canadian resources<a class="anchor" href="#section-8" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026. Every number and service below was checked on the service's own website on that date, unless noted.</em></p>
+<h3 id="section-8-right-now">Right now<a class="anchor" href="#section-8-right-now" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Service</th>
+<th>How to reach it</th>
+<th>Good to know</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://988.ca/">9-8-8: Suicide Crisis Helpline</a></td>
+<td>Call or text 9-8-8, 24/7</td>
+<td>For anyone in Canada. Partners include Hope for Wellness and Kids Help Phone. Deaf and hard-of-hearing people can use Canada VRS, TTY (dial 7-1-1) or IP Relay. 9-8-8 says it involves emergency services only in a very small number of cases, when someone is at imminent risk, and tries other options first, but that it can't promise it won't call 9-1-1 (<a href="https://988.ca/get-help/what-to-expect">what to expect</a>)</td>
+</tr>
+<tr class="even">
+<td>Emergency services</td>
+<td>9-1-1, or your local emergency number</td>
+<td>If you or someone else is in immediate danger. <a href="https://sheltersafe.ca/">Shelter Safe</a> notes 9-1-1 isn't available in Nunavut, so if you're there, save your community's local emergency numbers</td>
+</tr>
+<tr class="odd">
+<td><a href="https://kidshelpphone.ca/">Kids Help Phone</a></td>
+<td>Call 1-800-668-6868 or text CONNECT to 686868, 24/7</td>
+<td>For young people. Free and confidential. Indigenous youth can text FIRST NATIONS, INUIT or METIS to 686868 to ask for an Indigenous crisis responder, if one is available</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.hopeforwellness.ca/">Hope for Wellness Helpline</a></td>
+<td>Call 1-855-242-3310 or chat online, 24/7</td>
+<td>For all Indigenous people across Canada</td>
+</tr>
+<tr class="odd">
+<td>211</td>
+<td>Call 2-1-1 or visit 211.ca</td>
+<td>Finds local services such as counselling. 9-8-8 describes it as free, confidential and available 24/7 in most of Canada</td>
+</tr>
+</tbody>
+</table></div>
+<p>Some lists still online give 1-833-456-4566 or text 45645, under the name Crisis Services Canada or Talk Suicide Canada. Use 9-8-8 instead.</p>
+<h3 id="section-8-2slgbtqi-support">2SLGBTQI+ support<a class="anchor" href="#section-8-2slgbtqi-support" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Service</th>
+<th>How to reach it</th>
+<th>Good to know</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://translifeline.org/hotline/">Trans Lifeline</a></td>
+<td>Canada: 1-877-330-6366</td>
+<td>Peer support run by and for trans people. Monday to Friday, 1 pm to 9 pm Eastern. Says it does no non-consensual active rescue (calling 911 or police without your agreement), but reserves the right to report credible threats of violence to others and suspected child abuse</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.youthline.ca/helpline/peer-support-helpline/">LGBT YouthLine</a></td>
+<td>Text 647-694-4275, or chat on the website</td>
+<td>For people 29 and under in Ontario, with trained 2SLGBTQ+ peer volunteers. Peer support, not crisis support. Sunday to Friday, 4 pm to 9:30 pm Eastern. Stopped taking calls in 2023, so phone numbers on older lists won't reach the help line</td>
+</tr>
+<tr class="odd">
+<td><a href="https://pflagcanada.ca/">pflag Canada</a></td>
+<td><a href="https://pflagcanada.ca/pflag-canada-chapters/">Local chapters</a></td>
+<td>Peer support for 2SLGBTQIA+ people and their families. Not a crisis service: its contact page points people to 9-8-8 or Kids Help Phone (its FAQ still gives the old number below)</td>
+</tr>
+<tr class="even">
+<td><a href="https://egale.ca/">Egale Canada</a></td>
+<td><a href="https://egale.ca/resources/#category=resources&amp;topics=support-navigation">Find Support</a> directory</td>
+<td>National 2SLGBTQI organisation for research, education and advocacy, with a directory of support services. Its <a href="https://egale.ca/about/">history page</a> describes youth counselling and crisis services for people up to 29, launched in 2014; check what's running now</td>
+</tr>
+<tr class="odd">
+<td><a href="https://itgetsbettercanada.org/get-help/">It Gets Better Canada</a></td>
+<td>Get Help directory</td>
+<td>A directory of 2SLGBTQ+ services across Canada, by province. Some numbers on it are out of date (including the old Crisis Services Canada number), so check the service's own site</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-8-abuse-and-violence">Abuse and violence<a class="anchor" href="#section-8-abuse-and-violence" aria-label="Link to this section">#</a></h3>
+<p>Abuse isn't limited by gender, but many specialist services are. Shelter Safe and Tech Safety Canada come from Women's Shelters Canada, and some of the provincial lines Shelter Safe lists are for women only. Tech Safety Canada says its toolkit is for women, youth and gender-diverse people. If you're a man, or a shelter isn't the right fit, start with the Canadian Resource Centre for Victims of Crime or local victim services (below), 2-1-1, or 9-8-8 if you're in crisis.</p>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Service</th>
+<th>How to reach it</th>
+<th>Good to know</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://sheltersafe.ca/">Shelter Safe</a></td>
+<td>Map of shelters and transition houses, plus <a href="https://sheltersafe.ca/about/find-help/">provincial and territorial help lines</a></td>
+<td>Run by Women's Shelters Canada; mostly women's shelters. Some listed lines are for women only; others, such as VictimLink BC, aren't described that way. Shelter staff help with safety plans, 24/7, by phone, text and email. Tech Safety Canada adds that you don't need to stay in a shelter to get free, confidential support</td>
+</tr>
+<tr class="even">
+<td><a href="https://techsafety.ca/">Tech Safety Canada</a></td>
+<td>Online toolkits</td>
+<td>Planning around phones, accounts, location tracking and stalkerware. Written for women, youth and gender-diverse people, but the technical steps apply to anyone. Read it on a safer device</td>
+</tr>
+<tr class="odd">
+<td><a href="https://www.domesticshelters.org/">DomesticShelters.org</a></td>
+<td>Searchable directory</td>
+<td>Covers Canada and the US. Lists Canadian provincial groups</td>
+</tr>
+<tr class="even">
+<td><a href="https://canadianwomen.org/signal-for-help/">Signal for Help</a></td>
+<td>A hand signal</td>
+<td>From the Canadian Women's Foundation. Also teaches others how to respond if they see it</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-8-workplace-harassment-and-discrimination">Workplace harassment and discrimination<a class="anchor" href="#section-8-workplace-harassment-and-discrimination" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_domestic.html">CCOHS: Intimate partner and family violence at work</a>, and its <a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_legislation.html">legislation page</a> by jurisdiction. Free.</li>
+<li><a href="https://www.ohrc.on.ca/en/policy-discrimination-and-harassment-because-sexual-orientation">Ontario Human Rights Commission: Policy on discrimination and harassment because of sexual orientation</a>, and <a href="https://www.ohrc.on.ca/en/policy-preventing-discrimination-because-gender-identity-and-gender-expression">Policy on preventing discrimination because of gender identity and gender expression</a>. Ontario-specific; other provinces and territories have their own human rights bodies.</li>
+<li>Federally regulated workplaces: the <a href="https://laws-lois.justice.gc.ca/eng/regulations/SOR-2020-130/index.html">Work Place Harassment and Violence Prevention Regulations</a> under the Canada Labour Code.</li>
+</ul>
+<h3 id="section-8-stalking-and-criminal-harassment">Stalking and criminal harassment<a class="anchor" href="#section-8-stalking-and-criminal-harassment" aria-label="Link to this section">#</a></h3>
+<ul>
+<li>Criminal harassment is an offence under <a href="https://laws-lois.justice.gc.ca/eng/acts/c-46/section-264.html">section 264 of the Criminal Code</a>. Whether something meets that bar is a question for police or a lawyer.</li>
+<li><a href="https://crcvc.ca/">Canadian Resource Centre for Victims of Crime</a>: 1-877-232-2610. Free, confidential, bilingual support and advocacy for victims of serious crime.</li>
+<li>CCOHS suggests getting expert advice on safety planning from a local women's shelter, a victim services organisation or the police. Your local police non-emergency line can point you to victim services.</li>
+</ul>
+<h2 id="section-9">9. A blank plan you can copy<a class="anchor" href="#section-9" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<p>Copy this somewhere the person you're worried about can't see. A paper copy kept at a trusted person's home works, or at work if the person you're worried about can't get to it there. If your situation is mainly about your mental health, use the <a href="https://988.ca/wp-content/uploads/2025/11/9-8-8-Safety-Plan-Template-English.pdf">9-8-8 template</a> as well.</p>
+<pre><code>MY SAFETY PLAN                        Last updated: ____________
+
+PEOPLE
+Trusted contact:        ______________________  Phone: ____________
+Backup contact:         ______________________  Phone: ____________
+Out-of-area contact:    ______________________  Phone: ____________
+Professional(s):        ______________________  Phone: ____________
+
+PLACES
+If I need to leave, I&#39;ll go to:  _________________________________
+Backup place:                    _________________________________
+Nearest shelter / crisis centre: _________________________________
+
+ESSENTIALS
+Copies of documents are kept at:  ________________________________
+Emergency money is:               ________________________________
+My bag / list is:                 ________________________________
+Medications and daily needs:      ________________________________
+Children, pets, dependants:       ________________________________
+
+SIGNALS
+Code word or phrase:  ____________  It means my contact should: ___
+Check-in: if ________ doesn&#39;t hear from me by ______, they will: __
+
+NUMBERS
+Emergency: 9-1-1, or local: ____________   Crisis: call or text 9-8-8
+Other: ___________________________________________________________
+
+RECORDS
+My incident log is kept at: ______________________________________
+
+BEFORE I CHANGE PASSWORDS, LOCATION OR ACCOUNTS
+I&#39;ve documented what&#39;s happening:  yes / no
+I&#39;ve talked it through with:       _______________________________</code></pre>
+<h2 id="section-10">10. Sources and changelog<a class="anchor" href="#section-10" aria-label="Link to this section">#</a></h2>
+<p><em>Section last reviewed 12 November 2026.</em></p>
+<h3 id="section-10-sources">Sources<a class="anchor" href="#section-10-sources" aria-label="Link to this section">#</a></h3>
+<p>Free to read, as far as we could check. Services' own websites are listed in section 8.</p>
+<ul>
+<li><a href="https://eprints.gla.ac.uk/238354/">Nuij, van Ballegooijen, Juniar, Erlangsen, Portzky, O'Connor, Smit, Kerkhof and Riper: Safety planning-type interventions for suicide prevention: meta-analysis</a> (<em>British Journal of Psychiatry</em>, 2021, <a href="https://doi.org/10.1192/bjp.2021.50">doi:10.1192/bjp.2021.50</a>). Peer-reviewed meta-analysis. Free copy via the University of Glasgow.</li>
+<li><a href="https://www.uwo.ca/projects/heritage/heritage3/img/survey-report.pdf">Wathen, MacGregor and MacQuarrie, with the Canadian Labour Congress: Can Work Be Safe, When Home Isn't?</a> (2014). Initial findings of a pan-Canadian survey. Research report; non-random sample recruited mainly through unions.</li>
+<li><a href="https://988.ca/">9-8-8: Suicide Crisis Helpline</a>: <a href="https://988.ca/get-help/help-right-now">help right now</a>, <a href="https://988.ca/get-help/what-to-expect">what to expect</a>, <a href="https://988.ca/wp-content/uploads/2025/11/9-8-8-Safety-Plan-Template-English.pdf">safety plan template</a> (Stanley and Brown). Service website.</li>
+<li><a href="https://sheltersafe.ca/about/safety-planning/">Shelter Safe (Women's Shelters Canada): Safety Planning</a> and <a href="https://sheltersafe.ca/about/staysafe/">Staying Safe Online</a>. Service website.</li>
+<li><a href="https://techsafety.ca/">Tech Safety Canada (Women's Shelters Canada)</a>: Tech Safety Planning Toolkit, Survivors' Guide to Phones, A Survivor's Guide to Location Tracking, Tips for a Secure Email Account. Service toolkits.</li>
+<li><a href="https://www.ccohs.ca/oshanswers/psychosocial/violence_domestic.html">Canadian Centre for Occupational Health and Safety: Violence and Harassment in the Workplace, Intimate Partner and Family Violence</a>. Government agency guidance.</li>
+<li><a href="https://canadianwomen.org/signal-for-help/">Canadian Women's Foundation: Signal for Help</a>. Charity website.</li>
+<li><a href="https://laws-lois.justice.gc.ca/eng/acts/c-46/section-264.html">Criminal Code, section 264</a> and the <a href="https://laws-lois.justice.gc.ca/eng/regulations/SOR-2020-130/index.html">Work Place Harassment and Violence Prevention Regulations</a>. Legislation, linked only.</li>
+</ul>
+<p>Services change their numbers, hours and names. If you spot one that's wrong, please tell us.</p>
+<h3 id="section-10-changelog">Changelog<a class="anchor" href="#section-10-changelog" aria-label="Link to this section">#</a></h3>
+<div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
+<thead>
+<tr class="header">
+<th>Version</th>
+<th>Date</th>
+<th>What changed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.1.1</td>
+<td>12 November 2026</td>
+<td>Fixes from the first integrity audit. 9-1-1 caveat for places without it, wherever 9-1-1 appears. Abuse resources now say who each serves, with routes for men and anyone a women's shelter doesn't fit. Coming-out claim marked as opinion. Deaf and hard-of-hearing access to 9-8-8 added. Smaller fixes: 9-8-8 and Trans Lifeline police wording, pflag's FAQ, HR disclosure percentage, private browsing and spyware, where to keep a paper copy, log link.</td>
+</tr>
+<tr class="even">
+<td>0.1</td>
+<td>12 November 2026</td>
+<td>Never published; superseded the same day by 0.1.1. First version, built from an earlier community post by the author. Resources re-checked: the old Crisis Services Canada number replaced with 9-8-8; LGBT YouthLine changed to text and chat only; Egale and pflag descriptions corrected; Trans Lifeline and Hope for Wellness added. Digital safety caution added.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p>People Practice Playbook, Vol. 4 · Specious Coda-Bishop · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></p>
+
+    </main>
+
+    <footer class="doc-footer">
+        <div class="licence-box">
+            <span class="note-label">Licence</span>
+            <p><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Credit: Specious Coda-Bishop. Take it, change it and share it. Credit it and keep your version open on the same terms.</p>
+            <p><a class="download" href="people-practice-playbook-vol4-v0.1.1.md" download>Download the markdown (v0.1.1)</a></p>
+        </div>
+        <p class="history">Version history: <a href="#section-10-changelog">changelog in section 10</a> · <a href="https://github.com/iamspecious/portfolio/blob/main/people-practice-playbook/vol-4/DEVLOG.md">dev log on GitHub</a></p>
+        <p class="links">Specious Coda-Bishop · <a href="https://github.com/iamspecious/portfolio">Suggest a correction on GitHub</a> · <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a> · <a href="../vol-3/">Previous volume</a> · <a href="../../index.html#doc-people-practice-playbook-vol-4">Back to portfolio</a></p>
+    </footer>
+</div>
+</body>
+</html>
