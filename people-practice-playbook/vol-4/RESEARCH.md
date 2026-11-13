@@ -41,3 +41,52 @@ Spec's earlier community post on safety plans: definition, who they're for, a si
 - CCOHS notes Ontario's OHSA s. 32.0.4 names domestic violence, and Manitoba has Interpersonal Violence Leave. The playbook only says some jurisdictions name domestic violence and some offer protected leave, and points to CCOHS's legislation page.
 - Duty to report: YouthLine describes Ontario's duty to report abuse of children under 16 to the Children's Aid Society. The playbook says only that reporting duties vary.
 - 9-1-1 in Nunavut: Shelter Safe says it isn't available; not checked against a Nunavut government source. Attributed to Shelter Safe.
+
+## Version 0.2 research (12 November 2026)
+
+Asked for: an accuracy pass, more evidence, guidance that works for any size of organisation, and reach beyond Canada.
+
+### Re-checked from v0.1.1
+
+- **Nuij 2021:** 6 studies, 3,536 adults, RR 0.570, NNT 16, no significant effect on ideation, 4 of 6 high risk of bias, trim-and-fill adjusted RR 0.71, adults only, all clinician-delivered. All confirmed from the free full text on Enlighten. Spot-check item closed.
+- **Wathen 2014:** all figures confirmed. The HR figure (10.7%) maps to "HR/Personnel" in Figure 5, but the PDF text extraction didn't keep chart labels cleanly, so keep it on the human spot-check list.
+- **CCOHS:** consent quote confirmed. CCOHS's police example is "stalking or unauthorized electronic monitoring", not "stalking at work"; fixed.
+- **Nunavut 9-1-1:** no Government of Nunavut page reached. Nunatsiaq News (30 May 2025) reports the minister saying 9-1-1 won't come in the near future. Added as a second source; a Government of Nunavut source would still be better.
+
+### Leads from the first audit, now closed
+
+- **2025 JAMA Pediatrics meta-analysis (young people):** added to section 3. PMC full text served a captcha, and jamanetwork blocks automated requests, so the numbers come from the abstract (reproduced on library and research-network pages) and the SickKids news summary. Effect sizes are deliberately not quoted: one reproduction of the abstract had a confidence interval that didn't fit "no significant association", which looks like a transcription error. Check the PMC copy by hand.
+- **Domestic violence safety planning evidence:** added Rivas 2016 (Campbell) and Ford-Gilboe 2020 (iCAN). The myPlan/IRIS trials (Glass, Eden) were found in search but not opened; left out.
+
+### Found but not used
+
+- **Sabri and colleagues (2022), Trauma, Violence and Abuse, doi:10.1177/15248380211013136:** systematic review of 17 US studies of interventions with a safety planning component for marginalised survivors. Abstract seen in search results only. A good candidate for section 3 next time.
+- **Blades and colleagues (2018), Clinical Psychology Review; DeCou and Schumann (2018), Suicide and Life-Threatening Behavior:** meta-analyses finding no harm from asking about suicide in research. Abstracts seen in search only. Dazzi 2014 used instead because it was opened.
+- **CIPD and EHRC guide, Managing and supporting employees experiencing domestic abuse:** the CIPD page loaded but its content didn't come through, so nothing was cited. Spec holds CIPD Level 3, so may be able to read it directly.
+- **Employers' Initiative on Domestic Abuse (EIDA, UK):** mentioned by Acas; not opened.
+- **TelefonSeelsorge (Germany) language:** a third-party page quotes the federal health portal saying counselling is in German only. Not confirmed, so not stated.
+
+### Legal points flagged to Spec, kept out of the text
+
+- **Domestic violence leave:** IndustriALL (a union federation) says every Canadian province has domestic violence leave, paid or unpaid, and federally regulated workers get five paid days. Not checked against government sources. The text still says "some offer protected leave", which may understate it. Australia and New Zealand have paid leave in law per the same source; also unchecked.
+- **Acas "legal duty of care":** Acas states this for UK employers. The text attributes Acas's practical advice only, not the legal claim.
+
+### Couldn't be reached this time
+
+- ILO NORMLEX (full R206 text), BMC article page, PMC, findahelpline.com (directory content; described via IASP instead).
+
+### Phone numbers checked on government or secondary pages, not the service's own site
+
+- TelefonSeelsorge (Familienportal), Hilfetelefon Gewalt an Männern hours (Baden-Württemberg government), Men's Aid Ireland hours (HSE), Respect Men's Advice Line number (Respect's own article page; its hours vary across council directories, so none are given), Samaritans in Ireland (Samaritans' UK site; Irish calling terms not stated).
+
+## Version 0.2.1: integrity audit of v0.2 (12 November 2026)
+
+- Independent audit by a separate agent that saw only the document: PASS WITH FIXES. 143 claims (up from 86); 131 verified, 11 partial, 1 unreachable; 0 critical, 2 major, 12 minor, 11 notes. No phone number it could check was wrong.
+- Major: Samaritans in Ireland stopped connecting withheld-number calls on 9 November 2026, three days before v0.2's "checked" date. Matters most for people in monitored situations, who are the ones likely to withhold their number. Fixed.
+- Major: the Germany men's line number and hours came only from a 2022 Baden-Württemberg press release; maennerhilfetelefon.de couldn't be reached (proxy 403). Now dated to that source, with a link to the service.
+- TelefonSeelsorge "free": not stated on the Familienportal page used, so removed. (0800 numbers usually are, but that isn't a source.)
+- UK National Domestic Abuse Helpline chat hours: the page wasn't clear enough to state them, so the text says chat and BSL have set hours listed on the site.
+- Germany ambulance number (112) not verified this session; left as an open item rather than added unchecked.
+- Albaum 2025: the audit read the PMC full text. It found a 6 July 2026 correction (suicide-attempt risk ratio) and an ideation effect (g 0.11, 95% CI 0.01 to 0.21) that sits oddly with the paper's "no significant association". The playbook doesn't quote effect sizes, so the text stands, but it's on the hand-check list.
+- Web-search lead only: the UK helpline may be England-only, with separate lines for Scotland, Wales and Northern Ireland. The text already tells readers outside England to check.
+

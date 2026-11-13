@@ -1931,7 +1931,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Domains people-hr + ai-engineering is a documented exception to the TAXONOMY §3 anti-rule: the volume's subject is building with AI (including prompting, section 9), so it routes to builder-technical as well as the People lanes; research dropped to stay within three domains."
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file; v0.1.1 stays in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Domains people-hr + ai-engineering is a documented exception to the TAXONOMY §3 anti-rule: the volume's subject is building with AI (including prompting, section 9), so it routes to builder-technical as well as the People lanes; research dropped to stay within three domains."
   },
   {
     "id": "people-practice-playbook-vol-4",
@@ -1955,9 +1955,9 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["safety plan", "crisis", "domestic violence", "coming out", "2slgbtqi", "creative commons"],
+    "keywords": ["safety plan", "crisis", "domestic violence", "coming out", "2slgbtqi", "suicide prevention", "small business", "creative commons"],
     "tools": [],
-    "summary": "An open, living playbook on safety plans: what they are, why everyone should have one, what goes in one, and what HR should do when someone comes to them. Every Canadian crisis and support service listed was checked on its own website.",
+    "summary": "An open, living playbook on safety plans: what they are, why everyone should have one, what goes in one, and what HR, managers and employers of any size should do when someone comes to them. Crisis and support services for Canada, the US, the UK, Ireland, Germany and Australia were checked against each service's own website or a government page.",
     "anchor": "people-practice-playbook/vol-4/",
     "pageAnchor": "#doc-people-practice-playbook-vol-4",
     "relatedIds": [
@@ -1967,7 +1967,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-4/people-practice-playbook-vol4-v0.1.1.md by people-practice-playbook/vol-4/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-4/people-practice-playbook-vol4-v0.2.1.md by people-practice-playbook/vol-4/build.py; that markdown is offered as a download. v0.1 and v0.2 were never published, so there are no files for them; v0.1.1 stays in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
   {
     "id": "crisis-playbook",
