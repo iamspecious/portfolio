@@ -124,6 +124,8 @@ The exceptions run outside the browser on purpose: the HR Webhook Integration La
 
 Adding a project means: a block in `index.html` with an `id`, `data-date` and `data-category`; an entry in `portfolio-index.json` following the checklist in `TAXONOMY.md` §12; `keywords` for words a visitor might search that aren't in the title or summary (TAXONOMY.md §13); a row in this README; expected search words in `tools/search-lexicon.json`; and, for a standalone page, a description and Open Graph tags plus a back link to `index.html#<its card id>`.
 
+**Dev logs** follow one format everywhere, on the site and in every `DEVLOG.md`: newest entry first, only the newest showing with older ones behind "show older entries", and dates as day month year (13 Nov 2026). To add an entry, write it anywhere in the log with a plain date (`2026-11-13 — what happened` on the site, `## Entry 012 — title` or `### 2026-11-13: title` in a DEVLOG.md), then run `python3 tools/devlogs.py`. It sorts, collapses and formats every log, and `tools/audit.py` fails if one drifts.
+
 Every tab and item has a shareable link: `iamspecious.github.io/portfolio/#projects` opens the Projects tab, and `…/#proj-tarot-machine` opens the Tarot Machine card. The address bar updates as you browse, so you can copy a link from whatever is on screen.
 
 ## Auditing

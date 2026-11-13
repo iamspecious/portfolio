@@ -498,6 +498,23 @@
         }
         .page-footer a { color: var(--muted); text-decoration: none; }
         .page-footer a:hover { color: var(--accent); }
+        .devlog-overflow { display: none; }
+        .devlog-overflow.open { display: block; }
+        .devlog-toggle {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            color: var(--accent2);
+            font-family: monospace;
+            font-size: 12px;
+            text-align: left;
+            cursor: pointer;
+        }
+        .devlog-toggle:hover { background: var(--surface2); }
     </style>
 </head>
 <body>
@@ -1209,227 +1226,230 @@
             </div>
 
             <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — problem framing</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Starting narrow: one gap, one user group, one moment. "Making pregnancy tests accessible" is too broad to build from. "A blind pregnant person cannot independently read a home pregnancy test result" is buildable. Everything else follows.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — who we're designing for</span>
-                <p><span class="tag tag-note">Note</span>
-                Primary user: blind or severely visually impaired person taking a home pregnancy test alone. Secondary: low-vision users who can see something but not enough to read a faint second line confidently. Both share the same core need: a reliable, private, independent result.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — existing tools audit</span>
-                <p><span class="tag tag-tried">Tried</span>
-                Mapped existing solutions: Be My Eyes, Aira, VoiceOver/TalkBack (can't describe test results), Clearblue Digital (visual text only). None provide independent, private result reading. Be My Eyes and Aira require a third party to see the result — not acceptable as a default for this use case.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — layer 1: smartphone camera</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Phase 1 targets hardware everyone already owns. The recognition problem is constrained: we're classifying a small number of specific visual states (one line, two lines, digital text). That's well-defined classification, not open-ended computer vision. Tractable.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — privacy: cloud vision is a no</span>
-                <p><span class="tag tag-issue">Issue</span>
-                Cloud vision APIs require uploading a photo of the test to a remote server. This image carries health information tied to a specific moment — arguably among the most sensitive data a person generates. Sending it anywhere, even with strong privacy policies, is the wrong default. Non-negotiable.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — on-device ML as the answer</span>
-                <p><span class="tag tag-pivot">Pivot</span>
-                TensorFlow.js (PWA) and ML Kit (native) both run inference on-device with no data leaving the phone. For line detection and LCD text classification, the model complexity is low — well within what a mid-range phone from 2020 can handle offline. Privacy preserved by architecture, not policy.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — audio privacy: tap-to-hear model</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Auto-speaking on the phone speaker is never acceptable. A result announced in a shared bathroom, a public toilet, or with a partner in the next room removes the user's control at exactly the moment they need it most. Default: haptic signal when ready, audio only on tap. This is not a setting — it is the architecture.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — earphone detection and delay timer</span>
-                <p><span class="tag tag-note">Note</span>
-                Two optional audio modes beyond tap-to-hear: (1) Earphone mode — auto-speaks only if headphones are connected, silent on speaker. (2) Delay timer — user configures a pause (10–60s) between scan completion and haptic signal, giving time to move somewhere private or emotionally prepare. Both are opt-in. Neither changes the default.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — risk assessment: false result is the primary concern</span>
-                <p><span class="tag tag-issue">Issue</span>
-                A false positive or false negative in this context isn't an inconvenience — it has real psychological and medical consequences. The model must ship with a confidence threshold below which it returns "inconclusive, re-check recommended" rather than a result. It must also never present a result as certain. The language is always "the test shows" not "you are."</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — risk: audio disclosure in public</span>
-                <p><span class="tag tag-decision">Decision</span>
-                This risk is rated High likelihood if not actively mitigated — bathrooms are shared, speakers are loud. Addressed by the tap-to-hear model as the unconfigurable default. Earphone mode and delay timer are the user-level mitigations. Added to the risk register as a closed risk (architecturally resolved), not an open one.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — risk: OS-level data retention</span>
-                <p><span class="tag tag-note">Note</span>
-                Potential gap: even if we don't save images, could the OS? Investigated: camera roll access is a separate permission from live camera access. The app will only request <code>getUserMedia</code> (live stream). No <code>Photos</code> library permission is ever requested. <code>localStorage</code>, <code>sessionStorage</code>, and <code>IndexedDB</code> will never receive a result value. Crash reporting is explicitly excluded.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — regulatory framing established</span>
-                <p><span class="tag tag-decision">Decision</span>
-                PregVoice reads the visual output of a completed test. It does not perform or interpret the diagnostic process. The test is the regulated product. The reader is an accessibility tool. This distinction is enforced in code (we never touch the test hardware) and in all public language. Filed as a standing constraint.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — multilingual: language selection model</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Browser locale is a hint, not a confirmed preference. First launch presents a language selection with a voice preview. The user confirms before proceeding. Choice stored in <code>localStorage</code> (language preference only — no health data). No network request required at any point.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — multilingual: clinical phrasing decision</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Result strings use clinical framing: "The test shows a positive result" not "You are pregnant." This is less culturally variable, grammatically easier to keep gender-neutral, and more defensible from a regulatory language standpoint. Personal phrasing is available as a user preference for those who want it.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — multilingual: translation standards</span>
-                <p><span class="tag tag-note">Note</span>
-                All result strings require professional human translation with clinical/medical language awareness. Machine translation is a first-draft reference only. Priority languages for release: English, Spanish, Arabic, French, Portuguese, Hindi. RTL layout support (Arabic, Urdu, Hebrew) is a layout requirement, not a post-launch fix.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — framework decision: PWA first</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Progressive Web App for Phase 1. No app store, no approval gatekeeping, no install friction. Shareable as a URL. GitHub Pages hosting is free. TensorFlow.js handles on-device inference. Service worker enables offline use — critical, because the app must work with no network connection during the reading window. If camera recognition proves unreliable in the browser, Phase 2 is native (React Native or Flutter) for better ML Kit/Vision framework access.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — sustainability: zero running cost is the goal</span>
-                <p><span class="tag tag-note">Note</span>
-                Hosting: GitHub Pages (free). Inference: on-device (free per use). Audio: Web Speech API (free). Analytics: none (by design). The only real costs are a domain (~£10/year) and professional translations (one-time per language, seeking grant/volunteer funding). The tool has no server, no database, no API calls — nothing to pay for month to month.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — ethics: open source as trust</span>
-                <p><span class="tag tag-decision">Decision</span>
-                The repository will be public and auditable from day one. Not as a contribution invitation (though contributions are welcome) but because users handling sensitive health data deserve to be able to verify what the tool does. Privacy policies are words. Code is evidence.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — ethics: equity testing as release gate</span>
-                <p><span class="tag tag-decision">Decision</span>
-                The recognition model must be tested across all major test brands, lighting conditions, device camera qualities, and result types before any public release. If performance is systematically worse for any subgroup, the tool does not ship. Equity testing is a release requirement, not an audit. This applies to multilingual output too — "Inconclusive" in English and Arabic must both be as clear.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — digital test internals research thread opened</span>
-                <p><span class="tag tag-note">Note</span>
-                Ordered a Clearblue Digital reading stick for PCB examination. Working hypothesis: the electronics to support audio are simpler to add than a full redesign — the MCU, battery, and optical sensor are already there. Key unknowns: chipset, GPIO availability, firmware lock status. Findings will be documented here.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-08 — haptic language: pattern hypothesis</span>
-                <p><span class="tag tag-note">Note</span>
-                Draft haptic patterns established: long-short-short (negative), short-short-long (positive), six rapid (inconclusive), three long (error). Rationale: simple enough to learn once, distinctive enough not to misread under stress, compatible with standard phone vibration APIs. Pending validation with blind and low-vision community members before finalising.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — teardown research complete: MCU confirmed</span>
-                <p><span class="tag tag-done">Done</span>
-                Multiple independent teardowns confirm the Clearblue Digital reading stick contains a Holtek HT48C06 or HT48R065B — a standard off-the-shelf 8-bit OTP MCU, not a custom ASIC. Full public datasheets available. This is a significant finding: it means the chip can be sourced, studied, and potentially replaced. It is not a black box.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — the buzzer pins are already there</span>
-                <p><span class="tag tag-done">Done</span>
-                The HT48C06 has a dedicated complementary buzzer drive pair (PB0/PB1) and a built-in programmable frequency divider — native silicon features for driving a piezo element directly, no external driver required. The hardware to make the stick beep on a result is already specced into the chip inside the device. The reason Clearblue Digital makes no sound is a product decision, not a hardware limitation. This changes the manufacturer partnership conversation significantly.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — the real blocker: the enclosure, not the electronics</span>
-                <p><span class="tag tag-issue">Issue</span>
-                The stick enclosure is moulded to extremely tight tolerances. Adding any speaker or piezo disc — even a thin SMD type — requires a new enclosure revision and injection moulding tooling. The PCB also uses COB (epoxy blob) packaging in some variants, making chip-level modification impossible without destroying the board. The electronics are not the constraint. The plastic is. Any Layer 2 partnership conversation needs to lead with this: a new enclosure SKU, not a modification to the existing one.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — OTP firmware: reading it is not possible</span>
-                <p><span class="tag tag-issue">Issue</span>
-                OTP (one-time programmable) means the firmware is burned at manufacture and cannot be read out or overwritten. Any new firmware — for a partnership audio SKU or a parallel MCU approach — must be written from scratch. The optical sensing algorithm, threshold logic, and countdown timing all need to be reverse engineered and reimplemented. The chip is standard and purchasable; the firmware knowledge is not transferable. This is the largest engineering unknown for any hardware path.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — RNIB finding: blind users rejected audio output</span>
-                <p><span class="tag tag-issue">Issue</span>
-                The RNIB's 2020 accessible pregnancy test prototype conducted user research before building. Finding: blind users did not want audio output. Reason: any tone or voice has emotional valence — it sounds either positive or negative — and users did not want a machine to telegraph the outcome before they had a moment to process it. The RNIB chose tactile output (a mechanical button that raises on positive). The APT (James Dyson Award 2022) reached the same conclusion independently and used haptic vibration. This is a direct challenge to our audio-first design that we cannot design around without our own community research.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — revised position: haptic is primary, not fallback</span>
-                <p><span class="tag tag-pivot">Pivot</span>
-                The RNIB and APT findings shift haptic from "audio fallback" to "first-class output modality." The tap-to-hear model we designed (haptic signals ready, audio only on tap) partially addresses the valence concern — the user controls the emotional moment, not the machine. But some users may never want audio regardless of timing. The design must support haptic-only as a complete, uncompromised experience. This does not remove audio from the design; it removes audio as the assumed primary output. Community research will determine the right default.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — existing landscape: three prior efforts, none commercial</span>
-                <p><span class="tag tag-note">Note</span>
-                Three documented accessible pregnancy test projects exist: RNIB (tactile, 2020), APT (haptic, 2022), AMY (NFC to phone screen reader, 2025 award). None are commercially available. AMY's approach — delegating audio to the phone's existing screen reader via NFC — is elegant: it leverages infrastructure the user has already configured to their preference, rather than building a new audio system from scratch. Worth considering for our Layer 1 alongside direct camera recognition.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — patent landscape: third-party audio patent is a FTO risk</span>
-                <p><span class="tag tag-issue">Issue</span>
-                WO2014158850 / AU2014241791B2 ("Diagnostic Test Device with Audible Feedback") is a granted patent covering audio output on a lateral flow assay device — explicitly including pregnancy tests — not assigned to SPD. Anyone adding audio to a lateral flow test reader, including our Layer 3 standalone device and any SPD audio SKU, needs a freedom-to-operate analysis against this patent before commercialisation. Our smartphone Layer 1 is not a lateral flow device and is not affected. Filed as a standing legal risk — not blocking research, but blocking any commercial hardware launch without FTO clearance.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — SPD holds no audio patent: gap confirmed</span>
-                <p><span class="tag tag-note">Note</span>
-                SPD's patent portfolio covers the optical reader, immunoassay, display integration, and industrial design. There is no SPD/Clearblue patent on audio output from a pregnancy test. This means the concept is not legally blocked from their side. A partnership conversation about an audio SKU is not walking into their existing IP. The conversation needs to address the third-party WO2014158850 FTO question, but that's a solvable problem (license or design around), not a veto.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — regulatory path confirmed: new 510(k) required</span>
-                <p><span class="tag tag-note">Note</span>
-                FDA classification confirmed: Class II, product code LCX, 21 CFR 862.1155. The electronic reader and strip are cleared together under a single 510(k). Adding audio output to the reader is a user interface change — not a minor modification under 21 CFR Part 820. A new 510(k) is required, using the existing Clearblue system as predicate. Timeline: 12–24 months. Cost: $250K–$1M. EU path: IVDR Class B, Notified Body update required. This is the realistic regulatory cost SPD would face for an audio SKU. It is not prohibitive for a company of P&amp;G's scale, but it needs a clear commercial case to justify it.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — manufacturer entry point identified</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Primary target for a partnership conversation: Clearblue Innovation Centre, Bedford, UK (Stannard Way, Priory Business Park). This is SPD's R&amp;D home. Secondary route: P&amp;G's disability inclusion and ESG function, which has a documented accessibility commitments programme and may open faster than a cold commercial approach. The RNIB's 2020 work generated significant press — Clearblue's team is aware of the need. The conversation needs: (1) a working prototype demonstrating the concept, (2) quantified market size data, (3) a regulatory summary showing the 510(k) path is clear. We do not yet have all three.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — RNIB finding reframed: it's linguistic valence, not audio itself</span>
-                <p><span class="tag tag-pivot">Pivot</span>
-                Closer reading of the RNIB finding: their prototype used a voice saying "Pregnant" or "Not Pregnant." The issue was not that sound played — it was that words carry inherent emotional weight. Any voice, however clinical, is making a statement about the person's body and future at a moment they may not be ready for. A bleep carries no linguistic content, no cultural connotation, and no implied emotional register. The RNIB found against voice. They did not test tones. The design implication is not "no audio" — it is "no words."</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — context: not all results are good or wanted</span>
-                <p><span class="tag tag-note">Note</span>
-                This point cannot be designed around — it must be designed from. A positive result can be the best news of someone's life or devastating news depending entirely on context: wanted pregnancy, unwanted pregnancy, fertility treatment, contraceptive failure, post-miscarriage monitoring. A negative result is equally context-dependent. The system cannot know which situation it is in and must not presume. A bleep says nothing about how to feel. A voice saying anything — however carefully worded — says something. Tones are the only audio format that stays genuinely neutral.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — decision: tones as primary audio output, not voice</span>
-                <p><span class="tag tag-decision">Decision</span>
-                Primary audio output is now simple tones: 1 bleep = positive, 2 bleeps = negative, 3 bleeps = inconclusive, 4 rapid bleeps = error. Count-based, not cadence-based — a count is the simplest possible encoding, learnable in one read, universal across languages and cultures. No linguistic valence. No words. The user receives the count and applies their own emotional context to it. Voice announcement remains available as an explicit opt-in for users who want it, using clinical framing, but is not the default and will never auto-play.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — haptic motor variability: a real constraint</span>
-                <p><span class="tag tag-issue">Issue</span>
-                Phone haptic motors are not standardised. A flagship device produces precise, differentiated vibration. A budget Android may not reliably distinguish between a long and short pulse — and the user holding the phone through a case, at an angle, or with reduced hand sensation compounds this. Phone speakers are far more consistent across device tiers: a £50 phone speaker and a £1,000 phone speaker both produce a clearly audible bleep. The gap in haptic motor quality across devices is much larger than the gap in speaker quality. This is why tones are primary and haptic is secondary — not because haptic is less important, but because it is less reliable as a universal baseline.</p>
-            </div>
-
-            <div class="devlog-entry">
-                <span class="timestamp">2026-05-09 — revised output hierarchy confirmed</span>
+                <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — revised output hierarchy confirmed</span>
                 <p><span class="tag tag-decision">Decision</span>
                 Final output hierarchy: (1) Tones — primary audio, neutral, universal, device-consistent, played through earphones for privacy or phone speaker on user tap; (2) Haptic — secondary, genuine fallback for silent environments and hearing impaired users, acknowledged as device-dependent; (3) Voice — opt-in only, clinical phrasing, user-configured language, never the default; (4) Auto-announce — does not exist in any form. All outputs are triggered by user action, never by the system. The tap-to-hear model applies to tones, not just voice.</p>
             </div>
 
+            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 36 older entries</button>
+
+            <div class="devlog-overflow">
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — haptic motor variability: a real constraint</span>
+                    <p><span class="tag tag-issue">Issue</span>
+                    Phone haptic motors are not standardised. A flagship device produces precise, differentiated vibration. A budget Android may not reliably distinguish between a long and short pulse — and the user holding the phone through a case, at an angle, or with reduced hand sensation compounds this. Phone speakers are far more consistent across device tiers: a £50 phone speaker and a £1,000 phone speaker both produce a clearly audible bleep. The gap in haptic motor quality across devices is much larger than the gap in speaker quality. This is why tones are primary and haptic is secondary — not because haptic is less important, but because it is less reliable as a universal baseline.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — decision: tones as primary audio output, not voice</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Primary audio output is now simple tones: 1 bleep = positive, 2 bleeps = negative, 3 bleeps = inconclusive, 4 rapid bleeps = error. Count-based, not cadence-based — a count is the simplest possible encoding, learnable in one read, universal across languages and cultures. No linguistic valence. No words. The user receives the count and applies their own emotional context to it. Voice announcement remains available as an explicit opt-in for users who want it, using clinical framing, but is not the default and will never auto-play.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — context: not all results are good or wanted</span>
+                    <p><span class="tag tag-note">Note</span>
+                    This point cannot be designed around — it must be designed from. A positive result can be the best news of someone's life or devastating news depending entirely on context: wanted pregnancy, unwanted pregnancy, fertility treatment, contraceptive failure, post-miscarriage monitoring. A negative result is equally context-dependent. The system cannot know which situation it is in and must not presume. A bleep says nothing about how to feel. A voice saying anything — however carefully worded — says something. Tones are the only audio format that stays genuinely neutral.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — RNIB finding reframed: it's linguistic valence, not audio itself</span>
+                    <p><span class="tag tag-pivot">Pivot</span>
+                    Closer reading of the RNIB finding: their prototype used a voice saying "Pregnant" or "Not Pregnant." The issue was not that sound played — it was that words carry inherent emotional weight. Any voice, however clinical, is making a statement about the person's body and future at a moment they may not be ready for. A bleep carries no linguistic content, no cultural connotation, and no implied emotional register. The RNIB found against voice. They did not test tones. The design implication is not "no audio" — it is "no words."</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — manufacturer entry point identified</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Primary target for a partnership conversation: Clearblue Innovation Centre, Bedford, UK (Stannard Way, Priory Business Park). This is SPD's R&amp;D home. Secondary route: P&amp;G's disability inclusion and ESG function, which has a documented accessibility commitments programme and may open faster than a cold commercial approach. The RNIB's 2020 work generated significant press — Clearblue's team is aware of the need. The conversation needs: (1) a working prototype demonstrating the concept, (2) quantified market size data, (3) a regulatory summary showing the 510(k) path is clear. We do not yet have all three.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — regulatory path confirmed: new 510(k) required</span>
+                    <p><span class="tag tag-note">Note</span>
+                    FDA classification confirmed: Class II, product code LCX, 21 CFR 862.1155. The electronic reader and strip are cleared together under a single 510(k). Adding audio output to the reader is a user interface change — not a minor modification under 21 CFR Part 820. A new 510(k) is required, using the existing Clearblue system as predicate. Timeline: 12–24 months. Cost: $250K–$1M. EU path: IVDR Class B, Notified Body update required. This is the realistic regulatory cost SPD would face for an audio SKU. It is not prohibitive for a company of P&amp;G's scale, but it needs a clear commercial case to justify it.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — SPD holds no audio patent: gap confirmed</span>
+                    <p><span class="tag tag-note">Note</span>
+                    SPD's patent portfolio covers the optical reader, immunoassay, display integration, and industrial design. There is no SPD/Clearblue patent on audio output from a pregnancy test. This means the concept is not legally blocked from their side. A partnership conversation about an audio SKU is not walking into their existing IP. The conversation needs to address the third-party WO2014158850 FTO question, but that's a solvable problem (license or design around), not a veto.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — patent landscape: third-party audio patent is a FTO risk</span>
+                    <p><span class="tag tag-issue">Issue</span>
+                    WO2014158850 / AU2014241791B2 ("Diagnostic Test Device with Audible Feedback") is a granted patent covering audio output on a lateral flow assay device — explicitly including pregnancy tests — not assigned to SPD. Anyone adding audio to a lateral flow test reader, including our Layer 3 standalone device and any SPD audio SKU, needs a freedom-to-operate analysis against this patent before commercialisation. Our smartphone Layer 1 is not a lateral flow device and is not affected. Filed as a standing legal risk — not blocking research, but blocking any commercial hardware launch without FTO clearance.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — existing landscape: three prior efforts, none commercial</span>
+                    <p><span class="tag tag-note">Note</span>
+                    Three documented accessible pregnancy test projects exist: RNIB (tactile, 2020), APT (haptic, 2022), AMY (NFC to phone screen reader, 2025 award). None are commercially available. AMY's approach — delegating audio to the phone's existing screen reader via NFC — is elegant: it leverages infrastructure the user has already configured to their preference, rather than building a new audio system from scratch. Worth considering for our Layer 1 alongside direct camera recognition.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — revised position: haptic is primary, not fallback</span>
+                    <p><span class="tag tag-pivot">Pivot</span>
+                    The RNIB and APT findings shift haptic from "audio fallback" to "first-class output modality." The tap-to-hear model we designed (haptic signals ready, audio only on tap) partially addresses the valence concern — the user controls the emotional moment, not the machine. But some users may never want audio regardless of timing. The design must support haptic-only as a complete, uncompromised experience. This does not remove audio from the design; it removes audio as the assumed primary output. Community research will determine the right default.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — RNIB finding: blind users rejected audio output</span>
+                    <p><span class="tag tag-issue">Issue</span>
+                    The RNIB's 2020 accessible pregnancy test prototype conducted user research before building. Finding: blind users did not want audio output. Reason: any tone or voice has emotional valence — it sounds either positive or negative — and users did not want a machine to telegraph the outcome before they had a moment to process it. The RNIB chose tactile output (a mechanical button that raises on positive). The APT (James Dyson Award 2022) reached the same conclusion independently and used haptic vibration. This is a direct challenge to our audio-first design that we cannot design around without our own community research.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — OTP firmware: reading it is not possible</span>
+                    <p><span class="tag tag-issue">Issue</span>
+                    OTP (one-time programmable) means the firmware is burned at manufacture and cannot be read out or overwritten. Any new firmware — for a partnership audio SKU or a parallel MCU approach — must be written from scratch. The optical sensing algorithm, threshold logic, and countdown timing all need to be reverse engineered and reimplemented. The chip is standard and purchasable; the firmware knowledge is not transferable. This is the largest engineering unknown for any hardware path.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — the real blocker: the enclosure, not the electronics</span>
+                    <p><span class="tag tag-issue">Issue</span>
+                    The stick enclosure is moulded to extremely tight tolerances. Adding any speaker or piezo disc — even a thin SMD type — requires a new enclosure revision and injection moulding tooling. The PCB also uses COB (epoxy blob) packaging in some variants, making chip-level modification impossible without destroying the board. The electronics are not the constraint. The plastic is. Any Layer 2 partnership conversation needs to lead with this: a new enclosure SKU, not a modification to the existing one.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — the buzzer pins are already there</span>
+                    <p><span class="tag tag-done">Done</span>
+                    The HT48C06 has a dedicated complementary buzzer drive pair (PB0/PB1) and a built-in programmable frequency divider — native silicon features for driving a piezo element directly, no external driver required. The hardware to make the stick beep on a result is already specced into the chip inside the device. The reason Clearblue Digital makes no sound is a product decision, not a hardware limitation. This changes the manufacturer partnership conversation significantly.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-09">9 May 2026</time> — teardown research complete: MCU confirmed</span>
+                    <p><span class="tag tag-done">Done</span>
+                    Multiple independent teardowns confirm the Clearblue Digital reading stick contains a Holtek HT48C06 or HT48R065B — a standard off-the-shelf 8-bit OTP MCU, not a custom ASIC. Full public datasheets available. This is a significant finding: it means the chip can be sourced, studied, and potentially replaced. It is not a black box.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — haptic language: pattern hypothesis</span>
+                    <p><span class="tag tag-note">Note</span>
+                    Draft haptic patterns established: long-short-short (negative), short-short-long (positive), six rapid (inconclusive), three long (error). Rationale: simple enough to learn once, distinctive enough not to misread under stress, compatible with standard phone vibration APIs. Pending validation with blind and low-vision community members before finalising.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — digital test internals research thread opened</span>
+                    <p><span class="tag tag-note">Note</span>
+                    Ordered a Clearblue Digital reading stick for PCB examination. Working hypothesis: the electronics to support audio are simpler to add than a full redesign — the MCU, battery, and optical sensor are already there. Key unknowns: chipset, GPIO availability, firmware lock status. Findings will be documented here.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — ethics: equity testing as release gate</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    The recognition model must be tested across all major test brands, lighting conditions, device camera qualities, and result types before any public release. If performance is systematically worse for any subgroup, the tool does not ship. Equity testing is a release requirement, not an audit. This applies to multilingual output too — "Inconclusive" in English and Arabic must both be as clear.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — ethics: open source as trust</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    The repository will be public and auditable from day one. Not as a contribution invitation (though contributions are welcome) but because users handling sensitive health data deserve to be able to verify what the tool does. Privacy policies are words. Code is evidence.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — sustainability: zero running cost is the goal</span>
+                    <p><span class="tag tag-note">Note</span>
+                    Hosting: GitHub Pages (free). Inference: on-device (free per use). Audio: Web Speech API (free). Analytics: none (by design). The only real costs are a domain (~£10/year) and professional translations (one-time per language, seeking grant/volunteer funding). The tool has no server, no database, no API calls — nothing to pay for month to month.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — framework decision: PWA first</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Progressive Web App for Phase 1. No app store, no approval gatekeeping, no install friction. Shareable as a URL. GitHub Pages hosting is free. TensorFlow.js handles on-device inference. Service worker enables offline use — critical, because the app must work with no network connection during the reading window. If camera recognition proves unreliable in the browser, Phase 2 is native (React Native or Flutter) for better ML Kit/Vision framework access.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — multilingual: translation standards</span>
+                    <p><span class="tag tag-note">Note</span>
+                    All result strings require professional human translation with clinical/medical language awareness. Machine translation is a first-draft reference only. Priority languages for release: English, Spanish, Arabic, French, Portuguese, Hindi. RTL layout support (Arabic, Urdu, Hebrew) is a layout requirement, not a post-launch fix.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — multilingual: clinical phrasing decision</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Result strings use clinical framing: "The test shows a positive result" not "You are pregnant." This is less culturally variable, grammatically easier to keep gender-neutral, and more defensible from a regulatory language standpoint. Personal phrasing is available as a user preference for those who want it.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — multilingual: language selection model</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Browser locale is a hint, not a confirmed preference. First launch presents a language selection with a voice preview. The user confirms before proceeding. Choice stored in <code>localStorage</code> (language preference only — no health data). No network request required at any point.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — regulatory framing established</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    PregVoice reads the visual output of a completed test. It does not perform or interpret the diagnostic process. The test is the regulated product. The reader is an accessibility tool. This distinction is enforced in code (we never touch the test hardware) and in all public language. Filed as a standing constraint.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — risk: OS-level data retention</span>
+                    <p><span class="tag tag-note">Note</span>
+                    Potential gap: even if we don't save images, could the OS? Investigated: camera roll access is a separate permission from live camera access. The app will only request <code>getUserMedia</code> (live stream). No <code>Photos</code> library permission is ever requested. <code>localStorage</code>, <code>sessionStorage</code>, and <code>IndexedDB</code> will never receive a result value. Crash reporting is explicitly excluded.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — risk: audio disclosure in public</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    This risk is rated High likelihood if not actively mitigated — bathrooms are shared, speakers are loud. Addressed by the tap-to-hear model as the unconfigurable default. Earphone mode and delay timer are the user-level mitigations. Added to the risk register as a closed risk (architecturally resolved), not an open one.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — risk assessment: false result is the primary concern</span>
+                    <p><span class="tag tag-issue">Issue</span>
+                    A false positive or false negative in this context isn't an inconvenience — it has real psychological and medical consequences. The model must ship with a confidence threshold below which it returns "inconclusive, re-check recommended" rather than a result. It must also never present a result as certain. The language is always "the test shows" not "you are."</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — earphone detection and delay timer</span>
+                    <p><span class="tag tag-note">Note</span>
+                    Two optional audio modes beyond tap-to-hear: (1) Earphone mode — auto-speaks only if headphones are connected, silent on speaker. (2) Delay timer — user configures a pause (10–60s) between scan completion and haptic signal, giving time to move somewhere private or emotionally prepare. Both are opt-in. Neither changes the default.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — audio privacy: tap-to-hear model</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Auto-speaking on the phone speaker is never acceptable. A result announced in a shared bathroom, a public toilet, or with a partner in the next room removes the user's control at exactly the moment they need it most. Default: haptic signal when ready, audio only on tap. This is not a setting — it is the architecture.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — on-device ML as the answer</span>
+                    <p><span class="tag tag-pivot">Pivot</span>
+                    TensorFlow.js (PWA) and ML Kit (native) both run inference on-device with no data leaving the phone. For line detection and LCD text classification, the model complexity is low — well within what a mid-range phone from 2020 can handle offline. Privacy preserved by architecture, not policy.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — privacy: cloud vision is a no</span>
+                    <p><span class="tag tag-issue">Issue</span>
+                    Cloud vision APIs require uploading a photo of the test to a remote server. This image carries health information tied to a specific moment — arguably among the most sensitive data a person generates. Sending it anywhere, even with strong privacy policies, is the wrong default. Non-negotiable.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — layer 1: smartphone camera</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Phase 1 targets hardware everyone already owns. The recognition problem is constrained: we're classifying a small number of specific visual states (one line, two lines, digital text). That's well-defined classification, not open-ended computer vision. Tractable.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — existing tools audit</span>
+                    <p><span class="tag tag-tried">Tried</span>
+                    Mapped existing solutions: Be My Eyes, Aira, VoiceOver/TalkBack (can't describe test results), Clearblue Digital (visual text only). None provide independent, private result reading. Be My Eyes and Aira require a third party to see the result — not acceptable as a default for this use case.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — who we're designing for</span>
+                    <p><span class="tag tag-note">Note</span>
+                    Primary user: blind or severely visually impaired person taking a home pregnancy test alone. Secondary: low-vision users who can see something but not enough to read a faint second line confidently. Both share the same core need: a reliable, private, independent result.</p>
+                </div>
+
+                <div class="devlog-entry">
+                    <span class="timestamp"><time datetime="2026-05-08">8 May 2026</time> — problem framing</span>
+                    <p><span class="tag tag-decision">Decision</span>
+                    Starting narrow: one gap, one user group, one moment. "Making pregnancy tests accessible" is too broad to build from. "A blind pregnant person cannot independently read a home pregnancy test result" is buildable. Everything else follows.</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1460,5 +1480,15 @@
     </div>
 
 </div>
+<script>
+    // Dev log: older entries sit behind a "+ show N older entries" button.
+    function toggleDevlog(btn) {
+        const overflow = btn.nextElementSibling;
+        const isOpen = overflow.classList.toggle('open');
+        const count = overflow.querySelectorAll('.devlog-entry').length;
+        const word = count === 1 ? 'entry' : 'entries';
+        btn.textContent = (isOpen ? '− hide ' : '+ show ') + count + ' older ' + word;
+    }
+</script>
 </body>
 </html>

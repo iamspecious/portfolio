@@ -523,6 +523,27 @@ print(f'  {n_el} elements in index.html')
 if n_el > 6000:
     warn('weight', f'index.html has {n_el} elements; over 6000 slows tab switching on phones')
 
+# ─── 10. Dev logs ───────────────────────────────────────────────────────
+# Newest first, only the newest showing, dates as day month year.
+# tools/devlogs.py fixes anything flagged here.
+heading('10. Dev logs')
+import importlib.util
+_spec = importlib.util.spec_from_file_location('devlogs', os.path.join(ROOT, 'tools', 'devlogs.py'))
+devlogs = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(devlogs)
+n_logs = 0
+for page in devlogs.PAGES:
+    problems, _ = devlogs.process(page, write=False)
+    n_logs += open(page).read().count('class="devlog-toggle"')
+    for p in problems:
+        fail('devlogs', p + '  (run python3 tools/devlogs.py)')
+for md in devlogs.markdown_logs():
+    problems, _ = devlogs.process_markdown(md, write=False)
+    n_logs += 1
+    for p in problems:
+        fail('devlogs', f'{md}: {p}  (run python3 tools/devlogs.py)')
+print(f'{n_logs} dev logs checked (site pages and every DEVLOG.md)')
+
 # ─── Report ─────────────────────────────────────────────────────────────
 heading(f'RESULT: {len(fails)} FAIL, {len(warns)} WARN')
 for label, rows in (('FAIL', fails), ('WARN', warns)):
