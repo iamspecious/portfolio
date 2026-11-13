@@ -20,6 +20,14 @@
 - Minor fixes: Deaf and hard-of-hearing access to 9-8-8; 9-8-8 and Trans Lifeline police wording; pflag's FAQ still giving the old number; HR disclosure percentage; private browsing doesn't beat spyware; paper copy at work; log link.
 - v0.1 was never published, so only v0.1.1 goes live. The changelog records both.
 
+### 2026-11-12: Publishing v0.1.1
+
+- Decision: index tags are people-hr and research, with technical-writing left off. With it, Vol. 4 took the last document slot in Digital Spec's Documentation lane and pushed cat-api-documentation out of every lane, leaving that lane four playbooks out of seven items. Vol. 4 is reached from the Playbooks tab and search instead. A one-line change if that call should flip.
+- Rebased onto main after the crisis playbook rebuild (#59), which renamed crisis-management-playbook to crisis-playbook. Kept both sets of _config.yml excludes and re-applied Vol. 4's index entry, search keywords and card on top of main's versions.
+- Checks: tools/audit.py 0 FAIL. tools/smoke-test.js showed 4 failures, all scroll-position checks on older Projects-tab items (optimising-cs-operations, leadership-coaching-project, niche-market-web-dev-strategy); the same failures appear on the commit before Vol. 4, so they predate it. Vol. 4 is found by search and its page loads.
+- Network: about 30 Canadian crisis, government, charity and research hosts added to the environment's allowlist, with Spec's approval, so sources could be opened rather than taken from search summaries.
+- Published as PR #60 and merged; the page was live about 50 seconds later.
+
 ### 2026-11-12: v0.2, accuracy pass and wider reach
 
 - Brief from Spec: re-check accuracy, add evidence and best practice, make it useful at any company size, and don't keep it Canada-only.
@@ -37,4 +45,14 @@
 - Major fixes: Samaritans in Ireland no longer connects withheld numbers (changed 9 November 2026), so the Ireland row now says to show your number, and adds 999 or 112. The Germany men's line details are dated to their 2022 source, with a link to the service.
 - Minor fixes: "unlikely to cause harm" rather than "safe"; check-in wording; Rivas "looked at" rather than "pooled"; Albaum "half were pilot trials"; section 5's police note; Acas's remit; UK chat hours; TelefonSeelsorge "free" removed; Find A Helpline and Befrienders counts; Men's Aid sourced to its own site.
 - v0.2 was never published, so only v0.2.1 goes live. The changelog records both.
+
+### 2026-11-13: Placing the v0.2 handoff and publishing v0.2.1
+
+- Spec's v0.2 handoff placed as given: the v0.2 markdown, CHANGELOG, SOURCES, RESEARCH, DEVLOG and build.py. README.md and portfolio-index.json were changed by applying the supplied diff, not by overwriting the whole files, so nothing else in them moved.
+- Added beyond the handoff, which didn't cover them: the Playbooks card (version, summary, "what it demonstrates", scope, roadmap, download link, dev log) and the search lexicon ("suicide prevention", "small business"). Index tags left as people-hr and research, so the lane decision above still holds.
+- Network: about 30 more hosts allowed, with Spec's approval, for the international helplines, Acas, the ILO, Workplaces Respond, Find A Helpline and the v0.2 research sources, so the audit could open each one.
+- Decision: v0.2 was audited before publishing, as the handoff asked. Fixes went in as v0.2.1 and the v0.2 file was renamed rather than kept, the same pattern as v0.1 and v0.1.1.
+- Decision: two gaps the audit raised were left as open items rather than filled with unchecked details: Germany's ambulance number, and whether the UK abuse helpline covers Scotland, Wales and Northern Ireland.
+- Card dev log toggle moved so two entries show before "show older", matching the other cards.
+- Checks: tools/audit.py 0 FAIL; page rebuilt with no em dashes and no sideways scroll at phone width.
 
