@@ -29,4 +29,12 @@
 - Decision: warning signs are framed as reasons to check in, not evidence, with a bias caveat. CCOHS's list includes cameras off in video meetings, which would land on disabled, neurodivergent and caregiving staff if used as a red flag.
 - Decision: international list kept to five countries plus Find A Helpline, one crisis line and the main abuse lines each, with a men's route where the main line is for women. More countries means more numbers to keep right; the directory covers the rest.
 - Resolved a tension between Acas (keep records) and the "don't write details into files" line: keep a minimal, access-limited record of requests and actions, not the details of the abuse.
-- Not yet independently audited. Built locally, not pushed.
+- Not yet independently audited when handed over.
+
+### 2026-11-12: Integrity audit of v0.2 and v0.2.1
+
+- Independent audit by a separate agent that saw only the document: PASS WITH FIXES. 143 claims; none fabricated; no wrong phone numbers among those it could check; 2 major and 12 minor findings. The audit was interrupted by a usage limit and resumed after it reset.
+- Major fixes: Samaritans in Ireland no longer connects withheld numbers (changed 9 November 2026), so the Ireland row now says to show your number, and adds 999 or 112. The Germany men's line details are dated to their 2022 source, with a link to the service.
+- Minor fixes: "unlikely to cause harm" rather than "safe"; check-in wording; Rivas "looked at" rather than "pooled"; Albaum "half were pilot trials"; section 5's police note; Acas's remit; UK chat hours; TelefonSeelsorge "free" removed; Find A Helpline and Befrienders counts; Men's Aid sourced to its own site.
+- v0.2 was never published, so only v0.2.1 goes live. The changelog records both.
+

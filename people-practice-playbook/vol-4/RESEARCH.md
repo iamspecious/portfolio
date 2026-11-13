@@ -78,3 +78,15 @@ Asked for: an accuracy pass, more evidence, guidance that works for any size of 
 ### Phone numbers checked on government or secondary pages, not the service's own site
 
 - TelefonSeelsorge (Familienportal), Hilfetelefon Gewalt an Männern hours (Baden-Württemberg government), Men's Aid Ireland hours (HSE), Respect Men's Advice Line number (Respect's own article page; its hours vary across council directories, so none are given), Samaritans in Ireland (Samaritans' UK site; Irish calling terms not stated).
+
+## Version 0.2.1: integrity audit of v0.2 (12 November 2026)
+
+- Independent audit by a separate agent that saw only the document: PASS WITH FIXES. 143 claims (up from 86); 131 verified, 11 partial, 1 unreachable; 0 critical, 2 major, 12 minor, 11 notes. No phone number it could check was wrong.
+- Major: Samaritans in Ireland stopped connecting withheld-number calls on 9 November 2026, three days before v0.2's "checked" date. Matters most for people in monitored situations, who are the ones likely to withhold their number. Fixed.
+- Major: the Germany men's line number and hours came only from a 2022 Baden-Württemberg press release; maennerhilfetelefon.de couldn't be reached (proxy 403). Now dated to that source, with a link to the service.
+- TelefonSeelsorge "free": not stated on the Familienportal page used, so removed. (0800 numbers usually are, but that isn't a source.)
+- UK National Domestic Abuse Helpline chat hours: the page wasn't clear enough to state them, so the text says chat and BSL have set hours listed on the site.
+- Germany ambulance number (112) not verified this session; left as an open item rather than added unchecked.
+- Albaum 2025: the audit read the PMC full text. It found a 6 July 2026 correction (suicide-attempt risk ratio) and an ideation effect (g 0.11, 95% CI 0.01 to 0.21) that sits oddly with the paper's "no significant association". The playbook doesn't quote effect sizes, so the text stands, but it's on the hand-check list.
+- Web-search lead only: the UK helpline may be England-only, with separate lines for Scotland, Wales and Northern Ireland. The text already tells readers outside England to check.
+
