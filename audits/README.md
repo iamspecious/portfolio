@@ -34,6 +34,7 @@ What they cover:
 | Phone width | No sideways scroll at 375px | smoke-test |
 | Page weight | Gzip size of each file against a budget, third-party files, the index downloaded once, element count | audit.py §9 |
 | Tabs | Arrow-key navigation and `aria-selected` | smoke-test |
+| Dev logs | Every log on the site and every `DEVLOG.md`: newest first, one entry showing, older ones collapsed, dates day month year (`tools/devlogs.py` fixes) | audit.py §10 |
 
 ## 2. Manual review, per project and document
 

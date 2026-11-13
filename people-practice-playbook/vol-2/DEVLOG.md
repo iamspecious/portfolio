@@ -4,31 +4,6 @@
 
 ---
 
-## Entry 001: People Practice Playbook, Vol. 2 v0.1, first full draft
-
-**Date:** 9 November 2026
-**Status:** Draft
-
-### What and why
-
-Volume 2 of the open People Practice Playbook series, on onboarding new hires from offer accepted to about six months in. Written for founders and executives, People and ops leads, line managers and the new hire themselves. Same research-led approach as Vol. 1: each section says what the research shows, good and bad, where it runs out, and then what I'd do.
-
-### Key decisions
-
-- Onboarding starts at offer accepted, but before day one is the organisation's work. The new hire gets one short message with the logistics, and no unpaid reading or tasks.
-- Five pillars: Business, Operations, The role, People and culture, and Growth, with where to take a problem running underneath all five.
-- Day counts and buddy length are each organisation's choice. There's no research on 30, 60 or 90 days, and the playbook says so.
-- Explicitness runs through the whole thing rather than a separate chapter on adjustments, because being explicit helps everyone.
-- Two fairness scenarios, written speaking-up norms that are never put down to nationality or background, and probation that doesn't read quiet as disengaged.
-- Every example says "This is illustrative, not a real company."
-- Templates in section 10, each usable on its own.
-
-### Open items
-
-- See section 12 of the playbook.
-
----
-
 ## Entry 002: People Practice Playbook, Vol. 2 v0.1.1, integrity audit fixes
 
 **Date:** 9 November 2026
@@ -56,3 +31,31 @@ An integrity audit of v0.1, run in a fresh session against every source, passed 
 ### Open items
 
 - See section 12 of the playbook.
+
+<details>
+<summary>Show 1 older entry</summary>
+
+## Entry 001: People Practice Playbook, Vol. 2 v0.1, first full draft
+
+**Date:** 9 November 2026
+**Status:** Draft
+
+### What and why
+
+Volume 2 of the open People Practice Playbook series, on onboarding new hires from offer accepted to about six months in. Written for founders and executives, People and ops leads, line managers and the new hire themselves. Same research-led approach as Vol. 1: each section says what the research shows, good and bad, where it runs out, and then what I'd do.
+
+### Key decisions
+
+- Onboarding starts at offer accepted, but before day one is the organisation's work. The new hire gets one short message with the logistics, and no unpaid reading or tasks.
+- Five pillars: Business, Operations, The role, People and culture, and Growth, with where to take a problem running underneath all five.
+- Day counts and buddy length are each organisation's choice. There's no research on 30, 60 or 90 days, and the playbook says so.
+- Explicitness runs through the whole thing rather than a separate chapter on adjustments, because being explicit helps everyone.
+- Two fairness scenarios, written speaking-up norms that are never put down to nationality or background, and probation that doesn't read quiet as disengaged.
+- Every example says "This is illustrative, not a real company."
+- Templates in section 10, each usable on its own.
+
+### Open items
+
+- See section 12 of the playbook.
+
+</details>
