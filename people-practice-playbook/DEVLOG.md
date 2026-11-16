@@ -4,6 +4,44 @@
 
 ---
 
+## Entry 009: People Practice Playbook v0.2, job descriptions and ladders
+
+**Date:** 15 November 2026
+**Status:** Minor release
+
+### What and why
+
+A reader asked in a Slack community how to make the case for a levelling framework at a company where the job descriptions are already up to date. They knew they weren't the same thing. What they wanted was a way to say it to people who think current job descriptions make a ladder pointless. That's a gap in the playbook, so section 2 now answers it.
+
+### What changed
+
+- New part of section 2, "Our job descriptions are already up to date". It explains the difference with an onion. The job description is the outer layer: the marketing, the bit that attracts people. Under it are the behaviours, values and competencies. Further in are the ladder and how you make the jump. Job architecture is the bag the onions come in.
+- It covers why vague feedback like "more presence" is a fairness problem as well as an unhelpful one, the individual contributor who can't get into management with no route to learn it, whether the inner layers belong in a public job description, and how to make the case.
+- Nine new research sources and one framework page in section 10. Sections 2, 3 and 10 have new last-reviewed dates.
+- The Gomez-Mejia and Kent rows in the research table, which were out of order, are now in alphabetical order.
+- Section 3 no longer calls Campion et al. "the most-cited" set of competency modelling best practices. The integrity audit couldn't find anything to back that up.
+- Version moved to 0.2: a new part of a section, no recommendations changed.
+
+### Key decisions
+
+- This part was rewritten in full before it went in. The first draft started from the research and fitted my thinking around it, which is backwards. The final version starts from my images and views, and the research tests them.
+- I've kept "marketing" for the job description, and the text says why. I don't mean it as a dig, I haven't found a better word, and the licence means anyone can change it in their version.
+- "Two things can be true at once" on how much detail goes in a job description. Research on information overload and one study of job adverts point different ways, so both are in, and my own take is labelled as mine.
+- Cognitive load theory is used as an analogy only. It's research on learning, not on job hunting.
+- Left out: a study that only varied pay information in adverts (pay is out of scope), choice overload research (it's about how many options there are, not how much detail), and a comparison table that no source supported.
+
+### Evidence standard
+
+Every source in the new part was opened and checked in an integrity audit before it went in. Five were checked against the abstract only, because no legal free copy exists. The source register says which. The Center for Creative Leadership paper is labelled as industry research, not peer-reviewed.
+
+### Open items
+
+- Liu (2020): the abstract doesn't say what "stopped their search" means. Check the full text if a copy turns up.
+- Section 2's "How sure is this?" doesn't yet mention the evidence in the new part.
+
+<details>
+<summary>Show 8 older entries</summary>
+
 ## Entry 008: People Practice Playbook v0.1.2, review schedule removed
 
 **Date:** 8 November 2026
@@ -28,9 +66,6 @@ The playbook promised a full review every six months. I don't want a fixed date 
 
 - Decide how playbooks get audited: an agent or bot that checks each playbook for new research, changed standards and dead links. Not for now.
 - Any open item from earlier entries that says "at the six-month review" now means "at the next review".
-
-<details>
-<summary>Show 7 older entries</summary>
 
 ## Entry 007: People Practice Playbook v0.1.1, link fixes
 

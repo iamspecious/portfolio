@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://iamspecious.github.io/portfolio/people-practice-playbook/">
     <meta name="twitter:card" content="summary">
     <link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
-    <!-- Built from people-practice-playbook-v0.1.2.md by build.py. Edit the markdown, then rebuild. -->
+    <!-- Built from people-practice-playbook-v0.2.md by build.py. Edit the markdown, then rebuild. -->
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -83,6 +83,10 @@
             font-size: 0.82rem; font-weight: 700; color: #b392f0; text-transform: uppercase;
             letter-spacing: 0.08em; margin: 36px 0 14px; scroll-margin-top: 20px;
         }
+        .doc-body h4 {
+            font-size: 0.95rem; font-weight: 700; color: #e6edf3;
+            margin: 28px 0 10px; scroll-margin-top: 20px;
+        }
         .doc-body .anchor {
             margin-left: 8px; color: #484f58; text-decoration: none; font-weight: 400;
             opacity: 0; transition: opacity 0.15s;
@@ -139,14 +143,14 @@
     <header class="doc-header">
         <span class="doc-label">People Practice · Job Architecture · CC BY-SA 4.0</span>
         <h1 class="doc-title">People Practice Playbook, Vol. 1: Job Architecture and Levelling</h1>
-        <p class="doc-subtitle">Specious Coda-Bishop · Version 0.1.2 · 8 November 2026</p>
+        <p class="doc-subtitle">Specious Coda-Bishop · Version 0.2 · 15 November 2026</p>
         <p class="doc-version"><a href="#section-10-changelog">Changelog and version history</a> in section 10 · Next volume: <a href="vol-2/">Vol. 2: Onboarding New Hires</a></p>
     </header>
 
     <div class="licence-box">
         <span class="note-label">Licence</span>
         <p><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Credit: Specious Coda-Bishop. Take it, change it and share it. Credit it and keep your version open on the same terms.</p>
-        <p><a class="download" href="people-practice-playbook-v0.1.2.md" download>Download the markdown (v0.1.2)</a></p>
+        <p><a class="download" href="people-practice-playbook-v0.2.md" download>Download the markdown (v0.2)</a></p>
     </div>
 
     <nav class="toc" aria-label="Contents">
@@ -167,7 +171,7 @@
 
     <main class="doc-body">
 <h2 id="section-1">1. Who this is for, and what it isn't<a class="anchor" href="#section-1" aria-label="Link to this section">#</a></h2>
-<p><em>Version 0.1.2, draft. Section last reviewed 8 November 2026.</em></p>
+<p><em>Version 0.2, draft. Section last reviewed 8 November 2026.</em></p>
 <p>If someone's asked you to "sort out our levels" and you're not sure where to start, this is for you. I'm writing for people at companies of roughly 50 to 500, usually in HR or L&amp;D, or a manager who's ended up holding it. I'm assuming you don't have a consultant on speed dial or months to spare.</p>
 <p>There's no shortage of ladders out there to copy. What there isn't much of is the working: how to figure out what's actually wrong, what to do first, and how to get anyone to use the thing once it exists. That's what this is.</p>
 <p>The pattern I see most is people buying the wrong fix. The ladder is honestly fine, the real problem is that managers don't know how to use it, and the answer everyone lands on is more detail. Six months later the document is longer and fewer people open it. So the whole playbook starts from one idea: work out what problem you've got before you build anything.</p>
@@ -224,7 +228,7 @@
 <li>If something's wrong, open a pull request on the <a href="https://github.com/iamspecious/portfolio">GitHub repo</a> or <a href="mailto:work.specious@gmail.com">email me</a>. If your correction changes a recommendation, you'll be credited in the changelog.</li>
 </ul>
 <h2 id="section-2">2. Diagnose first: which problem have you actually got?<a class="anchor" href="#section-2" aria-label="Link to this section">#</a></h2>
-<p><em>Section last reviewed 6 November 2026.</em></p>
+<p><em>Section last reviewed 15 November 2026.</em></p>
 <p>When people say "our levels are a mess", they usually mean one of four different things. Each one needs a different fix, and the fix for one can make another worse. Spend a week here before you spend six months building. That's my view, and it's the one this whole playbook rests on.</p>
 <h3 id="section-2-the-four-problems">The four problems<a class="anchor" href="#section-2-the-four-problems" aria-label="Link to this section">#</a></h3>
 <div class="table-wrap" role="region" tabindex="0" aria-label="Table, scrolls sideways"><table>
@@ -276,6 +280,33 @@
 <h3 id="section-2-what-order-to-fix-them-in">What order to fix them in<a class="anchor" href="#section-2-what-order-to-fix-them-in" aria-label="Link to this section">#</a></h3>
 <p>If you've got more than one, I'd go prerequisite first, then name the political problem out loud, then design, then adoption. Getting managers excited about a ladder that's broken burns trust you'll need later. Rewriting a ladder before leaders agree on what good looks like means rewriting it again.</p>
 <p>The political one is the hardest to say. You don't have to solve it. You do have to name it to whoever asked for the work, or the rest of this playbook won't help you much.</p>
+<h3 id="section-2-our-job-descriptions-are-already-up-to-date">"Our job descriptions are already up to date"<a class="anchor" href="#section-2-our-job-descriptions-are-already-up-to-date" aria-label="Link to this section">#</a></h3>
+<p>If you're making the case for a ladder, you'll probably hear some version of this. I get why. If you haven't worked with both, it looks like two documents that say the same thing and are kept apart for no clear reason. The simplest way I've found to explain the difference is an onion.</p>
+<h4 id="one-role-is-one-onion">One role is one onion</h4>
+<p>The job description is the outer layer. It's the protective skin, and it's the part people see first. I think of it as marketing.</p>
+<p>When I say marketing, I mean everything outside your internal documentation: your careers page, the advert, whatever someone sees when they come looking at your company. Its whole job is to attract the right people with the right skills, who'll add to the company, and to show the company in a certain light. To me that's marketing 101. I don't mean it as a dig at whoever writes job descriptions, and I don't see marketing or advertising as dirty words. I know some people do. I haven't found a better word for what I'm describing, so this is the one I'm using. This playbook is openly licensed for exactly this kind of thing. If the word doesn't work for you, change it in your version. Take what works and leave what doesn't.</p>
+<p>Under the skin are the behaviours, values and competencies: what good actually looks like here. Further in are the ladder and the mechanisms for making the jump to the next level.</p>
+<p>Here's where that matters. Put a junior and a senior job description for the same role side by side. There'll be some differences, but neither tells you how to get from one to the other. How do you show leadership in this company? What does taking on more responsibility look like here? That's the layer underneath.</p>
+<p>Without it, people get told they need "more exposure", "more presence" or "more initiative". It sounds like feedback, but what does it mean in practice? That's the question the inner layers answer, and it's a fairness question as well as a clarity one. When researchers coded managers' written reviews at a Fortune 500 tech company, "taking charge" went with the highest ratings for men but not for women (<a href="https://doi.org/10.1177/0003122420962080">Correll et al., 2020</a>). Correll's explanation is that when managers aren't clear what they're judging, they fall back on ideas about how different kinds of people are. Vague words are where that gets in. Section 9 has more on this.</p>
+<p>Say you've got an excellent individual contributor. The next role up means managing a team of five. They've never managed anyone, they keep getting turned down for promotion, and there's no route for them to learn those skills, if they even want to. Nothing in either job description bridges that gap. The behaviours, values and competencies do, because they spell out what the next role asks for and give someone something to work towards. If they don't want to manage, that's what the parallel tracks in section 4 are for.</p>
+<p>Research shows the same gap from the other side. A study of sales workers at 131 firms found companies tended to promote people for how good they were in their current job, over things that better predicted how they'd do as managers (<a href="https://doi.org/10.1093/qje/qjz022">Benson, Li and Shue, 2019</a>; <a href="https://hdl.handle.net/1721.1/144198">free copy</a>). Either way, the decision falls back on how good someone is at the job they've got, because nobody wrote down what the next job asks for. People don't get much help with the jump either. In a white paper from the Center for Creative Leadership, almost 60% of first-time managers said they'd had no training when they moved into the role (<a href="https://www.ccl.org/wp-content/uploads/2026/02/leadership-challenges-first-time-managers-research-paper-center-for-creative-leadership.pdf">Gentry, Logan and Tonidandel, 2014</a>). That's industry research, not peer-reviewed.</p>
+<p>The outer layer still points at what's inside. In a choice experiment with business students, the chance to progress counted for far more than how well known the employer was or how the tasks were described (<a href="https://doi.org/10.1080/09585192.2021.1891112">Petry, Treisch and Peters, 2022</a>). It's one study, with students.</p>
+<p>The outer layer also has to be honest about the rest. A meta-analysis of 52 studies found that realistic job previews, which show people the good and the bad of a job, cut voluntary turnover mainly because people saw the organisation as honest (<a href="https://doi.org/10.1111/j.1744-6570.2011.01230.x">Earnest, Allen and Landis, 2011</a>). Previews aren't job descriptions, and the most effective ones came after hiring, so I wouldn't stretch it. But if the skin promises something the inside doesn't deliver, people find out.</p>
+<h4 id="do-the-inner-layers-go-in-the-job-description">Do the inner layers go in the job description?</h4>
+<p>Some companies keep a separate internal job description alongside the public one, with duties and sometimes competencies. That comes from my experience, not from a study I can point you to. Different companies do different things, and that's okay. The reason I'd give for keeping one is that it doesn't help you attract people if you bombard them with information they don't need yet.</p>
+<p>The research here doesn't line up neatly, and I'd rather show you both sides than pretend it does. Two things can be true at once.</p>
+<p>On one side, the prevailing view in research on information overload is an inverted U. Decisions get better as you add information, then worse once there's more than people can process. How complex the information is matters as well as how much there is (<a href="https://doi.org/10.1007/s40685-018-0069-z">Roetzel, 2019</a>). Cognitive load theory comes from research on learning rather than job hunting, but it says something similar: the problems caused by extra or redundant information show up when the material is complex, not when it's simple (<a href="https://doi.org/10.1007/s10648-010-9150-7">Kalyuga, 2011</a>). I'm borrowing that, so treat it as an analogy.</p>
+<p>On the other side, one study of job adverts found more detail didn't put people off. After a detailed advert, more of the people who settle on the first good-enough option stopped their search. Only the people who look for the best option found the company more attractive (<a href="https://doi.org/10.1111/ijsa.12281">Liu, 2020</a>). The abstract doesn't say exactly what stopping their search meant, so I wouldn't lean on it hard. It may be that the detail was laid out well enough not to overwhelm anyone.</p>
+<p>My own take is that I'm against overloading people, and a very long job description feels like it would add to that. Whatever you put in, structure it so it's manageable. That's my opinion, not a finding. Read the research and come to your own view.</p>
+<h4 id="your-job-architecture-is-the-bag">Your job architecture is the bag</h4>
+<p>People don't usually buy one onion. They buy a bag. The onions in a bag are roughly the same size and shape, but you won't find two that are exactly 20 centimetres across and weigh exactly 20 grams. There's variance, and that's normal.</p>
+<p>That's your job architecture. Finance doesn't look like software engineering, which doesn't look like HR. Some onions are bigger and some are smaller, but they're all onions and they're all in the bag. The bag lets you say "senior" and mean roughly the same thing wherever you find it. A job description written for one role isn't built to do that.</p>
+<p>The research on how organisations describe work draws a similar line. Traditional job analysis sets out to describe a job as it is. Sanchez and Levine, who'd written on job analysis for years, argued that competency modelling has a different aim. It tries to shape behaviour rather than describe it, keeps the organisation in view rather than one job, and looks forward rather than back (<a href="https://doi.org/10.1016/j.hrmr.2008.10.002">Sanchez and Levine, 2009</a>). That's an argument, not a study. A set of best practices for competency models adds that they often try to tell top performers apart from average ones, often describe how competencies change as people move up, and are usually applied across several functions or job families (<a href="https://apps.it.purdue.edu/sites/Home/DirectoryApi/Files/0e3546ac-6f92-4520-bc41-d38da187f4e0/Download">Campion et al., 2011</a>). Those are the inner layers and the bag. SFIA says plainly that it doesn't describe roles or jobs. It gives you the building blocks to create them (<a href="https://sfia-online.org/en/about-sfia/sfia-and-skills-management">SFIA</a>).</p>
+<h4 id="making-the-case">Making the case</h4>
+<p>When someone tells you the job descriptions already cover it, I'd start by agreeing. There is overlap, and if the job descriptions are good, say so. Then use the onion: yes, that's the first layer. What's underneath?</p>
+<p>Before you argue, find out what the objection is really about. Sometimes nobody wants another document to keep up to date. Sometimes someone worked hard on those job descriptions and hears you saying they're not good enough. Asking "What would a ladder have to do for you to think it was worth it?" usually tells you which.</p>
+<p>Then take it to something real. Put a junior and a senior job description side by side and ask what someone has to show to move from one to the other. Or follow the last three promotions, as in the checks earlier in this section, and ask whether the job description explained why each one was a step up. If the honest answer is "more years" or "they just seemed ready", that's the gap.</p>
+<p>You don't have to throw the job descriptions away. The ladder sits underneath them, and good, current job descriptions are a useful place to start writing it. If you want it in one sentence: "Our job descriptions are the outside of the role, the bit that attracts people. The ladder is the inside: what good looks like here, and how you grow."</p>
 <h3 id="section-2-an-example">An example<a class="anchor" href="#section-2-an-example" aria-label="Link to this section">#</a></h3>
 <p>This is illustrative, not a real company.</p>
 <p>Remember the engineering manager from section 1? 120 people, a ladder nobody opens, two senior people gone. Leadership wants a more detailed ladder.</p>
@@ -286,7 +317,7 @@
 <p>There is research behind one part of it, though. Studies of how HR practices land in organisations keep finding a gap between what was designed and what managers actually do with it, and point to line managers as a major cause of that gap (<a href="https://kar.kent.ac.uk/id/document/3202131">Kent</a>). A related idea says a system only works when people see it applied consistently and agree on what it means, not just when it's well written (<a href="https://doi.org/10.5465/amr.2004.12736076">Bowen and Ostroff, 2004</a>). Looking back twelve years later, its own authors said there were still challenges in making the idea work in both theory and research (<a href="https://doi.org/10.5465/amr.2015.0323">Ostroff and Bowen, 2016</a>).</p>
 <p><strong>What would change my mind:</strong> good evidence that companies which rewrote their ladder, without doing anything on adoption, saw better outcomes than companies that worked on adoption alone. If you've got that data, I want to see it.</p>
 <h2 id="section-3">3. Prerequisites: do you know what good looks like here?<a class="anchor" href="#section-3" aria-label="Link to this section">#</a></h2>
-<p><em>Section last reviewed 6 November 2026.</em></p>
+<p><em>Section last reviewed 15 November 2026.</em></p>
 <p>A ladder describes what good looks like at each level. If your leaders haven't agreed what good looks like at all, the ladder has nothing to describe, and you'll end up writing their disagreements down and calling it a framework.</p>
 <p>The groundwork runs in a chain:</p>
 <ol type="1">
@@ -347,7 +378,7 @@
 <p>That's three sentences. It took a 90-minute conversation to get there, and that conversation is the actual work.</p>
 <h3 id="section-3-what-about-competency-formats">What about competency formats?<a class="anchor" href="#section-3-what-about-competency-formats" aria-label="Link to this section">#</a></h3>
 <p>There's a lot of advice out there on how to format competencies: rating scales, behavioural anchors, matrices. The evidence on format is old and mixed. A 1975 study with US Navy officers found behaviourally anchored scales somewhat better than plain or trait-based scales on most of the measures tested (<a href="https://digitalcommons.usf.edu/psy_facpub/1148">Borman and Dunnette</a>). Another study the same year found they cut halo error but did nothing for leniency (<a href="https://epublications.marquette.edu/mgmt_fac/306">Keaveny and McGann</a>). A comparison in two samples of technicians found them no better than simple global ratings on any measure (<a href="https://doi.org/10.1300/J075v09n02_10">Gomez-Mejia, 1988</a>).</p>
-<p>The most-cited set of best practices for competency modelling says openly that it's based on experience, not on research (<a href="https://apps.it.purdue.edu/sites/Home/DirectoryApi/Files/0e3546ac-6f92-4520-bc41-d38da187f4e0/Download">Campion et al., 2011</a>). So if someone tells you their format is the evidence-based one, ask to see the evidence.</p>
+<p>A set of best practices for competency modelling says openly that it's based on experience, not on research (<a href="https://apps.it.purdue.edu/sites/Home/DirectoryApi/Files/0e3546ac-6f92-4520-bc41-d38da187f4e0/Download">Campion et al., 2011</a>). So if someone tells you their format is the evidence-based one, ask to see the evidence.</p>
 <p>My read is that the conversation matters more than the template. Spend your time getting leaders to agree what the behaviours are, and keep the format as plain as you can get away with.</p>
 <h3 id="section-3-if-the-groundwork-isnt-there">If the groundwork isn't there<a class="anchor" href="#section-3-if-the-groundwork-isnt-there" aria-label="Link to this section">#</a></h3>
 <p>Don't write the ladder yet. As I see it, you've got two honest options.</p>
@@ -865,7 +896,7 @@
 <p>The new ladder already replaces that line with what the work involves: owning a problem area across teams and making sure it gets solved. They add one more thing. From now on, any "not yet" has to say which part of the level and what evidence would change it, written down and shared with the person.</p>
 <p><strong>What would change my mind:</strong> good evidence that transparent, written decisions against clear criteria didn't reduce gaps, or made them worse. Castilla's study is one company, and I'd like to see it repeated.</p>
 <h2 id="section-10">10. Sources, confidence labels and changelog<a class="anchor" href="#section-10" aria-label="Link to this section">#</a></h2>
-<p><em>Section last reviewed 6 November 2026.</em></p>
+<p><em>Section last reviewed 15 November 2026.</em></p>
 <p>Everything this playbook relies on is listed here, grouped by what kind of source it is, so you can judge it for yourself.</p>
 <h3 id="section-10-how-to-read-the-sources">How to read the sources<a class="anchor" href="#section-10-how-to-read-the-sources" aria-label="Link to this section">#</a></h3>
 <ul>
@@ -897,74 +928,84 @@
 <td>9</td>
 </tr>
 <tr class="odd">
+<td><a href="https://doi.org/10.1093/qje/qjz022">Benson, Li and Shue, 2019</a>; <a href="https://hdl.handle.net/1721.1/144198">free copy</a></td>
+<td>Promoting the best worker over the best potential manager</td>
+<td>2</td>
+</tr>
+<tr class="even">
 <td><a href="https://doi.org/10.1257/aer.20220831">Benson, Li and Shue, 2026</a></td>
 <td>Bias in ratings of potential</td>
 <td>9</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://doi.org/10.1177/0149206309352880">Blume et al., 2010</a></td>
 <td>Training transfer and work environment</td>
 <td>6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://doi.org/10.1002/hrm.22302">Bol, Braga De Aguiar and Lill, 2025</a></td>
 <td>Strategic behaviour in calibration</td>
 <td>5</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://digitalcommons.usf.edu/psy_facpub/1148">Borman and Dunnette, 1975</a></td>
 <td>Behaviourally anchored rating scales</td>
 <td>3</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://research.utwente.nl/en/publications/employee-perceptions-of-line-management-performance-applying-the-/">Bos-Nehles, van Riemsdijk and Looise, 2013</a></td>
 <td>Managers' ability, motivation and opportunity</td>
 <td>6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://doi.org/10.5465/amr.2004.12736076">Bowen and Ostroff, 2004</a>; <a href="https://doi.org/10.5465/amr.2015.0323">Ostroff and Bowen, 2016</a></td>
 <td>HR system strength</td>
 <td>2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://doi.org/10.1016/S0020-7489(99)00005-X">Buchan, 1999</a></td>
 <td>Evidence on nursing clinical ladders</td>
 <td>6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://doi.org/10.1287/orsc.2021.1550">Campbell and Hahl, 2022</a></td>
 <td>Under-levelling at hire</td>
 <td>9</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://apps.it.purdue.edu/sites/Home/DirectoryApi/Files/0e3546ac-6f92-4520-bc41-d38da187f4e0/Download">Campion et al., 2011</a></td>
 <td>Competency modelling practice</td>
-<td>3</td>
+<td>2, 3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://doi.org/10.2189/asqu.2010.55.4.543">Castilla and Benard, 2010</a></td>
 <td>The paradox of meritocracy</td>
 <td>9</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://doi.org/10.1287/orsc.2014.0950">Castilla, 2015</a></td>
 <td>Accountability and transparency reducing gaps</td>
 <td>6, 9</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://www.cipd.org/uk/knowledge/evidence-reviews/performance-feedback">CIPD, Performance feedback evidence review, 2022</a></td>
 <td>How feedback affects performance</td>
 <td>6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://doi.org/10.1023/A:1021362019948">Colella and Varma, 1999</a></td>
 <td>Disability stereotypes and expectations</td>
 <td>9</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://leeds-faculty.colorado.edu/dahe7472/colquitt%202001.pdf">Colquitt et al., 2001</a></td>
 <td>Fair process</td>
 <td>5</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.1177/0003122420962080">Correll et al., 2020</a></td>
+<td>Gender differences in how managers' review language links to ratings</td>
+<td>2</td>
 </tr>
 <tr class="odd">
 <td><a href="https://www.siop.org/wp-content/uploads/2026/09/Focal-Can-Skills-Based-Practices-Deliver-A-Framework-for-Understanding-and-Implementation-and-A-Call-for-Research-.pdf">Curnow and Belwalkar, SIOP</a></td>
@@ -977,54 +1018,84 @@
 <td>5</td>
 </tr>
 <tr class="odd">
+<td><a href="https://doi.org/10.1111/j.1744-6570.2011.01230.x">Earnest, Allen and Landis, 2011</a></td>
+<td>Realistic job previews cut voluntary turnover mainly through perceived honesty</td>
+<td>2</td>
+</tr>
+<tr class="even">
 <td><a href="https://scholars.duke.edu/publication/779753">Gaucher, Friesen and Kay, 2011</a></td>
 <td>Gendered wording</td>
 <td>5</td>
 </tr>
-<tr class="even">
-<td><a href="https://doi.org/10.5465/amj.2012.0338">Grant, Berg and Cable, 2014</a></td>
-<td>Job titles and identity</td>
-<td>8</td>
-</tr>
 <tr class="odd">
-<td><a href="https://doi.org/10.1016/j.jfineco.2014.05.010">Guiso, Sapienza and Zingales, 2015</a>; <a href="https://www.nber.org/papers/w19557">free copy</a></td>
-<td>Advertised versus lived values</td>
-<td>3</td>
+<td><a href="https://www.ccl.org/wp-content/uploads/2026/02/leadership-challenges-first-time-managers-research-paper-center-for-creative-leadership.pdf">Gentry, Logan and Tonidandel, 2014 (Center for Creative Leadership white paper, not peer-reviewed)</a></td>
+<td>Training for first-time managers</td>
+<td>2</td>
 </tr>
 <tr class="even">
-<td><a href="https://econpapers.repec.org/RePEc:hal:journl:hal-03232764">Hennekam and Ananthram, 2020</a></td>
-<td>Reactions to demotion</td>
-<td>8</td>
-</tr>
-<tr class="odd">
-<td><a href="https://doi.org/10.1080/09585192.2011.561251">Howell, Kirk-Brown and Cooper, 2012</a></td>
-<td>Stated and lived values</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td><a href="https://doi.org/10.1177/0018720819845988">Hughes et al., 2020</a></td>
-<td>Peer support and training</td>
-<td>6</td>
-</tr>
-<tr class="odd">
-<td><a href="https://core.ac.uk/download/4379977.pdf">Katz, Tushman and Allen, 1990</a></td>
-<td>Dual ladders</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td><a href="https://epublications.marquette.edu/mgmt_fac/306">Keaveny and McGann, 1975</a></td>
+<td><a href="https://doi.org/10.1300/J075v09n02_10">Gomez-Mejia, 1988</a></td>
 <td>Behaviourally anchored rating scales</td>
 <td>3</td>
 </tr>
 <tr class="odd">
+<td><a href="https://doi.org/10.5465/amj.2012.0338">Grant, Berg and Cable, 2014</a></td>
+<td>Job titles and identity</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.1016/j.jfineco.2014.05.010">Guiso, Sapienza and Zingales, 2015</a>; <a href="https://www.nber.org/papers/w19557">free copy</a></td>
+<td>Advertised versus lived values</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td><a href="https://econpapers.repec.org/RePEc:hal:journl:hal-03232764">Hennekam and Ananthram, 2020</a></td>
+<td>Reactions to demotion</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.1080/09585192.2011.561251">Howell, Kirk-Brown and Cooper, 2012</a></td>
+<td>Stated and lived values</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.1177/0018720819845988">Hughes et al., 2020</a></td>
+<td>Peer support and training</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td><a href="https://kar.kent.ac.uk/id/document/3202131">Intended and implemented HR, Kent</a></td>
+<td>The gap between policy and practice</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.1007/s10648-010-9150-7">Kalyuga, 2011</a></td>
+<td>Cognitive load theory: when extra information becomes a problem</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><a href="https://core.ac.uk/download/4379977.pdf">Katz, Tushman and Allen, 1990</a></td>
+<td>Dual ladders</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td><a href="https://epublications.marquette.edu/mgmt_fac/306">Keaveny and McGann, 1975</a></td>
+<td>Behaviourally anchored rating scales</td>
+<td>3</td>
+</tr>
+<tr class="even">
 <td><a href="https://doi.org/10.1037/0033-2909.119.2.254">Kluger and DeNisi, 1996</a></td>
 <td>When feedback makes performance worse</td>
 <td>6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="https://digitalcommons.memphis.edu/facpubs/11893">Kraiger and Ford, 1985</a></td>
 <td>Race effects in ratings</td>
 <td>9</td>
+</tr>
+<tr class="even">
+<td><a href="https://doi.org/10.1111/ijsa.12281">Liu, 2020</a></td>
+<td>Detailed adverts affect candidates differently depending on decision-making style</td>
+<td>2</td>
 </tr>
 <tr class="odd">
 <td><a href="https://econbiz.de/Record/has-goal-setting-gone-wild-or-have-its-attackers-abandoned-good-scholarship-locke-edwin/10009893943">Locke and Latham, 2009</a></td>
@@ -1052,23 +1123,33 @@
 <td>6</td>
 </tr>
 <tr class="even">
+<td><a href="https://doi.org/10.1080/09585192.2021.1891112">Petry, Treisch and Peters, 2022</a></td>
+<td>Business students weighted the chance to progress far above employer familiarity and task descriptions</td>
+<td>2</td>
+</tr>
+<tr class="odd">
 <td><a href="https://uwe-repository.worktribe.com/output/1030432/front-line-managers-as-agents-in-the-hrm-performance-causal-chain-theory-analysis-and-evidence">Purcell and Hutchinson, 2007</a></td>
 <td>Managers as the people who make policy real</td>
 <td>6</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="https://doi.org/10.1111/j.2044-8325.2011.02045.x">Roch et al., 2012</a></td>
 <td>Frame-of-reference rater training</td>
 <td>5</td>
 </tr>
+<tr class="odd">
+<td><a href="https://doi.org/10.1007/s40685-018-0069-z">Roetzel, 2019</a>; <a href="https://opus4.kobv.de/opus4-h-ab/frontdoor/index/index/docId/1392">free copy</a></td>
+<td>Information overload: decisions improve with information up to a point, then worsen; complexity matters too</td>
+<td>2</td>
+</tr>
 <tr class="even">
-<td><a href="https://econpapers.repec.org/RePEc:inm:ororsc:v:13:y:2002:i:1:p:18-35">Simons, 2002</a></td>
-<td>Behavioural integrity</td>
-<td>3</td>
+<td><a href="https://doi.org/10.1016/j.hrmr.2008.10.002">Sanchez and Levine, 2009</a></td>
+<td>How competency modelling differs from job analysis</td>
+<td>2</td>
 </tr>
 <tr class="odd">
-<td><a href="https://doi.org/10.1300/J075v09n02_10">Gomez-Mejia, 1988</a></td>
-<td>Behaviourally anchored rating scales</td>
+<td><a href="https://econpapers.repec.org/RePEc:inm:ororsc:v:13:y:2002:i:1:p:18-35">Simons, 2002</a></td>
+<td>Behavioural integrity</td>
 <td>3</td>
 </tr>
 <tr class="even">
@@ -1085,11 +1166,6 @@
 <td><a href="https://doi.org/10.1016/j.jvb.2025.104205">Zhou, Upadhyay and Viswesvaran, 2026</a></td>
 <td>Outcomes for disabled employees</td>
 <td>9</td>
-</tr>
-<tr class="odd">
-<td><a href="https://kar.kent.ac.uk/id/document/3202131">Intended and implemented HR, Kent</a></td>
-<td>The gap between policy and practice</td>
-<td>2</td>
 </tr>
 </tbody>
 </table></div>
@@ -1117,6 +1193,10 @@
 <tr class="even">
 <td><a href="https://www.elidedbranches.com/2025/05/">Fournier, Rent the Runway ladder, ten years on</a></td>
 <td>Also counted as practitioner writing below</td>
+</tr>
+<tr class="odd">
+<td><a href="https://sfia-online.org/en/about-sfia/sfia-and-skills-management">SFIA and skills management</a></td>
+<td>Describes levels across roles, not jobs, and gives building blocks for job descriptions (section 2)</td>
 </tr>
 </tbody>
 </table></div>
@@ -1192,16 +1272,21 @@
 </thead>
 <tbody>
 <tr class="odd">
+<td>15 November 2026</td>
+<td>0.2</td>
+<td>Added "Our job descriptions are already up to date" to section 2: the onion and the bag as a way to explain the difference between a job description and a ladder, what goes in a public job description, and how to make the case. Prompted by a reader question. Ten new sources in section 10. In section 3, Campion et al. is no longer called "the most-cited" set of best practices, because that couldn't be checked.</td>
+</tr>
+<tr class="even">
 <td>8 November 2026</td>
 <td>0.1.2</td>
 <td>Removed the fixed six-month review from section 1. Each section's last-reviewed date still shows when it was last checked. No recommendations changed.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>6 November 2026</td>
 <td>0.1.1</td>
 <td>Fixed dead and abstract-only links. Papers now link by DOI, with a legal free copy alongside where one exists. Named the technician rating scales study (Gomez-Mejia, 1988). Reworded the line on HR system strength to match what its authors said in 2016. No recommendations changed.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>6 November 2026</td>
 <td>0.1</td>
 <td>First full draft of all ten sections</td>
@@ -1215,7 +1300,7 @@
         <div class="licence-box">
             <span class="note-label">Licence</span>
             <p><a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Credit: Specious Coda-Bishop. Take it, change it and share it. Credit it and keep your version open on the same terms.</p>
-            <p><a class="download" href="people-practice-playbook-v0.1.2.md" download>Download the markdown (v0.1.2)</a></p>
+            <p><a class="download" href="people-practice-playbook-v0.2.md" download>Download the markdown (v0.2)</a></p>
         </div>
         <p class="links">Specious Coda-Bishop · <a href="https://github.com/iamspecious/portfolio">Suggest a correction on GitHub</a> · <a href="mailto:work.specious@gmail.com">work.specious@gmail.com</a> · <a href="vol-2/">Next volume</a> · <a href="../index.html#doc-people-practice-playbook">Back to portfolio</a></p>
     </footer>

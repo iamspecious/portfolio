@@ -18,9 +18,9 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SOURCE = 'people-practice-playbook-v0.1.2.md'
-VERSION = '0.1.2'
-DATE = '8 November 2026'
+SOURCE = 'people-practice-playbook-v0.2.md'
+VERSION = '0.2'
+DATE = '15 November 2026'
 LICENCE_URL = 'https://creativecommons.org/licenses/by-sa/4.0/'
 CREDIT = 'Specious Coda-Bishop'
 REPO_URL = 'https://github.com/iamspecious/portfolio'
@@ -123,6 +123,14 @@ def main():
     print(f'Wrote {out}: {len(toc)} sections, {len(seen)} anchors')
 
 
+# Page styles live inside TEMPLATE below.
+# Why there's an h4 style: version 0.2 added the first headings one level
+# below a sub-heading (the "####" ones in section 2, like "One role is one
+# onion"). Without a style of their own, the browser drew them in its plain
+# default look, which didn't match the rest of the page. They get a quieter
+# look than h3 so it's clear they sit inside it. They don't get a hover anchor
+# or a place in the table of contents, because the script only adds those
+# for h2 and h3.
 TEMPLATE = '''<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -207,6 +215,10 @@ TEMPLATE = '''<!DOCTYPE html>
         .doc-body h3 {{
             font-size: 0.82rem; font-weight: 700; color: #b392f0; text-transform: uppercase;
             letter-spacing: 0.08em; margin: 36px 0 14px; scroll-margin-top: 20px;
+        }}
+        .doc-body h4 {{
+            font-size: 0.95rem; font-weight: 700; color: #e6edf3;
+            margin: 28px 0 10px; scroll-margin-top: 20px;
         }}
         .doc-body .anchor {{
             margin-left: 8px; color: #484f58; text-decoration: none; font-weight: 400;
