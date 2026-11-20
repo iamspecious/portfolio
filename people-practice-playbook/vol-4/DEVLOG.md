@@ -1,5 +1,46 @@
 # People Practice Playbook, Vol. 4: Dev log
 
+### 20 Nov 2026: Publishing v0.3.1
+
+- Spec reviewed the audit summary and approved publishing v0.3.1 as it stands, including the Daoud reframing in section 7 (studies disagree on how much pregnancy changes the risk, not whether) and the labelled take on Carmarthenshire's risk assessment point.
+- Decision (Spec): publish before the three hand checks the audit couldn't do (Pike 2025, AIFS 2015, the Daoud abstract). Their wording is as in Spec's handoff, and they stay first on the open items list.
+- Placement: v0.3 went onto a fresh branch from main at 7bf8bd6, the commit the handoff was built on. A diff against v0.2.1 showed only the handoff's changes. Vol. 5 had added a "Next volume" link to build.py since v0.2.1; it was kept.
+- Network: 10 more hosts allowed, with Spec's approval, for the v0.3 sources (AIFS, Guttmacher, Surviving Economic Abuse, Carmarthenshire, Safety Net, PLOS, Frontiers, AJPH, the German men's line), so the audit could open them. AIFS still sat behind a Cloudflare bot check, which the audit didn't try to get around.
+- The audit ran in two parts: a usage limit stopped it partway and it resumed after the reset.
+- House style: tools/audit.py now checks dev logs, and failed on the Playbooks tab entry until it was put in day-month-year form and date order with tools/devlogs.py. That tool also tidied Vol. 1's DEVLOG.md (a separator line); that change was reverted to keep this update to Vol. 4.
+- Housekeeping: running tools/audit.py rewrites a committed cache file (tools/__pycache__/devlogs.cpython-313.pyc). It was reset each time so it isn't committed. Adding tools/__pycache__/ to .gitignore would stop this.
+- Checks: tools/audit.py 0 FAIL, 76 WARN (the same count as main; none new for Vol. 4). Page rebuilt with no em dashes; "Next volume" link to Vol. 5 intact.
+- Published by pull request and merge, as with earlier versions.
+
+<details>
+<summary>Show 9 older entries</summary>
+
+### 20 Nov 2026: Integrity audit of v0.3 and v0.3.1
+
+- Independent audit by a separate agent that saw only the document: PASS WITH FIXES. 198 claims; none fabricated; every v0.2.1 fix confirmed; 2 major and 10 minor findings. Interrupted by a usage limit and resumed after it reset.
+- Major fix: the Canadian survey (Daoud 2012) had been filed under "Some don't". It now reads as abuse spread across the whole period: more common before pregnancy, but half of those abused during pregnancy said it started then, with the authors' recommendation quoted as written. Spec's "show the disagreement" decision stands; the section now says studies disagree on how much pregnancy changes the risk.
+- Major fix: Carmarthenshire's "suspected abuse in the pregnancy risk assessment" now carries a labelled take: only with the person's agreement, and record agreed safeguards, not the suspicion. This keeps section 7 consistent with "never record a sign as a concern".
+- Minor fixes: Campbell 2003 and Román-Gálvez 2021 described precisely; stillbirth exclusion sourced; Hall 2014 called termination; childcare tactics separated; "don't pass on" now names its exceptions; leave evidence noted; trans men and non-binary people named in section 4; Safety Net cited from its Spanish page because the English one is gone; Germany men's line confirmed on its own site.
+- Decision: the 14 unreachable items (Pike 2025, AIFS 2015, the Daoud abstract) stay on the hand-check list rather than being reworded blind. Their wording matches Spec's source notes.
+- v0.3 was never published, so only v0.3.1 goes live. The changelog records both.
+- Card dev log entry added and its toggle moved so one entry shows before "show older", as the card already did. Playbooks tab dev log entry added.
+- Checks: tools/audit.py; page rebuilt; no em dashes.
+
+### 20 Nov 2026: v0.3, pregnancy, fertility and loss
+
+- Came from the Vol. 6 chat. Vol. 4 had nothing on pregnancy, fertility treatment or reproductive coercion.
+- Section 4: new checklist for anyone pregnant, trying to conceive or going through fertility treatment: who knows, appointments, apps, emergency contacts, where post and claim statements go, medical papers, someone to come to appointments, a safe contact route for leave.
+- Section 7: new "Pregnancy, fertility and loss" part, new "what not to do" points, records and post row.
+- Decision (Spec): show the conflicting studies on risk in pregnancy and explain why they differ, rather than pick one figure.
+- Decision (Spec): "what it can look like" framed as awareness, not warning signs, with the same "reason to check in, not proof" caveat as the CCOHS signs.
+- Decision (Spec): maternity-leave contact advice goes in Vol. 4 section 7.
+- Decision (Spec): nothing about a pregnancy, loss, fertility treatment or abuse is passed on to anyone the person hasn't named.
+- Decision: reproductive coercion described by pattern only; no tactics list. No legal detail. The 30% statistic left out.
+- Vol. 6 points here for the full plan: the one exception to the no-cross-reference rule.
+- Placed on a fresh branch from main at 7bf8bd6, the commit the handoff was built on. A diff against v0.2.1 showed only the changes described in the handoff. v0.2.1 and v0.1.1 kept for history.
+- Added beyond the handoff: the Playbooks card (version, summary, download link, roadmap), the search lexicon ("pregnancy", "fertility", "reproductive coercion") and "including around pregnancy, fertility and loss" in the page description. Index tags still people-hr and research, so the lane decision holds.
+- Not yet independently audited when placed.
+
 ### 13 Nov 2026: Placing the v0.2 handoff and publishing v0.2.1
 
 - Spec's v0.2 handoff placed as given: the v0.2 markdown, CHANGELOG, SOURCES, RESEARCH, DEVLOG and build.py. README.md and portfolio-index.json were changed by applying the supplied diff, not by overwriting the whole files, so nothing else in them moved.
@@ -9,9 +50,6 @@
 - Decision: two gaps the audit raised were left as open items rather than filled with unchecked details: Germany's ambulance number, and whether the UK abuse helpline covers Scotland, Wales and Northern Ireland.
 - Card dev log toggle moved so two entries show before "show older", matching the other cards.
 - Checks: tools/audit.py 0 FAIL; page rebuilt with no em dashes and no sideways scroll at phone width.
-
-<details>
-<summary>Show 6 older entries</summary>
 
 ### 12 Nov 2026: Integrity audit of v0.2 and v0.2.1
 

@@ -90,3 +90,32 @@ Asked for: an accuracy pass, more evidence, guidance that works for any size of 
 - Albaum 2025: the audit read the PMC full text. It found a 6 July 2026 correction (suicide-attempt risk ratio) and an ideation effect (g 0.11, 95% CI 0.01 to 0.21) that sits oddly with the paper's "no significant association". The playbook doesn't quote effect sizes, so the text stands, but it's on the hand-check list.
 - Web-search lead only: the UK helpline may be England-only, with separate lines for Scotland, Wales and Northern Ireland. The text already tells readers outside England to check.
 
+## Version 0.3 research (20 November 2026)
+
+Came from the Vol. 6 chat (pregnancy, pregnancy loss and fertility at work). Its handover rested on two sources read at abstract level (WHO 2011 sheet; Grace and Anderson 2018).
+
+- **WHO 2011 dropped.** Replaced by sources that show the disagreement on risk: AIFS 2015 (higher risk), Daoud 2012 (abuse more common before than during pregnancy), Román-Gálvez 2021 (very wide variation). Spec chose to show both sides and explain why they differ, in section 7.
+- **Why the studies differ** is partly sourced (definitions, time windows, questionnaire type) and partly the author's reading (the Canadian survey only included people who gave birth, so it can't count pregnancies that ended). The second point is labelled "My reading".
+- **"30% of domestic abuse starts in pregnancy":** widely repeated in UK employer guidance, credited to SafeLives. Origin not traced. Not used. The text says so without calling it wrong. Leicester's 2023 pack also cites "one in eight women abused during pregnancy (National Social Inclusion Office, Ireland, 2012)"; not checked.
+- **Grace and Anderson 2018** kept in sources as background only. Pike et al. 2025 is the main reproductive coercion source: broader countries, includes family and community perpetrators. It excluded male survivors in heterosexual relationships and is mostly about cisgender women.
+- **Campbell 2003:** abuse during pregnancy was significant only in bivariate analysis. Worded as "one of the factors linked to a higher risk, though not one of the strongest once other factors were taken into account".
+- **Spec's point that "things can change quickly":** kept as Spec's take in "what not to do". Daoud (before and after pregnancy) and AIFS (into the first month after birth) support that risk shifts around pregnancy, but not the speed.
+- **US homicide data** (Wallace et al. 2021, *Obstetrics & Gynecology*): homicide a leading cause of pregnancy-associated death in the US; seen in search only, US-specific and firearm-linked. Not used.
+- **Fertility treatment:** one ethnographic study from Beijing (Reproductive Health, 2024) on partner violence around infertility treatment, seen in search only. Pressure about treatment is written as the author's take.
+- **Workplace guidance found but not opened:** "Protecting Every Future" (Domestic Abuse Alliance and The HR Dept), a UK guide on abuse in pregnancy for employers. Worth reading next.
+- **Pregnancy-specific abuse helplines:** none found for the five countries in section 8.
+- **Benefits:** the US EOB problem is sourced; whether Canadian, UK, Irish, German or Australian benefit plans work the same way was not checked, so the text says "in some systems".
+
+## Version 0.3.1: integrity audit of v0.3 (20 November 2026)
+
+- Independent audit by a separate agent that saw only the document: PASS WITH FIXES. 198 claims (143 carried, 55 new); 167 verified, 14 partial, 14 unreachable; 0 critical, 2 major, 10 minor, 21 notes. Every v0.2.1 fix confirmed in place. It was interrupted by a usage limit and resumed after it reset.
+- Major: Daoud 2012 was filed under "Some don't" (studies that don't point to higher risk). The Guttmacher summary does say violence was more common before than during pregnancy, but also that half of those abused during pregnancy said it started then, and its recommendation is to watch "not only during pregnancy but also before and after pregnancy", not that before and after are "especially important". Reframed as "spread across the whole period", with the onset finding and the actual recommendation. The section's opening now says studies disagree on how much pregnancy changes the risk, not whether. Spec's decision to show the disagreement stands.
+- Major: Carmarthenshire's guidance to take suspected abuse into account in the pregnancy risk assessment was relayed without comment, against the volume's own "don't record a sign as a concern" and consent principles. Kept the attribution and added a labelled take: only with the person's agreement, record agreed safeguards not the suspicion.
+- Campbell 2003: Table 3 shows "Abused when pregnant" as not significant in the multivariate model. Reworded, with the factors that did predict risk, and a one-study caveat replacing "Where the research does agree".
+- Román-Gálvez 2021: 44 of 155 studies (28%) met two-thirds of the quality criteria; no difference between validated and unvalidated tools; rates higher for diagnostic than screening measurement for physical and sexual IPV. Text corrected.
+- Daoud's sample excluded stillbirths and infants who died shortly after birth (Guttmacher summary), so that part of the "My reading" is now sourced. Hall 2014 is about termination of pregnancy only, so the text says "termination".
+- Safety Net's English page (techsafety.org/reprocoercion) returns 404 even after redirect. The Spanish version, © 2022 NNEDV Safety Net Project, supports both claims (community, workplace or school computers "podrían registrar" use; read the privacy policy or ask a victim services provider). Cited in Spanish with a note.
+- Germany men's line: maennerhilfetelefon.de reachable this time; number and hours match. Now sourced to the service.
+- Trans men and non-binary people who can be pregnant are now named in section 4 (labelled take): disclosure of a pregnancy can also disclose gender history.
+- Unreachable this time: Pike 2025 (Springer login redirect, PMC reCAPTCHA), Campo/AIFS 2015 (Cloudflare bot check, not worked around), Daoud abstract (AJPH 403). These stay on the hand-check list. The "30% starts in pregnancy" absence claim held up after three searches; the audit noted Daoud's own figures give about 15% (half of the 30% abused during pregnancy).
+
