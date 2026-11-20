@@ -1962,12 +1962,49 @@
     "pageAnchor": "#doc-people-practice-playbook-vol-4",
     "relatedIds": [
       "people-practice-playbook-vol-3",
+      "people-practice-playbook-vol-5",
       "people-practice-playbook"
     ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-4/people-practice-playbook-vol4-v0.2.1.md by people-practice-playbook/vol-4/build.py; that markdown is offered as a download. v0.1 and v0.2 were never published, so there are no files for them; v0.1.1 stays in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
+  },
+  {
+    "id": "people-practice-playbook-vol-5",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "People Practice Playbook, Vol. 5: Menstruation and Menopause at Work",
+    "dateStart": "2026-11",
+    "dateEnd": "2026-11",
+    "status": "live",
+    "domains": [
+      "people-hr",
+      "research"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "writing-range"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "keywords": ["menopause", "perimenopause", "menstruation", "periods", "endometriosis", "pcos", "pmdd", "menstrual leave", "women's health", "creative commons"],
+    "tools": [],
+    "summary": "An open, living playbook on supporting periods, perimenopause, menopause and related conditions at work. It covers what the evidence shows and where it runs out, the choices an organisation has to make, how to have the conversation, and how to make support work without anyone having to explain themselves.",
+    "anchor": "people-practice-playbook/vol-5/",
+    "pageAnchor": "#doc-people-practice-playbook-vol-5",
+    "relatedIds": [
+      "people-practice-playbook-vol-4",
+      "people-practice-playbook"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-5/people-practice-playbook-vol5-v0.1.1.md by people-practice-playbook/vol-5/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
   {
     "id": "crisis-playbook",
