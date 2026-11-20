@@ -1,5 +1,20 @@
 # People Practice Playbook, Vol. 4: Dev log
 
+### 20 Nov 2026: Publishing v0.3.1
+
+- Spec reviewed the audit summary and approved publishing v0.3.1 as it stands, including the Daoud reframing in section 7 (studies disagree on how much pregnancy changes the risk, not whether) and the labelled take on Carmarthenshire's risk assessment point.
+- Decision (Spec): publish before the three hand checks the audit couldn't do (Pike 2025, AIFS 2015, the Daoud abstract). Their wording is as in Spec's handoff, and they stay first on the open items list.
+- Placement: v0.3 went onto a fresh branch from main at 7bf8bd6, the commit the handoff was built on. A diff against v0.2.1 showed only the handoff's changes. Vol. 5 had added a "Next volume" link to build.py since v0.2.1; it was kept.
+- Network: 10 more hosts allowed, with Spec's approval, for the v0.3 sources (AIFS, Guttmacher, Surviving Economic Abuse, Carmarthenshire, Safety Net, PLOS, Frontiers, AJPH, the German men's line), so the audit could open them. AIFS still sat behind a Cloudflare bot check, which the audit didn't try to get around.
+- The audit ran in two parts: a usage limit stopped it partway and it resumed after the reset.
+- House style: tools/audit.py now checks dev logs, and failed on the Playbooks tab entry until it was put in day-month-year form and date order with tools/devlogs.py. That tool also tidied Vol. 1's DEVLOG.md (a separator line); that change was reverted to keep this update to Vol. 4.
+- Housekeeping: running tools/audit.py rewrites a committed cache file (tools/__pycache__/devlogs.cpython-313.pyc). It was reset each time so it isn't committed. Adding tools/__pycache__/ to .gitignore would stop this.
+- Checks: tools/audit.py 0 FAIL, 76 WARN (the same count as main; none new for Vol. 4). Page rebuilt with no em dashes; "Next volume" link to Vol. 5 intact.
+- Published by pull request and merge, as with earlier versions.
+
+<details>
+<summary>Show 9 older entries</summary>
+
 ### 20 Nov 2026: Integrity audit of v0.3 and v0.3.1
 
 - Independent audit by a separate agent that saw only the document: PASS WITH FIXES. 198 claims; none fabricated; every v0.2.1 fix confirmed; 2 major and 10 minor findings. Interrupted by a usage limit and resumed after it reset.
@@ -10,9 +25,6 @@
 - v0.3 was never published, so only v0.3.1 goes live. The changelog records both.
 - Card dev log entry added and its toggle moved so one entry shows before "show older", as the card already did. Playbooks tab dev log entry added.
 - Checks: tools/audit.py; page rebuilt; no em dashes.
-
-<details>
-<summary>Show 8 older entries</summary>
 
 ### 20 Nov 2026: v0.3, pregnancy, fertility and loss
 

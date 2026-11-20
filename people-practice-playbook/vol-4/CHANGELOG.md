@@ -13,7 +13,7 @@ Newest first. Section 10 of the playbook is the single source of truth; this fil
 
 ## Open items for the next version
 
-- Hand checks from the v0.3 audit, which couldn't reach these sources: Pike et al. 2025 (authors, 58 studies, partners/family/community, "any gender", open access licence); Campo/AIFS 2015 (higher risk, more severe, the 25% first-onset figure, December 2015 date; Cloudflare blocked it); the Daoud 2012 abstract. Also the Daoud reframing in section 7 against the full paper.
+- Hand checks from the v0.3 audit, which couldn't reach these sources (v0.3.1 was published before these, at Spec's call): Pike et al. 2025 (authors, 58 studies, partners/family/community, "any gender", open access licence); Campo/AIFS 2015 (higher risk, more severe, the 25% first-onset figure, December 2015 date; Cloudflare blocked it); the Daoud 2012 abstract. Also the Daoud reframing in section 7 against the full paper.
 - v0.3 audit spot-checks: the Surviving Economic Abuse contact quote; Román-Gálvez's 155 studies and 25.0%; Daoud's 6,421 women; Gold 2009's policyholder point; Hall 2014 and Campbell 2003 citations.
 - Consider: the US HIPAA right to ask for confidential communications (described in Gold 2009) for the "where post goes" checklist item; a pregnancy-specific or reproductive coercion support route for section 8, if one exists; Safety Net's caution about using a friend's phone, which sits uneasily with "a friend's phone" as a safer device in section 4.
 - Read "Protecting Every Future" (Domestic Abuse Alliance and The HR Dept) and the CIPD/EHRC employer guide for section 7.
