@@ -18,8 +18,8 @@ import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SOURCE = 'people-practice-playbook-vol4-v0.3.md'
-VERSION = '0.3'
+SOURCE = 'people-practice-playbook-vol4-v0.3.1.md'
+VERSION = '0.3.1'
 DATE = '20 November 2026'
 LICENCE_URL = 'https://creativecommons.org/licenses/by-sa/4.0/'
 CREDIT = 'Specious Coda-Bishop'

@@ -1,5 +1,19 @@
 # People Practice Playbook, Vol. 4: Dev log
 
+### 20 Nov 2026: Integrity audit of v0.3 and v0.3.1
+
+- Independent audit by a separate agent that saw only the document: PASS WITH FIXES. 198 claims; none fabricated; every v0.2.1 fix confirmed; 2 major and 10 minor findings. Interrupted by a usage limit and resumed after it reset.
+- Major fix: the Canadian survey (Daoud 2012) had been filed under "Some don't". It now reads as abuse spread across the whole period: more common before pregnancy, but half of those abused during pregnancy said it started then, with the authors' recommendation quoted as written. Spec's "show the disagreement" decision stands; the section now says studies disagree on how much pregnancy changes the risk.
+- Major fix: Carmarthenshire's "suspected abuse in the pregnancy risk assessment" now carries a labelled take: only with the person's agreement, and record agreed safeguards, not the suspicion. This keeps section 7 consistent with "never record a sign as a concern".
+- Minor fixes: Campbell 2003 and Román-Gálvez 2021 described precisely; stillbirth exclusion sourced; Hall 2014 called termination; childcare tactics separated; "don't pass on" now names its exceptions; leave evidence noted; trans men and non-binary people named in section 4; Safety Net cited from its Spanish page because the English one is gone; Germany men's line confirmed on its own site.
+- Decision: the 14 unreachable items (Pike 2025, AIFS 2015, the Daoud abstract) stay on the hand-check list rather than being reworded blind. Their wording matches Spec's source notes.
+- v0.3 was never published, so only v0.3.1 goes live. The changelog records both.
+- Card dev log entry added and its toggle moved so one entry shows before "show older", as the card already did. Playbooks tab dev log entry added.
+- Checks: tools/audit.py; page rebuilt; no em dashes.
+
+<details>
+<summary>Show 8 older entries</summary>
+
 ### 20 Nov 2026: v0.3, pregnancy, fertility and loss
 
 - Came from the Vol. 6 chat. Vol. 4 had nothing on pregnancy, fertility treatment or reproductive coercion.
@@ -13,10 +27,7 @@
 - Vol. 6 points here for the full plan: the one exception to the no-cross-reference rule.
 - Placed on a fresh branch from main at 7bf8bd6, the commit the handoff was built on. A diff against v0.2.1 showed only the changes described in the handoff. v0.2.1 and v0.1.1 kept for history.
 - Added beyond the handoff: the Playbooks card (version, summary, download link, roadmap), the search lexicon ("pregnancy", "fertility", "reproductive coercion") and "including around pregnancy, fertility and loss" in the page description. Index tags still people-hr and research, so the lane decision holds.
-- Not yet independently audited.
-
-<details>
-<summary>Show 7 older entries</summary>
+- Not yet independently audited when placed.
 
 ### 13 Nov 2026: Placing the v0.2 handoff and publishing v0.2.1
 

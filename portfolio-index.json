@@ -1968,7 +1968,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-4/people-practice-playbook-vol4-v0.3.md by people-practice-playbook/vol-4/build.py; that markdown is offered as a download. v0.1 and v0.2 were never published, so there are no files for them; v0.1.1 and v0.2.1 stay in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-4/people-practice-playbook-vol4-v0.3.1.md by people-practice-playbook/vol-4/build.py; that markdown is offered as a download. v0.1, v0.2 and v0.3 were never published, so there are no files for them; v0.1.1 and v0.2.1 stay in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
   {
     "id": "people-practice-playbook-vol-5",
