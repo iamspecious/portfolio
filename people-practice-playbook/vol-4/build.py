@@ -35,6 +35,7 @@ DESCRIPTION = ('An open, living playbook on safety plans: what they are, why eve
 # (_config.yml excludes them from the GitHub Pages build).
 REPO_DIR = REPO_URL + '/blob/main/people-practice-playbook/vol-4/'
 PREVIOUS_VOLUME = ('../vol-3/', 'Vol. 3: Building HR Tools with AI')
+NEXT_VOLUME = ('../vol-5/', 'Vol. 5: Menstruation and Menopause at Work')
 
 
 def slug(text):
@@ -149,6 +150,8 @@ def main():
         repo_dir=REPO_DIR,
         prev_url=PREVIOUS_VOLUME[0],
         prev_title=html.escape(PREVIOUS_VOLUME[1]),
+        next_url=NEXT_VOLUME[0],
+        next_title=html.escape(NEXT_VOLUME[1]),
         toc=toc_html,
         body=body,
     )
@@ -330,7 +333,7 @@ TEMPLATE = '''<!DOCTYPE html>
         <span class="doc-label">People Practice · Safety Plans · CC BY-SA 4.0</span>
         <h1 class="doc-title">{title}</h1>
         <p class="doc-subtitle">{byline}</p>
-        <p class="doc-version"><a href="#{changelog_id}">Changelog and version history</a> in section 10 · Previous volume: <a href="{prev_url}">{prev_title}</a></p>
+        <p class="doc-version"><a href="#{changelog_id}">Changelog and version history</a> in section 10 · Previous volume: <a href="{prev_url}">{prev_title}</a> · Next volume: <a href="{next_url}">{next_title}</a></p>
     </header>
 
     <div class="licence-box">
@@ -357,7 +360,7 @@ TEMPLATE = '''<!DOCTYPE html>
             <p><a class="download" href="{source}" download>Download the markdown (v{version})</a></p>
         </div>
         <p class="history">Version history: <a href="#{changelog_id}">changelog in section 10</a> · <a href="{repo_dir}DEVLOG.md">dev log on GitHub</a></p>
-        <p class="links">{credit} · <a href="{repo_url}">Suggest a correction on GitHub</a> · <a href="mailto:{email}">{email}</a> · <a href="{prev_url}">Previous volume</a> · <a href="../../index.html#doc-people-practice-playbook-vol-4">Back to portfolio</a></p>
+        <p class="links">{credit} · <a href="{repo_url}">Suggest a correction on GitHub</a> · <a href="mailto:{email}">{email}</a> · <a href="{prev_url}">Previous volume</a> · <a href="{next_url}">Next volume</a> · <a href="../../index.html#doc-people-practice-playbook-vol-4">Back to portfolio</a></p>
     </footer>
 </div>
 </body>
