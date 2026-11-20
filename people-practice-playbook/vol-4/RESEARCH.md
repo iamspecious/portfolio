@@ -90,3 +90,19 @@ Asked for: an accuracy pass, more evidence, guidance that works for any size of 
 - Albaum 2025: the audit read the PMC full text. It found a 6 July 2026 correction (suicide-attempt risk ratio) and an ideation effect (g 0.11, 95% CI 0.01 to 0.21) that sits oddly with the paper's "no significant association". The playbook doesn't quote effect sizes, so the text stands, but it's on the hand-check list.
 - Web-search lead only: the UK helpline may be England-only, with separate lines for Scotland, Wales and Northern Ireland. The text already tells readers outside England to check.
 
+## Version 0.3 research (20 November 2026)
+
+Came from the Vol. 6 chat (pregnancy, pregnancy loss and fertility at work). Its handover rested on two sources read at abstract level (WHO 2011 sheet; Grace and Anderson 2018).
+
+- **WHO 2011 dropped.** Replaced by sources that show the disagreement on risk: AIFS 2015 (higher risk), Daoud 2012 (abuse more common before than during pregnancy), Román-Gálvez 2021 (very wide variation). Spec chose to show both sides and explain why they differ, in section 7.
+- **Why the studies differ** is partly sourced (definitions, time windows, questionnaire type) and partly the author's reading (the Canadian survey only included people who gave birth, so it can't count pregnancies that ended). The second point is labelled "My reading".
+- **"30% of domestic abuse starts in pregnancy":** widely repeated in UK employer guidance, credited to SafeLives. Origin not traced. Not used. The text says so without calling it wrong. Leicester's 2023 pack also cites "one in eight women abused during pregnancy (National Social Inclusion Office, Ireland, 2012)"; not checked.
+- **Grace and Anderson 2018** kept in sources as background only. Pike et al. 2025 is the main reproductive coercion source: broader countries, includes family and community perpetrators. It excluded male survivors in heterosexual relationships and is mostly about cisgender women.
+- **Campbell 2003:** abuse during pregnancy was significant only in bivariate analysis. Worded as "one of the factors linked to a higher risk, though not one of the strongest once other factors were taken into account".
+- **Spec's point that "things can change quickly":** kept as Spec's take in "what not to do". Daoud (before and after pregnancy) and AIFS (into the first month after birth) support that risk shifts around pregnancy, but not the speed.
+- **US homicide data** (Wallace et al. 2021, *Obstetrics & Gynecology*): homicide a leading cause of pregnancy-associated death in the US; seen in search only, US-specific and firearm-linked. Not used.
+- **Fertility treatment:** one ethnographic study from Beijing (Reproductive Health, 2024) on partner violence around infertility treatment, seen in search only. Pressure about treatment is written as the author's take.
+- **Workplace guidance found but not opened:** "Protecting Every Future" (Domestic Abuse Alliance and The HR Dept), a UK guide on abuse in pregnancy for employers. Worth reading next.
+- **Pregnancy-specific abuse helplines:** none found for the five countries in section 8.
+- **Benefits:** the US EOB problem is sourced; whether Canadian, UK, Irish, German or Australian benefit plans work the same way was not checked, so the text says "in some systems".
+

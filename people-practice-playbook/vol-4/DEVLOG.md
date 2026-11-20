@@ -1,5 +1,23 @@
 # People Practice Playbook, Vol. 4: Dev log
 
+### 20 Nov 2026: v0.3, pregnancy, fertility and loss
+
+- Came from the Vol. 6 chat. Vol. 4 had nothing on pregnancy, fertility treatment or reproductive coercion.
+- Section 4: new checklist for anyone pregnant, trying to conceive or going through fertility treatment: who knows, appointments, apps, emergency contacts, where post and claim statements go, medical papers, someone to come to appointments, a safe contact route for leave.
+- Section 7: new "Pregnancy, fertility and loss" part, new "what not to do" points, records and post row.
+- Decision (Spec): show the conflicting studies on risk in pregnancy and explain why they differ, rather than pick one figure.
+- Decision (Spec): "what it can look like" framed as awareness, not warning signs, with the same "reason to check in, not proof" caveat as the CCOHS signs.
+- Decision (Spec): maternity-leave contact advice goes in Vol. 4 section 7.
+- Decision (Spec): nothing about a pregnancy, loss, fertility treatment or abuse is passed on to anyone the person hasn't named.
+- Decision: reproductive coercion described by pattern only; no tactics list. No legal detail. The 30% statistic left out.
+- Vol. 6 points here for the full plan: the one exception to the no-cross-reference rule.
+- Placed on a fresh branch from main at 7bf8bd6, the commit the handoff was built on. A diff against v0.2.1 showed only the changes described in the handoff. v0.2.1 and v0.1.1 kept for history.
+- Added beyond the handoff: the Playbooks card (version, summary, download link, roadmap), the search lexicon ("pregnancy", "fertility", "reproductive coercion") and "including around pregnancy, fertility and loss" in the page description. Index tags still people-hr and research, so the lane decision holds.
+- Not yet independently audited.
+
+<details>
+<summary>Show 7 older entries</summary>
+
 ### 13 Nov 2026: Placing the v0.2 handoff and publishing v0.2.1
 
 - Spec's v0.2 handoff placed as given: the v0.2 markdown, CHANGELOG, SOURCES, RESEARCH, DEVLOG and build.py. README.md and portfolio-index.json were changed by applying the supplied diff, not by overwriting the whole files, so nothing else in them moved.
@@ -9,9 +27,6 @@
 - Decision: two gaps the audit raised were left as open items rather than filled with unchecked details: Germany's ambulance number, and whether the UK abuse helpline covers Scotland, Wales and Northern Ireland.
 - Card dev log toggle moved so two entries show before "show older", matching the other cards.
 - Checks: tools/audit.py 0 FAIL; page rebuilt with no em dashes and no sideways scroll at phone width.
-
-<details>
-<summary>Show 6 older entries</summary>
 
 ### 12 Nov 2026: Integrity audit of v0.2 and v0.2.1
 
