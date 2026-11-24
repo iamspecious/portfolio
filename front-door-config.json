@@ -51,6 +51,7 @@
         { "label": "More people & compliance", "lane": "people-hr" },
         { "label": "More community / DevRel",  "lane": "community-devrel" },
         { "label": "More writing & docs",       "lane": "documentation" },
+        { "label": "Playbooks & reference docs", "target": "playbooks-intro" },
         { "label": "Just show me everything",  "action": "skip" }
       ]
     },
@@ -127,7 +128,31 @@
           "action": "deeplink",
           "anchor": "#cs-stamped-widget-diagnostic",
           "tab": "case-studies-tab"
+        },
+        {
+          "label": "The openly-licensed playbooks Spec published",
+          "target": "playbooks-intro"
         }
+      ]
+    },
+    "playbooks-intro": {
+      "text": "The Playbooks tab is Spec's standalone reference documents — built to be used rather than filed. Right now there are seven: six volumes of the People Practice series (CC BY-SA 4.0, for HR at growing companies) and a crisis communications kit for small studios and community teams. Which are you looking for?",
+      "options": [
+        { "label": "The People Practice series",    "target": "playbooks-people-practice" },
+        { "label": "The Crisis Playbook",           "action": "deeplink", "tab": "playbooks-tab", "anchor": "#doc-crisis-playbook" },
+        { "label": "Show me everything in Playbooks", "action": "deeplink", "tab": "playbooks-tab" }
+      ]
+    },
+    "playbooks-people-practice": {
+      "text": "Six volumes so far, all CC BY-SA 4.0: job architecture and levelling (Vol. 1), onboarding new hires (Vol. 2), building HR tools with AI (Vol. 3), safety plans (Vol. 4), menstruation and menopause at work (Vol. 5), and pregnancy, pregnancy loss and fertility at work (Vol. 6).",
+      "options": [
+        { "label": "Vol. 1: Job Architecture & Levelling",             "action": "deeplink", "tab": "playbooks-tab", "anchor": "#doc-people-practice-playbook" },
+        { "label": "Vol. 2: Onboarding New Hires",                    "action": "deeplink", "tab": "playbooks-tab", "anchor": "#doc-people-practice-playbook-vol-2" },
+        { "label": "Vol. 3: Building HR Tools with AI",               "action": "deeplink", "tab": "playbooks-tab", "anchor": "#doc-people-practice-playbook-vol-3" },
+        { "label": "Vol. 4: Safety Plans",                            "action": "deeplink", "tab": "playbooks-tab", "anchor": "#doc-people-practice-playbook-vol-4" },
+        { "label": "Vol. 5: Menstruation and Menopause at Work",      "action": "deeplink", "tab": "playbooks-tab", "anchor": "#doc-people-practice-playbook-vol-5" },
+        { "label": "Vol. 6: Pregnancy, Pregnancy Loss and Fertility", "action": "deeplink", "tab": "playbooks-tab", "anchor": "#doc-people-practice-playbook-vol-6" },
+        { "label": "Show me all six",                                 "action": "deeplink", "tab": "playbooks-tab" }
       ]
     }
   }

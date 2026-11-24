@@ -3,7 +3,7 @@
     "id": "spec-solutions-fractional-cos",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Fractional Chief of Staff — Spec Solutions",
+    "title": "Fractional Chief of Staff \u2014 Spec Solutions",
     "dateStart": "2023-01",
     "dateEnd": "present",
     "status": null,
@@ -43,7 +43,7 @@
     "id": "phandroid-tech-writer",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Contributing Tech Writer & Content Strategist — Phandroid",
+    "title": "Contributing Tech Writer & Content Strategist \u2014 Phandroid",
     "dateStart": "2018-01",
     "dateEnd": "present",
     "status": null,
@@ -74,7 +74,7 @@
     "id": "connection-engine-cos",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Executive Assistant / Chief of Staff — Connection Engine",
+    "title": "Executive Assistant / Chief of Staff \u2014 Connection Engine",
     "dateStart": "2025-05",
     "dateEnd": "2025-07",
     "status": null,
@@ -95,7 +95,7 @@
     "tools": [
       "coda"
     ],
-    "summary": "Served as organisational glue for the Mission Circle — scheduling, project tracking in Coda, community beta support, and CRM/workflow administration across a 30/30/30/10 split.",
+    "summary": "Served as organisational glue for the Mission Circle \u2014 scheduling, project tracking in Coda, community beta support, and CRM/workflow administration across a 30/30/30/10 split.",
     "anchor": "#work-connection-engine-cos",
     "relatedIds": [],
     "audiencePin": [],
@@ -107,7 +107,7 @@
     "id": "the-nook-community-manager",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Community Manager — The Nook",
+    "title": "Community Manager \u2014 The Nook",
     "dateStart": "2020-10",
     "dateEnd": "2024-12",
     "status": null,
@@ -136,7 +136,7 @@
     "id": "stamped-support-hero",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Customer Support Hero (Technical) — Stamped",
+    "title": "Customer Support Hero (Technical) \u2014 Stamped",
     "dateStart": "2020-05",
     "dateEnd": "2020-07",
     "status": null,
@@ -175,7 +175,7 @@
     "id": "can-i-play-that-editor",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Editor & Operations Assistant — Can I Play That?",
+    "title": "Editor & Operations Assistant \u2014 Can I Play That?",
     "dateStart": "2018-08",
     "dateEnd": "2020-02",
     "status": null,
@@ -193,7 +193,7 @@
       "engagement": "employment"
     },
     "tools": [],
-    "summary": "Provided executive support to the CEO of a gaming accessibility platform — managing content pipeline, strategic partnerships, the 2019/2020 awards programme, Patreon, and audience growth (30% over two years).",
+    "summary": "Provided executive support to the CEO of a gaming accessibility platform \u2014 managing content pipeline, strategic partnerships, the 2019/2020 awards programme, Patreon, and audience growth (30% over two years).",
     "anchor": "#work-can-i-play-that-editor",
     "relatedIds": [],
     "audiencePin": [],
@@ -205,7 +205,7 @@
     "id": "itc-community-manager",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Community Manager — Irish Tech Community",
+    "title": "Community Manager \u2014 Irish Tech Community",
     "dateStart": "2016-08",
     "dateEnd": "2018-09",
     "status": null,
@@ -236,7 +236,7 @@
     "id": "samebug-developer-advocate",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Developer Advocate — Samebug",
+    "title": "Developer Advocate \u2014 Samebug",
     "dateStart": "2017-07",
     "dateEnd": "2017-09",
     "status": null,
@@ -254,7 +254,7 @@
       "engagement": "employment"
     },
     "tools": [],
-    "summary": "Bridged the product team and developer community — guidance on debugging and issue resolution, workshops and webinars, feedback collection, and direct platform support.",
+    "summary": "Bridged the product team and developer community \u2014 guidance on debugging and issue resolution, workshops and webinars, feedback collection, and direct platform support.",
     "anchor": "#work-samebug-developer-advocate",
     "relatedIds": [],
     "audiencePin": [],
@@ -266,7 +266,7 @@
     "id": "learnovate-pm-research",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Project Manager & Research Assistant — Learnovate Centre, Trinity College Dublin",
+    "title": "Project Manager & Research Assistant \u2014 Learnovate Centre, Trinity College Dublin",
     "dateStart": "2016-04",
     "dateEnd": "2017-04",
     "status": null,
@@ -285,7 +285,7 @@
       "engagement": "employment"
     },
     "tools": [],
-    "summary": "Led the €3M EU-funded DEVELOP project across international partners — Agile methodologies, cross-border stakeholder communication, bottleneck removal, and onboarding/culture work.",
+    "summary": "Led the \u20ac3M EU-funded DEVELOP project across international partners \u2014 Agile methodologies, cross-border stakeholder communication, bottleneck removal, and onboarding/culture work.",
     "anchor": "#work-learnovate-pm-research",
     "relatedIds": [
       "learnovate-develop-project"
@@ -299,7 +299,7 @@
     "id": "coderdojo-support-specialist",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Customer Support Specialist — CoderDojo",
+    "title": "Customer Support Specialist \u2014 CoderDojo",
     "dateStart": "2015-09",
     "dateEnd": "2016-01",
     "status": null,
@@ -319,7 +319,7 @@
     "tools": [
       "zendesk"
     ],
-    "summary": "Front-line support to CoderDojo community members via Zendesk — ticket categorisation, escalation, knowledge base contribution, trend analysis, and onboarding new dojo organisers.",
+    "summary": "Front-line support to CoderDojo community members via Zendesk \u2014 ticket categorisation, escalation, knowledge base contribution, trend analysis, and onboarding new dojo organisers.",
     "anchor": "#work-coderdojo-support-specialist",
     "relatedIds": [],
     "audiencePin": [],
@@ -331,7 +331,7 @@
     "id": "donnerwood-product-analyst",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Product Analyst — Donnerwood Media (Meez)",
+    "title": "Product Analyst \u2014 Donnerwood Media (Meez)",
     "dateStart": "2015-01",
     "dateEnd": "2015-04",
     "status": null,
@@ -351,7 +351,7 @@
     "tools": [
       "sql"
     ],
-    "summary": "Analysed consumer demographics and behaviour data using SQL — churn, LTV, retention metrics — to support data-driven decisions for Meez's freemium model; reported to senior stakeholders.",
+    "summary": "Analysed consumer demographics and behaviour data using SQL \u2014 churn, LTV, retention metrics \u2014 to support data-driven decisions for Meez's freemium model; reported to senior stakeholders.",
     "anchor": "#work-donnerwood-product-analyst",
     "relatedIds": [],
     "audiencePin": [],
@@ -363,7 +363,7 @@
     "id": "leaguepedia-chief-of-people",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Chief of People (Operations & Communications) — Leaguepedia",
+    "title": "Chief of People (Operations & Communications) \u2014 Leaguepedia",
     "dateStart": "2012-01",
     "dateEnd": "2014-12",
     "status": null,
@@ -382,7 +382,7 @@
       "engagement": "employment"
     },
     "tools": [],
-    "summary": "Supported CEO in scaling Leaguepedia from a small group to a 100+ member organisation — end-to-end hiring frameworks, SOPs, operational workflows, onboarding programmes, and cross-functional collaboration.",
+    "summary": "Supported CEO in scaling Leaguepedia from a small group to a 100+ member organisation \u2014 end-to-end hiring frameworks, SOPs, operational workflows, onboarding programmes, and cross-functional collaboration.",
     "anchor": "#work-leaguepedia-chief-of-people",
     "relatedIds": [],
     "audiencePin": [],
@@ -394,7 +394,7 @@
     "id": "vodafone-support-specialist",
     "schemaVersion": 1,
     "type": "work",
-    "title": "Customer Support Specialist — Vodafone",
+    "title": "Customer Support Specialist \u2014 Vodafone",
     "dateStart": "2011-06",
     "dateEnd": "2011-09",
     "status": null,
@@ -410,7 +410,7 @@
       "engagement": "employment"
     },
     "tools": [],
-    "summary": "Customer service across multiple South Dublin Vodafone stores — sales, technical troubleshooting, high satisfaction ratings, and training/mentoring new team members.",
+    "summary": "Customer service across multiple South Dublin Vodafone stores \u2014 sales, technical troubleshooting, high satisfaction ratings, and training/mentoring new team members.",
     "anchor": "#work-vodafone-support-specialist",
     "relatedIds": [],
     "audiencePin": [],
@@ -444,7 +444,7 @@
       "postman",
       "api-debugging"
     ],
-    "summary": "Worked through a reviews widget that presented four different visible failure modes — reduced an ambiguous, frequently-escalated issue to a four-branch diagnostic without engineering involvement.",
+    "summary": "Worked through a reviews widget that presented four different visible failure modes \u2014 reduced an ambiguous, frequently-escalated issue to a four-branch diagnostic without engineering involvement.",
     "anchor": "#cs-stamped-widget-diagnostic",
     "relatedIds": [
       "stamped-support-hero"
@@ -498,7 +498,7 @@
     "id": "learnovate-develop-project",
     "schemaVersion": 1,
     "type": "case-study",
-    "title": "Keeping a €3M Project Aligned Across Borders, Without Authority",
+    "title": "Keeping a \u20ac3M Project Aligned Across Borders, Without Authority",
     "dateStart": "2016-04",
     "dateEnd": "2017-04",
     "status": null,
@@ -516,7 +516,7 @@
       "engagement": "employment"
     },
     "tools": [],
-    "summary": "Kept a stalled EU-funded research project on track across international partner organisations using visibility rhythms and direct intervention — with no formal authority over any partner.",
+    "summary": "Kept a stalled EU-funded research project on track across international partner organisations using visibility rhythms and direct intervention \u2014 with no formal authority over any partner.",
     "anchor": "#cs-learnovate-develop-project",
     "relatedIds": [
       "learnovate-pm-research"
@@ -558,7 +558,7 @@
       "prompt-engineering",
       "html-css-js"
     ],
-    "summary": "Paste a browser console error or stack trace and get a plain-English breakdown with five structured sections — distinguishing where an error surfaces from where it originated.",
+    "summary": "Paste a browser console error or stack trace and get a plain-English breakdown with five structured sections \u2014 distinguishing where an error surfaces from where it originated.",
     "anchor": "#proj-error-log-interpreter",
     "relatedIds": [
       "debug-helper"
@@ -643,7 +643,7 @@
     "tools": [
       "python"
     ],
-    "summary": "Research-backed prototype — structured JSON account model and Python script that produces a ranked morning action list for a CSM: URGENT / WATCH / OK, each with signal, reason, and suggested action.",
+    "summary": "Research-backed prototype \u2014 structured JSON account model and Python script that produces a ranked morning action list for a CSM: URGENT / WATCH / OK, each with signal, reason, and suggested action.",
     "anchor": "#proj-posthog-cs-health-intelligence",
     "relatedIds": [
       "posthog-csm-copilot",
@@ -688,7 +688,7 @@
       "prompt-engineering",
       "html-css-js"
     ],
-    "summary": "Customer Success copilot for a PostHog CSM role — paste any incoming signal, add customer context, and choose a mode: Triage + Next Action, Draft Response, Escalation Strategy, or Health Assessment.",
+    "summary": "Customer Success copilot for a PostHog CSM role \u2014 paste any incoming signal, add customer context, and choose a mode: Triage + Next Action, Draft Response, Escalation Strategy, or Health Assessment.",
     "anchor": "#proj-posthog-csm-copilot",
     "relatedIds": [
       "posthog-cs-health-intelligence",
@@ -732,7 +732,7 @@
       "prompt-engineering",
       "html-css-js"
     ],
-    "summary": "Paste a company FAQ or knowledge base and a customer message; Claude returns an answer grounded entirely in the docs — no vector database, no backend, no hallucination.",
+    "summary": "Paste a company FAQ or knowledge base and a customer message; Claude returns an answer grounded entirely in the docs \u2014 no vector database, no backend, no hallucination.",
     "anchor": "#proj-faq-chatbot",
     "relatedIds": [
       "spec-solutions-support-ops",
@@ -860,7 +860,7 @@
       "html-css-js",
       "cloudflare-workers"
     ],
-    "summary": "Paste a customer message or error log; Claude returns a category, colour-coded urgency (Low to Critical), and a suggested first response ready to copy. Built on Haiku at ~0.2¢ per triage.",
+    "summary": "Paste a customer message or error log; Claude returns a category, colour-coded urgency (Low to Critical), and a suggested first response ready to copy. Built on Haiku at ~0.2\u00a2 per triage.",
     "anchor": "#proj-support-triage-tool",
     "relatedIds": [
       "spec-solutions-support-ops",
@@ -903,7 +903,7 @@
       "jina-reader",
       "cloudflare-workers"
     ],
-    "summary": "Theory stress-tester for Kingdom Hearts lore: paste a theory and relevant wiki links, get a structured AI analysis — contradictions, weaknesses, clarifying questions, and an overall verdict.",
+    "summary": "Theory stress-tester for Kingdom Hearts lore: paste a theory and relevant wiki links, get a structured AI analysis \u2014 contradictions, weaknesses, clarifying questions, and an overall verdict.",
     "anchor": "#proj-kh-lore-checker",
     "relatedIds": [
       "lorebyspec-creator-tool"
@@ -943,7 +943,7 @@
       "tmdb-api",
       "icalendar"
     ],
-    "summary": "Recreation and technical deconstruction of a viral 'date proposal' website — running No button, four date-type paths (food/coffee/activity/cinema), live API discovery, and calendar invite generation.",
+    "summary": "Recreation and technical deconstruction of a viral 'date proposal' website \u2014 running No button, four date-type paths (food/coffee/activity/cinema), live API discovery, and calendar invite generation.",
     "anchor": "#proj-date-proposal-website",
     "relatedIds": [],
     "audiencePin": [],
@@ -972,7 +972,7 @@
       "engagement": "consulting"
     },
     "tools": [],
-    "summary": "End-to-end sponsorship project for a TikTok creator in mental health and rehabilitation — sponsor research, outreach strategy, personalised outreach messages, and a full sponsorship document with audience metrics and packages.",
+    "summary": "End-to-end sponsorship project for a TikTok creator in mental health and rehabilitation \u2014 sponsor research, outreach strategy, personalised outreach messages, and a full sponsorship document with audience metrics and packages.",
     "anchor": "#proj-tiktok-sponsorship-strategy",
     "relatedIds": [
       "spec-solutions-fractional-cos"
@@ -1006,7 +1006,7 @@
       "engagement": "consulting"
     },
     "tools": [],
-    "summary": "Supported a creative business expanding from US to Europe — HR compliance, EOR partner selection, local labour law navigation, and creative workspace scouting in a major European city.",
+    "summary": "Supported a creative business expanding from US to Europe \u2014 HR compliance, EOR partner selection, local labour law navigation, and creative workspace scouting in a major European city.",
     "anchor": "#proj-business-relocation-expansion",
     "relatedIds": [
       "spec-solutions-fractional-cos"
@@ -1068,7 +1068,7 @@
       "engagement": "consulting"
     },
     "tools": [],
-    "summary": "Partnered with a startup on ticket volume — implemented priority-based ticket allocation, knowledge base, and staff training; reduced response times 30% and increased CSAT.",
+    "summary": "Partnered with a startup on ticket volume \u2014 implemented priority-based ticket allocation, knowledge base, and staff training; reduced response times 30% and increased CSAT.",
     "anchor": "#proj-optimising-cs-operations",
     "relatedIds": [
       "spec-solutions-fractional-cos",
@@ -1100,7 +1100,7 @@
       "engagement": "consulting"
     },
     "tools": [],
-    "summary": "Identified an underserved niche — custom webhooks and integrations for Twitch streamers — and helped a developer position, price, and market into it; client established a sustainable revenue stream.",
+    "summary": "Identified an underserved niche \u2014 custom webhooks and integrations for Twitch streamers \u2014 and helped a developer position, price, and market into it; client established a sustainable revenue stream.",
     "anchor": "#proj-niche-market-web-dev-strategy",
     "relatedIds": [
       "spec-solutions-fractional-cos"
@@ -1188,7 +1188,7 @@
         4
       ]
     },
-    "notes": "Dates approximate — engagement ran across 2024 but precise months unavailable. EOR selection reached contract with Oyster; expansion funding was pulled before operation at scale."
+    "notes": "Dates approximate \u2014 engagement ran across 2024 but precise months unavailable. EOR selection reached contract with Oyster; expansion funding was pulled before operation at scale."
   },
   {
     "id": "advisory-job-ladders",
@@ -1218,7 +1218,7 @@
       "levelling",
       "compensation"
     ],
-    "summary": "Reframed a job architecture question as a compensation and career clarity problem — the ladder wasn't the issue, the missing criteria were.",
+    "summary": "Reframed a job architecture question as a compensation and career clarity problem \u2014 the ladder wasn't the issue, the missing criteria were.",
     "anchor": "#advisory-job-ladders",
     "relatedIds": [],
     "audiencePin": [],
@@ -1255,7 +1255,7 @@
       "misclassification",
       "contractor"
     ],
-    "summary": "Surfaced the real question behind an EOR enquiry — contractor misclassification risk — before the expensive solution was purchased.",
+    "summary": "Surfaced the real question behind an EOR enquiry \u2014 contractor misclassification risk \u2014 before the expensive solution was purchased.",
     "anchor": "#advisory-cross-border-eor",
     "relatedIds": [],
     "audiencePin": [],
@@ -1292,7 +1292,7 @@
       "contract variation",
       "employment law"
     ],
-    "summary": "Explained why 'remote-first' contracts can inadvertently create custom and practice obligations — and what to do before changing the terms.",
+    "summary": "Explained why 'remote-first' contracts can inadvertently create custom and practice obligations \u2014 and what to do before changing the terms.",
     "anchor": "#advisory-remote-contracts",
     "relatedIds": [],
     "audiencePin": [],
@@ -1330,7 +1330,7 @@
       "evidence gap",
       "job architecture"
     ],
-    "summary": "Diagnosed why a strong IC kept missing Director promotion — the work was there but the visibility of strategic influence wasn't.",
+    "summary": "Diagnosed why a strong IC kept missing Director promotion \u2014 the work was there but the visibility of strategic influence wasn't.",
     "anchor": "#advisory-director-evidence-gap",
     "relatedIds": [],
     "audiencePin": [],
@@ -1404,7 +1404,7 @@
       "attrition",
       "measurement"
     ],
-    "summary": "Identified that a team's chosen metric was measuring output rather than the health signal they actually needed — and suggested an alternative.",
+    "summary": "Identified that a team's chosen metric was measuring output rather than the health signal they actually needed \u2014 and suggested an alternative.",
     "anchor": "#advisory-metrics-wrong-thing",
     "relatedIds": [],
     "audiencePin": [],
@@ -1553,7 +1553,7 @@
       "culture deck",
       "remote onboarding"
     ],
-    "summary": "Helped scope an onboarding deck to avoid organising culture guidance around national stereotypes — and found a more useful frame.",
+    "summary": "Helped scope an onboarding deck to avoid organising culture guidance around national stereotypes \u2014 and found a more useful frame.",
     "anchor": "#advisory-onboarding-culture-deck",
     "relatedIds": [],
     "audiencePin": [],
@@ -1605,7 +1605,7 @@
       "ops-strategy"
     ],
     "lensByAudience": {},
-    "notes": "audienceExclude[ops-strategy]: item ranks deceptively high in that lane due to support-ops and people-hr domains; it is documentation evidence, not strategy output. Contains 4 sub-documents: API Troubleshooting Playbook (Zendesk→Slack), SQL Missing Data Audit Guide, EOR Payroll Processing Explainer, Support Escalation Playbook. Indexed as one item; deep-link anchors for sub-docs are within the page."
+    "notes": "audienceExclude[ops-strategy]: item ranks deceptively high in that lane due to support-ops and people-hr domains; it is documentation evidence, not strategy output. Contains 4 sub-documents: API Troubleshooting Playbook (Zendesk\u2192Slack), SQL Missing Data Audit Guide, EOR Payroll Processing Explainer, Support Escalation Playbook. Indexed as one item; deep-link anchors for sub-docs are within the page."
   },
   {
     "id": "saas-integration-diagnostic-guide",
@@ -1637,7 +1637,7 @@
     "tools": [
       "zendesk"
     ],
-    "summary": "Internal support enablement document for Tier 1 and 2 agents covering webhook delivery failures, API authentication breakdowns, and HRIS sync errors — structured to reduce unnecessary escalation.",
+    "summary": "Internal support enablement document for Tier 1 and 2 agents covering webhook delivery failures, API authentication breakdowns, and HRIS sync errors \u2014 structured to reduce unnecessary escalation.",
     "anchor": "support-guide.html",
     "pageAnchor": "#doc-saas-integration-diagnostic-guide",
     "relatedIds": [
@@ -1679,7 +1679,7 @@
       "product feedback"
     ],
     "tools": [],
-    "summary": "Installed PostHog cold on this site as a genuine first-time user and documented the first hour live — a wizard with no exit, an ambiguous SDK label, and an OAuth redirect with no success state. Filed four issues and a docs PR against PostHog's own repos.",
+    "summary": "Installed PostHog cold on this site as a genuine first-time user and documented the first hour live \u2014 a wizard with no exit, an ambiguous SDK label, and an OAuth redirect with no success state. Filed four issues and a docs PR against PostHog's own repos.",
     "anchor": "posthog-first-run-audit.html",
     "pageAnchor": "#doc-posthog-first-run-audit",
     "relatedIds": [
@@ -1689,7 +1689,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Evidence is externally verifiable: PostHog/wizard#869, PostHog/wizard#870, PostHog/posthog#70206, PostHog/posthog#70204 (all open), PostHog/posthog.com#18390 (open PR). Not a portfolio sample — filed under Spec's own GitHub account during the run-through."
+    "notes": "Evidence is externally verifiable: PostHog/wizard#869, PostHog/wizard#870, PostHog/posthog#70206, PostHog/posthog#70204 (all open), PostHog/posthog.com#18390 (open PR). Not a portfolio sample \u2014 filed under Spec's own GitHub account during the run-through."
   },
   {
     "id": "cat-api-documentation",
@@ -1716,7 +1716,7 @@
       "api reference"
     ],
     "tools": [],
-    "summary": "Professional API reference documentation for The Cat API's images search endpoint — authentication, all query parameters, response schema, request/response examples, error states, and pagination.",
+    "summary": "Professional API reference documentation for The Cat API's images search endpoint \u2014 authentication, all query parameters, response schema, request/response examples, error states, and pagination.",
     "anchor": "cat-api-documentation.html",
     "pageAnchor": "#doc-cat-api-documentation",
     "relatedIds": [
@@ -1752,7 +1752,7 @@
       "voice and tone"
     ],
     "tools": [],
-    "summary": "Internal contributor guide defining voice, tone, and writing standards for technical documentation teams — voice characteristics, tone shifts by context, common mistakes, and a contributor checklist.",
+    "summary": "Internal contributor guide defining voice, tone, and writing standards for technical documentation teams \u2014 voice characteristics, tone shifts by context, common mistakes, and a contributor checklist.",
     "anchor": "voice-and-tone-guide.html",
     "pageAnchor": "#doc-voice-and-tone-guide",
     "relatedIds": [
@@ -1790,7 +1790,7 @@
       "2fa"
     ],
     "tools": [],
-    "summary": "The same 2FA how-to guide written three times — in Apple, Mailchimp, and PostHog voice — with source guide citations, applied principles, and reflection on what was hardest to adapt.",
+    "summary": "The same 2FA how-to guide written three times \u2014 in Apple, Mailchimp, and PostHog voice \u2014 with source guide citations, applied principles, and reflection on what was hardest to adapt.",
     "anchor": "voice-adaptation-showcase.html",
     "pageAnchor": "#doc-voice-adaptation-showcase",
     "relatedIds": [
@@ -1837,10 +1837,15 @@
     "relatedIds": [
       "crisis-playbook",
       "people-practice-playbook-vol-2",
-      "technical-writing-portfolio"
+      "technical-writing-portfolio",
+      "people-practice-playbook-vol-3"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "people-hr",
+      "documentation",
+      "ops-strategy"
+    ],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/people-practice-playbook-v0.2.md by people-practice-playbook/build.py; the markdown is offered as a download (the v0.1, v0.1.1 and v0.1.2 files are kept so older links still work) and is not separately indexed."
   },
@@ -1881,10 +1886,15 @@
     "pageAnchor": "#doc-people-practice-playbook-vol-2",
     "relatedIds": [
       "crisis-playbook",
-      "people-practice-playbook"
+      "people-practice-playbook",
+      "people-practice-playbook-vol-3"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "people-hr",
+      "documentation",
+      "ops-strategy"
+    ],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-2/people-practice-playbook-vol2-v0.1.1.md by people-practice-playbook/vol-2/build.py; that markdown is offered as a download. The v0.1 draft and the working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
@@ -1926,12 +1936,18 @@
     "pageAnchor": "#doc-people-practice-playbook-vol-3",
     "relatedIds": [
       "people-practice-playbook-vol-2",
-      "people-practice-playbook"
+      "people-practice-playbook",
+      "people-practice-playbook-vol-4"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "people-hr",
+      "documentation",
+      "builder-technical",
+      "ops-strategy"
+    ],
     "lensByAudience": {},
-    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file; v0.1.1 stays in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Domains people-hr + ai-engineering is a documented exception to the TAXONOMY §3 anti-rule: the volume's subject is building with AI (including prompting, section 9), so it routes to builder-technical as well as the People lanes; research dropped to stay within three domains."
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-3/people-practice-playbook-vol3-v0.1.1.md by people-practice-playbook/vol-3/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file; v0.1.1 stays in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Domains people-hr + ai-engineering is a documented exception to the TAXONOMY \u00a73 anti-rule: the volume's subject is building with AI (including prompting, section 9), so it routes to builder-technical as well as the People lanes; research dropped to stay within three domains."
   },
   {
     "id": "people-practice-playbook-vol-4",
@@ -1955,7 +1971,19 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["safety plan", "crisis", "domestic violence", "coming out", "2slgbtqi", "suicide prevention", "small business", "pregnancy", "fertility", "reproductive coercion", "creative commons"],
+    "keywords": [
+      "safety plan",
+      "crisis",
+      "domestic violence",
+      "coming out",
+      "2slgbtqi",
+      "suicide prevention",
+      "small business",
+      "pregnancy",
+      "fertility",
+      "reproductive coercion",
+      "creative commons"
+    ],
     "tools": [],
     "summary": "An open, living playbook on safety plans: what they are, why everyone should have one, what goes in one, and what HR, managers and employers of any size should do when someone comes to them, including around pregnancy, fertility and loss. Crisis and support services for Canada, the US, the UK, Ireland, Germany and Australia were checked against each service's own website or a government page.",
     "anchor": "people-practice-playbook/vol-4/",
@@ -1966,7 +1994,10 @@
       "people-practice-playbook"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "people-hr",
+      "ops-strategy"
+    ],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-4/people-practice-playbook-vol4-v0.3.1.md by people-practice-playbook/vol-4/build.py; that markdown is offered as a download. v0.1, v0.2 and v0.3 were never published, so there are no files for them; v0.1.1 and v0.2.1 stay in the repo for version history. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
@@ -1992,7 +2023,18 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["menopause", "perimenopause", "menstruation", "periods", "endometriosis", "pcos", "pmdd", "menstrual leave", "women's health", "creative commons"],
+    "keywords": [
+      "menopause",
+      "perimenopause",
+      "menstruation",
+      "periods",
+      "endometriosis",
+      "pcos",
+      "pmdd",
+      "menstrual leave",
+      "women's health",
+      "creative commons"
+    ],
     "tools": [],
     "summary": "An open, living playbook on supporting periods, perimenopause, menopause and related conditions at work. It covers what the evidence shows and where it runs out, the choices an organisation has to make, how to have the conversation, and how to make support work without anyone having to explain themselves.",
     "anchor": "people-practice-playbook/vol-5/",
@@ -2003,7 +2045,10 @@
       "people-practice-playbook"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "people-hr",
+      "ops-strategy"
+    ],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-5/people-practice-playbook-vol5-v0.1.1.md by people-practice-playbook/vol-5/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
   },
@@ -2029,7 +2074,19 @@
       "level": "lead",
       "engagement": "personal"
     },
-    "keywords": ["miscarriage", "stillbirth", "ectopic", "ivf", "egg freezing", "fertility preservation", "surrogacy", "termination", "abortion", "baby loss", "creative commons"],
+    "keywords": [
+      "miscarriage",
+      "stillbirth",
+      "ectopic",
+      "ivf",
+      "egg freezing",
+      "fertility preservation",
+      "surrogacy",
+      "termination",
+      "abortion",
+      "baby loss",
+      "creative commons"
+    ],
     "tools": [],
     "summary": "An open, living playbook on supporting fertility treatment, pregnancy and every way a pregnancy can end at work. It covers what the evidence shows and where it runs out, the choices an organisation has to make, how to have the conversation, and how to make support work without anyone having to explain themselves or be judged for how they feel.",
     "anchor": "people-practice-playbook/vol-6/",
@@ -2039,7 +2096,10 @@
       "people-practice-playbook"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "people-hr",
+      "ops-strategy"
+    ],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-6/people-practice-playbook-vol6-v0.1.1.md by people-practice-playbook/vol-6/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Tagged the same as Vols. 4 and 5; like them it sits outside the Digital Spec lanes (document cap) and is reached from the Playbooks tab and search."
   },
@@ -2086,7 +2146,11 @@
       "voice-and-tone-guide"
     ],
     "audiencePin": [],
-    "audienceExclude": [],
+    "audienceExclude": [
+      "documentation",
+      "cs-support",
+      "community-devrel"
+    ],
     "lensByAudience": {},
     "notes": "v1.0, 12 Nov 2026: renamed from \"The Small Studio Crisis Playbook\", moved to markdown-as-source-of-truth with a build.py matching the People Practice Playbook series, full dev log in crisis-playbook/DEVLOG.md. Bundled companion asset crisis-playbook/one-page.html (a standalone printable quick-reference card extracted from section 2) is linked from within the document and is not separately indexed."
   },
@@ -2094,7 +2158,7 @@
     "id": "proj-digital-spec-front-door",
     "schemaVersion": 1,
     "type": "project",
-    "title": "Digital Spec — Portfolio Front Door",
+    "title": "Digital Spec \u2014 Portfolio Front Door",
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "live",
@@ -2119,7 +2183,7 @@
     "tools": [
       "html-css-js"
     ],
-    "summary": "The portfolio's branching front-door guide — tag-driven curation, built as an overlay, no AI.",
+    "summary": "The portfolio's branching front-door guide \u2014 tag-driven curation, built as an overlay, no AI.",
     "anchor": "#proj-digital-spec-front-door",
     "relatedIds": [
       "faq-chatbot",
@@ -2130,7 +2194,7 @@
     ],
     "audienceExclude": [],
     "lensByAudience": {
-      "builder-technical": "The portfolio's own front door — a tag-driven guide built as an overlay, no AI, fully documented."
+      "builder-technical": "The portfolio's own front door \u2014 a tag-driven guide built as an overlay, no AI, fully documented."
     },
     "notes": "audiencePin builder-technical: the front door is the portfolio's own system and the item the \"Show me how you were built\" option points to, so it is kept inside the lane's project cap (added in the 2026-09-03 routing audit, #42)."
   },
@@ -2159,7 +2223,7 @@
     "tools": [
       "html-css-js"
     ],
-    "summary": "A header search bar that queries the same tagged portfolio index Digital Spec routes visitors through — type a tool, discipline, or project name and jump straight to every matching work role, case study, project, and document, with no backend and no AI.",
+    "summary": "A header search bar that queries the same tagged portfolio index Digital Spec routes visitors through \u2014 type a tool, discipline, or project name and jump straight to every matching work role, case study, project, and document, with no backend and no AI.",
     "anchor": "#proj-portfolio-search",
     "relatedIds": [
       "proj-digital-spec-front-door"
@@ -2215,13 +2279,13 @@
     ],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "New tools added to vocabulary: scheduled-agent, ats-api, web-fetch, grep-parsing. Status 'live' but private — no public demo; runs as a personal daily automation, documented on the card. Domains ai-engineering + operations per the brief's filter tags (AI Tools, Engineering, Operations); people-hr deliberately NOT applied despite the job-search/EOR subject, honouring the people-hr<->ai-engineering anti-rule (TAXONOMY section 3)."
+    "notes": "New tools added to vocabulary: scheduled-agent, ats-api, web-fetch, grep-parsing. Status 'live' but private \u2014 no public demo; runs as a personal daily automation, documented on the card. Domains ai-engineering + operations per the brief's filter tags (AI Tools, Engineering, Operations); people-hr deliberately NOT applied despite the job-search/EOR subject, honouring the people-hr<->ai-engineering anti-rule (TAXONOMY section 3)."
   },
   {
     "id": "role-fit-evaluator",
     "schemaVersion": 1,
     "type": "project",
-    "title": "Role-Fit Evaluator — Application Decision Matrix",
+    "title": "Role-Fit Evaluator \u2014 Application Decision Matrix",
     "dateStart": "2026-06",
     "dateEnd": "present",
     "status": "complete",
@@ -2260,7 +2324,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Internal tool, not hosted — badge reads 'Internal Tool' on the card; status mapped to 'complete' since the vocabulary has no internal-tool value. Supplementary index tags from the brief (strategy, career, decision-matrix, ai-assisted, internal-tool): strategy applied as a domain; decision-matrix + ai-assisted-scoring as tools; career + internal-tool captured here and in an HTML comment on the card (no free-tag field in the schema). New tools added to vocabulary: excel-openpyxl, weighted-scoring-matrix, dealbreaker-gate, ai-assisted-scoring. Primary lane operations per the brief; sibling of role-fit-watcher. dateEnd \"present\" is intended alongside status complete: the build is finished and the tool is in active use (confirmed 2026-10-16)."
+    "notes": "Internal tool, not hosted \u2014 badge reads 'Internal Tool' on the card; status mapped to 'complete' since the vocabulary has no internal-tool value. Supplementary index tags from the brief (strategy, career, decision-matrix, ai-assisted, internal-tool): strategy applied as a domain; decision-matrix + ai-assisted-scoring as tools; career + internal-tool captured here and in an HTML comment on the card (no free-tag field in the schema). New tools added to vocabulary: excel-openpyxl, weighted-scoring-matrix, dealbreaker-gate, ai-assisted-scoring. Primary lane operations per the brief; sibling of role-fit-watcher. dateEnd \"present\" is intended alongside status complete: the build is finished and the tool is in active use (confirmed 2026-10-16)."
   },
   {
     "id": "kh-description-optimizer",
@@ -2295,7 +2359,7 @@
       "html-css-js",
       "cowork-artifact"
     ],
-    "summary": "Rewrites old LoreBySpec YouTube video descriptions for SEO in a single pass, returning a rewritten description, 3–5 lore-aware hashtags, and backend tags trimmed to YouTube's 500-character limit — with a built-in KH lore dictionary driving entity detection automatically.",
+    "summary": "Rewrites old LoreBySpec YouTube video descriptions for SEO in a single pass, returning a rewritten description, 3\u20135 lore-aware hashtags, and backend tags trimmed to YouTube's 500-character limit \u2014 with a built-in KH lore dictionary driving entity detection automatically.",
     "anchor": "#proj-kh-description-optimizer",
     "relatedIds": [
       "kh-lore-checker",
@@ -2341,7 +2405,7 @@
       "html-css-js",
       "cowork-artifact"
     ],
-    "summary": "Generates three differentiated title and thumbnail concept variants from a video script — Curiosity, Bold Claim, List/Authority — tuned for the KH lore audience, with an over-promise flag based on YouTube's watch-time share ranking logic.",
+    "summary": "Generates three differentiated title and thumbnail concept variants from a video script \u2014 Curiosity, Bold Claim, List/Authority \u2014 tuned for the KH lore audience, with an over-promise flag based on YouTube's watch-time share ranking logic.",
     "anchor": "#proj-kh-ab-testing-tool",
     "relatedIds": [
       "lorebyspec-creator-tool",
@@ -2385,7 +2449,7 @@
       "weighted-scoring-matrix",
       "prompt-engineering"
     ],
-    "summary": "Visually audited all 69 videos on the LoreBySpec channel against a 22-point rubric, built an impact-ranked redo list (weakness × views), and produced finished reference thumbnails for priority videos.",
+    "summary": "Visually audited all 69 videos on the LoreBySpec channel against a 22-point rubric, built an impact-ranked redo list (weakness \u00d7 views), and produced finished reference thumbnails for priority videos.",
     "anchor": "#proj-kh-title-thumbnail-audit",
     "relatedIds": [
       "kh-ab-testing-tool",
@@ -2443,7 +2507,7 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "New tools added to vocabulary: n8n, docker, sqlite, ngrok, webhook-signature-verification (see TAXONOMY.md §6 and TAGGING-AUDIT.md). Domains deliberately exclude ai-engineering — no model/prompt integration in this project, and the anti-rule in TAXONOMY.md §3 forbids people-hr + ai-engineering together regardless. Status complete but with an explicit split: the Remote integration is genuinely live (sandbox); HiBob and Ashby are documented-payload simulators, since neither offers a public sandbox — stated in README.md and RESEARCH.md, not softened."
+    "notes": "New tools added to vocabulary: n8n, docker, sqlite, ngrok, webhook-signature-verification (see TAXONOMY.md \u00a76 and TAGGING-AUDIT.md). Domains deliberately exclude ai-engineering \u2014 no model/prompt integration in this project, and the anti-rule in TAXONOMY.md \u00a73 forbids people-hr + ai-engineering together regardless. Status complete but with an explicit split: the Remote integration is genuinely live (sandbox); HiBob and Ashby are documented-payload simulators, since neither offers a public sandbox \u2014 stated in README.md and RESEARCH.md, not softened."
   },
   {
     "id": "sql-90",
@@ -2515,6 +2579,6 @@
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
-    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md §3 and §6, and TAGGING-AUDIT.md). Routed by Digital Spec only through the side-projects lane (the 'nosy' path, \"The random stuff Spec builds for fun\"); deliberately no hiring route for hardware (2026-10-16). Also reachable through the Projects tab and Portfolio Search. Status in-progress (card draws, art and flip working on the device 2026-10-14; Wands order bug fixed and version 4 on 2026-10-15); LittleFS not tagged until used; python added 2026-10-07 for convert.py, which generates cards.h from cards.txt. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
+    "notes": "Working title; the id, anchor and folder (tarot-machine/) change together if it's renamed. New domain hardware and new tools arduino, esp32 added to the vocabulary (see TAXONOMY.md \u00a73 and \u00a76, and TAGGING-AUDIT.md). Routed by Digital Spec only through the side-projects lane (the 'nosy' path, \"The random stuff Spec builds for fun\"); deliberately no hiring route for hardware (2026-10-16). Also reachable through the Projects tab and Portfolio Search. Status in-progress (card draws, art and flip working on the device 2026-10-14; Wands order bug fixed and version 4 on 2026-10-15); LittleFS not tagged until used; python added 2026-10-07 for convert.py, which generates cards.h from cards.txt. Evidence judgment-restraint: parts list deliberately limited to the stick and a cable, and an ideas file parks features outside the current session."
   }
 ]

@@ -285,7 +285,7 @@ while stack:
         if o.get('action') == 'find-project' and o.get('itemId') not in by_id:
             fail('front-door', f'node {n}: itemId `{o.get("itemId")}` not indexed')
         if o.get('action') == 'deeplink':
-            if o['anchor'][1:] not in html_ids:
+            if o.get('anchor') and o['anchor'][1:] not in html_ids:
                 fail('front-door', f'node {n}: deeplink {o["anchor"]} missing')
             if o.get('tab') and not soup.find(id=o['tab']):
                 fail('front-door', f'node {n}: tab {o["tab"]} missing')
