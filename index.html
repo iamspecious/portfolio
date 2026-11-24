@@ -811,6 +811,14 @@
                         </div>
 
                         <div class="devlog-entry">
+                            <span class="timestamp"><time datetime="2026-11-24">24 Nov 2026</time> — Digital Spec now routes to this tab</span>
+                            <p>
+                                <span class="tag tag-done">Done</span>
+                                Added two entry points from the conversation tree to the Playbooks tab: "Playbooks &amp; reference docs" in the hiring-else node, and "The openly-licensed playbooks Spec published" in the nosy-specific recommendations. A <code>playbooks-intro</code> node describes all seven documents and branches to the People Practice series or the crisis playbook. A <code>playbooks-people-practice</code> node names all six volumes by topic and deeplinks each one, with a "show me all six" fallback. All seven playbooks are now excluded from every lane in the scoring system — they're reachable only through this path and from the Playbooks tab directly.
+                            </p>
+                        </div>
+
+                        <div class="devlog-entry">
                             <span class="timestamp"><time datetime="2026-11-24">24 Nov 2026</time> — Vol. 6 published</span>
                             <p>
                                 <span class="tag tag-done">Done</span>
@@ -3021,6 +3029,14 @@
                             </div>
 
                             <div class="devlog-entry">
+                                <span class="timestamp"><time datetime="2026-11-24">24 Nov 2026</time> — Playbooks routing; all playbooks excluded from lanes</span>
+                                <p>
+                                    <span class="tag tag-done">Done</span>
+                                    Added the Playbooks routing to cover all six People Practice volumes and the crisis playbook. Two entry points: "Playbooks &amp; reference docs" in hiring-else; "The openly-licensed playbooks Spec published" in nosy-specific. <code>playbooks-intro</code> branches on which of the two series you want; <code>playbooks-people-practice</code> names all six volumes and deeplinks each one. All seven playbooks now carry <code>audienceExclude</code> for every lane they would otherwise match — they're a separate content type and the lane scoring system isn't the right model for them. Fixed a KeyError in <code>tools/audit.py</code> section 4: deeplink options without an anchor were crashing the check.
+                                </p>
+                            </div>
+
+                            <div class="devlog-entry">
                                 <span class="timestamp"><time datetime="2026-11-02">2 Nov 2026</time> — dropped Bootstrap's JavaScript, and most of its CSS</span>
                                 <p>
                                     <span class="tag tag-done">Done</span>
@@ -3028,7 +3044,7 @@
                                 </p>
                             </div>
 
-                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 33 older entries</button>
+                            <button class="devlog-toggle" onclick="toggleDevlog(this)">+ show 34 older entries</button>
 
                             <div class="devlog-overflow">
                                 <div class="devlog-entry">
