@@ -1999,12 +1999,49 @@
     "pageAnchor": "#doc-people-practice-playbook-vol-5",
     "relatedIds": [
       "people-practice-playbook-vol-4",
+      "people-practice-playbook-vol-6",
       "people-practice-playbook"
     ],
     "audiencePin": [],
     "audienceExclude": [],
     "lensByAudience": {},
     "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-5/people-practice-playbook-vol5-v0.1.1.md by people-practice-playbook/vol-5/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed."
+  },
+  {
+    "id": "people-practice-playbook-vol-6",
+    "schemaVersion": 1,
+    "type": "document",
+    "title": "People Practice Playbook, Vol. 6: Pregnancy, Pregnancy Loss and Fertility at Work",
+    "dateStart": "2026-11",
+    "dateEnd": "2026-11",
+    "status": "live",
+    "domains": [
+      "people-hr",
+      "research"
+    ],
+    "evidence": [
+      "diagnostic-reasoning",
+      "process-design",
+      "writing-range"
+    ],
+    "context": {
+      "stage": "personal-project",
+      "level": "lead",
+      "engagement": "personal"
+    },
+    "keywords": ["miscarriage", "stillbirth", "ectopic", "ivf", "egg freezing", "fertility preservation", "surrogacy", "termination", "abortion", "baby loss", "creative commons"],
+    "tools": [],
+    "summary": "An open, living playbook on supporting fertility treatment, pregnancy and every way a pregnancy can end at work. It covers what the evidence shows and where it runs out, the choices an organisation has to make, how to have the conversation, and how to make support work without anyone having to explain themselves or be judged for how they feel.",
+    "anchor": "people-practice-playbook/vol-6/",
+    "pageAnchor": "#doc-people-practice-playbook-vol-6",
+    "relatedIds": [
+      "people-practice-playbook-vol-5",
+      "people-practice-playbook"
+    ],
+    "audiencePin": [],
+    "audienceExclude": [],
+    "lensByAudience": {},
+    "notes": "Licensed CC BY-SA 4.0. Page is built from people-practice-playbook/vol-6/people-practice-playbook-vol6-v0.1.1.md by people-practice-playbook/vol-6/build.py; that markdown is offered as a download. v0.1 was never published, so there is no v0.1 file. The working files (CHANGELOG, DEVLOG, RESEARCH, SOURCES) stay in the repo, are excluded from the Pages build in _config.yml, and are not indexed. Tagged the same as Vols. 4 and 5; like them it sits outside the Digital Spec lanes (document cap) and is reached from the Playbooks tab and search."
   },
   {
     "id": "crisis-playbook",
